@@ -3,6 +3,7 @@
 <struts-config>
 	<form-beans>
 		<form-bean name="loginForm" type="login.LoginForm"></form-bean>
+		<form-bean name="headerForm" type="header.HeaderForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
