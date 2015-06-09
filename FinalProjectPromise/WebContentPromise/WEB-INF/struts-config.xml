@@ -2,18 +2,13 @@
 <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
 <struts-config>
 	<form-beans>
-
-		<form-bean name="empForm" type="employees.EmployeesForm"></form-bean>
+		<form-bean name="loginForm" type="login.LoginForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
-		<action path="/emp" name="empForm" type="employees.EmployeesHandler"
+		<action path="/login" name="loginForm" type="login.LoginForm"
 			scope="request">
-			<forward name="empHalList" path="/WEB-INF/emp/EmployeeList.jsp"></forward>
-			<forward name="empHalEdit" path="/WEB-INF/emp/EmployeeEdit.jsp"></forward>
-			<forward name="empHalAdd" path="/WEB-INF/emp/EmployeeAdd.jsp"></forward>
-			<forward name="report" path="/report/report.jsp"></forward>
-
+			<forward name="default" path="/WEB-INF/jsp/login.jsp"></forward>
 		</action>
 	</action-mappings>
 
