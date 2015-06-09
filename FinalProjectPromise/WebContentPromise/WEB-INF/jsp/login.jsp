@@ -7,16 +7,8 @@
 <title>Welcome</title>
 </head>
 <body>
-<<<<<<< HEAD
-
-<p>Hello World </p>
-<input type="text"></input>
-ASDADASDASD
-
-=======
 <p>Hello World
 <input type="text"></input>
 </p>
->>>>>>> branch 'master' of git@github.com:bluecode2/ACEFinalProject.git
 </body>
 </html>
