@@ -16,6 +16,8 @@ public class LoginHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+		
+		
 		return mapping.findForward("default");
 	}
 }
