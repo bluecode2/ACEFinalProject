@@ -8,7 +8,7 @@
 </head>
 <body style="font-family:Calibri">
 
-<table background="icon/bga.jpg" align="center" >
+<table background="icon/bgImg.jpg" align="center" >
 	<tr>
 		<td>
 		Username
