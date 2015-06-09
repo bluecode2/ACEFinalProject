@@ -1,0 +1,19 @@
+<project default="copyToWeb">
+	<property name="webdir" value="WebContentPromise"/>
+	
+	<target name="deleteClasses">
+	    	<delete dir="build/classes"/>
+	   	</target>
+
+
+		<target name="deleteWebClasses">
+	    	<delete dir="${webdir}/WEB-INF/classes"/>
+	   	</target>
+
+
+		<target name="copyToWeb">
+	    	<copy todir="${webdir}/WEB-INF/classes" includeemptydirs="false">
+	        	<fileset dir="build/classes"/>
+	      	</copy>
+	   	</target>
+</project>
