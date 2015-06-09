@@ -7,8 +7,32 @@
 <title>Welcome</title>
 </head>
 <body>
-<p>Hello World
-<input type="text"></input>
-</p>
+
+<table>
+	<tr>
+		<td>
+		Username
+		</td>
+		<td>
+		<input type="text"/>
+		</td>
+		<td rowspan="3"></td>
+	</tr>
+	<tr>
+		<td>
+		Password
+		</td>
+		<td>
+		<input type="password"/>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="right">
+		<button type="button" onclick="#">Login</button>
+		</td>
+	</tr>
+</table>
+
 </body>
 </html>
