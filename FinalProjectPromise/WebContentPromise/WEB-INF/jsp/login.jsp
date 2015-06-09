@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 </head>
-<body>
+<body style="font-family:Calibri">
 
-<table>
+<table border="1" align="center">
 	<tr>
 		<td>
 		Username
@@ -16,7 +16,7 @@
 		<td>
 		<input type="text"/>
 		</td>
-		<td rowspan="3"><img src="icon/login.png"/></td>
+		<td rowspan="2"><img src="icon/login.png" width="150px" height="150px"/></td>
 	</tr>
 	<tr>
 		<td>
@@ -28,7 +28,7 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td colspan="3" align="right">
+		<td colspan="2" align="right">
 		<button type="button" onclick="#">Login</button>
 		</td>
 	</tr>
