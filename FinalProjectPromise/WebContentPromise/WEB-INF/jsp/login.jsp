@@ -6,9 +6,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 </head>
-<body>
-<p>Hello World
-<input type="text"></input>
-</p>
+<body style="font-family:Calibri">
+
+<table background="icon/bgImg.jpg" align="center" >
+	<tr>
+		<td>
+		Username
+		</td>
+		<td>
+		<input type="text"/>
+		</td>
+		<td rowspan="2"><img src="icon/login.png" width="150px" height="150px"/></td>
+	</tr>
+	<tr>
+		<td>
+		Password
+		</td>
+		<td>
+		<input type="password"/>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right">
+		<button type="button" onclick="#">Login</button>
+		</td>
+	</tr>
+</table>
+
 </body>
 </html>
