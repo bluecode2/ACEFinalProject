@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="menu">
-	<select id="selectAllMenuHead" resultClass="general.MenuBean">
+	<select id="selectListMenuHead" resultClass="general.MenuBean">
 		SELECT 
 			MENU_ID as menuId, 
 			UPDATED_BY as updateBy, 
@@ -19,7 +19,7 @@
 		FROM menu
 		WHERE parent_id IS NULL
 	</select>
-	<select id="selectAllMenuByParent" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
+	<select id="selectListMenuByParent" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
 		SELECT 
 			MENU_ID as menuId, 
 			UPDATED_BY as updateBy, 
@@ -34,6 +34,6 @@
 			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') as updateDateInString, 
 			IS_PARENT as isParent
 		FROM menu
-		WHERE parent_id IS NULL
+		WHERE parent_id = #value#
 	</select>
 </sqlMap>

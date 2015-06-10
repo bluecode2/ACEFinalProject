@@ -13,7 +13,7 @@
 </head>
 <body>
 		
-		<bean:write name="menu"/>
+		<bean:write name="menuList"/>
 		
 		
 		<ul class="nav">
