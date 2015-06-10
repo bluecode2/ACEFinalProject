@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css"
-	href="css/style.css" />
+	href="css/menu.css" />
 <script type="text/javascript"
 	src='js/jquery-1.11.3.min.js'></script>
 </head>
