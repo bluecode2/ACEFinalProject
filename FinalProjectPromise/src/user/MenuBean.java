@@ -25,180 +25,202 @@ public class MenuBean {
 	
 	SimpleDateFormat df = new SimpleDateFormat();
 
-	public Integer getUserId() {
-		return userId;
+	/**
+	 * @return the menuId
+	 */
+	public Integer getMenuId() {
+		return menuId;
 	}
 
-	
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	/**
+	 * @param menuId the menuId to set
+	 */
+	public void setMenuId(Integer menuId) {
+		this.menuId = menuId;
 	}
 
-	
-	public Integer getUserRoleId() {
-		return userRoleId;
+	/**
+	 * @return the updatedBy
+	 */
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
 
-	
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
+	/**
+	 * @param updatedBy the updatedBy to set
+	 */
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
-	public Integer getEmployeeId() {
-		return employeeId;
+	/**
+	 * @return the createdBy
+	 */
+	public Integer getCreatedBy() {
+		return createdBy;
 	}
 
-	
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
 
-	
-	public Integer getUseUserId() {
-		return useUserId;
+	/**
+	 * @return the menuCode
+	 */
+	public String getMenuCode() {
+		return menuCode;
 	}
 
-	public void setUseUserId(Integer useUserId) {
-		this.useUserId = useUserId;
+	/**
+	 * @param menuCode the menuCode to set
+	 */
+	public void setMenuCode(String menuCode) {
+		this.menuCode = menuCode;
 	}
 
-	
-	public Integer getUseUserId2() {
-		return useUserId2;
+	/**
+	 * @return the menuCaption
+	 */
+	public String getMenuCaption() {
+		return menuCaption;
 	}
 
-	
-	public void setUseUserId2(Integer useUserId2) {
-		this.useUserId2 = useUserId2;
+	/**
+	 * @param menuCaption the menuCaption to set
+	 */
+	public void setMenuCaption(String menuCaption) {
+		this.menuCaption = menuCaption;
 	}
 
-	public String getUsername() {
-		return username;
+	/**
+	 * @return the parentId
+	 */
+	public String getParentId() {
+		return parentId;
 	}
 
-	
-	public void setUsername(String username) {
-		this.username = username;
+	/**
+	 * @param parentId the parentId to set
+	 */
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
-	
-	public String getPassword() {
-		return password;
+	/**
+	 * @return the menuCrud
+	 */
+	public String getMenuCrud() {
+		return menuCrud;
 	}
 
-
-	public void setPassword(String password) {
-		this.password = password;
+	/**
+	 * @param menuCrud the menuCrud to set
+	 */
+	public void setMenuCrud(String menuCrud) {
+		this.menuCrud = menuCrud;
 	}
 
-	
-	public Integer getIsActive() {
-		return isActive;
+	/**
+	 * @return the menuIndex
+	 */
+	public Integer getMenuIndex() {
+		return menuIndex;
 	}
 
-	
-	public void setIsActive(Integer isActive) {
-		this.isActive = isActive;
+	/**
+	 * @param menuIndex the menuIndex to set
+	 */
+	public void setMenuIndex(Integer menuIndex) {
+		this.menuIndex = menuIndex;
 	}
 
-	
+	/**
+	 * @return the menuUrl
+	 */
+	public String getMenuUrl() {
+		return menuUrl;
+	}
+
+	/**
+	 * @param menuUrl the menuUrl to set
+	 */
+	public void setMenuUrl(String menuUrl) {
+		this.menuUrl = menuUrl;
+	}
+
+	/**
+	 * @return the createDate
+	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
 
+	/**
+	 * @param createDate the createDate to set
+	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
-		
-		if (createDate != null) {
-			this.createDateInString = df.format(createDate.getTime());
-		}else{
-			this.createDateInString = "";
-		}
 	}
 
-	
+	/**
+	 * @return the updateDate
+	 */
 	public Date getUpdateDate() {
 		return updateDate;
 	}
 
-	
+	/**
+	 * @param updateDate the updateDate to set
+	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
-		
-		if (updateDate != null) {
-			this.updateDateInString = df.format(updateDate.getTime());
-		}else{
-			this.updateDateInString = "";
-		}
 	}
 
-	
-	public Integer getCreateBy() {
-		return createBy;
-	}
-
-	
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
-
-	public Integer getUpdateBy() {
-		return updateBy;
-	}
-
-	
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	
+	/**
+	 * @return the createDateInString
+	 */
 	public String getCreateDateInString() {
 		return createDateInString;
 	}
 
-	
+	/**
+	 * @param createDateInString the createDateInString to set
+	 */
 	public void setCreateDateInString(String createDateInString) {
 		this.createDateInString = createDateInString;
-		
-		Date date = new Date();
-		try {
-			date = df.parse(createDateInString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			this.createDateInString = "";
-			date = null;
-		}
-		this.createDate = date;
 	}
 
-	
+	/**
+	 * @return the updateDateInString
+	 */
 	public String getUpdateDateInString() {
 		return updateDateInString;
 	}
 
+	/**
+	 * @param updateDateInString the updateDateInString to set
+	 */
 	public void setUpdateDateInString(String updateDateInString) {
 		this.updateDateInString = updateDateInString;
-		
-		Date date = new Date();
-		try {
-			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			this.updateDateInString = "";
-			date = null;
-		}
-		this.updateDate = date;
 	}
 
-	
+	/**
+	 * @return the df
+	 */
 	public SimpleDateFormat getDf() {
 		return df;
 	}
 
-	
+	/**
+	 * @param df the df to set
+	 */
 	public void setDf(SimpleDateFormat df) {
 		this.df = df;
 	}
-	
+
+
 	
 }
