@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AuditTrailBean {
-	SimpleDateFormat df = new SimpleDateFormat();
 	private Integer auditTrailId;
 	private Integer userId;
 	private String tableName;
@@ -15,6 +14,8 @@ public class AuditTrailBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private Integer updateBy;
+	
+	SimpleDateFormat df = new SimpleDateFormat();
 	
 	public Integer getAuditTrailId() {
 		return auditTrailId;

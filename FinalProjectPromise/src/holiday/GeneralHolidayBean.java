@@ -15,23 +15,18 @@ public class GeneralHolidayBean {
 	public Integer getGenHolidayId() {
 		return genHolidayId;
 	}
-
 	public void setGenHolidayId(Integer genHolidayId) {
 		this.genHolidayId = genHolidayId;
 	}
-
 	public String getGenHolidayName() {
 		return genHolidayName;
 	}
-
 	public void setGenHolidayName(String genHolidayName) {
 		this.genHolidayName = genHolidayName;
 	}
-
 	public Date getGenHolidayDate() {
 		return genHolidayDate;
 	}
-
 	public void setGenHolidayDate(Date genHolidayDate) {
 		this.genHolidayDate = genHolidayDate;
 
@@ -41,11 +36,9 @@ public class GeneralHolidayBean {
 			this.genHolidayDateInString = "";
 		}
 	}
-
 	public String getGenHolidayDateInString() {
 		return genHolidayDateInString;
 	}
-
 	public void setGenHolidayDateInString(String genHolidayDateInString) {
 		this.genHolidayDateInString = genHolidayDateInString;
 

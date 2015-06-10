@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DepartmentBean {
-	SimpleDateFormat df = new SimpleDateFormat();
 	private Integer deptId;
 	private Integer employeeId;
 	private Integer createdBy;
@@ -16,6 +15,8 @@ public class DepartmentBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	
+	SimpleDateFormat df = new SimpleDateFormat();
 	
 	public Integer getDeptId() {
 		return deptId;
@@ -105,5 +106,4 @@ public class DepartmentBean {
 		}
 		this.updateDate = date;
 	}
-	
 }

@@ -1,7 +1,6 @@
 package project_member;
 
 public class ProjectMemberBean {
-
 	private Integer memberId;
 	private Integer projectRoleId;
 	private Integer employeeId;
@@ -31,5 +30,4 @@ public class ProjectMemberBean {
 	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
 	}
-	
 }

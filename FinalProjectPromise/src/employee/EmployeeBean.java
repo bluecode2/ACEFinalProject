@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EmployeeBean {
-	SimpleDateFormat df = new SimpleDateFormat();
 	private Integer employeeId;
 	private Integer deptId;
 	private Integer rankId;
@@ -23,12 +22,9 @@ public class EmployeeBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
-	}
+
+	SimpleDateFormat df = new SimpleDateFormat();
+	
 	public Integer getEmployeeId() {
 		return employeeId;
 	}

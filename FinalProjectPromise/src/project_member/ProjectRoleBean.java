@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProjectRoleBean {
-
-	SimpleDateFormat df = new SimpleDateFormat();
 	private Integer projectRoleId;
 	private Integer updatedBy;
 	private Integer createdBy;
@@ -16,42 +14,35 @@ public class ProjectRoleBean {
 	private Date updateDate;
 	private String updateDateInString;
 
+	SimpleDateFormat df = new SimpleDateFormat();
+	
 	public Integer getProjectRoleId() {
 		return projectRoleId;
 	}
-
 	public void setProjectRoleId(Integer projectRoleId) {
 		this.projectRoleId = projectRoleId;
 	}
-
 	public Integer getUpdatedBy() {
 		return updatedBy;
 	}
-
 	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
-
 	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
-
 	public String getProjectRoleName() {
 		return projectRoleName;
 	}
-
 	public void setProjectRoleName(String projectRoleName) {
 		this.projectRoleName = projectRoleName;
 	}
-
 	public Date getCreateDate() {
 		return createDate;
 	}
-
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 
@@ -61,11 +52,9 @@ public class ProjectRoleBean {
 			this.createDateInString = "";
 		}
 	}
-
 	public String getCreateDateInString() {
 		return createDateInString;
 	}
-
 	public void setCreateDateInString(String createDateInString) {
 		this.createDateInString = createDateInString;
 		Date date = new Date();
@@ -79,11 +68,9 @@ public class ProjectRoleBean {
 		}
 		this.createDate = date;
 	}
-
 	public Date getUpdateDate() {
 		return updateDate;
 	}
-
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 
@@ -93,11 +80,9 @@ public class ProjectRoleBean {
 			this.updateDateInString = "";
 		}
 	}
-
 	public String getUpdateDateInString() {
 		return updateDateInString;
 	}
-
 	public void setUpdateDateInString(String updateDateInString) {
 		this.updateDateInString = updateDateInString;
 		Date date = new Date();
@@ -111,5 +96,4 @@ public class ProjectRoleBean {
 		}
 		this.updateDate = date;
 	}
-
 }

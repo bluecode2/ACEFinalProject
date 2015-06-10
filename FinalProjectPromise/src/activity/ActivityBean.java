@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ActivityBean {
-	SimpleDateFormat df = new SimpleDateFormat();
 	private Integer activityId;
 	private Integer taskId;
 	private Integer updateBy;
@@ -17,6 +16,8 @@ public class ActivityBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	
+	SimpleDateFormat df = new SimpleDateFormat();
 	
 	public Integer getActivityId() {
 		return activityId;
@@ -112,6 +113,5 @@ public class ActivityBean {
 		}
 		this.updateDate = date;
 	}
-	
 
 }
