@@ -1,4 +1,4 @@
-#nav ul li {
+.nav ul li {
 	border-right: none;
 	border-bottom: 1px solid #DDD;
 	width: 170px;
@@ -7,18 +7,18 @@
 	visibility: visible
 }
 
-#nav ul li a {
+.nav ul li a {
 	border-right: none;
 	color: #6791AD;
 	text-shadow: 1px 1px 1px #FFF;
 	border-bottom: 1px solid #FFF
 }
 
-#nav ul li:hover {
+.nav ul li:hover {
 	background: #DFEEF0
 }
 
-#nav ul {
+.nav ul {
 	display: none;
 	visibility: hidden;
 	position: absolute;
@@ -36,12 +36,12 @@
 	padding: 0
 }
 
-#nav li:hover>ul {
+.nav li:hover>ul {
 	display: block;
 	visibility: visible
 }
 
-#nav {
+.nav {
 	height: 39px;
 	font: 12px Geneva, Arial, Helvetica, sans-serif;
 	background: #3AB3A9;
@@ -52,7 +52,7 @@
 	padding-left: 0
 }
 
-#nav li {
+.nav li {
 	list-style: none;
 	display: block;
 	float: left;
@@ -61,7 +61,7 @@
 	border-right: 1px solid #52BDB5
 }
 
-#nav li a {
+.nav li a {
 	line-height: 40px;
 	text-decoration: none;
 	border-right: 1px solid #389E96;
@@ -74,31 +74,30 @@
 	
 }
 
-#nav .site-name,#nav .site-name:hover {
+.nav .site-name,.nav .site-name:hover {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #FFF;
 	text-shadow: 1px 1px 1px #66696B;
 	font: italic 20px/38px Georgia, "Times New Roman", Times, serif;
-	background: url(images/saaraan.png) no-repeat 10px 5px;
 	width: 160px;
 	border-right: 1px solid #52BDB5
 }
 
-#nav .site-name a {
+.nav .site-name a {
 	width: 129px;
 	overflow: hidden
 }
 
-#nav li:hover {
+.nav li:hover {
 	background: #3BA39B
 }
 
-#nav ul li:last-child,#nav ul li:last-child a {
+.nav ul li:last-child,.nav ul li:last-child a {
 	border-bottom: none
 }
 
-#nav ul ul,#nav ul ul ul {
+.nav ul ul,.nav ul ul ul {
 	top: 0;
 	left: 170px;
 	display: none;
@@ -108,19 +107,19 @@
 }
 
 <!--
-[if IE 7]> <style>#nav {
+[if IE 7]> <style>.nav {
 	margin-left: 0px
 }
 
-#nav ul {
+.nav ul {
 	left: -40px;
 }
 
-#nav ul ul {
+.nav ul ul {
 	left: 130px;
 }
 
-#nav ul ul ul {
+.nav ul ul ul {
 	left: 130px;
 }
 </

@@ -3,13 +3,17 @@
 <struts-config>
 	<form-beans>
 		<form-bean name="loginForm" type="login.LoginForm"></form-bean>
-		<form-bean name="headerForm" type="header.HeaderForm"></form-bean>
+		<form-bean name="homeForm" type="other.HomeForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
 		<action path="/login" name="loginForm" type="login.LoginHandler"
 			scope="request">
 			<forward name="default" path="/WEB-INF/jsp/signIn.jsp"></forward>
+		</action>
+		<action path="/home" name="homeForm" type="other.HomeHandler"
+			scope="request">
+			<forward name="home" path="/index.jsp"></forward>
 		</action>
 	</action-mappings>
 

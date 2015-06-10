@@ -1,4 +1,4 @@
-package user;
+package general;
 
 import java.text.DateFormat;
 import java.text.Format;
@@ -12,7 +12,7 @@ public class MenuBean {
 	private Integer createdBy;
 	private String menuCode;
 	private String menuCaption;
-	private String parentId;
+	private Integer parentId;
 	private String menuCrud;
 	private Integer menuIndex;
 	private String menuUrl;
@@ -20,6 +20,7 @@ public class MenuBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private Integer isParent;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
 
@@ -53,10 +54,10 @@ public class MenuBean {
 	public void setMenuCaption(String menuCaption) {
 		this.menuCaption = menuCaption;
 	}
-	public String getParentId() {
+	public Integer getParentId() {
 		return parentId;
 	}
-	public void setParentId(String parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 	public String getMenuCrud() {
@@ -132,5 +133,11 @@ public class MenuBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public Integer getIsParent() {
+		return isParent;
+	}
+	public void setIsParent(Integer isParent) {
+		this.isParent = isParent;
 	}
 }

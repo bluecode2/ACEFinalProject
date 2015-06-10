@@ -1,0 +1,39 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="menu">
+	<select id="selectAllMenuHead" resultClass="general.MenuBean">
+		SELECT 
+			MENU_ID as menuId, 
+			UPDATED_BY as updateBy, 
+			CREATED_BY as createdBy, 
+			MENU_CODE as menuCode, 
+			MENU_CAPTION as menuCaption, 
+			PARENT_ID as parentId, 
+			MENU_CRUD as menuCrud, 
+			MENU_INDEX as menuIndex, 
+			MENU_URL as menuUrl, 
+			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString , 
+			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') as updateDateInString, 
+			IS_PARENT as isParent
+		FROM menu
+		WHERE parent_id IS NULL
+	</select>
+	<select id="selectAllMenuByParent" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
+		SELECT 
+			MENU_ID as menuId, 
+			UPDATED_BY as updateBy, 
+			CREATED_BY as createdBy, 
+			MENU_CODE as menuCode, 
+			MENU_CAPTION as menuCaption, 
+			PARENT_ID as parentId, 
+			MENU_CRUD as menuCrud, 
+			MENU_INDEX as menuIndex, 
+			MENU_URL as menuUrl, 
+			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString , 
+			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') as updateDateInString, 
+			IS_PARENT as isParent
+		FROM menu
+		WHERE parent_id IS NULL
+	</select>
+</sqlMap>
