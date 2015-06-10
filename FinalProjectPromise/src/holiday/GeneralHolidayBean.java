@@ -1,28 +1,63 @@
 package holiday;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GeneralHolidayBean {
-	private Integer gen_holiday_id;
-	private String gen_holiday_name;
-	private Date gen_holiday_date;
-	
-	public Integer getGen_holiday_id() {
-		return gen_holiday_id;
+	private Integer genHolidayId;
+	private String genHolidayName;
+	private Date genHolidayDate;
+	private String genHolidayDateInString;
+
+	SimpleDateFormat df = new SimpleDateFormat();
+
+	public Integer getGenHolidayId() {
+		return genHolidayId;
 	}
-	public void setGen_holiday_id(Integer gen_holiday_id) {
-		this.gen_holiday_id = gen_holiday_id;
+
+	public void setGenHolidayId(Integer genHolidayId) {
+		this.genHolidayId = genHolidayId;
 	}
-	public String getGen_holiday_name() {
-		return gen_holiday_name;
+
+	public String getGenHolidayName() {
+		return genHolidayName;
 	}
-	public void setGen_holiday_name(String gen_holiday_name) {
-		this.gen_holiday_name = gen_holiday_name;
+
+	public void setGenHolidayName(String genHolidayName) {
+		this.genHolidayName = genHolidayName;
 	}
-	public Date getGen_holiday_date() {
-		return gen_holiday_date;
+
+	public Date getGenHolidayDate() {
+		return genHolidayDate;
 	}
-	public void setGen_holiday_date(Date gen_holiday_date) {
-		this.gen_holiday_date = gen_holiday_date;
+
+	public void setGenHolidayDate(Date genHolidayDate) {
+		this.genHolidayDate = genHolidayDate;
+
+		if (genHolidayDate != null) {
+			this.genHolidayDateInString = df.format(genHolidayDate.getTime());
+		} else {
+			this.genHolidayDateInString = "";
+		}
+	}
+
+	public String getGenHolidayDateInString() {
+		return genHolidayDateInString;
+	}
+
+	public void setGenHolidayDateInString(String genHolidayDateInString) {
+		this.genHolidayDateInString = genHolidayDateInString;
+
+		Date date = new Date();
+		try {
+			date = df.parse(genHolidayDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.genHolidayDateInString = "";
+			date = null;
+		}
+		this.genHolidayDate = date;
 	}
 }

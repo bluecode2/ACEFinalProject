@@ -1,70 +1,146 @@
 package holiday;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HolidayBean {
-	private Integer holiday_id;
-	private Integer employee_id;
-	private Integer created_by;
-	private Integer updated_by;
-	private String holiday_desc;
-	private Date holiday_date;
-	private Integer is_exchange_day;
-	private Date create_date;
-	private Date update_date;
-	
-	public Integer getHoliday_id() {
-		return holiday_id;
+	private Integer holidayId;
+	private Integer employeeId;
+	private Integer createdBy;
+	private Integer updatedBy;
+	private String holidayDesc;
+	private Date holidayDate;
+	private String holidayDateInString;
+	private Integer isExchangeDay;
+	private Date createDate;
+	private String createDateInString;
+	private Date updateDate;
+	private String updateDateInString;
+
+	SimpleDateFormat df = new SimpleDateFormat();
+
+	public Integer getHolidayId() {
+		return holidayId;
 	}
-	public void setHoliday_id(Integer holiday_id) {
-		this.holiday_id = holiday_id;
+	public void setHolidayId(Integer holidayId) {
+		this.holidayId = holidayId;
 	}
-	public Integer getEmployee_id() {
-		return employee_id;
+	public Integer getEmployeeId() {
+		return employeeId;
 	}
-	public void setEmployee_id(Integer employee_id) {
-		this.employee_id = employee_id;
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
 	}
-	public Integer getCreated_by() {
-		return created_by;
+	public Integer getCreatedBy() {
+		return createdBy;
 	}
-	public void setCreated_by(Integer created_by) {
-		this.created_by = created_by;
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
-	public Integer getUpdated_by() {
-		return updated_by;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdated_by(Integer updated_by) {
-		this.updated_by = updated_by;
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
-	public String getHoliday_desc() {
-		return holiday_desc;
+	public String getHolidayDesc() {
+		return holidayDesc;
 	}
-	public void setHoliday_desc(String holiday_desc) {
-		this.holiday_desc = holiday_desc;
+	public void setHolidayDesc(String holidayDesc) {
+		this.holidayDesc = holidayDesc;
 	}
-	public Date getHoliday_date() {
-		return holiday_date;
+	public Date getHolidayDate() {
+		return holidayDate;
 	}
-	public void setHoliday_date(Date holiday_date) {
-		this.holiday_date = holiday_date;
+	public void setHolidayDate(Date holidayDate) {
+		this.holidayDate = holidayDate;
+
+		if (holidayDate != null) {
+			this.holidayDateInString = df.format(holidayDate.getTime());
+		} else {
+			this.holidayDateInString = "";
+		}
 	}
-	public Integer getIs_exchange_day() {
-		return is_exchange_day;
+	public String getHolidayDateInString() {
+		return holidayDateInString;
 	}
-	public void setIs_exchange_day(Integer is_exchange_day) {
-		this.is_exchange_day = is_exchange_day;
+	public void setHolidayDateInString(String holidayDateInString) {
+		this.holidayDateInString = holidayDateInString;
+
+		Date date = new Date();
+		try {
+			date = df.parse(holidayDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.holidayDateInString = "";
+			date = null;
+		}
+		this.holidayDate = date;
 	}
-	public Date getCreate_date() {
-		return create_date;
+	public Integer getIsExchangeDay() {
+		return isExchangeDay;
 	}
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public void setIsExchangeDay(Integer isExchangeDay) {
+		this.isExchangeDay = isExchangeDay;
 	}
-	public Date getUpdate_date() {
-		return update_date;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setUpdate_date(Date update_date) {
-		this.update_date = update_date;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+
+		if (createDate != null) {
+			this.createDateInString = df.format(createDate.getTime());
+		} else {
+			this.createDateInString = "";
+		}
+	}
+	public String getCreateDateInString() {
+		return createDateInString;
+	}
+	public void setCreateDateInString(String createDateInString) {
+		this.createDateInString = createDateInString;
+
+		Date date = new Date();
+		try {
+			date = df.parse(createDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.createDateInString = "";
+			date = null;
+		}
+		this.createDate = date;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+		
+		if (updateDate != null) {
+			this.updateDateInString = df.format(updateDate.getTime());
+		} else {
+			this.updateDateInString = "";
+		}
+	}
+	public String getUpdateDateInString() {
+		return updateDateInString;
+	}
+	public void setUpdateDateInString(String updateDateInString) {
+		this.updateDateInString = updateDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.updateDateInString = "";
+			date = null;
+		}
+		this.updateDate = date;
 	}
 }

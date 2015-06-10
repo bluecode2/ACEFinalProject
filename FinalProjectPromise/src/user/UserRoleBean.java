@@ -1,49 +1,101 @@
 package user;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserRoleBean {
-	private Integer user_role_id;
-	private Integer updated_by;
-	private Integer created_by;
-	private String user_role_name;
-	private Date create_date;
-	private Date update_date;
+	private Integer userRoleId;
+	private Integer updatedBy;
+	private Integer createdBy;
+	private String userRoleName;
+	private Date createDate;
+	private String createDateInString;
+	private Date updateDate;
+	private String updateDateInString;
 	
-	public Integer getUser_role_id() {
-		return user_role_id;
+	SimpleDateFormat df = new SimpleDateFormat();
+	
+	public Integer getUserRoleId() {
+		return userRoleId;
 	}
-	public void setUser_role_id(Integer user_role_id) {
-		this.user_role_id = user_role_id;
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
-	public Integer getUpdated_by() {
-		return updated_by;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdated_by(Integer updated_by) {
-		this.updated_by = updated_by;
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
-	public Integer getCreated_by() {
-		return created_by;
+	public Integer getCreatedBy() {
+		return createdBy;
 	}
-	public void setCreated_by(Integer created_by) {
-		this.created_by = created_by;
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
-	public String getUser_role_name() {
-		return user_role_name;
+	public String getUserRoleName() {
+		return userRoleName;
 	}
-	public void setUser_role_name(String user_role_name) {
-		this.user_role_name = user_role_name;
+	public void setUserRoleName(String userRoleName) {
+		this.userRoleName = userRoleName;
 	}
-	public Date getCreate_date() {
-		return create_date;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+
+		if (createDate != null) {
+			this.createDateInString = df.format(createDate.getTime());
+		} else {
+			this.createDateInString = "";
+		}
 	}
-	public Date getUpdate_date() {
-		return update_date;
+	public String getCreateDateInString() {
+		return createDateInString;
 	}
-	public void setUpdate_date(Date update_date) {
-		this.update_date = update_date;
+	public void setCreateDateInString(String createDateInString) {
+		this.createDateInString = createDateInString;
+
+		Date date = new Date();
+		try {
+			date = df.parse(createDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.createDateInString = "";
+			date = null;
+		}
+		this.createDate = date;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+		
+		if (updateDate != null) {
+			this.updateDateInString = df.format(updateDate.getTime());
+		} else {
+			this.updateDateInString = "";
+		}
+	}
+	public String getUpdateDateInString() {
+		return updateDateInString;
+	}
+	public void setUpdateDateInString(String updateDateInString) {
+		this.updateDateInString = updateDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.updateDateInString = "";
+			date = null;
+		}
+		this.updateDate = date;
 	}
 }

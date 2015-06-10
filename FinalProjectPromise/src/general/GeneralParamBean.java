@@ -1,33 +1,33 @@
 package general;
 
 public class GeneralParamBean {
-	private String gen_param_id;
-	private String gen_param_desc;
-	private String gen_param_value;
-	private Integer is_active;
+	private String genParamId;
+	private String genParamDesc;
+	private String genParamValue;
+	private Integer isActive;
 	
-	public String getGen_param_id() {
-		return gen_param_id;
+	public String getGenParamId() {
+		return genParamId;
 	}
-	public void setGen_param_id(String gen_param_id) {
-		this.gen_param_id = gen_param_id;
+	public void setGenParamId(String genParamId) {
+		this.genParamId = genParamId;
 	}
-	public String getGen_param_desc() {
-		return gen_param_desc;
+	public String getGenParamDesc() {
+		return genParamDesc;
 	}
-	public void setGen_param_desc(String gen_param_desc) {
-		this.gen_param_desc = gen_param_desc;
+	public void setGenParamDesc(String genParamDesc) {
+		this.genParamDesc = genParamDesc;
 	}
-	public String getGen_param_value() {
-		return gen_param_value;
+	public String getGenParamValue() {
+		return genParamValue;
 	}
-	public void setGen_param_value(String gen_param_value) {
-		this.gen_param_value = gen_param_value;
+	public void setGenParamValue(String genParamValue) {
+		this.genParamValue = genParamValue;
 	}
-	public Integer getIs_active() {
-		return is_active;
+	public Integer getIsActive() {
+		return isActive;
 	}
-	public void setIs_active(Integer is_active) {
-		this.is_active = is_active;
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 }
