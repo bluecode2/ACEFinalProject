@@ -7,18 +7,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MenuBean {
-	private Integer userId;
-	private Integer userRoleId;
-	private Integer employeeId;
-	private Integer useUserId;
-	private Integer useUserId2;
-	private String username;
-	private String password;
-	private Integer isActive;
+	private Integer menuId;
+	private Integer updatedBy;
+	private Integer createdBy;
+	private String menuCode;
+	private String menuCaption;
+	private String parentId;
+	private String menuCrud;
+	private Integer menuIndex;
+	private String menuUrl;
 	private Date createDate;
 	private Date updateDate;
-	private Integer createBy;
-	private Integer updateBy;
+	
 	
 	private String createDateInString;
 	private String updateDateInString;
