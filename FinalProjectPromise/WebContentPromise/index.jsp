@@ -15,11 +15,11 @@
 	src='js/jquery-1.11.3.min.js'></script>
 </head>
 <body>
-	<html:form action="/home" method="post">
+	
 	<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		Halaman index
 	
 	<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-	</html:form>
+	
 </body>
 </html>
