@@ -56,7 +56,7 @@
 	</td>
 	</tr>
 	<tr>
-		<td><h1>Promise</h1></td>
+		<td align="center"><h1>Promise</h1></td>
 		<td>&nbsp;</td>
 		
 	</tr>	
