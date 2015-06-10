@@ -17,6 +17,9 @@
 <body>
 	
 	<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
-	Halaman index
+		Halaman index
+	
+	<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
+	
 </body>
 </html>
