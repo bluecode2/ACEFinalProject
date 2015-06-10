@@ -11,43 +11,34 @@ public class NotificationBean {
 	private Integer employeeId;
 	private String notificationDesc;
 	private Date notificationDate;
+	private String notificationDateInString;
 	private Integer isRead;
 	private Date readDate;
-	
-	private String notificationDateInString;
 	private String readDateInString;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
 
-	
 	public Integer getNotificationId() {
 		return notificationId;
 	}
-
 	public void setNotificationId(Integer notificationId) {
 		this.notificationId = notificationId;
 	}
-
 	public Integer getEmployeeId() {
 		return employeeId;
 	}
-
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
-
 	public String getNotificationDesc() {
 		return notificationDesc;
 	}
-
 	public void setNotificationDesc(String notificationDesc) {
 		this.notificationDesc = notificationDesc;
 	}
-
 	public Date getNotificationDate() {
 		return notificationDate;
 	}
-
 	public void setNotificationDate(Date notificationDate) {
 		this.notificationDate = notificationDate;
 		
@@ -57,19 +48,15 @@ public class NotificationBean {
 			this.notificationDateInString = "";
 		}
 	}
-
 	public Integer getIsRead() {
 		return isRead;
 	}
-
 	public void setIsRead(Integer isRead) {
 		this.isRead = isRead;
 	}
-
 	public Date getReadDate() {
 		return readDate;
 	}
-
 	public void setReadDate(Date readDate) {
 		this.readDate = readDate;
 		
@@ -79,11 +66,9 @@ public class NotificationBean {
 			this.readDateInString = "";
 		}
 	}
-
 	public String getNotificationDateInString() {
 		return notificationDateInString;
 	}
-
 	public void setNotificationDateInString(String notificationDateInString) {
 		this.notificationDateInString = notificationDateInString;
 		
@@ -97,11 +82,9 @@ public class NotificationBean {
 		}
 		this.notificationDate = date;
 	}
-
 	public String getReadDateInString() {
 		return readDateInString;
 	}
-
 	public void setReadDateInString(String readDateInString) {
 		this.readDateInString = readDateInString;
 		
@@ -115,16 +98,4 @@ public class NotificationBean {
 		}
 		this.readDate = date;
 	}
-
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
-	}
-	
-	
-	
-
 }

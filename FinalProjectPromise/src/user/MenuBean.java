@@ -17,10 +17,8 @@ public class MenuBean {
 	private Integer menuIndex;
 	private String menuUrl;
 	private Date createDate;
-	private Date updateDate;
-	
-	
 	private String createDateInString;
+	private Date updateDate;
 	private String updateDateInString;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
@@ -28,79 +26,60 @@ public class MenuBean {
 	public Integer getMenuId() {
 		return menuId;
 	}
-
 	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
 	}
-	
 	public Integer getUpdatedBy() {
 		return updatedBy;
 	}
-
 	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
-
 	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
-
 	public String getMenuCode() {
 		return menuCode;
 	}
-
 	public void setMenuCode(String menuCode) {
 		this.menuCode = menuCode;
 	}
-
 	public String getMenuCaption() {
 		return menuCaption;
 	}
-
 	public void setMenuCaption(String menuCaption) {
 		this.menuCaption = menuCaption;
 	}
-
 	public String getParentId() {
 		return parentId;
 	}
-
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
-
 	public String getMenuCrud() {
 		return menuCrud;
 	}
-
 	public void setMenuCrud(String menuCrud) {
 		this.menuCrud = menuCrud;
 	}
-
 	public Integer getMenuIndex() {
 		return menuIndex;
 	}
-
 	public void setMenuIndex(Integer menuIndex) {
 		this.menuIndex = menuIndex;
 	}
-
 	public String getMenuUrl() {
 		return menuUrl;
 	}
-
 	public void setMenuUrl(String menuUrl) {
 		this.menuUrl = menuUrl;
 	}
-
 	public Date getCreateDate() {
 		return createDate;
 	}
-
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 		
@@ -110,11 +89,9 @@ public class MenuBean {
 			this.createDateInString = "";
 		}
 	}
-
 	public Date getUpdateDate() {
 		return updateDate;
 	}
-
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 		
@@ -124,11 +101,9 @@ public class MenuBean {
 			this.updateDateInString = "";
 		}
 	}
-
 	public String getCreateDateInString() {
 		return createDateInString;
 	}
-
 	public void setCreateDateInString(String createDateInString) {
 		this.createDateInString = createDateInString;
 		
@@ -142,11 +117,9 @@ public class MenuBean {
 		}
 		this.createDate = date;
 	}
-
 	public String getUpdateDateInString() {
 		return updateDateInString;
 	}
-
 	public void setUpdateDateInString(String updateDateInString) {
 		this.updateDateInString = updateDateInString;
 		
@@ -160,15 +133,4 @@ public class MenuBean {
 		}
 		this.updateDate = date;
 	}
-
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
-	}
-
-
-	
 }

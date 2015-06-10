@@ -1,7 +1,6 @@
 package user;
 
 public class RoleMenuBean {
-
 	private Integer userRoleMenuId;
 	private Integer userRoleId;
 	private Integer menuId;

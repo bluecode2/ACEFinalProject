@@ -1,11 +1,9 @@
 package user;
 
 public class UserMenuBean {
-	
 	private Integer userMenuId;
 	private Integer menuId;
 	private Integer userId;
-	
 	
 	public Integer getUserMenuId() {
 		return userMenuId;
@@ -25,6 +23,4 @@ public class UserMenuBean {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
-	
 }

@@ -18,9 +18,8 @@ public class UserBean {
 	private Date createDate;
 	private Date updateDate;
 	private Integer createBy;
-	private Integer updateBy;
-	
 	private String createDateInString;
+	private Integer updateBy;
 	private String updateDateInString;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
@@ -28,84 +27,54 @@ public class UserBean {
 	public Integer getUserId() {
 		return userId;
 	}
-
-	
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
-	
 	public Integer getUserRoleId() {
 		return userRoleId;
 	}
-
-	
 	public void setUserRoleId(Integer userRoleId) {
 		this.userRoleId = userRoleId;
 	}
-
 	public Integer getEmployeeId() {
 		return employeeId;
 	}
-
-	
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
-
-	
 	public Integer getUseUserId() {
 		return useUserId;
 	}
-
 	public void setUseUserId(Integer useUserId) {
 		this.useUserId = useUserId;
 	}
-
-	
 	public Integer getUseUserId2() {
 		return useUserId2;
 	}
-
-	
 	public void setUseUserId2(Integer useUserId2) {
 		this.useUserId2 = useUserId2;
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	
 	public String getPassword() {
 		return password;
 	}
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 	public Integer getIsActive() {
 		return isActive;
 	}
-
-	
 	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
 	}
-
-	
 	public Date getCreateDate() {
 		return createDate;
 	}
-
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 		
@@ -115,13 +84,9 @@ public class UserBean {
 			this.createDateInString = "";
 		}
 	}
-
-	
 	public Date getUpdateDate() {
 		return updateDate;
 	}
-
-	
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 		
@@ -131,32 +96,21 @@ public class UserBean {
 			this.updateDateInString = "";
 		}
 	}
-
-	
 	public Integer getCreateBy() {
 		return createBy;
 	}
-
-	
 	public void setCreateBy(Integer createBy) {
 		this.createBy = createBy;
 	}
-
 	public Integer getUpdateBy() {
 		return updateBy;
 	}
-
-	
 	public void setUpdateBy(Integer updateBy) {
 		this.updateBy = updateBy;
 	}
-
-	
 	public String getCreateDateInString() {
 		return createDateInString;
 	}
-
-	
 	public void setCreateDateInString(String createDateInString) {
 		this.createDateInString = createDateInString;
 		
@@ -170,12 +124,9 @@ public class UserBean {
 		}
 		this.createDate = date;
 	}
-
-	
 	public String getUpdateDateInString() {
 		return updateDateInString;
 	}
-
 	public void setUpdateDateInString(String updateDateInString) {
 		this.updateDateInString = updateDateInString;
 		
@@ -189,16 +140,4 @@ public class UserBean {
 		}
 		this.updateDate = date;
 	}
-
-	
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
-	}
-	
-	
 }
