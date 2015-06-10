@@ -9,7 +9,7 @@
 	<action-mappings>
 		<action path="/login" name="loginForm" type="login.LoginHandler"
 			scope="request">
-			<forward name="default" path="/WEB-INF/jsp/login.jsp"></forward>
+			<forward name="default" path="/WEB-INF/jsp/signIn.jsp"></forward>
 		</action>
 	</action-mappings>
 

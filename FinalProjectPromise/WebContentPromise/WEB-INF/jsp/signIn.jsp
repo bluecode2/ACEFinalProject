@@ -31,8 +31,12 @@
   </head>
 
   <body>
-
-    <div class="container">
+	<table align="center">
+	<tr>
+	<td>
+		<img src="icon/bgTable.jpg"/>
+	</td>
+	<td width="250px">
 
       <form class="form-signin">
         <h2 class="form-signin-heading">Silahkan Login</h2>
@@ -48,8 +52,18 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
       </form>
 
-    </div> <!-- /container -->
-
+    <!-- /container -->
+	</td>
+	</tr>
+	<tr>
+		<td><h1>Promise</h1></td>
+		<td>&nbsp;</td>
+		
+	</tr>	
+	</table>
+	
+	
+   
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
