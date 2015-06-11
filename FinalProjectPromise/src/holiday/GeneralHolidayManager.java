@@ -1,6 +1,5 @@
 package holiday;
 
-import general.GeneralParamBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
