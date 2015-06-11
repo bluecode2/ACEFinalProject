@@ -36,7 +36,7 @@
 					</tr>
 				</table>
 			</div>
-			
+			<br/>
 			<div class="divContent">
 				<table>
 					<tr>
