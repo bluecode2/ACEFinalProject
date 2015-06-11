@@ -94,3 +94,17 @@ body {
   /* Set the fixed height of the footer here */
   height: 50px;
 }
+
+.align-center{
+	text-align: center;
+}
+	
+.divSearch{
+	text-align: right;
+	margin-top: 10px;
+}
+
+.divContent{
+	margin-top: 50px;
+}
+	
