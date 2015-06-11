@@ -1,0 +1,109 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="employees">
+	<select id="getListDepartments" parameterClass="java.util.Map"
+		resultClass="department.DepartmentBean">
+		SELECT dept_id as deptId, 
+		dept_head_id as deptHeadId, 
+		created_by as createdBy, 
+		updated_by as updatedBy, 
+		dept_code as deptCode,
+		dept_name as deptName, 
+		create_date as createDate,
+		update_date as updateDate
+		FROM
+		(SELECT a.*, ROWNUM as
+		idx FROM
+		(SELECT * FROM Department
+		WHERE 1=1 
+		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(first_name) LIKE LOWER( '%' || #searchValue# || '%' ) 
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadId">
+				LOWER(last_name) LIKE LOWER( '%' || #searchValue# || '%' ) 
+			</isEqual>
+		</dynamic>
+		
+		ORDER BY dept_id )a 
+		WHERE ROWNUM &lt;= #lastIndex# )b 
+		WHERE b.idx &gt; #firstIndex#
+	</select>
+
+	<select id="getRowCountDepartmentsFiltered" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		SELECT COUNT(1) as maxid FROM Department
+		WHERE 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadId">
+				LOWER(first_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		ORDER BY dept_id
+	</select>
+
+	<select id="getDepartment" parameterClass="java.lang.Integer"
+		resultClass="department.DepartmentBean">
+		SELECT dept_id as deptId, 
+		dept_head_id as deptHeadId, 
+		created_by as createdBy, 
+		updated_by as updatedBy, 
+		dept_code as deptCode,
+		dept_name as deptName, 
+		create_date as createDate,
+		update_date as updateDate
+		FROM Department WHERE dept_id = #value#
+	</select>
+
+	<select id="getDepartmentMaxId" resultClass="java.lang.Integer">
+		SELECT
+		MAX(dept_id)
+		FROM Department
+	</select>
+
+	<select id="getListDepartmentsForField" parameterClass="java.lang.Integer" resultClass="department.DepartmentBean">
+		SELECT dept_id as deptId,
+		dept_head_id as deptHeadId,
+		created_by as createdBy, 
+		updated_by as updatedBy, 
+		dept_code as deptCode,
+		dept_name as deptName FROM Department WHERE dept_id &lt;&gt; #value# ORDER BY dept_id
+	</select>
+
+	<insert id="insertDepartment" parameterClass="department.DepartmentBean">
+		INSERT INTO Department
+		(dept_id, dept_head_id, created_by, updated_by, dept_code, dept_name, create_date, update_date)
+		VALUES (#deptId#, #deptHeadId#, #createdBy#, #updatedBy#, #deptCode#, #deptName#, #createDate#, #updateDate#)
+	</insert>
+
+	<update id="updateDepartment" parameterClass="department.DepartmentBean">
+		UPDATE Department
+		SET
+		dept_id = #deptId#, 
+		dept_head_id = #deptHeadId#, 
+		created_by = #createdBy#, 
+		updated_by = #updatedBy#, 
+		dept_code = #deptCode#, 
+		dept_name = #deptName#, 
+		create_date = #createDate#, 
+		update_date = #updateDate#, 
+		WHERE dept_id = #deptId#
+	</update>
+
+	<delete id="deleteDepartment" parameterClass="java.lang.Integer">
+		DELETE FROM Department
+		WHERE dept_id = #value#
+	</delete>
+
+	
+
+</sqlMap>
