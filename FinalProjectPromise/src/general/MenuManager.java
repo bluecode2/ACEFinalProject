@@ -43,4 +43,32 @@ public class MenuManager {
 		}
 		return arr;
 	}
+	
+	public void insertMenu(MenuBean bean) throws SQLException{
+		try{
+			this.ibatis.startTransaction();
+			this.ibatis.insert("menu.insertMenu", bean);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
+	public void updateMenu(MenuBean bean) throws SQLException{
+		try{
+			this.ibatis.startTransaction();
+			this.ibatis.update("menu.updateMenu", bean);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
+	public void deleteMenu(Integer menuId) throws SQLException{
+		try{
+			this.ibatis.startTransaction();
+			this.ibatis.delete("menu.updateMenu", menuId);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
 }
