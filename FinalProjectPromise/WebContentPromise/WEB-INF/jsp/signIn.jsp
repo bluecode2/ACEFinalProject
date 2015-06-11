@@ -33,6 +33,10 @@
   <body>
 	<table align="center">
 	<tr>
+		<td align="center"><h1>Promise</h1></td>
+		<td>&nbsp;</td>		
+	</tr>
+	<tr>
 	<td>
 		<img src="icon/bgTable.jpg"/>
 	</td>
@@ -55,11 +59,6 @@
     <!-- /container -->
 	</td>
 	</tr>
-	<tr>
-		<td align="center"><h1>Promise</h1></td>
-		<td>&nbsp;</td>
-		
-	</tr>	
 	</table>
 	
 	
