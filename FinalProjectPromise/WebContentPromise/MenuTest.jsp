@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="css/jquery-ui.css">
-<script src="js/jquery-1.11.3.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
 
 <style>
