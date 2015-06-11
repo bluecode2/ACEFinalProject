@@ -101,7 +101,7 @@
 
 	<delete id="deleteDepartment" parameterClass="java.lang.Integer">
 		DELETE FROM Department
-		WHERE dept_id = #value#
+		WHERE dept_id = #deptId#
 	</delete>
 
 	
