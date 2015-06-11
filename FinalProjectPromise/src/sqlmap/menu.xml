@@ -4,36 +4,72 @@
 <sqlMap namespace="menu">
 	<select id="selectListMenuHead" resultClass="general.MenuBean">
 		SELECT 
-			MENU_ID as menuId, 
-			UPDATED_BY as updateBy, 
-			CREATED_BY as createdBy, 
-			MENU_CODE as menuCode, 
-			MENU_CAPTION as menuCaption, 
-			PARENT_ID as parentId, 
-			MENU_CRUD as menuCrud, 
-			MENU_INDEX as menuIndex, 
-			MENU_URL as menuUrl, 
-			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString , 
-			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') as updateDateInString, 
-			IS_PARENT as isParent
+			MENU_ID 							as menuId, 
+			UPDATED_BY 							as updateBy, 
+			CREATED_BY 							as createdBy, 
+			MENU_CODE 							as menuCode, 
+			MENU_CAPTION 						as menuCaption, 
+			PARENT_ID 							as parentId, 
+			MENU_CRUD 							as menuCrud, 
+			MENU_INDEX 							as menuIndex, 
+			MENU_URL							as menuUrl, 
+			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	as createDateInString , 
+			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') 	as updateDateInString, 
+			IS_PARENT 							as isParent
 		FROM menu
 		WHERE parent_id IS NULL
 	</select>
 	<select id="selectListMenuByParent" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
 		SELECT 
-			MENU_ID as menuId, 
-			UPDATED_BY as updateBy, 
-			CREATED_BY as createdBy, 
-			MENU_CODE as menuCode, 
-			MENU_CAPTION as menuCaption, 
-			PARENT_ID as parentId, 
-			MENU_CRUD as menuCrud, 
-			MENU_INDEX as menuIndex, 
-			MENU_URL as menuUrl, 
-			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString , 
-			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') as updateDateInString, 
-			IS_PARENT as isParent
+			MENU_ID 							as menuId, 
+			UPDATED_BY							as updateBy, 
+			CREATED_BY 							as createdBy, 
+			MENU_CODE 							as menuCode, 
+			MENU_CAPTION 						as menuCaption, 
+			PARENT_ID 							as parentId, 
+			MENU_CRUD 							as menuCrud, 
+			MENU_INDEX 							as menuIndex, 
+			MENU_URL 							as menuUrl, 
+			TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	as createDateInString , 
+			TO_CHAR(UPDATE_DATE'YYYY-MM-DD') 	as updateDateInString, 
+			IS_PARENT 							as isParent
 		FROM menu
 		WHERE parent_id = #value#
 	</select>
+	<insert id="insertMenu" parameterClass="general.MenuBean">
+		INSERT INTO MENU(
+			MENU_ID,
+			UPDATED_BY, 
+			CREATED_BY, 
+			MENU_CODE, 
+			MENU_CAPTION, 
+			PARENT_ID, 
+			MENU_CRUD, 
+			MENU_INDEX, 
+			MENU_URL, 
+			CREATE_DATE, 
+			UPDATE_DATE,
+			IS_PARENT) 
+			VALUES(
+			#menuId#,#updateBy#,#createdBy#,#menuCode#,#menuCaption#,#parentId#,#menuCrud#,#menuIndex#,#menuUrl#,
+			TO_DATE(#createDateInString#,'YYYY-MM-DD'),
+			TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
+			#isParent#)
+	</insert>
+	<update id="updateMenu" parameterClass="general.MenuBean">
+		UPDATE MENU SET
+			UPDATED_BY = #updateBy#,  
+			MENU_CODE = #menuCode#, 
+			MENU_CAPTION = #menuCaption#, 
+			PARENT_ID = #parentId#, 
+			MENU_CRUD = #menuCrud#, 
+			MENU_INDEX = #menuIndex#, 
+			MENU_URL = #menuUrl#,
+			UPDATE_DATE = TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
+			IS_PARENT = #isParent#) 
+		WHERE MENU_ID = #menuId#
+	</update>
+	<delete id="deleteEmployee" parameterClass="java.lang.Integer" >
+		DELETE FROM MENU WHERE MENU_ID = #menuId#
+	</delete>
 </sqlMap>
