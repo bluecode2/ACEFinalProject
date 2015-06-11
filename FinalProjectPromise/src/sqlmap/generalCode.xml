@@ -29,7 +29,7 @@
 	</select>
 
 	<select id="selectMaxGeneralCode">
-		select count(1)+1 from general_code where LOWER($col$) LIKE
+		select count(1) from general_code where LOWER($col$) LIKE
 		LOWER('%'||#input#||'%')
 	</select>
 
