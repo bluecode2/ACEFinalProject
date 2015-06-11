@@ -1,0 +1,41 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="generalHoliday">
+	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean">
+		SELECT GEN_HOLIDAY_ID as genHolidayId,
+		GEN_HOLIDAY_NAME as genHolidayName, 
+		GEN_HOLIDAY_DATE as genHolidayDateInString,
+		IS_GENERATED as isGenerated
+		FROM GENERAL_HOLIDAY ORDER BY GEN_HOLIDAY_ID
+	</select>
+	
+	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
+		insert into
+		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, IS_GENERATED)
+		values (#genHolidayId#, #genHolidayName#, #genHolidayDateInString#, #isGenerated#)
+	</insert>
+	
+	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
+		SELECT GEN_HOLIDAY_ID as genHolidayId,
+		GEN_HOLIDAY_NAME as genHolidayName, 
+		GEN_HOLIDAY_DATE as genHolidayDateInString,
+		IS_GENERATED as isGenerated
+		FROM GENERAL_HOLIDAY
+		where GEN_HOLIDAY_ID = #value#
+		ORDER BY GEN_HOLIDAY_ID
+	</select>
+	
+	<update id="editGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
+		UPDATE GENERAL_HOLIDAY
+		SET
+		GEN_HOLIDAY_NAME=#genHolidayName#, GEN_HOLIDAY_DATE=#genHolidayDateInString#,
+		IS_GENERATED=#isGenerated#
+		WHERE GEN_HOLIDAY_ID=#genHolidayId#
+	</update>
+	
+	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
+		DELETE FROM GENERAL_HOLIDAY
+		WHERE GEN_HOLIDAY_ID=#id#
+	</delete>
+</sqlMap>

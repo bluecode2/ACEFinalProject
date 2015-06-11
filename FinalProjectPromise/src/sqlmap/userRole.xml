@@ -1,0 +1,46 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userRole">
+	<select id="getUserRole" resultClass="user.UserRoleBean">
+		SELECT USER_ROLE_ID as userRoleId,
+		UPDATED_BY as updatedBy, 
+		CREATED_BY as createdBy,
+		USER_ROLE_NAME as userRoleName,
+		CREATE_DATE as createDateInString,
+		UPDATE_DATE as updateDateInString
+		FROM USER_ROLE ORDER BY USER_ROLE_ID
+	</select>
+	
+	<insert id="insertUserRole" parameterClass="user.UserRoleBean">
+		insert into
+		USER_ROLE(USER_ROLE_ID, UPDATED_BY, CREATED_BY, USER_ROLE_NAME, CREATE_DATE, UPDATE_DATE)
+		values (#userRoleId#, #updatedBy#, #createdBy#, #userRoleName#, #createDateInString#, #updateDateInString#)
+	</insert>
+	
+	<select id="getUserRoleEdit" resultClass="user.UserRoleBean">
+		SELECT USER_ROLE_ID as userRoleId,
+		UPDATED_BY as updatedBy, 
+		CREATED_BY as createdBy,
+		USER_ROLE_NAME as userRoleName,
+		CREATE_DATE as createDateInString,
+		UPDATE_DATE as updateDateInString
+		FROM USER_ROLE
+		where USER_ROLE_ID = #value#
+		ORDER BY USER_ROLE_ID
+	</select>
+	
+	<update id="editUserRole" parameterClass="user.UserRoleBean">
+		UPDATE USER_ROLE
+		SET
+		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
+		USER_ROLE_NAME=#userRoleName#, CREATE_DATE=#createDateInString#,
+		UPDATE_DATE=#updateDateInString#
+		WHERE USER_ROLE_ID=#userRoleId#
+	</update>
+	
+	<delete id="deleteUserRole" parameterClass="java.lang.Integer">
+		DELETE FROM USER_ROLE
+		WHERE USER_ROLE_ID=#id#
+	</delete>
+</sqlMap>
