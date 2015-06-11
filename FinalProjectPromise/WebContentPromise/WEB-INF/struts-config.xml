@@ -23,7 +23,7 @@
 		</action>
 		<action path="/generalHoliday" name="generalHolidayForm" type="general.GeneralHolidayHandler"
 			scope="request">
-			<forward name="addGen" path="/WEB-INF/jsp/generalHoliday/insertGeneralHoliday.jsp"></forward>
+			<forward name="genList" path="/WEB-INF/jsp/generalHoliday/generalHolidayList.jsp"></forward>
 		</action>
 	</action-mappings>
 

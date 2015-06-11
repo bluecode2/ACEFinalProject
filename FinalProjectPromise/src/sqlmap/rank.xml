@@ -1,0 +1,58 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="rank">
+	<select id="getAllEmployeeRank" resultClass="employee.RankEmpBean" parameterClass="java.util.Map">
+		select * from (select r.* , ROWNUM rnum from (
+		SELECT rank_id as rankId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		rank_name as rankName,
+		rank_level as rankLevel,
+		create_date as createDate,
+		update_date as updateDate
+		FROM rank_emp
+		<dynamic prepend="where">
+			<isNotNull property="col">
+				<isNotEqual property="col" compareValue="SHOW_ALL">
+					LOWER($col$)
+					LIKE
+					LOWER('%'||#input#||'%')
+				</isNotEqual>
+			</isNotNull>
+		</dynamic>
+		ORDER BY rank_id ) r
+		where ROWNUM &lt;= #end#)
+		where rnum &gt; #begin#
+	</select>
+
+	<insert id="insertEmployeeRank" parameterClass="employee.RankEmpBean">
+		insert into
+		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_name, rank_level,
+		create_date, update_date)
+		values (#rankId#, #updatedBy#, #createdBy#,
+		#rankName#, #rankLevel#, #createDate#, #updateDate#)
+	</insert>
+
+	<update id="updateEmployeeRank" parameterClass="employee.RankEmpBean">
+		UPDATE rank_emp
+		SET
+		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
+		rank_name=#rankName#, CREATE_DATE=#createDate#,
+		UPDATE_DATE=#updateDate#
+		WHERE rank_id=#rankId#
+	</update>
+
+	<delete id="deleteEmployeeRank" parameterClass="java.lang.Integer">
+		DELETE FROM
+		rank_emp
+		WHERE rank_id=#id#
+	</delete>
+
+	<select id="countEmployeeRank" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM rank_id
+		WHERE LOWER($col$) LIKE
+		LOWER('%'||#input#||'%')
+	</select>
+</sqlMap>

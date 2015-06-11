@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>General Holiday</title>
 </head>
 <body>
-	<html:form action="/department" method="post">
+	<html:form action="/generalHoliday" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -23,9 +23,9 @@
 					<tr>
 						<td>Search by</td>
 						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control select">	
-								<option value="deptCode">Dept. Code</option>
-								<option value="deptName">Dept. Name</option>
+							<select id="selSearchField" class="form-control">	
+								<option value="deptCode">General Holiday Name</option>
+								<option value="deptName">General Holiday Date</option>
 							</select>
 						</td>
 						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
@@ -42,9 +42,10 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
+							<td>General Holiday ID</td>
+							<td>General Holiday Name</td>
+							<td>General Holiday Date</td>
+							<td>Is Generated</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
