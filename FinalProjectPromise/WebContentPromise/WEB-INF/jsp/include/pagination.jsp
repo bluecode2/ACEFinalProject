@@ -14,22 +14,28 @@
 	<div class="divPaging">
 		<table cellspacing="5" width="100%">
 			<tr valign="middle">
-				<logic:iterate id="pageNav" name="pageNavigator">
-					<td align="center" class="solidButton"><logic:notEqual
-							name="pageNav" property="value" value="${currPage}">
+				<td>
+					<ul class="pagination">
+						<logic:iterate id="pageNav" name="pageNavigator">
+							<logic:notEqual name="pageNav" property="value"
+								value="${currPage}">
+								<li>
+							</logic:notEqual>
+							<logic:equal name="pageNav" property="value" value="${currPage}">
+								<li class="active">
+							</logic:equal>
 							<a href="#" class=""
 								onclick="changePage(<bean:write name="pageNav" property="value" />);"
 								title="<bean:write name="pageNav" property="title" />"><bean:write
 									name="pageNav" property="label" /></a>
-						</logic:notEqual> <logic:equal name="pageNav" property="value" value="${currPage}">
-							<bean:write name="pageNav" property="value" />
-						</logic:equal></td>
-				</logic:iterate>
-				<td>Go to Page &nbsp; <input type="text" id="txtGoToPage" /> <input
-					type="button" class="myButton"
-					onclick="goToPage('<bean:write name="pageCount"
-											 />');"
-					value="Go">
+							</li>
+						</logic:iterate>
+					</ul>
+				</td>
+				<td>Go to Page &nbsp; <input type="text" id="txtGoToPage" />
+					<button type="button" class="btn btn-info btn-sm"
+						onclick="goToPage('<bean:write name="pageCount"
+											 />');">Go</button>
 				</td>
 				<td align="right">Total <bean:write name="rowCount" />
 					Record(s), Page <bean:write name="currPage" /> of <bean:write

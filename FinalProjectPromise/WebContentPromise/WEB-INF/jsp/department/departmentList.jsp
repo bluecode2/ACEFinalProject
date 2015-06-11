@@ -24,13 +24,14 @@
 						<td>Search by</td>
 						<td><input type="text" /></td>
 						<td><input type="text" /></td>
-						<td><button id="btnSearch" class="btn btn-info btn-icon" title="Back">
-			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		</button></td>
+						<td><button id="btnSearch" class="btn btn-info btn-icon"
+								title="Back">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button></td>
 					</tr>
 				</table>
 			</div>
-
+			
 			<div class="divContent">
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
@@ -59,9 +60,9 @@
 				</table>
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
-			
+
 		</div>
-		
+
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>
