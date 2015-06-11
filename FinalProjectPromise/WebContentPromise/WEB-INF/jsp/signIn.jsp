@@ -34,7 +34,7 @@
 	<table align="center">
 	<tr>
 		<td colspan="2" align="left" class="bg-primary"
-		style="border-radius:6px"><h3>&nbsp;&nbsp;&nbsp;ProMISe | Project Management Information System</h3></td>	
+		style="border-radius:6px"><h3>&nbsp;&nbsp;&nbsp;PROMISE | Project Management Information System</h3></td>	
 	</tr>
 	
 	<tr>
@@ -44,7 +44,7 @@
 	<td width="250px">
 
       <form class="form-signin">
-      	<h3 class="form-signin-heading">Silahkan Login</h3>
+      	<!-- <h3 class="form-signin-heading">Silahkan Login</h3> -->
       	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       	<img src="icon/key.png" width="80px" height="70"/>
         <label for="inputEmail" class="sr-only">Username</label>
@@ -62,7 +62,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center" class="bg-primary"
-		style="border-radius:4px">Copyright &copy; 2015 | BCA IT Trainee Batch 21</td>	
+		style="border-radius:4px">Copyright &copy; 2015 | ACE 21</td>	
 	</tr>
 	</table>
 	
