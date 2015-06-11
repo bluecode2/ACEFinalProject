@@ -9,10 +9,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function onBtnAddClick() {
+		document.forms[0].task.value = 'add';
+		document.forms[0].submit();
+	}
+</script>
 </head>
 <body>
-	<html:form action="/department" method="post">
-
+	<html:form action="/generalCode" method="post">
+		<html:hidden property="task" name="generalCodeForm" />
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -24,8 +30,9 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;"><select id="selSearchField"
 							class="form-control">
-								<option value="deptCode">Dept. Code</option>
-								<option value="deptName">Dept. Name</option>
+								<option value="genCodeId">General Code ID</option>
+								<option value="genCodeCaption">General Code Caption</option>
+								<option value="	parentId">Parent ID</option>
 						</select></td>
 						<td style="padding-left: 15px"><input type="text"
 							class="form-control" /></td>
@@ -42,21 +49,24 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
+							<td>General Code ID</td>
+							<td>General Code Caption</td>
+							<td>Parent ID</td>
+							<td>is Active ?</td>
+							<td>General Code Index</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="departmentForm" property="arrList">
-							<logic:iterate id="reg" name="departmentForm" property="arrList">
+						<logic:notEmpty name="generalCodeForm" property="arrCodeBean">
+							<logic:iterate id="reg" name="generalCodeFormg"
+								property="arrCodeBean">
 								<tr>
 									<td></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="departmentForm" property="arrList">
+						<logic:empty name="generalCodeForm" property="arrCodeBean">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>

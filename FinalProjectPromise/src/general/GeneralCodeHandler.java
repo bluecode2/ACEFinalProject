@@ -17,6 +17,15 @@ public class GeneralCodeHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
+		GeneralCodeForm gcf = (GeneralCodeForm) form;
+
+		if ("add".equals(gcf.getTask())) {
+
+		} else if ("search".equals(gcf.getTask())) {
+
+		}
+		
+
 		request.setAttribute("pageTitle", "General Code List");
 
 		request.setAttribute("pageNavigator",
