@@ -1,9 +1,12 @@
 package general;
 
+import ibatis.IbatisHelper;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import ibatis.IbatisHelper;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -16,12 +19,18 @@ public class GeneralParamManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public ArrayList<GeneralParamBean> getAllGeneralParam() {
-		ArrayList<GeneralParamBean> arr = null;
+	public List<GeneralParamBean> getAllGeneralParam(String col, String input,
+			Integer begin, Integer end) {
 
+		List<GeneralParamBean> arr = null;
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("input", input);
+		map.put("begin", begin);
+		map.put("end", end);
 		try {
-			arr = (ArrayList<GeneralParamBean>) this.ibatis.queryForList(
-					"genParam.selectGenParam", null);
+			arr = (List<GeneralParamBean>) this.ibatis.queryForList(
+					"genParam.selectGenParam", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

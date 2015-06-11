@@ -17,8 +17,9 @@
 		<dynamic prepend="where">
 			<isNotNull property="col">
 				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER(E.$col$)
-					LIKE LOWER('%'||#input#||'%')
+					LOWER($col$)
+					LIKE
+					LOWER('%'||#input#||'%')
 				</isNotEqual>
 			</isNotNull>
 		</dynamic>
