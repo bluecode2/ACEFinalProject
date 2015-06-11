@@ -16,8 +16,6 @@ public class DepartmentHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
-		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(1,1));
 		
