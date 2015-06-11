@@ -23,7 +23,7 @@
 					<tr>
 						<td>Search by</td>
 						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control select">	
+							<select id="selSearchField" class="form-control">	
 								<option value="deptCode">Dept. Code</option>
 								<option value="deptName">Dept. Name</option>
 							</select>
