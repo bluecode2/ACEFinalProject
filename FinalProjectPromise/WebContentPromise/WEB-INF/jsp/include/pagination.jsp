@@ -15,7 +15,7 @@
 		<table cellspacing="5" width="100%">
 			<tr valign="middle">
 				<td>
-					<ul class="pagination">
+					<ul class="pagination pagination-sm">
 						<logic:iterate id="pageNav" name="pageNavigator">
 							<logic:notEqual name="pageNav" property="value"
 								value="${currPage}">

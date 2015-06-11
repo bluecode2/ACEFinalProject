@@ -40,6 +40,7 @@
 							<td>Department Code</td>
 							<td>Department Name</td>
 							<td>Department Head</td>
+							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,7 +53,7 @@
 						</logic:notEmpty>
 						<logic:empty name="departmentForm" property="arrList">
 							<tr>
-								<td colspan="11" align="center" style="padding: 10px">No
+								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
