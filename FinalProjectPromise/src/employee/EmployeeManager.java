@@ -4,7 +4,9 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -58,5 +60,13 @@ public class EmployeeManager {
 			// TODO: handle exception
 			this.ibatis.endTransaction();
 		}
+	}
+	
+	public Integer getCountEmployee(String column, String value) throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+		Integer result = (Integer) this.ibatis.queryForObject("employee.countEmployee", map);
+		return result;
 	}
 }
