@@ -13,7 +13,6 @@
 <link href="css/material.css" rel="stylesheet">
 <link href="css/ripples.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
-<link href="css/jquery.dropdown.css" rel="stylesheet">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.js"></script>
@@ -21,17 +20,12 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/ripples.min.js"></script>
 <script src="js/material.min.js"></script>
-<script src="js/jquery.dropdown.js"></script>
-    <script>
-      $.material.init();
-      $(document).ready(function() {
-        $(".select").dropdown({"optionClass": "withripple"});
-      });
-      $().dropdown({autoinit: "select"});
-      $("button").click(function() {
-        $("body").append("<select class=select><option>hey</option><option>hey</option></select>");
-      });
-    </script>
+<script>
+		$(document).ready(function() {
+			// This command is used to initialize some elements and make them work properly
+			$.material.init();
+		});
+</script>
 
 </head>
 <body>
