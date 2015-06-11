@@ -4,6 +4,7 @@
 	<form-beans>
 		<form-bean name="loginForm" type="login.LoginForm"></form-bean>
 		<form-bean name="homeForm" type="other.HomeForm"></form-bean>
+		<form-bean name="departmentForm" type="department.DepartmentForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -14,6 +15,10 @@
 		<action path="/home" name="homeForm" type="other.HomeHandler"
 			scope="request">
 			<forward name="home" path="/index.jsp"></forward>
+		</action>
+		<action path="/department" name="departmentForm" type="department.DepartmentHandler"
+			scope="request">
+			<forward name="list" path="/WEB-INF/jsp/department/departmentList.jsp"></forward>
 		</action>
 	</action-mappings>
 

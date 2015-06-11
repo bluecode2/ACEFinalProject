@@ -8,51 +8,84 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/menu.css" />
-<script type="text/javascript" src='js/jquery-1.11.3.min.js'></script>
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/material.css" rel="stylesheet">
+<link href="css/ripples.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ripples.min.js"></script>
+<script src="js/material.min.js"></script>
+<script>
+	$(document).ready(function() {
+		// This command is used to initialize some elements and make them work properly
+		$.material.init();
+	});
+</script>
+
 </head>
 <body>
-		
-		<bean:write name="menuList"/>
-		
-		
-		<ul class="nav">
-			<li class="site-name"><a href="#"> </a></li>
-			<li><a href="#">Yahoo</a>
-				<ul>
-					<li><a href="#">Yahoo Games »</a>
-						<ul>
-							<li><a href="#">Board Games</a></li>
-							<li><a href="#">Card Games</a></li>
-							<li><a href="#">Puzzle Games</a></li>
-							<li><a href="#">Skill Games »</a>
-								<ul>
-									<li><a href="#">Yahoo Pool</a></li>
-									<li><a href="#">Chess</a></li>
-								</ul></li>
-						</ul></li>
-					<li><a href="#">Yahoo Search</a></li>
-					<li><a href="#">Yahoo Answsers</a></li>
-				</ul></li>
-			<li class="facebook"><a href="#">Facebook</a>
-				<ul>
-					<li><a href="#">Facebook Pages</a></li>
-					<li><a href="#">Facebook Groups</a></li>
-				</ul></li>
-			<li class="google"><a href="#">Google</a>
-				<ul>
-					<li><a href="#">Google mail</a></li>
-					<li><a href="#">Google Plus</a></li>
-					<li><a href="#">Google Search »</a>
-						<ul>
-							<li><a href="#">Search Images</a></li>
-							<li><a href="#">Search Web</a></li>
-						</ul></li>
-				</ul></li>
-			<li class="twitter"><a href="#">Twitter</a>
-				<ul>
-					<li><a href="#">New Tweets</a></li>
-					<li><a href="#">Compose a Tweet</a></li>
-				</ul></li>
-		</ul>
+
+	<nav class="navbar navbar-material-blue navbar-static-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">PROMISE</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li class="dropdown"><a href="#" data-toggle="dropdown"
+					class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+					<ul class="dropdown-menu" id="menu1">
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">2-level Menu <span
+								class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+							<ul class="dropdown-menu sub-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+					</ul></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" title="Home"><span
+								class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+				<li class="dropdown">
+					
+				<a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"><span
+								class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right:10px"></span>Username
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Change Password</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+
+
 </body>
