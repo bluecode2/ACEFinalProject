@@ -5,15 +5,31 @@ body {
   background-color: #fff;
 }
 
-h1,
-.h1 {
+h1, p {
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  font-size: 24.5px;
   margin: 0;
+  padding: 0;
+}
+
+hr {
+  margin: 10px 0 3px;
 }
 
 .breadcrumb {
-  padding-top: 0;
+  padding: 0 15px 0;
   margin-left: -10px;
   background-color: transparent;
+}
+
+.toolbar {
+}
+
+.btn-icon {
+  padding: 8px 15px;
 }
 
 /*============== submenu ================*/
@@ -61,3 +77,20 @@ h1,
 }
 
 /*===================================*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+}
