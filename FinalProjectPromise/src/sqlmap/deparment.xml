@@ -1,7 +1,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="employees">
+<sqlMap namespace="department">
 	<select id="getListDepartments" parameterClass="java.util.Map"
 		resultClass="department.DepartmentBean">
 		SELECT dept_id as deptId, 
