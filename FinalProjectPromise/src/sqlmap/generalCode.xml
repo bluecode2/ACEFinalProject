@@ -28,7 +28,7 @@
 		WHERE rnum &gt; #begin#;
 	</select>
 
-	<select id="selectMaxGeneralCode">
+	<select id="countGeneralCode">
 		select count(1) from general_code where LOWER($col$) LIKE
 		LOWER('%'||#input#||'%')
 	</select>

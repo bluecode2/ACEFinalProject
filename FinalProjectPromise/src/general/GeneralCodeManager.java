@@ -40,14 +40,14 @@ public class GeneralCodeManager {
 		return arr;
 	}
 
-	public int getMaxGeneralCode(String column, String value)
+	public int getCountGeneralCode(String column, String value)
 			throws SQLException {
 		Map map = new HashMap();
 		map.put("col", column);
 		map.put("input", value);
 
 		int count = (Integer) this.ibatis.queryForObject(
-				"genCode.selectMaxGeneralCode", map);
+				"genCode.countGeneralCode", map);
 
 		return count;
 	}
