@@ -19,6 +19,7 @@
 		FROM menu
 		WHERE parent_id IS NULL
 	</select>
+	
 	<select id="selectListMenuByParent" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
 		SELECT 
 			MENU_ID 							as menuId, 
@@ -36,6 +37,7 @@
 		FROM menu
 		WHERE parent_id = #value#
 	</select>
+	
 	<insert id="insertMenu" parameterClass="general.MenuBean">
 		INSERT INTO MENU(
 			MENU_ID,
@@ -56,6 +58,7 @@
 			TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
 			#isParent#)
 	</insert>
+	
 	<update id="updateMenu" parameterClass="general.MenuBean">
 		UPDATE MENU SET
 			UPDATED_BY = #updateBy#,  
@@ -69,7 +72,13 @@
 			IS_PARENT = #isParent#) 
 		WHERE MENU_ID = #menuId#
 	</update>
+	
 	<delete id="deleteEmployee" parameterClass="java.lang.Integer" >
 		DELETE FROM MENU WHERE MENU_ID = #menuId#
 	</delete>
+	
+	<select id="countMenu" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM MENU
+		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	</select>
 </sqlMap>

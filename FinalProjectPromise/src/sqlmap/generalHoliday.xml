@@ -38,4 +38,9 @@
 		DELETE FROM GENERAL_HOLIDAY
 		WHERE GEN_HOLIDAY_ID=#id#
 	</delete>
+	
+	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM GENERAL_HOLIDAY
+		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	</select>
 </sqlMap>

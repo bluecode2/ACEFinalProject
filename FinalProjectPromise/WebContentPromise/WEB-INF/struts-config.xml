@@ -20,6 +20,10 @@
 			scope="request">
 			<forward name="list" path="/WEB-INF/jsp/department/departmentList.jsp"></forward>
 		</action>
+		<action path="/generalHoliday" name="generalHolidayForm" type="general.GeneralHolidayHandler"
+			scope="request">
+			<forward name="addGen" path="/WEB-INF/jsp/generalHoliday/insertGeneralHoliday.jsp"></forward>
+		</action>
 	</action-mappings>
 
 	<message-resources parameter="application" />

@@ -1,9 +1,12 @@
 package general;
 
+import ibatis.IbatisHelper;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import ibatis.IbatisHelper;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -16,18 +19,38 @@ public class GeneralParamManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public ArrayList<GeneralParamBean> getAllGeneralParam() {
-		ArrayList<GeneralParamBean> arr = null;
+	public List<GeneralParamBean> getAllGeneralParam(String col, String input,
+			Integer pageNum, Integer pageSize) {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
 
+		List<GeneralParamBean> arr = null;
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("input", input);
+		map.put("begin", begin);
+		map.put("end", end);
 		try {
-			arr = (ArrayList<GeneralParamBean>) this.ibatis.queryForList(
-					"genParam.selectGenParam", null);
+			arr = (List<GeneralParamBean>) this.ibatis.queryForList(
+					"genParam.selectGenParam", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return arr;
+	}
+
+	public int getCountGeneralParam(String column, String value)
+			throws SQLException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+
+		int count = (Integer) this.ibatis.queryForObject(
+				"genParam.countGenParam", map);
+
+		return count;
 	}
 
 	public void insertGeneralParam(GeneralParamBean genParamBean)

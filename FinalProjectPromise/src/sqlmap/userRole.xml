@@ -43,4 +43,9 @@
 		DELETE FROM USER_ROLE
 		WHERE USER_ROLE_ID=#id#
 	</delete>
+	
+	<select id="countUserRole" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM USER_ROLE
+		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	</select>
 </sqlMap>

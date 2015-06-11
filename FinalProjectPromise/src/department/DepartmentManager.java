@@ -1,6 +1,7 @@
 package department;
 
 import ibatis.IbatisHelper;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,5 +122,13 @@ public class DepartmentManager {
 			e.printStackTrace();
 		}
 		return maxid;
+	}
+	
+	public Integer getCountDepartment(String column, String value) throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+		Integer result = (Integer) this.ibatis.queryForObject("department.countDepartment", map);
+		return result;
 	}
 }

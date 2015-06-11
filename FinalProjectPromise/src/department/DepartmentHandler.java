@@ -19,7 +19,6 @@ public class DepartmentHandler extends Action {
 		
 		request.setAttribute("pageTitle", "Department List");
 		
-		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(1,1));
 		
