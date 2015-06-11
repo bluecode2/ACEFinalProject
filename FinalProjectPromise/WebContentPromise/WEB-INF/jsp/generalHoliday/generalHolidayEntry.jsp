@@ -56,7 +56,7 @@
 						<td><input type="text" id="txtGoToPage" /></td>
 					</tr>
 				</table>
-				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
 			</div>
 
 		</div>

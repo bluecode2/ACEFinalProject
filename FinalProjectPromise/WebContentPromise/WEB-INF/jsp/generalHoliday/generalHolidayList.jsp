@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 	function onBtnAddClick(){
-		alert('add');
+		//alert('add');
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}
@@ -25,7 +25,8 @@
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
-
+		<html:hidden property="task" name="generalHolidayForm" />
+		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>

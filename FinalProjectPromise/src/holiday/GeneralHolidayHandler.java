@@ -25,7 +25,7 @@ public class GeneralHolidayHandler extends Action{
 			empForm.setListOfDept(empManager.getDeptId());
 			
 			request.setAttribute("ljob", empManager.getJobId());*/
-			request.setAttribute("pageTitle", "General Holiday List");
+			request.setAttribute("pageTitle", "General Holiday Entry");
 			
 			request.setAttribute("pageNavigator", CommonFunction
 					.createPagingNavigatorList(1,1));
@@ -33,8 +33,6 @@ public class GeneralHolidayHandler extends Action{
 			request.setAttribute("pageCount", 1);
 			request.setAttribute("currPage", 1);
 			request.setAttribute("rowCount", 1);
-			
-			System.out.println("add");
 			
 			return mapping.findForward("genEntry");
 		}
