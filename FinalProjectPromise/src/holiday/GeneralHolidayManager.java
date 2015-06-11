@@ -3,7 +3,9 @@ package holiday;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -52,5 +54,13 @@ public class GeneralHolidayManager {
 		} finally{
 			this.ibatis.endTransaction();
 		}
+	}
+	
+	public Integer getCountGeneralHoliday(String column, String value) throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+		Integer result = (Integer) this.ibatis.queryForObject("generalHoliday.countGeneralHoliday", map);
+		return result;
 	}
 }
