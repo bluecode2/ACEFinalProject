@@ -48,14 +48,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="employeeForm" property="arrList">
-							<logic:iterate id="reg" name="departmentForm" property="arrList">
+						<logic:notEmpty name="employeeForm" property="listOfEmployee">
+							<logic:iterate id="reg" name="employeeForm" property="listOfEmployee">
 								<tr>
 									<td></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="departmentForm" property="arrList">
+						<logic:empty name="employeeForm" property="listOfEmployee">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>

@@ -38,7 +38,7 @@
 			scope="request">
 			<forward name="list" path="/WEB-INF/jsp/generalParam/generalParamList.jsp"></forward>
 		</action>
-		<action path="/employee" name="employeeForm" type="employee.employeeHandler"
+		<action path="/employee" name="employeeForm" type="employee.EmployeeHandler"
 			scope="request">
 			<forward name="employeeList" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
 		</action>
