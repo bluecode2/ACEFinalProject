@@ -31,7 +31,7 @@ public class GeneralParamManager {
 		map.put("begin", begin);
 		map.put("end", end);
 		try {
-			arr = (List<GeneralParamBean>) this.ibatis.queryForList(
+			arr = this.ibatis.queryForList(
 					"genParam.selectGenParam", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

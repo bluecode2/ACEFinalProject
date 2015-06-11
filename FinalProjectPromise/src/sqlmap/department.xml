@@ -14,7 +14,6 @@
 		, create_date
 		as createDate , update_date as updateDate from
 		department
-
 		<dynamic prepend="where">
 			<isNotNull property="col">
 				<isNotEqual property="col" compareValue="SHOW_ALL">

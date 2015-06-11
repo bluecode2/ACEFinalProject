@@ -1,10 +1,12 @@
 package department;
 
+import general.GeneralParamBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -16,24 +18,22 @@ public class DepartmentManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public DepartmentManager(String connString, String dbUser, String dbPass) {
-		
-	}
+	public List<DepartmentBean> getAllDepartmentsFiltered(String col,
+			String input, Integer pageNum, Integer pageSize) {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
 
-	public ArrayList<DepartmentBean> getAllDepartmentsFiltered(String searchField,
-			String searchValue, int pageSize, int pageNum) {
-		ArrayList<DepartmentBean> arr = new ArrayList<DepartmentBean>();
-		int startIdx = (pageNum - 1) * pageSize;
-		int lastIdx = pageNum * pageSize;
-		
+		List<DepartmentBean> arr = null;
 		Map map = new HashMap();
-		map.put("firstIndex", startIdx);
-		map.put("lastIndex", lastIdx);
-		map.put("searchField", searchField);
-		map.put("searchValue", searchValue);
-		
+		map.put("col", col);
+		map.put("input", input);
+		map.put("begin", begin);
+		map.put("end", end);
+
 		try {
-			arr = new ArrayList<DepartmentBean>(this.ibatis.queryForList("department.getListDepartments", map));
+			arr = this.ibatis
+					.queryForList("department.getListDepartments", map);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,11 +41,13 @@ public class DepartmentManager {
 		return arr;
 	}
 
-	public ArrayList<DepartmentBean> getAllDepartmentsForField(int excludedDeptId) {
+	public ArrayList<DepartmentBean> getAllDepartmentsForField(
+			int excludedDeptId) {
 		ArrayList<DepartmentBean> arr = new ArrayList<DepartmentBean>();
-		
+
 		try {
-			arr = new ArrayList<DepartmentBean>(this.ibatis.queryForList("department.getListDepartmentsForField", excludedDeptId));
+			arr = new ArrayList<DepartmentBean>(this.ibatis.queryForList(
+					"department.getListDepartmentsForField", excludedDeptId));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +58,8 @@ public class DepartmentManager {
 	public DepartmentBean getDepartment(int deptid) {
 		DepartmentBean dept = null;
 		try {
-			dept = (DepartmentBean) ibatis.queryForObject("department.getDepartment",deptid);
+			dept = (DepartmentBean) ibatis.queryForObject(
+					"department.getDepartment", deptid);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +103,8 @@ public class DepartmentManager {
 	public int getDepartmentMaxId() {
 		Integer maxId = 0;
 		try {
-			maxId = (Integer) ibatis.queryForObject("department.getDepartmentMaxId",null);
+			maxId = (Integer) ibatis.queryForObject(
+					"department.getDepartmentMaxId", null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,21 +118,24 @@ public class DepartmentManager {
 		Map map = new HashMap();
 		map.put("searchField", searchField);
 		map.put("searchValue", searchValue);
-		
+
 		try {
-			maxid = (Integer) this.ibatis.queryForObject("department.getRowCountDepartmentsFiltered", map);
+			maxid = (Integer) this.ibatis.queryForObject(
+					"department.getRowCountDepartmentsFiltered", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return maxid;
 	}
-	
-	public Integer getCountDepartment(String column, String value) throws SQLException, ClassNotFoundException {
+
+	public Integer getCountDepartment(String column, String value)
+			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("col", column);
 		map.put("input", value);
-		Integer result = (Integer) this.ibatis.queryForObject("department.countDepartment", map);
+		Integer result = (Integer) this.ibatis.queryForObject(
+				"department.countDepartment", map);
 		return result;
 	}
 }
