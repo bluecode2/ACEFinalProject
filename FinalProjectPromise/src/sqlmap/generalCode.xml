@@ -2,14 +2,29 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="genCode">
-	<select id="selectGeneralCode" resultClass="general.GeneralCodeBean">
-		select GEN_CODE_ID as
-		genCodeId,
-		PARENT_ID as parentId,
-		GEN_CODE_CAPTION as genCodeCaption,
-		IS_ACTIVE as isActive,
-		GEN_CODE_INDEX as genCodeIndex
-		from general_code
+
+	<select id="selectGeneralCode" resultClass="general.GeneralCodeBean"
+		parameterClass="java.util.map">
+		SELECT *
+		FROM (SELECT genCode.*, ROWNUM rnum
+		FROM (SELECT GEN_PARAM_ID
+		AS genParamId,
+		GEN_PARAM_DESC AS genParamDesc,
+		GEN_PARAM_VALUE AS
+		genParamValue,
+		IS_ACTIVE AS isActive
+		FROM general_parameter
+		<dynamic prepend="where">
+			<isNotNull property="col">
+				<isNotEqual property="col" compareValue="SHOW_ALL">
+					LOWER(E.$col$)
+					LIKE LOWER('%'||#input#||'%')
+				</isNotEqual>
+			</isNotNull>
+		</dynamic>
+		) genCode
+		WHERE ROWNUM &lt;= #end#)
+		WHERE rnum &gt; #begin#;
 	</select>
 
 	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">
