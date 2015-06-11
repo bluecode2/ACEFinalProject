@@ -63,4 +63,8 @@ public class GeneralParamManager {
 			this.ibatis.endTransaction();
 		}
 	}
+	
+	public void get() {
+		
+	}
 }
