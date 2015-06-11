@@ -18,13 +18,18 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divSearch" style="float: right;">
+			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
-					<tr align="right">
+					<tr>
 						<td>Search by</td>
-						<td><input type="text" /></td>
-						<td><input type="text" /></td>
-						<td><button id="btnSearch" class="btn btn-info btn-icon"
+						<td style="padding-left:15px;">
+							<select id="selSearchField" class="form-control">	
+								<option value="deptCode">Dept. Code</option>
+								<option value="deptName">Dept. Name</option>
+							</select>
+						</td>
+						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
+						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
 								title="Back">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
