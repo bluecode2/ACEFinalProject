@@ -23,14 +23,13 @@
 	<update id="updateGenParam" parameterClass="general.GeneralParamBean">
 		update
 		general_parameter set
-		GEN_PARAM_DESC = #genParamDesc#
-		GEN_PARAM_VALUE
-		=#genParamValue#
+		GEN_PARAM_DESC = #genParamDesc#,
+		GEN_PARAM_VALUE = #genParamValue#,
 		IS_ACTIVE = #isActive#
 		where GEN_PARAM_ID =
 		#genParamId#
 	</update>
-	<delete id="deleteGenParam" parameterClass="java.lang.Integer">
+	<delete id="deleteGenParam" parameterClass="java.lang.String">
 		delete from
 		general_parameter where gen_param_id = #genParamId#
 	</delete>

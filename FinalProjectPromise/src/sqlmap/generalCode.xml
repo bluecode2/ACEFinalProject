@@ -8,7 +8,7 @@
 		PARENT_ID as parentId,
 		GEN_CODE_CAPTION as genCodeCaption,
 		IS_ACTIVE as isActive,
-		INDEX as index
+		GEN_CODE_INDEX as genCodeIndex
 		from general_code
 	</select>
 
@@ -16,9 +16,9 @@
 		insert into
 		general_code (GEN_CODE_ID, PARENT_ID, GEN_CODE_CAPTION,
 		IS_ACTIVE,
-		INDEX) values (#genCodeId#, #parentId#, #genCodeCaption#,
+		GEN_CODE_INDEX) values (#genCodeId#, #parentId#, #genCodeCaption#,
 		#isActive#,
-		#index#)
+		#genCodeIndex#)
 	</insert>
 	<update id="updateGeneralCode" parameterClass="general.GeneralCodeBean">
 		update
@@ -28,13 +28,14 @@
 		#genCodeCaption#,
 		IS_ACTIVE =
 		#isActive#,
-		INDEX = #index#
+		GEN_CODE_INDEX = #genCodeIndex#
 		where
 		gen_code_id = #genCodeId#
 	</update>
 
-	<delete id="deleteGeneralCode" parameterClass="java.lang.Integer">
-		delete from general_code where gen_code_id = #genCodeId#
+	<delete id="deleteGeneralCode" parameterClass="java.lang.String">
+		delete from
+		general_code where gen_code_id = #genCodeId#
 	</delete>
 
 </sqlMap>

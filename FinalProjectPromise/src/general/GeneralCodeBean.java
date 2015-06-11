@@ -6,7 +6,7 @@ public class GeneralCodeBean {
 	private String genCodeCaption;
 	private String parentId;
 	private Integer isActive;
-	private Integer index;
+	private Integer genCodeIndex;
 
 	public String getGenCodeId() {
 		return genCodeId;
@@ -40,12 +40,12 @@ public class GeneralCodeBean {
 		this.isActive = isActive;
 	}
 
-	public Integer getIndex() {
-		return index;
+	public Integer getGenCodeIndex() {
+		return genCodeIndex;
 	}
 
-	public void setIndex(Integer index) {
-		this.index = index;
+	public void setGenCodeIndex(Integer genCodeIndex) {
+		this.genCodeIndex = genCodeIndex;
 	}
 
 }
