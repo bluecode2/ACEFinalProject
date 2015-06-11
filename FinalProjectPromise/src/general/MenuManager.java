@@ -53,6 +53,7 @@ public class MenuManager {
 			this.ibatis.endTransaction();
 		}
 	}
+	
 	public void updateMenu(MenuBean bean) throws SQLException{
 		try{
 			this.ibatis.startTransaction();
@@ -62,6 +63,7 @@ public class MenuManager {
 			this.ibatis.endTransaction();
 		}
 	}
+	
 	public void deleteMenu(Integer menuId) throws SQLException{
 		try{
 			this.ibatis.startTransaction();
@@ -70,5 +72,13 @@ public class MenuManager {
 		} finally{
 			this.ibatis.endTransaction();
 		}
+	}
+	
+	public Integer getCountMenu(String column, String value) throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+		Integer result = (Integer) this.ibatis.queryForObject("menu.countMenu", map);
+		return result;
 	}
 }

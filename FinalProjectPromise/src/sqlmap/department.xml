@@ -15,7 +15,7 @@
 		FROM
 		(SELECT a.*, ROWNUM as
 		idx FROM
-		(SELECT * FROM Department
+		(SELECT * FROM DEPARTMENT
 		WHERE 1=1 
 		
 		<dynamic prepend="AND">
@@ -36,7 +36,7 @@
 
 	<select id="getRowCountDepartmentsFiltered" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-		SELECT COUNT(1) as maxid FROM Department
+		SELECT COUNT(1) as maxid FROM DEPARTMENT
 		WHERE 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="deptName">
@@ -61,13 +61,13 @@
 		dept_name as deptName, 
 		create_date as createDate,
 		update_date as updateDate
-		FROM Department WHERE dept_id = #value#
+		FROM DEPARTMENT WHERE dept_id = #value#
 	</select>
 
 	<select id="getDepartmentMaxId" resultClass="java.lang.Integer">
 		SELECT
 		MAX(dept_id)
-		FROM Department
+		FROM DEPARTMENT
 	</select>
 
 	<select id="getListDepartmentsForField" parameterClass="java.lang.Integer" resultClass="department.DepartmentBean">
@@ -76,17 +76,17 @@
 		created_by as createdBy, 
 		updated_by as updatedBy, 
 		dept_code as deptCode,
-		dept_name as deptName FROM Department WHERE dept_id &lt;&gt; #value# ORDER BY dept_id
+		dept_name as deptName FROM DEPARTMENT WHERE dept_id &lt;&gt; #value# ORDER BY dept_id
 	</select>
 
 	<insert id="insertDepartment" parameterClass="department.DepartmentBean">
-		INSERT INTO Department
+		INSERT INTO DEPARTMENT
 		(dept_id, dept_head_id, created_by, updated_by, dept_code, dept_name, create_date, update_date)
 		VALUES (#deptId#, #deptHeadId#, #createdBy#, #updatedBy#, #deptCode#, #deptName#, #createDate#, #updateDate#)
 	</insert>
 
 	<update id="updateDepartment" parameterClass="department.DepartmentBean">
-		UPDATE Department
+		UPDATE DEPARTMENT
 		SET
 		dept_id = #deptId#, 
 		dept_head_id = #deptHeadId#, 
@@ -100,10 +100,12 @@
 	</update>
 
 	<delete id="deleteDepartment" parameterClass="java.lang.Integer">
-		DELETE FROM Department
+		DELETE FROM DEPARTMENT
 		WHERE dept_id = #deptId#
 	</delete>
 
-	
-
+	<select id="countDepartment" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM DEPARTMENT
+		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	</select>
 </sqlMap>
