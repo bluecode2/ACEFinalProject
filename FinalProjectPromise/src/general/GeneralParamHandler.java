@@ -17,12 +17,15 @@ public class GeneralParamHandler extends Action{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+		GeneralParamManager gpm = new GeneralParamManager();
+		GeneralParamForm gpf = new GeneralParamForm();
+		
 		request.setAttribute("pageTitle", "Department List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(1,1));
 		
-		request.setAttribute("pageCount", 1);
+		request.setAttribute("pageCount", gpm.getCountGeneralParam(gpf.getSearchCategory(),gpf.getSearchItem()));
 		request.setAttribute("currPage", 1);
 		request.setAttribute("rowCount", 1);
 		
