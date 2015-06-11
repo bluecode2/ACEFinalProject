@@ -1,10 +1,12 @@
 package general;
 
+import holiday.GeneralHolidayBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -17,7 +19,7 @@ public class MenuManager {
 	public MenuManager() {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
-	
+
 	public ArrayList<MenuBean> getAllMenuHead() {
 		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
 
@@ -30,7 +32,7 @@ public class MenuManager {
 		}
 		return arr;
 	}
-	
+
 	public ArrayList<MenuBean> getAllMenuByParent(Integer parentId) {
 		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
 
@@ -43,42 +45,61 @@ public class MenuManager {
 		}
 		return arr;
 	}
-	
-	public void insertMenu(MenuBean bean) throws SQLException{
-		try{
+
+	public List<MenuBean> selectListMenu(String col, String input,
+			Integer pageNum, Integer pageSize) throws SQLException {
+
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+
+		Map map = new HashMap();
+		map.put("col", col);
+		map.put("input", input);
+		map.put("begin", begin);
+		map.put("end", end);
+
+		List<MenuBean> listResult = this.ibatis.queryForList(
+				"generalHoliday.getGeneralHoliday", map);
+		return listResult;
+	}
+
+	public void insertMenu(MenuBean bean) throws SQLException {
+		try {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("menu.insertMenu", bean);
 			this.ibatis.commitTransaction();
-		} finally{
+		} finally {
 			this.ibatis.endTransaction();
 		}
 	}
-	
-	public void updateMenu(MenuBean bean) throws SQLException{
-		try{
+
+	public void updateMenu(MenuBean bean) throws SQLException {
+		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("menu.updateMenu", bean);
 			this.ibatis.commitTransaction();
-		} finally{
+		} finally {
 			this.ibatis.endTransaction();
 		}
 	}
-	
-	public void deleteMenu(Integer menuId) throws SQLException{
-		try{
+
+	public void deleteMenu(Integer menuId) throws SQLException {
+		try {
 			this.ibatis.startTransaction();
 			this.ibatis.delete("menu.updateMenu", menuId);
 			this.ibatis.commitTransaction();
-		} finally{
+		} finally {
 			this.ibatis.endTransaction();
 		}
 	}
-	
-	public Integer getCountMenu(String column, String value) throws SQLException, ClassNotFoundException {
+
+	public Integer getCountMenu(String column, String value)
+			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("col", column);
 		map.put("input", value);
-		Integer result = (Integer) this.ibatis.queryForObject("menu.countMenu", map);
+		Integer result = (Integer) this.ibatis.queryForObject("menu.countMenu",
+				map);
 		return result;
 	}
 }
