@@ -51,30 +51,50 @@
 		parameterClass="java.util.map">
 		select * from(
 		select m.* , ROWNUM rnum from (SELECT
-		MENU_ID as menuId,
-		UPDATED_BY as updateBy,
-		CREATED_BY as createdBy,
-		MENU_CODE as menuCode,
-		MENU_CAPTION as menuCaption,
-		PARENT_ID as parentId,
-		MENU_CRUD as
-		menuCrud,
-		MENU_INDEX as menuIndex,
-		MENU_URL as menuUrl,
+		MENU_ID 			as menuId,
+		UPDATED_BY 			as updateBy,
+		CREATED_BY 			as createdBy,
+		MENU_CODE 			as menuCode,
+		MENU_CAPTION 		as menuCaption,
+		PARENT_ID 			as parentId,
+		MENU_CRUD 			as menuCrud,
+		MENU_INDEX 			as menuIndex,
+		MENU_URL 			as menuUrl,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString ,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString,
-		IS_PARENT as
-		isParent
+		IS_PARENT 			as isParent
 		FROM menu
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCode">
+				LOWER(menu_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCaption">
+				LOWER(menu_caption) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="parentId">
+				LOWER(parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCrud">
+				LOWER(menu_crud) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuUrl">
+				LOWER(menu_url) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isParent">
+				LOWER(is_parent) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>										
 		order by menuId) m
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
@@ -126,7 +146,36 @@
 	<select id="countMenu" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM MENU
-		WHERE LOWER($col$) LIKE
-		LOWER('%'||#input#||'%')
+				where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCode">
+				LOWER(menu_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCaption">
+				LOWER(menu_caption) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="parentId">
+				LOWER(parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuCrud">
+				LOWER(menu_crud) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="menuUrl">
+				LOWER(menu_url) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isParent">
+				LOWER(is_parent) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
 	</select>
 </sqlMap>

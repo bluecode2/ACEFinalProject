@@ -24,8 +24,8 @@ public class GeneralCodeManager {
 
 		List<GeneralCodeBean> arr = null;
 		Map map = new HashMap();
-		map.put("col", col);
-		map.put("input", input);
+		map.put("searchField", col);
+		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 
@@ -43,8 +43,8 @@ public class GeneralCodeManager {
 	public int getCountGeneralCode(String column, String value)
 			throws SQLException {
 		Map map = new HashMap();
-		map.put("col", column);
-		map.put("input", value);
+		map.put("searchField", column);
+		map.put("searchValue", value);
 
 		int count = (Integer) this.ibatis.queryForObject(
 				"genCode.countGeneralCode", map);

@@ -7,31 +7,64 @@
 		parameterClass="java.util.map">
 		SELECT *
 		FROM (SELECT genCode.*, ROWNUM rnum
-		FROM (SELECT GEN_PARAM_ID
-		AS genParamId,
-		GEN_PARAM_DESC AS genParamDesc,
-		GEN_PARAM_VALUE AS
-		genParamValue,
-		IS_ACTIVE AS isActive
-		FROM general_parameter
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		FROM (
+		SELECT gen_code_id 		AS genCodeId,
+		Gen_code_caption 		AS genCodeCaption,
+		Parent_Id 				AS parentId,
+		IS_ACTIVE				AS isActive,
+		GEN_CODE_INDEX 			AS genCodeIndex
+		FROM
+		general_parameter
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genCodeId">
+				LOWER(gen_code_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
-		) genCode
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genCodeCaption">
+				LOWER(gen_code_caption) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="parentId">
+				LOWER(Parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isActive">
+				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		order by gen_code_index) genCode
 		WHERE ROWNUM &lt;= #end#)
-		WHERE rnum &gt; #begin#
+		WHERE rnum
+		&gt; #begin#
 	</select>
 
-	<select id="countGeneralCode">
-		select count(1) from general_code where LOWER($col$)
-		LIKE
-		LOWER('%'||#input#||'%')
+	<select id="countGeneralCode" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(1) from general_code
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genCodeId">
+				LOWER(gen_code_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genCodeCaption">
+				LOWER(gen_code_caption) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="parentId">
+				LOWER(Parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isActive">
+				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
 	</select>
 
 	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">

@@ -26,8 +26,8 @@ public class GeneralParamManager {
 
 		List<GeneralParamBean> arr = null;
 		Map map = new HashMap();
-		map.put("col", col);
-		map.put("input", input);
+		map.put("searchField", col);
+		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 		try {
@@ -44,8 +44,8 @@ public class GeneralParamManager {
 	public int getCountGeneralParam(String column, String value)
 			throws SQLException {
 		Map map = new HashMap();
-		map.put("col", column);
-		map.put("input", value);
+		map.put("searchField", column);
+		map.put("searchValue", value);
 
 		int count = (Integer) this.ibatis.queryForObject(
 				"genParam.countGenParam", map);

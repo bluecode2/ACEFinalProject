@@ -53,8 +53,8 @@ public class MenuManager {
 		int end = pageNum * pageSize;
 
 		Map map = new HashMap();
-		map.put("col", col);
-		map.put("input", input);
+		map.put("searchField", col);
+		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 
@@ -96,8 +96,8 @@ public class MenuManager {
 	public Integer getCountMenu(String column, String value)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
-		map.put("col", column);
-		map.put("input", value);
+		map.put("searchField", column);
+		map.put("searchValue", value);
 		Integer result = (Integer) this.ibatis.queryForObject("menu.countMenu",
 				map);
 		return result;

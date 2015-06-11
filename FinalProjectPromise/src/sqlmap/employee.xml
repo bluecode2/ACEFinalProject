@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="employee">
-	<select id="getCountEmployeeId" resultClass="java.lang.Integer">
+	<select id="getMaxEmployeeId" resultClass="java.lang.Integer">
 		SELECT
 		MAX(EMPLOYEE_ID)+1 FROM EMPLOYEE
 	</select>
@@ -12,32 +12,52 @@
 		SELECT * FROM(
 		SELECT emp.*, ROWNUM rnum from (
 		SELECT
-		EMPLOYEE_ID AS
-		employeeId,
-		DEPT_ID AS deptId,
-		RANK_ID AS rankId,
-		SUPERVISOR_ID AS
-		supervisorID,
-		PROJECT_ID AS projectId,
-		CREATED_BY AS createBy,
-		UPDATED_BY AS updateBy,
-		EMPLOYEE_NAME AS employeeName,
-		GENDER AS gender,
-		EMAIL AS email,
-		ADDRESS AS address,
-		PHONE_NUMBER AS phoneNumber,
-		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') AS updateDateInString
+		EMPLOYEE_ID 						AS employeeId,
+		DEPT_ID 							AS deptId,
+		RANK_ID 							AS rankId,
+		SUPERVISOR_ID 						AS supervisorID,
+		PROJECT_ID 							AS projectId,
+		CREATED_BY 							AS createBy,
+		UPDATED_BY 							AS updateBy,
+		EMPLOYEE_NAME 						AS employeeName,
+		GENDER 								AS gender,
+		EMAIL 								AS email,
+		ADDRESS 							AS address,
+		PHONE_NUMBER 						AS phoneNumber,
+		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
 		FROM EMPLOYEE
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeId">
+				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptId">
+				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankId">
+				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="supervisorId">
+				LOWER(SUPERVISOR_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectId">
+				LOWER(PROJECT_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>						
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>								
 		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = #end#)
 		WHERE rnum
 		&gt;
@@ -86,7 +106,37 @@
 	<select id="countEmployee" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM EMPLOYEE
-		WHERE LOWER($col$) LIKE
-		LOWER('%'||#input#||'%')
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeId">
+				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptId">
+				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankId">
+				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="supervisorId">
+				LOWER(SUPERVISOR_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectId">
+				LOWER(PROJECT_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>						
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>								
+
 	</select>
 </sqlMap>

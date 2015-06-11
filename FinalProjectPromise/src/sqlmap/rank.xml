@@ -12,15 +12,22 @@
 		create_date as createDate,
 		update_date as updateDate
 		FROM rank_emp
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankId">
+				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankName">
+				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankLevel">
+				LOWER(rank_level) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
 		ORDER BY rank_id ) r
 		where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
@@ -52,7 +59,21 @@
 	<select id="countEmployeeRank" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM rank_id
-		WHERE LOWER($col$) LIKE
-		LOWER('%'||#input#||'%')
+			where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankId">
+				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankName">
+				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankLevel">
+				LOWER(rank_level) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
 	</select>
 </sqlMap>

@@ -5,22 +5,33 @@
 	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean" parameterClass="java.util.Map">
 		select * from(
 		select hol.* , ROWNUM rnum from(
-		SELECT GEN_HOLIDAY_ID as
-		genHolidayId,
-		GEN_HOLIDAY_NAME as genHolidayName,
-		GEN_HOLIDAY_DATE as
-		genHolidayDateInString,
-		IS_GENERATED as isGenerated
+		SELECT 
+		GEN_HOLIDAY_ID 		as genHolidayId,
+		GEN_HOLIDAY_NAME 	as genHolidayName,
+		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
+		IS_GENERATED 		as isGenerated
 		FROM GENERAL_HOLIDAY
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayId">
+				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayName">
+				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayDateInString">
+				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isGenerated">
+				LOWER(is_generated) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
 		ORDER BY GEN_HOLIDAY_ID ) hol
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
@@ -66,7 +77,27 @@
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM GENERAL_HOLIDAY
-		WHERE LOWER($col$)
-		LIKE LOWER('%'||#input#||'%')
+				where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayId">
+				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayName">
+				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="genHolidayDateInString">
+				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="isGenerated">
+				LOWER(is_generated) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+
 	</select>
 </sqlMap>

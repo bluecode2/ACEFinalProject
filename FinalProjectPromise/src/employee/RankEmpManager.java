@@ -26,14 +26,24 @@ public class RankEmpManager {
 		int end = pageNum * pageSize;
 
 		Map map = new HashMap();
-		map.put("col", col);
-		map.put("input", input);
+		map.put("searchField", col);
+		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 
 		List<RankEmpBean> list = this.ibatis.queryForList(
 				"rank.getAllEmployeeRank", map);
 		return list;
+	}
+
+	public Integer getCountRankEmp(String column, String value)
+			throws SQLException {
+		Map map = new HashMap();
+		map.put("searchField", column);
+		map.put("searchValue", value);
+		Integer count = (Integer) this.ibatis.queryForObject(
+				"rank.countEmployeeRank", map);
+		return count;
 	}
 
 	public void insertEmployeeRank(RankEmpBean eb)

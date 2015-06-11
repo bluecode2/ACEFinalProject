@@ -25,8 +25,8 @@ public class DepartmentManager {
 
 		List<DepartmentBean> arr = null;
 		Map map = new HashMap();
-		map.put("col", col);
-		map.put("input", input);
+		map.put("searchField", col);
+		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 
@@ -132,8 +132,8 @@ public class DepartmentManager {
 	public Integer getCountDepartment(String column, String value)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
-		map.put("col", column);
-		map.put("input", value);
+		map.put("searchField", column);
+		map.put("searchValue", value);
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"department.countDepartment", map);
 		return result;

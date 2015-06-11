@@ -20,20 +20,35 @@ public class GeneralCodeHandler extends Action {
 		GeneralCodeForm gcf = (GeneralCodeForm) form;
 
 		if ("add".equals(gcf.getTask())) {
+			System.out.println("masuk ke form add");
+			request.setAttribute("pageTitle", "Add General Code");
+			request.setAttribute("pageNavigator",
+					CommonFunction.createPagingNavigatorList(1, 1));
 
+			request.setAttribute("pageCount", 1);
+			request.setAttribute("currPage", 1);
+			request.setAttribute("rowCount", 1);
+
+			return mapping.findForward("insert");
 		} else if ("search".equals(gcf.getTask())) {
 
+
+			request.setAttribute("pageNavigator",
+					CommonFunction.createPagingNavigatorList(1, 1));
 		}
-		
 
-		request.setAttribute("pageTitle", "General Code List");
+		else {
 
-		request.setAttribute("pageNavigator",
-				CommonFunction.createPagingNavigatorList(1, 1));
+			request.setAttribute("pageTitle", "General Code List");
 
-		request.setAttribute("pageCount", 1);
-		request.setAttribute("currPage", 1);
-		request.setAttribute("rowCount", 1);
+			request.setAttribute("pageNavigator",
+					CommonFunction.createPagingNavigatorList(1, 1));
+
+			request.setAttribute("pageCount", 1);
+			request.setAttribute("currPage", 1);
+			request.setAttribute("rowCount", 1);
+
+		}
 
 		return mapping.findForward("list");
 	}

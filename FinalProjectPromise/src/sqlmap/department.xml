@@ -5,26 +5,38 @@
 	<select id="getListDepartments" parameterClass="java.util.Map"
 		resultClass="department.DepartmentBean">
 		SELECT * FROM (
-		SELECT dept.* ROWNUM rnum from ( SELECT dept_id as
-		deptId ,
-		dept_head_id as deptHeadId , created_by as createdBy ,
-		updated_by as
-		updatedBy , dept_code as deptCode , dept_name as
-		deptName
-		, create_date
-		as createDate , update_date as updateDate from
-		department
-		<dynamic prepend="where">
-			<isNotNull property="col">
-				<isNotEqual property="col" compareValue="SHOW_ALL">
-					LOWER($col$)
-					LIKE
-					LOWER('%'||#input#||'%')
-				</isNotEqual>
-			</isNotNull>
+		SELECT dept.* ROWNUM rnum from ( SELECT 
+		dept_id 			as deptId ,
+		dept_head_id 		as deptHeadId ,
+		created_by 			as createdBy ,
+		updated_by 			as updatedBy , 
+		dept_code 			as deptCode , 
+		dept_name 			as deptName , 
+		create_date			as createDate , 
+		update_date 		as updateDate 
+		from department
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptId">
+				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadId">
+				LOWER(dept_head_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
 		</dynamic>
-		order by
-		dept_id
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptCode">
+				LOWER(dept_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(dept_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		order by dept_id
 		) dept where ROWNUM &lt; = #end#) WHERE rnum &gt;
 		#begin#
 	</select>
@@ -34,16 +46,25 @@
 		SELECT COUNT(1) as maxid FROM DEPARTMENT
 		WHERE 1=1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptName">
-				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="deptId">
+				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadId">
+				LOWER(dept_head_id) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptHeadId">
-				LOWER(first_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="deptCode">
+				LOWER(dept_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(dept_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		ORDER BY dept_id
 	</select>
 
 	<select id="getDepartment" parameterClass="java.lang.Integer"
