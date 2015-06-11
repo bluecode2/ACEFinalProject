@@ -23,7 +23,6 @@ public class GeneralHolidayManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<GeneralParamBean> arr = null;
 		Map map = new HashMap();
 		map.put("col", col);
 		map.put("input", input);
