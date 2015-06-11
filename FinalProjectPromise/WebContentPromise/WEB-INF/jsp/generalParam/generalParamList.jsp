@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<html:form action="/department" method="post">
+	<html:form action="/generalParam" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -49,14 +49,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="departmentForm" property="arrList">
-							<logic:iterate id="reg" name="departmentForm" property="arrList">
+						<logic:notEmpty name="generalParamForm" property="arrList">
+							<logic:iterate id="reg" name="generalParamForm" property="arrList">
 								<tr>
 									<td></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="departmentForm" property="arrList">
+						<logic:empty name="generalParamForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>
