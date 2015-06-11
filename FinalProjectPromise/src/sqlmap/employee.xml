@@ -3,15 +3,21 @@
 
 <sqlMap namespace="employee">
 	<select id="getCountEmployeeId" resultClass="java.lang.Integer">
-		SELECT MAX(EMPLOYEE_ID)+1 FROM EMPLOYEE
+		SELECT
+		MAX(EMPLOYEE_ID)+1 FROM EMPLOYEE
 	</select>
-	
-	<select id="getAllEmployee" resultClass="employee.EmployeeBean">
-		SELECT 
-		EMPLOYEE_ID AS employeeId,
+
+	<select id="getAllEmployee" resultClass="employee.EmployeeBean"
+		parameterClass="java.util.Map">
+		SELECT * FROM(
+		SELECT emp.*, ROWNUM rnum from (
+		SELECT
+		EMPLOYEE_ID AS
+		employeeId,
 		DEPT_ID AS deptId,
 		RANK_ID AS rankId,
-		SUPERVISOR_ID AS supervisorID,
+		SUPERVISOR_ID AS
+		supervisorID,
 		PROJECT_ID AS projectId,
 		CREATED_BY AS createBy,
 		UPDATED_BY AS updateBy,
@@ -22,42 +28,65 @@
 		PHONE_NUMBER AS phoneNumber,
 		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') AS updateDateInString
-		FROM EMPLOYEE ORDER BY EMPLOYEE_ID ASC
+		FROM EMPLOYEE
+		<dynamic prepend="where">
+			<isNotNull property="col">
+				<isNotEqual property="col" compareValue="SHOW_ALL">
+					LOWER($col$)
+					LIKE
+					LOWER('%'||#input#||'%')
+				</isNotEqual>
+			</isNotNull>
+		</dynamic>
+		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = #end#)
+		WHERE rnum
+		&gt;
+		#begin#
 	</select>
-	
+
 	<insert id="insertEmployee" parameterClass="employee.EmployeeBean">
-		INSERT INTO EMPLOYEE 
-		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, PROJECT_ID, CREATED_BY, UPDATED_BY, EMPLOYEE_NAME, 
-		GENDER, EMAIL, ADDRESS, PHONE_NUMBER,CREATE_DATE,UPDATE_DATE)
+		INSERT INTO EMPLOYEE
+		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, PROJECT_ID, CREATED_BY,
+		UPDATED_BY, EMPLOYEE_NAME,
+		GENDER, EMAIL, ADDRESS,
+		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE)
 		VALUES
 		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#projectId#,#createBy#,#updateBy#,#employeeName#,
 		#gender#,#email#,#address#,#phoneNumber#,TO_DATE(#createDateInString#,'yyyy-mm-dd'),TO_DATE(#updateDateInString#,'yyyy-mm-dd'))
 	</insert>
-	
+
 	<update id="updateEmployee" parameterClass="employee.EmployeeBean">
-		UPDATE EMPLOYEE SET 
+		UPDATE EMPLOYEE SET
 		DEPT_ID = #deptId#,
 		RANK_ID = #rankId#,
 		SUPERVISOR_ID = #supervisorID#,
 		PROJECT_ID = #projectId#,
 		CREATED_BY = #createBy#,
-		UPDATED_BY = #updateBy#,
+		UPDATED_BY =
+		#updateBy#,
 		EMPLOYEE_NAME = #employeeName#,
 		GENDER = #gender#,
-		EMAIL = #email#,
+		EMAIL =
+		#email#,
 		ADDRESS = #address#,
 		PHONE_NUMBER = #phoneNumber#,
-		CREATE_DATE = TO_DATE(#createDateInString#,'yyyy-mm-dd'),
-		UPDATE_DATE = TO_DATE(#updateDateInString#,'yyyy-mm-dd')
-		WHERE EMPLOYEE_ID = #employeeId#
+		CREATE_DATE =
+		TO_DATE(#createDateInString#,'yyyy-mm-dd'),
+		UPDATE_DATE =
+		TO_DATE(#updateDateInString#,'yyyy-mm-dd')
+		WHERE EMPLOYEE_ID =
+		#employeeId#
 	</update>
-	
+
 	<delete id="deleteEmployee" parameterClass="java.lang.Integer">
-		DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = #EmployeeId#
+		DELETE FROM EMPLOYEE
+		WHERE EMPLOYEE_ID = #EmployeeId#
 	</delete>
-	
-	<select id="countEmployee" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+
+	<select id="countEmployee" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM EMPLOYEE
-		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+		WHERE LOWER($col$) LIKE
+		LOWER('%'||#input#||'%')
 	</select>
 </sqlMap>

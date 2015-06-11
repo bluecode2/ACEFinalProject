@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="generalHoliday">
-	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean">
+	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean" parameterClass="java.util.Map">
 		select * from(
 		select hol.* , ROWNUM rnum from(
 		SELECT GEN_HOLIDAY_ID as
