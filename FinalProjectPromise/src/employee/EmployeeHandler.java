@@ -2,6 +2,7 @@ package employee;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -14,6 +15,12 @@ public class EmployeeHandler extends Action{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return super.execute(mapping, form, request, response);
+		EmployeeForm eForm = (EmployeeForm) form;
+		EmployeeManager eMan = new EmployeeManager();
+		
+		HttpSession session = request.getSession(true);
+		
+//		return super.execute(mapping, form, request, response);
+		return mapping.findForward("employeeList");
 	}
 }

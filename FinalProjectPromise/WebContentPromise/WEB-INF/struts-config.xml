@@ -40,7 +40,7 @@
 		</action>
 		<action path="/employee" name="employeeForm" type="employee.employeeHandler"
 			scope="request">
-			<forward name="list" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
+			<forward name="employeeList" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
 		</action>
 	</action-mappings>
 
