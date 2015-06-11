@@ -9,19 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Holiday</title>
-
-<script type="text/javascript">
-	function onBtnAddClick(){
-		alert('add');
-		document.forms[0].task.value = 'add';
-		document.forms[0].submit();
-	}
-	
-	function onBtnBackClick(){
-		alert('back');
-	}
-
-</script>
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
@@ -51,32 +38,23 @@
 			</div>
 			
 			<div class="divContent">
-				<table class="table table-bordered" cellspacing="0"
-					style="margin-top: 10px;" width="100%" class="tableContent">
-					<thead class="panel panel-info">
-						<tr>
-							<td>General Holiday ID</td>
-							<td>General Holiday Name</td>
-							<td>General Holiday Date</td>
-							<td>Is Generated</td>
-							<td class="align-center"></td>
-						</tr>
-					</thead>
-					<tbody>
-						<logic:notEmpty name="generalHolidayForm" property="arrList">
-							<logic:iterate id="reg" name="generalHolidayForm" property="arrList">
-								<tr>
-									<td></td>
-								</tr>
-							</logic:iterate>
-						</logic:notEmpty>
-						<logic:empty name="generalHolidayForm" property="arrList">
-							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
-									Data Found</td>
-							</tr>
-						</logic:empty>
-					</tbody>
+				<table>
+					<tr>
+						<td>General Holiday ID</td>
+						<td><input type="text" id="txtGoToPage" /></td>
+					</tr>
+					<tr>
+						<td>General Holiday Name</td>
+						<td><input type="text" id="txtGoToPage" /></td>
+					</tr>
+					<tr>
+						<td>General Holiday Date</td>
+						<td><input type="text" id="txtGoToPage" /></td>
+					</tr>
+					<tr>
+						<td>Is Generated</td>
+						<td><input type="text" id="txtGoToPage" /></td>
+					</tr>
 				</table>
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
