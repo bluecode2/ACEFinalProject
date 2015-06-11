@@ -14,8 +14,7 @@
 		, create_date
 		as createDate , update_date as updateDate from
 		department
-		order by
-		dept_id
+
 		<dynamic prepend="where">
 			<isNotNull property="col">
 				<isNotEqual property="col" compareValue="SHOW_ALL">
@@ -25,7 +24,10 @@
 				</isNotEqual>
 			</isNotNull>
 		</dynamic>
-		) dept where ROWNUM &lt; = #end#) WHERE rnum &gt; #begin#
+		order by
+		dept_id
+		) dept where ROWNUM &lt; = #end#) WHERE rnum &gt;
+		#begin#
 	</select>
 
 	<select id="getRowCountDepartmentsFiltered" parameterClass="java.util.Map"
