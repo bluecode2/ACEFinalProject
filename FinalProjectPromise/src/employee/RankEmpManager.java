@@ -59,5 +59,4 @@ public class RankEmpManager {
 			this.ibatis.endTransaction();
 		}
 	}
-	
 }
