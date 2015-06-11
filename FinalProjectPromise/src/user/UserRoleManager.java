@@ -3,7 +3,9 @@ package user;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -52,5 +54,13 @@ public class UserRoleManager {
 		} finally{
 			this.ibatis.endTransaction();
 		}
+	}
+	
+	public Integer getCountUserRole(String column, String value) throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+		Integer result = (Integer) this.ibatis.queryForObject("userRole.countUserRole", map);
+		return result;
 	}
 }
