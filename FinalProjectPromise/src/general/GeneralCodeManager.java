@@ -40,7 +40,7 @@ public class GeneralCodeManager {
 		return arr;
 	}
 
-	public int getMaxGeneralCOde(String column, String value)
+	public int getMaxGeneralCode(String column, String value)
 			throws SQLException {
 		Map map = new HashMap();
 		map.put("col", column);
