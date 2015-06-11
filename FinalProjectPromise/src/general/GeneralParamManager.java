@@ -20,7 +20,9 @@ public class GeneralParamManager {
 	}
 
 	public List<GeneralParamBean> getAllGeneralParam(String col, String input,
-			Integer begin, Integer end) {
+			Integer pageNum, Integer pageSize) {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
 
 		List<GeneralParamBean> arr = null;
 		Map map = new HashMap();
@@ -37,6 +39,18 @@ public class GeneralParamManager {
 		}
 
 		return arr;
+	}
+
+	public int getCountGeneralParam(String column, String value)
+			throws SQLException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+
+		int count = (Integer) this.ibatis.queryForObject(
+				"genParam.countGenParam", map);
+
+		return count;
 	}
 
 	public void insertGeneralParam(GeneralParamBean genParamBean)

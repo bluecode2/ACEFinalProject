@@ -5,13 +5,15 @@
 	<select id="selectGenParam" resultClass="general.GeneralParamBean">
 		SELECT *
 		SELECT * FROM ( SELECT genParam.*, ROWNUM rnum from (
-		select GEN_PARAM_ID as
+		select
+		GEN_PARAM_ID as
 		genParamId,
 		GEN_PARAM_DESC as genParamDesc,
 		GEN_PARAM_VALUE as
 		genParamValue,
 		IS_ACTIVE as isActive
-		from general_parameter
+		from
+		general_parameter
 		<dynamic prepend="where">
 			<isNotNull property="col">
 				<isNotEqual property="col" compareValue="SHOW_ALL">
@@ -24,6 +26,12 @@
 		) genParam
 		WHERE ROWNUM &lt;= #end#)
 		WHERE rnum &gt; #begin#;
+	</select>
+
+	<select id="countGenParam">
+		select count(1) from general_parameter where
+		LOWER($col$) LIKE
+		LOWER('%'||#input#||'%')
 	</select>
 
 	<insert id="insertGenParam" parameterClass="general.GeneralParamBean">
