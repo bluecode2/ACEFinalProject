@@ -70,8 +70,11 @@ div#users-contain table td,div#users-contain table th {
 		// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
 		coba = $("#coba"), allFields = $([]).add(coba);
 
-		function addUser(coba) {
-			document.home.hasilCoba.value = coba;
+		function addUser() {
+			allFields.removeClass("ui-state-error");
+
+			var c = coba.val();
+			document.getElementById("hasilCoba").value = c;
 			dialog.dialog("close");
 
 		}
@@ -95,45 +98,48 @@ div#users-contain table td,div#users-contain table th {
 
 		form = dialog.find("form").on("submit", function(event) {
 			event.preventDefault();
-			addUser(coba);
+			addUser();
 		});
 
 		$("#create-user").button().on("click", function() {
 			dialog.dialog("open");
 		});
 	});
-	function getValue() {
-		document.home.coba.value = document.popup.hasilCoba.value;
-	
-	}
 </script>
 </head>
 <body>
 
 	<div id="dialog-form" title="Create new user">
+		<form>
+			<fieldset>
+				<label for="name">Coba : </label> <input type="text" name="coba"
+					id="coba" class="text ui-widget-content ui-corner-all">
 
-
-		<form name="home">
-			<label for="name">Coba : </label> <input type="text" name="coba"
-				id="coba" class="text ui-widget-content ui-corner-all">
-			<!-- Allow form submission with keyboard without duplicating the dialog button -->
-			<input type="submit" tabindex="-1"
-				style="position: absolute; top: -1000px">
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1"
+					style="position: absolute; top: -1000px">
+			</fieldset>
 		</form>
+
+
 	</div>
 
 
 	<div id="users-contain" class="ui-widget">
-		<form name="popup">
-			<h1>Existing Users:</h1>
 
-			<input type="text" name="hasilCoba" id="hasilCoba">
-			<button id="" onclick="javascript:getValue()">Create new
-				user</button>
+		<h1>Existing Users:</h1>
 
-		</form>
+
+		<button id="create-user">Create new user</button>
+
+
 	</div>
+	<div>
 
+		<input type="text" name="hasilCoba" id="hasilCoba">
+
+
+	</div>
 </body>
 </body>
 </html>

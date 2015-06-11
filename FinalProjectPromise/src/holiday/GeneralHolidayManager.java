@@ -1,0 +1,56 @@
+package holiday;
+
+import ibatis.IbatisHelper;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+public class GeneralHolidayManager {
+	private SqlMapClient ibatis;
+	
+	public GeneralHolidayManager(){
+		this.ibatis = IbatisHelper.getSqlMapInstance();
+	}
+	
+	public List<GeneralHolidayBean> getGeneralHoliday() throws SQLException{
+		List<GeneralHolidayBean> listResult = this.ibatis.queryForList("generalHoliday.getGeneralHoliday", null);
+		return listResult;
+	}
+	
+	public void insertGeneralHoliday(GeneralHolidayBean genHolidayBean) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.insert("generalHoliday.insertGeneralHoliday", genHolidayBean);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
+
+	public GeneralHolidayBean getGeneralHolidayEdit(int genId) throws SQLException{
+		GeneralHolidayBean genHolidayBean = (GeneralHolidayBean) this.ibatis.queryForObject("generalHoliday.getGeneralHolidayEdit", genId);
+		return genHolidayBean;
+	}
+
+	public void editGeneralHoliday(GeneralHolidayBean genHolidayBean) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("generalHoliday.editGeneralHoliday", genHolidayBean);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
+	
+	public void deleteGeneralHoliday(Integer genId) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.delete("generalHoliday.deleteGeneralHoliday", genId);
+			this.ibatis.commitTransaction();
+		} finally{
+			this.ibatis.endTransaction();
+		}
+	}
+}

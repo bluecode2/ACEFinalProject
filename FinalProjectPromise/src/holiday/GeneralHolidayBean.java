@@ -9,6 +9,7 @@ public class GeneralHolidayBean {
 	private String genHolidayName;
 	private Date genHolidayDate;
 	private String genHolidayDateInString;
+	private Integer isGenerated;
 
 	SimpleDateFormat df = new SimpleDateFormat();
 
@@ -52,5 +53,11 @@ public class GeneralHolidayBean {
 			date = null;
 		}
 		this.genHolidayDate = date;
+	}
+	public Integer getIsGenerated() {
+		return isGenerated;
+	}
+	public void setIsGenerated(Integer isGenerated) {
+		this.isGenerated = isGenerated;
 	}
 }
