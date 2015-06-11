@@ -9,7 +9,7 @@ public class EmployeeBean {
 	private Integer deptId;
 	private Integer rankId;
 	private Integer depDeptId;
-	private Integer empEmployeeId;
+	private Integer supervisorID;
 	private Integer projectId;
 	private Integer createBy;
 	private Integer updateBy;
@@ -49,11 +49,12 @@ public class EmployeeBean {
 	public void setDepDeptId(Integer depDeptId) {
 		this.depDeptId = depDeptId;
 	}
-	public Integer getEmpEmployeeId() {
-		return empEmployeeId;
+	
+	public Integer getSupervisorID() {
+		return supervisorID;
 	}
-	public void setEmpEmployeeId(Integer empEmployeeId) {
-		this.empEmployeeId = empEmployeeId;
+	public void setSupervisorID(Integer supervisorID) {
+		this.supervisorID = supervisorID;
 	}
 	public Integer getProjectId() {
 		return projectId;
