@@ -25,7 +25,7 @@
 		</dynamic>
 		) genParam
 		WHERE ROWNUM &lt;= #end#)
-		WHERE rnum &gt; #begin#;
+		WHERE rnum &gt; #begin#
 	</select>
 
 	<select id="countGenParam">

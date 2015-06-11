@@ -25,11 +25,12 @@
 		</dynamic>
 		) genCode
 		WHERE ROWNUM &lt;= #end#)
-		WHERE rnum &gt; #begin#;
+		WHERE rnum &gt; #begin#
 	</select>
 
 	<select id="countGeneralCode">
-		select count(1) from general_code where LOWER($col$) LIKE
+		select count(1) from general_code where LOWER($col$)
+		LIKE
 		LOWER('%'||#input#||'%')
 	</select>
 
