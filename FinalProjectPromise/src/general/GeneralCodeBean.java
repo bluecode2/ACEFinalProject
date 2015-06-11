@@ -1,40 +1,51 @@
 package general;
 
 public class GeneralCodeBean {
-	private String gen_code_id;
-	private String gen_code_caption;
-	private String parent_id;
-	private Integer is_active;
+
+	private String genCodeId;
+	private String genCodeCaption;
+	private String parentId;
+	private Integer isActive;
 	private Integer index;
-	
-	public String getGen_code_id() {
-		return gen_code_id;
+
+	public String getGenCodeId() {
+		return genCodeId;
 	}
-	public void setGen_code_id(String gen_code_id) {
-		this.gen_code_id = gen_code_id;
+
+	public void setGenCodeId(String genCodeId) {
+		this.genCodeId = genCodeId;
 	}
-	public String getGen_code_caption() {
-		return gen_code_caption;
+
+	public String getGenCodeCaption() {
+		return genCodeCaption;
 	}
-	public void setGen_code_caption(String gen_code_caption) {
-		this.gen_code_caption = gen_code_caption;
+
+	public void setGenCodeCaption(String genCodeCaption) {
+		this.genCodeCaption = genCodeCaption;
 	}
-	public String getParent_id() {
-		return parent_id;
+
+	public String getParentId() {
+		return parentId;
 	}
-	public void setParent_id(String parent_id) {
-		this.parent_id = parent_id;
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
-	public Integer getIs_active() {
-		return is_active;
+
+	public Integer getIsActive() {
+		return isActive;
 	}
-	public void setIs_active(Integer is_active) {
-		this.is_active = is_active;
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
+
 	public Integer getIndex() {
 		return index;
 	}
+
 	public void setIndex(Integer index) {
 		this.index = index;
 	}
+
 }

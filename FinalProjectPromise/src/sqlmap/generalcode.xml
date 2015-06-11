@@ -2,6 +2,39 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="genCode">
+	<select id="selectGeneralCode" resultClass="general.GeneralCodeBean">
+		select GEN_CODE_ID as
+		genCodeId,
+		PARENT_ID as parentId,
+		GEN_CODE_CAPTION as genCodeCaption,
+		IS_ACTIVE as isActive,
+		INDEX as index
+		from general_code
+	</select>
 
+	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">
+		insert into
+		general_code (GEN_CODE_ID, PARENT_ID, GEN_CODE_CAPTION,
+		IS_ACTIVE,
+		INDEX) values (#genCodeId#, #parentId#, #genCodeCaption#,
+		#isActive#,
+		#index#)
+	</insert>
+	<update id="updateGeneralCode" parameterClass="general.GeneralCodeBean">
+		update
+		general_code set
+		Parent_id = #parentId#,
+		GEN_CODE_CAPTION=
+		#genCodeCaption#,
+		IS_ACTIVE =
+		#isActive#,
+		INDEX = #index#
+		where
+		gen_code_id = #genCodeId#
+	</update>
+
+	<delete id="deleteGeneralCode" parameterClass="java.lang.Integer">
+		delete from general_code where gen_code_id = #genCodeId#
+	</delete>
 
 </sqlMap>
