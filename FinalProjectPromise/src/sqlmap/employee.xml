@@ -5,6 +5,7 @@
 	<select id="getCountEmployeeId" resultClass="java.lang.Integer">
 		SELECT MAX(EMPLOYEE_ID)+1 FROM EMPLOYEE
 	</select>
+	
 	<select id="getAllEmployee" resultClass="employee.EmployeeBean">
 		SELECT 
 		EMPLOYEE_ID AS employeeId,
@@ -23,6 +24,7 @@
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') AS updateDateInString
 		FROM EMPLOYEE ORDER BY EMPLOYEE_ID ASC
 	</select>
+	
 	<insert id="insertEmployee" parameterClass="employee.EmployeeBean">
 		INSERT INTO EMPLOYEE 
 		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, PROJECT_ID, CREATED_BY, UPDATED_BY, EMPLOYEE_NAME, 
@@ -31,6 +33,7 @@
 		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#projectId#,#createBy#,#updateBy#,#employeeName#,
 		#gender#,#email#,#address#,#phoneNumber#,TO_DATE(#createDateInString#,'yyyy-mm-dd'),TO_DATE(#updateDateInString#,'yyyy-mm-dd'))
 	</insert>
+	
 	<update id="updateEmployee" parameterClass="employee.EmployeeBean">
 		UPDATE EMPLOYEE SET 
 		DEPT_ID = #deptId#,
@@ -48,7 +51,13 @@
 		UPDATE_DATE = TO_DATE(#updateDateInString#,'yyyy-mm-dd')
 		WHERE EMPLOYEE_ID = #employeeId#
 	</update>
+	
 	<delete id="deleteEmployee" parameterClass="java.lang.Integer">
 		DELETE FROM EMPLOYEE WHERE EMPLOYEE_ID = #EmployeeId#
 	</delete>
+	
+	<select id="countEmployee" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM EMPLOYEE
+		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	</select>
 </sqlMap>
