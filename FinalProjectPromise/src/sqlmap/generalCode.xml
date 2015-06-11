@@ -28,6 +28,11 @@
 		WHERE rnum &gt; #begin#;
 	</select>
 
+	<select id="selectMaxGeneralCode">
+		select count(1)+1 from general_code where LOWER($col$) LIKE
+		LOWER('%'||#input#||'%')
+	</select>
+
 	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">
 		insert into
 		general_code (GEN_CODE_ID, PARENT_ID, GEN_CODE_CAPTION,

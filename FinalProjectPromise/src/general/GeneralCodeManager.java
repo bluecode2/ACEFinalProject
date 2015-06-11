@@ -18,7 +18,10 @@ public class GeneralCodeManager {
 	}
 
 	public List<GeneralCodeBean> getAllGeneralCode(String col, String input,
-			Integer begin, Integer end) {
+			Integer pageNum, Integer pageSize) {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+
 		List<GeneralCodeBean> arr = null;
 		Map map = new HashMap();
 		map.put("col", col);
@@ -35,6 +38,18 @@ public class GeneralCodeManager {
 		}
 
 		return arr;
+	}
+
+	public int getMaxGeneralCOde(String column, String value)
+			throws SQLException {
+		Map map = new HashMap();
+		map.put("col", column);
+		map.put("input", value);
+
+		int count = (Integer) this.ibatis.queryForObject(
+				"genCode.selectMaxGeneralCode", map);
+
+		return count;
 	}
 
 	public void insertGeneralCode(GeneralCodeBean genCodebean)
