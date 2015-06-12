@@ -5,7 +5,7 @@
 	<select id="getListDepartments" parameterClass="java.util.Map" 
 		resultClass="department.DepartmentBean">
 		SELECT * FROM (
-		SELECT dept.* ROWNUM rnum from ( SELECT 
+		SELECT dept.*, ROWNUM rnum from ( SELECT 
 		dept_id 			as deptId ,
 		dept_head_id 		as deptHeadId ,
 		created_by 			as createdBy ,

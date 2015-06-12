@@ -112,7 +112,7 @@ public class DepartmentManager {
 		return maxId;
 	}
 
-	public int getAllDepartmmentRowCountFiltered(String searchField,
+	public int getAllDepartmentsRowCountFiltered(String searchField,
 			String searchValue) {
 		Integer maxid = 0;
 		Map map = new HashMap();
