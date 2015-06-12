@@ -9,6 +9,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ($('#hdnIsAdd').value() == 'true')
+			$('#txtGeneralCodeId').attr('disabled', 'disabled');
+		else
+			$('#txtGeneralCodeId').removeAttr('disabled');
+	});
+
+	function onBtnSaveClick() {
+		document.forms[0].task.value = 'save';
+		document.forms[0].submit();
+	}
+	function onBtnBackClick() {
+		document.forms[0].task.value = '';
+		document.forms[0].submit();
+	}
+</script>
 </head>
 <body>
 	<html:form action="/generalCode" method="post">
@@ -19,49 +36,17 @@
 
 		<div class="container">
 			<div class="divSearch" style="float: right;">
-				<table>
-					<tr align="right">
-						<td>Search by</td>
-						<td><input type="text" /></td>
-						<td><input type="text" /></td>
-						<td><button id="btnSearch" class="btn btn-info btn-icon" title="Back">
-			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		</button></td>
-					</tr>
-				</table>
+				<!-- untuk pengganti search -->
+				
 			</div>
 
 			<div class="divContent">
-				<table class="table table-bordered" cellspacing="0"
-					style="margin-top: 10px;" width="100%" class="tableContent">
-					<thead class="panel panel-info">
-						<tr>
-							<td>Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
-						</tr>
-					</thead>
-					<tbody>
-						<logic:notEmpty name="generalCodeForm" property="arrCodeBean">
-							<logic:iterate id="reg" name="generalCodeForm" property="generalCodeForm">
-								<tr>
-									<td></td>
-								</tr>
-							</logic:iterate>
-						</logic:notEmpty>
-						<logic:empty name="generalCodeForm" property="arrCodeBean">
-							<tr>
-								<td colspan="11" align="center" style="padding: 10px">No
-									Data Found</td>
-							</tr>
-						</logic:empty>
-					</tbody>
-				</table>
-				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+				<!-- kemungkinan untuk tempat entry -->
+
 			</div>
-			
+
 		</div>
-		
+
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

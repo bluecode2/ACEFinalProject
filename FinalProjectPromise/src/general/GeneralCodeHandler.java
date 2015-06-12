@@ -20,42 +20,35 @@ public class GeneralCodeHandler extends Action {
 
 		GeneralCodeForm gcForm = (GeneralCodeForm) form;
 		GeneralCodeManager gcMan = new GeneralCodeManager();
-
+		CommonFunction.createAllowedMenu(null, request);
+		
 		if ("add".equals(gcForm.getTask())) {
 			System.out.println("masuk ke form add");
 			request.setAttribute("pageTitle", "Add General Code");
-			request.setAttribute("pageNavigator",
-					CommonFunction.createPagingNavigatorList(1, 1));
 
-			request.setAttribute("pageCount", 1);
-			request.setAttribute("currPage", 1);
-			request.setAttribute("rowCount", 1);
 
-			return mapping.findForward("insert");
+			return mapping.findForward("entry");
 		} else if ("search".equals(gcForm.getTask())) {
 
 			request.setAttribute("pageNavigator",
 					CommonFunction.createPagingNavigatorList(1, 1));
 		}
 
-		else {
-
-			gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getColumn(),
-					gcForm.getInput()));
-			gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount()
-					/ (double) Constant.pageSize));
-			request.setAttribute("pageTitle", "General Code List");
-
-			request.setAttribute(
-					"pageNavigator",
-					CommonFunction.createPagingNavigatorList(
-							gcForm.getPageCount(), gcForm.getHal()));
-
-			request.setAttribute("pageCount", gcForm.getPageCount());
-			request.setAttribute("currPage", gcForm.getHal());
-			request.setAttribute("rowCount", 1);
-
+		else if ("save".equals(gcForm.getTask())) {
+			//untuk mengesave edit  atau add
 		}
+
+		
+		gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getColumn(), gcForm.getInput()));
+		gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount() / (double) Constant.pageSize));
+		
+	
+		request.setAttribute("pageTitle", "General Code List");
+		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getHal()));
+
+		request.setAttribute("pageCount", gcForm.getPageCount());
+		request.setAttribute("currPage", gcForm.getHal());
+		request.setAttribute("rowCount", gcForm.getListCount());
 
 		return mapping.findForward("list");
 	}
