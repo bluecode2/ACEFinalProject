@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="department">
-	<select id="getListDepartments" parameterClass="java.util.Map"
+	<select id="getListDepartments" parameterClass="java.util.Map" 
 		resultClass="department.DepartmentBean">
 		SELECT * FROM (
 		SELECT dept.* ROWNUM rnum from ( SELECT 

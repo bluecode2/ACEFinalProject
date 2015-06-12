@@ -6,7 +6,7 @@
 		SELECT
 		MENU_ID as
 		menuId,
-		UPDATED_BY as updateBy,
+		UPDATED_BY as updatedBy,
 		CREATED_BY as createdBy,
 		MENU_CODE as
 		menuCode,
@@ -28,7 +28,7 @@
 		resultClass="general.MenuBean">
 		SELECT
 		MENU_ID as menuId,
-		UPDATED_BY as updateBy,
+		UPDATED_BY as updatedBy,
 		CREATED_BY
 		as createdBy,
 		MENU_CODE as menuCode,
@@ -48,11 +48,11 @@
 	</select>
 
 	<select id="selectListMenu" resultClass="general.MenuBean"
-		parameterClass="java.util.map">
+		parameterClass="java.util.Map">
 		select * from(
 		select m.* , ROWNUM rnum from (SELECT
 		MENU_ID 			as menuId,
-		UPDATED_BY 			as updateBy,
+		UPDATED_BY 			as updatedBy,
 		CREATED_BY 			as createdBy,
 		MENU_CODE 			as menuCode,
 		MENU_CAPTION 		as menuCaption,
@@ -116,7 +116,7 @@
 		UPDATE_DATE,
 		IS_PARENT)
 		VALUES(
-		#menuId#,#updateBy#,#createdBy#,#menuCode#,#menuCaption#,#parentId#,#menuCrud#,#menuIndex#,#menuUrl#,
+		#menuId#,#updatedBy#,#createdBy#,#menuCode#,#menuCaption#,#parentId#,#menuCrud#,#menuIndex#,#menuUrl#,
 		TO_DATE(#createDateInString#,'YYYY-MM-DD'),
 		TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
 		#isParent#)
@@ -124,7 +124,7 @@
 
 	<update id="updateMenu" parameterClass="general.MenuBean">
 		UPDATE MENU SET
-		UPDATED_BY = #updateBy#,
+		UPDATED_BY = #updatedBy#,
 		MENU_CODE = #menuCode#,
 		MENU_CAPTION =
 		#menuCaption#,

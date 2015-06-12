@@ -12,7 +12,7 @@ public class EmployeeBean {
 	private Integer supervisorID;
 	private Integer projectId;
 	private Integer createBy;
-	private Integer updateBy;
+	private Integer updatedBy;
 	private String employeeName;
 	private String gender;
 	private String email;
@@ -68,11 +68,11 @@ public class EmployeeBean {
 	public void setCreateBy(Integer createBy) {
 		this.createBy = createBy;
 	}
-	public Integer getUpdateBy() {
-		return updateBy;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	public String getEmployeeName() {
 		return employeeName;
