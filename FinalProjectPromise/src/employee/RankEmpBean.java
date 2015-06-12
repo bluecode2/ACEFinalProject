@@ -16,6 +16,7 @@ public class RankEmpBean {
 	private String 	createDateInString;
 	private Date 	updateDate;
 	private String 	updateDateInString;
+	private String  rankCode;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
 	
@@ -111,6 +112,12 @@ public class RankEmpBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public String getRankCode() {
+		return rankCode;
+	}
+	public void setRankCode(String rankCode) {
+		this.rankCode = rankCode;
 	}
 	
 }

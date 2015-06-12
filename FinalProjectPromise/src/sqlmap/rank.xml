@@ -11,6 +11,7 @@
 		rank_level as rankLevel,
 		create_date as createDate,
 		update_date as updateDate
+		rank_code as rankCode
 		FROM rank_emp
 		where 1=1
 		<dynamic prepend="AND">
@@ -22,12 +23,7 @@
 			<isEqual property="searchField" compareValue="rankName">
 				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="rankLevel">
-				LOWER(rank_level) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
+		</dynamic>			
 		ORDER BY rank_id ) r
 		where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
@@ -46,7 +42,7 @@
 		SET
 		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
 		rank_name=#rankName#, CREATE_DATE=#createDate#,
-		UPDATE_DATE=#updateDate#
+		UPDATE_DATE=#updateDate#, rank_code = #rankCode#
 		WHERE rank_id=#rankId#
 	</update>
 
@@ -68,11 +64,6 @@
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankName">
 				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="rankLevel">
-				LOWER(rank_level) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>		
 	</select>
