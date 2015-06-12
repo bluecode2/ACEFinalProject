@@ -110,7 +110,7 @@ public class DepartmentHandler extends Action {
 //				  request.setAttribute("pageNavigator", CommonFunction
 //				    .createPagingNavigatorList(eForm.getPageCount(),
 //				      eForm.getCurrPage()));
-				  
+//				  
 				//  request.setAttribute("rowCount", rowCount);
 				 // return mapping.findForward("index");
 				
@@ -122,6 +122,7 @@ public class DepartmentHandler extends Action {
 				request.setAttribute("pageCount", 1);
 				request.setAttribute("currPage", 1);
 				request.setAttribute("rowCount", 1);
+			
 				
 				return mapping.findForward("list");
 			}

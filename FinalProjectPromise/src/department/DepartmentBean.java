@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class DepartmentBean {
 	private Integer deptId;
+	private Integer deptHeadId;
 	private Integer employeeId;
 	private Integer createdBy;
-	private Integer updateBy;
+	private Integer updatedBy;
 	private String deptCode;
 	private String deptName;
 	private Date createDate;
@@ -30,17 +31,24 @@ public class DepartmentBean {
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
+	
+	public Integer getDeptHeadId() {
+		return deptHeadId;
+	}
+	public void setDeptHeadId(Integer deptHeadId) {
+		this.deptHeadId = deptHeadId;
+	}
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
 	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Integer getUpdateBy() {
-		return updateBy;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	public String getDeptCode() {
 		return deptCode;

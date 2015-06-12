@@ -18,7 +18,7 @@
 		SUPERVISOR_ID 						AS supervisorID,
 		PROJECT_ID 							AS projectId,
 		CREATED_BY 							AS createBy,
-		UPDATED_BY 							AS updateBy,
+		UPDATED_BY 							AS updatedBy,
 		EMPLOYEE_NAME 						AS employeeName,
 		GENDER 								AS gender,
 		EMAIL 								AS email,
@@ -71,7 +71,7 @@
 		GENDER, EMAIL, ADDRESS,
 		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE)
 		VALUES
-		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#projectId#,#createBy#,#updateBy#,#employeeName#,
+		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#projectId#,#createBy#,#updatedBy#,#employeeName#,
 		#gender#,#email#,#address#,#phoneNumber#,TO_DATE(#createDateInString#,'yyyy-mm-dd'),TO_DATE(#updateDateInString#,'yyyy-mm-dd'))
 	</insert>
 
@@ -83,7 +83,7 @@
 		PROJECT_ID = #projectId#,
 		CREATED_BY = #createBy#,
 		UPDATED_BY =
-		#updateBy#,
+		#updatedBy#,
 		EMPLOYEE_NAME = #employeeName#,
 		GENDER = #gender#,
 		EMAIL =

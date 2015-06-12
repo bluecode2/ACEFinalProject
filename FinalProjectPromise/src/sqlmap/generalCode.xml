@@ -4,7 +4,7 @@
 <sqlMap namespace="genCode">
 
 	<select id="selectGeneralCode" resultClass="general.GeneralCodeBean"
-		parameterClass="java.util.map">
+		parameterClass="java.util.Map">
 		SELECT *
 		FROM (SELECT genCode.*, ROWNUM rnum
 		FROM (
