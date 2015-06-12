@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
+import common.Constant;
 
 public class GeneralCodeHandler extends Action {
 
@@ -17,9 +18,10 @@ public class GeneralCodeHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		GeneralCodeForm gcf = (GeneralCodeForm) form;
+		GeneralCodeForm gcForm = (GeneralCodeForm) form;
+		GeneralCodeManager gcMan = new GeneralCodeManager();
 
-		if ("add".equals(gcf.getTask())) {
+		if ("add".equals(gcForm.getTask())) {
 			System.out.println("masuk ke form add");
 			request.setAttribute("pageTitle", "Add General Code");
 			request.setAttribute("pageNavigator",
@@ -30,8 +32,7 @@ public class GeneralCodeHandler extends Action {
 			request.setAttribute("rowCount", 1);
 
 			return mapping.findForward("insert");
-		} else if ("search".equals(gcf.getTask())) {
-
+		} else if ("search".equals(gcForm.getTask())) {
 
 			request.setAttribute("pageNavigator",
 					CommonFunction.createPagingNavigatorList(1, 1));
@@ -39,13 +40,19 @@ public class GeneralCodeHandler extends Action {
 
 		else {
 
+			gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getColumn(),
+					gcForm.getInput()));
+			gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount()
+					/ (double) Constant.pageSize));
 			request.setAttribute("pageTitle", "General Code List");
 
-			request.setAttribute("pageNavigator",
-					CommonFunction.createPagingNavigatorList(1, 1));
+			request.setAttribute(
+					"pageNavigator",
+					CommonFunction.createPagingNavigatorList(
+							gcForm.getPageCount(), gcForm.getHal()));
 
-			request.setAttribute("pageCount", 1);
-			request.setAttribute("currPage", 1);
+			request.setAttribute("pageCount", gcForm.getPageCount());
+			request.setAttribute("currPage", gcForm.getHal());
 			request.setAttribute("rowCount", 1);
 
 		}
