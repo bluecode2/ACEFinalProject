@@ -13,7 +13,7 @@ public class GeneralParamForm extends ActionForm {
 	private Integer countPage;
 	private String task;
 	
-	private GeneralParamBean bean;
+	private GeneralParamBean bean = new GeneralParamBean();
 
 	public ArrayList<GeneralParamBean> getArrList() {
 		return arrList;
