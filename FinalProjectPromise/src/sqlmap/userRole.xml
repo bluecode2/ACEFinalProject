@@ -2,14 +2,32 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="userRole">
-	<select id="getUserRole" resultClass="user.UserRoleBean">
-		SELECT USER_ROLE_ID as userRoleId,
-		UPDATED_BY as updatedBy, 
-		CREATED_BY as createdBy,
-		USER_ROLE_NAME as userRoleName,
-		CREATE_DATE as createDateInString,
-		UPDATE_DATE as updateDateInString
-		FROM USER_ROLE ORDER BY USER_ROLE_ID
+	<select id="getUserRole" resultClass="user.UserRoleBean" parameterClass="java.util.Map">
+	select * from(
+		select ur.*, ROWNUM rnum from (
+			SELECT 
+			USER_ROLE_ID 	as userRoleId,
+	        UPDATED_BY 		as updatedBy, 
+	        CREATED_BY 		as createdBy,
+	        USER_ROLE_NAME 	as userRoleName,
+	        CREATE_DATE 	as createDateInString,
+	        UPDATE_DATE 	as updateDateInString,
+	        user_role_code 	as userRoleCode
+	        FROM USER_ROLE 
+	        where 1=1
+			<dynamic prepend="AND">
+				<isEqual property="searchField" compareValue="userRoleCode">
+					LOWER(user_role_code) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isEqual>
+			</dynamic>
+			<dynamic prepend="AND">
+				<isEqual property="searchField" compareValue="userRoleName">
+					LOWER(user_role_Name) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isEqual>
+			</dynamic>
+	        ORDER BY USER_ROLE_ID) ur 
+		where ROWNUM &lt;= #end#)
+	where rnum &gt; #begin#
 	</select>
 	
 	<insert id="insertUserRole" parameterClass="user.UserRoleBean">
@@ -46,6 +64,16 @@
 	
 	<select id="countUserRole" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM USER_ROLE
-		WHERE LOWER($col$) LIKE LOWER('%'||#input#||'%')
+	 	where 1=1
+			<dynamic prepend="AND">
+				<isEqual property="searchField" compareValue="userRoleCode">
+					LOWER(user_role_code) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isEqual>
+			</dynamic>
+			<dynamic prepend="AND">
+				<isEqual property="searchField" compareValue="userRoleName">
+					LOWER(user_role_Name) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isEqual>
+			</dynamic>
 	</select>
 </sqlMap>
