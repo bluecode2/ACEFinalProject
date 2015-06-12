@@ -10,14 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
- function onBtnAddClick(){
-  //alert('add');
-  document.forms[0].task.value = 'add';
-  document.forms[0].submit();
- }
- 
-</script>
 <body>
 	<html:form action="/employee" method="post">
 
@@ -26,15 +18,12 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divSearch form-group has-info" style="float: right;">
+			<div class="divSearch form-group has-info" style="float: left;">
 				<table>
 					<tr>
-						<td>Search by</td>
+						<td>Employee Name</td>
 						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control select">	
-								<option value="empId">Emp. Id</option>
-								<option value="empName">Emp. Name</option>
-							</select>
+							<input type="text" />
 						</td>
 						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
 						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
