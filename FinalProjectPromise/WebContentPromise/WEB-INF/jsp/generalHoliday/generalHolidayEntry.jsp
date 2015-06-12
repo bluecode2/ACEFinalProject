@@ -22,38 +22,41 @@
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control">	
+						<td style="padding-left: 15px;"><select id="selSearchField"
+							class="form-control">
 								<option value="genHolidayName">General Holiday Name</option>
 								<option value="genHolidayDate">General Holiday Date</option>
-							</select>
-						</td>
-						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
-						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
+						</select></td>
+						<td style="padding-left: 15px"><input type="text"
+							class="form-control" /></td>
+						<td style="padding-left: 15px"><button id="btnSearch"
+								class="btn btn-info btn-icon" title="Back">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
 					</tr>
 				</table>
 			</div>
-			<br/>
+			<br />
 			<div class="divContent">
 				<table>
-					<tr>
+					<!-- <tr>
 						<td>General Holiday ID</td>
 						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>General Holiday Name</td>
-						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
+						<td><input type="text" id="txtGoToPage" class="form-control" /></td>
 					</tr>
 					<tr>
 						<td>General Holiday Date</td>
-						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
+						<td><input type="text" id="txtGoToPage" class="form-control" /></td>
 					</tr>
 					<tr>
 						<td>Is Generated</td>
-						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
+						<td>
+							<input type="radio" name="gender" value="Yes"> Yes</input> &nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp; 
+							<input type="radio" name="gender" value="No"> No</input></td>
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
