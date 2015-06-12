@@ -18,25 +18,6 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divSearch form-group has-info" style="float: right;">
-				<table>
-					<tr>
-						<td>Search by</td>
-						<td style="padding-left: 15px;"><select id="selSearchField"
-							class="form-control">
-								<option value="genHolidayName">General Holiday Name</option>
-								<option value="genHolidayDate">General Holiday Date</option>
-						</select></td>
-						<td style="padding-left: 15px"><input type="text"
-							class="form-control" /></td>
-						<td style="padding-left: 15px"><button id="btnSearch"
-								class="btn btn-info btn-icon" title="Back">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
-					</tr>
-				</table>
-			</div>
-			<br />
 			<div class="divContent">
 				<table>
 					<!-- <tr>

@@ -16,6 +16,8 @@ public class GeneralHolidayHandler extends Action{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+		CommonFunction.createAllowedMenu(null, request);
+		
 		GeneralHolidayForm genForm = (GeneralHolidayForm)form;
 		
 		if("add".equals(genForm.getTask())){
