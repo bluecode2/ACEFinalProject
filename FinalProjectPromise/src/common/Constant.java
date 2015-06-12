@@ -2,7 +2,7 @@ package common;
 
 public class Constant {
 	public static class StringFormat{
-		public static final String dateFormat = "dd-MM-yyyy";
+		public static final String dateFormat = "yyyy-MM-dd";
 	}
 	
 	public static class DefaultValue{
@@ -12,5 +12,9 @@ public class Constant {
 	
 	public static final int pageSize = 15;
 	public static final int pageNavigatorSize = 5;
+	
+	public static class MenuCode{
+		
+	}
 	 
 }

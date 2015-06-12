@@ -21,10 +21,10 @@
 <script src="js/ripples.min.js"></script>
 <script src="js/material.min.js"></script>
 <script>
-	$(document).ready(function() {
-		// This command is used to initialize some elements and make them work properly
-		$.material.init();
-	});
+		$(document).ready(function() {
+			// This command is used to initialize some elements and make them work properly
+			$.material.init();
+		});
 </script>
 
 </head>
@@ -45,34 +45,44 @@
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<logic:iterate id="menuLvl1" name="arrMenuLvl1">
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle"><bean:write name="menuLvl1" property="menuCaption" />
-							<b class="caret"></b></a> 
-						<ul class="dropdown-menu" id="menu1">
-							<logic:iterate id="menuLvl2" name="arrMenuLvl2">
-								<logic:equal name="menuLvl2" property="parentId" value="${menuLvl1.menuId}">
-									<li><a href="#"><bean:write name="menuLvl2" property="menuCaption" /></a>
-										<ul class="dropdown-menu sub-menu">
-											<logic:iterate id="menuLvl3" name="arrMenuLvl3">
-												<logic:equal name="menuLvl3" property="parentId" value="${menuLvl2.menuId}">
-													<li><a href="#"><bean:write name="menuLvl3" property="menuCaption" /></a></li>
-												</logic:equal>
-											</logic:iterate>
-										</ul>
-									</li>
-								</logic:equal>
-							</logic:iterate>
-						</ul>
-					</li>
+					
 				</logic:iterate>
+			
+				<li class="active"><a href="#">Home</a></li>
+				<li class="dropdown"><a href="#" data-toggle="dropdown"
+					class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+					<ul class="dropdown-menu" id="menu1">
+						<li><a href="#">Another action</a>
+							<ul class="dropdown-menu sub-menu">
+							</ul>
+						</li>
+						<li><a href="#">2-level Menu <span
+								class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></a>
+							<ul class="dropdown-menu sub-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+					</ul></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" title="Home"><span
-						class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+								class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+				<li class="dropdown">
+					
+				<a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"><span
-						class="glyphicon glyphicon-user" aria-hidden="true"
-						style="margin-right: 10px"></span>Username <span class="caret"></span>
+								class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right:10px"></span>Username
+						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">Change Password</a></li>

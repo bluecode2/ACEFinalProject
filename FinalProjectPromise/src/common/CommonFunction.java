@@ -1,6 +1,11 @@
 package common;
 
+import general.MenuBean;
+import general.MenuManager;
+
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class CommonFunction {
 	public static ArrayList<PageNavigator> createPagingNavigatorList(int pageCount, int currPage){
@@ -71,4 +76,33 @@ public class CommonFunction {
 		}
 		return arr;
 	}
+	
+	public static void createAllowedMenu(Integer UserId, HttpServletRequest request){
+		ArrayList<MenuBean> arrMenuLvl1 = new ArrayList<MenuBean>();
+		ArrayList<MenuBean> arrMenuLvl2 = new ArrayList<MenuBean>();
+		ArrayList<MenuBean> arrMenuLvl3 = new ArrayList<MenuBean>();
+		
+		MenuManager menuMan = new MenuManager();
+		
+		arrMenuLvl1 = menuMan.getAllMenuHead();
+		
+		for (MenuBean menuLvl1 : arrMenuLvl1) {
+			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(menuLvl1.getMenuId());
+			
+			for (MenuBean menuLvl2 : tmpLvl2) {
+				arrMenuLvl2.add(menuLvl2);
+				ArrayList<MenuBean> tmpLvl3 = menuMan.getAllMenuByParent(menuLvl2.getMenuId());
+				
+				for (MenuBean menuLvl3 : tmpLvl3) {
+					arrMenuLvl3.add(menuLvl3);
+				}
+			}
+		}
+		
+		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
+		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
+		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
+	}
+	
+	
 }

@@ -22,7 +22,7 @@ public class MenuBean {
 	private String updateDateInString;
 	private Integer isParent;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(common.Constant.StringFormat.dateFormat);
 
 	public Integer getMenuId() {
 		return menuId;
@@ -111,8 +111,8 @@ public class MenuBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -127,8 +127,8 @@ public class MenuBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}
