@@ -12,7 +12,7 @@
 </head>
 <script type="text/javascript">
  function onBtnAddClick(){
-  //alert('add');
+  alert('add');
   document.forms[0].task.value = 'add';
   document.forms[0].submit();
  }
@@ -20,7 +20,7 @@
 </script>
 <body>
 	<html:form action="/employee" method="post">
-
+		<html:hidden property="task" name="employeeForm" />
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>

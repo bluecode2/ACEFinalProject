@@ -22,14 +22,36 @@
 				<table>
 					<tr>
 						<td>Employee Name</td>
-						<td style="padding-left:15px;">
-							<input type="text" />
+						<td style="padding-left:15px;" align="left">
+							<input type="text" name="employeeName" class="form-control" />
 						</td>
-						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
-						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td style="padding-left:15px;" align="left">
+							<input type="radio" name="gender" value="L"> L </input>
+							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="gender" value="P"> P </input>
+						</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td style="padding-left:15px;" align="left">
+							<input type="text" name="email" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td>Address</td>
+						<td style="padding-left:15px;" align="left">
+							<textarea style="width: 300px; height: 50px;" class="form-control"></textarea>
+							<%-- <html:textarea property=""></html:textarea> --%>
+						</td>
+					</tr>
+					<tr>
+						<td>Phone Number</td>
+						<td style="padding-left:15px;" align="left">
+							<input type="text" name="phoneNumber" class="form-control" />
+						</td>
 					</tr>
 				</table>
 			</div>
