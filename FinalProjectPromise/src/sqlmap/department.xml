@@ -40,33 +40,7 @@
 		) dept where ROWNUM &lt; = #end#) WHERE rnum &gt;
 		#begin#
 	</select>
-
-	<select id="getRowCountDepartmentsFiltered" parameterClass="java.util.Map"
-		resultClass="java.lang.Integer">
-		SELECT COUNT(1) as maxid FROM DEPARTMENT
-		WHERE 1=1
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptId">
-				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>			
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptHeadId">
-				LOWER(dept_head_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptCode">
-				LOWER(dept_code) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptName">
-				LOWER(dept_name) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-	</select>
-
+	
 	<select id="getDepartment" parameterClass="java.lang.Integer"
 		resultClass="department.DepartmentBean">
 		SELECT dept_id as deptId,
@@ -135,7 +109,26 @@
 	<select id="countDepartment" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM DEPARTMENT
-		WHERE LOWER($col$) LIKE
-		LOWER('%'||#input#||'%')
+		WHERE 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptId">
+				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadId">
+				LOWER(dept_head_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptCode">
+				LOWER(dept_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(dept_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
 	</select>
 </sqlMap>
