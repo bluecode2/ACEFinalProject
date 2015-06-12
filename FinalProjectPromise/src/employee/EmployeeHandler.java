@@ -17,14 +17,19 @@ public class EmployeeHandler extends Action{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
+		EmployeeForm eForm = (EmployeeForm) form;
 		request.setAttribute("pageTitle", "Employee List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
-				.createPagingNavigatorList(1,1));
+				.createPagingNavigatorList(15,5));
 		
-		request.setAttribute("pageCount", 1);
-		request.setAttribute("currPage", 1);
-		request.setAttribute("rowCount", 1);
+		request.setAttribute("pageCount", 5);
+		request.setAttribute("currPage", 5);
+		request.setAttribute("rowCount", 50);
+		
+		if ("add".equalsIgnoreCase(eForm.getTask())){
+			return mapping.findForward("employeeAdd");
+		}
 		
 //		return super.execute(mapping, form, request, response);
 		return mapping.findForward("employeeList");
