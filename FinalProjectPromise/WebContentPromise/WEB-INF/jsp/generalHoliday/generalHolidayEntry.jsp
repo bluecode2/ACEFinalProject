@@ -41,19 +41,19 @@
 				<table>
 					<tr>
 						<td>General Holiday ID</td>
-						<td><input type="text" id="txtGoToPage" /></td>
+						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
 					</tr>
 					<tr>
 						<td>General Holiday Name</td>
-						<td><input type="text" id="txtGoToPage" /></td>
+						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
 					</tr>
 					<tr>
 						<td>General Holiday Date</td>
-						<td><input type="text" id="txtGoToPage" /></td>
+						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
 					</tr>
 					<tr>
 						<td>Is Generated</td>
-						<td><input type="text" id="txtGoToPage" /></td>
+						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
