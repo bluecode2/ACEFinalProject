@@ -28,7 +28,7 @@ public class EmployeeHandler extends Action{
 		request.setAttribute("rowCount", 50);
 		
 		if ("add".equalsIgnoreCase(eForm.getTask())){
-			return mapping.findForward("");
+			return mapping.findForward("employeeAdd");
 		}
 		
 //		return super.execute(mapping, form, request, response);
