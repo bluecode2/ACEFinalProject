@@ -31,8 +31,7 @@ public class DepartmentManager {
 		map.put("end", end);
 
 		try {
-			arr = this.ibatis
-					.queryForList("department.getListDepartments", map);
+			arr = this.ibatis.queryForList("department.getListDepartments", map);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,31 +39,23 @@ public class DepartmentManager {
 		}
 		return arr;
 	}
+	
 
-	public ArrayList<DepartmentBean> getAllDepartmentsForField(
-			int excludedDeptId) {
-		ArrayList<DepartmentBean> arr = new ArrayList<DepartmentBean>();
-
-		try {
-			arr = new ArrayList<DepartmentBean>(this.ibatis.queryForList(
-					"department.getListDepartmentsForField", excludedDeptId));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return arr;
-	}
-
-	public DepartmentBean getDepartment(int deptid) {
+	public DepartmentBean getDepartmentByDeptId(int tmpDeptId) {
 		DepartmentBean dept = null;
 		try {
-			dept = (DepartmentBean) ibatis.queryForObject(
-					"department.getDepartment", deptid);
+			dept = (DepartmentBean) ibatis.queryForObject("department.getDepartmentbyDeptId", tmpDeptId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dept;
+	}
+	
+	public int getNewDeptId() throws SQLException {
+		
+		int tempDeptId = (Integer) ibatis.queryForObject("department.getNewDeptId", null);
+		return tempDeptId;
 	}
 
 	public void updateDepartment(DepartmentBean dept) {
@@ -98,35 +89,6 @@ public class DepartmentManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public int getDepartmentMaxId() {
-		Integer maxId = 0;
-		try {
-			maxId = (Integer) ibatis.queryForObject(
-					"department.getDepartmentMaxId", null);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return maxId;
-	}
-
-	public int getAllDepartmentsRowCountFiltered(String searchField,
-			String searchValue) {
-		Integer maxid = 0;
-		Map map = new HashMap();
-		map.put("searchField", searchField);
-		map.put("searchValue", searchValue);
-
-		try {
-			maxid = (Integer) this.ibatis.queryForObject(
-					"department.getRowCountDepartmentsFiltered", map);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return maxid;
 	}
 
 	public Integer getCountDepartment(String column, String value)

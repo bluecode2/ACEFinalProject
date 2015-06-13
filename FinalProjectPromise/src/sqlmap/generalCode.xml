@@ -8,13 +8,14 @@
 		SELECT *
 		FROM (SELECT genCode.*, ROWNUM rnum
 		FROM (
-		SELECT gen_code_id 		AS genCodeId,
+		SELECT 
+		gen_code_id 			AS genCodeId,
 		Gen_code_caption 		AS genCodeCaption,
 		Parent_Id 				AS parentId,
 		IS_ACTIVE				AS isActive,
 		GEN_CODE_INDEX 			AS genCodeIndex
 		FROM
-		general_parameter
+		general_code
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genCodeId">
@@ -65,6 +66,17 @@
 				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
+	</select>
+	
+	<select id="getGenCodeWithId" parameterClass="java.lang.String" resultClass="general.GeneralCodeBean">
+	SELECT 
+		gen_code_id 			AS genCodeId,
+		Gen_code_caption 		AS genCodeCaption,
+		Parent_Id 				AS parentId,
+		IS_ACTIVE				AS isActive,
+		GEN_CODE_INDEX 			AS genCodeIndex
+		FROM general_code
+		where gen_code_id = #tmpGenId#
 	</select>
 
 	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">

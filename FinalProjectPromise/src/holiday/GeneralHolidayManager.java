@@ -32,6 +32,16 @@ public class GeneralHolidayManager {
 		return listResult;
 	}
 
+	public GeneralHolidayBean getGeneralHolidayByHolId(int holId) throws SQLException {
+		GeneralHolidayBean genHolBean = (GeneralHolidayBean) this.ibatis.queryForObject("generalHoliday.getGeneralHolidayByHolId", holId);
+		return genHolBean;
+	}
+	
+	public int getNewGenHolidayId() throws SQLException {
+		int tmpNewHolId = (Integer) this.ibatis.queryForObject("generalHoliday.getNewHolId", null);
+		return tmpNewHolId;
+	}
+	
 	public void insertGeneralHoliday(GeneralHolidayBean genHolidayBean)
 			throws SQLException {
 		try {

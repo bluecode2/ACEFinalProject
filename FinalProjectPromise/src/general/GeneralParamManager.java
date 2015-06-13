@@ -40,6 +40,11 @@ public class GeneralParamManager {
 
 		return arr;
 	}
+	
+	public GeneralParamBean getGenParamByParamId(String tmpGenParamId) throws SQLException {
+		GeneralParamBean genParamBean = (GeneralParamBean) this.ibatis.queryForObject("genParam.getGenParamByGenParamId", tmpGenParamId);
+		return genParamBean;
+	}
 
 	public int getCountGeneralParam(String column, String value)
 			throws SQLException {

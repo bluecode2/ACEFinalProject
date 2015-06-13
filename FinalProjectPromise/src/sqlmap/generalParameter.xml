@@ -3,17 +3,15 @@
 
 <sqlMap namespace="genParam">
 	<select id="selectGenParam" resultClass="general.GeneralParamBean" parameterClass="java.util.Map">
-		SELECT *
-		SELECT * FROM ( SELECT genParam.*, ROWNUM rnum from (
+		SELECT * FROM ( 
+		SELECT 
+		genParam.*, ROWNUM rnum from (
 		select
-		GEN_PARAM_ID as
-		genParamId,
-		GEN_PARAM_DESC as genParamDesc,
-		GEN_PARAM_VALUE as
-		genParamValue,
-		IS_ACTIVE as isActive
-		from
-		general_parameter
+		GEN_PARAM_ID 			as genParamId,
+		GEN_PARAM_DESC 			as genParamDesc,
+		GEN_PARAM_VALUE 		as genParamValue,
+		IS_ACTIVE 				as isActive
+		from general_parameter
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamId">
@@ -62,6 +60,16 @@
 				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
+	</select>
+	
+	<select id="getGenParamByGenParamId" resultClass="general.GeneralParamBean" parameterClass="java.lang.String">
+	select
+		GEN_PARAM_ID 			as genParamId,
+		GEN_PARAM_DESC 			as genParamDesc,
+		GEN_PARAM_VALUE 		as genParamValue,
+		IS_ACTIVE 				as isActive
+		from general_parameter 
+		where gen_param_id = #tmpGenParamId#
 	</select>
 
 	<insert id="insertGenParam" parameterClass="general.GeneralParamBean">

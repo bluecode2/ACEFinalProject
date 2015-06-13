@@ -40,6 +40,11 @@ public class GeneralCodeManager {
 		return arr;
 	}
 
+	public GeneralCodeBean getGeneralCodeByGenId(String tmpGenId) throws SQLException {
+		GeneralCodeBean genCodeBean = (GeneralCodeBean) this.ibatis.queryForObject("genCode.getGenCodeWithId", tmpGenId);
+		return genCodeBean;
+	}
+	
 	public int getCountGeneralCode(String column, String value)
 			throws SQLException {
 		Map map = new HashMap();

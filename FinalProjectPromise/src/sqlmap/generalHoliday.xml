@@ -37,6 +37,20 @@
 		where rnum &gt;
 		#begin#
 	</select>
+	
+	<select id="getGeneralHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.GeneralHolidayBean">
+	SELECT 
+		GEN_HOLIDAY_ID 		as genHolidayId,
+		GEN_HOLIDAY_NAME 	as genHolidayName,
+		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
+		IS_GENERATED 		as isGenerated
+		FROM GENERAL_HOLIDAY
+		where gen_holiday_id = #holId#
+	</select>
+	
+	<select id="getNewHolId" resultClass="java.lang.Integer" >
+	select max(Gen_holiday_id)+1 from general_holiday
+	</select>
 
 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
 		insert into
