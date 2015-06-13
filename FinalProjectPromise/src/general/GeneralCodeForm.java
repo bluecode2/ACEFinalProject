@@ -8,14 +8,32 @@ public class GeneralCodeForm extends ActionForm {
 
 	private ArrayList<GeneralCodeBean> arrCodeBean = new ArrayList<GeneralCodeBean>();
 	private String 			task;
-	private String 			column;
-	private String 			input;
+	private String 			searchField;
+	private String 			searchValue;
 	private Integer 		hal = 1;
 	private Integer 		pageCount;
 	private GeneralCodeBean genCodeBean = new GeneralCodeBean();
 	private Integer 		listCount;
 	private boolean			isadd;
+	private String			currSearchField;
+	private String			currSearchValue;
 	
+	public String getCurrSearchField() {
+		return currSearchField;
+	}
+
+	public void setCurrSearchField(String currSearchField) {
+		this.currSearchField = currSearchField;
+	}
+
+	public String getCurrSearchValue() {
+		return currSearchValue;
+	}
+
+	public void setCurrSearchValue(String currSearchValue) {
+		this.currSearchValue = currSearchValue;
+	}
+
 	public boolean isIsadd() {
 		return isadd;
 	}
@@ -48,20 +66,20 @@ public class GeneralCodeForm extends ActionForm {
 		this.hal = hal;
 	}
 
-	public String getColumn() {
-		return column;
+	public String getSearchField() {
+		return searchField;
 	}
 
-	public void setColumn(String column) {
-		this.column = column;
+	public void setSearchField(String searchField) {
+		this.searchField = searchField;
 	}
 
-	public String getInput() {
-		return input;
+	public String getSearchValue() {
+		return searchValue;
 	}
 
-	public void setInput(String input) {
-		this.input = input;
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
 	}
 
 	public String getTask() {

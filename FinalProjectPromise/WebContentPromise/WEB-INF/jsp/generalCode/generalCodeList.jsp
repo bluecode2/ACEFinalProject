@@ -14,32 +14,46 @@
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}
+	function search() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+		changePage(1);
+	}
 </script>
 </head>
 <body>
 	<html:form action="/generalCode" method="post">
-		<html:hidden property="task" name="generalCodeForm" />
+
+		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
+		<html:hidden property="task" name="generalCodeForm" />
+		<html:hidden property="currColumn" name="generalCodeForm"/>
+		<html:hidden property="currInput" name="generalCodeForm"/>
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;"><select id="selSearchField"
-							class="form-control">
-								<option value="genCodeId">General Code ID</option>
-								<option value="genCodeCaption">General Code Caption</option>
-								<option value="	parentId">Parent ID</option>
-						</select></td>
-						<td style="padding-left: 15px"><input type="text"
-							class="form-control" /></td>
-						<td style="padding-left: 15px"><button id="btnSearch"
+						<td style="padding-left: 15px;">
+							<html:select name="generalCodeForm" property="searchField"
+								styleId="selSearchField" styleClass="form-control">
+								<option value="deptCode">Dept. Code</option>
+								<option value="deptName">Dept. Name</option>
+							</html:select>
+						</td>
+						<td style="padding-left: 15px">
+							<html:text name="generalCodeForm" property="searchValue" styleClass="form-control" />
+						</td>
+						<td style="padding-left: 15px">
+							<button type="button" onclick="search();" id="btnSearch"
 								class="btn btn-info btn-icon" title="Back">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
+							</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -58,15 +72,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="generalCodeForm" property="arrCodeBean">
-							<logic:iterate id="reg" name="generalCodeFormg"
-								property="arrCodeBean">
+						<logic:notEmpty name="genCodeForm" property="arrList">
+							<logic:iterate id="reg" name="departmentForm" property="arrList">
 								<tr>
-									<td></td>
+									<td><bean:write name="reg" property="deptCode" /></td>
+									<td><bean:write name="reg" property="deptName" /></td>
+									<td><bean:write name="reg" property="deptHeadId" /></td>
+									<td align="center"><a href="#"
+										onclick="editDepartment('<bean:write name="reg" property="deptId" />');"
+										title="Edit">Edit</a> <a href="#"
+										onclick="deleteDepartment('<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
+										title="Delete">Delete</a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="generalCodeForm" property="arrCodeBean">
+						<logic:empty name="departmentForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>

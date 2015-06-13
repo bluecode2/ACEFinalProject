@@ -2,6 +2,7 @@ package general;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -21,6 +22,7 @@ public class GeneralCodeHandler extends Action {
 		GeneralCodeForm gcForm = (GeneralCodeForm) form;
 		GeneralCodeManager gcMan = new GeneralCodeManager();
 		CommonFunction.createAllowedMenu(null, request);
+		HttpSession session = request.getSession(true);
 		
 		if ("add".equals(gcForm.getTask())) {
 			System.out.println("masuk ke form add");
@@ -38,8 +40,10 @@ public class GeneralCodeHandler extends Action {
 			//untuk mengesave edit  atau add
 		}
 
+		gcForm.setCurrSearchField(gcForm.getSearchField());
+		gcForm.setCurrSearchValue(gcForm.getSearchValue());
 		
-		gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getColumn(), gcForm.getInput()));
+		gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue()));
 		gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount() / (double) Constant.pageSize));
 		
 	
