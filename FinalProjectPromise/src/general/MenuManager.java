@@ -45,6 +45,11 @@ public class MenuManager {
 		}
 		return arr;
 	}
+	
+	public MenuBean getMenuByMenuId(int tmpMenuId) throws SQLException {
+		MenuBean mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuId", tmpMenuId);
+		return mnBean;
+	}
 
 	public List<MenuBean> selectListMenu(String col, String input,
 			Integer pageNum, Integer pageSize) throws SQLException {

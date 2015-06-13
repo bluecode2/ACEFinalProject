@@ -36,16 +36,17 @@
 		values (#userRoleId#, #updatedBy#, #createdBy#, #userRoleName#, #createDateInString#, #updateDateInString#)
 	</insert>
 	
-	<select id="getUserRoleEdit" resultClass="user.UserRoleBean">
-		SELECT USER_ROLE_ID as userRoleId,
-		UPDATED_BY as updatedBy, 
-		CREATED_BY as createdBy,
-		USER_ROLE_NAME as userRoleName,
-		CREATE_DATE as createDateInString,
-		UPDATE_DATE as updateDateInString
-		FROM USER_ROLE
-		where USER_ROLE_ID = #value#
-		ORDER BY USER_ROLE_ID
+	<select id="getUserRoleByUserRoleId" resultClass="user.UserRoleBean" parameterClass="java.lang.Integer">
+	SELECT 
+			USER_ROLE_ID 	as userRoleId,
+	        UPDATED_BY 		as updatedBy, 
+	        CREATED_BY 		as createdBy,
+	        USER_ROLE_NAME 	as userRoleName,
+	        CREATE_DATE 	as createDateInString,
+	        UPDATE_DATE 	as updateDateInString,
+	        user_role_code 	as userRoleCode
+	        FROM USER_ROLE 
+	        where user_role_id = #tmpUserRoleId#
 	</select>
 	
 	<update id="editUserRole" parameterClass="user.UserRoleBean">

@@ -29,6 +29,23 @@
 		where rnum &gt; #begin#
 	</select>
 
+	<select id="getRankByRankId" parameterClass="java.lang.Integer" resultClass="employee.RankEmpBean">
+	SELECT rank_id as rankId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		rank_name as rankName,
+		rank_level as rankLevel,
+		create_date as createDate,
+		update_date as updateDate
+		rank_code as rankCode
+		FROM rank_emp
+		where rank_id = #tmpRankId#
+	</select>
+	
+	<select id="getNewRankId" resultClass="java.lang.Integer">
+	select max(rank_id)+1 from rank_emp
+	</select>
+
 	<insert id="insertEmployeeRank" parameterClass="employee.RankEmpBean">
 		insert into
 		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_name, rank_level,

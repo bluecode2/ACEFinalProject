@@ -44,9 +44,9 @@ public class UserRoleManager {
 		}
 	}
 
-	public UserRoleBean getUserRoleEdit(int roleId) throws SQLException {
+	public UserRoleBean getUserRoleEdit(int tmpUserRoleId) throws SQLException {
 		UserRoleBean userRoleBean = (UserRoleBean) this.ibatis.queryForObject(
-				"userRole.getUserRoleEdit", roleId);
+				"userRole.getUserRoleByUserRoleId", tmpUserRoleId);
 		return userRoleBean;
 	}
 

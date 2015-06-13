@@ -46,6 +46,16 @@ public class RankEmpManager {
 		return count;
 	}
 
+	public RankEmpBean getRankByRankId(int tmpRankId) throws SQLException {
+		RankEmpBean rankBean = (RankEmpBean) this.ibatis.queryForObject("rank.getRankByRankId", tmpRankId);
+		return rankBean;
+	}
+	
+	public int getNewRankId() throws SQLException {
+		int NewRankId = (Integer) this.ibatis.queryForObject("rank.getNewRankId", null);
+		return NewRankId;
+	}
+	
 	public void insertEmployeeRank(RankEmpBean eb)
 			throws ClassNotFoundException, SQLException {
 
