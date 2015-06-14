@@ -41,8 +41,10 @@
 						<td style="padding-left: 15px;">
 							<html:select name="generalCodeForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="deptCode">Dept. Code</option>
-								<option value="deptName">Dept. Name</option>
+								<option value="genCodeId">Gen. Code ID</option>
+								<option value="genCodeCaption">Gen. Code Caption</option>
+								<option value="parentId">Parent ID</option>
+								<option value="isActive">Status Active</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px">
@@ -63,21 +65,23 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
+							<td>General Code Index</td>
 							<td>General Code ID</td>
 							<td>General Code Caption</td>
 							<td>Parent ID</td>
-							<td>is Active ?</td>
-							<td>General Code Index</td>
+							<td>is Active ?</td>						
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="genCodeForm" property="arrList">
-							<logic:iterate id="reg" name="departmentForm" property="arrList">
+						<logic:notEmpty name="genCodeForm" property="arrCodeBean">
+							<logic:iterate id="reg" name="genCodeForm" property="arrCodeBean">
 								<tr>
-									<td><bean:write name="reg" property="deptCode" /></td>
-									<td><bean:write name="reg" property="deptName" /></td>
-									<td><bean:write name="reg" property="deptHeadId" /></td>
+									<td><bean:write name="reg" property="genCodeIndex" /></td>
+									<td><bean:write name="reg" property="genCodeId" /></td>
+									<td><bean:write name="reg" property="genCodeCaption" /></td>
+									<td><bean:write name="reg" property="parentId" /></td>
+									<td><bean:write name="reg" property="isActive" /></td>
 									<td align="center"><a href="#"
 										onclick="editDepartment('<bean:write name="reg" property="deptId" />');"
 										title="Edit">Edit</a> <a href="#"
