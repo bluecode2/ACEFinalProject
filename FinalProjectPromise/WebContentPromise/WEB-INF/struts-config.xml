@@ -9,7 +9,7 @@
 		<form-bean name="generalCodeForm" type="general.GeneralCodeForm"></form-bean>
 		<form-bean name="generalParamForm" type="general.GeneralParamForm"></form-bean>
 		<form-bean name="employeeForm" type="employee.EmployeeForm"></form-bean>
-		<form-bean name="users" type="user.UserForm"></form-bean>
+		<form-bean name="userForm" type="user.UserForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>

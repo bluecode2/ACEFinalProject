@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="users">
-	<select id="">
-	
+	<select id="userAdd" parameterClass="user.UserBean">
+		
 	</select>
 </sqlMap>

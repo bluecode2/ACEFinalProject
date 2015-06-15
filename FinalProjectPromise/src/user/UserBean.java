@@ -8,16 +8,14 @@ public class UserBean {
 	private Integer userId;
 	private Integer userRoleId;
 	private Integer employeeId;
-	private Integer useUserId;
-	private Integer useUserId2;
+	private Integer createBy;
+	private Integer updateBy;
 	private String username;
 	private String password;
 	private Integer isActive;
 	private Date createDate;
 	private Date updateDate;
-	private Integer createBy;
 	private String createDateInString;
-	private Integer updateBy;
 	private String updateDateInString;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
@@ -39,18 +37,6 @@ public class UserBean {
 	}
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
-	}
-	public Integer getUseUserId() {
-		return useUserId;
-	}
-	public void setUseUserId(Integer useUserId) {
-		this.useUserId = useUserId;
-	}
-	public Integer getUseUserId2() {
-		return useUserId2;
-	}
-	public void setUseUserId2(Integer useUserId2) {
-		this.useUserId2 = useUserId2;
 	}
 	public String getUsername() {
 		return username;
