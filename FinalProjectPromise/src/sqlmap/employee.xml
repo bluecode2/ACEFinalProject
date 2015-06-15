@@ -13,6 +13,7 @@
 		SELECT emp.*, ROWNUM rnum from (
 		SELECT
 		EMPLOYEE_ID 						AS employeeId,
+		EMPLOYEE_code 						AS employeeCode,
 		DEPT_ID 							AS deptId,
 		RANK_ID 							AS rankId,
 		SUPERVISOR_ID 						AS supervisorID,
@@ -23,8 +24,8 @@
 		EMAIL 								AS email,
 		ADDRESS 							AS address,
 		PHONE_NUMBER 						AS phoneNumber,
-		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM EMPLOYEE
 		where 1=1
 		<dynamic prepend="AND">
@@ -63,27 +64,25 @@
 		#begin#
 	</select>
 	
-	<select id="getEmployeeByEmpId" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
+	<select id="getEmployeeByEmpId" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
+		EMPLOYEE_code 						AS employeeCode,
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email,
 		ADDRESS 							AS address,
 		PHONE_NUMBER 						AS phoneNumber,
-		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
-		FROM EMPLOYEE where employee_id = #empId# and IS_ACTIVE = 1
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
+		FROM EMPLOYEE where employee_id = #value# and IS_ACTIVE = 1
 	</select>
 	
 	<select id="getEmployeeForDeptHead" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
+		EMPLOYEE_code 						AS employeeCode,
 		DEPT_ID 							AS deptId,
 		e.RANK_ID 							AS rankId,
-		SUPERVISOR_ID 						AS supervisorID,
-		PROJECT_ID 							AS projectId,
-		CREATED_BY 							AS createdBy,
-		UPDATED_BY 							AS updatedBy,
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email
 		FROM EMPLOYEE e
@@ -134,7 +133,7 @@
 	<select id="countEmployee" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM EMPLOYEE
-		where 1=1
+		where is_active = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeId">
 				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )

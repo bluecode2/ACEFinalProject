@@ -58,6 +58,15 @@ public class UserManager {
 	}
 	
 	public void insertUser(UserBean uBean) throws SQLException, ClassNotFoundException{
-		
+		try {
+			ibatis.startTransaction();
+			uBean.setUserId(getNewUserID());
+			ibatis.insert("users.insertNewUser", uBean);
+			ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			ibatis.endTransaction();
+		}
 	}
 }

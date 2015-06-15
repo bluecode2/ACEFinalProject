@@ -1,9 +1,5 @@
 package department;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +12,9 @@ import org.apache.struts.action.ActionMapping;
 import common.CommonFunction;
 import common.Constant;
 
+import employee.EmployeeBean;
+import employee.EmployeeManager;
+
 public class DepartmentHandler extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -24,6 +23,7 @@ public class DepartmentHandler extends Action {
 
 		DepartmentForm dForm = (DepartmentForm) form;
 		DepartmentManager dMan = new DepartmentManager();
+		EmployeeManager eMan = new EmployeeManager();
 
 		HttpSession session = request.getSession(true);
 
@@ -32,15 +32,25 @@ public class DepartmentHandler extends Action {
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
+			request.setAttribute("lstDeptHead",
+					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId()));
 			request.setAttribute("pageTitle", "Department Entry");
 			return mapping.findForward("entry");
 		}
 
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
+			request.setAttribute("lstDeptHead",
+					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId()));
 			request.setAttribute("pageTitle", "Department Entry");
+
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
+			EmployeeBean deptHead = eMan.getEmployeeByEmpId(dForm
+					.getSelectedDept().getDeptHeadId());
+			if (deptHead != null)
+				dForm.setDeptHeadDisplay(deptHead.getEmployeeCode() + " - "
+						+ deptHead.getEmployeeName());
 			return mapping.findForward("entry");
 		}
 

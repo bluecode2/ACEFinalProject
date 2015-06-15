@@ -77,8 +77,8 @@
 				<table class="table table-striped table-bordered table-hover"
 					cellspacing="0" style="margin-top: 10px;" width="100%"
 					class="tableContent">
-					<thead class="panel panel-info">
-						<tr>
+					<thead >
+						<tr class="panel panel-info">
 							<td>Department Code</td>
 							<td>Department Name</td>
 							<td>Department Head</td>
