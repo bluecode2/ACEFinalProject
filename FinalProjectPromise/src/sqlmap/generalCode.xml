@@ -28,11 +28,6 @@
 				LOWER(Parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isActive">
-				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
 		order by gen_code_index) genCode
 		WHERE ROWNUM &lt;= #end#)
 		WHERE rnum
@@ -54,12 +49,7 @@
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="parentId">
-				LOWER(Parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isActive">
-				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 	</select>
