@@ -32,54 +32,57 @@ public class DepartmentHandler extends Action {
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
+			request.setAttribute("pageTitle", "Department Entry");
 			return mapping.findForward("entry");
 		}
 
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
+			request.setAttribute("pageTitle", "Department Entry");
+			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
+					.getSelectedId()));
 			return mapping.findForward("entry");
 		}
 
 		else if (dForm.getTask().equals("delete")) {
-			dMan.deleteDepartment(dForm.getSelectedId());
+			dMan.deleteDepartment(dForm.getSelectedId(), 0);
 		}
-		//
-		// else if (eForm.getTask().equals("save")) {
-		// boolean isAdd = eForm.getIsAdd();
-		//
-		// if (eForm.getSelectedDepartment().getDepartmentId() == 0)
-		// eForm.getSelectedDepartment().setDepartmentId(null);
-		//
-		// if (isAdd) {
-		// eForm.getSelectedDepartment().setDepartmentId(
-		// eMan.getDepartmentMaxId() + 1);
-		// eMan.insertDepartment(eForm.getSelectedDepartment());
-		// } else {
-		// eMan.updateDepartment(eForm.getSelectedDepartment());
-		// }
-		//
-		// response.sendRedirect("departmentMaster.do");
-		// return null;
-		// }
-		//
-		//
+
+		else if (dForm.getTask().equals("save")) {
+			boolean isAdd = dForm.getIsAdd();
+
+			if (dForm.getSelectedDept().getDeptHeadId() == 0)
+				dForm.getSelectedDept().setDeptHeadId(null);
+
+			if (isAdd) {
+				dMan.insertDepartment(dForm.getSelectedDept());
+			} else {
+				dMan.updateDepartment(dForm.getSelectedDept());
+			}
+
+			response.sendRedirect("department.do");
+			return null;
+		}
+
 		dForm.setTask("");
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
 
 		int rowCount;
 
-		dForm.setArrList(dMan.getAllDepartmentsFiltered(dForm.getCurrSearchField(), dForm.getCurrSearchValue(),dForm.getCurrPage(),Constant.pageSize));
-		rowCount = dMan.getCountDepartment(
-				dForm.getCurrSearchField(), dForm.getCurrSearchValue());
+		dForm.setArrList(dMan.getAllDepartmentsFiltered(
+				dForm.getCurrSearchField(), dForm.getCurrSearchValue(),
+				dForm.getCurrPage(), Constant.pageSize));
+		rowCount = dMan.getCountDepartment(dForm.getCurrSearchField(),
+				dForm.getCurrSearchValue());
 		//
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
 		request.setAttribute("pageTitle", "Department List");
 
-		request.setAttribute("pageNavigator",
-				CommonFunction.createPagingNavigatorList(dForm.getPageCount(),
+		request.setAttribute("pageNavigator", CommonFunction
+				.createPagingNavigatorList(dForm.getPageCount(),
 						dForm.getCurrPage()));
 
 		request.setAttribute("pageCount", dForm.getPageCount());

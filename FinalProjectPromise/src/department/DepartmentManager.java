@@ -67,10 +67,14 @@ public class DepartmentManager {
 		}
 	}
 
-	public void deleteDepartment(int deptid) {
+	public void deleteDepartment(int deptid,int userId) {
 		try {
+			Map map = new HashMap();
+			map.put("deptId", deptid);
+			map.put("updatedBy", userId);
+			
 			ibatis.startTransaction();
-			ibatis.delete("department.deleteDepartment", deptid);
+			ibatis.delete("department.deleteDepartment", map);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,10 +82,11 @@ public class DepartmentManager {
 		}
 	}
 
-	public void insertDepartment(DepartmentBean deptid) {
+	public void insertDepartment(DepartmentBean dept) {
 		try {
 			ibatis.startTransaction();
-			ibatis.insert("department.insertDepartment", deptid);
+			dept.setDeptId(getNewDeptId());
+			ibatis.insert("department.insertDepartment", dept);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

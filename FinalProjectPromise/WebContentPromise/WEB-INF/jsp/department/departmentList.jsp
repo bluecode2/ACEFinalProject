@@ -8,13 +8,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>DepartmentList</title>
 <script type="text/javascript">
+	function onBtnAddClick(){
+		document.forms[0].task.value = "add";
+		document.forms[0].submit();
+	}
+	
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
 
 		changePage(1);
+	}
+
+	function actionForm(task, id, nama) {
+
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
+
+		if (task == "delete") {
+			if (confirm("Are you sure want to delete Department " + nama)) {
+				document.forms[0].submit();
+			}
+		} else {
+			document.forms[0].submit();
+		}
+
 	}
 </script>
 
@@ -41,10 +61,12 @@
 								<option value="deptCode">Dept. Code</option>
 								<option value="deptName">Dept. Name</option>
 							</html:select></td>
-						<td style="padding-left: 15px"><html:text name="departmentForm"
-													property="searchValue" styleClass="form-control" /></td>
-						<td style="padding-left: 15px"><button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Back">
+						<td style="padding-left: 15px"><html:text
+								name="departmentForm" property="searchValue"
+								styleClass="form-control" /></td>
+						<td style="padding-left: 15px"><button type="button"
+								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								title="Back">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
 					</tr>
@@ -52,8 +74,9 @@
 			</div>
 
 			<div class="divContent">
-				<table class="table table-striped table-bordered table-hover" cellspacing="0"
-					style="margin-top: 10px;" width="100%" class="tableContent">
+				<table class="table table-striped table-bordered table-hover"
+					cellspacing="0" style="margin-top: 10px;" width="100%"
+					class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
 							<td>Department Code</td>
@@ -70,10 +93,12 @@
 									<td><bean:write name="reg" property="deptName" /></td>
 									<td><bean:write name="reg" property="deptHeadId" /></td>
 									<td align="center"><a href="#"
-										onclick="editDepartment('<bean:write name="reg" property="deptId" />');"
-										title="Edit">Edit</a> <a href="#"
-										onclick="deleteDepartment('<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
-										title="Delete">Delete</a></td>
+										onclick="actionForm('edit','<bean:write name="reg" property="deptId" />');"
+										title="Edit"><span class="glyphicon glyphicon-pencil"
+											aria-hidden="true"></span></a> &nbsp; <a href="#"
+										onclick="actionForm('delete','<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
+										title="Delete"><span class="glyphicon glyphicon-trash"
+											aria-hidden="true"></span></a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

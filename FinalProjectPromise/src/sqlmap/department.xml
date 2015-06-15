@@ -15,7 +15,7 @@
 		create_date			as createDate , 
 		update_date 		as updateDate 
 		from department
-		where 1=1
+		WHERE is_deleted = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="deptId">
 				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -52,7 +52,7 @@
 		create_date			as createDate , 
 		update_date 		as updateDate 
 		from department
-		where dept_id = #tmpDeptId#
+		WHERE is_deleted = 0 AND dept_id = #tmpDeptId#
 	</select>
 	
 	<select id="getNewDeptId" resultClass="java.lang.Integer">
@@ -65,10 +65,10 @@
 		INSERT INTO
 		DEPARTMENT
 		(dept_id, dept_head_id, created_by, updated_by, dept_code,
-		dept_name, create_date, update_date)
+		dept_name, create_date, update_date,is_deleted)
 		VALUES (#deptId#, #deptHeadId#,
-		#createdBy#, #updatedBy#, #deptCode#, #deptName#, #createDate#,
-		#updateDate#)
+		#createdBy#, NULL, #deptCode#, #deptName#, SYSDATE,
+		NULL, 0)
 	</insert>
 
 	<update id="updateDepartment" parameterClass="department.DepartmentBean">
@@ -76,27 +76,26 @@
 		SET
 		dept_id = #deptId#,
 		dept_head_id = #deptHeadId#,
-		created_by =
-		#createdBy#,
 		updated_by = #updatedBy#,
 		dept_code = #deptCode#,
 		dept_name
 		= #deptName#,
-		create_date = #createDate#,
-		update_date = #updateDate#,
+		update_date = SYSDATE
 		WHERE dept_id = #deptId#
 	</update>
 
-	<delete id="deleteDepartment" parameterClass="java.lang.Integer">
-		DELETE FROM
-		DEPARTMENT
+	<delete id="deleteDepartment" parameterClass="java.util.Map">
+		UPDATE department
+		SET is_deleted = 1,
+		updated_by = #updatedBy#,
+		update_date = SYSDATE
 		WHERE dept_id = #deptId#
 	</delete>
 
 	<select id="countDepartment" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM DEPARTMENT
-		WHERE 1=1
+		WHERE is_deleted = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="deptId">
 				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
