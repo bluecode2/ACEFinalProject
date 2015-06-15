@@ -45,11 +45,13 @@
 				<form class="form-signin">
 					<!-- <h3 class="form-signin-heading">Silahkan Login</h3> -->
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="icon/key.png" width="80px" height="70" /> <label
-						for="inputEmail" class="sr-only">Username</label> <input
-						type="text" id="inputEmail" class="form-control"
-						placeholder="Username" required autofocus> <label
-						for="inputPassword" class="sr-only">Password</label> <input
+					<img src="icon/key.png" width="80px" height="70" /> 
+					<label for="inputEmail" class="sr-only">Username</label> 
+					<input type="text" id="inputEmail" class="form-control"
+						placeholder="Username" required autofocus> 
+					<label
+						for="inputPassword" class="sr-only">Password</label> 
+					<input
 						type="password" id="inputPassword" class="form-control"
 						placeholder="Password" required>
 					<div class="checkbox">
