@@ -25,7 +25,8 @@ hr {
   background-color: transparent;
 }
 
-.toolbar {
+.center-block {
+	float: none;
 }
 
 .btn-icon {
