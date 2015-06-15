@@ -91,7 +91,7 @@
 								<tr>
 									<td><bean:write name="reg" property="deptCode" /></td>
 									<td><bean:write name="reg" property="deptName" /></td>
-									<td><bean:write name="reg" property="deptHeadId" /></td>
+									<td><bean:write name="reg" property="deptHeadDisplay" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="deptId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

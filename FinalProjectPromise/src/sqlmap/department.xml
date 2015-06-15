@@ -8,13 +8,15 @@
 		SELECT dept.*, ROWNUM rnum from ( SELECT 
 		dept_id 			as deptId ,
 		dept_head_id 		as deptHeadId ,
+		dept_head_code 		as deptHeadCode ,
+		dept_head_name		as deptHeadName ,
 		created_by 			as createdBy ,
 		updated_by 			as updatedBy , 
 		dept_code 			as deptCode , 
 		dept_name 			as deptName , 
 		create_date			as createDate , 
 		update_date 		as updateDate 
-		from department
+		from vDepartment
 		WHERE is_deleted = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="deptId">
@@ -45,13 +47,15 @@
 		SELECT 
 		dept_id 			as deptId ,
 		dept_head_id 		as deptHeadId ,
+		dept_head_code 		as deptHeadCode ,
+		dept_head_name		as deptHeadName ,
 		created_by 			as createdBy ,
 		updated_by 			as updatedBy , 
 		dept_code 			as deptCode , 
 		dept_name 			as deptName , 
 		create_date			as createDate , 
 		update_date 		as updateDate 
-		from department
+		from vDepartment
 		WHERE is_deleted = 0 AND dept_id = #tmpDeptId#
 	</select>
 	

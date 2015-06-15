@@ -46,11 +46,11 @@ public class DepartmentHandler extends Action {
 
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
-			EmployeeBean deptHead = eMan.getEmployeeByEmpId(dForm
-					.getSelectedDept().getDeptHeadId());
-			if (deptHead != null)
-				dForm.setDeptHeadDisplay(deptHead.getEmployeeCode() + " - "
-						+ deptHead.getEmployeeName());
+			if(dForm.getSelectedDept().getDeptHeadCode() != null)
+				dForm.setDeptHeadDisplay(dForm.getSelectedDept().getDeptHeadCode() + " - "
+						+ dForm.getSelectedDept().getDeptHeadName());
+			else
+				dForm.setDeptHeadDisplay("");
 			return mapping.findForward("entry");
 		}
 
