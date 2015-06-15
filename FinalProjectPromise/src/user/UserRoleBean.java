@@ -14,6 +14,7 @@ public class UserRoleBean {
 	private Date 		updateDate;
 	private String 		updateDateInString;
 	private String 		userRoleCode;
+	private Integer		isDeleted;
 
 	SimpleDateFormat df = new SimpleDateFormat();
 
@@ -121,5 +122,13 @@ public class UserRoleBean {
 
 	public void setUserRoleCode(String userRoleCode) {
 		this.userRoleCode = userRoleCode;
+	}
+
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }
