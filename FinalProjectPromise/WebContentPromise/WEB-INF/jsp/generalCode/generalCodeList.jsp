@@ -20,6 +20,20 @@
 
 		changePage(1);
 	}
+	function actionForm(task, id, nama) {
+
+		  document.forms[0].task.value = task;
+		  document.forms[0].empId.value = id;
+
+		  if (task == "delete") {
+		   if (confirm("Are u sure want to delete General Code " + nama + " ?")) {
+		    document.forms[0].submit();
+		   }
+		  } else {
+		   document.forms[0].submit();
+		  }
+
+		 }
 </script>
 </head>
 <body>
@@ -66,7 +80,6 @@
 					<thead class="panel panel-info">
 						<tr>
 							<td>General Code Index</td>
-							<td>General Code ID</td>
 							<td>General Code Caption</td>
 							<td>Parent ID</td>
 							<td>is Active ?</td>						
@@ -78,12 +91,12 @@
 							<logic:iterate id="reg" name="genCodeForm" property="arrCodeBean">
 								<tr>
 									<td><bean:write name="reg" property="genCodeIndex" /></td>
-									<td><bean:write name="reg" property="genCodeId" /></td>
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
 									<td><bean:write name="reg" property="parentId" /></td>
 									<td><bean:write name="reg" property="isActive" /></td>
+									
 									<td align="center"><a href="#"
-										onclick="editDepartment('<bean:write name="reg" property="deptId" />');"
+										onclick="actionForm'<bean:write name="reg" property="deptId" />');"
 										title="Edit">Edit</a> <a href="#"
 										onclick="deleteDepartment('<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
 										title="Delete">Delete</a></td>

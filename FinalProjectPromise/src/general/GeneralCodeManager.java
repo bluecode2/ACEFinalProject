@@ -70,11 +70,19 @@ public class GeneralCodeManager {
 
 	}
 
-	public void updateGeneralCode(GeneralCodeBean genCodebean)
+	public void updateGeneralCode(String parentId, String genCodeCaption, int genCodeIndex, int empId, String genCodeId)
 			throws SQLException {
+		
+		Map m = new HashMap();
+		m.put("parentId", parentId);
+		m.put("genCodeCaption", genCodeCaption);
+		m.put("genCodeIndex", genCodeIndex);
+		m.put("empId", empId);
+		m.put("genCodeId", genCodeId);
+		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("genCode.updateGeneralCode", genCodebean);
+			this.ibatis.update("genCode.updateGeneralCode", m);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -82,11 +90,14 @@ public class GeneralCodeManager {
 
 	}
 
-	public void deleteGeneralCodeByCodeId(String genCodeId) throws SQLException {
-
+	public void deleteGeneralCodeByCodeId(String genCodeId, int status) throws SQLException {
+		Map m = new HashMap();
+		m.put("status", status);
+		m.put("genCodeId", genCodeId);
+		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("genCode.deleteGeneralCode", genCodeId);
+			this.ibatis.update("genCode.deleteGeneralCode", m);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
