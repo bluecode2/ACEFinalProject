@@ -95,7 +95,7 @@
 		</dynamic>
 	</select>
 	
-	<select id="getNewUserID" resultClass="java.Lang.Integer">
+	<select id="getNewUserID" resultClass="java.lang.Integer">
 		SELECT MAX(USER_ID)+1 FROM USERS
 	</select>
 	

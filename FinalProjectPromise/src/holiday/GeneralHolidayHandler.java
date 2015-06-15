@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
+import common.Constant;
 
 public class GeneralHolidayHandler extends Action{
 	@Override
@@ -59,6 +60,20 @@ public class GeneralHolidayHandler extends Action{
 			response.sendRedirect("generalHoliday.do");
 			return null;
 		}
+		
+		genForm.setTask("");
+		genForm.setSearchField(genForm.getCurrSearchField());
+		genForm.setSearchValue(genForm.getCurrSearchValue());
+
+		int rowCount;
+
+		genForm.setArrList(genManager.getGeneralHoliday(
+				genForm.getCurrSearchField(), genForm.getCurrSearchValue(),
+				genForm.getCurrPage(), Constant.pageSize));
+		rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
+				genForm.getCurrSearchValue());
+		//
+		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
 		request.setAttribute("pageTitle", "General Holiday List");
 		
