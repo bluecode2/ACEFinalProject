@@ -27,13 +27,30 @@ public class UserHandler extends Action{
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
-			return mapping.findForward("entry");
+			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
 			
 		}
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
 			
+		}
+		else if ("save".equalsIgnoreCase(uForm.getTask())){
+			Boolean isAdd = uForm.getIsAdd();
+
+			if (uForm.getuBean().getUserId() == 0)
+				uForm.getuBean().setUserId(null);
+
+			if (isAdd) {
+				uForm.getuBean().setCreateBy(1);
+//				dMan.insertDepartment(dForm.getSelectedDept());
+			} else {
+				uForm.getuBean().setUpdateBy(1);
+//				dMan.updateDepartment(dForm.getSelectedDept());
+			}
+
+			response.sendRedirect("users.do");
+			return null;
 		}
 		
 		uForm.setTask("");
@@ -47,11 +64,11 @@ public class UserHandler extends Action{
 				uForm.getCurrPage(), Constant.pageSize));
 		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue());
-		//
+		
 		uForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
-		request.setAttribute("pageTitle", "Department List");
+		request.setAttribute("pageTitle", "User List");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(uForm.getPageCount(),

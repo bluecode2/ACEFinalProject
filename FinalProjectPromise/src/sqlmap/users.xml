@@ -35,8 +35,8 @@
 		USERNAME AS username,
 		PASSWORD AS password_user,
 		IS_ACTIVATE as isActive,
-		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') as createDateInString,
-		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') as updateDateInString
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString
 		FROM USERS
 		where 1=1
 		<dynamic prepend="AND">

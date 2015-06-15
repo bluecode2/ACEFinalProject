@@ -57,4 +57,7 @@ public class UserManager {
 		return newUserID;
 	}
 	
+	public void insertUser(UserBean uBean) throws SQLException, ClassNotFoundException{
+		
+	}
 }
