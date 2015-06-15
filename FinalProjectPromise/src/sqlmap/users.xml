@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="users">
-	<insert id="insertNewUser" parameterClass="java.util.Map">
+	<insert id="insertNewUser" parameterClass="user.UserBean">
 		INSERT INTO users
 		( USER_ID,
 		USER_ROLE_ID,
@@ -15,8 +15,8 @@
 		)
 		VALUES
 		( #userId#, #userRoleId#,
-		#empId#, #userId#,
-		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #pass#),
+		#employeeId#, #createBy#,
+		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #password_user#),
 		1, SYSDATE)
 	</insert>
 

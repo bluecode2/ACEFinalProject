@@ -52,7 +52,7 @@
 					<tr align="left">
 						<td>Password</td>
 						<td style="padding-left:15px;">
-							<html:text property="uBean.password_user" styleClass="form-control"></html:text>
+							<html:password property="uBean.password_user" styleClass="form-control"></html:password>
 						</td>
 					</tr>
 				</table>
