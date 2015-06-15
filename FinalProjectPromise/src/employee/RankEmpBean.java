@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 
 public class RankEmpBean {
 	
@@ -18,7 +20,7 @@ public class RankEmpBean {
 	private String 	updateDateInString;
 	private String  rankCode;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	
 	public Integer getRankId() {
@@ -74,7 +76,7 @@ public class RankEmpBean {
 		try {
 			date = df.parse(createDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.createDateInString = "";
@@ -105,7 +107,7 @@ public class RankEmpBean {
 		try {
 			date = df.parse(updateDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.updateDateInString = "";

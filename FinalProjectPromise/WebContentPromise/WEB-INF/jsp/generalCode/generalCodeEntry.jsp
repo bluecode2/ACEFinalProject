@@ -42,22 +42,45 @@
 						<td class="tdLabel" align="right"><label>Gen. Code ID</label></td>
 						<td><html:text styleClass="form-control"
 								styleId="txtGenCodeId" name="genCodeForm"
-								property="genCodeBean.genCodeId" style="width:150px"></html:text></td>
+								property="genCodeBean.genCodeId"></html:text></td>
+					</tr>
+					
+					<tr>
+						<td class="tdLabel" align="right"><label>Gen. Code Caption</label></td>
+						<td>
+							<html:text styleClass="form-control"
+								styleId="txtGenCodeCaption" name="genCodeForm"
+								property="genCodeBean.genCodeCaption">
+							</html:text>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="tdLabel" align="right"><label>Parent ID</label></td>
+						<td>
+							<html:select property="genCodeBean.parentId" styleId="txtParentId" styleClass="form-control">
+								<html:option value=""></html:option>
+							</html:select>
+						</td>
 					</tr>
 					<tr>
-						<td class="tdLabel" align="right"><label>Department
-								Name</label></td>
-						<td><html:text styleClass="form-control"
-								styleId="txtDeptName" name="genCodeForm"
-								property="genCodeBean.genCodeCaption"></html:text></td>
+						<td class="tdLabel" align="right"><label>Gen. Code Index</label></td>
+						<td>
+							<html:text styleClass="form-control"
+								styleId="txtGenCodeIndex" name="genCodeForm"
+								property="genCodeBean.genCodeIndex">
+							</html:text>
+						</td>
 					</tr>
 					<tr>
-						<td class="tdLabel" align="right"><label>Department
-								Head</label></td>
-						<td><html:hidden styleId="hdnDeptHeadId"
-								name="genCodeForm" property="selectedDept.deptHeadId" /> <html:text
-								styleClass="form-control" styleId="txtDeptHead"
-								name="genCodeForm" property="selectedDept.deptHeadId"></html:text>
+						<td class="tdLabel" align="right"><label>Gen. Code ID</label></td>
+						<td>
+							<html:hidden styleId="hdnDeptHeadId"
+								name="genCodeForm" property="genCodeBean.genCodeId" /> 
+							<html:text
+								styleClass="form-control" styleId="txtGenCodeId"
+								name="genCodeForm" property="genCodeBean.genCodeId">
+							</html:text>
 						</td>
 					</tr>
 				</table>

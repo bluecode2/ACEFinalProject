@@ -94,7 +94,7 @@
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
 									<td><bean:write name="reg" property="parentId" /></td>
 									<td align="center"><a class="text-success" href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="genCodeId" />');"
+										onclick="actionForm('entry','<bean:write name="reg" property="genCodeId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"

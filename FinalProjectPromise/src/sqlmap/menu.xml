@@ -113,7 +113,7 @@
 				LOWER(is_parent) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>										
-		order by menuId) m
+		order by menu_id) m
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
 		#begin#

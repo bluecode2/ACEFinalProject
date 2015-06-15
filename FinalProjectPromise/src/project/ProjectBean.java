@@ -1,8 +1,9 @@
 package project;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class ProjectBean {
 	private Integer projectId;
@@ -33,7 +34,7 @@ public class ProjectBean {
 	private String createDateInString;
 	private String updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	
 	public Integer getProjectId() {
@@ -242,7 +243,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(estStartDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.estStartDateInString = "";
 			date = null;
@@ -260,7 +261,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(estEndDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.estEndDateInString = "";
 			date = null;
@@ -278,7 +279,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(actStartDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.actStartDateInString = "";
 			date = null;
@@ -296,7 +297,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(actEndDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.actEndDateInString = "";
 			date = null;
@@ -314,7 +315,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
@@ -332,7 +333,7 @@ public class ProjectBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;

@@ -17,7 +17,8 @@ public class GeneralCodeForm extends ActionForm {
 	private Integer 		listCount;
 	private String			currSearchField;
 	private String			currSearchValue;
-	private int 			selectedId;
+	private String			selectedId;
+
 	
 	public List<GeneralCodeBean> getArrList() {
 		return arrList;
@@ -27,11 +28,11 @@ public class GeneralCodeForm extends ActionForm {
 		this.arrList = arrList;
 	}
 
-	public int getSelectedId() {
+	public String getSelectedId() {
 		return selectedId;
 	}
 
-	public void setSelectedId(int selectedId) {
+	public void setSelectedId(String selectedId) {
 		this.selectedId = selectedId;
 	}
 

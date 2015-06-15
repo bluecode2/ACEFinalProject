@@ -1,8 +1,9 @@
 package user;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class UserRoleBean {
 	private Integer 	userRoleId;
@@ -16,7 +17,7 @@ public class UserRoleBean {
 	private String 		userRoleCode;
 	private Integer		isDeleted;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getUserRoleId() {
 		return userRoleId;
@@ -74,7 +75,7 @@ public class UserRoleBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.createDateInString = "";
@@ -107,7 +108,7 @@ public class UserRoleBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.updateDateInString = "";

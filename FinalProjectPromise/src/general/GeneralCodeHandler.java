@@ -25,11 +25,10 @@ public class GeneralCodeHandler extends Action {
 		HttpSession session = request.getSession(true);
 	
 		
-		if ("add".equals(gcForm.getTask())) {
+		if ("entry".equals(gcForm.getTask())) {
 			System.out.println("masuk ke form add");
 			request.setAttribute("pageTitle", "Add General Code");
-
-
+			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
 			return mapping.findForward("entry");
 		} else if ("search".equals(gcForm.getTask())) {
 
@@ -45,13 +44,12 @@ public class GeneralCodeHandler extends Action {
 				gcForm.getGenCodeBean().setUpdatedBy(1); 
 				gcMan.updateGeneralCode(gcForm.getGenCodeBean());
 
-
 			response.sendRedirect("generalCode.do");
 			return null;
 		}
 		
 		else if ("delete".equals(gcForm.getTask())) {
-			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId()+"");
+			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
 		}
 		
 		gcForm.setTask("");

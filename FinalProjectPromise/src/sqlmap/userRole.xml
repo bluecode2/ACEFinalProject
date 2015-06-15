@@ -33,7 +33,7 @@
 	<insert id="insertUserRole" parameterClass="user.UserRoleBean">
 		insert into
 		USER_ROLE(USER_ROLE_ID, UPDATED_BY, CREATED_BY, USER_ROLE_NAME, CREATE_DATE, UPDATE_DATE, IS_DELETED)
-		values (#userRoleId#, #updatedBy#, #createdBy#, #userRoleName#, #createDateInString#, #updateDateInString#, 0)
+		values (#userRoleId#, NULL, #createdBy#, #userRoleName#, SYSDATE, NULL, 0)
 	</insert>
 	
 	<select id="getUserRoleByUserRoleId" resultClass="user.UserRoleBean" parameterClass="java.lang.Integer">
@@ -52,23 +52,22 @@
 	<update id="editUserRole" parameterClass="user.UserRoleBean">
 		UPDATE USER_ROLE
 		SET
-		UPDATED_BY=#updatedBy#,
-		USER_ROLE_NAME=#userRoleName#,
-		UPDATE_DATE=SYSDATE
-		IS_DELETED = #isDeleted#
-		WHERE USER_ROLE_ID=#userRoleId#
+		UPDATED_BY			=	#updatedBy#,
+		USER_ROLE_NAME		=	#userRoleName#,
+		UPDATE_DATE			=	SYSDATE
+		WHERE USER_ROLE_ID	=	#userRoleId#
 	</update>
 	
-	<delete id="deleteUserRole" parameterClass="java.util.Map">
+	<delete id="deleteUserRole" parameterClass="java.lang.Integer">
 		UPDATE USER_ROLE
 		SET
-		IS_DELETED = #isDeleted#
-		WHERE USER_ROLE_ID=#userRoleId#
+		IS_DELETED = 1
+		WHERE USER_ROLE_ID	=	#userRoleId#
 	</delete>
 	
 	<select id="countUserRole" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM USER_ROLE
-	 	where 1=1
+	 	where 	IS_DELETED = 0
 			<dynamic prepend="AND">
 				<isEqual property="searchField" compareValue="userRoleCode">
 					LOWER(user_role_code) LIKE LOWER( '%' || #searchValue# || '%' )

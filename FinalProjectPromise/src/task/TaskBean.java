@@ -1,8 +1,9 @@
 package task;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class TaskBean {
 
@@ -31,7 +32,7 @@ public class TaskBean {
 	private Date 	updateDate;
 	private String 	updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getTaskId() {
 		return taskId;
@@ -115,7 +116,7 @@ public class TaskBean {
 		try {
 			date = df.parse(estStartDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.estStartDateInString = "";
@@ -150,7 +151,7 @@ public class TaskBean {
 		try {
 			date = df.parse(estEndDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.estEndDateInString = "";
@@ -185,7 +186,7 @@ public class TaskBean {
 		try {
 			date = df.parse(actStartDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.actStartDateInString = "";
@@ -220,7 +221,7 @@ public class TaskBean {
 		try {
 			date = df.parse(actEndDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.actEndDateInString = "";
@@ -295,7 +296,7 @@ public class TaskBean {
 		try {
 			date = df.parse(createDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.createDateInString = "";
@@ -330,7 +331,7 @@ public class TaskBean {
 		try {
 			date = df.parse(updateDateInString);
 		} 
-		catch (ParseException e) {
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.updateDateInString = "";

@@ -1,8 +1,9 @@
 package user;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class UserBean {
 	private Integer userId;
@@ -18,7 +19,7 @@ public class UserBean {
 	private String createDateInString;
 	private String updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getUserId() {
 		return userId;
@@ -102,7 +103,7 @@ public class UserBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
@@ -118,7 +119,7 @@ public class UserBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
