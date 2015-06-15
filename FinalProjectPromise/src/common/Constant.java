@@ -2,7 +2,7 @@ package common;
 
 public class Constant {
 	public static class StringFormat{
-		public static final String dateFormat = "yyyy-MM-dd";
+		public static final String dateFormat = "YYYY-MM-DD";
 	}
 	
 	public static class DefaultValue{

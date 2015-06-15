@@ -55,7 +55,7 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public EmployeeBean getEmployeeByEmpId(int empId) throws SQLException {
+	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
 		
 		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject("employee.getEmployeeByEmpId", empId);	
 		return empBean;

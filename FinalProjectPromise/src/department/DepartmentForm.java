@@ -15,12 +15,14 @@ public class DepartmentForm extends ActionForm{
 	private Boolean isAdd = false;
 	private List<DepartmentBean> arrList = new ArrayList<DepartmentBean>();
 	private DepartmentBean selectedDept  = new DepartmentBean();
+	
 	private String searchValue;
 	private String searchField;
 	private String currSearchValue = "";
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	private String deptHeadDisplay;
 	
 	public List<DepartmentBean> getArrList() {
 		return arrList;
@@ -108,5 +110,13 @@ public class DepartmentForm extends ActionForm{
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+	}
+
+	public String getDeptHeadDisplay() {
+		return deptHeadDisplay;
+	}
+
+	public void setDeptHeadDisplay(String deptHeadDisplay) {
+		this.deptHeadDisplay = deptHeadDisplay;
 	}
 }
