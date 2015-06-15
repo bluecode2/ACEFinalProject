@@ -1,6 +1,9 @@
 package general;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class GeneralCodeBean {
 
@@ -11,6 +14,25 @@ public class GeneralCodeBean {
 	private Integer genCodeIndex;
 	private Date 	updateDate;
 	private Integer updateBy;
+	private String	updateDateInString;
+	
+	SimpleDateFormat df = new SimpleDateFormat();
+
+	public String getUpdateDateInString() {
+		return updateDateInString;
+	}
+
+	public void setUpdateDateInString(String updateDateInString) {
+		this.updateDateInString = updateDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.updateDateInString = "";
+			date = null;
+		}
+	}
 
 	public Date getUpdateDate() {
 		return updateDate;
@@ -18,6 +40,12 @@ public class GeneralCodeBean {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+		
+		if (updateDate!= null) {
+			this.updateDateInString = df.format(updateDate.getTime());
+		} else {
+			this.updateDateInString = "";
+		}
 	}
 
 	public Integer getUpdateBy() {

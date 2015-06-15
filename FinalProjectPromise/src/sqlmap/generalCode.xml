@@ -15,7 +15,7 @@
 		IS_ACTIVE				AS isActive,
 		GEN_CODE_INDEX 			AS genCodeIndex,
 		update_by				as updateBy,
-		update_date				as updateDate
+		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd')	as updateDateInString
 		FROM 					general_code
 		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
