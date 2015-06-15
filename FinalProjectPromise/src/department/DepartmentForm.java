@@ -46,7 +46,7 @@ public class DepartmentForm extends ActionForm{
 		this.selectedId = selectedId;
 	}
 
-	public boolean getIsAdd() {
+	public Boolean getIsAdd() {
 		return isAdd;
 	}
 

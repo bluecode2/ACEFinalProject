@@ -10,8 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Department Entry</title>
 
-<link href="css/custom.css" rel="stylesheet">
-
 <script type="text/javascript">
 	function onBtnBackClick(){
 		location.href = "department.do";
@@ -31,15 +29,15 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden name="departmentForm" property="task" />
-		<html:text name="departmentForm" property="isAdd" />
+		<html:hidden name="departmentForm" property="isAdd" />
 		<html:hidden name="departmentForm" property="selectedDept.deptId" />
 
 		<div class="container">
 
 			<div class="divContent form-group has-info">
-				<table width="50%">
+				<table width="50%" >
 					<colgroup>
-						<col width="30%"/>
+						<col width="30%" class="tdLabel"/>
 						<col/>
 					</colgroup>
 					<tr>

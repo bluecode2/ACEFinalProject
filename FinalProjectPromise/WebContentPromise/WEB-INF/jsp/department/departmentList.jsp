@@ -92,10 +92,10 @@
 									<td><bean:write name="reg" property="deptCode" /></td>
 									<td><bean:write name="reg" property="deptName" /></td>
 									<td><bean:write name="reg" property="deptHeadId" /></td>
-									<td align="center"><a href="#"
+									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="deptId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
-											aria-hidden="true"></span></a> &nbsp; <a href="#"
+											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a></td>
