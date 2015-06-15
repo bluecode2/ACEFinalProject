@@ -7,7 +7,6 @@ import java.util.Date;
 public class DepartmentBean {
 	private Integer deptId;
 	private Integer deptHeadId;
-	private Integer employeeId;
 	private Integer createdBy;
 	private Integer updatedBy;
 	private String deptCode;
@@ -16,6 +15,7 @@ public class DepartmentBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private Integer isDeleted;
 	
 	SimpleDateFormat df = new SimpleDateFormat();
 	
@@ -25,13 +25,6 @@ public class DepartmentBean {
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
 	}
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-	
 	public Integer getDeptHeadId() {
 		return deptHeadId;
 	}
@@ -113,5 +106,11 @@ public class DepartmentBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

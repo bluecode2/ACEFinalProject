@@ -10,8 +10,7 @@ public class EmployeeBean {
 	private Integer rankId;
 	private Integer depDeptId;
 	private Integer supervisorID;
-	private Integer projectId;
-	private Integer createBy;
+	private Integer createdBy;
 	private Integer updatedBy;
 	private String employeeName;
 	private String gender;
@@ -22,6 +21,8 @@ public class EmployeeBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private Integer isActive;
+	private String EmployeeCode;
 
 	SimpleDateFormat df = new SimpleDateFormat();
 	
@@ -56,17 +57,11 @@ public class EmployeeBean {
 	public void setSupervisorID(Integer supervisorID) {
 		this.supervisorID = supervisorID;
 	}
-	public Integer getProjectId() {
-		return projectId;
+	public Integer getCreatedBy() {
+		return createdBy;
 	}
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
-	}
-	public Integer getCreateBy() {
-		return createBy;
-	}
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
+	public void setCreatdeBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
 	public Integer getUpdatedBy() {
 		return updatedBy;
@@ -155,6 +150,18 @@ public class EmployeeBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public Integer getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+	public String getEmployeeCode() {
+		return EmployeeCode;
+	}
+	public void setEmployeeCode(String employeeCode) {
+		EmployeeCode = employeeCode;
 	}
 	
 	
