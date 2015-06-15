@@ -33,6 +33,12 @@ hr {
   padding: 10px 14px;
 }
 
+.logo {
+	position: relative; 
+	top:-3px; 
+	padding-right: 7px;
+}
+
 /*============== submenu ================*/
 
 .sub-menu {
@@ -86,13 +92,18 @@ hr {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
+  position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 50px;
 }
+
 .footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 50px;
@@ -119,4 +130,8 @@ body {
 .tdLabel {
 	padding-right: 20px;
 	margin-right: 20px;
+}
+
+.table-clickable td {
+	cursor: pointer;
 }

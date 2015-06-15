@@ -49,10 +49,10 @@
 						<ul class="dropdown-menu" id="menu1">
 							<logic:iterate id="menuLvl2" name="arrMenuLvl2">
 								<logic:equal name="menuLvl2" property="parentId" value="${menuLvl1.menuId}">
-									<li><a href="#"><bean:write name="menuLvl2" property="menuCaption" /></a>
+									<li><a href="<bean:write name="menuLvl2" property="menuUrl" />"><bean:write name="menuLvl2" property="menuCaption" /></a>
 										<ul class="dropdown-menu sub-menu"><logic:iterate id="menuLvl3" name="arrMenuLvl3">
 												<logic:equal name="menuLvl3" property="parentId" value="${menuLvl2.menuId}">
-													<li><a href="#"><bean:write name="menuLvl3" property="menuCaption" /></a></li>
+													<li><a href="<bean:write name="menuLvl2" property="menuUrl" />"><bean:write name="menuLvl3" property="menuCaption" /></a></li>
 												</logic:equal>
 											</logic:iterate></ul>
 									</li>
