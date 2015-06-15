@@ -16,8 +16,7 @@
 		DEPT_ID 							AS deptId,
 		RANK_ID 							AS rankId,
 		SUPERVISOR_ID 						AS supervisorID,
-		PROJECT_ID 							AS projectId,
-		CREATED_BY 							AS createBy,
+		CREATED_BY 							AS createdBy,
 		UPDATED_BY 							AS updatedBy,
 		EMPLOYEE_NAME 						AS employeeName,
 		GENDER 								AS gender,
@@ -67,20 +66,29 @@
 	<select id="getEmployeeByEmpId" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
-		DEPT_ID 							AS deptId,
-		RANK_ID 							AS rankId,
-		SUPERVISOR_ID 						AS supervisorID,
-		PROJECT_ID 							AS projectId,
-		CREATED_BY 							AS createBy,
-		UPDATED_BY 							AS updatedBy,
 		EMPLOYEE_NAME 						AS employeeName,
-		GENDER 								AS gender,
 		EMAIL 								AS email,
 		ADDRESS 							AS address,
 		PHONE_NUMBER 						AS phoneNumber,
 		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
 		FROM EMPLOYEE where employee_id = #empId# and IS_ACTIVE = 1
+	</select>
+	
+	<select id="getEmployeeForDeptHead" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
+	SELECT
+		EMPLOYEE_ID 						AS employeeId,
+		DEPT_ID 							AS deptId,
+		e.RANK_ID 							AS rankId,
+		SUPERVISOR_ID 						AS supervisorID,
+		PROJECT_ID 							AS projectId,
+		CREATED_BY 							AS createdBy,
+		UPDATED_BY 							AS updatedBy,
+		EMPLOYEE_NAME 						AS employeeName,
+		EMAIL 								AS email
+		FROM EMPLOYEE e
+		LEFT JOIN rank_emp re ON re.rank_id = e.rank_id
+		WHERE dept_id = #value# and IS_ACTIVE = 1 AND re.rank_id = fGetGeneralParameterValue('deptHeadLevel')
 	</select>
 	
 	<select id="getNewEmpId" resultClass="java.lang.Integer">
@@ -94,7 +102,7 @@
 		GENDER, EMAIL, ADDRESS,
 		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE,IS_ACTIVE,EMPLOYEE_CODE)
 		VALUES
-		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#createBy#,null,#employeeName#,
+		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#createdBy#,null,#employeeName#,
 		#gender#,#email#,#address#,#phoneNumber#,SYSDATE,null,1,#employeeCode#)
 	</insert>
 

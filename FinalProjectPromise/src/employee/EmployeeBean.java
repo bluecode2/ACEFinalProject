@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class EmployeeBean {
 	private Integer employeeId;
 	private Integer deptId;
@@ -22,9 +24,9 @@ public class EmployeeBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private Integer isActive;
-	private String EmployeeCode;
+	private String employeeCode;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -158,10 +160,10 @@ public class EmployeeBean {
 		this.isActive = isActive;
 	}
 	public String getEmployeeCode() {
-		return EmployeeCode;
+		return employeeCode;
 	}
 	public void setEmployeeCode(String employeeCode) {
-		EmployeeCode = employeeCode;
+		this.employeeCode = employeeCode;
 	}
 	
 	
