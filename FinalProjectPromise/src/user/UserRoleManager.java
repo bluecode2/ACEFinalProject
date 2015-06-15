@@ -1,6 +1,5 @@
 package user;
 
-import general.GeneralCodeBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;

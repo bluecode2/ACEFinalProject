@@ -6,6 +6,10 @@ import org.apache.struts.action.ActionForm;
 
 public class GeneralParamForm extends ActionForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<GeneralParamBean> arrList = new ArrayList<GeneralParamBean>();
 	private String searchCategory;
 	private String searchItem;

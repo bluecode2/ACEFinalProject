@@ -3,7 +3,6 @@ package other;
 import java.util.ArrayList;
 
 import general.MenuBean;
-import general.MenuManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +19,7 @@ public class HomeHandler extends Action {
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		MenuManager menuMan = new MenuManager();
-		
-//		ArrayList<MenuBean> arrList = 
-		
-		
+		//MenuManager menuMan = new MenuManager();
 		request.setAttribute("menuList", "abc");
 		
 		return mapping.findForward("home");

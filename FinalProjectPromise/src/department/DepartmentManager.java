@@ -1,10 +1,8 @@
 package department;
 
-import general.GeneralParamBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
