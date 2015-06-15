@@ -49,6 +49,7 @@
 		<html:hidden name="userForm" property="selectedId" />
 		<html:hidden name="userForm" property="currSearchField" />
 		<html:hidden name="userForm" property="currSearchValue" />
+		<html:hidden property="currPage" name="userForm"/>
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
@@ -96,16 +97,16 @@
 					</thead>
 					<tbody>
 						<logic:notEmpty name="userForm" property="listOfUser">
-							<logic:iterate id="reg" name="departmentForm" property="listOfUser">
+							<logic:iterate id="reg" name="userForm" property="listOfUser">
 								<tr>
 									<td><bean:write name="reg" property="userId" /></td>
 									<td><bean:write name="reg" property="userRoleId" /></td>
 									<td><bean:write name="reg" property="employeeId" /></td>
 									<td><bean:write name="reg" property="username" /></td>
 									<td><bean:write name="reg" property="isActive" /></td>
-									<td><bean:write name="reg" property="createBy" /></td>
-									<td><bean:write name="reg" property="createDate" /></td>
-									<td><bean:write name="reg" property="updateBy" /></td>
+									<td><bean:write name="reg" property="createdBy" /></td>
+									<td><bean:write name="reg" property="updateDateInString" /></td>
+									<td><bean:write name="reg" property="updatedBy" /></td>
 									<td><bean:write name="reg" property="updateDate" /></td>
 									<td align="center">
 									<a href="#"	onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"

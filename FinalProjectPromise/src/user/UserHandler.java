@@ -35,7 +35,7 @@ public class UserHandler extends Action{
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
 			
 		}
-		else if ("save".equalsIgnoreCase(uForm.getTask())){
+	/*	else if ("save".equalsIgnoreCase(uForm.getTask())){
 			Boolean isAdd = uForm.getIsAdd();
 
 			if (uForm.getuBean().getUserId() == 0)
@@ -51,7 +51,7 @@ public class UserHandler extends Action{
 
 			response.sendRedirect("users.do");
 			return null;
-		}
+		}*/
 		
 		uForm.setTask("");
 		uForm.setSearchField(uForm.getCurrSearchField());
@@ -59,15 +59,17 @@ public class UserHandler extends Action{
 
 		int rowCount;
 		
+		
+		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
+				uForm.getCurrSearchValue());
+		System.out.println("rowCount selesai");
+		uForm.setPageCount((int) Math.ceil((double) rowCount
+				/ (double) Constant.pageSize));
+System.out.println("pageCount end");
 		uForm.setListOfUser(uMan.getAllUser(
 				uForm.getCurrSearchField(), uForm.getCurrSearchValue(),
 				uForm.getCurrPage(), Constant.pageSize));
-		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
-				uForm.getCurrSearchValue());
-		
-		uForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
-
+System.out.println("isi list selesai");
 		request.setAttribute("pageTitle", "User List");
 
 		request.setAttribute("pageNavigator", CommonFunction

@@ -4,21 +4,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class UserBean {
 	private Integer userId;
 	private Integer userRoleId;
 	private Integer employeeId;
-	private Integer createBy;
-	private Integer updateBy;
+	private Integer createdBy;
+	private Integer updatedBy;
 	private String username;
-	private String password_user;
+	private String passwordUser;
 	private Integer isActive;
 	private Date createDate;
 	private Date updateDate;
 	private String createDateInString;
 	private String updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getUserId() {
 		return userId;
@@ -45,11 +47,11 @@ public class UserBean {
 		this.username = username;
 	}
 
-	public String getPassword_user() {
-		return password_user;
+	public String getPasswordUser() {
+		return passwordUser;
 	}
-	public void setPassword_user(String password_user) {
-		this.password_user = password_user;
+	public void setPasswordUser(String passwordUser) {
+		this.passwordUser = passwordUser;
 	}
 	public Integer getIsActive() {
 		return isActive;
@@ -81,17 +83,18 @@ public class UserBean {
 			this.updateDateInString = "";
 		}
 	}
-	public Integer getCreateBy() {
-		return createBy;
+
+	public Integer getCreatedBy() {
+		return createdBy;
 	}
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
 	}
-	public Integer getUpdateBy() {
-		return updateBy;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	public String getCreateDateInString() {
 		return createDateInString;
@@ -102,7 +105,7 @@ public class UserBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
@@ -118,7 +121,7 @@ public class UserBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;

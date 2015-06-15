@@ -15,8 +15,8 @@
 		)
 		VALUES
 		( #userId#, #userRoleId#,
-		#employeeId#, #createBy#,
-		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #password_user#),
+		#employeeId#, #createdBy#,
+		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#),
 		1, SYSDATE)
 	</insert>
 
@@ -26,42 +26,53 @@
 
 	<select id="getAllUser" parameterClass="java.util.Map"
 		resultClass="user.UserBean">
+		Select * from (
+		select us.*, ROWNUM rnum from (
 		SELECT
-		USER_ID AS userId
+		USER_ID AS userId,
 		USER_ROLE_ID AS userRoleId,
 		EMPLOYEE_ID AS employeeId,
-		CREATED_BY AS createBy,
-		UPDATED_BY AS updateBy,
+		CREATED_BY AS createdBy,
+		UPDATED_BY AS updatedBy,
 		USERNAME AS username,
-		PASSWORD AS password_user,
-		IS_ACTIVATE as isActive,
+		PASSWORD_USER AS passwordUser,
+		IS_ACTIVE as isActive,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString
 		FROM USERS
-		where 1=1
+		where Is_active = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userId">
+				<isNotEmpty property="searchValue">
 				LOWER(USER_ID)
 				LIKE LOWER( '%' || #searchValue# || '%' )
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userRoleId">
+			<isNotEmpty property="searchValue">
 				LOWER(USER_ROLE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.employeeId">
+			<isNotEmpty property="searchValue">
 				LOWER(EMPLOYEE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.username">
+			<isNotEmpty property="searchValue">
 				LOWER(USERNAME)
 				LIKE LOWER( '%' || #searchValue# || '%' )
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>
-		ORDER BY USER_ID ASC ) emp where ROWNUM &lt; = #end#)
+		ORDER BY USER_ID ASC ) us 
+		where ROWNUM &lt; = #end#) 
 		WHERE rnum
 		&gt;
 		#begin#
@@ -70,7 +81,7 @@
 	<select id="countUser" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM USERS
-		WHERE IS_ACTIVE = 0
+		WHERE IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userId">
 				LOWER(USER_ID)
