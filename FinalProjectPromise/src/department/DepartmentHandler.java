@@ -45,18 +45,20 @@ public class DepartmentHandler extends Action {
 		}
 
 		else if (dForm.getTask().equals("delete")) {
-			dMan.deleteDepartment(dForm.getSelectedId(), 0);
+			dMan.deleteDepartment(dForm.getSelectedId(), 1);
 		}
 
 		else if (dForm.getTask().equals("save")) {
-			boolean isAdd = dForm.getIsAdd();
+			Boolean isAdd = dForm.getIsAdd();
 
 			if (dForm.getSelectedDept().getDeptHeadId() == 0)
 				dForm.getSelectedDept().setDeptHeadId(null);
 
 			if (isAdd) {
+				dForm.getSelectedDept().setCreatedBy(1);
 				dMan.insertDepartment(dForm.getSelectedDept());
 			} else {
+				dForm.getSelectedDept().setUpdatedBy(1);
 				dMan.updateDepartment(dForm.getSelectedDept());
 			}
 

@@ -31,6 +31,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden name="departmentForm" property="task" />
+		<html:text name="departmentForm" property="isAdd" />
 		<html:hidden name="departmentForm" property="selectedDept.deptId" />
 
 		<div class="container">

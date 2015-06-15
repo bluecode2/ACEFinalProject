@@ -50,9 +50,9 @@ public class DepartmentManager {
 		return dept;
 	}
 	
-	public int getNewDeptId() throws SQLException {
+	public Integer getNewDeptId() throws SQLException {
 		
-		int tempDeptId = (Integer) ibatis.queryForObject("department.getNewDeptId", null);
+		Integer tempDeptId = (Integer) ibatis.queryForObject("department.getNewDeptId", null);
 		return tempDeptId;
 	}
 
