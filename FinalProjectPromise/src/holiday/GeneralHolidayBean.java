@@ -4,14 +4,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class GeneralHolidayBean {
 	private Integer genHolidayId;
 	private String genHolidayName;
 	private Date genHolidayDate;
 	private String genHolidayDateInString;
 	private Integer isGenerated;
+	private Integer createdBy;
+	private Integer updatedBy;
+	private Date createDate;
+	private String createDateInString;
+	private Date updateDate;
+	private String updateDateInString;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getGenHolidayId() {
 		return genHolidayId;
@@ -59,5 +67,69 @@ public class GeneralHolidayBean {
 	}
 	public void setIsGenerated(Integer isGenerated) {
 		this.isGenerated = isGenerated;
+	}
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Integer getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+		if (createDate != null){
+			this.createDateInString = df.format(createDate.getTime());
+		} else {
+			this.createDateInString = "";
+		}
+	}
+	public String getCreateDateInString() {
+		return createDateInString;
+	}
+	public void setCreateDateInString(String createDateInString) {
+		this.createDateInString = createDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(createDateInString);
+		} catch (ParseException pe){
+			pe.printStackTrace();
+			this.createDateInString = "";
+			date = null;
+		}
+		this.createDate = date;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+		if (updateDate != null){
+			this.updateDateInString = df.format(updateDate.getTime());
+		} else {
+			this.updateDateInString = "";
+		}
+	}
+	public String getUpdateDateInString() {
+		return updateDateInString;
+	}
+	public void setUpdateDateInString(String updateDateInString) {
+		this.updateDateInString = updateDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (ParseException pe){
+			pe.printStackTrace();
+			this.updateDateInString = "";
+			date = null;
+		}
+		this.updateDate = date;
 	}
 }

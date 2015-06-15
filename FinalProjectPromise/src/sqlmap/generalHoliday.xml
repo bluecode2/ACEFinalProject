@@ -9,7 +9,11 @@
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
 		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
-		IS_GENERATED 		as isGenerated
+		IS_GENERATED 		as isGenerated,
+		created_by 			as createdBy,
+		updated_by 			as updatedBy,
+		create_date			as createDate, 
+		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY
 		where IS_GENERATED = 1
 		<dynamic prepend="AND">
@@ -43,7 +47,11 @@
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
 		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
-		IS_GENERATED 		as isGenerated
+		IS_GENERATED 		as isGenerated,
+		created_by 			as createdBy,
+		updated_by 			as updatedBy,
+		create_date			as createDate, 
+		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY
 		where gen_holiday_id = #holId# AND IS_GENERATED = 1
 	</select>
@@ -54,10 +62,10 @@
 
 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
 		insert into
-		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE,
-		IS_GENERATED)
+		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, 
+		IS_GENERATED, created_by, updated_by, create_date, update_date)
 		values (#genHolidayId#, #genHolidayName#,
-		#genHolidayDateInString#, #isGenerated#)
+		#genHolidayDate#, #isGenerated#, #createdBy#, NULL, SYSDATE, NULL)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">

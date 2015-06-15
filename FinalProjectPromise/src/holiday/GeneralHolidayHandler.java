@@ -16,9 +16,10 @@ public class GeneralHolidayHandler extends Action{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		CommonFunction.createAllowedMenu(null, request);
+		GeneralHolidayForm genForm = (GeneralHolidayForm) form;
+		GeneralHolidayManager genManager = new GeneralHolidayManager();
 		
-		GeneralHolidayForm genForm = (GeneralHolidayForm)form;
+		CommonFunction.createAllowedMenu(null, request);
 		
 		if("add".equals(genForm.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
@@ -27,6 +28,8 @@ public class GeneralHolidayHandler extends Action{
 			empForm.setListOfDept(empManager.getDeptId());
 			
 			request.setAttribute("ljob", empManager.getJobId());*/
+			
+			genForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "General Holiday Entry");
 			
 			request.setAttribute("pageNavigator", CommonFunction
@@ -37,6 +40,24 @@ public class GeneralHolidayHandler extends Action{
 			request.setAttribute("rowCount", 1);
 			
 			return mapping.findForward("genEntry");
+		}
+		else if ("save".equals(genForm.getTask())){
+			Boolean isAdd = genForm.getIsAdd();
+			
+			//if (genForm.getGenHolidayBean().getGenHolidayId() == 0)
+				genForm.getGenHolidayBean().setGenHolidayId(1);
+				
+			if (isAdd) {
+				genForm.getGenHolidayBean().setCreatedBy(1);
+				genManager.insertGeneralHoliday(genForm.getGenHolidayBean());
+			} 
+			else {
+				genForm.getGenHolidayBean().setUpdatedBy(1);
+				genManager.editGeneralHoliday(genForm.getGenHolidayBean());
+			}
+
+			response.sendRedirect("generalHoliday.do");
+			return null;
 		}
 		
 		request.setAttribute("pageTitle", "General Holiday List");

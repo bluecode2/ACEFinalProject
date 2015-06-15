@@ -9,10 +9,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Holiday</title>
+
+<script type="text/javascript">
+	function onBtnSaveClick(){
+		document.forms[0].task.value = 'save';
+		document.forms[0].submit();
+	}
+	
+	function onBtnBackClick(){
+		location.href = "generalHoliday.do";
+	}
+</script>
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
-
+		<html:hidden name="generalHolidayForm" property="task" />
+		<html:hidden name="generalHolidayForm" property="isAdd" />
+		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -26,18 +39,23 @@
 					</tr> -->
 					<tr>
 						<td>General Holiday Name</td>
-						<td><input type="text" id="txtGoToPage" class="form-control" /></td>
+						<td>
+							<html:text styleClass="form-control" styleId="txtGenHolName" name="generalHolidayForm" property="genHolidayBean.genHolidayName"></html:text>
+						</td>
 					</tr>
 					<tr>
 						<td>General Holiday Date</td>
-						<td><input type="text" id="txtGoToPage" class="form-control" /></td>
+						<td>
+							<html:text styleClass="form-control" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
+						</td>
 					</tr>
 					<tr>
 						<td>Is Generated</td>
 						<td>
-							<input type="radio" name="gender" value="Yes"> Yes</input> &nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp; 
-							<input type="radio" name="gender" value="No"> No</input></td>
+							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="1">Yes</html:radio>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="0">No</html:radio>
+						</td>
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>

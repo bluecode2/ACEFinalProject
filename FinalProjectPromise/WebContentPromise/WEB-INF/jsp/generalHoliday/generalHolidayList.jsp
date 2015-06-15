@@ -16,16 +16,11 @@
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}
-	
-	function onBtnBackClick(){
-		alert('back');
-	}
-
 </script>
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
-		<html:hidden property="task" name="generalHolidayForm" />
+		<html:hidden name="generalHolidayForm" property="task" />
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
