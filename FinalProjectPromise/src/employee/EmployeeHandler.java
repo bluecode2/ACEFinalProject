@@ -17,6 +17,7 @@ public class EmployeeHandler extends Action{
 		// TODO Auto-generated method stub
 		EmployeeForm eForm = (EmployeeForm) form;
 		request.setAttribute("pageTitle", "Employee List");
+		CommonFunction.createAllowedMenu(null, request);
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(15,5));

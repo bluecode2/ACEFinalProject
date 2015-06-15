@@ -17,11 +17,19 @@ public class UserHandler extends Action{
 			throws Exception {
 		// TODO Auto-generated method stub
 //		return super.execute(mapping, form, request, response);
+		System.out.println("masuk ke index");
 		UserForm uForm = (UserForm) form;
 		UserManager uMan = new UserManager();
+		CommonFunction.createAllowedMenu(null, request);
 		
 		request.setAttribute("pageTitle", "User");
+		request.setAttribute("pageNavigator", CommonFunction
+				.createPagingNavigatorList(15,5));
 		
+		request.setAttribute("pageCount", 5);
+		request.setAttribute("currPage", 5);
+		request.setAttribute("rowCount", 50);
+		System.out.println("berhasilkasi smua attribut");
 		return mapping.findForward("userAdd");
 	}
 }

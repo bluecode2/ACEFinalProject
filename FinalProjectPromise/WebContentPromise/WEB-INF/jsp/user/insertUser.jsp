@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<html:form action="/user" method="post">
+	<html:form action="/users" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -24,7 +24,7 @@
 					<tr align="left">
 						<td>User Name</td>
 						<td style="padding-left:15px;">
-							<input type="text" name="UserName" class="form-control" />
+							
 						</td>
 					</tr>
 				</table>

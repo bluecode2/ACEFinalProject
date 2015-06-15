@@ -46,7 +46,7 @@
 			<forward name="employeeList" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
 			<forward name="employeeAdd" path="/WEB-INF/jsp/employee/insertEmployee.jsp"></forward>
 		</action>
-		<action path="/user" name="UserForm" type="user.UserHandler"
+		<action path="/users" name="userForm" type="user.UserHandler"
 			scope="request">
 			<forward name="userAdd" path="/WEB-INF/jsp/user/insertUser.jsp"></forward>
 		</action>
