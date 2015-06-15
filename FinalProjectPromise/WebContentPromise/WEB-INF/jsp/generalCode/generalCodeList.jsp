@@ -45,8 +45,8 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="generalCodeForm" />
-		<html:hidden property="currColumn" name="generalCodeForm"/>
-		<html:hidden property="currInput" name="generalCodeForm"/>
+		<html:hidden property="currSearchField" name="generalCodeForm"/>
+		<html:hidden property="currSearchValue" name="generalCodeForm"/>
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -87,8 +87,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="genCodeForm" property="arrCodeBean">
-							<logic:iterate id="reg" name="genCodeForm" property="arrCodeBean">
+						<logic:notEmpty name="generalCodeForm" property="arrCodeBean">
+							<logic:iterate id="reg" name="generalCodeForm" property="arrCodeBean">
 								<tr>
 									<td><bean:write name="reg" property="genCodeIndex" /></td>
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
@@ -96,14 +96,14 @@
 									<td><bean:write name="reg" property="isActive" /></td>
 									
 									<td align="center"><a href="#"
-										onclick="actionForm'<bean:write name="reg" property="deptId" />');"
+										onclick="actionForm('edit','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"
 										title="Edit">Edit</a> <a href="#"
-										onclick="deleteDepartment('<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
+										onclick="actionForm('delete','<bean:write name="reg" property="genCodeIn" />','<bean:write name="reg" property="genCodeCaption" />');"
 										title="Delete">Delete</a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="departmentForm" property="arrList">
+						<logic:empty name="generalCodeForm" property="arrCodeBean">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>
