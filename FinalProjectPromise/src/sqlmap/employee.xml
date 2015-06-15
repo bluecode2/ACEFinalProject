@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="employee">
-	<select id="getMaxEmployeeId" resultClass="java.lang.Integer">
+	<select id="getMaxEmployeeId" resultClass="employee.EmployeeBean">
 		SELECT
 		MAX(EMPLOYEE_ID)+1 FROM EMPLOYEE
 	</select>
@@ -27,7 +27,7 @@
 		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
 		FROM EMPLOYEE
-		where 1=1
+		where 1=1 and IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeId">
 				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -64,7 +64,7 @@
 		#begin#
 	</select>
 	
-	<select id="getEmployeeByEmpId" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
+	<select id="getEmployeeByEmpId" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
 		DEPT_ID 							AS deptId,
@@ -80,7 +80,7 @@
 		PHONE_NUMBER 						AS phoneNumber,
 		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') 	AS updateDateInString
-		FROM EMPLOYEE where employee_id = #empId#
+		FROM EMPLOYEE where employee_id = #empId# and IS_ACTIVE = 1
 	</select>
 	
 	<select id="getNewEmpId" resultClass="java.lang.Integer">
@@ -89,13 +89,13 @@
 
 	<insert id="insertEmployee" parameterClass="employee.EmployeeBean">
 		INSERT INTO EMPLOYEE
-		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, PROJECT_ID, CREATED_BY,
+		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, CREATED_BY,
 		UPDATED_BY, EMPLOYEE_NAME,
 		GENDER, EMAIL, ADDRESS,
-		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE)
+		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE,IS_ACTIVE,EMPLOYEE_CODE)
 		VALUES
-		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#projectId#,#createBy#,#updatedBy#,#employeeName#,
-		#gender#,#email#,#address#,#phoneNumber#,TO_DATE(#createDateInString#,'yyyy-mm-dd'),TO_DATE(#updateDateInString#,'yyyy-mm-dd'))
+		(#employeeId#,#deptId#,#rankId#,#supervisorID#,#createBy#,null,#employeeName#,
+		#gender#,#email#,#address#,#phoneNumber#,SYSDATE,null,1,#employeeCode#)
 	</insert>
 
 	<update id="updateEmployee" parameterClass="employee.EmployeeBean">
@@ -103,27 +103,24 @@
 		DEPT_ID = #deptId#,
 		RANK_ID = #rankId#,
 		SUPERVISOR_ID = #supervisorID#,
-		PROJECT_ID = #projectId#,
-		CREATED_BY = #createBy#,
-		UPDATED_BY =
-		#updatedBy#,
+		UPDATED_BY = #updatedBy#,
 		EMPLOYEE_NAME = #employeeName#,
 		GENDER = #gender#,
-		EMAIL =
-		#email#,
+		EMAIL = #email#,
 		ADDRESS = #address#,
 		PHONE_NUMBER = #phoneNumber#,
-		CREATE_DATE =
-		TO_DATE(#createDateInString#,'yyyy-mm-dd'),
-		UPDATE_DATE =
-		TO_DATE(#updateDateInString#,'yyyy-mm-dd')
-		WHERE EMPLOYEE_ID =
-		#employeeId#
+		UPDATE_DATE = SYSDATE,
+		EMPLOYEE_CODE = #employeeCode#
+		WHERE EMPLOYEE_ID = #employeeId#
 	</update>
 
-	<delete id="deleteEmployee" parameterClass="java.lang.Integer">
-		DELETE FROM EMPLOYEE
-		WHERE EMPLOYEE_ID = #EmployeeId#
+	<delete id="deleteEmployee" parameterClass="java.util.Map">
+		update
+		employee set
+		IS_ACTIVE = 0
+		UPDATED_BY = #userName#,
+		UPDATE_DATE = SYSDATE
+		where EMPLOYEE_ID = #employeeId#
 	</delete>
 
 	<select id="countEmployee" resultClass="java.lang.Integer"
