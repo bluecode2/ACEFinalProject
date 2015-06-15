@@ -22,27 +22,26 @@ public class DepartmentHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		DepartmentForm eForm = (DepartmentForm) form;
-		DepartmentManager eMan = new DepartmentManager();
+		DepartmentForm dForm = (DepartmentForm) form;
 		DepartmentManager dMan = new DepartmentManager();
 
 		HttpSession session = request.getSession(true);
 
 		CommonFunction.createAllowedMenu(null, request);
 
-		if (eForm.getTask().equals("add")) {
-			eForm.setIsAdd(true);
-			eForm.setSelectedId(0);
+		if (dForm.getTask().equals("add")) {
+			dForm.setIsAdd(true);
+			dForm.setSelectedId(0);
 			return mapping.findForward("entry");
 		}
 
-		else if (eForm.getTask().equals("edit")) {
-			eForm.setIsAdd(false);
+		else if (dForm.getTask().equals("edit")) {
+			dForm.setIsAdd(false);
 			return mapping.findForward("entry");
 		}
 
-		else if (eForm.getTask().equals("delete")) {
-			eMan.deleteDepartment(eForm.getSelectedId());
+		else if (dForm.getTask().equals("delete")) {
+			dMan.deleteDepartment(dForm.getSelectedId());
 		}
 		//
 		// else if (eForm.getTask().equals("save")) {
@@ -64,27 +63,27 @@ public class DepartmentHandler extends Action {
 		// }
 		//
 		//
-		eForm.setTask("");
-		eForm.setSearchField(eForm.getCurrSearchField());
-		eForm.setSearchValue(eForm.getCurrSearchValue());
+		dForm.setTask("");
+		dForm.setSearchField(dForm.getCurrSearchField());
+		dForm.setSearchValue(dForm.getCurrSearchValue());
 
 		int rowCount;
 
-		eForm.setArrList(eMan.getAllDepartmentsFiltered(eForm.getCurrSearchField(), eForm.getCurrSearchValue(),eForm.getCurrPage(),Constant.pageSize));
-		rowCount = eMan.getCountDepartment(
-				eForm.getCurrSearchField(), eForm.getCurrSearchValue());
+		dForm.setArrList(dMan.getAllDepartmentsFiltered(dForm.getCurrSearchField(), dForm.getCurrSearchValue(),dForm.getCurrPage(),Constant.pageSize));
+		rowCount = dMan.getCountDepartment(
+				dForm.getCurrSearchField(), dForm.getCurrSearchValue());
 		//
-		eForm.setPageCount((int) Math.ceil((double) rowCount
+		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
 		request.setAttribute("pageTitle", "Department List");
 
 		request.setAttribute("pageNavigator",
-				CommonFunction.createPagingNavigatorList(eForm.getPageCount(),
-						eForm.getCurrPage()));
+				CommonFunction.createPagingNavigatorList(dForm.getPageCount(),
+						dForm.getCurrPage()));
 
-		request.setAttribute("pageCount", eForm.getPageCount());
-		request.setAttribute("currPage", eForm.getCurrPage());
+		request.setAttribute("pageCount", dForm.getPageCount());
+		request.setAttribute("currPage", dForm.getCurrPage());
 		request.setAttribute("rowCount", rowCount);
 
 		return mapping.findForward("list");

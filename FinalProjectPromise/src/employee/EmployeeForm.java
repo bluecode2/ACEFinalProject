@@ -6,6 +6,10 @@ import org.apache.struts.action.ActionForm;
 
 public class EmployeeForm extends ActionForm{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<EmployeeBean> listOfEmployee;
 	private String task;
 

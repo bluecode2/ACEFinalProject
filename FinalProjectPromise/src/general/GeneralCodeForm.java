@@ -6,6 +6,10 @@ import org.apache.struts.action.ActionForm;
 
 public class GeneralCodeForm extends ActionForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<GeneralCodeBean> arrCodeBean = new ArrayList<GeneralCodeBean>();
 	private String 			task;
 	private String 			searchField;
