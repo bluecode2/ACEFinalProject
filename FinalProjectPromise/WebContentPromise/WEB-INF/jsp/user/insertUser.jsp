@@ -22,9 +22,33 @@
 				<table>
 				
 					<tr align="left">
+						<td>User Role ID</td>
+						<td style="padding-left:15px;">
+							<html:text property="uBean.userRoleId" styleClass="form-control"></html:text>
+						</td>
+					</tr>
+					<tr align="left">
+						<td>Employee ID</td>
+						<td style="padding-left:15px;">
+							<html:text property="uBean.employeeId" styleClass="form-control"></html:text>
+						</td>
+					</tr>
+					<tr align="left">
 						<td>User Name</td>
 						<td style="padding-left:15px;">
-							
+							<html:text property="uBean.username" styleClass="form-control"></html:text>
+						</td>
+					</tr>
+					<tr align="left">
+						<td>Password</td>
+						<td style="padding-left:15px;">
+							<html:text property="uBean.password_user" styleClass="form-control" styleId="password1"></html:text>
+						</td>
+					</tr>
+					<tr align="left">
+						<td>Re-Type Password</td>
+						<td style="padding-left:15px;">
+							<html:text property="uBean.password_user" styleClass="form-control" styleId="password2"></html:text>
 						</td>
 					</tr>
 				</table>

@@ -11,7 +11,7 @@ public class UserBean {
 	private Integer createBy;
 	private Integer updateBy;
 	private String username;
-	private String password;
+	private String password_user;
 	private Integer isActive;
 	private Date createDate;
 	private Date updateDate;
@@ -44,11 +44,12 @@ public class UserBean {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getPassword_user() {
+		return password_user;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword_user(String password_user) {
+		this.password_user = password_user;
 	}
 	public Integer getIsActive() {
 		return isActive;

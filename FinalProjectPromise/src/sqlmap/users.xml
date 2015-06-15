@@ -23,4 +23,45 @@
 	<select id="getNewUserId" resultClass="java.lang.Integer">
 	select max(user_id)+1 from users
 	</select>
+	
+	<select id="getAllUser" parameterClass="java.util.Map" resultClass="user.UserBean">
+		SELECT 
+		USER_ID AS userId
+		USER_ROLE_ID AS userRoleId,
+		EMPLOYEE_ID AS employeeId,
+		CREATED_BY AS createBy,
+		UPDATED_BY AS updateBy,
+		USERNAME AS username,
+		PASSWORD AS password_user,
+		IS_ACTIVATE as isActive,
+		TO_CHAR(CREATE_DATE,'yyyy-mm-dd') as createDateInString,
+		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd') as updateDateInString
+		FROM USERS
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.userId">
+				LOWER(USER_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.userRoleId">
+				LOWER(USER_ROLE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.employeeId">
+				LOWER(EMPLOYEE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.username">
+				LOWER(USERNAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		ORDER BY USER_ID ASC ) emp where ROWNUM &lt; = #end#)
+		WHERE rnum
+		&gt;
+		#begin#
+	</select>
+	
 </sqlMap>
