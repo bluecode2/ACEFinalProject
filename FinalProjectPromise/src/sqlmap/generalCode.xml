@@ -66,18 +66,23 @@
 	</select>
 
 	<insert id="insertGeneralCode" parameterClass="java.util.Map">
-		insert into
-		general_code (GEN_CODE_ID, PARENT_ID, GEN_CODE_CAPTION,IS_ACTIVE,
-		GEN_CODE_INDEX,update_by, update_date) 
-		values (#genCodeId#, #parentId#, #genCodeCaption#, #isActive#,
-		#genCodeIndex#,#empId#, SYSDATE)
+		insert into general_code (
+		GEN_CODE_ID, 		PARENT_ID, 
+		GEN_CODE_CAPTION,	IS_ACTIVE,
+		GEN_CODE_INDEX,		update_by,
+		update_date	) 
+		values (
+		#genCodeId#, 		#parentId#, 
+		#genCodeCaption#, 	1,
+		#genCodeIndex#,		#userId#, 
+		SYSDATE)
 	</insert>
 	<update id="updateGeneralCode" parameterClass="java.util.Map">
 		update		general_code set
 		Parent_id 			=	#parentId#,
 		GEN_CODE_CAPTION 	=	#genCodeCaption#,
 		GEN_CODE_INDEX 		=	#genCodeIndex#,
-		update_by			= 	#empId#,
+		update_by			= 	#userId#,
 		update_date			= 	SYSDATE
 		where gen_code_id 	=	#genCodeId#
 	</update>
