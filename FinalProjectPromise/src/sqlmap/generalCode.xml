@@ -17,7 +17,7 @@
 		update_by				as updateBy,
 		update_date				as updateDate
 		FROM 					general_code
-		where 1=1
+		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genCodeCaption">
 				LOWER(gen_code_caption) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -72,7 +72,7 @@
 		IS_ACTIVE				AS isActive,
 		GEN_CODE_INDEX 			AS genCodeIndex
 		FROM general_code
-		where gen_code_id = #tmpGenId#
+		where gen_code_id = #tmpGenId# and IS_ACTIVE = 1
 	</select>
 
 	<insert id="insertGeneralCode" parameterClass="java.util.Map">
@@ -94,7 +94,7 @@
 
 	<delete id="deleteGeneralCode" parameterClass="java.util.Map">
 		UPDATE GENERAL_CODE SET
-		IS_ACTIVE			=	#status#
+		IS_ACTIVE			=	0
 		where gen_code_id	=	#genCodeId#
 	</delete>
 

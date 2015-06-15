@@ -2,7 +2,25 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="users">
-	<select id="userAdd" parameterClass="user.UserBean">
-		
+	<insert id="insertNewUser" parameterClass="java.util.Map">
+		INSERT INTO users 
+		(	USER_ID,
+			USER_ROLE_ID,
+			EMPLOYEE_ID,
+			CREATED_BY,
+			USERNAME ,
+			PASSWORD_USER,
+			IS_ACTIVE,
+			CREATE_DATE
+		) 
+		VALUES 
+		(	#userId#,	#userRoleId#,
+			#empId#,	#userId#,
+			#username#,	dbms_obfuscation_toolkit.md5(input_string= &gt; #pass#),
+			1,			SYSDATE)
+	</insert>
+	
+	<select id="getNewUserId" resultClass="java.lang.Integer">
+	select max(user_id)+1 from users
 	</select>
 </sqlMap>

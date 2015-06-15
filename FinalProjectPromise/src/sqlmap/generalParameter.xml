@@ -12,7 +12,7 @@
 		GEN_PARAM_VALUE 		as genParamValue,
 		IS_ACTIVE 				as isActive
 		from general_parameter
-		where 1=1 and IS_ACTIVE = 1
+		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamId">
 				LOWER(gen_param_id) LIKE LOWER( '%' || #searchValue# || '%' )
