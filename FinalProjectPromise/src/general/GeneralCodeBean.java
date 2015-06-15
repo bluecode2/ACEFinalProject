@@ -13,10 +13,19 @@ public class GeneralCodeBean {
 	private Integer isActive;
 	private Integer genCodeIndex;
 	private Date 	updateDate;
-	private Integer updateBy;
+	private Integer updatedBy;
 	private String	updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+
+	public Integer getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 
 	public String getUpdateDateInString() {
 		return updateDateInString;
@@ -46,14 +55,6 @@ public class GeneralCodeBean {
 		} else {
 			this.updateDateInString = "";
 		}
-	}
-
-	public Integer getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
 	}
 
 	public String getGenCodeId() {

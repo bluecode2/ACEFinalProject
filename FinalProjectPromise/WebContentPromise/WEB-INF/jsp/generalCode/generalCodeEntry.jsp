@@ -10,12 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <script type="text/javascript">
-	$(document).ready(function() {
-		if ($('#hdnIsAdd').value() == 'true')
-			$('#txtGeneralCodeId').attr('disabled', 'disabled');
-		else
-			$('#txtGeneralCodeId').removeAttr('disabled');
-	});
 
 	function onBtnSaveClick() {
 		document.forms[0].task.value = 'save';
@@ -34,17 +28,43 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
+
 		<div class="container">
-			<div class="divSearch" style="float: right;">
-				<!-- untuk pengganti search -->
-				
+			<div class="container">
+
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" class="tdLabel" />
+						<col />
+					</colgroup>
+					<tr>
+						<td class="tdLabel" align="right"><label>Gen. Code ID</label></td>
+						<td><html:text styleClass="form-control"
+								styleId="txtGenCodeId" name="genCodeForm"
+								property="genCodeBean.genCodeId" style="width:150px"></html:text></td>
+					</tr>
+					<tr>
+						<td class="tdLabel" align="right"><label>Department
+								Name</label></td>
+						<td><html:text styleClass="form-control"
+								styleId="txtDeptName" name="genCodeForm"
+								property="genCodeBean.genCodeCaption"></html:text></td>
+					</tr>
+					<tr>
+						<td class="tdLabel" align="right"><label>Department
+								Head</label></td>
+						<td><html:hidden styleId="hdnDeptHeadId"
+								name="genCodeForm" property="selectedDept.deptHeadId" /> <html:text
+								styleClass="form-control" styleId="txtDeptHead"
+								name="genCodeForm" property="selectedDept.deptHeadId"></html:text>
+						</td>
+					</tr>
+				</table>
 			</div>
 
-			<div class="divContent">
-				<!-- kemungkinan untuk tempat entry -->
-
-			</div>
-
+		</div>
+			
 		</div>
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>

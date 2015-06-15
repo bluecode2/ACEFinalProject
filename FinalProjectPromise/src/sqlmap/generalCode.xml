@@ -14,7 +14,7 @@
 		Parent_Id 				AS parentId,
 		IS_ACTIVE				AS isActive,
 		GEN_CODE_INDEX 			AS genCodeIndex,
-		update_by				as updateBy,
+		updated_by				as updateBy,
 		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd')	as updateDateInString
 		FROM 					general_code
 		where IS_ACTIVE = 1
@@ -36,7 +36,7 @@
 
 	<select id="countGeneralCode" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		select count(1) from general_code
-		where 1=1
+		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genCodeId">
 				LOWER(gen_code_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -65,29 +65,29 @@
 		where gen_code_id = #tmpGenId# and IS_ACTIVE = 1
 	</select>
 
-	<insert id="insertGeneralCode" parameterClass="java.util.Map">
+	<insert id="insertGeneralCode" parameterClass="general.GeneralCodeBean">
 		insert into general_code (
 		GEN_CODE_ID, 		PARENT_ID, 
 		GEN_CODE_CAPTION,	IS_ACTIVE,
-		GEN_CODE_INDEX,		update_by,
+		GEN_CODE_INDEX,		updated_by,
 		update_date	) 
 		values (
 		#genCodeId#, 		#parentId#, 
 		#genCodeCaption#, 	1,
-		#genCodeIndex#,		#userId#, 
+		#genCodeIndex#,		#updatedBy#, 
 		SYSDATE)
 	</insert>
-	<update id="updateGeneralCode" parameterClass="java.util.Map">
+	<update id="updateGeneralCode" parameterClass="general.GeneralCodeBean">
 		update		general_code set
 		Parent_id 			=	#parentId#,
 		GEN_CODE_CAPTION 	=	#genCodeCaption#,
 		GEN_CODE_INDEX 		=	#genCodeIndex#,
-		update_by			= 	#userId#,
+		updated_by			= 	#updatedBy#,
 		update_date			= 	SYSDATE
 		where gen_code_id 	=	#genCodeId#
 	</update>
 
-	<delete id="deleteGeneralCode" parameterClass="java.util.Map">
+	<delete id="deleteGeneralCode" parameterClass="java.lang.String">
 		UPDATE GENERAL_CODE SET
 		IS_ACTIVE			=	0
 		where gen_code_id	=	#genCodeId#
