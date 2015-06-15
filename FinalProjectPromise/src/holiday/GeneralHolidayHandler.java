@@ -46,7 +46,7 @@ public class GeneralHolidayHandler extends Action{
 			Boolean isAdd = genForm.getIsAdd();
 			
 			//if (genForm.getGenHolidayBean().getGenHolidayId() == 0)
-				genForm.getGenHolidayBean().setGenHolidayId(1);
+				genForm.getGenHolidayBean().setGenHolidayId(2);
 				
 			if (isAdd) {
 				genForm.getGenHolidayBean().setCreatedBy(1);
@@ -66,23 +66,25 @@ public class GeneralHolidayHandler extends Action{
 		genForm.setSearchValue(genForm.getCurrSearchValue());
 
 		int rowCount;
+		System.out.println(genForm.getSearchValue());
 
-		genForm.setArrList(genManager.getGeneralHoliday(
-				genForm.getCurrSearchField(), genForm.getCurrSearchValue(),
-				genForm.getCurrPage(), Constant.pageSize));
+		
 		rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
 				genForm.getCurrSearchValue());
 		//
 		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		genForm.setArrList(genManager.getGeneralHoliday(
+				genForm.getCurrSearchField(), genForm.getCurrSearchValue(),
+				genForm.getCurrPage(), Constant.pageSize));
 		
 		request.setAttribute("pageTitle", "General Holiday List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
-				.createPagingNavigatorList(1,1));
+				.createPagingNavigatorList(genForm.getPageCount(),genForm.getCurrPage()));
 		
-		request.setAttribute("pageCount", 1);
-		request.setAttribute("currPage", 1);
-		request.setAttribute("rowCount", 1);
+		request.setAttribute("pageCount", genForm.getPageCount());
+		request.setAttribute("currPage", genForm.getCurrPage());
+		request.setAttribute("rowCount", rowCount);
 		
 		return mapping.findForward("genList");
 	}

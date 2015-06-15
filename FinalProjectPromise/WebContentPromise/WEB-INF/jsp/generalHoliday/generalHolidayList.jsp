@@ -21,7 +21,9 @@
 <body>
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
-		
+		<html:hidden property="currSearchValue" name="generalHolidayForm"/>
+		<html:hidden property="currSearchField" name="generalHolidayForm"/>
+		<html:hidden property="currPage" name="generalHolidayForm"/>
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -62,7 +64,20 @@
 						<logic:notEmpty name="generalHolidayForm" property="arrList">
 							<logic:iterate id="reg" name="generalHolidayForm" property="arrList">
 								<tr>
-									<td></td>
+									<td><bean:write name="reg" property="genHolidayId" /></td>
+									<td><bean:write name="reg" property="genHolidayName" /></td>
+									<td><bean:write name="reg" property="genHolidayDateInString" /></td>
+									<td><bean:write name="reg" property="isGenerated" /></td>
+									<td align="center">
+										<a class="text-success" href="#"
+										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
+										title="Edit">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp; 
+										<a href="#" class="text-danger" 
+										onclick="actionForm('delete','<bean:write name="reg" property="genHolidayId" />','<bean:write name="reg" property="genHolidayName" />');"
+										title="Delete">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

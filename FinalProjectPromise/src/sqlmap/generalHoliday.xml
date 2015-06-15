@@ -15,7 +15,6 @@
 		create_date			as createDate, 
 		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY
-		where IS_GENERATED = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayId">
 				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -53,7 +52,7 @@
 		create_date			as createDate, 
 		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY
-		where gen_holiday_id = #holId# AND IS_GENERATED = 1
+		where gen_holiday_id = #holId#
 	</select>
 	
 	<select id="getNewHolId" resultClass="java.lang.Integer" >
