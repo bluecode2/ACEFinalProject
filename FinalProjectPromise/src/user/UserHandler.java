@@ -30,6 +30,6 @@ public class UserHandler extends Action{
 		request.setAttribute("currPage", 5);
 		request.setAttribute("rowCount", 50);
 		System.out.println("berhasilkasi smua attribut");
-		return mapping.findForward("userAdd");
+		return mapping.findForward("userList");
 	}
 }
