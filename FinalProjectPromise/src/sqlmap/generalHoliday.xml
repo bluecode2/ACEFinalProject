@@ -11,7 +11,7 @@
 		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated
 		FROM GENERAL_HOLIDAY
-		where 1=1
+		where IS_GENERATED = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayId">
 				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -45,7 +45,7 @@
 		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated
 		FROM GENERAL_HOLIDAY
-		where gen_holiday_id = #holId#
+		where gen_holiday_id = #holId# AND IS_GENERATED = 1
 	</select>
 	
 	<select id="getNewHolId" resultClass="java.lang.Integer" >
@@ -83,9 +83,11 @@
 	</update>
 
 	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
-		DELETE FROM
+		UPDATE
 		GENERAL_HOLIDAY
-		WHERE GEN_HOLIDAY_ID=#id#
+		SET
+		IS_GENERATED=0
+		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
