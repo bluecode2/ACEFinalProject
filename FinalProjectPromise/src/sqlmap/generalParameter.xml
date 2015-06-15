@@ -89,7 +89,7 @@
 		general_parameter set
 		GEN_PARAM_DESC = #genParamDesc#,
 		GEN_PARAM_VALUE = #genParamValue#,
-		UPDATE_BY = #userName#,
+		UPDATE_BY = #updateBy#,
 		UPDATE_DATE = SYSDATE
 		where GEN_PARAM_ID = #genParamId#
 	</update>
