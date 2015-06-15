@@ -8,7 +8,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>User Entry</title>
+<script type="text/javascript">
+	function onBtnBackClick() {
+		location.href = "users.do";
+	}
+
+	function onBtnSaveClick() {
+		document.forms[0].task.value = "save";
+		document.forms[0].submit();
+	}
+</script>
 </head>
 <body>
 	<html:form action="/users" method="post">
@@ -42,13 +52,7 @@
 					<tr align="left">
 						<td>Password</td>
 						<td style="padding-left:15px;">
-							<html:text property="uBean.password_user" styleClass="form-control" styleId="password1"></html:text>
-						</td>
-					</tr>
-					<tr align="left">
-						<td>Re-Type Password</td>
-						<td style="padding-left:15px;">
-							<html:text property="uBean.password_user" styleClass="form-control" styleId="password2"></html:text>
+							<html:text property="uBean.password_user" styleClass="form-control"></html:text>
 						</td>
 					</tr>
 				</table>

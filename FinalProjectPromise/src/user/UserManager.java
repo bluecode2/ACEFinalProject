@@ -41,4 +41,20 @@ public class UserManager {
 		
 		return listUser;
 	}
+	
+	public Integer getCountUser(String column, String value)
+			throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("searchField", column);
+		map.put("searchValue", value);
+		Integer result = (Integer) this.ibatis.queryForObject(
+				"users.countUser", map);
+		return result;
+	}
+	
+	public Integer getNewUserID() throws SQLException, ClassNotFoundException{
+		Integer newUserID = (Integer) this.ibatis.queryForObject("users.getNewUserID", null);
+		return newUserID;
+	}
+	
 }

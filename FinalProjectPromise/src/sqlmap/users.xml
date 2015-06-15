@@ -3,29 +3,30 @@
 
 <sqlMap namespace="users">
 	<insert id="insertNewUser" parameterClass="java.util.Map">
-		INSERT INTO users 
-		(	USER_ID,
-			USER_ROLE_ID,
-			EMPLOYEE_ID,
-			CREATED_BY,
-			USERNAME ,
-			PASSWORD_USER,
-			IS_ACTIVE,
-			CREATE_DATE
-		) 
-		VALUES 
-		(	#userId#,	#userRoleId#,
-			#empId#,	#userId#,
-			#username#,	dbms_obfuscation_toolkit.md5(input_string= &gt; #pass#),
-			1,			SYSDATE)
+		INSERT INTO users
+		( USER_ID,
+		USER_ROLE_ID,
+		EMPLOYEE_ID,
+		CREATED_BY,
+		USERNAME ,
+		PASSWORD_USER,
+		IS_ACTIVE,
+		CREATE_DATE
+		)
+		VALUES
+		( #userId#, #userRoleId#,
+		#empId#, #userId#,
+		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #pass#),
+		1, SYSDATE)
 	</insert>
-	
+
 	<select id="getNewUserId" resultClass="java.lang.Integer">
-	select max(user_id)+1 from users
+		select max(user_id)+1 from users
 	</select>
-	
-	<select id="getAllUser" parameterClass="java.util.Map" resultClass="user.UserBean">
-		SELECT 
+
+	<select id="getAllUser" parameterClass="java.util.Map"
+		resultClass="user.UserBean">
+		SELECT
 		USER_ID AS userId
 		USER_ROLE_ID AS userRoleId,
 		EMPLOYEE_ID AS employeeId,
@@ -40,14 +41,15 @@
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userId">
-				LOWER(USER_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(USER_ID)
+				LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userRoleId">
 				LOWER(USER_ROLE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>		
+		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.employeeId">
 				LOWER(EMPLOYEE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -55,13 +57,46 @@
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.username">
-				LOWER(USERNAME) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(USERNAME)
+				LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>				
+		</dynamic>
 		ORDER BY USER_ID ASC ) emp where ROWNUM &lt; = #end#)
 		WHERE rnum
 		&gt;
 		#begin#
+	</select>
+
+	<select id="countUser" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM USERS
+		WHERE IS_ACTIVE = 0
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.userId">
+				LOWER(USER_ID)
+				LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.userRoleId">
+				LOWER(USER_ROLE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.employeeId">
+				LOWER(EMPLOYEE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="uBean.username">
+				LOWER(USERNAME)
+				LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+	</select>
+	
+	<select id="getNewUserID" resultClass="java.Lang.Integer">
+		SELECT MAX(USER_ID)+1 FROM USERS
 	</select>
 	
 </sqlMap>

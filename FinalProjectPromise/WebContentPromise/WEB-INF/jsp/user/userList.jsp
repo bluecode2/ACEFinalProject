@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DepartmentList</title>
+<title>UserList</title>
 <script type="text/javascript">
 	function onBtnAddClick(){
 		document.forms[0].task.value = "add";
@@ -44,14 +44,19 @@
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
-
 		
+		<html:hidden name="userForm" property="task" />
+		<html:hidden name="userForm" property="selectedId" />
+		<html:hidden name="userForm" property="currSearchField" />
+		<html:hidden name="userForm" property="currSearchValue" />
+
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;"><html:select
+						<td style="padding-left: 15px;">
+						<html:select
 								name="userForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="uBean.userId">User ID</option>
@@ -60,7 +65,7 @@
 								<option value="uBean.username">Username</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
-								name="departmentForm" property="searchValue"
+								name="userForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
@@ -115,8 +120,8 @@
 						</logic:notEmpty>
 						<logic:empty name="userForm" property="listOfUser">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
-									Data Not Found</td>
+								<td colspan="10" align="center" style="padding: 10px">No
+									Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>
@@ -125,7 +130,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="departmentForm" property="currPage" />
+		<html:hidden name="userForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>
