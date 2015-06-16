@@ -1,11 +1,9 @@
 package rank_employee;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import common.Constant;
-
 
 public class RankEmpBean {
 	

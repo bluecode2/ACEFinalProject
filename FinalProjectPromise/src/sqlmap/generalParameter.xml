@@ -10,7 +10,9 @@
 		GEN_PARAM_ID 			as genParamId,
 		GEN_PARAM_DESC 			as genParamDesc,
 		GEN_PARAM_VALUE 		as genParamValue,
-		IS_ACTIVE 				as isActive
+		IS_ACTIVE 				as isActive,
+		UPDATED_BY				as updatedBy,
+		UPDATE_DATE				as updateDate
 		from general_parameter
 		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
@@ -57,7 +59,9 @@
 		GEN_PARAM_ID 			as genParamId,
 		GEN_PARAM_DESC 			as genParamDesc,
 		GEN_PARAM_VALUE 		as genParamValue,
-		IS_ACTIVE 				as isActive
+		IS_ACTIVE 				as isActive,
+		UPDATED_BY				as updatedBy,
+		UPDATE_DATE				as updateDate
 		from general_parameter 
 		where gen_param_id = #tmpGenParamId# and IS_ACTIVE = 1
 	</select>
@@ -69,7 +73,7 @@
 		GEN_PARAM_DESC,
 		GEN_PARAM_VALUE,
 		IS_ACTIVE, 
-		UPDATE_BY,
+		UPDATED_BY,
 		UPDATE_DATE) 
 		values (#genParamId#, #genParamDesc#, #genParamValue#, 1, null, null)
 	</insert>
@@ -79,7 +83,7 @@
 		general_parameter set
 		GEN_PARAM_DESC = #genParamDesc#,
 		GEN_PARAM_VALUE = #genParamValue#,
-		UPDATE_BY = #updateBy#,
+		UPDATED_BY = #updatedBy#,
 		UPDATE_DATE = SYSDATE
 		where GEN_PARAM_ID = #genParamId#
 	</update>
@@ -87,7 +91,7 @@
 		update
 		general_parameter set
 		IS_ACTIVE = 0
-		UPDATE_BY = #userName#,
+		UPDATED_BY = #username#,
 		UPDATE_DATE = SYSDATE
 		where GEN_PARAM_ID = #genParamId#
 	</delete>
