@@ -85,7 +85,7 @@
 						<tr>
 							<td>User Role Code</td>
 							<td>User Role Name</td>
-							<td>Is Deleted</td>
+				
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -95,7 +95,7 @@
 								<tr>
 									<td><bean:write name="reg" property="userRoleCode" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
-									<td><bean:write name="reg" property="isDeleted" /></td>
+				
 									<td align="center">
 										<a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="userRoleId" />');"

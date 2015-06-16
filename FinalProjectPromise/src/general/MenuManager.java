@@ -64,7 +64,7 @@ public class MenuManager {
 		map.put("end", end);
 
 		List<MenuBean> listResult = this.ibatis.queryForList(
-				"generalHoliday.getGeneralHoliday", map);
+				"menu.selectListMenu", map);
 		return listResult;
 	}
 
