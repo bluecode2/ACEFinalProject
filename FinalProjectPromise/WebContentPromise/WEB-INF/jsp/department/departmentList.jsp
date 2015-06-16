@@ -37,7 +37,6 @@
 
 	}
 </script>
-
 </head>
 <body>
 	<html:form action="/department" method="post">

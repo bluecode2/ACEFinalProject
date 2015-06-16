@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import common.CommonFunction;
+
 import user.UserManager;
 
 public class LoginHandler extends Action {
@@ -23,14 +25,20 @@ public class LoginHandler extends Action {
 
 		
 		if ("validasi".equals(lForm.getTask())) {
-			lForm.setUserBean(null);
-			
+			System.out.println("masuk ke saringan validasi");
+			System.out.println(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
+				System.out.println("masuk ke validasi berhasil");
+				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 				session.setAttribute("user", lForm.getUserBean());
-				response.sendRedirect("generalCode.do");
+				request.setAttribute("pageTitle", "HOME");
+				CommonFunction.createAllowedMenu(null, request);
+				
+
+				return mapping.findForward("index");
 			}
 			else {
-				return mapping.findForward("default");
+				System.out.println("masuk ke validasi gagal");
 			}
 		}
 		

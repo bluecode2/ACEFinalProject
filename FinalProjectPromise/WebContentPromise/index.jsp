@@ -11,12 +11,12 @@
 
 </head>
 <body>
-
+<html:form action="">
 	<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 	<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-
+</html:form>
 </body>
 </html>

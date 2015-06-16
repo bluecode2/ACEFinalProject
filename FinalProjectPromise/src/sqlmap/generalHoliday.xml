@@ -87,7 +87,7 @@
 	</update>
 
 	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
-		DELETE GENERAL_HOLIDAY
+		DELETE FROM GENERAL_HOLIDAY
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 

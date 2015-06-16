@@ -83,9 +83,8 @@
 					class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>User ID</td>
-							<td>User Role ID</td>
-							<td>Employee ID</td>
+							<td>User Role Name</td>
+							<td>Employee Name</td>
 							<td>Username</td>
 							<td>Created By</td>
 							<td>Created Date</td>
@@ -98,14 +97,13 @@
 						<logic:notEmpty name="userForm" property="listOfUser">
 							<logic:iterate id="reg" name="userForm" property="listOfUser">
 								<tr>
-									<td><bean:write name="reg" property="userId" /></td>
-									<td><bean:write name="reg" property="userRoleId" /></td>
-									<td><bean:write name="reg" property="employeeId" /></td>
+									<td><bean:write name="reg" property="userRoleName" /></td>
+									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="username" /></td>
 									<td><bean:write name="reg" property="createdBy" /></td>
-									<td><bean:write name="reg" property="updateDateInString" /></td>
+									<td><bean:write name="reg" property="createDateInString" /></td>
 									<td><bean:write name="reg" property="updatedBy" /></td>
-									<td><bean:write name="reg" property="updateDate" /></td>
+									<td><bean:write name="reg" property="updateDateInString" /></td>
 									<td align="center">
 									<a href="#"	onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

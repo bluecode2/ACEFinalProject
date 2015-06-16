@@ -28,14 +28,14 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete Department " + nama)) {
+			if (confirm("Are you sure want to delete Employee Rank " + nama)) {
 				document.forms[0].submit();
 			}
 		} else {
 			document.forms[0].submit();
 		}
-
 	}
+
 </script>
 </head>
 <body>
@@ -45,23 +45,17 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<html:hidden name="departmentForm" property="task" />
-		<html:hidden name="departmentForm" property="selectedId" />
-		<html:hidden name="departmentForm" property="currSearchField" />
-		<html:hidden name="departmentForm" property="currSearchValue" />
+		<html:hidden name="rankEmpForm" property="task" />
+		<html:hidden name="rankEmpForm" property="selectedId" />
+		<html:hidden name="rankEmpForm" property="currSearchField" />
+		<html:hidden name="rankEmpForm" property="currSearchValue" />
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;"><html:select
-								name="departmentForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
-								<option value="deptCode">Dept. Code</option>
-								<option value="deptName">Dept. Name</option>
-							</html:select></td>
 						<td style="padding-left: 15px"><html:text
-								name="departmentForm" property="searchValue"
+								name="rankEmpForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
@@ -78,21 +72,21 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td>Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
+							<td>Rank Code</td>
+							<td>Rank Name</td>
+							<td>Rank Level</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="departmentForm" property="arrList">
-							<logic:iterate id="reg" name="departmentForm" property="arrList">
+						<logic:notEmpty name="rankEmpForm" property="arrList">
+							<logic:iterate id="reg" name="rankEmpForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="deptCode" /></td>
-									<td><bean:write name="reg" property="deptName" /></td>
-									<td><bean:write name="reg" property="deptHeadDisplay" /></td>
+									<td><bean:write name="reg" property="rankCode" /></td>
+									<td><bean:write name="reg" property="rankName" /></td>
+									<td><bean:write name="reg" property="rankDisplay" /></td>
 									<td align="center"><a class="text-success" href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="deptId" />');"
+										onclick="actionForm('edit','<bean:write name="reg" property="rankId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
@@ -101,7 +95,7 @@
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="departmentForm" property="arrList">
+						<logic:empty name="rankEmpForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>
@@ -113,7 +107,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="departmentForm" property="currPage" />
+		<html:hidden name="rankEmpForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>
