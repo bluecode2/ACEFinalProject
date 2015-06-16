@@ -14,7 +14,7 @@
 		updated_by 			as updatedBy,
 		create_date			as createDate, 
 		update_date 		as updateDate
-		FROM GENERAL_HOLIDAY
+		FROM GENERAL_HOLIDAY 
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayName">
