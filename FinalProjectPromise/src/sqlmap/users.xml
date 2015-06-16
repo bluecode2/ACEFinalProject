@@ -14,7 +14,7 @@
 		( 
 			#userId#, 		#userRoleId#,
 			#employeeId#,	#createdBy#,
-			#username#, 	(dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#)),
+			#username#, 	(dbms_obfuscation_toolkit.md5(input_string=&gt; #passwordUser#)),
 			1,				SYSDATE
 		)
 	</insert>
@@ -26,7 +26,7 @@
 	<update id="updateUser" parameterClass="user.UserBean">
 	update users set 
 	username = #username#,
-	password_user = dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#)
+	password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #passwordUser#)
 	where user_id = #userId#
 	</update>
 
@@ -85,7 +85,7 @@
 		employee_name   AS      employeeName,
 		user_role_name  AS      userRoleName
 		from vusers
-		where password_user = dbms_obfuscation_toolkit.md5(input_string =>#password#) AND username = #username# AND is_active =1
+		where password_user = dbms_obfuscation_toolkit.md5(input_string=&gt;  #password#) AND username = #username# AND is_active =1
 	</select>
 
 	<select id="countUser" resultClass="java.lang.Integer"

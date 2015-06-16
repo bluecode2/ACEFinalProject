@@ -35,7 +35,7 @@ public class UserHandler extends Action{
 			
 			uForm.setuBean(uMan.getUserByUserID(uForm
 					.getSelectedId()));
-			
+			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
 			return mapping.findForward("userAdd");
 		}
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
@@ -46,14 +46,11 @@ public class UserHandler extends Action{
 			Boolean isAdd = uForm.getIsAdd();
 /*			if (uForm.getuBean().getUserId() == 0)
 				uForm.getuBean().setUserId(null);
-*/System.out.println(isAdd);
+*/
 			if (isAdd) {
 				uForm.getuBean().setCreatedBy(1);
 				uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
 				uForm.getuBean().setUserId(uMan.getNewUserID());
-				System.out.println(uForm.getPasswordUser()+" test" +uForm.getuBean().getUserId());
-
-				System.out.println(uForm.getuBean().getPasswordUser());
 				uMan.insertUser(uForm.getuBean());
 			} else {
 				uForm.getuBean().setUpdatedBy(1);
