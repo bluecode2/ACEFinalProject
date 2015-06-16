@@ -18,7 +18,6 @@ public class GeneralCodeForm extends ActionForm {
 	private String			currSearchField;
 	private String			currSearchValue;
 	private String			selectedId;
-
 	
 	public List<GeneralCodeBean> getArrList() {
 		return arrList;
@@ -108,5 +107,4 @@ public class GeneralCodeForm extends ActionForm {
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
 	}
-
 }

@@ -21,18 +21,18 @@
 		changePage(1);
 	}
 	function actionForm(task, id, nama) {
-		  document.forms[0].task.value = task;
-		  document.forms[0].selectedId.value = id;
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
 
-		  if (task == "delete") {
-			   if (confirm("Are u sure want to delete General Code " + nama + " ?")) {
+		if (task == "delete") {
+			if (confirm("Are u sure want to delete General Code " + nama + " ?")) {
 			    document.forms[0].submit();
-			   }	
-		  } else {
-		   document.forms[0].submit();
-		  }
-
-		 }
+			}	
+		} 
+		else {
+			document.forms[0].submit();
+		}
+	}
 </script>
 </head>
 <body>
@@ -67,7 +67,7 @@
 						</td>
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Back">
+								class="btn btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
@@ -93,13 +93,17 @@
 									<td><bean:write name="reg" property="genCodeIndex" /></td>
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
 									<td><bean:write name="reg" property="parentId" /></td>
-									<td align="center"><a class="text-success" href="#"
-										onclick="actionForm('entry','<bean:write name="reg" property="genCodeId" />');"
+									<td align="center">
+										<a class="text-success" href="#"
+										onclick="actionForm('edit','<bean:write name="reg" property="genCodeId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
-											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
+											aria-hidden="true"></span></a>
+										&nbsp; 
+										<a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a></td>
+											aria-hidden="true"></span></a>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

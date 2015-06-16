@@ -24,30 +24,40 @@ public class GeneralCodeHandler extends Action {
 		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession(true);
 	
-		
-		if ("entry".equals(gcForm.getTask())) {
-			System.out.println("masuk ke form add");
+		/*if ("add".equals(gcForm.getTask())) {
 			request.setAttribute("pageTitle", "Add General Code");
-			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
+			//gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
 			return mapping.findForward("entry");
-		} else if ("search".equals(gcForm.getTask())) {
+		} */
+		if ("search".equals(gcForm.getTask())) {
 
 			request.setAttribute("pageNavigator",
 					CommonFunction.createPagingNavigatorList(1, 1));
 		}
+		else if ("edit".equals(gcForm.getTask())) {
+			/*request.setAttribute("lstDeptHead",
+					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
+			request.setAttribute("pageTitle", "General Code Edit");
 
+			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
+/*			if(gcForm.getGenCodeBean().getDeptHeadCode() != null)
+				gcForm.setDeptHeadDisplay(gcForm.getSelectedDept().getDeptHeadCode() + " - "
+						+ gcForm.getSelectedDept().getDeptHeadName());
+			else
+				gcForm.setDeptHeadDisplay("");*/
+			return mapping.findForward("entry");
+		}
 		else if ("save".equals(gcForm.getTask())) {
-
+			System.out.println("save");
 			if (gcForm.getGenCodeBean().getGenCodeId() == "")
 				gcForm.getGenCodeBean().setGenCodeId(null);
 			
-				gcForm.getGenCodeBean().setUpdatedBy(1); 
-				gcMan.updateGeneralCode(gcForm.getGenCodeBean());
-
+			gcForm.getGenCodeBean().setUpdatedBy(1); 
+			gcMan.updateGeneralCode(gcForm.getGenCodeBean());
+				
 			response.sendRedirect("generalCode.do");
 			return null;
 		}
-		
 		else if ("delete".equals(gcForm.getTask())) {
 			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
 		}
