@@ -38,19 +38,28 @@ public class GeneralHolidayHandler extends Action{
 		else if ("save".equals(genForm.getTask())){
 			Boolean isAdd = genForm.getIsAdd();
 			
-			genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
-				
 			if (isAdd) {
+				genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
 				genForm.getGenHolidayBean().setCreatedBy(1);
 				genManager.insertGeneralHoliday(genForm.getGenHolidayBean());
 			} 
 			else {
 				genForm.getGenHolidayBean().setUpdatedBy(1);
 				genManager.editGeneralHoliday(genForm.getGenHolidayBean());
+				System.out.println("selesai edit");
 			}
 
 			response.sendRedirect("generalHoliday.do");
 			return null;
+		}
+		else if ("edit".equals(genForm.getTask())) {
+			request.setAttribute("pageTitle", "General Holiday Edit");
+			genForm.setGenHolidayBean(genManager.getGeneralHolidayByHolId(genForm.getSelectedId()));
+
+			return mapping.findForward("genEntry");
+		}
+		else if ("delete".equals(genForm.getTask())) {
+			genManager.deleteGeneralHoliday(genForm.getSelectedId());
 		}
 		
 		genForm.setTask("");

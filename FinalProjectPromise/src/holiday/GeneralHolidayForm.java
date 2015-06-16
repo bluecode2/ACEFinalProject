@@ -10,16 +10,17 @@ public class GeneralHolidayForm extends ActionForm{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<GeneralHolidayBean> arrList = new ArrayList<GeneralHolidayBean>();
-	private GeneralHolidayBean genHolidayBean  = new GeneralHolidayBean();
-	private String task="";
-	private Boolean isAdd = false;
-	private String searchValue;
-	private String searchField;
-	private String currSearchValue = "";
-	private String currSearchField = "";
-	private Integer currPage = 1;
-	private Integer pageCount = 1;
+	private List<GeneralHolidayBean> 	arrList = new ArrayList<GeneralHolidayBean>();
+	private GeneralHolidayBean 			genHolidayBean  = new GeneralHolidayBean();
+	private String 						task="";
+	private Boolean 					isAdd = false;
+	private String 						searchValue;
+	private String 						searchField;
+	private String 						currSearchValue = "";
+	private String 						currSearchField = "";
+	private Integer 					currPage = 1;
+	private Integer 					pageCount = 1;
+	private Integer						selectedId;
 
 	public List<GeneralHolidayBean> getArrList() {
 		return arrList;
@@ -99,5 +100,13 @@ public class GeneralHolidayForm extends ActionForm{
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+	}
+
+	public Integer getSelectedId() {
+		return selectedId;
+	}
+
+	public void setSelectedId(Integer selectedId) {
+		this.selectedId = selectedId;
 	}
 }

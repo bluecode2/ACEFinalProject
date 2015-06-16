@@ -8,14 +8,14 @@
 		SELECT 
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
-		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
+		TO_CHAR(GEN_HOLIDAY_DATE,'YYYY-MM-DD') 	as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated,
 		created_by 			as createdBy,
 		updated_by 			as updatedBy,
 		create_date			as createDate, 
 		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY 
-		where 1=1
+		where GEN_HOLIDAY_DATE > SYSDATE
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayName">
 				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -41,7 +41,7 @@
 	SELECT 
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
-		GEN_HOLIDAY_DATE 	as genHolidayDateInString,
+		TO_CHAR(GEN_HOLIDAY_DATE,'YYYY-MM-DD') as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated,
 		created_by 			as createdBy,
 		updated_by 			as updatedBy,
@@ -60,7 +60,7 @@
 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, 
 		IS_GENERATED, created_by, updated_by, create_date, update_date)
 		values (#genHolidayId#, #genHolidayName#,
-		#genHolidayDate#, #isGenerated#, #createdBy#, NULL, SYSDATE, NULL)
+		TO_DATE(#genHolidayDateInString#,'YYYY-MM-DD'), #isGenerated#, #createdBy#, NULL, SYSDATE, NULL)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
@@ -76,20 +76,18 @@
 	</select>
 
 	<update id="editGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
-		UPDATE
-		GENERAL_HOLIDAY
+		UPDATE GENERAL_HOLIDAY
 		SET
 		GEN_HOLIDAY_NAME=#genHolidayName#,
-		GEN_HOLIDAY_DATE=#genHolidayDateInString#,
-		IS_GENERATED=#isGenerated#
+		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'YYYY-MM-DD'),
+		IS_GENERATED=#isGenerated#,
+		updated_by=#updatedBy#,
+		update_date=SYSDATE
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</update>
 
 	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
-		UPDATE
-		GENERAL_HOLIDAY
-		SET
-		IS_GENERATED = 0
+		DELETE GENERAL_HOLIDAY
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 

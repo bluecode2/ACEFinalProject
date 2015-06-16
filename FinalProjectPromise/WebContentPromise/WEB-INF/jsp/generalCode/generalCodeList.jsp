@@ -36,15 +36,14 @@
 </script>
 </head>
 <body>
-	<html:form action="/generalCode" method="post">
-
-		
+	<html:form action="/generalCode" method="post">		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="generalCodeForm" />
 		<html:hidden property="selectedId" name="generalCodeForm"/>
+		
 		<html:hidden property="currSearchField" name="generalCodeForm"/>
 		<html:hidden property="currSearchValue" name="generalCodeForm"/>
 		<html:hidden property="currPage" name="generalCodeForm"/>

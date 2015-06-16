@@ -23,11 +23,27 @@
 
 		changePage(1);
 	}
+	
+	function actionForm(task, id, nama) {
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
+
+		if (task == "delete") {
+			if (confirm("Are u sure want to delete General Holiday " + nama + " ?")) {
+			    document.forms[0].submit();
+			}	
+		} 
+		else {
+			document.forms[0].submit();
+		}
+	}
 </script>
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
+		<html:hidden name="generalHolidayForm" property="selectedId"/>
+		
 		<html:hidden property="currSearchValue" name="generalHolidayForm"/>
 		<html:hidden property="currSearchField" name="generalHolidayForm"/>
 		<html:hidden property="currPage" name="generalHolidayForm"/>
@@ -68,7 +84,6 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>General Holiday ID</td>
 							<td>General Holiday Name</td>
 							<td>General Holiday Date</td>
 							<td>Is Generated</td>
@@ -79,19 +94,19 @@
 						<logic:notEmpty name="generalHolidayForm" property="arrList">
 							<logic:iterate id="reg" name="generalHolidayForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="genHolidayId" /></td>
 									<td><bean:write name="reg" property="genHolidayName" /></td>
 									<td><bean:write name="reg" property="genHolidayDateInString" /></td>
 									<td><bean:write name="reg" property="isGenerated" /></td>
 									<td align="center">
 										<a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
-										title="Edit">
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp; 
+										title="Edit"><span class="glyphicon glyphicon-pencil"
+											aria-hidden="true"></span></a>
+										&nbsp; 
 										<a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="genHolidayId" />','<bean:write name="reg" property="genHolidayName" />');"
-										title="Delete">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+										title="Delete"><span class="glyphicon glyphicon-trash"
+											aria-hidden="true"></span></a>
 									</td>
 								</tr>
 							</logic:iterate>
