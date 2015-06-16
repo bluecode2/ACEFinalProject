@@ -16,7 +16,7 @@
 		VALUES
 		( #userId#, #userRoleId#,
 		#employeeId#, #createdBy#,
-		#username#, dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#),
+		#username#, dbms_obfuscation_toolkit.md5(input_string =&gt; #passwordUser#),
 		1, SYSDATE)
 	</insert>
 
