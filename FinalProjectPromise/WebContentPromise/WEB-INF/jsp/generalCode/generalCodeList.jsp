@@ -10,10 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Code List</title>
 <script type="text/javascript">
-	function onBtnAddClick() {
-		document.forms[0].task.value = 'add';
-		document.forms[0].submit();
-	}
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
