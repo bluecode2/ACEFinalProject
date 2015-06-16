@@ -119,7 +119,6 @@ public class EmployeeBean {
 		try {
 			date = df.parse(createDateInString);
 		} catch (Exception pe){
-			pe.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -145,7 +144,6 @@ public class EmployeeBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception pe){
-			pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

@@ -81,7 +81,7 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Employee Code</td>
+							<td width="150px">Employee Code</td>
 							<td>Employee Name</td>
 							<td>Email</td>
 							<td>Department</td>

@@ -79,7 +79,7 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td>Department Code</td>
+							<td width="150px">Department Code</td>
 							<td>Department Name</td>
 							<td>Department Head</td>
 							<td class="align-center"></td>
