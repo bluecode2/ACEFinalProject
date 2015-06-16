@@ -15,11 +15,7 @@
 		create_date			as createDate, 
 		update_date 		as updateDate
 		FROM GENERAL_HOLIDAY
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayId">
-				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
+		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayName">
 				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )

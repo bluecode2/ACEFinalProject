@@ -1,27 +1,41 @@
 package general;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
 public class GeneralCodeForm extends ActionForm {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private ArrayList<GeneralCodeBean> arrCodeBean = new ArrayList<GeneralCodeBean>();
+	private List<GeneralCodeBean> arrList;
 	private String 			task;
 	private String 			searchField;
 	private String 			searchValue;
-	private Integer 		hal = 1;
+	private Integer 		currPage = 1;
 	private Integer 		pageCount;
 	private GeneralCodeBean genCodeBean = new GeneralCodeBean();
 	private Integer 		listCount;
-	private boolean			isadd;
 	private String			currSearchField;
 	private String			currSearchValue;
+	private String			selectedId;
+
 	
+	public List<GeneralCodeBean> getArrList() {
+		return arrList;
+	}
+
+	public void setArrList(List<GeneralCodeBean> arrList) {
+		this.arrList = arrList;
+	}
+
+	public String getSelectedId() {
+		return selectedId;
+	}
+
+	public void setSelectedId(String selectedId) {
+		this.selectedId = selectedId;
+	}
+
 	public String getCurrSearchField() {
 		return currSearchField;
 	}
@@ -36,14 +50,6 @@ public class GeneralCodeForm extends ActionForm {
 
 	public void setCurrSearchValue(String currSearchValue) {
 		this.currSearchValue = currSearchValue;
-	}
-
-	public boolean isIsadd() {
-		return isadd;
-	}
-
-	public void setIsadd(boolean isadd) {
-		this.isadd = isadd;
 	}
 
 	public Integer getListCount() {
@@ -62,12 +68,13 @@ public class GeneralCodeForm extends ActionForm {
 		this.genCodeBean = genCodeBean;
 	}
 
-	public Integer getHal() {
-		return hal;
+
+	public Integer getCurrPage() {
+		return currPage;
 	}
 
-	public void setHal(Integer hal) {
-		this.hal = hal;
+	public void setCurrPage(Integer currPage) {
+		this.currPage = currPage;
 	}
 
 	public String getSearchField() {
@@ -92,14 +99,6 @@ public class GeneralCodeForm extends ActionForm {
 
 	public void setTask(String task) {
 		this.task = task;
-	}
-
-	public ArrayList<GeneralCodeBean> getArrCodeBean() {
-		return arrCodeBean;
-	}
-
-	public void setArrCodeBean(ArrayList<GeneralCodeBean> arrCodeBean) {
-		this.arrCodeBean = arrCodeBean;
 	}
 
 	public Integer getPageCount() {

@@ -23,12 +23,12 @@ public class GeneralCodeHandler extends Action {
 		GeneralCodeManager gcMan = new GeneralCodeManager();
 		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession(true);
+	
 		
-		if ("add".equals(gcForm.getTask())) {
+		if ("entry".equals(gcForm.getTask())) {
 			System.out.println("masuk ke form add");
 			request.setAttribute("pageTitle", "Add General Code");
-
-
+			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
 			return mapping.findForward("entry");
 		} else if ("search".equals(gcForm.getTask())) {
 
@@ -37,21 +37,35 @@ public class GeneralCodeHandler extends Action {
 		}
 
 		else if ("save".equals(gcForm.getTask())) {
-			//untuk mengesave edit  atau add
-		}
 
-		gcForm.setCurrSearchField(gcForm.getSearchField());
-		gcForm.setCurrSearchValue(gcForm.getSearchValue());
+			if (gcForm.getGenCodeBean().getGenCodeId() == "")
+				gcForm.getGenCodeBean().setGenCodeId(null);
+			
+				gcForm.getGenCodeBean().setUpdatedBy(1); 
+				gcMan.updateGeneralCode(gcForm.getGenCodeBean());
+
+			response.sendRedirect("generalCode.do");
+			return null;
+		}
+		
+		else if ("delete".equals(gcForm.getTask())) {
+			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
+		}
+		
+		gcForm.setTask("");
+		gcForm.setSearchField(gcForm.getCurrSearchField());
+		gcForm.setSearchValue(gcForm.getCurrSearchValue());
 		
 		gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue()));
 		gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount() / (double) Constant.pageSize));
 		
-	
+		gcForm.setArrList(gcMan.getAllGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue(), gcForm.getCurrPage(), Constant.pageSize));
+
 		request.setAttribute("pageTitle", "General Code List");
-		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getHal()));
+		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getCurrPage()));
 
 		request.setAttribute("pageCount", gcForm.getPageCount());
-		request.setAttribute("currPage", gcForm.getHal());
+		request.setAttribute("currPage", gcForm.getCurrPage());
 		request.setAttribute("rowCount", gcForm.getListCount());
 
 		return mapping.findForward("list");

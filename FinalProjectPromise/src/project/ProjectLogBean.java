@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class ProjectLogBean {
 	private Integer projectLogId;
 	private Integer projectId;
@@ -17,7 +19,7 @@ public class ProjectLogBean {
 	private String remarks;
 	private Integer updateBy;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getProjectLogId() {
 		return projectLogId;
@@ -80,7 +82,7 @@ public class ProjectLogBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;

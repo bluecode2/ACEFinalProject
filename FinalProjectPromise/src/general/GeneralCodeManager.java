@@ -18,24 +18,18 @@ public class GeneralCodeManager {
 	}
 
 	public List<GeneralCodeBean> getAllGeneralCode(String col, String input,
-			Integer pageNum, Integer pageSize) {
+			Integer pageNum, Integer pageSize) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-
-		List<GeneralCodeBean> arr = null;
+	
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
-		map.put("end", end);
+		map.put("end", end);		
 
-		try {
-			arr = (List<GeneralCodeBean>) this.ibatis.queryForList(
+		List<GeneralCodeBean> arr = this.ibatis.queryForList(
 					"genCode.selectGeneralCode", map);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		return arr;
 	}
@@ -70,19 +64,12 @@ public class GeneralCodeManager {
 
 	}
 
-	public void updateGeneralCode(String parentId, String genCodeCaption, int genCodeIndex, int empId, String genCodeId)
+	public void updateGeneralCode(GeneralCodeBean genCodeBean)
 			throws SQLException {
-		
-		Map m = new HashMap();
-		m.put("parentId", parentId);
-		m.put("genCodeCaption", genCodeCaption);
-		m.put("genCodeIndex", genCodeIndex);
-		m.put("empId", empId);
-		m.put("genCodeId", genCodeId);
 		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("genCode.updateGeneralCode", m);
+			this.ibatis.update("genCode.updateGeneralCode", genCodeBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -90,14 +77,10 @@ public class GeneralCodeManager {
 
 	}
 
-	public void deleteGeneralCodeByCodeId(String genCodeId, int status) throws SQLException {
-		Map m = new HashMap();
-		m.put("status", status);
-		m.put("genCodeId", genCodeId);
-		
+	public void deleteGeneralCodeByCodeId(String genCodeId) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("genCode.deleteGeneralCode", m);
+			this.ibatis.update("genCode.deleteGeneralCode", genCodeId);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();

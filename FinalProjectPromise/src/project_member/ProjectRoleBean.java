@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class ProjectRoleBean {
 	private Integer projectRoleId;
 	private Integer updatedBy;
@@ -14,7 +16,7 @@ public class ProjectRoleBean {
 	private Date updateDate;
 	private String updateDateInString;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	public Integer getProjectRoleId() {
 		return projectRoleId;
@@ -60,7 +62,7 @@ public class ProjectRoleBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.createDateInString = "";
@@ -88,7 +90,7 @@ public class ProjectRoleBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.updateDateInString = "";

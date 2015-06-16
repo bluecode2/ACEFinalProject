@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>General Code List</title>
 <script type="text/javascript">
 	function onBtnAddClick() {
 		document.forms[0].task.value = 'add';
@@ -21,14 +21,13 @@
 		changePage(1);
 	}
 	function actionForm(task, id, nama) {
-
 		  document.forms[0].task.value = task;
-		  document.forms[0].empId.value = id;
+		  document.forms[0].selectedId.value = id;
 
 		  if (task == "delete") {
-		   if (confirm("Are u sure want to delete General Code " + nama + " ?")) {
-		    document.forms[0].submit();
-		   }
+			   if (confirm("Are u sure want to delete General Code " + nama + " ?")) {
+			    document.forms[0].submit();
+			   }	
 		  } else {
 		   document.forms[0].submit();
 		  }
@@ -45,8 +44,11 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="generalCodeForm" />
+		<html:hidden property="selectedId" name="generalCodeForm"/>
 		<html:hidden property="currSearchField" name="generalCodeForm"/>
 		<html:hidden property="currSearchValue" name="generalCodeForm"/>
+		<html:hidden property="currPage" name="generalCodeForm"/>
+		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -55,10 +57,9 @@
 						<td style="padding-left: 15px;">
 							<html:select name="generalCodeForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="genCodeId">Gen. Code ID</option>
+								<html:option value="">-- All --</html:option>
 								<option value="genCodeCaption">Gen. Code Caption</option>
 								<option value="parentId">Parent ID</option>
-								<option value="isActive">Status Active</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px">
@@ -82,28 +83,27 @@
 							<td>General Code Index</td>
 							<td>General Code Caption</td>
 							<td>Parent ID</td>
-							<td>is Active ?</td>						
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="generalCodeForm" property="arrCodeBean">
-							<logic:iterate id="reg" name="generalCodeForm" property="arrCodeBean">
+						<logic:notEmpty name="generalCodeForm" property="arrList">
+							<logic:iterate id="reg" name="generalCodeForm" property="arrList">
 								<tr>
 									<td><bean:write name="reg" property="genCodeIndex" /></td>
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
 									<td><bean:write name="reg" property="parentId" /></td>
-									<td><bean:write name="reg" property="isActive" /></td>
-									
-									<td align="center"><a href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"
-										title="Edit">Edit</a> <a href="#"
-										onclick="actionForm('delete','<bean:write name="reg" property="genCodeIn" />','<bean:write name="reg" property="genCodeCaption" />');"
-										title="Delete">Delete</a></td>
+									<td align="center"><a class="text-success" href="#"
+										onclick="actionForm('entry','<bean:write name="reg" property="genCodeId" />');"
+										title="Edit"><span class="glyphicon glyphicon-pencil"
+											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
+										onclick="actionForm('delete','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"
+										title="Delete"><span class="glyphicon glyphicon-trash"
+											aria-hidden="true"></span></a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="generalCodeForm" property="arrCodeBean">
+						<logic:empty name="generalCodeForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>

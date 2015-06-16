@@ -1,8 +1,9 @@
 package holiday;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import common.Constant;
 
 public class HolidayBean {
 	private Integer holidayId;
@@ -18,7 +19,7 @@ public class HolidayBean {
 	private Date updateDate;
 	private String updateDateInString;
 
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getHolidayId() {
 		return holidayId;
@@ -71,7 +72,7 @@ public class HolidayBean {
 		Date date = new Date();
 		try {
 			date = df.parse(holidayDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.holidayDateInString = "";
@@ -106,7 +107,7 @@ public class HolidayBean {
 		Date date = new Date();
 		try {
 			date = df.parse(createDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.createDateInString = "";
@@ -135,7 +136,7 @@ public class HolidayBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.updateDateInString = "";

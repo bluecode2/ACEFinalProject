@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import common.Constant;
+
 public class GeneralParamBean {
 	private String 	genParamId;
 	private String 	genParamDesc;
@@ -13,7 +15,7 @@ public class GeneralParamBean {
 	private Date 	updateDate;
 	private String 	updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	
 	public String getGenParamId() {
@@ -59,7 +61,7 @@ public class GeneralParamBean {
 		Date date = new Date();
 		try {
 			date = df.parse(updateDateInString);
-		} catch (ParseException pe){
+		} catch (Exception pe){
 			pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
