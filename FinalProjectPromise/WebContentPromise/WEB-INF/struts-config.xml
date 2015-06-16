@@ -58,7 +58,6 @@
 			<forward name="employeeRankList" path="/WEB-INF/jsp/rankEmployee/rankEmployeeList.jsp"></forward>
 		</action>
 	</action-mappings>
-
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->
 <!-- 		<set-property property="pathnames" -->
