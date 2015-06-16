@@ -75,6 +75,7 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
+							<td>General Code ID</td>
 							<td>General Code Index</td>
 							<td>General Code Caption</td>
 							<td>Parent ID</td>
@@ -85,6 +86,7 @@
 						<logic:notEmpty name="generalCodeForm" property="arrList">
 							<logic:iterate id="reg" name="generalCodeForm" property="arrList">
 								<tr>
+									<td><bean:write name="reg" property="genCodeId" /></td>
 									<td><bean:write name="reg" property="genCodeIndex" /></td>
 									<td><bean:write name="reg" property="genCodeCaption" /></td>
 									<td><bean:write name="reg" property="parentId" /></td>
@@ -94,10 +96,10 @@
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a>
 										&nbsp; 
-										<a href="#" class="text-danger" 
+										<%-- <a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="genCodeId" />','<bean:write name="reg" property="genCodeCaption" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a>
+											aria-hidden="true"></span></a> --%>
 									</td>
 								</tr>
 							</logic:iterate>
