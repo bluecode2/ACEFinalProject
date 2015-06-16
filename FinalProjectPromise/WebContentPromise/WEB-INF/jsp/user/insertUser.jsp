@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Entry</title>
+<script type="text/javascript" src="js/md5.js"></script>
 <script type="text/javascript">
 	function onBtnBackClick() {
 		location.href = "users.do";
@@ -18,7 +19,6 @@
 			var nPass = document.getElementById('newPass').value;
 			var reTypePass = document.getElementById('reNewPass').value;
 			var oPass = document.getElementById('oldPass').value
-			var pass = document.form[0].passwordUser.value;
 			
 		if (document.forms[0].task.value == "add") {
 			if (nPass == reTypePass) {
@@ -28,13 +28,14 @@
 			} else {
 				alert('Password Is Not Valid');
 			}
-		} else if (document.forms[0].task.value == "Edit") {
-				alert('Edit Belum Selesai');
-			if ((nPass != reTypePass)||(nPass != pass)){
+		} else if (document.forms[0].task.value == "edit") {
+				alert("Edit Belum selesai");
+			/* if ((nPass != reTypePass)||(nPass != pass)){
+				set attribute untuk validasi pada password lama
 			}
 			else {
 
-			}
+			} */
 		}
 
 	}
@@ -97,6 +98,12 @@
 						<td>Re-Type Password</td>
 						<td style="padding-left: 15px;"><input type="password"
 							id="reNewPass" Class="form-control" /></td>
+					</tr>
+					<tr align="left">
+						<td>Test Pass</td>
+						<td style="padding-left: 15px;">
+						<html:text name="userForm" property="uBean.passwordUser"  styleClass="form-control"></html:text>
+						</td>
 					</tr>
 				</table>
 			</div>
