@@ -82,12 +82,12 @@ public class UserManager {
 		}
 	}
 	
-//	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
-//		UserBean uBean = null;
-//		
-//		uBean = (UserBean) this.ibatis.queryForObject("", tempUserID);
-//		
-//		return uBean;
-//	}
+	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
+		UserBean uBean = null;
+		
+		uBean = (UserBean) this.ibatis.queryForObject("users.getUserByUserID", tempUserID);
+		
+		return uBean;
+	}
 	
 }
