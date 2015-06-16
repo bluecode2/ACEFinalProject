@@ -41,23 +41,28 @@ public class UserHandler extends Action{
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
 			
 		}
-	/*	else if ("save".equalsIgnoreCase(uForm.getTask())){
+		else if ("save".equalsIgnoreCase(uForm.getTask())){
+			
 			Boolean isAdd = uForm.getIsAdd();
-
-			if (uForm.getuBean().getUserId() == 0)
+/*			if (uForm.getuBean().getUserId() == 0)
 				uForm.getuBean().setUserId(null);
-
+*/System.out.println(isAdd);
 			if (isAdd) {
-				uForm.getuBean().setCreateBy(1);
-//				dMan.insertDepartment(dForm.getSelectedDept());
+				uForm.getuBean().setCreatedBy(1);
+				uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
+				uForm.getuBean().setUserId(uMan.getNewUserID());
+				System.out.println(uForm.getPasswordUser()+" test" +uForm.getuBean().getUserId());
+
+				System.out.println(uForm.getuBean().getPasswordUser());
+				uMan.insertUser(uForm.getuBean());
 			} else {
-				uForm.getuBean().setUpdateBy(1);
+				uForm.getuBean().setUpdatedBy(1);
 //				dMan.updateDepartment(dForm.getSelectedDept());
 			}
 
 			response.sendRedirect("users.do");
 			return null;
-		}*/
+		}
 		
 		uForm.setTask("");
 		uForm.setSearchField(uForm.getCurrSearchField());
@@ -71,11 +76,11 @@ public class UserHandler extends Action{
 		System.out.println("rowCount selesai");
 		uForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-System.out.println("pageCount end");
+		System.out.println("pageCount end");
 		uForm.setListOfUser(uMan.getAllUser(
 				uForm.getCurrSearchField(), uForm.getCurrSearchValue(),
 				uForm.getCurrPage(), Constant.pageSize));
-System.out.println("isi list selesai");
+		System.out.println("isi list selesai");
 		request.setAttribute("pageTitle", "User List");
 
 		request.setAttribute("pageNavigator", CommonFunction

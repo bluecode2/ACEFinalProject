@@ -30,7 +30,16 @@ public class UserForm extends ActionForm{
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	private String passwordUser;
 	
+	public String getPasswordUser() {
+		return passwordUser;
+	}
+
+	public void setPasswordUser(String passwordUser) {
+		this.passwordUser = passwordUser;
+	}
+
 	public UserBean getuBean() {
 		return uBean;
 	}
