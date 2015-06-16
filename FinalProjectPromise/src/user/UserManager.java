@@ -19,11 +19,13 @@ public class UserManager {
 	}
 	
 	public UserBean getLoginValidasi(String username, String password) throws SQLException {
+		UserBean uBean = null;
+		
 		Map m = new HashMap();
 		m.put("username", username);
 		m.put("password", password);
 		
-		UserBean uBean = (UserBean) this.ibatis.queryForObject("users.checkLogin", m);
+		uBean = (UserBean) this.ibatis.queryForObject("users.checkLogin", m);
 		
 		return uBean;
 	}
