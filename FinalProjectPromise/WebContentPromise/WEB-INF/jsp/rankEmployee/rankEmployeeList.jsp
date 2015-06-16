@@ -34,8 +34,8 @@
 		} else {
 			document.forms[0].submit();
 		}
-
 	}
+
 </script>
 </head>
 <body>
