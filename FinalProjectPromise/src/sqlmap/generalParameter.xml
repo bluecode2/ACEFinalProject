@@ -14,11 +14,6 @@
 		from general_parameter
 		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genParamId">
-				LOWER(gen_param_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamDesc">
 				LOWER(Gen_param_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
@@ -26,11 +21,6 @@
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamValue">
 				LOWER(GEN_PARAM_VALUE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isActive">
-				LOWER(is_active) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		) genParam
