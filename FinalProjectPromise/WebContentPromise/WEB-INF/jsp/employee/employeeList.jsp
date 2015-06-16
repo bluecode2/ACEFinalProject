@@ -47,27 +47,29 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="employeeForm" />
-		<html:hidden name="departmentForm" property="selectedId" />
-		<html:hidden name="departmentForm" property="currSearchField" />
-		<html:hidden name="departmentForm" property="currSearchValue" />
+		<html:hidden name="employeeForm" property="selectedId" />
+		<html:hidden name="employeeForm" property="currSearchField" />
+		<html:hidden name="employeeForm" property="currSearchValue" />
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;"><select id="selSearchField"
-							class="form-control select">
+						<td style="padding-left: 15px;"><html:select
+								name="employeeForm" property="searchField"
+								styleId="selSearchField" styleClass="form-control">
 								<option value="employeeCode">Emp. Code</option>
 								<option value="employeeName">Emp. Name</option>
 								<option value="email">Email</option>
 								<option value="deptName">Department</option>
 								<option value="supervisorName">Supervisor</option>
-						</select></td>
-						<td style="padding-left: 15px"><input type="text"
-							class="form-control" /></td>
-						<td style="padding-left: 15px"><button id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
+						</html:select></td>
+						<td style="padding-left: 15px"><html:text
+								name="employeeForm" property="searchValue"
+								styleClass="form-control" /></td>
+						<td style="padding-left: 15px"><button type="button" id="btnSearch"
+								onclick="search();" class="btn btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
 					</tr>
@@ -119,7 +121,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="departmentForm" property="currPage" />
+		<html:hidden name="employeeForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

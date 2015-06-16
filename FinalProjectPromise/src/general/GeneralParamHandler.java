@@ -20,12 +20,14 @@ public class GeneralParamHandler extends Action{
 		GeneralParamManager gpm = new GeneralParamManager();
 		GeneralParamForm gpf = new GeneralParamForm();
 		
+		CommonFunction.createAllowedMenu(null, request);
+		
 		request.setAttribute("pageTitle", "Department List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(1,1));
 		
-		request.setAttribute("pageCount", gpm.getCountGeneralParam(gpf.getSearchCategory(),gpf.getSearchItem()));
+		request.setAttribute("pageCount", gpm.getCountGeneralParam(gpf.getSearchField(),gpf.getSearchValue()));
 		request.setAttribute("currPage", 1);
 		request.setAttribute("rowCount", 1);
 		

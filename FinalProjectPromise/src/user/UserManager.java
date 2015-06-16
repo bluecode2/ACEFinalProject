@@ -70,24 +70,43 @@ public class UserManager {
 	}
 	
 	public void insertUser(UserBean uBean) throws SQLException, ClassNotFoundException{
+		System.out.println(uBean.getUserId());
+		System.out.println(uBean.getUserId());
+		System.out.println(uBean.getEmployeeId());
+		System.out.println(uBean.getCreatedBy());
+		System.out.println(uBean.getUsername());
+		System.out.println(uBean.getPasswordUser());
 		try {
-			ibatis.startTransaction();
-			uBean.setUserId(getNewUserID());
-			ibatis.insert("users.insertNewUser", uBean);
-			ibatis.commitTransaction();
+			this.ibatis.startTransaction();
+			
+			
+			this.ibatis.insert("users.insertNewUser", uBean);
+			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			ibatis.endTransaction();
+			this.ibatis.endTransaction();
 		}
 	}
 	
-//	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
-//		UserBean uBean = null;
-//		
-//		uBean = (UserBean) this.ibatis.queryForObject("", tempUserID);
-//		
-//		return uBean;
-//	}
+	public void updateUser(UserBean uBean) throws SQLException, ClassNotFoundException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("users.updateUser", uBean);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+	}
+	
+	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
+		UserBean uBean = null;
+		
+		uBean = (UserBean) this.ibatis.queryForObject("users.getUserByUserID", tempUserID);
+		
+		return uBean;
+	}
 	
 }

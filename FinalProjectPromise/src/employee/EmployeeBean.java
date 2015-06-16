@@ -9,8 +9,14 @@ import common.Constant;
 public class EmployeeBean {
 	private Integer employeeId;
 	private Integer deptId;
+	private String deptCode;
+	private String deptName;
 	private Integer rankId;
+	private String rankCode;
+	private String rankName;
 	private Integer supervisorID;
+	private String supervisorCode;
+	private String supervisorName;
 	private Integer createdBy;
 	private Integer updatedBy;
 	private String employeeName;
@@ -54,7 +60,7 @@ public class EmployeeBean {
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatdeBy(Integer createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 	public Integer getUpdatedBy() {
@@ -156,6 +162,42 @@ public class EmployeeBean {
 	}
 	public void setEmployeeCode(String employeeCode) {
 		this.employeeCode = employeeCode;
+	}
+	public String getDeptCode() {
+		return deptCode;
+	}
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	public String getRankCode() {
+		return rankCode;
+	}
+	public void setRankCode(String rankCode) {
+		this.rankCode = rankCode;
+	}
+	public String getRankName() {
+		return rankName;
+	}
+	public void setRankName(String rankName) {
+		this.rankName = rankName;
+	}
+	public String getSupervisorCode() {
+		return supervisorCode;
+	}
+	public void setSupervisorCode(String supervisorCode) {
+		this.supervisorCode = supervisorCode;
+	}
+	public String getSupervisorName() {
+		return supervisorName;
+	}
+	public void setSupervisorName(String supervisorName) {
+		this.supervisorName = supervisorName;
 	}
 	
 	

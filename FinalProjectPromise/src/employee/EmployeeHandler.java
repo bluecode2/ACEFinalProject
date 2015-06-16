@@ -25,7 +25,7 @@ public class EmployeeHandler extends Action{
 
 		HttpSession session = request.getSession(true);
 		
-		
+		CommonFunction.createAllowedMenu(null, request);
 		
 		eForm.setTask("");
 		eForm.setSearchField(eForm.getCurrSearchField());

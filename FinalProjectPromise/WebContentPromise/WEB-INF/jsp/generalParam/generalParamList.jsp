@@ -8,7 +8,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>General Parameter List</title>
+<title>General Parameter</title>
+
+<script type="text/javascript">
+	function onBtnAddClick(){
+		//alert('add');
+		document.forms[0].task.value = 'add';
+		document.forms[0].submit();
+	}
+	
+	function search() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+		changePage(1);
+	}
+</script>
+
 </head>
 <body>
 	<html:form action="/generalParam" method="post">
@@ -22,17 +38,24 @@
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control select">	
-								<option value="deptCode">Dept. Code</option>
-								<option value="deptName">Dept. Name</option>
-							</select>
+						<td style="padding-left: 15px;">
+							<html:select name="generalParamForm" property="searchField" styleId="selSearchField" styleClass="form-control">
+								<option value="genParamDesc">General Parameter Description</option>
+								<option value="genParamValue">General Parameter Value</option>
+							</html:select>
 						</td>
-						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
-						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
+						<td style="padding-left: 15px">
+							<html:text
+								name="generalParamForm" property="searchValue" styleClass="form-control">
+							</html:text>
+						</td>
+						<td style="padding-left: 15px">
+							<button type="button"
+								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
+							</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -42,24 +65,35 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
-							<td class="align-center"></td>
+							<td>General Parameter Description</td>
+							<td>General Parameter Value</td>
+							<td>Is Active</td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
 						<logic:notEmpty name="generalParamForm" property="arrList">
 							<logic:iterate id="reg" name="generalParamForm" property="arrList">
 								<tr>
-									<td></td>
+									<td><bean:write name="reg" property="genParamDesc" /></td>
+									<td><bean:write name="reg" property="genParamValue" /></td>
+									<td><bean:write name="reg" property="isActive" /></td>
+									<td align="center">
+										<a class="text-success" href="#"
+										onclick="actionForm('edit','<bean:write name="reg" property="genParamId" />');"
+										title="Edit">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp; 
+										<a href="#" class="text-danger" 
+										onclick="actionForm('delete','<bean:write name="reg" property="genParamId" />','<bean:write name="reg" property="genParamDesc" />');"
+										title="Delete">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="generalParamForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
-									Data Found</td>
+								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>
@@ -68,7 +102,7 @@
 			</div>
 
 		</div>
-
+		<html:hidden name="generalParamForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

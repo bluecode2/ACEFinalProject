@@ -72,7 +72,7 @@
 								<tr>
 									<td><html:text styleClass="form-control"
 											styleId="txtDeptHead" readonly="true" name="departmentForm"
-											property="deptHeadDisplay"></html:text></td>
+											property="selectedDept.deptHeadDisplay"></html:text></td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchDeptHead"> <span
 											class="glyphicon glyphicon-edit" aria-hidden="true"></a></td>

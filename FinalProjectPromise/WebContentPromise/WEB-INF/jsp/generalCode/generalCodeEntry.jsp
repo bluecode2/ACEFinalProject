@@ -11,7 +11,6 @@
 <title>General Code Entry</title>
 <script type="text/javascript">
 	function onBtnSaveClick() {
-		alert('ini save');
 		document.forms[0].task.value = 'save';
 		document.forms[0].submit();
 	}

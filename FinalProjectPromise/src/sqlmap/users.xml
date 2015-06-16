@@ -14,7 +14,7 @@
 		( 
 			#userId#, 		#userRoleId#,
 			#employeeId#,	#createdBy#,
-			#username#, 	dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#),
+			#username#, 	(dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#)),
 			1,				SYSDATE
 		)
 	</insert>
@@ -22,6 +22,13 @@
 	<select id="getNewUserId" resultClass="java.lang.Integer">
 		select max(user_id)+1 from users
 	</select>
+	
+	<update id="updateUser" parameterClass="user.UserBean">
+	update users set 
+	username = #username#,
+	password_user = dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#)
+	where user_id = #userId#
+	</update>
 
 	<select id="getAllUser" parameterClass="java.util.Map"
 		resultClass="user.UserBean">
@@ -112,5 +119,21 @@
 	<select id="getNewUserID" resultClass="java.lang.Integer">
 		SELECT MAX(USER_ID)+1 FROM USERS
 	</select>
-	
+	<select id="getUserByUserID" parameterClass="java.lang.Integer" resultClass="user.UserBean">
+		 SELECT
+		        USER_ID         AS      userId,
+		        USER_ROLE_ID    AS      userRoleId,
+		        EMPLOYEE_ID     AS      employeeId,
+		        CREATED_BY      AS      createdBy,
+		        UPDATED_BY      AS      updatedBy,
+		        USERNAME        AS      username,
+		        PASSWORD_USER   AS      passwordUser,
+		        IS_ACTIVE       AS      isActive,
+		        TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
+		        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
+		        employee_name   AS      employeeName,
+		        user_role_name  AS      userRoleName
+		        from vusers
+		        where is_active = 1 AND USER_ID = #tempUserID#
+	</select>
 </sqlMap>

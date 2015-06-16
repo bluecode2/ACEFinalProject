@@ -45,8 +45,8 @@
 		</action>
 		<action path="/employee" name="employeeForm" type="employee.EmployeeHandler"
 			scope="request">
-			<forward name="employeeList" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
-			<forward name="employeeAdd" path="/WEB-INF/jsp/employee/insertEmployee.jsp"></forward>
+			<forward name="list" path="/WEB-INF/jsp/employee/employeeList.jsp"></forward>
+			<forward name="entry" path="/WEB-INF/jsp/employee/insertEmployee.jsp"></forward>
 		</action>
 		<action path="/users" name="userForm" type="user.UserHandler"
 			scope="request">

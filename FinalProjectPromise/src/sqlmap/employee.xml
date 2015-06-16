@@ -34,7 +34,7 @@
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM vEMPLOYEE
-		where isActive = 1
+		where is_Active = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeCode">
 				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )
