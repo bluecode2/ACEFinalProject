@@ -79,4 +79,13 @@ public class UserManager {
 			ibatis.endTransaction();
 		}
 	}
+	
+//	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
+//		UserBean uBean = null;
+//		
+//		uBean = (UserBean) this.ibatis.queryForObject("", tempUserID);
+//		
+//		return uBean;
+//	}
+	
 }

@@ -14,7 +14,7 @@
 		( 
 			#userId#, 		#userRoleId#,
 			#employeeId#,	#createdBy#,
-			#username#, 	dbms_obfuscation_toolkit.md5(input_string= &gt; #password_user#),
+			#username#, 	dbms_obfuscation_toolkit.md5(input_string= &gt; #passwordUser#),
 			1,				SYSDATE
 		)
 	</insert>
@@ -34,7 +34,7 @@
 		        CREATED_BY      AS      createdBy,
 		        UPDATED_BY      AS      updatedBy,
 		        USERNAME        AS      username,
-		        PASSWORD_USER   AS      password_user,
+		        PASSWORD_USER   AS      passwordUser,
 		        IS_ACTIVE       AS      isActive,
 		        TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
@@ -71,20 +71,20 @@
 		CREATED_BY      AS      createdBy,
 		UPDATED_BY      AS      updatedBy,
 		USERNAME        AS      username,
-		PASSWORD_USER   AS      password_user,
+		PASSWORD_USER   AS      passwordUser,
 		IS_ACTIVE       AS      isActive,
 		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
 		employee_name   AS      employeeName,
 		user_role_name  AS      userRoleName
 		from vusers
-		where password_user = dbms_obfuscation_toolkit.md5(input_string =>#password#) AND username = #username#
+		where password_user = dbms_obfuscation_toolkit.md5(input_string =>#password#) AND username = #username# AND is_active =1
 	</select>
 
 	<select id="countUser" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM USERS
-		WHERE IS_ACTIVE = 0
+		WHERE IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="uBean.userId">
 				LOWER(USER_ID)
