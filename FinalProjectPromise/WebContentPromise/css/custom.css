@@ -135,3 +135,7 @@ body {
 .table-clickable td {
 	cursor: pointer;
 }
+
+label {
+	font-weight: normal;
+}

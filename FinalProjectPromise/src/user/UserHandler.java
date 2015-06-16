@@ -30,7 +30,10 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
-			
+			uForm.setIsAdd(true);
+			uForm.setSelectedId(0);
+			request.setAttribute("pageTitle", "User Edit");
+			return mapping.findForward("userAdd");
 		}
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
 			

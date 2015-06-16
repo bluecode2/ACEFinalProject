@@ -87,7 +87,6 @@
 							<td>User Role ID</td>
 							<td>Employee ID</td>
 							<td>Username</td>
-							<td>Is Active</td>
 							<td>Created By</td>
 							<td>Created Date</td>
 							<td>Updated By</td>
@@ -103,7 +102,6 @@
 									<td><bean:write name="reg" property="userRoleId" /></td>
 									<td><bean:write name="reg" property="employeeId" /></td>
 									<td><bean:write name="reg" property="username" /></td>
-									<td><bean:write name="reg" property="isActive" /></td>
 									<td><bean:write name="reg" property="createdBy" /></td>
 									<td><bean:write name="reg" property="updateDateInString" /></td>
 									<td><bean:write name="reg" property="updatedBy" /></td>

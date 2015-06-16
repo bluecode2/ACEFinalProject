@@ -19,10 +19,22 @@
 		/* document.forms[0].task.value = "save";
 		document.forms[0].submit(); */
 	}
+	
+	function onLoadForm(){
+		if (document.forms[0].task.value == "add"){
+			document.getElementById('newPassword').style.display = 'none';
+			document.getElementById('oldPassword').style.display = 'none';
+		}
+		else if (document.forms[0].task.value == "Edit"){
+			document.getElementById('newPassword').style.display = 'block';
+			document.getElementById('oldPassword').style.display = 'block';
+		}
+	}
+	
 </script>
 </head>
-<body>
-	<html:form action="/users" method="post">
+<body onload="onLoadForm();">
+	<html:form action="/users" method="post" >
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -52,10 +64,22 @@
 							<html:text property="uBean.username" styleClass="form-control"></html:text>
 						</td>
 					</tr>
-					<tr align="left">
-						<td>Password</td>
+					<tr align="left" id="oldPassword">
+						<td>Old Password</td>
 						<td style="padding-left:15px;">
-							<html:password property="uBean.passwordUser" styleClass="form-control"></html:password>
+							<input type="password" id="oldPass" Class="form-control" />
+						</td>
+					</tr>
+					<tr align="left">
+						<td><label id="newPassword">New</label> Password</td>
+						<td style="padding-left:15px;">
+							<input type="password" id="newPass" Class="form-control" />
+						</td>
+					</tr>
+					<tr align="left">
+						<td>Re-Type Password</td>
+						<td style="padding-left:15px;">
+							<input type="password" id="reNewPass" Class="form-control" />
 						</td>
 					</tr>
 				</table>
