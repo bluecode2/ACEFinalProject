@@ -11,6 +11,7 @@
 		<form-bean name="employeeForm" type="employee.EmployeeForm"></form-bean>
 		<form-bean name="userForm" type="user.UserForm"></form-bean>
 		<form-bean name="rankEmpForm" type="rank_employee.RankEmpForm"></form-bean>
+		<form-bean name="userRoleForm" type="user.UserRoleForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -56,6 +57,11 @@
 		<action path="/rankEmployee" name="rankEmpForm" type="rank_employee.rankEmpHandler"
 			scope="request">
 			<forward name="employeeRankList" path="/WEB-INF/jsp/rankEmployee/rankEmployeeList.jsp"></forward>
+		</action>
+		<action path="/userRole" name="userRoleForm" type="user.UserRoleHandler"
+			scope="request">
+			<forward name="userRoleList" path="/WEB-INF/jsp/user/userRoleList.jsp"></forward>
+			<forward name="userRoleEntry" path="/WEB-INF/jsp/user/userRoleEntry.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
