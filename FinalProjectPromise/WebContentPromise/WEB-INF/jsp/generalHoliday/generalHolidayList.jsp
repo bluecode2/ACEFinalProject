@@ -16,6 +16,13 @@
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}
+	
+	function search() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+		changePage(1);
+	}
 </script>
 </head>
 <body>
@@ -24,6 +31,7 @@
 		<html:hidden property="currSearchValue" name="generalHolidayForm"/>
 		<html:hidden property="currSearchField" name="generalHolidayForm"/>
 		<html:hidden property="currPage" name="generalHolidayForm"/>
+		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -33,17 +41,24 @@
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control">	
+						<td style="padding-left: 15px;">
+							<html:select name="generalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
 								<option value="genHolidayName">General Holiday Name</option>
 								<option value="genHolidayDate">General Holiday Date</option>
-							</select>
+							</html:select>
 						</td>
-						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
-						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
+						<td style="padding-left: 15px">
+							<html:text
+								name="generalHolidayForm" property="searchValue" styleClass="form-control">
+							</html:text>
+						</td>
+						<td style="padding-left: 15px">
+							<button type="button"
+								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
+							</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -83,8 +98,7 @@
 						</logic:notEmpty>
 						<logic:empty name="generalHolidayForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
-									Data Found</td>
+								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>
