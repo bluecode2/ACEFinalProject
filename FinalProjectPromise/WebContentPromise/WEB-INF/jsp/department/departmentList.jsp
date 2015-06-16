@@ -82,7 +82,7 @@
 							<td>Department Code</td>
 							<td>Department Name</td>
 							<td>Department Head</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>

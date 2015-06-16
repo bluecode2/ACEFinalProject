@@ -1,6 +1,5 @@
 package general;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +10,7 @@ public class GeneralParamBean {
 	private String 	genParamDesc;
 	private String 	genParamValue;
 	private Integer isActive;
-	private Integer updateBy;
+	private Integer updatedBy;
 	private Date 	updateDate;
 	private String 	updateDateInString;
 	
@@ -68,10 +67,10 @@ public class GeneralParamBean {
 		}
 		this.updateDate = date;
 	}
-	public Integer getUpdateBy() {
-		return updateBy;
+	public Integer getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
+	public void setUpdateBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 }

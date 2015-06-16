@@ -68,7 +68,7 @@
 							<td>General Parameter Description</td>
 							<td>General Parameter Value</td>
 							<td>Is Active</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
