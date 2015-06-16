@@ -107,7 +107,7 @@
 			</div>
 
 		</div>
-
+		<html:hidden name="generalHolidayForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

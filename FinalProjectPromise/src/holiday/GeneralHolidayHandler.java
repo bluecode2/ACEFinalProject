@@ -33,13 +33,6 @@ public class GeneralHolidayHandler extends Action{
 			genForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "General Holiday Entry");
 			
-			request.setAttribute("pageNavigator", CommonFunction
-					.createPagingNavigatorList(1,1));
-			
-			request.setAttribute("pageCount", 1);
-			request.setAttribute("currPage", 1);
-			request.setAttribute("rowCount", 1);
-			
 			return mapping.findForward("genEntry");
 		}
 		else if ("save".equals(genForm.getTask())){
