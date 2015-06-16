@@ -89,7 +89,7 @@
 		UPDATE
 		GENERAL_HOLIDAY
 		SET
-		IS_GENERATED=0
+		IS_GENERATED = 0
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 
