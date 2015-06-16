@@ -22,6 +22,38 @@ public class UserRoleHandler extends Action{
 		
 		CommonFunction.createAllowedMenu(null, request);
 		
+		if("add".equals(userRoleForm.getTask())){
+			userRoleForm.setIsAdd(true);
+			request.setAttribute("pageTitle", "User Role Entry");
+			
+			return mapping.findForward("userRoleEntry");
+		}
+		else if ("save".equals(userRoleForm.getTask())){
+			Boolean isAdd = userRoleForm.getIsAdd();
+			
+			if (isAdd) {
+				userRoleForm.getUserRoleBean().setUserRoleId(userRoleManager.getUserRoleId());
+				userRoleForm.getUserRoleBean().setCreatedBy(1);
+				userRoleManager.insertUserRole(userRoleForm.getUserRoleBean());
+			} 
+			else {
+				userRoleForm.getUserRoleBean().setUpdatedBy(1);
+				userRoleManager.editUserRole(userRoleForm.getUserRoleBean());
+			}
+
+			response.sendRedirect("userRole.do");
+			return null;
+		}
+		else if ("edit".equals(userRoleForm.getTask())) {
+			request.setAttribute("pageTitle", "User Role Edit");
+			userRoleForm.setUserRoleBean(userRoleManager.getUserRoleEdit(userRoleForm.getSelectedId()));
+
+			return mapping.findForward("userRoleEntry");
+		}
+		else if ("delete".equals(userRoleForm.getTask())) {
+			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
+		}
+		
 		userRoleForm.setTask("");
 		userRoleForm.setSearchField(userRoleForm.getCurrSearchField());
 		userRoleForm.setSearchValue(userRoleForm.getCurrSearchValue());
