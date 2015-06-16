@@ -61,7 +61,7 @@ public class RankEmpHandler extends Action {
 				dMan.updateEmployeeRank(dForm.getSelectedRankEmp());
 			}
 
-			response.sendRedirect("department.do");
+			response.sendRedirect("rankEmployee.do");
 			return null;
 		}
 
