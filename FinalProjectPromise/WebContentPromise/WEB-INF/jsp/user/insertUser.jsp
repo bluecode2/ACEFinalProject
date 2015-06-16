@@ -15,8 +15,9 @@
 	}
 
 	function onBtnSaveClick() {
-		document.forms[0].task.value = "save";
-		document.forms[0].submit();
+		alert(document.forms[0].task.value);
+		/* document.forms[0].task.value = "save";
+		document.forms[0].submit(); */
 	}
 </script>
 </head>
@@ -26,6 +27,8 @@
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
+		
+		<html:hidden name="userForm" property="task"/>
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">
@@ -52,7 +55,7 @@
 					<tr align="left">
 						<td>Password</td>
 						<td style="padding-left:15px;">
-							<html:password property="uBean.password_user" styleClass="form-control"></html:password>
+							<html:password property="uBean.passwordUser" styleClass="form-control"></html:password>
 						</td>
 					</tr>
 				</table>
