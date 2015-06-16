@@ -15,10 +15,12 @@
 	}
 
 	function onBtnSaveClick() {
-		if (document.forms[0].task.value == "add") {
 			var nPass = document.getElementById('newPass').value;
 			var reTypePass = document.getElementById('reNewPass').value;
-			alert(nPass + reTypePass);
+			var oPass = document.getElementById('oldPass').value
+			var pass = document.form[0].passwordUser.value;
+			
+		if (document.forms[0].task.value == "add") {
 			if (nPass == reTypePass) {
 				document.forms[0].passwordUser.value = nPass;
 				document.forms[0].task.value = "save";
@@ -27,7 +29,12 @@
 				alert('Password Is Not Valid');
 			}
 		} else if (document.forms[0].task.value == "Edit") {
+				alert('Edit Belum Selesai');
+			if ((nPass != reTypePass)||(nPass != pass)){
+			}
+			else {
 
+			}
 		}
 
 	}
@@ -53,6 +60,7 @@
 		<html:hidden name="userForm" property="task" />
 		<html:hidden name="userForm" property="passwordUser" />
 		<html:hidden property="isAdd" name="userForm" />
+		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">
 				<table>
