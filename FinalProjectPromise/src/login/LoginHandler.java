@@ -2,6 +2,7 @@ package login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -18,12 +19,21 @@ public class LoginHandler extends Action {
 		// TODO Auto-generated method stub
 		LoginForm lForm = (LoginForm) form;
 		UserManager lMan = new UserManager();
+		HttpSession session = request.getSession(true);
+
 		
-/*		if ("validasi".) {
+		if ("validasi".equals(lForm.getTask())) {
+			lForm.setUserBean(null);
 			
-			response.sendRedirect("generalCode.do");
+			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
+				session.setAttribute("user", lForm.getUserBean());
+				response.sendRedirect("generalCode.do");
+			}
+			else {
+				return mapping.findForward("default");
+			}
 		}
-		*/
+		
 		return mapping.findForward("default");
 	}
 }
