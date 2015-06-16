@@ -22,7 +22,6 @@ public class DepartmentForm extends ActionForm{
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
-	private String deptHeadDisplay;
 	
 	public List<DepartmentBean> getArrList() {
 		return arrList;
@@ -110,13 +109,5 @@ public class DepartmentForm extends ActionForm{
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
-	}
-
-	public String getDeptHeadDisplay() {
-		return deptHeadDisplay;
-	}
-
-	public void setDeptHeadDisplay(String deptHeadDisplay) {
-		this.deptHeadDisplay = deptHeadDisplay;
 	}
 }

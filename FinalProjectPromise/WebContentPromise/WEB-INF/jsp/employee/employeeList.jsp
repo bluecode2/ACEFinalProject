@@ -11,61 +11,105 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
- function onBtnAddClick(){
-  alert('add');
-  document.forms[0].task.value = 'add';
-  document.forms[0].submit();
- }
- 
+	function onBtnAddClick() {
+		alert('add');
+		document.forms[0].task.value = 'add';
+		document.forms[0].submit();
+	}
+	
+	function search() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+		changePage(1);
+	}
+	
+	function actionForm(task, id, nama) {
+
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
+
+		if (task == "delete") {
+			if (confirm("Are you sure want to delete employee " + nama)) {
+				document.forms[0].submit();
+			}
+		} else {
+			document.forms[0].submit();
+		}
+
+	}
 </script>
 <body>
 	<html:form action="/employee" method="post">
-		<html:hidden property="task" name="employeeForm" />
+		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
+
+		<html:hidden property="task" name="employeeForm" />
+		<html:hidden name="departmentForm" property="selectedId" />
+		<html:hidden name="departmentForm" property="currSearchField" />
+		<html:hidden name="departmentForm" property="currSearchValue" />
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left:15px;">
-							<select id="selSearchField" class="form-control select">	
-								<option value="empId">Emp. Id</option>
-								<option value="empName">Emp. Name</option>
-							</select>
-						</td>
-						<td style="padding-left:15px"><input type="text" class="form-control" /></td>
-						<td style="padding-left:15px"><button id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
+						<td style="padding-left: 15px;"><select id="selSearchField"
+							class="form-control select">
+								<option value="employeeCode">Emp. Code</option>
+								<option value="employeeName">Emp. Name</option>
+								<option value="email">Email</option>
+								<option value="deptName">Department</option>
+								<option value="supervisorName">Supervisor</option>
+						</select></td>
+						<td style="padding-left: 15px"><input type="text"
+							class="form-control" /></td>
+						<td style="padding-left: 15px"><button id="btnSearch"
+								class="btn btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
 					</tr>
 				</table>
 			</div>
-			
+
 			<div class="divContent">
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Employee ID</td>
+							<td>Employee Code</td>
 							<td>Employee Name</td>
+							<td>Email</td>
+							<td>Department</td>
+							<td>Supervisor</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
 						<logic:notEmpty name="employeeForm" property="listOfEmployee">
-							<logic:iterate id="reg" name="employeeForm" property="listOfEmployee">
+							<logic:iterate id="reg" name="employeeForm"
+								property="listOfEmployee">
 								<tr>
-									<td></td>
+									<td><bean:write name="reg" property="employeeCode" /></td>
+									<td><bean:write name="reg" property="employeeName" /></td>
+									<td><bean:write name="reg" property="email" /></td>
+									<td><bean:write name="reg" property="deptName" /></td>
+									<td><bean:write name="reg" property="supervisorName" /></td>
+									<td align="center"><a class="text-success" href="#"
+										onclick="actionForm('edit','<bean:write name="reg" property="employeeId" />');"
+										title="Edit"><span class="glyphicon glyphicon-pencil"
+											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
+										onclick="actionForm('delete','<bean:write name="reg" property="employeeId" />','<bean:write name="reg" property="employeeName" />');"
+										title="Delete"><span class="glyphicon glyphicon-trash"
+											aria-hidden="true"></span></a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="employeeForm" property="listOfEmployee">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
+								<td colspan="6" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
@@ -75,7 +119,7 @@
 			</div>
 
 		</div>
-
+		<html:hidden name="departmentForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

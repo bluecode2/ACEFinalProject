@@ -15,8 +15,14 @@
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
 		DEPT_ID 							AS deptId,
+		DEPT_CODE 							AS deptCode,
+		DEPT_NAME							AS deptName,
 		RANK_ID 							AS rankId,
+		RANK_CODE 							AS rankCode,
+		RANK_NAME 							AS rankName,
 		SUPERVISOR_ID 						AS supervisorID,
+		SUPERVISOR_CODE 					AS supervisorCode,
+		SUPERVISOR_NAME 					AS supervisorName,
 		CREATED_BY 							AS createdBy,
 		UPDATED_BY 							AS updatedBy,
 		EMPLOYEE_NAME 						AS employeeName,
@@ -27,7 +33,7 @@
 		is_active							AS isActive,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
-		FROM EMPLOYEE
+		FROM vEMPLOYEE
 		where isActive = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeCode">

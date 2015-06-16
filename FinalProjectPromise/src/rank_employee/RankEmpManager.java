@@ -1,4 +1,4 @@
-package employee;
+package rank_employee;
 
 import ibatis.IbatisHelper;
 

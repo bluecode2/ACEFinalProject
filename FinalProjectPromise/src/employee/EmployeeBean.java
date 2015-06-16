@@ -10,7 +10,6 @@ public class EmployeeBean {
 	private Integer employeeId;
 	private Integer deptId;
 	private Integer rankId;
-	private Integer depDeptId;
 	private Integer supervisorID;
 	private Integer createdBy;
 	private Integer updatedBy;
@@ -46,13 +45,6 @@ public class EmployeeBean {
 	public void setRankId(Integer rankId) {
 		this.rankId = rankId;
 	}
-	public Integer getDepDeptId() {
-		return depDeptId;
-	}
-	public void setDepDeptId(Integer depDeptId) {
-		this.depDeptId = depDeptId;
-	}
-	
 	public Integer getSupervisorID() {
 		return supervisorID;
 	}

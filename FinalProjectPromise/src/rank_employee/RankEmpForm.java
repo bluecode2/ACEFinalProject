@@ -1,11 +1,11 @@
-package employee;
+package rank_employee;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-public class EmployeeRankForm extends ActionForm  {
+public class RankEmpForm extends ActionForm  {
 	
 	private static final long serialVersionUID = 1L;
 	private String task = "";

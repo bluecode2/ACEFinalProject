@@ -11,7 +11,6 @@ import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
 import common.Constant;
-
 import employee.EmployeeBean;
 import employee.EmployeeManager;
 
@@ -46,11 +45,6 @@ public class DepartmentHandler extends Action {
 
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
-			if(dForm.getSelectedDept().getDeptHeadCode() != null)
-				dForm.setDeptHeadDisplay(dForm.getSelectedDept().getDeptHeadCode() + " - "
-						+ dForm.getSelectedDept().getDeptHeadName());
-			else
-				dForm.setDeptHeadDisplay("");
 			return mapping.findForward("entry");
 		}
 
