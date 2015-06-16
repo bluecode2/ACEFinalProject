@@ -18,6 +18,16 @@ public class UserManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
+	public UserBean getLoginValidasi(String username, String password) throws SQLException {
+		Map m = new HashMap();
+		m.put("username", username);
+		m.put("password", password);
+		
+		UserBean uBean = (UserBean) this.ibatis.queryForObject("users.checkLogin", m);
+		
+		return uBean;
+	}
+	
 	public List<UserBean> getAllUser(String col, String input,
 	Integer pageNum, Integer pageSize) throws ClassNotFoundException,
 	SQLException {

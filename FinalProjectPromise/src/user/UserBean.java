@@ -13,15 +13,30 @@ public class UserBean {
 	private Integer employeeId;
 	private Integer createdBy;
 	private Integer updatedBy;
-	private String username;
-	private String passwordUser;
+	private String 	username;
+	private String 	passwordUser;
 	private Integer isActive;
-	private Date createDate;
-	private Date updateDate;
-	private String createDateInString;
-	private String updateDateInString;
-	
+	private Date 	createDate;
+	private Date 	updateDate;
+	private String 	createDateInString;
+	private String 	updateDateInString;
+	private String	employeeName;
+	private String 	userRoleName;
+
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public String getUserRoleName() {
+		return userRoleName;
+	}
+	public void setUserRoleName(String userRoleName) {
+		this.userRoleName = userRoleName;
+	}
 
 	public Integer getUserId() {
 		return userId;
