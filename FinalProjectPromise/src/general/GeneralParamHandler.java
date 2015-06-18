@@ -22,6 +22,8 @@ public class GeneralParamHandler extends Action{
 		GeneralParamForm gpf = (GeneralParamForm) form;
 		
 		CommonFunction.createAllowedMenu(null, request);
+
+		System.out.println(gpf.getTask());
 		
 		if("add".equals(gpf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
@@ -55,6 +57,8 @@ public class GeneralParamHandler extends Action{
 			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
 
+			System.out.println("IRENE GILAA");
+			
 			return mapping.findForward("entry");
 		}
 		else if ("delete".equals(gpf.getTask())) {

@@ -9,26 +9,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Parameter</title>
+
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+	function onBtnSaveClick(){
+		document.forms[0].task.value = 'save';
+		document.forms[0].submit();
+	}
+	
+	function onBtnBackClick(){
+		location.href = "generalParam.do";
+	}
+	
+</script>
 </head>
 <body>
 	<html:form action="/generalParam" method="post">
+		<html:hidden name="generalParamForm" property="task" />
+		<html:hidden name="generalParamForm" property="isAdd" />
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<div class="container">
-			<div class="divSearch form-group has-info" style="float: right;">
-			</div>
-			<br />
+		<div class="container" style="padding-top: 30px">
 			<div class="divContent">
 				<table>
 					<tr>
 						<td>General Parameter Desc</td>
+						<td>  </td>
 						<td><html:text property="bean.genParamDesc" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 					<tr>
 						<td>General Parameter Value</td>
+						<td>  </td>
 						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 					<tr>
