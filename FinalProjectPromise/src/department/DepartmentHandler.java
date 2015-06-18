@@ -32,7 +32,7 @@ public class DepartmentHandler extends Action {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
 			request.setAttribute("lstDeptHead",
-					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId()));
+					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
 			request.setAttribute("pageTitle", "Department Entry");
 			return mapping.findForward("entry");
 		}
@@ -40,7 +40,7 @@ public class DepartmentHandler extends Action {
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			request.setAttribute("lstDeptHead",
-					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId()));
+					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
 			request.setAttribute("pageTitle", "Department Entry");
 
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm

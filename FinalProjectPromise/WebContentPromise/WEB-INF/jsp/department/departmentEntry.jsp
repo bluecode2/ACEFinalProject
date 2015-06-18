@@ -22,16 +22,41 @@
 
 	$(document).ready(
 			function() {
-				$('.rowSearch').on(
-						'click',
-						function() {
-							var value = $(this).find('td').eq(0).html();
-							var text = $(this).find('td').eq(1).html() + ' - '
-									+ $(this).find('td').eq(2).html();
-							$('#hdnDeptHeadId').val(value);
-							$('#txtDeptHead').val(text);
-						});
+				registerSearchHeadDeptEvent();
 			});
+
+	function search() {
+		var deptId = $('#hdnDeptId').val();
+		var searchField = $('#selSearchFieldDeptHead').val();
+		var searchValue = $('#txtSearchValueDeptHead').val();
+
+		$.ajax({
+			type : "POST",
+			url : "searchDeptHead.do",
+			data : "deptId=" + deptId + "&searchField=" + searchField
+					+ "&searchValue=" + searchValue,
+			success : function(response) {
+				$("#tblSearch").find("tr:gt(0)").remove();
+				$("#tblSearch").append(response);
+				registerSearchHeadDeptEvent();
+			},
+			error : function(e) {
+				alert("Error: " + e);
+			}
+		});
+	}
+	
+	function registerSearchHeadDeptEvent(){
+		$('.rowSearch').on(
+				'click',
+				function() {
+					var value = $(this).find('td').eq(0).html();
+					var text = $(this).find('td').eq(1).html() + ' - '
+							+ $(this).find('td').eq(2).html();
+					$('#hdnDeptHeadId').val(value);
+					$('#txtDeptHead').val(text);
+				});
+	}
 </script>
 </head>
 <body>
@@ -43,7 +68,8 @@
 
 		<html:hidden name="departmentForm" property="task" />
 		<html:hidden name="departmentForm" property="isAdd" />
-		<html:hidden name="departmentForm" property="selectedDept.deptId" />
+		<html:hidden styleId="hdnDeptId" name="departmentForm"
+			property="selectedDept.deptId" />
 
 		<div class="container">
 
@@ -93,64 +119,69 @@
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Depatment Head Candidate</h4>
-					</div>
-					<div class="modal-body">
-						<div class="container form-group">
-							<table>
-								<tr>
-									<td>Search</td>
-									<td style="padding-left: 15px"><select
-										class="form-control" id="selSearchFieldDeptHead"
-										style="width: 150px">
-											<option value="employeeCode">Employee Code</option>
-											<option value="employeeName">Employee Name</option>
-											<option value="email">Email</option>
-									</select></td>
-									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchValueDeptHead" class="form-control" /></td>
-									<td style="padding-left: 15px"><button type="button"
-											onclick="search();" id="btnSearch"
-											class="btn btn-sm btn-info btn-icon" title="Back">
-											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										</button></td>
-								</tr>
+					<html:form action="searchDeptHead" method="post">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Depatment Head Candidate</h4>
+						</div>
+						<div class="modal-body">
+							<div class="container form-group">
+								<table>
+									<tr>
+										<td>Search</td>
+										<td style="padding-left: 15px"><select
+											class="form-control" id="selSearchFieldDeptHead"
+											style="width: 150px">
+												<option value="employeeCode">Employee Code</option>
+												<option value="employeeName">Employee Name</option>
+												<option value="email">Email</option>
+										</select></td>
+										<td style="padding-left: 15px"><input type="text"
+											id="txtSearchValueDeptHead" class="form-control" /></td>
+										<td style="padding-left: 15px"><button type="button"
+												onclick="search();" id="btnSearch"
+												class="btn btn-sm btn-info btn-icon" title="Back">
+												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+											</button></td>
+									</tr>
+								</table>
+							</div>
+
+							<table width="100%" id="tblSearch"
+								class="table table-striped table-hover table-bordered table-clickable">
+								<thead>
+									<tr>
+										<th>Employee Code</th>
+										<th>Employee Name</th>
+										<th>Email</th>
+									</tr>
+								</thead>
+								<tbody>
+									<logic:notEmpty name="lstDeptHead">
+										<logic:iterate id="emp" name="lstDeptHead">
+											<tr data-dismiss="modal" class="rowSearch">
+												<td style="display: none"><bean:write name="emp"
+														property="employeeId" /></td>
+												<td width="150px"><bean:write name="emp"
+														property="employeeCode" /></td>
+												<td><bean:write name="emp" property="employeeName" /></td>
+												<td width="150px"><bean:write name="emp"
+														property="email" /></td>
+											</tr>
+										</logic:iterate>
+									</logic:notEmpty>
+									<logic:empty name="lstDeptHead">
+										<tr>
+											<td colspan="3" align="center">No Data Found</td>
+										</tr>
+									</logic:empty>
+								</tbody>
 							</table>
 						</div>
-
-						<table width="100%" id="tblSearch"
-							class="table table-striped table-hover table-bordered table-clickable">
-							<thead>
-								<tr>
-									<th>Employee Code</th>
-									<th>Employee Name</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							<logic:notEmpty name="lstDeptHead">
-								<logic:iterate id="emp" name="lstDeptHead">
-									<tr data-dismiss="modal" class="rowSearch">
-										<td style="display: none"><bean:write name="emp"
-												property="employeeId" /></td>
-										<td width="150px"><bean:write name="emp"
-												property="employeeCode" /></td>
-										<td><bean:write name="emp" property="employeeName" /></td>
-										<td width="150px"><bean:write name="emp" property="email" /></td>
-									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="lstDeptHead">
-								<tr>
-									<td colspan="3" align="center">No Data Found</td>
-								</tr>
-							</logic:empty>
-						</table>
-					</div>
+					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>

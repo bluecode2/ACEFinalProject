@@ -93,7 +93,7 @@
 		where employee_id = #value# and IS_ACTIVE = 1
 	</select>
 	
-	<select id="getEmployeeForDeptHead" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
+	<select id="getEmployeeForDeptHead" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
@@ -102,7 +102,17 @@
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email
 		FROM vEMPLOYEE e
-		WHERE dept_id = #value# and IS_ACTIVE = 1 AND e.rank_id = fGetGeneralParameterValue('deptHeadLevel')
+		WHERE dept_id = #deptId# and IS_ACTIVE = 1 AND e.rank_id = fGetGeneralParameterValue('deptHeadLevel')
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeCode">
+				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
 	</select>
 	
 	<select id="getEmployeeForSupervisor" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">

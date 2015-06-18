@@ -16,6 +16,7 @@
 		<form-bean name="menuForm" type="general.MenuForm"></form-bean>
 		<form-bean name="projectRoleForm" type="project_role.ProjectRoleForm"></form-bean>
 		<form-bean name="personalHolidayForm" type="holiday.PersonalHolidayForm"></form-bean>
+		<form-bean name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -84,7 +85,8 @@
 		<action path="/menu" name="menuForm" type="general.MenuHandler" scope="request">
 			<forward name="list" path="/WEB-INF/jsp/menu/menuList.jsp"></forward>
 		</action>
-		
+		<action path="/searchDeptHead" name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadHandler" scope="request">
+		</action>	
 	</action-mappings>
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->
