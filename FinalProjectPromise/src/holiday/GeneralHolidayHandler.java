@@ -22,6 +22,9 @@ public class GeneralHolidayHandler extends Action{
 		
 		CommonFunction.createAllowedMenu(null, request);
 		
+//		HttpSession session = request.getSession();	
+//		UserBean us = (UserBean) session.getAttribute("currUser");
+		
 		if("add".equals(genForm.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
 			empForm.setListOfJobs(empManager.getJobId());
