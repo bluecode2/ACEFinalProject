@@ -19,7 +19,21 @@ public class UserBean {
 	private String 	updateDateInString;
 	private String	employeeName;
 	private String 	userRoleName;
+	private Integer userRoleIdDisplay;
+	private Integer employeeIdDisplay;
 
+	public Integer getUserRoleIdDisplay() {
+		return userRoleIdDisplay;
+	}
+	public void setUserRoleIdDisplay(Integer userRoleIdDisplay) {
+		this.userRoleIdDisplay = userRoleIdDisplay;
+	}
+	public Integer getEmployeeIdDisplay() {
+		return employeeIdDisplay;
+	}
+	public void setEmployeeIdDisplay(Integer employeeIdDisplay) {
+		this.employeeIdDisplay = employeeIdDisplay;
+	}
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public String getEmployeeName() {

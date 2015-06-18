@@ -63,6 +63,23 @@
 			alert("Password is not valid2");
 		}
 	}
+	
+	$(document).ready(
+			function() {
+				registerSearchUserRole();
+			});
+	
+	function registerSearchUserRole(){
+		$('.rowSearch').on(
+				'click',
+				function() {
+					var value = $(this).find('td').eq(0).html();
+					var text = $(this).find('td').eq(1).html() + ' - '
+							+ $(this).find('td').eq(2).html();
+					$('#txtUserRoleId').val(value);
+					$('#roleIdDisplay').val(text);
+				});
+	}
 </script>                 
 </head>
 <body onload="onLoadForm();">
@@ -79,6 +96,8 @@
 		<html:hidden property="uBean.passwordUser" name="userForm"/>
 		<html:hidden property="uBean.userId" name="userForm"/>
 		<html:hidden property="val" name="userForm"/>
+		<html:hidden property="uBean.userRoleId" name="userForm" styleId="txtUserRoleId" />
+		<html:hidden property="uBean.employeeId" name="userForm"/>
 		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">
@@ -86,14 +105,40 @@
 
 					<tr align="left">
 						<td>User Role ID</td>
-						<td style="padding-left: 15px;"><html:text name="userForm"
-								property="uBean.userRoleId" styleClass="form-control"></html:text>
+						<td style="padding-left: 15px;">
+								<table>
+									<tr>
+										<td>
+											<html:text styleClass="form-control"
+											styleId="roleIdDisplay" readonly="true" name="userForm"
+											property="uBean.userRoleIdDisplay"></html:text>
+										</td>
+										<td>
+											<a href="#" class="text-info"
+											data-toggle="modal" data-target="#searchUserRoleId"> <span
+											class="glyphicon glyphicon-edit" aria-hidden="true" /></a>
+										</td>
+									</tr>
+								</table>
 						</td>
 					</tr>
 					<tr align="left">
 						<td>Employee ID</td>
-						<td style="padding-left: 15px;"><html:text name="userForm"
-								property="uBean.employeeId" styleClass="form-control"></html:text>
+						<td style="padding-left: 15px;">
+								<table>
+									<tr>
+										<td>
+											<html:text styleClass="form-control"
+											styleId="employeeIdDisplay" readonly="true" name="userForm"
+											property="uBean.employeeIdDisplay"></html:text>
+										</td>
+										<td>
+											<a href="#" class="text-info"
+											data-toggle="modal" data-target="#searchEmployeeId"> <span
+											class="glyphicon glyphicon-edit" aria-hidden="true" /></a>
+										</td>
+									</tr>
+								</table>
 						</td>
 					</tr>
 					<tr align="left">
@@ -117,15 +162,90 @@
 						<td style="padding-left: 15px;"><input type="password"
 							id="reNewPass" Class="form-control" /></td>
 					</tr>
-					<tr align="left">
-						<td>test</td>
-						<td style="padding-left: 15px;"><html:text name="userForm"
-								property="uBean.passwordUser" styleClass="form-control"></html:text></td>
-					</tr>
+					
 				</table>
 			</div>
 
 		</div>
+
+
+
+		<div class="modal fade" id="searchUserRoleId" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">User Role</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container form-group">
+							<table>
+								<tr>
+									<td>Search</td>
+									<td style="padding-left: 15px"><select
+										class="form-control" id="selSearchFieldRoleId"
+										style="width: 150px">
+											<option value="userRoleCode">User Role Code</option>
+											<option value="userRoleName">User Role Name</option>
+									</select></td>
+									<td style="padding-left: 15px">
+									<input type="text" id="txtSearchValueRoleId" class="form-control" /></td>
+									<td style="padding-left: 15px">
+									<button type="button" onclick="search();" id="btnSearch"
+											class="btn btn-sm btn-info btn-icon" title="Back">
+											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+										</button></td>
+								</tr>
+							</table>
+						</div>
+
+						<table width="100%" id="tblSearch"
+							class="table table-striped table-hover table-bordered table-clickable">
+							<thead>
+								<tr>
+									<th>User Role Code</th>
+									<th>User Role Name</th>
+								</tr>
+							</thead>
+							<logic:notEmpty name="lstUserRole">
+								<logic:iterate id="uRole" name="lstUserRole">
+									<tr data-dismiss="modal" class="rowSearch">
+										<td style="display: none">
+										<bean:write name="uRole" property="userRoleId" /></td>
+										<td width="150px">
+										<bean:write name="uRole" property="userRoleCode" /></td>
+										<td width="150px">
+										<bean:write name="uRole" property="userRoleName" /></td>
+									</tr>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="lstUserRole">
+								<tr>
+									<td colspan="2" align="center">No Data Found</td>
+								</tr>
+							</logic:empty>
+						</table>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+
+
+
+
+
+
+
+
+
+
+
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 

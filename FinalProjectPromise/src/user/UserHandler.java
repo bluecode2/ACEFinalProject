@@ -10,6 +10,8 @@ import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeForm;
+import employee.EmployeeManager;
 
 public class UserHandler extends Action{
 	@Override
@@ -21,6 +23,13 @@ public class UserHandler extends Action{
 		UserForm uForm = (UserForm) form;
 		UserManager uMan = new UserManager();
 		
+		UserRoleForm uRoleForm = new UserRoleForm();
+		UserRoleManager uRoleMan = new UserRoleManager();
+		
+		EmployeeForm eForm = new EmployeeForm();
+		EmployeeManager eMan = new EmployeeManager();
+		
+		
 		CommonFunction.createAllowedMenu(null, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
@@ -28,6 +37,12 @@ public class UserHandler extends Action{
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
 			uForm.setVal("0");
+			request.setAttribute("lstUserRole", uRoleMan.getUserRole(
+					uRoleForm.getCurrSearchField(), uRoleForm.getCurrSearchValue(),
+					uRoleForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
+					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
+					eForm.getCurrPage(), Constant.pageSize));
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
