@@ -91,6 +91,29 @@
 		document.forms[0].submit();
 	}
 	
+	function search() {
+		if (document.getElementById('btnSearchUserRole').value == 'btnRole'){
+			var globalID = $('#txtUserRoleId').val();
+			var searchField = $('#selSearchFieldRoleId').val();
+			var searchValue = $('#txtSearchValueRoleId').val();
+	
+			$.ajax({
+				type : "POST",
+				url : ".do",
+				data : "globalId=" + globalID + "&searchField=" + searchField
+						+ "&searchValue=" + searchValue,
+				success : function(response) {
+					$("#tblSearchUserRole").find("tr:gt(0)").remove();
+					$("#tblSearchUserRole").append(response);
+					registerSearchHeadDeptEvent();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+			});
+		}
+	}
+	
 </script>                 
 </head>
 <body>
@@ -221,15 +244,15 @@
 									<td style="padding-left: 15px">
 									<input type="text" id="txtSearchValueRoleId" class="form-control" /></td>
 									<td style="padding-left: 15px">
-									<button type="button" onclick="search();" id="btnSearch"
-											class="btn btn-sm btn-info btn-icon" title="Back">
+									<button type="button" onclick="search();" id="btnSearchUserRole"
+											class="btn btn-sm btn-info btn-icon" title="Back" value="btnRole">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button></td>
 								</tr>
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchUserRole"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>
@@ -289,8 +312,8 @@
 									<td style="padding-left: 15px">
 									<input type="text" id="txtSearchValueRoleId" class="form-control" /></td>
 									<td style="padding-left: 15px">
-									<button type="button" onclick="search();" id="btnSearch"
-											class="btn btn-sm btn-info btn-icon" title="Back">
+									<button type="button" onclick="search();" id="btnSearchEmp"
+											class="btn btn-sm btn-info btn-icon" title="Back" value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button></td>
 								</tr>

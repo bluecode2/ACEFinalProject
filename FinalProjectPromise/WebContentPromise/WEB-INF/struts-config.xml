@@ -90,6 +90,8 @@
 		</action>	
 		<action path="/searchRank" name="searchRankForm" type="search_dialog.SearchRankHandler" scope="request">
 		</action>
+		<action path="/SearchGlobalForm" name="searchGlobalForm" type="search_dialog.SearchUserRolePopUpHandler" scope="request">
+		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->
