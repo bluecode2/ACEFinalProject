@@ -76,8 +76,11 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"
-							style="margin-right: 10px"></span><bean:write name="userName"/><span class="caret"></span>
-					</a>
+							style="margin-right: 10px"></span> <logic:notEmpty
+								name="userName">
+								<bean:write name="userName" />
+								<span class="caret">
+							</logic:notEmpty> </span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">Change Password</a></li>
 							<li><a href="logout.do">Logout</a></li>
