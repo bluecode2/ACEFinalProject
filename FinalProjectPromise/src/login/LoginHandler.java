@@ -30,15 +30,17 @@ public class LoginHandler extends Action {
 			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
 				System.out.println("masuk ke validasi berhasil");
 				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
-				session.setAttribute("user", lForm.getUserBean());
-				request.setAttribute("pageTitle", "HOME");
-				CommonFunction.createAllowedMenu(null, request);
-				
-
-				return mapping.findForward("index");
+				if (lForm.getUserBean().getIsActive()==1) {
+					session.setAttribute("currUser", lForm.getUserBean());
+					request.setAttribute("pageTitle", "HOME");
+					CommonFunction.createAllowedMenu(null, request);
+					
+					return mapping.findForward("index");
+				}
+				request.setAttribute("errorMessage", "User is not active");
 			}
 			else {
-				System.out.println("masuk ke validasi gagal");
+				request.setAttribute("errorMessage", "Invalid username or password");
 			}
 		}
 		
