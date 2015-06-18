@@ -85,7 +85,7 @@
 						<tr>
 							<td>Personal Holiday Name</td>
 							<td>Personal Holiday Date</td>
-							<td>Employee ID</td>
+							<td>Employee Name</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -94,8 +94,8 @@
 							<logic:iterate id="reg" name="personalHolidayForm" property="arrList">
 								<tr>
 									<td><bean:write name="reg" property="holidayDesc" /></td>
-									<td><bean:write name="reg" property="holidayDateInString" /></td>
-									<td><bean:write name="reg" property="employeeId" /></td>
+									<td><bean:write name="reg" property="holidayDateDisplay" /></td>
+									<td><bean:write name="reg" property="employeeName" /></td>
 									<td align="center">
 										<a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="holidayId" />');"

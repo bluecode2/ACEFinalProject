@@ -20,8 +20,16 @@ public class PersonalHolidayBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private String empDisplay;
+	private String employeeName;
+	
+	private String holidayDateDisplay;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	
+	public String getHolidayDateDisplay() {
+		return df2.format(holidayDate);
+	}
 	
 	public Integer getHolidayId() {
 		return holidayId;
@@ -145,5 +153,11 @@ public class PersonalHolidayBean {
 	}
 	public void setEmpDisplay(String empDisplay) {
 		this.empDisplay = empDisplay;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 }
