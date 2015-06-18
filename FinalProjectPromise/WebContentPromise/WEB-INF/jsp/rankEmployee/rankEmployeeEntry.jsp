@@ -21,7 +21,7 @@
 </script>
 </head>
 <body>
-	<html:form action="/generalCode" method="post">
+	<html:form action="/rankEmployee" method="post">
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -40,20 +40,20 @@
 						<tr>
 							<td class="tdLabel" align="right"><label>Rank Code</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtRankCode" name="generalCodeForm"
+									styleId="txtRankCode" name="rankEmpForm"
 									property="bean.rankCode"></html:text></td>
 						</tr>
 						<tr>
 							<td class="tdLabel" align="right"><label>Rank Name</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtRankName" name="generalCodeForm"
+									styleId="txtRankName" name="rankEmpForm"
 									property="bean.rankName">
 								</html:text></td>
 						</tr>
 						<tr>
 							<td class="tdLabel" align="right"><label>Rank Level</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtRankLevel" name="generalCodeForm"
+									styleId="txtRankLevel" name="rankEmpForm"
 									property="bean.rankLevel">
 								</html:text></td>
 						</tr>
