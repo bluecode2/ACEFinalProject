@@ -7,17 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
-
+<title>Insert title here</title>
 </head>
 <body>
-	<html:form action="/home" method="post">
+<html:form action="/logout"></html:form>
 
-		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
-
-		<html:text property="username" name="homeForm"></html:text>
-		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-	
- </html:form>
 </body>
 </html>
