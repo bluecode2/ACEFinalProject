@@ -32,6 +32,8 @@
 				alert("Edit Belum selesai");
 			/* if ((nPass != reTypePass)||(nPass != pass)){
 				set attribute untuk validasi pada password lama
+				nanti validasi di handler
+				trus di return mapping kembali dengan hasil set attribute memanggil error message pada javascript
 			}
 			else {
 
