@@ -18,9 +18,16 @@ public class MenuBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private Integer isParent;
-	
+	private String parentName;
 	SimpleDateFormat df = new SimpleDateFormat(common.Constant.StringFormat.dateFormat);
 
+	
+	public String getParentName() {
+		return parentName;
+	}
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 	public Integer getMenuId() {
 		return menuId;
 	}

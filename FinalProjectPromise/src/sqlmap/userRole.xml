@@ -32,8 +32,8 @@
 	
 	<insert id="insertUserRole" parameterClass="user.UserRoleBean">
 		insert into
-		USER_ROLE(USER_ROLE_ID, UPDATED_BY, CREATED_BY, USER_ROLE_NAME, CREATE_DATE, UPDATE_DATE, IS_DELETED)
-		values (#userRoleId#, NULL, #createdBy#, #userRoleName#, SYSDATE, NULL, 0)
+		USER_ROLE(USER_ROLE_ID, USER_ROLE_CODE, UPDATED_BY, CREATED_BY, USER_ROLE_NAME, CREATE_DATE, UPDATE_DATE, IS_DELETED)
+		values (#userRoleId#, #userRoleCode#, NULL, #createdBy#, #userRoleName#, SYSDATE, NULL, 0)
 	</insert>
 	
 	<select id="getUserRoleByUserRoleId" resultClass="user.UserRoleBean" parameterClass="java.lang.Integer">
@@ -78,5 +78,9 @@
 					LOWER(user_role_Name) LIKE LOWER( '%' || #searchValue# || '%' )
 				</isEqual>
 			</dynamic>
+	</select>
+	
+	<select id="getUserRoleId" resultClass="java.lang.Integer" >
+		select max(USER_ROLE_ID)+1 from USER_ROLE
 	</select>
 </sqlMap>

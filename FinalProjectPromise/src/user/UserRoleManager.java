@@ -78,4 +78,9 @@ public class UserRoleManager {
 				"userRole.countUserRole", map);
 		return result;
 	}
+	
+	public int getUserRoleId() throws SQLException {
+		int tmpUserRoleId = (Integer) this.ibatis.queryForObject("userRole.getUserRoleId", null);
+		return tmpUserRoleId;
+	}
 }

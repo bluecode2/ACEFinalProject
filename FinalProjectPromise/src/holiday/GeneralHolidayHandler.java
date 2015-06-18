@@ -46,7 +46,6 @@ public class GeneralHolidayHandler extends Action{
 			else {
 				genForm.getGenHolidayBean().setUpdatedBy(1);
 				genManager.editGeneralHoliday(genForm.getGenHolidayBean());
-				System.out.println("selesai edit");
 			}
 
 			response.sendRedirect("generalHoliday.do");

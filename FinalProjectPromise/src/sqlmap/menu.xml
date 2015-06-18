@@ -16,8 +16,8 @@
 		as menuCrud,
 		MENU_INDEX as menuIndex,
 		MENU_URL as menuUrl,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString ,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
 		IS_PARENT as
 		isParent
 		FROM menu
@@ -37,9 +37,9 @@
 		MENU_CRUD as menuCrud,
 		MENU_INDEX as menuIndex,
 		MENU_URL as menuUrl,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as
 		createDateInString ,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as
 		updateDateInString,
 		IS_PARENT as isParent
 		FROM menu
@@ -58,8 +58,8 @@
 		MENU_CRUD 			as menuCrud,
 		MENU_INDEX 			as menuIndex,
 		MENU_URL 			as menuUrl,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString ,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
 		IS_PARENT 			as isParent
 		FROM menu
 		where menu_id = #tmpMenuId#
@@ -78,10 +78,11 @@
 		MENU_CRUD 			as menuCrud,
 		MENU_INDEX 			as menuIndex,
 		MENU_URL 			as menuUrl,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') as createDateInString ,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') as updateDateInString,
-		IS_PARENT 			as isParent
-		FROM menu
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		IS_PARENT 			as isParent,
+		PARENT_NAME			as parentName
+		FROM vmenu
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="menuCode">
@@ -135,8 +136,8 @@
 		IS_PARENT)
 		VALUES(
 		#menuId#,#updatedBy#,#createdBy#,#menuCode#,#menuCaption#,#parentId#,#menuCrud#,#menuIndex#,#menuUrl#,
-		TO_DATE(#createDateInString#,'YYYY-MM-DD'),
-		TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
+		TO_DATE(#createDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#updateDateInString#,'yyyy-MM-dd'),
 		#isParent#)
 	</insert>
 
@@ -151,7 +152,7 @@
 		MENU_INDEX = #menuIndex#,
 		MENU_URL = #menuUrl#,
 		UPDATE_DATE =
-		TO_DATE(#updateDateInString#,'YYYY-MM-DD'),
+		TO_DATE(#updateDateInString#,'yyyy-MM-dd'),
 		IS_PARENT = #isParent#)
 		WHERE MENU_ID = #menuId#
 	</update>
