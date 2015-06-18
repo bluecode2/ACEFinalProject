@@ -30,6 +30,10 @@ public class EmployeeHandler extends Action{
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);
 			eForm.setSelectedId(0);
+			request.setAttribute("pageTitle", "Employee Entry");
+			
+			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog());
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0));
 			
 			return mapping.findForward("entry");
 		}
@@ -37,10 +41,12 @@ public class EmployeeHandler extends Action{
 		else if (eForm.getTask().equals("edit")) {
 			eForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Department Entry");
+			request.setAttribute("pageTitle", "Employee Entry");
 
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
+			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog());
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,99));
 			return mapping.findForward("entry");
 		}
 

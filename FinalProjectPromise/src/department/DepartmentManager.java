@@ -3,6 +3,7 @@ package department;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,19 @@ public class DepartmentManager {
 			e.printStackTrace();
 		}
 		return dept;
+	}
+	
+	public List<DepartmentBean> getListDepartmentForSearchDialog() {
+
+		List<DepartmentBean> arr = new ArrayList<DepartmentBean>();
+
+		try {
+			arr = this.ibatis.queryForList("department.getDepartmentForSearchDialog", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
 	}
 	
 	public Integer getNewDeptId() throws SQLException {
