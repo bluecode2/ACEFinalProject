@@ -23,7 +23,7 @@ public class FilterLogin implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
-		System.out.println("Masuk filter...");
+		//System.out.println("Masuk filter...");
 		if(session.getAttribute("currUser") == null)
 		{
 			System.out.println("session null");
@@ -31,7 +31,7 @@ public class FilterLogin implements Filter {
 		}
 		else {
 			chain.doFilter(req, res);
-			System.out.println(session.getAttribute("currUser"));	
+			//System.out.println(session.getAttribute("currUser"));	
 		}
 			
 	}
@@ -39,7 +39,6 @@ public class FilterLogin implements Filter {
 	
 	public void init(FilterConfig arg0) throws ServletException {
 			// TODO Auto-generated method stub
-		System.out.println("check login");
-			
+		//System.out.println("check login");
 	}
 }
