@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import rank_employee.RankEmpBean;
 import rank_employee.RankEmpManager;
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 import department.DepartmentManager;
@@ -25,7 +26,9 @@ public class EmployeeHandler extends Action{
 		DepartmentManager dMan = new DepartmentManager();
 		EmployeeManager eMan = new EmployeeManager();
 		RankEmpManager reMan = new RankEmpManager();
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 		
 		CommonFunction.createAllowedMenu(null, request);
 		

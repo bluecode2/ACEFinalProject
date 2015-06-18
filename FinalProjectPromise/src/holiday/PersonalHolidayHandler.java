@@ -2,12 +2,14 @@ package holiday;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeManager;
@@ -23,6 +25,9 @@ public class PersonalHolidayHandler extends Action{
 		EmployeeManager empManager = new EmployeeManager();
 		
 		CommonFunction.createAllowedMenu(null, request);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);

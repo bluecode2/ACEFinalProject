@@ -11,9 +11,9 @@ import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
 import common.Constant;
-
 import rank_employee.RankEmpBean;
 import rank_employee.RankEmpManager;
+import user.UserBean;
 
 public class RankEmpHandler extends Action {
 	@Override
@@ -23,7 +23,9 @@ public class RankEmpHandler extends Action {
 
 		RankEmpForm dForm = (RankEmpForm) form;
 		RankEmpManager dMan = new RankEmpManager();
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 
 		CommonFunction.createAllowedMenu(null, request);
 

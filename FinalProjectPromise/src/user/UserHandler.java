@@ -2,6 +2,7 @@ package user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -31,7 +32,9 @@ public class UserHandler extends Action{
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		
-		
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 		CommonFunction.createAllowedMenu(null, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
