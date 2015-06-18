@@ -49,9 +49,9 @@
 		$('.rowSearch').on(
 				'click',
 				function() {
-					var value = $(this).find('td').eq(0).html();
-					var text = $(this).find('td').eq(1).html() + ' - '
-							+ $(this).find('td').eq(2).html();
+					var value = $(this).find('td').eq(0).html().trim();
+					var text = $(this).find('td').eq(1).html().trim() + ' - '
+							+ $(this).find('td').eq(2).html().trim();
 					$('#hdnDeptHeadId').val(value);
 					$('#txtDeptHead').val(text);
 				});

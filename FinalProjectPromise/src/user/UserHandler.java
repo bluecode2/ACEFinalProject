@@ -52,6 +52,12 @@ public class UserHandler extends Action{
 					.getSelectedId()));
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
 			uForm.setVal("0");
+			request.setAttribute("lstUserRole", uRoleMan.getUserRole(
+					uRoleForm.getCurrSearchField(), uRoleForm.getCurrSearchValue(),
+					uRoleForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
+					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
+					eForm.getCurrPage(), Constant.pageSize));
 			return mapping.findForward("userAdd");
 		}
 		else if ("delete".equalsIgnoreCase(uForm.getTask())){
