@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="rank">
-	<select id="getAllEmployeeRank" resultClass="employee.RankEmpBean" parameterClass="java.util.Map">
+	<select id="getAllEmployeeRank" resultClass="rank_employee.RankEmpBean" parameterClass="java.util.Map">
 		select * from (select r.* , ROWNUM rnum from (
 		SELECT rank_id as rankId,
 		UPDATED_BY as updatedBy,
@@ -29,7 +29,7 @@
 		where rnum &gt; #begin#
 	</select>
 
-	<select id="getRankByRankId" parameterClass="java.lang.Integer" resultClass="employee.RankEmpBean">
+	<select id="getRankByRankId" parameterClass="java.lang.Integer" resultClass="rank_employee.RankEmpBean">
 	SELECT rank_id as rankId,
 		UPDATED_BY as updatedBy,
 		CREATED_BY as createdBy,
@@ -46,7 +46,7 @@
 	select max(rank_id)+1 from rank_emp
 	</select>
 
-	<insert id="insertEmployeeRank" parameterClass="employee.RankEmpBean">
+	<insert id="insertEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		insert into
 		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_name, rank_level,
 		create_date, update_date)
@@ -54,7 +54,7 @@
 		#rankName#, #rankLevel#, #createDate#, #updateDate#)
 	</insert>
 
-	<update id="updateEmployeeRank" parameterClass="employee.RankEmpBean">
+	<update id="updateEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		UPDATE rank_emp
 		SET
 		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
