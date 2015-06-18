@@ -39,7 +39,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<div class="container">
+		<div class="container" style="padding-top: 30px">
 			<div class="divContent">
 				<table>
 					<!-- <tr>
@@ -50,6 +50,8 @@
 						<td>General Holiday Name</td>
 						<td>
 							<html:text styleClass="form-control" styleId="txtGenHolName" name="generalHolidayForm" property="genHolidayBean.genHolidayName"></html:text>
+							
+							
 						</td>
 					</tr>
 					<tr>

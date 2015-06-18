@@ -2,60 +2,64 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="generalHoliday">
-	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean" parameterClass="java.util.Map">
+	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean"
+		parameterClass="java.util.Map">
 		select * from(
 		select hol.* , ROWNUM rnum from(
-		SELECT 
-		GEN_HOLIDAY_ID 		as genHolidayId,
-		GEN_HOLIDAY_NAME 	as genHolidayName,
-		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') 	as genHolidayDateInString,
-		IS_GENERATED 		as isGenerated,
-		created_by 			as createdBy,
-		updated_by 			as updatedBy,
-		create_date			as createDate, 
-		update_date 		as updateDate
-		FROM GENERAL_HOLIDAY 
-		where GEN_HOLIDAY_DATE > SYSDATE
+		SELECT
+		GEN_HOLIDAY_ID as genHolidayId,
+		GEN_HOLIDAY_NAME as genHolidayName,
+		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
+		IS_GENERATED as isGenerated,
+		created_by as createdBy,
+		updated_by as
+		updatedBy,
+		TO_CHAR(create_date,'yyyy-MM-dd') as createDateInString,
+		TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString
+		FROM GENERAL_HOLIDAY
+		where 1=1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayName">
-				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="byDate">
+				<isNotEqual property="searchValue" compareValue="">
+					GEN_HOLIDAY_DATE BETWEEN to_date(#searchValue#,'yyyy-MM-dd')
+					AND to_date(#searchValue2#,'yyyy-MM-dd')
+				</isNotEqual>
 			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayDateInString">
-				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
-		ORDER BY GEN_HOLIDAY_ID ) hol
+		</dynamic>
+		ORDER BY GEN_HOLIDAY_DATE ) hol
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
 		#begin#
 	</select>
-	
-	<select id="getGeneralHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.GeneralHolidayBean">
-	SELECT 
-		GEN_HOLIDAY_ID 		as genHolidayId,
-		GEN_HOLIDAY_NAME 	as genHolidayName,
+
+	<select id="getGeneralHolidayByHolId" parameterClass="java.lang.Integer"
+		resultClass="holiday.GeneralHolidayBean">
+		SELECT
+		GEN_HOLIDAY_ID as genHolidayId,
+		GEN_HOLIDAY_NAME as genHolidayName,
 		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
-		IS_GENERATED 		as isGenerated,
-		created_by 			as createdBy,
-		updated_by 			as updatedBy,
-		create_date			as createDate, 
-		update_date 		as updateDate
+		IS_GENERATED as isGenerated,
+		created_by as createdBy,
+		updated_by as
+		updatedBy,
+		create_date as createDate,
+		update_date as updateDate
 		FROM GENERAL_HOLIDAY
 		where gen_holiday_id = #holId#
 	</select>
-	
-	<select id="getNewHolId" resultClass="java.lang.Integer" >
-	select max(Gen_holiday_id)+1 from general_holiday
+
+	<select id="getNewHolId" resultClass="java.lang.Integer">
+		select max(Gen_holiday_id)+1 from general_holiday
 	</select>
 
 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
 		insert into
-		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, 
+		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE,
 		IS_GENERATED, created_by, updated_by, create_date, update_date)
-		values (#genHolidayId#, #genHolidayName#,
-		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL, SYSDATE, NULL)
+		values
+		(#genHolidayId#, #genHolidayName#,
+		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL,
+		SYSDATE, NULL)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
@@ -78,26 +82,24 @@
 		<!-- IS_GENERATED=#isGenerated#, -->
 		updated_by=#updatedBy#,
 		update_date=SYSDATE
-		WHERE GEN_HOLIDAY_ID=#genHolidayId#
+		WHERE
+		GEN_HOLIDAY_ID=#genHolidayId#
 	</update>
 
 	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
-		DELETE FROM GENERAL_HOLIDAY
+		DELETE FROM
+		GENERAL_HOLIDAY
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM GENERAL_HOLIDAY
-		where GEN_HOLIDAY_DATE > SYSDATE
+		WHERE 1=1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayName">
-				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayDateInString">
-				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="byDate">
+				GEN_HOLIDAY_DATE BETWEEN to_date(#searchValue#,'yyyy-MM-dd') and
+				to_date(#searchValue2#,'yyyy-MM-dd')
 			</isEqual>
 		</dynamic>
 	</select>
