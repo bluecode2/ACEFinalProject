@@ -32,7 +32,7 @@ public class RankEmpHandler extends Action {
 			dForm.setSelectedId(0);
 
 			request.setAttribute("pageTitle", "Employee Rank Entry");
-			return mapping.findForward("entry");
+			return mapping.findForward("employeeRankEntry");
 		}
 
 		else if (dForm.getTask().equals("edit")) {

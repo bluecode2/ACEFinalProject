@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-<html:form action="/department" method="post">
+<html:form action="/rankEmployee" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -109,7 +109,6 @@
 		</div>
 		<html:hidden name="rankEmpForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-
 	</html:form>
 </body>
 </html>
