@@ -84,12 +84,12 @@
 								<tr>
 									<td><bean:write name="reg" property="rankCode" /></td>
 									<td><bean:write name="reg" property="rankName" /></td>
-									<td><bean:write name="reg" property="rankDisplay" /></td>
+									<td><bean:write name="reg" property="rankLevel" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="rankId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
-										onclick="actionForm('delete','<bean:write name="reg" property="deptId" />','<bean:write name="reg" property="deptName" />');"
+										onclick="actionForm('delete','<bean:write name="reg" property="rankId" />','<bean:write name="reg" property="rankName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a></td>
 								</tr>

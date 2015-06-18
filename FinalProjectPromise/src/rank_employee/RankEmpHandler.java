@@ -89,6 +89,6 @@ public class RankEmpHandler extends Action {
 		request.setAttribute("currPage", dForm.getCurrPage());
 		request.setAttribute("rowCount", rowCount);
 
-		return mapping.findForward("list");
+		return mapping.findForward("employeeRankList");
 	}
 }
