@@ -64,7 +64,6 @@
 			});
 	
 	function registerSearchUserRole(){
-	
 		$('.rowSearchUserRole').on(
 				'click',
 				function() {
@@ -112,6 +111,9 @@
 					alert("Error: " + e);
 				}
 			});
+		}
+		if (document.getElementById('btnSearchEmp').value == 'btnEmp'){
+			
 		}
 	}
 	

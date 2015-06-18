@@ -11,14 +11,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import common.Constant;
 import user.UserRoleBean;
 import user.UserRoleManager;
+import common.Constant;
 import employee.EmployeeBean;
 import employee.EmployeeManager;
 
-public class SearchUserRolePopUpHandler extends Action {
-	
+public class SearchEmpHandler extends Action{
+
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -28,19 +28,19 @@ public class SearchUserRolePopUpHandler extends Action {
 		response.setHeader("cache-control", "no-cache");
 		PrintWriter out = response.getWriter();
 		
-		SearchUserRoleForm sUserRoleForm = (SearchUserRoleForm) form;
-		UserRoleManager uRoleMan = new UserRoleManager();
+		SearchEmpForm sEmpForm = (SearchEmpForm) form;
+		EmployeeManager eMan = new EmployeeManager();
 		
-		String searchField = sUserRoleForm.getSearchField();
-		String searchValue = sUserRoleForm.getSearchValue();
+		String searchField = sEmpForm.getSearchField();
+		String searchValue = sEmpForm.getSearchValue();
 		
-		List<UserRoleBean> arrEmp = uRoleMan.getUserRole(sUserRoleForm.getSearchField(), sUserRoleForm.getSearchValue(), 1, Constant.pageSize);
+		List<EmployeeBean> arrEmp = eMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
 		
-		for (UserRoleBean uRoleBean : arrEmp) {
+		for (EmployeeBean empBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchUserRole\">");
-			out.println("<td style=\"display: none\">" + uRoleBean.getUserRoleId() + "</td>");
-			out.println("<td>" + uRoleBean.getUserRoleCode() + "</td>");
-			out.println("<td>" + uRoleBean.getUserRoleName() + "</td>");
+//			out.println("<td style=\"display: none\">" + uRoleBean.getUserRoleId() + "</td>");
+//			out.println("<td>" + uRoleBean.getUserRoleCode() + "</td>");
+//			out.println("<td>" + uRoleBean.getUserRoleName() + "</td>");
 			out.println("</tr>");
 		}	
 
