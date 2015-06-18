@@ -60,7 +60,7 @@
 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, 
 		IS_GENERATED, created_by, updated_by, create_date, update_date)
 		values (#genHolidayId#, #genHolidayName#,
-		TO_DATE(#genHolidayDateInString#,'YYYY-MM-DD'), #isGenerated#, #createdBy#, NULL, SYSDATE, NULL)
+		TO_DATE(#genHolidayDateInString#,'YYYY-MM-DD'), 0, #createdBy#, NULL, SYSDATE, NULL)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">

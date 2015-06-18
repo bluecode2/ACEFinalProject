@@ -50,14 +50,14 @@
 							<html:text styleClass="form-control" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
 						</td>
 					</tr>
-					<tr>
+					<%-- <tr>
 						<td>Is Generated</td>
 						<td>
 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="1">Yes</html:radio>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="0">No</html:radio>
 						</td>
-					</tr>
+					</tr> --%>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
 			</div>
