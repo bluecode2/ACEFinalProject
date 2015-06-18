@@ -24,13 +24,12 @@
 		</dynamic>		
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDateInString">
-				LOWER(HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+					to_char(HOLIDAY_DATE,'yyyy-MM-dd') LIKE ( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>	
 		ORDER BY HOLIDAY_ID) hol
 		where ROWNUM &lt;= #end#)
-		where rnum &gt;
-		#begin#
+		where rnum &gt; #begin#
 	</select>
 	
 	<select id="getPersonalHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.PersonalHolidayBean">

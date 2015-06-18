@@ -80,7 +80,7 @@ public class EmployeeManager {
 
 		return arr;
 	}
-
+	
 	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
 
 		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
@@ -139,5 +139,19 @@ public class EmployeeManager {
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"employee.countEmployee", map);
 		return result;
+	}
+	
+	public List<EmployeeBean> getListEmployeeForPersonalHoliday()
+			throws ClassNotFoundException, SQLException {
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		
+		try {
+			arr = this.ibatis.queryForList("employee.getEmployeeForPersonalHoliday", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return arr;
 	}
 }

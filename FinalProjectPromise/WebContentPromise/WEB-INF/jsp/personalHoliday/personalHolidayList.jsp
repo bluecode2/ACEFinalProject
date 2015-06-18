@@ -60,7 +60,7 @@
 						<td style="padding-left: 15px;">
 							<html:select name="personalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
 								<option value="holidayDesc">Personal Holiday Name</option>
-								<option value="holidayDate">Personal Holiday Date</option>
+								<option value="holidayDateInString">Personal Holiday Date</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px">
@@ -70,8 +70,7 @@
 						</td>
 						<td style="padding-left: 15px">
 							<button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
-								title="Search">
+								onclick="search();" id="btnSearch" class="btn btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
@@ -86,6 +85,7 @@
 						<tr>
 							<td>Personal Holiday Name</td>
 							<td>Personal Holiday Date</td>
+							<td>Employee ID</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -95,6 +95,7 @@
 								<tr>
 									<td><bean:write name="reg" property="holidayDesc" /></td>
 									<td><bean:write name="reg" property="holidayDateInString" /></td>
+									<td><bean:write name="reg" property="employeeId" /></td>
 									<td align="center">
 										<a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="holidayId" />');"

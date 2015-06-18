@@ -127,6 +127,18 @@
 		WHERE dept_id = #deptId# AND RANK_LEVEL = (#rankLevel# -1) and IS_ACTIVE = 1
 	</select>
 	
+	<select id="getEmployeeForPersonalHoliday" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
+		SELECT
+		EMPLOYEE_ID 						AS employeeId,
+		EMPLOYEE_code 						AS employeeCode,
+		DEPT_ID 							AS deptId,
+		e.RANK_ID 							AS rankId,
+		EMPLOYEE_NAME 						AS employeeName,
+		EMAIL 								AS email
+		FROM vEMPLOYEE e
+		WHERE IS_ACTIVE = 1
+	</select>
+	
 	<select id="getNewEmpId" resultClass="java.lang.Integer">
 	select max(employee_id)+1 from employee 
 	</select>
