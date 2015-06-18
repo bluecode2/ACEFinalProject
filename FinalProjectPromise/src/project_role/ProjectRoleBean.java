@@ -14,6 +14,7 @@ public class ProjectRoleBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private String ProjectRoleCode;
 
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
@@ -96,5 +97,11 @@ public class ProjectRoleBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public String getProjectRoleCode() {
+		return ProjectRoleCode;
+	}
+	public void setProjectRoleCode(String projectRoleCode) {
+		ProjectRoleCode = projectRoleCode;
 	}
 }

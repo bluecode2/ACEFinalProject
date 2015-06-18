@@ -1,0 +1,97 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="projectRole">
+	<select id="getProjectRole" resultClass="project_role.ProjectRoleBean" parameterClass="java.util.Map">
+		select * from(
+		select hol.* , ROWNUM rnum from(
+		SELECT 
+		PROJECT_ROLE_ID 	as projectRoleId,
+		UPDATED_BY 			as updatedBy,
+		CREATED_BY 			as createdBy,
+		PROJECT_ROLE_NAME	as projectRoleName
+		CREATE_DATE			as createDate, 
+		UPDATE_DATE 		as updateDate
+		PROJECT_ROLE_CODE	as projectRoleCode
+		FROM PROJECT_ROLE 
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectRoleName">
+				LOWER(PROJECT_ROLE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectRoleCode">
+				LOWER(PROJECT_ROLE_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>				
+		ORDER BY PROJECT_ROLE_ID ) hol
+		WHERE ROWNUM &lt;= #end#)
+		WHERE rnum &gt;
+		#begin#
+	</select>
+	
+	<select id="getProjectRoleId" parameterClass="java.lang.Integer" resultClass="project_role.ProjectRoleBean">
+		SELECT 
+		UPDATED_BY 			as updatedBy,
+		CREATED_BY 			as createdBy,
+		PROJECT_ROLE_NAME	as projectRoleName
+		CREATE_DATE			as createDate, 
+		UPDATE_DATE 		as updateDate
+		PROJECT_ROLE_CODE	as projectRoleCode
+		FROM PROJECT_ROLE 
+		where PROJECT_ROLE_ID = #projectRoleId#
+	</select>
+	
+	<select id="getMaxProjectRoleId" resultClass="java.lang.Integer" >
+	select max(PROJECT_ROLE_ID)+1 from PROJECT_ROLE
+	</select>
+
+	<insert id="insertProjectRoleId" parameterClass="project_role.ProjectRoleBean">
+		insert into
+		PROJECT_ROLE(
+		PROJECT_ROLE_ID, 
+		UPDATED_BY, 
+		CREATED_BY, 
+		PROJECT_ROLE_NAME, 
+		CREATE_DATE, 
+		UPDATE_DATE, 
+		PROJECT_ROLE_CODE)
+		values (#projectRoleId#, null, #createdBy#, #projectRoleName#, SYSDATE, NULL, #projectRoleCode#)
+	</insert>
+
+	<update id="editProjectRoleId" parameterClass="project_role.ProjectRoleBean">
+		UPDATE GENERAL_HOLIDAY
+		SET
+		PROJECT_ROLE_CODE 		= #projectRoleCode#
+		PROJECT_ROLE_NAME 		= #projectRoleName#,
+		UPDATED_BY				= #updatedBy#,
+		UPDATE_DATE=SYSDATE
+		WHERE PROJECT_ROLE_ID 	= #projectRoleId#
+	</update>
+
+	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
+		DELETE FROM PROJECT_ROLE
+		WHERE GEN_HOLIDAY_ID = #projectRoleId#
+	</delete>
+
+	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM PROJECT_ROLE
+		WHERE 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectRoleId">
+				LOWER(project_name_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectRoleName">
+				LOWER(PROJECT_ROLE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectRoleCode">
+				LOWER(PROJECT_ROLE_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+	</select>
+</sqlMap>
