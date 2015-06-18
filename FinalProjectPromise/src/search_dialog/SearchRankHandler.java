@@ -24,12 +24,13 @@ public ActionForward execute(ActionMapping mapping, ActionForm form,
 	response.setContentType("text/text;charset=utf-8");
 	response.setHeader("cache-control", "no-cache");
 	PrintWriter out = response.getWriter();
+	
 	SearchRankForm srForm = (SearchRankForm) form;
 	RankEmpManager reMan = new RankEmpManager();
 	
 	String searchField = srForm.getSearchField();
 	String searchValue = srForm.getSearchValue();
-	
+	System.out.println(searchField  + " "+ searchValue);
 	List<RankEmpBean> arrRank = reMan.getListRankForSearch(searchField, searchValue);
 
 	for (RankEmpBean reBean : arrRank) {

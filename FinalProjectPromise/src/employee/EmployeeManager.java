@@ -96,14 +96,9 @@ public class EmployeeManager {
 
 	public void insertEmployee(EmployeeBean eb) throws ClassNotFoundException,
 			SQLException {
-		Integer autoEmpId = (Integer) this.ibatis.queryForObject(
-				"employee.getCountEmployeeId", null);
-		if (autoEmpId == null) {
-			autoEmpId = 1;
-		}
-		eb.setEmployeeId(autoEmpId);
 		try {
 			this.ibatis.startTransaction();
+			eb.setEmployeeId(getNewEmpId());
 			this.ibatis.insert("employee.insertEmployee", eb);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {

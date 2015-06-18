@@ -1,27 +1,40 @@
 package holiday;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
+
+import common.Constant;
 
 public class GeneralHolidayForm extends ActionForm{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	private List<GeneralHolidayBean> 	arrList = new ArrayList<GeneralHolidayBean>();
 	private GeneralHolidayBean 			genHolidayBean  = new GeneralHolidayBean();
 	private String 						task="";
 	private Boolean 					isAdd = false;
-	private String 						searchValue;
-	private String 						searchField;
-	private String 						currSearchValue = "";
-	private String 						currSearchField = "";
-	private Integer 					currPage = 1;
-	private Integer 					pageCount = 1;
+	private String 						searchValue = "";
+	private String 						searchValue2 = "";
+	private String 						searchField = "";
+	private String 						currSearchValue ;
+	private String 						currSearchValue2 = Constant.DefaultValue.maxDate;
+	private String 						currSearchField = "byDate";
+	private int							currPage = 1;
+	private int 						pageCount = 1;
 	private Integer						selectedId;
 
+	public GeneralHolidayForm() {
+		// TODO Auto-generated constructor stub
+		currSearchValue = df.format(new Date().getTime());
+	}
+	
+	
 	public List<GeneralHolidayBean> getArrList() {
 		return arrList;
 	}
@@ -62,6 +75,14 @@ public class GeneralHolidayForm extends ActionForm{
 		this.searchValue = searchValue;
 	}
 
+	public String getSearchValue2() {
+		return searchValue2;
+	}
+
+	public void setSearchValue2(String searchValue2) {
+		this.searchValue2 = searchValue2;
+	}
+
 	public String getSearchField() {
 		return searchField;
 	}
@@ -76,6 +97,14 @@ public class GeneralHolidayForm extends ActionForm{
 
 	public void setCurrSearchValue(String currSearchValue) {
 		this.currSearchValue = currSearchValue;
+	}
+
+	public String getCurrSearchValue2() {
+		return currSearchValue2;
+	}
+
+	public void setCurrSearchValue2(String currSearchValue2) {
+		this.currSearchValue2 = currSearchValue2;
 	}
 
 	public String getCurrSearchField() {

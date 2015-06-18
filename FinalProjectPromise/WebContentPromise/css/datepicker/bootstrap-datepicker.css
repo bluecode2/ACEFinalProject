@@ -74,6 +74,7 @@
 }
 .datepicker > div {
   display: none;
+  z-index: 2000;
 }
 .datepicker.days .datepicker-days,
 .datepicker.months .datepicker-months,

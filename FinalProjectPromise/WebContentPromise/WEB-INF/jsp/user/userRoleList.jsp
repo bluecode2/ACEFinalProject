@@ -58,7 +58,6 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 							<html:select name="userRoleForm" property="searchField" styleId="selSearchField" styleClass="form-control">
-								<option value="">All</option>
 								<option value="userRoleCode">User Role Code</option>
 								<option value="userRoleName">User Role Name</option>
 							</html:select>

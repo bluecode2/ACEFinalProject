@@ -11,56 +11,87 @@
 <title>Employee Entry</title>
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
-	function onBtnBackClick(){
+	function onBtnBackClick() {
 		location.href = "employee.do";
 	}
-	
-	function onBtnSaveClick(){
+
+	function onBtnSaveClick() {
 		document.forms["employeeForm"].task.value = "save";
 		document.forms["employeeForm"].submit();
 	}
-	
-/* 	$(document).ready(function() {
-		$('.rowSearchDept').on('click', function() {
-			var value = $(this).find('td').eq(0).html();
-			var text = $(this).find('td').eq(2).html();
-			$('#hdRankId').val(value);
-			$('#txtDept').val(text);
-		});
-		
+
+	$(document).ready(function() {
+		registerSearchRankEvent();
+		registerSearchSpvEvent();
+		registerSearchDeptEvent();
+	});
+
+	function registerSearchSpvEvent() {
+
 		$('.rowSearchSupervisor').on('click', function() {
 			var value = $(this).find('td').eq(0).html();
 			var text = $(this).find('td').eq(2).html();
 			$('#hdnSupervisorId').val(value);
 			$('#txtSupervisor').val(text);
 		});
-	});
-	 */
-	$(document).ready(
-			function() {
-				registerSearchRankEvent();
-			});
+	}
+
+	function searchSupervisor() {
+
+	}
+
+	function registerSearchDeptEvent() {
+		$('.rowSearchDept').on('click', function() {
+			var value = $(this).find('td').eq(0).html();
+			var text = $(this).find('td').eq(2).html();
+			$('#hdRankId').val(value);
+			$('#txtDept').val(text);
+			$('#hdnSupervisorId').val('');
+			$('#txtSupervisor').val('');
+		});
+	}
+
+	function searchDept() {
+		var searchField = $('#selSearchFieldRank').val();
+		var searchValue = $('#txtSearchValueRank').val();
+		$
+				.ajax({
+					type : "POST",
+					url : "searchRank.do",
+					data : "searchField=" + searchField + "&searchValue="
+							+ searchValue,
+					success : function(response) {
+						$("#tblSearchDept").find("tr:gt(0)").remove();
+						$("#tblSearchDept").append(response);
+						registerSearchRankEvent();
+					},
+					error : function(e) {
+						alert("Error: " + e);
+					}
+				});
+	}
+
 	function searchRank() {
 		var searchField = $('#selSearchFieldRank').val();
 		var searchValue = $('#txtSearchValueRank').val();
-
-		$.ajax({
-			type : "POST",
-			url : "searchRank.do",
-			data : "searchField=" + searchField
-					+ "&searchValue=" + searchValue,
-			success : function(response) {
-				$("#tblSearch").find("tr:gt(0)").remove();
-				$("#tblSearch").append(response);
-				registerSearchRankEvent();
-			},
-			error : function(e) {
-				alert("Error: " + e);
-			}
-		});
+		$
+				.ajax({
+					type : "POST",
+					url : "searchRank.do",
+					data : "searchField=" + searchField + "&searchValue="
+							+ searchValue,
+					success : function(response) {
+						$("#tblSearchRank").find("tr:gt(0)").remove();
+						$("#tblSearchRank").append(response);
+						registerSearchRankEvent();
+					},
+					error : function(e) {
+						alert("Error: " + e);
+					}
+				});
 	}
-	function registerSearchRankEvent(){
-		$('.rowSearch').on(
+	function registerSearchRankEvent() {
+		$('.rowSearchRank').on(
 				'click',
 				function() {
 					var value = $(this).find('td').eq(0).html();
@@ -68,6 +99,8 @@
 							+ $(this).find('td').eq(2).html();
 					$('#hdRankId').val(value);
 					$('#txtRankName').val(text);
+					$('#hdnSupervisorId').val('');
+					$('#txtSupervisor').val('');
 				});
 	}
 </script>
@@ -83,8 +116,8 @@
 		<html:hidden name="employeeForm" property="task" />
 		<html:hidden name="employeeForm" property="isAdd" />
 		<html:hidden name="employeeForm" property="selectedEmp.employeeId" />
-		
-		
+
+
 
 		<div class="container">
 			<div class="divContent form-group has-info">
@@ -108,7 +141,7 @@
 					<tr>
 						<td class="tdLabel" align="right"><label>Gender</label></td>
 						<td>
-						
+
 							<table width="50%">
 								<tr align="left">
 									<td><html:radio name="employeeForm"
@@ -136,12 +169,12 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Department</label></td>
-						<td><html:hidden styleId="hdnDeptId"
-								name="employeeForm" property="selectedEmp.deptId" />
+						<td><html:hidden styleId="hdDeptId" name="employeeForm"
+								property="selectedEmp.deptId" />
 							<table width="100%">
 								<tr>
-									<td><html:text styleClass="form-control"
-											styleId="txtDept" readonly="true" name="employeeForm"
+									<td><html:text styleClass="form-control" styleId="txtDept"
+											readonly="true" name="employeeForm"
 											property="selectedEmp.deptName"></html:text></td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchDept"> <span
@@ -152,8 +185,8 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Rank</label></td>
-						<td>
-						<html:hidden styleId="hdRankId" name="employeeForm" property="selectedEmp.rankId" />
+						<td><html:hidden styleId="hdRankId" name="employeeForm"
+								property="selectedEmp.rankId" />
 							<table width="100%">
 								<tr>
 									<td><html:text styleClass="form-control"
@@ -164,8 +197,7 @@
 											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 
 								</tr>
-							</table>
-						</td>
+							</table></td>
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Supervisor</label></td>
@@ -188,8 +220,8 @@
 
 		</div>
 
-		<div class="modal fade" id="searchDept" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="searchDept" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -211,7 +243,7 @@
 											<option value="deptName">Dept Name</option>
 									</select></td>
 									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchValueRank" class="form-control" /></td>
+										id="txtSearchDept" class="form-control" /></td>
 									<td style="padding-left: 15px"><button type="button"
 											onclick="searchDepartment();" id="btnSearch"
 											class="btn btn-sm btn-info btn-icon" title="Back">
@@ -221,7 +253,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchDept"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>
@@ -253,10 +285,10 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
-		<!-- edit disini -->
-			<div class="modal fade" id="searchRank" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<!-- FIX UNTUK RANK -->
+		<div class="modal fade" id="searchRank" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<html:form action="searchRank" method="post">
@@ -278,8 +310,7 @@
 												<option value="rankCode">Rank Code</option>
 												<option value="rankName">Rank Name</option>
 										</select></td>
-										<td style="padding-left: 15px">
-										<input type="text"
+										<td style="padding-left: 15px"><input type="text"
 											id="txtSearchValueRank" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="searchRank();" id="btnSearch"
@@ -290,7 +321,7 @@
 								</table>
 							</div>
 
-							<table width="100%" id="tblSearch"
+							<table width="100%" id="tblSearchRank"
 								class="table table-striped table-hover table-bordered table-clickable">
 								<thead>
 									<tr>
@@ -302,7 +333,7 @@
 								<tbody>
 									<logic:notEmpty name="listRank">
 										<logic:iterate id="emp" name="listRank">
-											<tr data-dismiss="modal" class="rowSearch">
+											<tr data-dismiss="modal" class="rowSearchRank">
 												<td style="display: none"><bean:write name="emp"
 														property="rankId" /></td>
 												<td width="150px"><bean:write name="emp"
@@ -328,7 +359,8 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
+		<!-- 	FIX UNTUK RANK -->
+
 		<div class="modal fade" id="searchSupervisor" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -363,7 +395,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchEmp"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>

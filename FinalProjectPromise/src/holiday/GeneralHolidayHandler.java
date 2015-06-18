@@ -33,7 +33,6 @@ public class GeneralHolidayHandler extends Action{
 		}
 		else if ("save".equals(genForm.getTask())){
 			Boolean isAdd = genForm.getIsAdd();
-			
 			if (isAdd) {
 				genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
 				genForm.getGenHolidayBean().setCreatedBy(1);
@@ -56,18 +55,50 @@ public class GeneralHolidayHandler extends Action{
 		else if ("delete".equals(genForm.getTask())) {
 			genManager.deleteGeneralHoliday(genForm.getSelectedId());
 		}
-		
-		genForm.setTask("");
-		genForm.setSearchField(genForm.getCurrSearchField());
-		genForm.setSearchValue(genForm.getCurrSearchValue());
+		else if ("search".equals(genForm.getTask())) {
+			System.out.println(genForm.getCurrSearchField() + " "+ genForm.getCurrSearchValue()+" " +genForm.getCurrSearchValue2());
+			
+			if (genForm.getCurrSearchValue()!= "" && genForm.getCurrSearchValue2() != "") {	
+				int rowCount;
+				genForm.setArrList(genManager.getGeneralHoliday(
+						genForm.getCurrSearchField(), genForm.getCurrSearchValue(), genForm.getCurrSearchValue2(),
+						genForm.getCurrPage(), Constant.pageSize));
+				
+				rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
+						genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
+				genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+				request.setAttribute("pageTitle", "General Holiday List");
+				
+				request.setAttribute("pageNavigator", CommonFunction
+						.createPagingNavigatorList(genForm.getPageCount(),genForm.getCurrPage()));
+				
+				request.setAttribute("pageCount", genForm.getPageCount());
+				request.setAttribute("currPage", genForm.getCurrPage());
+				request.setAttribute("rowCount", rowCount);
+				
+				return mapping.findForward("genList");				
+			}
+			else {
+				genForm.setCurrSearchField("");
+				System.out.println("salah");
+			}
+
+		}
+
+		genForm.setTask("");
+		
+		genForm.setSearchField(genForm.getCurrSearchField());
+//		genForm.setSearchValue(genForm.getCurrSearchValue());
+//		genForm.setSearchValue2(genForm.getCurrSearchValue2());
+		
 		int rowCount;
 		genForm.setArrList(genManager.getGeneralHoliday(
-				genForm.getCurrSearchField(), genForm.getCurrSearchValue(),
+				genForm.getCurrSearchField(), genForm.getCurrSearchValue(), genForm.getCurrSearchValue2(),
 				genForm.getCurrPage(), Constant.pageSize));
 		
 		rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
-				genForm.getCurrSearchValue());
+				genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
 		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));		
 		

@@ -77,7 +77,7 @@ public class UserRoleBean {
 			date = df.parse(createDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -110,7 +110,7 @@ public class UserRoleBean {
 			date = df.parse(updateDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

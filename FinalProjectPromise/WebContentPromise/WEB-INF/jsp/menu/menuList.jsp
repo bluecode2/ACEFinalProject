@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu</title>
 <script type="text/javascript">
 function search() {
 	document.forms[0].currSearchField.value = document.forms[0].searchField.value;
@@ -38,7 +38,6 @@ function search() {
 						<td style="padding-left: 15px;">
 							<html:select name="menuForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<html:option value="">-- All --</html:option>
 								<option value="menuCode">Menu Code</option>
 								<option value="menuCaption">Menu Caption</option>
 								<option value="parentName">ParentName</option>

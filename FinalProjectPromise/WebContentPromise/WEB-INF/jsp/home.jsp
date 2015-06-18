@@ -14,8 +14,6 @@
 	<html:form action="/home" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
-
-		<html:text property="username" name="homeForm"></html:text>
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	
  </html:form>

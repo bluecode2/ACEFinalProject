@@ -23,16 +23,38 @@
 
 		changePage(1);
 	}
+	
+	function actionForm(task, id, nama) {
+		
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
+		
+		if (task == "delete") {
+			
+			if (confirm("Are u sure want to delete General Parameter " + nama  + " ?")) {
+			    document.forms[0].submit();
+			}	
+		} 
+		else {
+			document.forms[0].submit();
+		}
+	}
 </script>
 
 </head>
 <body>
 	<html:form action="/generalParam" method="post">
+		<html:hidden name="generalParamForm" property="task" />
+		<html:hidden name="generalParamForm" property="selectedId"/>
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
-
+		
+		<html:hidden property="currPage" name="generalParamForm"/>
+		<html:hidden property="currSearchField" name="generalParamForm"/>
+		<html:hidden property="currSearchValue" name="generalParamForm"/>
+		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -40,6 +62,7 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 							<html:select name="generalParamForm" property="searchField" styleId="selSearchField" styleClass="form-control">
+								<option value="">All</option>
 								<option value="genParamDesc">General Parameter Description</option>
 								<option value="genParamValue">General Parameter Value</option>
 							</html:select>
@@ -65,6 +88,7 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
+							<td>General Parameter ID</td>
 							<td>General Parameter Description</td>
 							<td>General Parameter Value</td>
 							<td>Is Active</td>
@@ -75,6 +99,8 @@
 						<logic:notEmpty name="generalParamForm" property="arrList">
 							<logic:iterate id="reg" name="generalParamForm" property="arrList">
 								<tr>
+									
+									<td><bean:write name="reg" property="genParamId" /></td>
 									<td><bean:write name="reg" property="genParamDesc" /></td>
 									<td><bean:write name="reg" property="genParamValue" /></td>
 									<td><bean:write name="reg" property="isActive" /></td>
