@@ -10,6 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Holiday</title>
 
+<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
 	function onBtnSaveClick(){
 		document.forms[0].task.value = 'save';
@@ -19,13 +23,17 @@
 	function onBtnBackClick(){
 		location.href = "generalHoliday.do";
 	}
+	$(document).ready(function() {
+		$("#txtGenHolDate").attr("data-provide", "datepicker");
+		$("#txtGenHolDate").attr("data-date-format", "yyyy/mm/dd");
+	    autoclose: true
+	});
 </script>
 </head>
 <body>
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
 		<html:hidden name="generalHolidayForm" property="isAdd" />
-		<html:hidden name="generalHolidayForm" property="genHolidayBean.genHolidayId" />
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -50,14 +58,14 @@
 							<html:text styleClass="form-control" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
 						</td>
 					</tr>
-					<%-- <tr>
-						<td>Is Generated</td>
-						<td>
-							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="1">Yes</html:radio>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="0">No</html:radio>
-						</td>
-					</tr> --%>
+<!-- 					<tr> -->
+<!-- 						<td>Is Generated</td> -->
+<!-- 						<td> -->
+<%-- 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="1">Yes</html:radio> --%>
+<!-- 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -->
+<%-- 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="0">No</html:radio> --%>
+<!-- 						</td> -->
+<!-- 					</tr> -->
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
 			</div>

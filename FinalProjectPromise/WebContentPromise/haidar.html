@@ -9,12 +9,14 @@
 
 <!-- CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
 <link href="css/material.ripples.min.css" rel="stylesheet">
 <link href="css/custom.css" rel="stylesheet">
 
 <!-- JavaScript -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
 <script src="js/material.ripples.min.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -161,8 +163,11 @@
 				<!-- 			button modal  -->
 				<button class="btn btn-info" data-toggle="modal"
 					data-target="#myModal" data-whatever="@mdo">Pop-up</button>
+				<button class="btn btn-info" onclick="loadXMLDoc()">Ajax</button>
+					
 				<!-- 			/.button modal  -->
-				<input type="text" class="form-control" id="myMainPageInput" />
+				<input type="text" class="form-control" id="myMainPageInput" /> 
+				<input type="date" class="datepicker" data-provide="datepicker">
 			</div>
 		</div>
 
@@ -248,6 +253,75 @@
 				var value = $('.value1').text();
 				$('#myMainPageInput').val(value);
 			});
+			if ($('[type="date"]').prop('type') != 'date') {
+				$('[type="date"]').datepicker({
+				    format:'dd/mm/yyyy',
+				    autoclose: true
+				  });
+			}
+			// AJAX
+			function loadXMLDoc() {
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						var e = xmlhttp.responseText;
+						$('#myMainPageInput').val(e);
+					}
+				}
+				xmlhttp.open("GET", "http://www.w3schools.com/ajax/demo_post2.asp?fname=Henry&lname=Ford",	true);
+				xmlhttp.send();
+// 				xmlhttp.open("POST","http://www.w3schools.com/ajax/demo_post2.asp",true);
+// 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+// 				xmlhttp.send("fname=Henry&lname=Ford");
+			}
+			
+			 var request;
+			   
+			  function getCount() {
+			    var url = "/department.do";
+			   
+			    // Perform the AJAX request using a non-IE browser.
+			    if (window.XMLHttpRequest) {
+			      request = new XMLHttpRequest();
+			   
+			      // Register callback function that will be called when
+			      // the response is generated from the server.
+			      request.onreadystatechange = updateCount;
+			   
+			      try {
+			      request.open("POST", url, true);
+			      } catch (e) {
+			         alert("Unable to connect to server to retrieve count.");
+			      }
+			   
+			      request.send(null);
+			    // Perform the AJAX request using an IE browser.
+			    } else if (window.ActiveXObject) {
+			      request = new ActiveXObject("Microsoft.XMLHTTP");
+			   
+			      if (request) {
+			        // Register callback function that will be called when
+			        // the response is generated from the server.
+			        request.onreadystatechange = updateCount;
+			   
+			        request.open("GET", url, true);
+			        request.send();
+			      }
+			    }
+			  }
+			   
+			  // Callback function to update page with count retrieved from server.
+			  function updateCount() {
+			    if (request.readyState == 4) {
+			      if (request.status == 200) {
+			        var count = request.responseText;
+			        
+			        document.getElementById('myMainPageInput').innerHTML = count;
+			      } else {
+			        alert("Unable to retrieve count from server.");
+			      }
+			    }
+			  }
 		</script>
 </body>
 </html>
