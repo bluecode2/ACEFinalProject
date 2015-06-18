@@ -92,15 +92,16 @@
 	}
 	
 	function search() {
+		
 		if (document.getElementById('btnSearchUserRole').value == 'btnRole'){
-			var globalID = $('#txtUserRoleId').val();
+			var userRoleID = $('#txtUserRoleId').val();
 			var searchField = $('#selSearchFieldRoleId').val();
 			var searchValue = $('#txtSearchValueRoleId').val();
 	
 			$.ajax({
 				type : "POST",
-				url : ".do",
-				data : "globalId=" + globalID + "&searchField=" + searchField
+				url : "searchGlobal.do",
+				data : "userRoleID=" + userRoleID + "&searchField=" + searchField
 						+ "&searchValue=" + searchValue,
 				success : function(response) {
 					$("#tblSearchUserRole").find("tr:gt(0)").remove();

@@ -2,17 +2,18 @@ package search_dialog;
 
 import org.apache.struts.action.ActionForm;
 
-public class SearchGlobalForm extends ActionForm{
+public class SearchUserRoleForm extends ActionForm{
 
-	private Integer globalId;
+	private Integer userRoleID;
 	private String searchField;
 	private String searchValue;
 	
-	public Integer getGlobalId() {
-		return globalId;
+	
+	public Integer getUserRoleID() {
+		return userRoleID;
 	}
-	public void setGlobalId(Integer globalId) {
-		this.globalId = globalId;
+	public void setUserRoleID(Integer userRoleID) {
+		this.userRoleID = userRoleID;
 	}
 	public String getSearchField() {
 		return searchField;
