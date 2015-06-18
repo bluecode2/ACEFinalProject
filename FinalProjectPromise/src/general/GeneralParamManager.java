@@ -43,10 +43,7 @@ public class GeneralParamManager {
 	}
 	
 	public GeneralParamBean getGenParamByParamId(String tmpGenParamId) throws SQLException {
-		System.out.println("test masuk get gen param");
-		System.out.println(tmpGenParamId);
 		GeneralParamBean genParamBean = (GeneralParamBean) this.ibatis.queryForObject("genParam.getGenParamByGenParamId", tmpGenParamId);
-		System.out.println(genParamBean.getGenParamValue());
 		return genParamBean;
 	}
 

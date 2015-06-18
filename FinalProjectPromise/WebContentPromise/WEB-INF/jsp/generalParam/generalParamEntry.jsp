@@ -48,7 +48,7 @@
 					<tr>
 						<td>Is Active</td>
 						<td>
-							<html:checkbox property="bean.isActive" name="generalParamForm" styleClass="form-control"></html:checkbox> &nbsp;
+							<html:checkbox property="bean.isActive" name="generalParamForm" styleClass="form-control" ></html:checkbox> &nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp; 
 					</tr>
 				</table>
