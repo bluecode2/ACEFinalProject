@@ -8,7 +8,7 @@
 		SELECT 
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
-		TO_CHAR(GEN_HOLIDAY_DATE,'YYYY-MM-DD') 	as genHolidayDateInString,
+		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') 	as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated,
 		created_by 			as createdBy,
 		updated_by 			as updatedBy,
@@ -41,7 +41,7 @@
 	SELECT 
 		GEN_HOLIDAY_ID 		as genHolidayId,
 		GEN_HOLIDAY_NAME 	as genHolidayName,
-		TO_CHAR(GEN_HOLIDAY_DATE,'YYYY-MM-DD') as genHolidayDateInString,
+		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
 		IS_GENERATED 		as isGenerated,
 		created_by 			as createdBy,
 		updated_by 			as updatedBy,
@@ -60,7 +60,7 @@
 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, 
 		IS_GENERATED, created_by, updated_by, create_date, update_date)
 		values (#genHolidayId#, #genHolidayName#,
-		TO_DATE(#genHolidayDateInString#,'YYYY-MM-DD'), 0, #createdBy#, NULL, SYSDATE, NULL)
+		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL, SYSDATE, NULL)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
@@ -79,7 +79,7 @@
 		UPDATE GENERAL_HOLIDAY
 		SET
 		GEN_HOLIDAY_NAME=#genHolidayName#,
-		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'YYYY-MM-DD'),
+		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'yyyy-MM-dd'),
 		IS_GENERATED=#isGenerated#,
 		updated_by=#updatedBy#,
 		update_date=SYSDATE
