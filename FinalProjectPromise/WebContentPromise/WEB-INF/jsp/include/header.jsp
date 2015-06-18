@@ -58,7 +58,7 @@
 													<logic:equal name="menuLvl3" property="parentId"
 														value="${menuLvl2.menuId}">
 														<li><a
-															href="<bean:write name="menuLvl2" property="menuUrl" />"><bean:write
+															href="<bean:write name="menuLvl3" property="menuUrl" />"><bean:write
 																	name="menuLvl3" property="menuCaption" /></a></li>
 													</logic:equal>
 												</logic:iterate>
@@ -80,7 +80,7 @@
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">Change Password</a></li>
-							<li><a href="#">Logout</a></li>
+							<li><a href="logout.do">Logout</a></li>
 						</ul></li>
 				</ul>
 			</div>
