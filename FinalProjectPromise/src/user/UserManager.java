@@ -110,4 +110,9 @@ public class UserManager {
 		return uBean;
 	}
 	
+
+	public String getMD5OldPass(String OldPass) throws SQLException, ClassNotFoundException{
+		String getOldPass = (String) this.ibatis.queryForObject("users.getMD5OldPass", OldPass);		
+		return OldPass;
+	}
 }
