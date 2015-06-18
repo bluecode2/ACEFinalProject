@@ -59,6 +59,16 @@
 		WHERE is_deleted = 0 AND dept_id = #tmpDeptId#
 	</select>
 	
+	<select id="getDepartmentForSearchDialog" resultClass="department.DepartmentBean">
+		SELECT 
+		dept_id 			as deptId ,
+		dept_code 			as deptCode , 
+		dept_name 			as deptName , 
+		dept_head_name		as deptHeadName
+		from vDepartment
+		WHERE is_deleted = 0
+	</select>
+	
 	<select id="getNewDeptId" resultClass="java.lang.Integer">
 		SELECT
 		MAX(dept_id)+1

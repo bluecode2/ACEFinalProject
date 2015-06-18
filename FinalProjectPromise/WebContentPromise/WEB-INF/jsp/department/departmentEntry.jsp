@@ -20,14 +20,18 @@
 		document.forms[0].submit();
 	}
 
-	$(document).ready(function() {
-		$('.rowSearch').on('click', function() {
-			var value = $(this).find('td').eq(0).html();
-			var text = $(this).find('td').eq(1).html() + ' - ' + $(this).find('td').eq(2).html()
-			$('#hdnDeptHeadId').val(value);
-			$('#txtDeptHead').val(text);
-		});
-	});
+	$(document).ready(
+			function() {
+				$('.rowSearch').on(
+						'click',
+						function() {
+							var value = $(this).find('td').eq(0).html();
+							var text = $(this).find('td').eq(1).html() + ' - '
+									+ $(this).find('td').eq(2).html();
+							$('#hdnDeptHeadId').val(value);
+							$('#txtDeptHead').val(text);
+						});
+			});
 </script>
 </head>
 <body>
@@ -75,10 +79,10 @@
 											property="selectedDept.deptHeadDisplay"></html:text></td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchDeptHead"> <span
-											class="glyphicon glyphicon-edit" aria-hidden="true"></a></td>
-									</td>
+											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
+
 								</tr>
-							</table>
+							</table></td>
 					</tr>
 				</table>
 			</div>

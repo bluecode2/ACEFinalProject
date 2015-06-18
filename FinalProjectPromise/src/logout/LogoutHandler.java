@@ -1,8 +1,4 @@
-package other;
-
-import java.util.ArrayList;
-
-import general.MenuBean;
+package logout;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,26 +9,17 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import common.CommonFunction;
+public class LogoutHandler extends Action{
 
-import user.UserBean;
-
-public class HomeHandler extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		//MenuManager menuMan = new MenuManager();
-		HomeForm hmForm = (HomeForm) form;
-		
 		HttpSession session = request.getSession();	
-		UserBean us = (UserBean) session.getAttribute("currUser");
-		hmForm.setUsername(us.getEmployeeName());
-		
-		CommonFunction.createAllowedMenu(null, request);
-		
-		return mapping.findForward("index");
+		session.invalidate();
+		response.sendRedirect("login.do");
+		return null;
 	}
 }

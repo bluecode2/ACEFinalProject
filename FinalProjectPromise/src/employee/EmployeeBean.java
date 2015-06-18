@@ -14,7 +14,7 @@ public class EmployeeBean {
 	private Integer rankId;
 	private String rankCode;
 	private String rankName;
-	private Integer supervisorID;
+	private Integer supervisorId;
 	private String supervisorCode;
 	private String supervisorName;
 	private Integer createdBy;
@@ -51,11 +51,11 @@ public class EmployeeBean {
 	public void setRankId(Integer rankId) {
 		this.rankId = rankId;
 	}
-	public Integer getSupervisorID() {
-		return supervisorID;
+	public Integer getSupervisorId() {
+		return supervisorId;
 	}
-	public void setSupervisorID(Integer supervisorID) {
-		this.supervisorID = supervisorID;
+	public void setSupervisorId(Integer supervisorId) {
+		this.supervisorId = supervisorId;
 	}
 	public Integer getCreatedBy() {
 		return createdBy;

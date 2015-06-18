@@ -41,12 +41,13 @@ public class EmployeeManager {
 
 		return arr;
 	}
-	
-	public List<EmployeeBean> getAllEmployeeForDeptHead(Integer deptId) throws ClassNotFoundException,
-			SQLException {
+
+	public List<EmployeeBean> getAllEmployeeForDeptHead(Integer deptId)
+			throws ClassNotFoundException, SQLException {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		try {
-			arr = this.ibatis.queryForList("employee.getEmployeeForDeptHead", deptId);
+			arr = this.ibatis.queryForList("employee.getEmployeeForDeptHead",
+					deptId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,15 +55,36 @@ public class EmployeeManager {
 
 		return arr;
 	}
-	
-	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
+
+	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel)
+			throws ClassNotFoundException, SQLException {
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		
-		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject("employee.getEmployeeByEmpId", empId);	
+		Map map = new HashMap();
+		map.put("deptId", deptId);
+		map.put("rankLevel", rankLevel);
+		
+		try {
+			arr = this.ibatis.queryForList("employee.getEmployeeForSupervisor",
+					map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return arr;
+	}
+
+	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
+
+		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
+				"employee.getEmployeeByEmpId", empId);
 		return empBean;
 	}
-	
+
 	public int getNewEmpId() throws SQLException {
-		int tempNewEmp = (Integer) this.ibatis.queryForObject("employee.getNewEmpId", null);
+		int tempNewEmp = (Integer) this.ibatis.queryForObject(
+				"employee.getNewEmpId", null);
 		return tempNewEmp;
 	}
 

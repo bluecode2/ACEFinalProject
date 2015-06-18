@@ -90,10 +90,7 @@
 								<bean:write name="errorMessage" />
 							</span>
 					</logic:notEmpty>
-
-					<html:button property=""
-						styleClass="btn btn-lg btn-info btn-block"
-						onclick="goLogin('validasi')">LOGIN</html:button>
+					<html:submit styleClass="btn btn-lg btn-info btn-block" onclick="goLogin('validasi')">LOGIN</html:submit>
 				</div></html:form></td>
 		</tr>
 		<tr>

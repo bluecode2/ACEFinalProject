@@ -1,0 +1,117 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="personalHoliday">
+	<select id="getPersonalHoliday" resultClass="holiday.PersonalHolidayBean" parameterClass="java.util.Map">
+		select * from(
+		select hol.* , ROWNUM rnum from(
+		SELECT 
+		HOLIDAY_ID			as holidayId,
+		EMPLOYEE_ID			as employeeId,
+		CREATED_BY			as createdBy,
+		UPDATED_BY			as updatedBy,
+		HOLIDAY_DESC		as holidayDesc,
+		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
+		IS_EXCHANGE_DAY		as isExchangeDay,
+		CREATE_DATE			as createDate,			
+		UPDATE_DATE			as updateDate
+		FROM PERSONAL_HOLIDAY 
+		where HOLIDAY_DATE > SYSDATE
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="holidayDesc">
+				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="holidayDateInString">
+				LOWER(HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+		ORDER BY HOLIDAY_ID) hol
+		where ROWNUM &lt;= #end#)
+		where rnum &gt;
+		#begin#
+	</select>
+	
+	<select id="getPersonalHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.PersonalHolidayBean">
+	SELECT 
+		HOLIDAY_ID			as holidayId,
+		EMPLOYEE_ID			as employeeId,
+		CREATED_BY			as createdBy,
+		UPDATED_BY			as updatedBy,
+		HOLIDAY_DESC		as holidayDesc,
+		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
+		IS_EXCHANGE_DAY		as isExchangeDay,
+		CREATE_DATE			as createDate,			
+		UPDATE_DATE			as updateDate
+		FROM PERSONAL_HOLIDAY
+		where HOLIDAY_ID = #holId#
+	</select>
+	
+	<select id="getNewHolId" resultClass="java.lang.Integer" >
+	SELECT MAX(HOLIDAY_ID)+1 FROM PERSONAL_HOLIDAY
+	</select>
+
+	<insert id="insertPersonalHoliday" parameterClass="holiday.PersonalHolidayBean">
+		insert into
+		PERSONAL_HOLIDAY(HOLIDAY_ID, EMPLOYEE_ID, CREATED_BY, UPDATED_BY,
+		HOLIDAY_DESC, HOLIDAY_DATE, IS_EXCHANGE_DAY, CREATE_DATE, UPDATE_DATE)
+		VALUES
+		(#holidayId#, #employeeId#, #createdBy#, NULL, #holidayDesc#, #holidayDateInString#, 
+		#isExchangeDay#, SYSDATE, NULL)
+	</insert>
+
+	<select id="getPersonalHolidayEdit" resultClass="holiday.PersonalHolidayBean">
+		SELECT
+		HOLIDAY_ID			as holidayId,
+		EMPLOYEE_ID			as employeeId,
+		CREATED_BY			as createdBy,
+		UPDATED_BY			as updatedBy,
+		HOLIDAY_DESC		as holidayDesc,
+		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
+		IS_EXCHANGE_DAY		as isExchangeDay,
+		CREATE_DATE			as createDate,			
+		UPDATE_DATE			as updateDate
+		FROM PERSONAL_HOLIDAY
+		where HOLIDAY_ID = #value#
+		ORDER BY HOLIDAY_ID
+	</select>
+
+	<update id="editPersonalHoliday" parameterClass="holiday.PersonalHolidayBean">
+		UPDATE PERSONAL_HOLIDAY
+		SET
+		HOLIDAY_ID=#holidayId#,
+		EMPLOYEE_ID=#employeeId#,
+		UPDATED_BY=#updatedBy#,
+		HOLIDAY_DESC=#holidayDesc#,
+		HOLIDAY_DATE=to_date(#holidayDateInString#,'yyyy-MM-dd'),
+		IS_EXCHANGE_DAY=#isExchangeDay#,		
+		UPDATE_DATE=SYSDATE
+		WHERE HOLIDAY_ID=#holidayId#
+	</update>
+
+	<delete id="deletePersonalHoliday" parameterClass="java.lang.Integer">
+		DELETE FROM PERSONAL_HOLIDAY
+		WHERE HOLIDAY_ID=#persHolidayId#
+	</delete>
+
+	<select id="countPersonalHoliday" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM PERSONAL_HOLIDAY WHERE 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="holidayId">
+				LOWER(HOLIDAY_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="holidayDesc">
+				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="holidayDateInString">
+				LOWER(HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+	</select>
+</sqlMap>
