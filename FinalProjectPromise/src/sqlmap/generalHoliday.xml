@@ -88,7 +88,8 @@
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM GENERAL_HOLIDAY WHERE 1=1
+		SELECT COUNT(1) FROM GENERAL_HOLIDAY
+		where GEN_HOLIDAY_DATE > SYSDATE
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayName">
 				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )

@@ -26,13 +26,6 @@ public class GeneralHolidayHandler extends Action{
 //		UserBean us = (UserBean) session.getAttribute("currUser");
 		
 		if("add".equals(genForm.getTask())){
-			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
-			empForm.setListOfJobs(empManager.getJobId());
-			empForm.setListOfEmp(empManager.getEmployees());
-			empForm.setListOfDept(empManager.getDeptId());
-			
-			request.setAttribute("ljob", empManager.getJobId());*/
-			
 			genForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "General Holiday Entry");
 			
@@ -75,9 +68,8 @@ public class GeneralHolidayHandler extends Action{
 		
 		rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
 				genForm.getCurrSearchValue());
-		//
-		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
-		
+
+		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));		
 		
 		request.setAttribute("pageTitle", "General Holiday List");
 		
