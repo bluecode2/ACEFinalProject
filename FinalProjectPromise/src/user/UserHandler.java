@@ -27,23 +27,24 @@ public class UserHandler extends Action{
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
+			uForm.setVal("0");
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
 			uForm.setIsAdd(false);
 			request.setAttribute("pageTitle", "User Edit");
-			
 			uForm.setuBean(uMan.getUserByUserID(uForm
 					.getSelectedId()));
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
+			uForm.setVal("0");
 			return mapping.findForward("userAdd");
 		}
-		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
-			
+		else if ("delete".equalsIgnoreCase(uForm.getTask())){
+			uMan.delUsers(uForm.getSelectedId());
 		}
 
-else if ("save".equalsIgnoreCase(uForm.getTask())){
-			
+		else if ("save".equalsIgnoreCase(uForm.getTask())){
+			System.out.println("berhasil masuk save");
 			Boolean isAdd = uForm.getIsAdd();
 /*			if (uForm.getuBean().getUserId() == 0)
 				uForm.getuBean().setUserId(null);
@@ -51,17 +52,19 @@ else if ("save".equalsIgnoreCase(uForm.getTask())){
 			if (isAdd) {
 				uForm.getuBean().setCreatedBy(1);
 				uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
-				uForm.getuBean().setUserId(uMan.getNewUserID());
 				uMan.insertUser(uForm.getuBean());
 			} else {
+				uForm.setVal("0");
 				uForm.getuBean().setUpdatedBy(1);
-				uForm.getOldPassword();
-				uForm.setOldPassword(uMan.getMD5OldPass(uForm.getOldPassword()));
-				if (uForm.getOldPassword().equals(uForm.getuBean().getPasswordUser())){
-					
+				if (uMan.getLoginValidasi(uForm.getuBean().getUsername(), uForm.getOldPassword()) != null){
+					uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
+					uMan.updateUser(uForm.getuBean());
 				}
 				else {
-					request.setAttribute("pass", "1");
+					uForm.setVal("1");
+					request.setAttribute("pageTitle", "User Edit");
+					uForm.setTask("edit");
+					return mapping.findForward("userAdd");
 				}
 //				dMan.updateDepartment(dForm.getSelectedDept());
 				
@@ -97,7 +100,7 @@ else if ("save".equalsIgnoreCase(uForm.getTask())){
 		request.setAttribute("pageCount", uForm.getPageCount());
 		request.setAttribute("currPage", uForm.getCurrPage());
 		request.setAttribute("rowCount", rowCount);
-		
+		uForm.setVal("0");
 		return mapping.findForward("userList");
 	}
 }

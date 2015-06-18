@@ -26,6 +26,7 @@
 	<update id="updateUser" parameterClass="user.UserBean">
 	update users set 
 	username = #username#,
+	updated_by = #updatedBy#,
 	password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #passwordUser#)
 	where user_id = #userId#
 	</update>
@@ -50,11 +51,6 @@
 		        from vusers
 		        where is_active = 1
 
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="userRoleName">
-				LOWER(USER_ROLE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -91,22 +87,11 @@
 	
 	<select id="countUser" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM USERS
+		SELECT COUNT(1) FROM vusers
 		WHERE IS_ACTIVE = 1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="uBean.userId">
-				LOWER(USER_ID)
-				LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="uBean.userRoleId">
-				LOWER(USER_ROLE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="uBean.employeeId">
-				LOWER(EMPLOYEE_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
@@ -137,8 +122,9 @@
 		        from vusers
 		        where is_active = 1 AND USER_ID = #tempUserID#
 	</select>
-	
-	<select id="getMD5OldPass" parameterClass="java.lang.String" resultClass="java.lang.String">
-		select dbms_obfuscation_toolkit.md5(input_string => #OldPass#) from dual;
-	</select>
+	<update id="delUsers" parameterClass="java.lang.Integer">
+		update users set 
+		is_active = 0
+		where user_id = #userId#
+	</update>
 </sqlMap>

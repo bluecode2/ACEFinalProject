@@ -18,19 +18,19 @@
 	function onBtnSaveClick() {
 			var nPass = document.getElementById('newPass').value;
 			var reTypePass = document.getElementById('reNewPass').value;
-			var oPass = document.getElementById('oldPass').value
-			
+			var oPass = document.getElementById('oldPass').value;
+			alert("a");
 		if (document.forms[0].task.value == "add") {
 			if (nPass == reTypePass) {
 				document.forms[0].passwordUser.value = nPass;
 				document.forms[0].task.value = "save";
 				document.forms[0].submit();
 			} else {
-				alert('Password Is Not Valid');
+				alert('Password Is Not Valid1');
 			}
 		} else if (document.forms[0].task.value == "edit") {
-				alert("Edit Belum selesai");
 				if (nPass == reTypePass) {
+					document.forms[0].passwordUser.value = nPass;
 					document.forms[0].oldPassword.value = oPass;
 					document.forms[0].task.value = "save";
 					document.forms[0].submit();
@@ -50,17 +50,20 @@
 	}
 
 	function onLoadForm() {
-		var pass = document.getElementById('pass');
-		alert(pass.value);
-		if (document.forms[0].task.value == "add") {
-			document.getElementById('newPassword').style.display = 'none';
-			document.getElementById('oldPassword').style.display = 'none';
-		} else if (document.forms[0].task.value == "Edit") {
-			document.getElementById('newPassword').style.display = 'block';
-			document.getElementById('oldPassword').style.display = 'block';
+		if (document.forms[0].val.value == "0"){
+			if (document.forms[0].task.value == "add") {
+				document.getElementById('newPassword').style.display = 'none';
+				document.getElementById('oldPassword').style.display = 'none';
+			} else if (document.forms[0].task.value == "Edit") {
+				document.getElementById('newPassword').style.display = 'block';
+				document.getElementById('oldPassword').style.display = 'block';
+			}
+		}
+		if (document.forms[0].val.value == "1"){
+			alert("Password is not valid2");
 		}
 	}
-</script>
+</script>                 
 </head>
 <body onload="onLoadForm();">
 	<html:form action="/users" method="post">
@@ -73,8 +76,9 @@
 		<html:hidden name="userForm" property="passwordUser" />
 		<html:hidden property="isAdd" name="userForm" />
 		<html:hidden property="oldPassword" name="userForm"/>
-		<html:hidden property="uBean" name="userForm"/>
-		<input type="hidden" name="pass" id="pass" />
+		<html:hidden property="uBean.passwordUser" name="userForm"/>
+		<html:hidden property="uBean.userId" name="userForm"/>
+		<html:hidden property="val" name="userForm"/>
 		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">
@@ -112,6 +116,11 @@
 						<td>Re-Type Password</td>
 						<td style="padding-left: 15px;"><input type="password"
 							id="reNewPass" Class="form-control" /></td>
+					</tr>
+					<tr align="left">
+						<td>test</td>
+						<td style="padding-left: 15px;"><html:text name="userForm"
+								property="uBean.passwordUser" styleClass="form-control"></html:text></td>
 					</tr>
 				</table>
 			</div>

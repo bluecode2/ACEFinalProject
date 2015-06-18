@@ -23,30 +23,30 @@ public final class ActiveDirectoryManager {
 	private static final String INITIAL_CONTEXT_FACTORY = "com.sun.jndi.ldap.LdapCtxFactory";
 	private static final String SECURITY_AUTHENTICATION = "simple";
 
-	private String provideURL /* = "ldap://acesvr01:389/" */;
-	private String domain /* = "AD-INS" */;
+	private String provideURL /* = "ldap://ace-router" */;
+	private String domain /* = "nu-ace" */;
 	private String schema;
 
 	public ActiveDirectoryManager() {
 
-		Properties properties = new Properties();
-		try {
-			properties.load(new FileInputStream("C://application.properties"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		this.provideURL = properties.getProperty("ad.provideURL");
-		this.domain = properties.getProperty("ad.domain");
-		this.schema = properties.getProperty("ad.schema");
+//		Properties properties = new Properties();
+//		try {
+//			properties.load(new FileInputStream("C://application.properties"));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		this.provideURL = properties.getProperty("ad.provideURL");
+//		this.domain = properties.getProperty("ad.domain");
+//		this.schema = properties.getProperty("ad.schema");
 
-//		this.provideURL = "ldap://romans.ad-ins.com";
-//		this.domain = "ace.ad-ins.com";
-//		this.schema = "DC=ace,DC=ad-ins,DC=com";
+		this.provideURL = "ldap://ace-router";
+		this.domain = "nu-ace.ad-ins.com";
+		this.schema = "DC=nu-ace,DC=ad-ins,DC=com";
 
 	}
 
@@ -130,9 +130,9 @@ public final class ActiveDirectoryManager {
 
 	public static void main(String args[]) {
 		ActiveDirectoryManager adm = new ActiveDirectoryManager();
-		System.out.println(adm.isAuthenticated("william.kwesnady", "Ace1111")); //utk login
+		System.out.println(adm.isAuthenticated("bonaventura.aap", "Ace2015")); //utk login
 		System.out.println();
-		System.out.println(adm.checkValidUser("christian", "btari.tn", "Ace2013")); //utk cek user
+		System.out.println(adm.checkValidUser("dedy.suwandi", "bonaventura.aap", "Ace2015")); //utk cek user
 	}
 
 }

@@ -60,10 +60,8 @@
 						<html:select
 								name="userForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="uBean.userId">User ID</option>
-								<option value="uBean.userRoleId">User Role ID</option>
-								<option value="uBean.employeeId">Employee ID</option>
-								<option value="uBean.username">Username</option>
+								<option value="employeeName">Employee Name</option>
+								<option value="username">Username</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="userForm" property="searchValue"
@@ -83,13 +81,10 @@
 					class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>User Role Name</td>
+							
 							<td>Employee Name</td>
 							<td>Username</td>
-							<td>Created By</td>
-							<td>Created Date</td>
-							<td>Updated By</td>
-							<td>Updated Date</td>
+							<td>User Role Name</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -97,13 +92,10 @@
 						<logic:notEmpty name="userForm" property="listOfUser">
 							<logic:iterate id="reg" name="userForm" property="listOfUser">
 								<tr>
-									<td><bean:write name="reg" property="userRoleName" /></td>
+									
 									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="username" /></td>
-									<td><bean:write name="reg" property="createdBy" /></td>
-									<td><bean:write name="reg" property="createDateInString" /></td>
-									<td><bean:write name="reg" property="updatedBy" /></td>
-									<td><bean:write name="reg" property="updateDateInString" /></td>
+									<td><bean:write name="reg" property="userRoleName" /></td>
 									<td align="center">
 									<a href="#"	onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

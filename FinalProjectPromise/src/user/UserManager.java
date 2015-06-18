@@ -80,7 +80,7 @@ public class UserManager {
 		try {
 			this.ibatis.startTransaction();
 			
-			
+			uBean.setUserId(getNewUserID());
 			this.ibatis.insert("users.insertNewUser", uBean);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
@@ -104,15 +104,13 @@ public class UserManager {
 	
 	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
 		UserBean uBean = null;
-		
 		uBean = (UserBean) this.ibatis.queryForObject("users.getUserByUserID", tempUserID);
-		
 		return uBean;
 	}
-	
 
-	public String getMD5OldPass(String OldPass) throws SQLException, ClassNotFoundException{
-		String getOldPass = (String) this.ibatis.queryForObject("users.getMD5OldPass", OldPass);		
-		return OldPass;
+	public void delUsers(Integer userId) throws SQLException{
+		this.ibatis.startTransaction();
+		this.ibatis.update("users.delUsers", userId);
+		this.ibatis.commitTransaction();
 	}
 }
