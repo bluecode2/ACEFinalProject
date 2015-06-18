@@ -27,6 +27,42 @@ public class EmployeeHandler extends Action{
 		
 		CommonFunction.createAllowedMenu(null, request);
 		
+		if (eForm.getTask().equals("add")) {
+			eForm.setIsAdd(true);
+			eForm.setSelectedId(0);
+			
+			return mapping.findForward("entry");
+		}
+
+		else if (eForm.getTask().equals("edit")) {
+			eForm.setIsAdd(false);
+			
+			request.setAttribute("pageTitle", "Department Entry");
+
+			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
+					.getSelectedId()));
+			return mapping.findForward("entry");
+		}
+
+		else if (eForm.getTask().equals("delete")) {
+			dMan.deleteDepartment(eForm.getSelectedId(), 1);
+		}
+
+//		else if (eForm.getTask().equals("save")) {
+//			Boolean isAdd = eForm.getIsAdd();
+//
+//			if (isAdd) {
+//				eForm.getSelectedDept().setCreatedBy(1);
+//				dMan.insertDepartment(eForm.getSelectedDept());
+//			} else {
+//				eForm.getSelectedDept().setUpdatedBy(1);
+//				dMan.updateDepartment(eForm.getSelectedDept());
+//			}
+//
+//			response.sendRedirect("department.do");
+//			return null;
+//		}
+		
 		eForm.setTask("");
 		eForm.setSearchField(eForm.getCurrSearchField());
 		eForm.setSearchValue(eForm.getCurrSearchValue());
