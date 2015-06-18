@@ -20,9 +20,10 @@
 		document.forms[0].submit();
 	}
 
-	$(document).ready(function() {
-		registerSearchHeadDeptEvent();
-	});
+	$(document).ready(
+			function() {
+				registerSearchHeadDeptEvent();
+			});
 
 	function search() {
 		var deptId = $('#hdnDeptId').val();
@@ -44,14 +45,14 @@
 			}
 		});
 	}
-
-	function registerSearchHeadDeptEvent() {
+	
+	function registerSearchHeadDeptEvent(){
 		$('.rowSearch').on(
 				'click',
 				function() {
-					var value = $(this).find('td').eq(0).html().trim();
-					var text = $(this).find('td').eq(1).html().trim() + ' - '
-							+ $(this).find('td').eq(2).html().trim();
+					var value = $(this).find('td').eq(0).html();
+					var text = $(this).find('td').eq(1).html() + ' - '
+							+ $(this).find('td').eq(2).html();
 					$('#hdnDeptHeadId').val(value);
 					$('#txtDeptHead').val(text);
 				});
@@ -92,25 +93,23 @@
 								styleId="txtDeptName" name="departmentForm"
 								property="selectedDept.deptName"></html:text></td>
 					</tr>
-					<logic:equal name="departmentForm" property="isAdd" value="false">
-						<tr>
-							<td class="tdLabel" align="right"><label>Department
-									Head</label></td>
-							<td><html:hidden styleId="hdnDeptHeadId"
-									name="departmentForm" property="selectedDept.deptHeadId" />
-								<table width="100%">
-									<tr>
-										<td><html:text styleClass="form-control"
-												styleId="txtDeptHead" readonly="true" name="departmentForm"
-												property="selectedDept.deptHeadDisplay"></html:text></td>
-										<td align="center"><a href="#" class="text-info"
-											data-toggle="modal" data-target="#searchDeptHead"> <span
-												class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
+					<tr>
+						<td class="tdLabel" align="right"><label>Department
+								Head</label></td>
+						<td><html:hidden styleId="hdnDeptHeadId"
+								name="departmentForm" property="selectedDept.deptHeadId" />
+							<table width="100%">
+								<tr>
+									<td><html:text styleClass="form-control"
+											styleId="txtDeptHead" readonly="true" name="departmentForm"
+											property="selectedDept.deptHeadDisplay"></html:text></td>
+									<td align="center"><a href="#" class="text-info"
+										data-toggle="modal" data-target="#searchDeptHead"> <span
+											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 
-									</tr>
-								</table></td>
-						</tr>
-					</logic:equal>
+								</tr>
+							</table></td>
+					</tr>
 				</table>
 			</div>
 
@@ -120,7 +119,7 @@
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					
+					<html:form action="searchDeptHead" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -182,6 +181,7 @@
 								</tbody>
 							</table>
 						</div>
+					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>
