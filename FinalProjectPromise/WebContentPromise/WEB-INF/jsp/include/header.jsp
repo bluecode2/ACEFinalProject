@@ -74,7 +74,8 @@
 					<li><a href="#" title="Home"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false"><span
+						data-toggle="dropdown" role="button" aria-expanded="false">
+					<span
 							class="glyphicon glyphicon-user" aria-hidden="true"
 							style="margin-right: 10px"></span>Username <%-- <bean:write name="username"/>  --%><span class="caret"></span>
 					</a>
