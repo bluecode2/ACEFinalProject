@@ -16,7 +16,8 @@
 		<form-bean name="menuForm" type="general.MenuForm"></form-bean>
 		<form-bean name="projectRoleForm" type="project_role.ProjectRoleForm"></form-bean>
 		<form-bean name="personalHolidayForm" type="holiday.PersonalHolidayForm"></form-bean>
-		<form-bean name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadForm"></form-bean>	
+		<form-bean name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadForm"></form-bean>
+		<form-bean name="searchRankForm" type="search_dialog.SearchRankForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -87,6 +88,8 @@
 		</action>
 		<action path="/searchDeptHead" name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadHandler" scope="request">
 		</action>	
+		<action path="/searchRank" name="searchRankForm" type="search_dialog.SearchRankHandler" scope="request">
+		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->

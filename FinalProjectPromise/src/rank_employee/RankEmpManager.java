@@ -45,7 +45,13 @@ public class RankEmpManager {
 				"rank.countEmployeeRank", map);
 		return count;
 	}
-
+	public List<RankEmpBean> getListRankForSearch(String column, String value) throws SQLException {
+		Map m = new HashMap();
+		m.put("searchField", column);
+		m.put("searchValue", value);
+		List<RankEmpBean> arrList = this.ibatis.queryForList("rank.getRankListForSearch", m);
+		return arrList;
+	}
 	public RankEmpBean getRankByRankId(int tmpRankId) throws SQLException {
 		RankEmpBean rankBean = (RankEmpBean) this.ibatis.queryForObject("rank.getRankByRankId", tmpRankId);
 		return rankBean;
