@@ -12,7 +12,7 @@ public class RankEmpForm extends ActionForm  {
 	private Integer selectedId = 0;
 	private Boolean isAdd = false;
 	private List<RankEmpBean> arrList = new ArrayList<RankEmpBean>();
-	private RankEmpBean selectedRankEmp  = new RankEmpBean();
+	private RankEmpBean bean  = new RankEmpBean();
 	
 	private String searchValue;
 	private String searchField;
@@ -110,14 +110,12 @@ public class RankEmpForm extends ActionForm  {
 		this.rankIdDisplay = rankIdDisplay;
 	}
 
-	public RankEmpBean getSelectedRankEmp() {
-		return selectedRankEmp;
+	public RankEmpBean getBean() {
+		return bean;
 	}
 
-	public void setSelectedRankEmp(RankEmpBean selectedRankEmp) {
-		this.selectedRankEmp = selectedRankEmp;
+	public void setBean(RankEmpBean bean) {
+		this.bean = bean;
 	}
-
 	
-
 }

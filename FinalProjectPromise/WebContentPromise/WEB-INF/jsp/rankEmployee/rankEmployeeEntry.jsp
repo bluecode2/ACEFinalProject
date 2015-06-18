@@ -26,8 +26,8 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<html:hidden name="generalCodeForm" property="task" />
-		<html:hidden name="generalCodeForm" property="genCodeBean.genCodeId" />
+		<html:hidden name="rankEmpForm" property="task" />
+		<html:hidden name="rankEmpForm" property="bean.rankId" />
 
 		<div class="container">
 			<div class="container">
@@ -38,34 +38,24 @@
 							<col />
 						</colgroup>
 						<tr>
-							<td class="tdLabel" align="right"><label>General
-									Code ID</label></td>
+							<td class="tdLabel" align="right"><label>Rank Code</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtGenCodeId" name="generalCodeForm"
-									property="genCodeBean.genCodeId"></html:text></td>
+									styleId="txtRankCode" name="generalCodeForm"
+									property="bean.rankCode"></html:text></td>
 						</tr>
 						<tr>
-							<td class="tdLabel" align="right"><label>Gen. Code
-									Index</label></td>
+							<td class="tdLabel" align="right"><label>Rank Name</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtGenCodeIndex" name="generalCodeForm"
-									property="genCodeBean.genCodeIndex">
+									styleId="txtRankName" name="generalCodeForm"
+									property="bean.rankName">
 								</html:text></td>
 						</tr>
 						<tr>
-							<td class="tdLabel" align="right"><label>General
-									Code Caption</label></td>
+							<td class="tdLabel" align="right"><label>Rank Level</label></td>
 							<td><html:text styleClass="form-control"
-									styleId="txtGenCodeCaption" name="generalCodeForm"
-									property="genCodeBean.genCodeCaption">
+									styleId="txtRankLevel" name="generalCodeForm"
+									property="bean.rankLevel">
 								</html:text></td>
-						</tr>
-						<tr>
-							<td class="tdLabel" align="right"><label>Parent ID</label></td>
-							<td><html:select property="genCodeBean.parentId"
-									styleId="txtParentId" styleClass="form-control">
-									<html:option value=""></html:option>
-								</html:select></td>
 						</tr>
 					</table>
 				</div>
