@@ -17,7 +17,7 @@ public class MenuForm extends ActionForm{
 	private String 			currSearchField;
 	private MenuBean 		mnBean;
 	private List<MenuBean> 	arrList;
-	private Integer 		currPage;
+	private Integer 		currPage=1;
 	private Integer 		pageCount;
 	private Integer 		listCount;
 	

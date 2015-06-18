@@ -54,8 +54,10 @@ public class MenuManager {
 	public List<MenuBean> selectListMenu(String col, String input,
 			Integer pageNum, Integer pageSize) throws SQLException {
 
+		System.out.println(pageNum +" " + pageSize + " "+ col + " "+ input);
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
+		System.out.println(begin + " "+end);
 
 		Map map = new HashMap();
 		map.put("searchField", col);

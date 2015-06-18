@@ -82,7 +82,7 @@
 			<forward name="personalHolidayEntry" path="/WEB-INF/jsp/personalHoliday/personalHolidayEntry.jsp"></forward>
 		</action>
 		<action path="/menu" name="menuForm" type="general.MenuHandler" scope="request">
-			<forward name="list" path="/WEB-INF/jsp/menu/menuList"></forward>
+			<forward name="list" path="/WEB-INF/jsp/menu/menuList.jsp"></forward>
 		</action>
 		
 	</action-mappings>

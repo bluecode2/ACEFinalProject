@@ -81,7 +81,9 @@
 		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
 		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
 		IS_PARENT 			as isParent,
-		PARENT_NAME			as parentName
+		PARENT_NAME			as parentName,
+		created_by_name 	as createdByName,
+		updated_by_name		as updatedByName
 		FROM vmenu
 		where 1=1
 		<dynamic prepend="AND">
@@ -95,8 +97,8 @@
 			</isEqual>
 		</dynamic>		
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="parentId">
-				LOWER(parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="parentName">
+				LOWER(parent_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>				
 		<dynamic prepend="AND">
@@ -108,13 +110,8 @@
 			<isEqual property="searchField" compareValue="menuUrl">
 				LOWER(menu_url) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>	
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isParent">
-				LOWER(is_parent) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
 		</dynamic>										
-		order by menu_id) m
+		order by menu_index) m
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
 		#begin#
@@ -164,8 +161,9 @@
 
 	<select id="countMenu" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM MENU
-				where 1=1
+		SELECT COUNT(1) 
+		FROM vmenu
+		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="menuCode">
 				LOWER(menu_code) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -177,8 +175,8 @@
 			</isEqual>
 		</dynamic>		
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="parentId">
-				LOWER(parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="parentName">
+				LOWER(parent_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>				
 		<dynamic prepend="AND">
@@ -190,11 +188,6 @@
 			<isEqual property="searchField" compareValue="menuUrl">
 				LOWER(menu_url) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>	
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isParent">
-				LOWER(is_parent) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>	
+		</dynamic>								
 	</select>
 </sqlMap>

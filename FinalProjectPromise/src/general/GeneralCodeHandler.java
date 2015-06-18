@@ -29,12 +29,8 @@ public class GeneralCodeHandler extends Action {
 			//gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
 			return mapping.findForward("entry");
 		} */
-		if ("search".equals(gcForm.getTask())) {
 
-			request.setAttribute("pageNavigator",
-					CommonFunction.createPagingNavigatorList(1, 1));
-		}
-		else if ("edit".equals(gcForm.getTask())) {
+		if ("edit".equals(gcForm.getTask())) {
 			/*request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
 			request.setAttribute("pageTitle", "General Code Edit");

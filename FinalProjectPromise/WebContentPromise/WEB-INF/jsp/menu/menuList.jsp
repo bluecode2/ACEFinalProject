@@ -20,6 +20,11 @@ function search() {
 </head>
 <body>
 	<html:form action="/menu" method="post">
+	
+		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
+		
 		<html:hidden property="task" name="menuForm" />
 		<html:hidden property="currSearchField" name="menuForm"/>
 		<html:hidden property="currSearchValue" name="menuForm"/>
@@ -34,8 +39,11 @@ function search() {
 							<html:select name="menuForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<html:option value="">-- All --</html:option>
-								<option value="genCodeCaption">Gen. Code Caption</option>
-								<option value="parentId">Parent ID</option>
+								<option value="menuCode">Menu Code</option>
+								<option value="menuCaption">Menu Caption</option>
+								<option value="parentName">ParentName</option>
+								<option value="menuCrud">Menu Crud</option>
+								<option value="menuUrl">Menu URL</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px">
