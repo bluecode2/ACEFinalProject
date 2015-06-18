@@ -9,8 +9,8 @@
 		CREATED_BY as createdBy,
 		rank_name as rankName,
 		rank_level as rankLevel,
-		create_date as createDate,
-		update_date as updateDate,
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
 		rank_code as rankCode
 		FROM rank_emp
 		where 1=1
@@ -35,9 +35,9 @@
 		CREATED_BY as createdBy,
 		rank_name as rankName,
 		rank_level as rankLevel,
-		create_date as createDate,
-		update_date as updateDate
-		rank_code as rankCode
+		rank_code as rankCode,
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM rank_emp
 		where rank_id = #tmpRankId#
 	</select>
@@ -51,15 +51,14 @@
 		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_name, rank_level,
 		create_date, update_date)
 		values (#rankId#, #updatedBy#, #createdBy#,
-		#rankName#, #rankLevel#, #createDate#, #updateDate#)
+		#rankName#, #rankLevel#,SYSDATE, NULL)
 	</insert>
 
 	<update id="updateEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		UPDATE rank_emp
 		SET
 		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
-		rank_name=#rankName#, CREATE_DATE=#createDate#,
-		UPDATE_DATE=#updateDate#, rank_code = #rankCode#
+		rank_name=#rankName#, UPDATE_DATE=SYSDATE, rank_code = #rankCode#
 		WHERE rank_id=#rankId#
 	</update>
 
