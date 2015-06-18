@@ -41,12 +41,12 @@
 </head>
 <body>
 	<html:form action="/personalHoliday" method="post">
-		<html:hidden name="generalHolidayForm" property="task" />
-		<html:hidden name="generalHolidayForm" property="selectedId"/>
+		<html:hidden name="personalHolidayForm" property="task" />
+		<html:hidden name="personalHolidayForm" property="selectedId"/>
 		
-		<html:hidden property="currSearchValue" name="generalHolidayForm"/>
-		<html:hidden property="currSearchField" name="generalHolidayForm"/>
-		<html:hidden property="currPage" name="generalHolidayForm"/>
+		<html:hidden property="currSearchValue" name="personalHolidayForm"/>
+		<html:hidden property="currSearchField" name="personalHolidayForm"/>
+		<html:hidden property="currPage" name="personalHolidayForm"/>
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -58,14 +58,14 @@
 					<tr>
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
-							<html:select name="generalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
-								<option value="genHolidayName">General Holiday Name</option>
-								<option value="genHolidayDate">General Holiday Date</option>
+							<html:select name="personalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
+								<option value="holidayDesc">Personal Holiday Name</option>
+								<option value="holidayDate">Personal Holiday Date</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px">
 							<html:text
-								name="generalHolidayForm" property="searchValue" styleClass="form-control">
+								name="personalHolidayForm" property="searchValue" styleClass="form-control">
 							</html:text>
 						</td>
 						<td style="padding-left: 15px">
@@ -84,34 +84,32 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>General Holiday Name</td>
-							<td>General Holiday Date</td>
-							<td>Is Generated</td>
+							<td>Personal Holiday Name</td>
+							<td>Personal Holiday Date</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="generalHolidayForm" property="arrList">
-							<logic:iterate id="reg" name="generalHolidayForm" property="arrList">
+						<logic:notEmpty name="personalHolidayForm" property="arrList">
+							<logic:iterate id="reg" name="personalHolidayForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="genHolidayName" /></td>
-									<td><bean:write name="reg" property="genHolidayDateInString" /></td>
-									<td><bean:write name="reg" property="isGenerated" /></td>
+									<td><bean:write name="reg" property="holidayDesc" /></td>
+									<td><bean:write name="reg" property="holidayDateInString" /></td>
 									<td align="center">
 										<a class="text-success" href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
+										onclick="actionForm('edit','<bean:write name="reg" property="holidayId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a>
 										&nbsp; 
 										<a href="#" class="text-danger" 
-										onclick="actionForm('delete','<bean:write name="reg" property="genHolidayId" />','<bean:write name="reg" property="genHolidayName" />');"
+										onclick="actionForm('delete','<bean:write name="reg" property="holidayId" />','<bean:write name="reg" property="holidayDesc" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a>
 									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="generalHolidayForm" property="arrList">
+						<logic:empty name="personalHolidayForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
 							</tr>
@@ -122,7 +120,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="generalHolidayForm" property="currPage" />
+		<html:hidden name="personalHolidayForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

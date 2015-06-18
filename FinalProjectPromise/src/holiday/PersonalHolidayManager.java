@@ -18,7 +18,6 @@ public class PersonalHolidayManager {
 
 	public List<PersonalHolidayBean> getPersonalHoliday(String col, String input,
 			Integer pageNum, Integer pageSize) throws SQLException {
-
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 

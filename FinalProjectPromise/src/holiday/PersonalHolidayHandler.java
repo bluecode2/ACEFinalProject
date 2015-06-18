@@ -57,7 +57,6 @@ public class PersonalHolidayHandler extends Action{
 		persForm.setTask("");
 		persForm.setSearchField(persForm.getCurrSearchField());
 		persForm.setSearchValue(persForm.getCurrSearchValue());
-
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
 				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),

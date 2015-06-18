@@ -13,8 +13,8 @@
 		HOLIDAY_DESC		as holidayDesc,
 		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
 		IS_EXCHANGE_DAY		as isExchangeDay,
-		CREATE_DATE			as createDate,			
-		UPDATE_DATE			as updateDate
+		CREATE_DATE			as createDateInString,
+		UPDATE_DATE			as updateDateInString
 		FROM PERSONAL_HOLIDAY 
 		where HOLIDAY_DATE > SYSDATE
 		<dynamic prepend="AND">
@@ -42,8 +42,8 @@
 		HOLIDAY_DESC		as holidayDesc,
 		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
 		IS_EXCHANGE_DAY		as isExchangeDay,
-		CREATE_DATE			as createDate,			
-		UPDATE_DATE			as updateDate
+		CREATE_DATE			as createDateInString,			
+		UPDATE_DATE			as updateDateInString
 		FROM PERSONAL_HOLIDAY
 		where HOLIDAY_ID = #holId#
 	</select>
@@ -70,8 +70,8 @@
 		HOLIDAY_DESC		as holidayDesc,
 		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
 		IS_EXCHANGE_DAY		as isExchangeDay,
-		CREATE_DATE			as createDate,			
-		UPDATE_DATE			as updateDate
+		CREATE_DATE			as createDateInString,			
+		UPDATE_DATE			as updateDateInString
 		FROM PERSONAL_HOLIDAY
 		where HOLIDAY_ID = #value#
 		ORDER BY HOLIDAY_ID
