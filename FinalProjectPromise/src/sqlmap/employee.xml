@@ -124,7 +124,7 @@
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email
 		FROM vEMPLOYEE e
-		WHERE dept_id = #deptId# AND RANK_LEVEL &lt; #rankLevel# and IS_ACTIVE = 1
+		WHERE dept_id = #deptId# AND RANK_LEVEL = (#rankLevel# -1) and IS_ACTIVE = 1
 	</select>
 	
 	<select id="getNewEmpId" resultClass="java.lang.Integer">

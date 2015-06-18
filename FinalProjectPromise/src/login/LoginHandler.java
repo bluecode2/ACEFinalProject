@@ -25,6 +25,8 @@ public class LoginHandler extends Action {
 
 		
 		if ("validasi".equals(lForm.getTask())) {
+			if (lForm.getUsername() !="" && lForm.getPassword()!="") {
+			
 			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
 				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 				if (lForm.getUserBean().getIsActive()==1) {
@@ -33,7 +35,7 @@ public class LoginHandler extends Action {
 					return null;
 				}
 				request.setAttribute("errorMessage", "User is not active");
-			}
+			}}
 			else {
 				request.setAttribute("errorMessage", "Invalid username or password");
 			}

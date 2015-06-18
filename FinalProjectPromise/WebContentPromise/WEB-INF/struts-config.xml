@@ -19,6 +19,8 @@
 		<form-bean name="searchDeptHeadForm" type="search_dialog.SearchDeptHeadForm"></form-bean>
 		<form-bean name="searchRankForm" type="search_dialog.SearchRankForm"></form-bean>	
 		<form-bean name="searchUserRoleForm" type="search_dialog.SearchUserRoleForm"></form-bean>
+		<form-bean name="searchDeptForm" type="search_dialog.SearchDeptForm"></form-bean>	
+		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -92,6 +94,10 @@
 		<action path="/searchRank" name="searchRankForm" type="search_dialog.SearchRankHandler" scope="request">
 		</action>
 		<action path="/searchUserRole" name="searchUserRoleForm" type="search_dialog.SearchUserRolePopUpHandler" scope="request">
+		</action>
+		<action path="/searchDept" name="searchDeptForm" type="search_dialog.SearchDeptHandler" scope="request">
+		</action>
+		<action path="/searchSpv" name="searchSpvForm" type="search_dialog.SearchSpvHandler" scope="request">
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
