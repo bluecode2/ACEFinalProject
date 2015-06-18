@@ -69,15 +69,14 @@
 					</logic:iterate>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" title="Home"><span
+					<li><a href="home.do" title="Home"><span
 							class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-					<li><a href="#" title="Home"><span
+					<li><a href="#" title="Notification"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false">
-					<span
+						data-toggle="dropdown" role="button" aria-expanded="false"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"
-							style="margin-right: 10px"></span>Username <%-- <bean:write name="username"/>  --%><span class="caret"></span>
+							style="margin-right: 10px"></span><bean:write name="userName"/><span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">Change Password</a></li>
