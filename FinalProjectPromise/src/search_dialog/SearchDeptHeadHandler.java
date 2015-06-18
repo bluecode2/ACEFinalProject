@@ -34,8 +34,6 @@ public class SearchDeptHeadHandler extends Action {
 		
 		List<EmployeeBean> arrEmp = eman.getAllEmployeeForDeptHead(deptId, searchField, searchValue);
 		
-//		out.print("aaaaaa");
-		
 		for (EmployeeBean employeeBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 			out.println("<td style=\"display: none\">" + employeeBean.getEmployeeId() + "</td>");
@@ -43,8 +41,8 @@ public class SearchDeptHeadHandler extends Action {
 			out.println("<td>" + employeeBean.getEmployeeName() + "</td>");
 			out.println("<td>" + employeeBean.getEmail() + "</td>");
 			out.println("</tr>");
-		}
-//		
+		}	
+
 		out.flush();
 		return null;
 	}
