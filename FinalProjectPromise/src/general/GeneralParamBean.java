@@ -16,7 +16,6 @@ public class GeneralParamBean {
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
-	
 	public String getGenParamId() {
 		return genParamId;
 	}
@@ -61,7 +60,7 @@ public class GeneralParamBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception pe){
-			pe.printStackTrace();
+			//pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}
@@ -70,7 +69,7 @@ public class GeneralParamBean {
 	public Integer getUpdatedBy() {
 		return updatedBy;
 	}
-	public void setUpdateBy(Integer updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 }

@@ -1,6 +1,7 @@
 package general;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
@@ -10,23 +11,24 @@ public class GeneralParamForm extends ActionForm {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<GeneralParamBean> arrList = new ArrayList<GeneralParamBean>();
+	private List<GeneralParamBean> arrList;
 	private String task = "";
-	private Integer selectedId = 0;
+	private String selectedId = "";
 	private String searchValue;
 	private String searchField;
 	private String currSearchValue = "";
 	private String currSearchField = "";
 	private Integer currPage = 1;
-	private Integer pageCount = 1;
+	private Integer pageCount;
+	private Boolean isAdd = false;
 	
 	private GeneralParamBean bean = new GeneralParamBean();
 
-	public ArrayList<GeneralParamBean> getArrList() {
+	public List<GeneralParamBean> getArrList() {
 		return arrList;
 	}
 
-	public void setArrList(ArrayList<GeneralParamBean> arrList) {
+	public void setArrList(List<GeneralParamBean> arrList) {
 		this.arrList = arrList;
 	}
 
@@ -46,11 +48,11 @@ public class GeneralParamForm extends ActionForm {
 		this.bean = bean;
 	}
 
-	public Integer getSelectedId() {
+	public String getSelectedId() {
 		return selectedId;
 	}
 
-	public void setSelectedId(Integer selectedId) {
+	public void setSelectedId(String selectedId) {
 		this.selectedId = selectedId;
 	}
 
@@ -104,6 +106,14 @@ public class GeneralParamForm extends ActionForm {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Boolean getIsAdd() {
+		return isAdd;
+	}
+
+	public void setIsAdd(Boolean isAdd) {
+		this.isAdd = isAdd;
 	}
 	
 	

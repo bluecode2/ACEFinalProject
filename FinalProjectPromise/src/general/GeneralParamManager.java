@@ -20,24 +20,25 @@ public class GeneralParamManager {
 	}
 
 	public List<GeneralParamBean> getAllGeneralParam(String col, String input,
-			Integer pageNum, Integer pageSize) {
+			Integer pageNum, Integer pageSize) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<GeneralParamBean> arr = null;
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
+
+		List<GeneralParamBean>	arr = new  ArrayList<GeneralParamBean>(); 
+		
 		try {
 			arr = this.ibatis.queryForList(
 					"genParam.selectGenParam", map);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
-		}
-
+		} 
 		return arr;
 	}
 	
@@ -70,7 +71,7 @@ public class GeneralParamManager {
 		}
 
 	}
-
+	
 	public void updateGeneralParam(GeneralParamBean genParamBean)
 			throws SQLException {
 		try {
@@ -82,14 +83,19 @@ public class GeneralParamManager {
 		}
 	}
 
-	public void deleteGeneralParam(String genParamId) throws SQLException {
+	public void deleteGeneralParam(GeneralParamBean genParamBean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("genParam.deleteGenparam", genParamId);
+			this.ibatis.update("genParam.deleteGenParam", genParamBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
 		}
+	}
+	
+	public String getMaxParamId() throws SQLException{
+		String maxId = (String) this.ibatis.queryForObject("genParam.getMaxGenParamId", null);
+		return maxId;
 	}
 
 }

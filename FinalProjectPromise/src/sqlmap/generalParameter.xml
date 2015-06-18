@@ -6,13 +6,13 @@
 		SELECT * FROM ( 
 		SELECT 
 		genParam.*, ROWNUM rnum from (
-		select
+		SELECT
 		GEN_PARAM_ID 			as genParamId,
 		GEN_PARAM_DESC 			as genParamDesc,
 		GEN_PARAM_VALUE 		as genParamValue,
 		IS_ACTIVE 				as isActive,
 		UPDATED_BY				as updatedBy,
-		UPDATE_DATE				as updateDate
+		UPDATE_DATE				as updateDateInString
 		from general_parameter
 		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
@@ -31,7 +31,7 @@
 	</select>
 
 	<select id="countGenParam" resultClass="java.lang.Integer" parameterClass="java.util.Map">
-		select count(1) from general_parameter where 1=1
+		select count(1) from general_parameter where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamId">
 				LOWER(gen_param_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -61,7 +61,7 @@
 		GEN_PARAM_VALUE 		as genParamValue,
 		IS_ACTIVE 				as isActive,
 		UPDATED_BY				as updatedBy,
-		UPDATE_DATE				as updateDate
+		UPDATE_DATE				as updateDateInString
 		from general_parameter 
 		where gen_param_id = #tmpGenParamId# and IS_ACTIVE = 1
 	</select>
@@ -87,12 +87,18 @@
 		UPDATE_DATE = SYSDATE
 		where GEN_PARAM_ID = #genParamId#
 	</update>
-	<delete id="deleteGenParam" parameterClass="java.util.Map">
+	
+	<update id="deleteGenParam" parameterClass="general.GeneralParamBean">
 		update
 		general_parameter set
-		IS_ACTIVE = 0
-		UPDATED_BY = #username#,
+		IS_ACTIVE = 0,
+		UPDATED_BY = #updatedBy#,
 		UPDATE_DATE = SYSDATE
 		where GEN_PARAM_ID = #genParamId#
-	</delete>
+		AND IS_ACTIVE=1
+	</update>
+	
+	<select id="getMaxGenParamId" resultClass="java.lang.Integer" >
+	select max(General_parameter_id)+1 from general_parameter
+	</select>
 </sqlMap>
