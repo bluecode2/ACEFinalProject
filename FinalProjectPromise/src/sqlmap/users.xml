@@ -137,4 +137,8 @@
 		        from vusers
 		        where is_active = 1 AND USER_ID = #tempUserID#
 	</select>
+	
+	<select id="getMD5OldPass" parameterClass="java.lang.String" resultClass="java.lang.String">
+		select dbms_obfuscation_toolkit.md5(input_string => #OldPass#) from dual;
+	</select>
 </sqlMap>

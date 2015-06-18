@@ -31,7 +31,16 @@ public class UserForm extends ActionForm{
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	private String passwordUser;
+	private String oldPassword;
 	
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
 	public String getPasswordUser() {
 		return passwordUser;
 	}

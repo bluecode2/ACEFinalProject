@@ -41,7 +41,8 @@ public class UserHandler extends Action{
 		else if ("Delete".equalsIgnoreCase(uForm.getTask())){
 			
 		}
-		else if ("save".equalsIgnoreCase(uForm.getTask())){
+
+else if ("save".equalsIgnoreCase(uForm.getTask())){
 			
 			Boolean isAdd = uForm.getIsAdd();
 /*			if (uForm.getuBean().getUserId() == 0)
@@ -54,7 +55,16 @@ public class UserHandler extends Action{
 				uMan.insertUser(uForm.getuBean());
 			} else {
 				uForm.getuBean().setUpdatedBy(1);
+				uForm.getOldPassword();
+				uForm.setOldPassword(uMan.getMD5OldPass(uForm.getOldPassword()));
+				if (uForm.getOldPassword().equals(uForm.getuBean().getPasswordUser())){
+					
+				}
+				else {
+					request.setAttribute("pass", "1");
+				}
 //				dMan.updateDepartment(dForm.getSelectedDept());
+				
 			}
 
 			response.sendRedirect("users.do");

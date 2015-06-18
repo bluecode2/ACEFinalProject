@@ -2,9 +2,6 @@ package user;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import common.Constant;
-
 import common.Constant;
 
 public class UserBean {

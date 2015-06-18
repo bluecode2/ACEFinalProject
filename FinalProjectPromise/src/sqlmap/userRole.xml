@@ -53,6 +53,7 @@
 		UPDATE USER_ROLE
 		SET
 		UPDATED_BY			=	#updatedBy#,
+		USER_ROLE_CODE		=	#userRoleCode#,
 		USER_ROLE_NAME		=	#userRoleName#,
 		UPDATE_DATE			=	SYSDATE
 		WHERE USER_ROLE_ID	=	#userRoleId#
