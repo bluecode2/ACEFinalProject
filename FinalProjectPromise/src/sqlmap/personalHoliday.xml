@@ -57,7 +57,7 @@
 		PERSONAL_HOLIDAY(HOLIDAY_ID, EMPLOYEE_ID, CREATED_BY, UPDATED_BY,
 		HOLIDAY_DESC, HOLIDAY_DATE, IS_EXCHANGE_DAY, CREATE_DATE, UPDATE_DATE)
 		VALUES
-		(#holidayId#, #employeeId#, #createdBy#, NULL, #holidayDesc#, #holidayDateInString#, 
+		(#holidayId#, #employeeId#, #createdBy#, NULL, #holidayDesc#, TO_DATE(#holidayDateInString#,'yyyy-MM-dd'),
 		#isExchangeDay#, SYSDATE, NULL)
 	</insert>
 

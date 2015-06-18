@@ -59,6 +59,7 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 							<html:select name="generalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
+								<option value="">All</option>
 								<option value="genHolidayName">General Holiday Name</option>
 								<option value="genHolidayDate">General Holiday Date</option>
 							</html:select>

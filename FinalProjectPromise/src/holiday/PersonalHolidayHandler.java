@@ -22,37 +22,37 @@ public class PersonalHolidayHandler extends Action{
 		
 		CommonFunction.createAllowedMenu(null, request);
 		
-		/*if("add".equals(persForm.getTask())){
+		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "General Holiday Entry");
+			request.setAttribute("pageTitle", "Personal Holiday Entry");
 			
-			return mapping.findForward("genEntry");
+			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("save".equals(persForm.getTask())){
 			Boolean isAdd = persForm.getIsAdd();
 			
 			if (isAdd) {
-				persForm.getGenHolidayBean().setGenHolidayId(persManager.getNewGenHolidayId());
-				persForm.getGenHolidayBean().setCreatedBy(1);
-				persManager.insertGeneralHoliday(persForm.getGenHolidayBean());
+				persForm.getPersHolidayBean().setHolidayId(persManager.getNewGenHolidayId());
+				persForm.getPersHolidayBean().setCreatedBy(1);
+				persManager.insertPersonalHoliday(persForm.getPersHolidayBean());
 			} 
 			else {
-				persForm.getGenHolidayBean().setUpdatedBy(1);
-				persManager.editGeneralHoliday(persForm.getGenHolidayBean());
+				persForm.getPersHolidayBean().setUpdatedBy(1);
+				persManager.editPersonalHoliday(persForm.getPersHolidayBean());
 			}
 
-			response.sendRedirect("generalHoliday.do");
+			response.sendRedirect("personalHoliday.do");
 			return null;
 		}
 		else if ("edit".equals(persForm.getTask())) {
-			request.setAttribute("pageTitle", "General Holiday Edit");
-			persForm.setGenHolidayBean(persManager.getGeneralHolidayByHolId(persForm.getSelectedId()));
+			request.setAttribute("pageTitle", "Personal Holiday Edit");
+			persForm.setPersHolidayBean(persManager.getPersonalHolidayEdit(persForm.getSelectedId()));
 
-			return mapping.findForward("genEntry");
+			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("delete".equals(persForm.getTask())) {
-			persManager.deleteGeneralHoliday(persForm.getSelectedId());
-		}*/
+			persManager.deletePersonalHoliday(persForm.getSelectedId());
+		}
 		
 		persForm.setTask("");
 		persForm.setSearchField(persForm.getCurrSearchField());
