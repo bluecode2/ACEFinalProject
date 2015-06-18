@@ -25,16 +25,9 @@
 	}
 	
 	$(document).ready(function() {
-		$("#txtGenHolDate").attr("data-provide", "datepicker");
+		$(".datepicker").attr("data-provide", "datepicker");
 	});
 	
-	$.fn.datepicker.defaults.autoclose = true;
-	$.fn.datepicker.defaults.format = "yyyy-mm-dd";
-	$(document).on('[data-provide="datepicker"]',
-			function(e){
-				datepickerPlugin.call(this, 'show');
-			}
-		);
 </script>
 </head>
 <body>
@@ -62,7 +55,7 @@
 					<tr>
 						<td>General Holiday Date</td>
 						<td>
-							<html:text styleClass="form-control" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
+							<html:text styleClass="form-control datepicker" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
 						</td>
 					</tr>
 <!-- 					<tr> -->
