@@ -36,14 +36,6 @@
 				} else {
 					alert('Password and Re-type Password must be same');
 				}
-			/* if ((nPass != reTypePass)||(nPass != pass)){
-				set attribute untuk validasi pada password lama
-				nanti validasi di handler
-				trus di return mapping kembali dengan hasil set attribute memanggil error message pada javascript
-			}
-			else {
-
-			} */
 		}
 
 	}
@@ -94,7 +86,10 @@
 				});
 	}
 	
-	
+	function resetPass(){
+		document.forms[0].task.value = "resetPass";
+		document.forms[0].submit();
+	}
 	
 </script>                 
 </head>
@@ -184,7 +179,16 @@
 						<td style="padding-left: 15px;"><input type="password"
 							id="reNewPass" Class="form-control" /></td>
 					</tr>
-					
+					<tr>
+						<td>&nbsp;</td>
+					</tr>
+					<logic:equal value="true" name="show">
+					<tr align="left" id="resetBtn">
+						<td>&nbsp;</td>
+						<td style="padding-left: 15px;"  ><input type="button"
+							onclick="resetPass()" class="btn-info" value="Reset Password"/></td>
+					</tr>
+					</logic:equal>
 				</table>
 			</div>
 

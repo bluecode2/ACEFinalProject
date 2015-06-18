@@ -12,6 +12,8 @@ import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeForm;
 import employee.EmployeeManager;
+import general.GeneralParamBean;
+import general.GeneralParamManager;
 
 public class UserHandler extends Action{
 	@Override
@@ -33,6 +35,7 @@ public class UserHandler extends Action{
 		CommonFunction.createAllowedMenu(null, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
+			request.setAttribute("show", true);
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
@@ -46,6 +49,7 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
+			request.setAttribute("show", false);
 			uForm.setIsAdd(false);
 			request.setAttribute("pageTitle", "User Edit");
 			uForm.setuBean(uMan.getUserByUserID(uForm
@@ -67,9 +71,6 @@ public class UserHandler extends Action{
 		else if ("save".equalsIgnoreCase(uForm.getTask())){
 			System.out.println("berhasil masuk save");
 			Boolean isAdd = uForm.getIsAdd();
-/*			if (uForm.getuBean().getUserId() == 0)
-				uForm.getuBean().setUserId(null);
-*/
 			if (isAdd) {
 				uForm.getuBean().setCreatedBy(1);
 				uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
@@ -87,10 +88,19 @@ public class UserHandler extends Action{
 					uForm.setTask("edit");
 					return mapping.findForward("userAdd");
 				}
-//				dMan.updateDepartment(dForm.getSelectedDept());
-				
 			}
 
+			response.sendRedirect("users.do");
+			return null;
+		}
+		else if ("resetPass".equalsIgnoreCase(uForm.getTask())){
+			uForm.setVal("0");
+			uForm.getuBean().setUpdatedBy(1);
+			GeneralParamManager gParamMan = new GeneralParamManager();
+			GeneralParamBean gParamBean = new GeneralParamBean();
+			gParamBean = gParamMan.getGenParamByParamId("password");
+			uForm.getuBean().setPasswordUser(gParamBean.getGenParamValue());
+			uMan.updateUser(uForm.getuBean());
 			response.sendRedirect("users.do");
 			return null;
 		}
@@ -100,7 +110,6 @@ public class UserHandler extends Action{
 		uForm.setSearchValue(uForm.getCurrSearchValue());
 
 		int rowCount;
-		
 		
 		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue());

@@ -27,6 +27,9 @@
 	update users set 
 	username = #username#,
 	updated_by = #updatedBy#,
+	update_date = SYSDATE,
+	employee_id = #employeeId#,
+	user_role_id = #userRoleId#,
 	password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #passwordUser#)
 	where user_id = #userId#
 	</update>
