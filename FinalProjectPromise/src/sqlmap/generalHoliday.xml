@@ -25,12 +25,7 @@
 			<isEqual property="searchField" compareValue="genHolidayDateInString">
 				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>	
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isGenerated">
-				LOWER(is_generated) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>			
+		</dynamic>		
 		ORDER BY GEN_HOLIDAY_ID ) hol
 		where ROWNUM &lt;= #end#)
 		where rnum &gt;
@@ -80,7 +75,7 @@
 		SET
 		GEN_HOLIDAY_NAME=#genHolidayName#,
 		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'yyyy-MM-dd'),
-		IS_GENERATED=#isGenerated#,
+		<!-- IS_GENERATED=#isGenerated#, -->
 		updated_by=#updatedBy#,
 		update_date=SYSDATE
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
@@ -93,13 +88,7 @@
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM GENERAL_HOLIDAY
-				where 1=1
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="genHolidayId">
-				LOWER(gen_holiday_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
+		SELECT COUNT(1) FROM GENERAL_HOLIDAY WHERE 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genHolidayName">
 				LOWER(gen_holiday_name) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -109,12 +98,6 @@
 			<isEqual property="searchField" compareValue="genHolidayDateInString">
 				LOWER(GEN_HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>	
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="isGenerated">
-				LOWER(is_generated) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>			
-
+		</dynamic>
 	</select>
 </sqlMap>
