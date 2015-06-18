@@ -42,7 +42,7 @@ public class RankEmpHandler extends Action {
 
 			dForm.setBean(dMan.getRankByRankId(dForm.getSelectedId()));
 
-			return mapping.findForward("entry");
+			return mapping.findForward("employeeRankEntry");
 		}
 
 		else if (dForm.getTask().equals("delete")) {
