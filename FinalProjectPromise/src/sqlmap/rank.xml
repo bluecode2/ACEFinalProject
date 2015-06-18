@@ -95,7 +95,7 @@
 		where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankCode">
-				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(rank_code) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
@@ -103,7 +103,7 @@
 				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>	
-			ORDER BY rank_id
+			ORDER BY rank_level
 		
 	</select>
 </sqlMap>

@@ -43,15 +43,15 @@
 	function searchRank() {
 		var searchField = $('#selSearchFieldRank').val();
 		var searchValue = $('#txtSearchValueRank').val();
-
 		$.ajax({
 			type : "POST",
 			url : "searchRank.do",
 			data : "searchField=" + searchField
 					+ "&searchValue=" + searchValue,
 			success : function(response) {
-				$("#tblSearch").find("tr:gt(0)").remove();
-				$("#tblSearch").append(response);
+				alert("a");
+				$("#tblSearchRank").find("tr:gt(0)").remove();
+				$("#tblSearchRank").append(response);
 				registerSearchRankEvent();
 			},
 			error : function(e) {
@@ -211,7 +211,7 @@
 											<option value="deptName">Dept Name</option>
 									</select></td>
 									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchValueRank" class="form-control" /></td>
+										id="txtSearchDept" class="form-control" /></td>
 									<td style="padding-left: 15px"><button type="button"
 											onclick="searchDepartment();" id="btnSearch"
 											class="btn btn-sm btn-info btn-icon" title="Back">
@@ -221,7 +221,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchDept"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>
@@ -254,7 +254,7 @@
 		</div>
 		<!-- /.modal -->
 		
-		<!-- edit disini -->
+		<!-- FIX UNTUK RANK -->
 			<div class="modal fade" id="searchRank" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -272,15 +272,14 @@
 								<table>
 									<tr>
 										<td>Search</td>
-										<td style="padding-left: 15px"><select
-											class="form-control" id="selSearchFieldRank"
+										<td style="padding-left: 15px">
+										<select class="form-control" id="selSearchFieldRank"
 											style="width: 150px">
 												<option value="rankCode">Rank Code</option>
 												<option value="rankName">Rank Name</option>
 										</select></td>
 										<td style="padding-left: 15px">
-										<input type="text"
-											id="txtSearchValueRank" class="form-control" /></td>
+										<input type="text" id="txtSearchValueRank" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="searchRank();" id="btnSearch"
 												class="btn btn-sm btn-info btn-icon" title="Back">
@@ -290,7 +289,7 @@
 								</table>
 							</div>
 
-							<table width="100%" id="tblSearch"
+							<table width="100%" id="tblSearchRank"
 								class="table table-striped table-hover table-bordered table-clickable">
 								<thead>
 									<tr>
@@ -328,6 +327,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+	<!-- 	FIX UNTUK RANK -->
 		
 		<div class="modal fade" id="searchSupervisor" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -363,7 +363,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchEmp"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>
