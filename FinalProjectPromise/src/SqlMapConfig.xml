@@ -39,6 +39,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<sqlMap resource="sqlmap/menu.xml" />
 	<sqlMap resource="sqlmap/userRole.xml" />
 	<sqlMap resource="sqlmap/users.xml"/>
+	<sqlMap resource="sqlmap/rank.xml"/>
 </sqlMapConfig>
 
 

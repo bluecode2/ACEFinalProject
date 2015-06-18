@@ -1,4 +1,4 @@
-package project_member;
+package project_role;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -31,17 +31,16 @@ public class RankEmpHandler extends Action {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
 
-			request.setAttribute("pageTitle", "Department Entry");
+			request.setAttribute("pageTitle", "Employee Rank Entry");
 			return mapping.findForward("entry");
 		}
 
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Department Entry");
+			request.setAttribute("pageTitle", "Employee Rank Entry");
 
-			dForm.setSelectedRankEmp(dMan.getRankByRankId(dForm
-					.getSelectedId()));
+			dForm.setBean(dMan.getRankByRankId(dForm.getSelectedId()));
 
 			return mapping.findForward("entry");
 		}
@@ -54,11 +53,11 @@ public class RankEmpHandler extends Action {
 			Boolean isAdd = dForm.getIsAdd();
 
 			if (isAdd) {
-				dForm.getSelectedRankEmp().setCreatedBy(1);
-				dMan.insertEmployeeRank(dForm.getSelectedRankEmp());
+				dForm.getBean().setCreatedBy(1);
+				dMan.insertEmployeeRank(dForm.getBean());
 			} else {
-				dForm.getSelectedRankEmp().setUpdatedBy(1);
-				dMan.updateEmployeeRank(dForm.getSelectedRankEmp());
+				dForm.getBean().setUpdatedBy(1);
+				dMan.updateEmployeeRank(dForm.getBean());
 			}
 
 			response.sendRedirect("rankEmployee.do");

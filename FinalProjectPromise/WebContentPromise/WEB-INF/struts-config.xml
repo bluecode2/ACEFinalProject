@@ -14,7 +14,7 @@
 		<form-bean name="rankEmpForm" type="rank_employee.RankEmpForm"></form-bean>
 		<form-bean name="userRoleForm" type="user.UserRoleForm"></form-bean>
 		<form-bean name="menuForm" type="general.MenuForm"></form-bean>
-		<form-bean name="projectRoleForm" type="project.ProjectRoleForm"></form-bean>
+		<form-bean name="projectRoleForm" type="project_role.ProjectRoleForm"></form-bean>
 		<form-bean name="personalHolidayForm" type="holiday.PersonalHolidayForm"></form-bean>
 	</form-beans>
 
@@ -70,7 +70,7 @@
 			<forward name="userRoleList" path="/WEB-INF/jsp/user/userRoleList.jsp"></forward>
 			<forward name="userRoleEntry" path="/WEB-INF/jsp/user/userRoleEntry.jsp"></forward>
 		</action>
-		<action path="/projectRole" name="projectRoleForm" type="project.ProjectRoleHandler"
+		<action path="/projectRole" name="projectRoleForm" type="project_role.ProjectRoleHandler"
 			scope="request">
 			<forward name="projectRoleList" path="/WEB-INF/jsp/projectRole/projectRoleList.jsp"></forward>
 			<forward name="projectRoleEntry" path="/WEB-INF/jsp/projectRole/projectRoleEntry.jsp"></forward>
