@@ -85,9 +85,10 @@
 		employee_name   AS      employeeName,
 		user_role_name  AS      userRoleName
 		from vusers
-		where password_user = dbms_obfuscation_toolkit.md5(input_string=&gt;  #password#) AND username = #username# AND is_active =1
+		where password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #password#) 
+		AND username = #username# 
 	</select>
-
+	
 	<select id="countUser" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM USERS

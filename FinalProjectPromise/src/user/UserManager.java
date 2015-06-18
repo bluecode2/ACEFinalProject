@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.client.SqlMapException;
 
 public class UserManager {
 	
@@ -26,7 +27,7 @@ public class UserManager {
 		m.put("password", password);
 		
 		uBean = (UserBean) this.ibatis.queryForObject("users.checkLogin", m);
-		
+
 		return uBean;
 	}
 	
