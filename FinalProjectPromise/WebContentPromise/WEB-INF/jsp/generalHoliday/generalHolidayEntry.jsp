@@ -11,7 +11,9 @@
 <title>General Holiday</title>
 
 <link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
 <script src="js/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
@@ -26,6 +28,7 @@
 	
 	$(document).ready(function() {
 		$(".datepicker").attr("data-provide", "datepicker");
+// 		$(".datepicker").attr("data-date-start-date", new Date());
 	});
 	
 </script>
@@ -50,14 +53,14 @@
 						<td>General Holiday Name</td>
 						<td>
 							<html:text styleClass="form-control" styleId="txtGenHolName" name="generalHolidayForm" property="genHolidayBean.genHolidayName"></html:text>
-							
-							
 						</td>
 					</tr>
 					<tr>
 						<td>General Holiday Date</td>
 						<td>
-							<html:text styleClass="form-control datepicker" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
+							<html:text styleClass="form-control datepicker" styleId="txtGenHolDate"
+								name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
+							<%-- <html:text styleClass="form-control datepicker" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text> --%>
 						</td>
 					</tr>
 <!-- 					<tr> -->

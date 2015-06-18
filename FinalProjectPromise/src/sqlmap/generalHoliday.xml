@@ -92,14 +92,15 @@
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</delete>
 
-	<select id="countGeneralHoliday" resultClass="java.lang.Integer"
-		parameterClass="java.util.Map">
+	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM GENERAL_HOLIDAY
 		WHERE 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="byDate">
-				GEN_HOLIDAY_DATE BETWEEN to_date(#searchValue#,'yyyy-MM-dd') and
-				to_date(#searchValue2#,'yyyy-MM-dd')
+				<isNotEqual property="searchValue" compareValue="">
+					GEN_HOLIDAY_DATE BETWEEN to_date(#searchValue#,'yyyy-MM-dd')
+					AND to_date(#searchValue2#,'yyyy-MM-dd')
+				</isNotEqual>
 			</isEqual>
 		</dynamic>
 	</select>

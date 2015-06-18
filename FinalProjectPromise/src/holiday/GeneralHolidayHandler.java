@@ -33,7 +33,6 @@ public class GeneralHolidayHandler extends Action{
 		}
 		else if ("save".equals(genForm.getTask())){
 			Boolean isAdd = genForm.getIsAdd();
-			
 			if (isAdd) {
 				genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
 				genForm.getGenHolidayBean().setCreatedBy(1);
@@ -86,7 +85,6 @@ public class GeneralHolidayHandler extends Action{
 			}
 
 		}
-		
 
 		genForm.setTask("");
 		

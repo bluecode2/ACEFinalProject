@@ -60,7 +60,7 @@
 		<html:hidden property="currSearchField" name="generalHolidayForm" />
 		<html:hidden property="currSearchValue2" name="generalHolidayForm" />
 		<html:hidden property="currPage" name="generalHolidayForm" />
-		<html:hidden property="searchField" name="generalHolidayForm" />
+		<html:hidden property="searchField" name="generalHolidayForm" value="genHolidayDateInString" />
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -70,24 +70,24 @@
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
-						<td>Search by</td>
-						<td style="padding-left: 15px;"><html:select
+						<td>Search by Date</td>
+						<%-- <td style="padding-left: 15px;">
+							<html:select
 								name="generalHolidayForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="genHolidayName">General Holiday Name</option>
 								<option value="genHolidayDateInString">General Holiday
 									Date</option>
-							</html:select></td>
+							</html:select>
+						</td> --%>
 						<td style="padding-left: 15px"><html:text
 								styleClass="form-control datepicker" styleId="txtGenHolDate"
 								name="generalHolidayForm" property="searchValue"></html:text></td>
-
-
-
 						<td style="padding-left: 15px">-</td>
 						<td style="padding-left: 15px"><html:text
 								styleClass="form-control datepicker" styleId="txtGenHolDate"
 								name="generalHolidayForm" property="searchValue2"></html:text></td>
+								
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
 								class="btn btn-info btn-icon" title="Search">
