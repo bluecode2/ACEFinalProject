@@ -24,7 +24,7 @@
 				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>			
-		ORDER BY rank_id ) r
+		ORDER BY rank_level asc ) r
 		where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>
