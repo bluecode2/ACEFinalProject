@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DepartmentList</title>
+<title>Department List</title>
 <script type="text/javascript">
 	function onBtnAddClick(){
 		document.forms[0].task.value = "add";
