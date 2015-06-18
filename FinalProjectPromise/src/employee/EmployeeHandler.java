@@ -34,8 +34,8 @@ public class EmployeeHandler extends Action{
 			eForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "Employee Entry");
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
-			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog());
-			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0));
+			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0,"",""));
 			
 			return mapping.findForward("entry");
 		}
@@ -47,8 +47,9 @@ public class EmployeeHandler extends Action{
 
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
-			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog());
-			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,99));
+			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
+			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,99,"",""));
 			return mapping.findForward("entry");
 		}
 

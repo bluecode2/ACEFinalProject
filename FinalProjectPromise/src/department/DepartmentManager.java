@@ -51,12 +51,16 @@ public class DepartmentManager {
 		return dept;
 	}
 	
-	public List<DepartmentBean> getListDepartmentForSearchDialog() {
-
+	public List<DepartmentBean> getListDepartmentForSearchDialog(String col, String input) {
+		
+		Map m = new HashMap();
+		m.put("searchValue", input);
+		m.put("searchField", col);
+		
 		List<DepartmentBean> arr = new ArrayList<DepartmentBean>();
 
 		try {
-			arr = this.ibatis.queryForList("department.getDepartmentForSearchDialog", null);
+			arr = this.ibatis.queryForList("department.getDepartmentForSearchDialog", m);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

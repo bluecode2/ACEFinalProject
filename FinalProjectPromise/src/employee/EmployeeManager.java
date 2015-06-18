@@ -62,13 +62,16 @@ public class EmployeeManager {
 		return arr;
 	}
 
-	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel)
+	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel, String col, String input)
 			throws ClassNotFoundException, SQLException {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		
 		Map map = new HashMap();
 		map.put("deptId", deptId);
 		map.put("rankLevel", rankLevel);
+		map.put("searchValue", input);
+		map.put("searchField", col);
+		
 		
 		try {
 			arr = this.ibatis.queryForList("employee.getEmployeeForSupervisor",
