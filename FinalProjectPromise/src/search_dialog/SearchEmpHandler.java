@@ -37,10 +37,10 @@ public class SearchEmpHandler extends Action{
 		List<EmployeeBean> arrEmp = eMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
 		
 		for (EmployeeBean empBean : arrEmp) {
-			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchUserRole\">");
-//			out.println("<td style=\"display: none\">" + uRoleBean.getUserRoleId() + "</td>");
-//			out.println("<td>" + uRoleBean.getUserRoleCode() + "</td>");
-//			out.println("<td>" + uRoleBean.getUserRoleName() + "</td>");
+			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");
+			out.println("<td style=\"display: none\">" + empBean.getEmployeeId() + "</td>");
+			out.println("<td>" + empBean.getEmployeeCode() + "</td>");
+			out.println("<td>" + empBean.getEmployeeName() + "</td>");
 			out.println("</tr>");
 		}	
 

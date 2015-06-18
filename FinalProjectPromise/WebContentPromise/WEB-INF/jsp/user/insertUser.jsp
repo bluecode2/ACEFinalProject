@@ -113,7 +113,23 @@
 			});
 		}
 		if (document.getElementById('btnSearchEmp').value == 'btnEmp'){
-			
+			var searchField = $('#selSearchFieldEmpId').val();
+			var searchValue = $('#txtSearchValueEmpId').val();
+	
+			$.ajax({
+				type : "POST",
+				url : "searchEmp.do",
+				data : "&searchField=" + searchField
+						+ "&searchValue=" + searchValue,
+				success : function(response) {
+					$("#tblSearchEmp").find("tr:gt(0)").remove();
+					$("#tblSearchEmp").append(response);
+					registerSearchEmployee();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+			});
 		}
 	}
 	
@@ -307,13 +323,13 @@
 								<tr>
 									<td>Search</td>
 									<td style="padding-left: 15px"><select
-										class="form-control" id="selSearchFieldRoleId"
+										class="form-control" id="selSearchFieldEmpId"
 										style="width: 150px">
 											<option value="employeeCode">Employee Code</option>
 											<option value="employeeName">Employee Name</option>
 									</select></td>
 									<td style="padding-left: 15px">
-									<input type="text" id="txtSearchValueRoleId" class="form-control" /></td>
+									<input type="text" id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 									<button type="button" onclick="search();" id="btnSearchEmp"
 											class="btn btn-sm btn-info btn-icon" title="Back" value="btnEmp">
@@ -323,7 +339,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblSearchEmp"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>

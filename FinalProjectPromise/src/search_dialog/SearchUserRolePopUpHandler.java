@@ -34,7 +34,7 @@ public class SearchUserRolePopUpHandler extends Action {
 		String searchField = sUserRoleForm.getSearchField();
 		String searchValue = sUserRoleForm.getSearchValue();
 		
-		List<UserRoleBean> arrEmp = uRoleMan.getUserRole(sUserRoleForm.getSearchField(), sUserRoleForm.getSearchValue(), 1, Constant.pageSize);
+		List<UserRoleBean> arrEmp = uRoleMan.getUserRole(searchField, searchValue, 1, Constant.pageSize);
 		
 		for (UserRoleBean uRoleBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchUserRole\">");
