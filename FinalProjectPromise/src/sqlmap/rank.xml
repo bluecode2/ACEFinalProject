@@ -82,4 +82,28 @@
 			</isEqual>
 		</dynamic>		
 	</select>
+	<select id="getRankListForSearch" parameterClass="java.util.Map" resultClass="rank_employee.RankEmpBean">
+	SELECT rank_id as rankId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		rank_name as rankName,
+		rank_level as rankLevel,
+		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
+		rank_code as rankCode
+		FROM rank_emp
+		where 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankCode">
+				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankName">
+				LOWER(rank_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>	
+			ORDER BY rank_id
+		
+	</select>
 </sqlMap>

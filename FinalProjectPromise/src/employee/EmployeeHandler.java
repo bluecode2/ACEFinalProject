@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import rank_employee.RankEmpBean;
+import rank_employee.RankEmpManager;
 import common.CommonFunction;
 import common.Constant;
 import department.DepartmentManager;
@@ -22,7 +24,7 @@ public class EmployeeHandler extends Action{
 		EmployeeForm eForm = (EmployeeForm) form;
 		DepartmentManager dMan = new DepartmentManager();
 		EmployeeManager eMan = new EmployeeManager();
-
+		RankEmpManager reMan = new RankEmpManager();
 		HttpSession session = request.getSession(true);
 		
 		CommonFunction.createAllowedMenu(null, request);
@@ -31,7 +33,7 @@ public class EmployeeHandler extends Action{
 			eForm.setIsAdd(true);
 			eForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "Employee Entry");
-			
+			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog());
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0));
 			
