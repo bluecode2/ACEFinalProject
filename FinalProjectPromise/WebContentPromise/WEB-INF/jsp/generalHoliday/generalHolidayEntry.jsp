@@ -10,10 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>General Holiday</title>
 
-<link href="css/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+<link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
+
 <script type="text/javascript">
 	function onBtnSaveClick(){
 		document.forms[0].task.value = 'save';
@@ -23,11 +23,18 @@
 	function onBtnBackClick(){
 		location.href = "generalHoliday.do";
 	}
+	
 	$(document).ready(function() {
 		$("#txtGenHolDate").attr("data-provide", "datepicker");
-		$("#txtGenHolDate").attr("data-date-format", "yyyy/mm/dd");
-	    autoclose: true
 	});
+	
+	$.fn.datepicker.defaults.autoclose = true;
+	$.fn.datepicker.defaults.format = "yyyy-mm-dd";
+	$(document).on('[data-provide="datepicker"]',
+			function(e){
+				datepickerPlugin.call(this, 'show');
+			}
+		);
 </script>
 </head>
 <body>
