@@ -99,7 +99,10 @@ public class UserHandler extends Action{
 			GeneralParamManager gParamMan = new GeneralParamManager();
 			GeneralParamBean gParamBean = new GeneralParamBean();
 			gParamBean = gParamMan.getGenParamByParamId("password");
+			System.out.println(uForm.getuBean().getUserId()+" "+uForm.getuBean().getUserRoleId()+ " "+uForm.getuBean().getEmployeeId());
+			System.out.println(gParamBean.getGenParamValue());
 			uForm.getuBean().setPasswordUser(gParamBean.getGenParamValue());
+			System.out.println(uForm.getuBean().getUserId()+"berhasil true");
 			uMan.updateUser(uForm.getuBean());
 			response.sendRedirect("users.do");
 			return null;
