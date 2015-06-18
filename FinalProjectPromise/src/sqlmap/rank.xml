@@ -10,7 +10,7 @@
 		rank_name as rankName,
 		rank_level as rankLevel,
 		create_date as createDate,
-		update_date as updateDate
+		update_date as updateDate,
 		rank_code as rankCode
 		FROM rank_emp
 		where 1=1
@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="getNewRankId" resultClass="java.lang.Integer">
-	select max(rank_id)+1 from rank_emp
+	select max(rank_id)+1 FROM rank_emp
 	</select>
 
 	<insert id="insertEmployeeRank" parameterClass="rank_employee.RankEmpBean">
@@ -64,7 +64,7 @@
 	</update>
 
 	<delete id="deleteEmployeeRank" parameterClass="java.lang.Integer">
-		DELETE FROM
+		DELETE
 		rank_emp
 		WHERE rank_id=#id#
 	</delete>
