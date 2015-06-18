@@ -30,7 +30,7 @@ public class HomeHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		hmForm.setUsername(us.getEmployeeName());
-		
+/*		request.setAttribute("username", us.getUsername());*/
 		CommonFunction.createAllowedMenu(null, request);
 		
 		return mapping.findForward("index");
