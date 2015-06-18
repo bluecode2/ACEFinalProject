@@ -21,7 +21,6 @@ public class PersonalHolidayBean {
 	private String updateDateInString;
 	private String empDisplay;
 	private String employeeName;
-	
 	private String holidayDateDisplay;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
