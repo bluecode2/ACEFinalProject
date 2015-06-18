@@ -56,20 +56,20 @@ public class EmployeeHandler extends Action{
 			dMan.deleteDepartment(eForm.getSelectedId(), 1);
 		}
 
-//		else if (eForm.getTask().equals("save")) {
-//			Boolean isAdd = eForm.getIsAdd();
-//
-//			if (isAdd) {
-//				eForm.getSelectedDept().setCreatedBy(1);
-//				dMan.insertDepartment(eForm.getSelectedDept());
-//			} else {
-//				eForm.getSelectedDept().setUpdatedBy(1);
-//				dMan.updateDepartment(eForm.getSelectedDept());
-//			}
-//
-//			response.sendRedirect("department.do");
-//			return null;
-//		}
+		else if (eForm.getTask().equals("save")) {
+			Boolean isAdd = eForm.getIsAdd();
+			
+			if (isAdd) {
+				eForm.getSelectedEmp().setCreatedBy(1);
+				eMan.insertEmployee(eForm.getSelectedEmp());
+			} else {
+				eForm.getSelectedEmp().setUpdatedBy(1);
+				eMan.updateEmployee(eForm.getSelectedEmp());
+			}
+
+			response.sendRedirect("employee.do");
+			return null;
+		}
 		
 		eForm.setTask("");
 		eForm.setSearchField(eForm.getCurrSearchField());
