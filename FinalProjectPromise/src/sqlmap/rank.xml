@@ -56,8 +56,8 @@
 	<update id="updateEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		UPDATE rank_emp
 		SET
-		UPDATED_BY=#updatedBy#, CREATED_BY=#createdBy#,
-		rank_name=#rankName#, UPDATE_DATE=SYSDATE, rank_code = #rankCode#
+		UPDATED_BY=#updatedBy#,
+		rank_name=#rankName#, UPDATE_DATE=SYSDATE,rank_code = #rankCode#,rank_level = #rankLevel#
 		WHERE rank_id=#rankId#
 	</update>
 
@@ -72,7 +72,7 @@
 		SELECT COUNT(1) FROM RANK_EMP
 			where 1=1
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="rankId">
+			<isEqual property="searchField" compareValue="rankCode">
 				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>

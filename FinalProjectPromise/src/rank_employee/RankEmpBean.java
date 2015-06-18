@@ -76,7 +76,6 @@ public class RankEmpBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -107,7 +106,6 @@ public class RankEmpBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

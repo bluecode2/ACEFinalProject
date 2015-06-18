@@ -27,6 +27,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden name="rankEmpForm" property="task" />
+		<html:hidden name="rankEmpForm" property="isAdd" />
 		<html:hidden name="rankEmpForm" property="bean.rankId" />
 
 		<div class="container">

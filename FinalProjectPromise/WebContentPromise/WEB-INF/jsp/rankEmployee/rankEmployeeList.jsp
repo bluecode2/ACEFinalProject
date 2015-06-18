@@ -54,6 +54,13 @@
 				<table>
 					<tr>
 						<td>Search by</td>
+						<td style="padding-left: 15px;">
+							<html:select name="rankEmpForm" property="searchField"
+								styleId="selSearchField" styleClass="form-control">
+								<option value="rankCode">Rank Code</option>
+								<option value="rankName">Rank Name</option>
+							</html:select>
+						</td>
 						<td style="padding-left: 15px"><html:text
 								name="rankEmpForm" property="searchValue"
 								styleClass="form-control" /></td>
