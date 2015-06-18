@@ -8,13 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home</title>
+
 </head>
 <body>
 	<html:form action="/login" method="post">
 	<html:hidden property="task" name="loginForm"/>
+
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
+
 	
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>

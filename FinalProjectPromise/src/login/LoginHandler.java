@@ -26,14 +26,15 @@ public class LoginHandler extends Action {
 		
 		if ("validasi".equals(lForm.getTask())) {
 			System.out.println("masuk ke saringan validasi");
-			System.out.println(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
 				System.out.println("masuk ke validasi berhasil");
+				System.out.println();
 				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 				if (lForm.getUserBean().getIsActive()==1) {
-					session.setAttribute("currUser", lForm.getUserBean());
-					request.setAttribute("pageTitle", "HOME");
 					CommonFunction.createAllowedMenu(null, request);
+					session.setAttribute("currUser", lForm.getUserBean());
+					
+					System.out.println(lForm.getUserBean().getCreateDateInString());
 					
 					return mapping.findForward("index");
 				}
