@@ -100,13 +100,13 @@
 	
 			$.ajax({
 				type : "POST",
-				url : "searchGlobal.do",
+				url : "searchUserRole.do",
 				data : "userRoleID=" + userRoleID + "&searchField=" + searchField
 						+ "&searchValue=" + searchValue,
 				success : function(response) {
 					$("#tblSearchUserRole").find("tr:gt(0)").remove();
 					$("#tblSearchUserRole").append(response);
-					registerSearchHeadDeptEvent();
+					registerSearchUserRole();
 				},
 				error : function(e) {
 					alert("Error: " + e);
