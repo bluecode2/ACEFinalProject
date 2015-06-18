@@ -19,9 +19,23 @@ public class MenuBean {
 	private String updateDateInString;
 	private Integer isParent;
 	private String parentName;
+	private String createdByName;
+	private String updatedByName;
+	
 	SimpleDateFormat df = new SimpleDateFormat(common.Constant.StringFormat.dateFormat);
 
-	
+	public String getUpdatedByName() {
+		return updatedByName;
+	}
+	public void setUpdatedByName(String updatedByName) {
+		this.updatedByName = updatedByName;
+	}
+	public String getCreatedByName() {
+		return createdByName;
+	}
+	public void setCreatedByName(String createdByName) {
+		this.createdByName = createdByName;
+	}
 	public String getParentName() {
 		return parentName;
 	}

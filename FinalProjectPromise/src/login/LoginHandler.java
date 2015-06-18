@@ -25,12 +25,9 @@ public class LoginHandler extends Action {
 
 		
 		if ("validasi".equals(lForm.getTask())) {
-			System.out.println("masuk ke saringan validasi");
 			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
-				System.out.println("masuk ke validasi berhasil");
 				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
 				if (lForm.getUserBean().getIsActive()==1) {
-					
 					session.setAttribute("currUser", lForm.getUserBean());
 					response.sendRedirect("home.do");
 					return null;

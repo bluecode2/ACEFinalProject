@@ -22,14 +22,14 @@ public class MenuHandler extends Action {
 		MenuForm mnForm = (MenuForm) form;
 		MenuManager mnMan = new MenuManager();
 		CommonFunction.createAllowedMenu(null, request);
-		HttpSession session = request.getSession(true);
 		
-		
+		System.out.println("masuk ke handler");
 		mnForm.setListCount(mnMan.getCountMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue()));
 		mnForm.setPageCount((int) Math.ceil((double) mnForm.getListCount() / (double) Constant.pageSize));
-		
+		System.out.println(mnForm.getListCount());
+		System.out.println(mnForm.getPageCount());
 		mnForm.setArrList(mnMan.selectListMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue(), mnForm.getCurrPage(), Constant.pageSize));
-		
+		System.out.println(mnForm.getArrList());
 		request.setAttribute("pageTitle", "General Code List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(mnForm.getPageCount(), mnForm.getCurrPage()));
 
