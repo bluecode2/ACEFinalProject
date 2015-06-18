@@ -35,7 +35,7 @@ public class UserHandler extends Action{
 		CommonFunction.createAllowedMenu(null, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
-			request.setAttribute("show", true);
+			request.setAttribute("show", false);
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
@@ -49,7 +49,7 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
-			request.setAttribute("show", false);
+			request.setAttribute("show", true);
 			uForm.setIsAdd(false);
 			request.setAttribute("pageTitle", "User Edit");
 			uForm.setuBean(uMan.getUserByUserID(uForm
