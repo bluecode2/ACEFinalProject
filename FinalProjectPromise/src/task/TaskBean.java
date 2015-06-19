@@ -8,12 +8,16 @@ import common.Constant;
 public class TaskBean {
 
 	private Integer taskId;
+	private String 	taskName;
 	private Integer projectId;
-	private Integer employeeId;
-	private String 	genCodeId;
+	private Integer assignedTo;
+	private String 	assignedToName;
+	private Integer assignedBy;
+	private String 	assignedByName;
+	private String 	taskStatus;
+	private String 	taskStatusName;
 	private Integer updatedBy;
 	private Integer createdBy;
-	private String 	taskName;
 	private Date 	estStartDate;
 	private String 	estStartDateInString;
 	private Date 	estEndDate;
@@ -24,15 +28,74 @@ public class TaskBean {
 	private String 	actEndDateInString;
 	private Integer estMainDays;
 	private Integer actmainDays;
-	private String 	taskStatus;
 	private Float 	taskProgress;
 	private String 	remarks;
 	private Date 	createDate;
 	private String 	createDateInString;
 	private Date 	updateDate;
 	private String 	updateDateInString;
+	private Integer isOutsource;
+	private String 	taskDesc;
 	
+
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+
+	
+	public String getTaskDesc() {
+		return taskDesc;
+	}
+
+	public void setTaskDesc(String taskDesc) {
+		this.taskDesc = taskDesc;
+	}
+
+	public Integer getAssignedTo() {
+		return assignedTo;
+	}
+
+	public void setAssignedTo(Integer assignedTo) {
+		this.assignedTo = assignedTo;
+	}
+
+	public String getAssignedToName() {
+		return assignedToName;
+	}
+
+	public void setAssignedToName(String assignedToName) {
+		this.assignedToName = assignedToName;
+	}
+
+	public Integer getAssignedBy() {
+		return assignedBy;
+	}
+
+	public void setAssignedBy(Integer assignedBy) {
+		this.assignedBy = assignedBy;
+	}
+
+	public String getAssignedByName() {
+		return assignedByName;
+	}
+
+	public void setAssignedByName(String assignedByName) {
+		this.assignedByName = assignedByName;
+	}
+
+	public String getTaskStatusName() {
+		return taskStatusName;
+	}
+
+	public void setTaskStatusName(String taskStatusName) {
+		this.taskStatusName = taskStatusName;
+	}
+
+	public Integer getIsOutsource() {
+		return isOutsource;
+	}
+
+	public void setIsOutsource(Integer isOutsource) {
+		this.isOutsource = isOutsource;
+	}
 
 	public Integer getTaskId() {
 		return taskId;
@@ -48,22 +111,6 @@ public class TaskBean {
 
 	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
-	}
-
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getGenCodeId() {
-		return genCodeId;
-	}
-
-	public void setGenCodeId(String genCodeId) {
-		this.genCodeId = genCodeId;
 	}
 
 	public Integer getUpdatedBy() {

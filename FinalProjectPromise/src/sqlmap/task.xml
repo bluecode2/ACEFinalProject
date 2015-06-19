@@ -2,7 +2,90 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="task">
-	<select id="getNewTaskId">
-	select MAX(TASK_ID)+1 FROM TASK
+	<select id="getNewTaskId" resultClass="java.lang.Integer">
+		select MAX(TASK_ID)+1 FROM TASK
 	</select>
+	
+	<select id="getAllListAssignTask" resultClass="task.TaskBean" parameterClass="java.util.Map">
+		select * from (
+		    select vit.*, ROWNUM rnum from(
+		        SELECT
+		          TASK_ID           AS taskId,
+		          PROJECT_ID        as projectId,
+		          ASSIGNED_TO       as assignedTo,
+		          ASSIGNED_TO_NAME  as assignedToName,
+		          ASSIGNED_BY       as assignedBy,    
+		          ASSIGNED_BY_NAME  as assignedByName,
+		          TASK_STATUS       as taskStatus,
+		          TASK_NAME         as taskName,
+		          EST_START_DATE    as estStartDateInString,
+		          EST_END_DATE      as estEndDateInString,
+		          ACT_START_DATE    as actStartDateInString,
+		          ACT_END_DATE      as actEndDateInString,
+		          EST_MAIN_DAYS     as estMainDays,
+		          ACT_MAIN_DAYS     as actmainDays,
+		          TASK_PROGRESS     as taskProgress,
+		          REMARKS           as remarks,
+		          CREATE_DATE       as createDateInString,
+		          UPDATE_DATE       as updateDateInString,
+		          TASK_DESC         as taskDesc,
+		          IS_OUTSOURCE      as isOutsource,
+		          TASK_STATUS_NAME  as taskStatusName
+		          from vindependenttask
+		          WHERE 1=1
+					<dynamic prepend="AND">
+						<isEqual property="searchField" compareValue="taskName">
+							LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
+						</isEqual>
+					</dynamic>
+					<dynamic prepend="AND">
+						<isEqual property="searchField" compareValue="taskDesc">
+							LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+						</isEqual>
+					</dynamic>		          
+		          order by task_id) vit
+		      where ROWNUM &lt;= #end#)
+		where rnum &gt; #begin#
+	</select>
+	
+	<select id="getCountAssignTask" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(1)
+		from vindependenttask
+		WHERE 1=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskName">
+							LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskDesc">
+				LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		          
+	</select>
+	
+	<insert id="insertToAssignTask" parameterClass="task.TaskBean">
+		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
+		EST_END_DATE,EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status) 
+		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
+	</insert>
+	
+	<update id="updateCommentAssignTask" parameterClass="java.util.Map">
+		UPDATE TASK SET 
+		TASK_NAME =#taskName#,
+		TASK_DESC = #taskDesc#,
+		updated_by = #updateBy#,
+		remarks = #remarks#,
+		update_date = SYSDATE
+		WHERE task_id = #taskId#
+	</update>
+	
+	<update id="updateStatusAssignTask" parameterClass="java.util.Map">
+		UPDATE task set 
+		act_start_date = SYSDATE,
+		update_by = #updateBy#,
+		task_status = #taskStatus#
+		where task_id =#taskId#      
+	</update>
 </sqlMap>
