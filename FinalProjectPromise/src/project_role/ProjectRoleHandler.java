@@ -26,7 +26,7 @@ public class ProjectRoleHandler extends Action {
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		CommonFunction.initializeHeader(Constant.MenuCode.us, request);
+		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE, us, request);
 
 		if("add".equals(prf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
