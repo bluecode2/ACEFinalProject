@@ -1,4 +1,7 @@
-/* @import url(http://fonts.googleapis.com/css?family=Lato); */
+/*
+material-blue					#2196f3
+material-light-blue / -info		#03a9f4
+*/
 
 html {
   position: relative;
@@ -6,14 +9,11 @@ html {
 }
 
 body {
-/*   font-family: 'Lato', sans-serif; */
   background-color: #fff;
-/*   footer */
-  margin-bottom: 60px;
+  margin-bottom: 60px;		/* space for footer */
 }
 
 h1 {
-/*   font-family: 'Lato', sans-serif; */
   font-size: 24.5px;
   margin: 0;
   padding: 0;
@@ -36,13 +36,17 @@ label {
 }
 
 .btn-icon {
-  padding: 10px 14px;
+	padding: 10px 14px;
 }
 
 .breadcrumb {
-  padding: 0 12px 0;
-  margin-left: -10px;
-  background-color: transparent;
+	padding: 0 12px 0;
+	margin-left: -10px;
+	background-color: transparent;
+}
+
+.breadcrumb > li > a {
+	color: #03a9f4;
 }
 
 .datepicker{ 
@@ -108,11 +112,8 @@ label {
 .footer {
   position: absolute;
   bottom: 0;
-/*   border-top: 10px solid #E9F4FE; */
   width: 100%;
-  /* Set the fixed height of the footer here */
   min-height: 60px;
-/*   background-color: #d9edf7; */
 }
 
 .footer > .container {
