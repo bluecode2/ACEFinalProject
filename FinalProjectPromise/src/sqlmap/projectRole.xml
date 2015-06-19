@@ -9,10 +9,10 @@
 		PROJECT_ROLE_ID 	as projectRoleId,
 		UPDATED_BY 			as updatedBy,
 		CREATED_BY 			as createdBy,
-		PROJECT_ROLE_NAME	as projectRoleName
+		PROJECT_ROLE_NAME	as projectRoleName,
 		CREATE_DATE			as createDate, 
-		UPDATE_DATE 		as updateDate
-		PROJECT_ROLE_CODE	as projectRoleCode
+		UPDATE_DATE 		as updateDate,
+		PROJECT_ROLE_CODE	as projectRoleCode,
 		IS_DELETED			as isDeleted
 		FROM PROJECT_ROLE 
 		WHERE IS_DELETED = 0
@@ -36,10 +36,10 @@
 		SELECT 
 		UPDATED_BY 			as updatedBy,
 		CREATED_BY 			as createdBy,
-		PROJECT_ROLE_NAME	as projectRoleName
+		PROJECT_ROLE_NAME	as projectRoleName,
 		CREATE_DATE			as createDate, 
-		UPDATE_DATE 		as updateDate
-		PROJECT_ROLE_CODE	as projectRoleCode
+		UPDATE_DATE 		as updateDate,
+		PROJECT_ROLE_CODE	as projectRoleCode,
 		IS_DELETED			as isDeleted
 		FROM PROJECT_ROLE 
 		WHERE PROJECT_ROLE_ID = #projectRoleId#
@@ -60,25 +60,27 @@
 		UPDATE_DATE, 
 		PROJECT_ROLE_CODE,
 		IS_DELETED)
-		VALUES (#projectRoleId#, NULL, #createdBy#, #projectRoleName#, SYSDATE, NULL, #projectRoleCode#)
+		VALUES (#projectRoleId#, NULL, #createdBy#, #projectRoleName#, SYSDATE, NULL, #projectRoleCode#, 0)
 	</insert>
 
 	<update id="editProjectRole" parameterClass="project_role.ProjectRoleBean">
 		UPDATE PROJECT_ROLE
 		SET
-		PROJECT_ROLE_CODE 		= #projectRoleCode#
+		PROJECT_ROLE_CODE 		= #projectRoleCode#,
 		PROJECT_ROLE_NAME 		= #projectRoleName#,
 		UPDATED_BY				= #updatedBy#,
 		UPDATE_DATE				= SYSDATE
 		WHERE PROJECT_ROLE_ID 	= #projectRoleId#
 	</update>
 
-	<update id="deleteProjectRole" parameterClass="java.lang.Integer">
+	<update id="deleteProjectRole" parameterClass="project_role.ProjectRoleBean">
 		UPDATE PROJECT_ROLE
 		SET
 		UPDATED_BY				= #updatedBy#,
-		UPDATE_DATE				= SYSDATE
-		WHERE PROJECT_ROLE_ID 	= #projectRoleId# AND IS_DELETED = 0
+		UPDATE_DATE				= SYSDATE,
+		IS_DELETED 				= 1
+		WHERE PROJECT_ROLE_ID 	= #projectRoleId# 
+		AND IS_DELETED = 0
 	</update>
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">

@@ -18,6 +18,7 @@ public class GeneralHolidayBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private Integer isDeleted = 0;
 
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
@@ -131,5 +132,11 @@ public class GeneralHolidayBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

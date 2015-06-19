@@ -64,7 +64,7 @@ public class ProjectRoleManager {
 
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.insert("projectRole.insertProjectRoleId", projectRoleBean);
+			this.ibatis.insert("projectRole.insertProjectRole", projectRoleBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -93,8 +93,8 @@ public class ProjectRoleManager {
 		}
 	}
 	
-	public String getMaxProjectRoleId() throws SQLException{
-		String maxId = (String) this.ibatis.queryForObject("projectRole.getMaxProjectRoleId", null);
+	public Integer getMaxProjectRoleId() throws SQLException{
+		Integer maxId = (Integer) this.ibatis.queryForObject("projectRole.getMaxProjectRoleId", null);
 		return maxId;
 	}
 

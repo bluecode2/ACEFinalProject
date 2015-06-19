@@ -15,9 +15,10 @@
 		updated_by as
 		updatedBy,
 		TO_CHAR(create_date,'yyyy-MM-dd') as createDateInString,
-		TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString
+		TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString,
+		IS_DELETED as isDeleted
 		FROM GENERAL_HOLIDAY
-		where 1=1
+		where IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="byDate">
 				<isNotEqual property="searchValue" compareValue="">
@@ -43,7 +44,8 @@
 		updated_by as
 		updatedBy,
 		create_date as createDate,
-		update_date as updateDate
+		update_date as updateDate,
+		IS_DELETED as isDeleted
 		FROM GENERAL_HOLIDAY
 		where gen_holiday_id = #holId#
 	</select>
@@ -55,11 +57,11 @@
 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
 		insert into
 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE,
-		IS_GENERATED, created_by, updated_by, create_date, update_date)
+		IS_GENERATED, created_by, updated_by, create_date, update_date, IS_DELETED)
 		values
 		(#genHolidayId#, #genHolidayName#,
 		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL,
-		SYSDATE, NULL)
+		SYSDATE, NULL, 0)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
@@ -67,7 +69,8 @@
 		GEN_HOLIDAY_ID as genHolidayId,
 		GEN_HOLIDAY_NAME as genHolidayName,
 		GEN_HOLIDAY_DATE as genHolidayDateInString,
-		IS_GENERATED as isGenerated
+		IS_GENERATED as isGenerated,
+		IS_DELETED as isDeleted
 		FROM GENERAL_HOLIDAY
 		where GEN_HOLIDAY_ID = #value#
 		ORDER BY
@@ -86,15 +89,25 @@
 		GEN_HOLIDAY_ID=#genHolidayId#
 	</update>
 
-	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
+	<update id="deleteGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
+		update
+		GENERAL_HOLIDAY SET
+		IS_DELETED = 1,
+		UPDATED_BY = #updatedBy#,
+		UPDATE_DATE = SYSDATE
+		WHERE GEN_HOLIDAY_ID=#genHolidayId#
+		AND IS_DELETED=0
+	</update>
+	
+	<!-- <delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
 		DELETE FROM
 		GENERAL_HOLIDAY
 		WHERE GEN_HOLIDAY_ID=#genHolidayId#
-	</delete>
+	</delete> -->
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM GENERAL_HOLIDAY
-		WHERE 1=1
+		WHERE IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="byDate">
 				<isNotEqual property="searchValue" compareValue="">

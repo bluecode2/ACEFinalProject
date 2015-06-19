@@ -88,10 +88,10 @@ public class GeneralHolidayManager {
 		}
 	}
 
-	public void deleteGeneralHoliday(Integer genId) throws SQLException {
+	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("generalHoliday.deleteGeneralHoliday", genId);
+			this.ibatis.update("generalHoliday.deleteGeneralHoliday", genHolidayBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
