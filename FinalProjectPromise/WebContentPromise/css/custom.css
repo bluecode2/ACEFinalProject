@@ -139,3 +139,7 @@ body {
 label {
 	font-weight: normal;
 }
+
+.datepicker{ 
+	z-index: 9999 !important;
+}

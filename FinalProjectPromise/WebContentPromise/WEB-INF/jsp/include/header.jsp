@@ -53,12 +53,8 @@
 										<li><a
 											href="<bean:write name="menuLvl2" property="menuUrl" />"><bean:write
 													name="menuLvl2" property="menuCaption" /></a>
-											<ul class="dropdown-menu sub-menu">
-												<logic:iterate id="menuLvl3" name="arrMenuLvl3">
-													<logic:equal name="menuLvl3" property="parentId"
-														value="${menuLvl2.menuId}">
-														<li><a
-															href="<bean:write name="menuLvl3" property="menuUrl" />"><bean:write
+											<ul class="dropdown-menu sub-menu"><logic:iterate id="menuLvl3" name="arrMenuLvl3"><logic:equal name="menuLvl3" property="parentId"
+														value="${menuLvl2.menuId}"><li><a href="<bean:write name="menuLvl3" property="menuUrl" />"><bean:write
 																	name="menuLvl3" property="menuCaption" /></a></li>
 													</logic:equal>
 												</logic:iterate>
