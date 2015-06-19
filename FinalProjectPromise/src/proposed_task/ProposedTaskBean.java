@@ -1,0 +1,230 @@
+package proposed_task;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import common.Constant;
+
+public class ProposedTaskBean {
+	private Integer propTaskId;
+	private String propTaskName;
+	private String propTaskDesc;
+	private Date estStartDate;
+	private String estStartDateInString;
+	private Date estEndDate;
+	private String estEndDateInString;
+	private Integer propBy;
+	private Integer propTo;
+	private Integer createdBy;
+	private Integer updatedBy;
+	private Date createDate;
+	private String createDateInString;
+	private Date updateDate;
+	private String updateDateInString;
+	private Integer taskId;
+	private String propStatus;
+	
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+
+	public Integer getPropTaskId() {
+		return propTaskId;
+	}
+
+	public void setPropTaskId(Integer propTaskId) {
+		this.propTaskId = propTaskId;
+	}
+
+	public String getPropTaskName() {
+		return propTaskName;
+	}
+
+	public void setPropTaskName(String propTaskName) {
+		this.propTaskName = propTaskName;
+	}
+
+	public String getPropTaskDesc() {
+		return propTaskDesc;
+	}
+
+	public void setPropTaskDesc(String propTaskDesc) {
+		this.propTaskDesc = propTaskDesc;
+	}
+
+	public Date getEstStartDate() {
+		return estStartDate;
+	}
+
+	public void setEstStartDate(Date estStartDate) {
+		this.estStartDate = estStartDate;
+		if (estStartDate != null) {
+			this.estStartDateInString = df.format(estStartDate.getTime());
+		} else {
+			this.estStartDateInString = "";
+		}
+	}
+
+	public Date getEstEndDate() {
+		return estEndDate;
+	}
+
+	public void setEstEndDate(Date estEndDate) {
+		this.estEndDate = estEndDate;
+		if (estEndDate != null) {
+			this.estEndDateInString = df.format(estEndDate.getTime());
+		} else {
+			this.estEndDateInString = "";
+		}
+	}
+
+	public Integer getPropBy() {
+		return propBy;
+	}
+
+	public void setPropBy(Integer propBy) {
+		this.propBy = propBy;
+	}
+
+	public Integer getPropTo() {
+		return propTo;
+	}
+
+	public void setPropTo(Integer propTo) {
+		this.propTo = propTo;
+	}
+
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Integer getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+		if (createDate != null) {
+			this.createDateInString = df.format(createDate.getTime());
+		} else {
+			this.createDateInString = "";
+		}
+	}
+
+	public String getCreateDateInString() {
+		return createDateInString;
+	}
+
+	public void setCreateDateInString(String createDateInString) {
+		this.createDateInString = createDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(createDateInString);
+		} catch (Exception pe) {
+			pe.printStackTrace();
+			this.createDateInString = "";
+			date = null;
+		}
+		this.createDate = date;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+		if (updateDate != null) {
+			this.updateDateInString = df.format(updateDate.getTime());
+		} else {
+			this.updateDateInString = "";
+		}
+	}
+
+	public String getUpdateDateInString() {
+		return updateDateInString;
+	}
+
+	public void setUpdateDateInString(String updateDateInString) {
+		this.updateDateInString = updateDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (Exception pe) {
+			pe.printStackTrace();
+			this.updateDateInString = "";
+			date = null;
+		}
+		this.updateDate = date;
+	}
+
+	public Integer getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(Integer taskId) {
+		this.taskId = taskId;
+	}
+
+	public String getPropStatus() {
+		return propStatus;
+	}
+
+	public void setPropStatus(String propStatus) {
+		this.propStatus = propStatus;
+	}
+
+	
+	public SimpleDateFormat getDf() {
+		return df;
+	}
+
+	public void setDf(SimpleDateFormat df) {
+		this.df = df;
+	}
+
+	public String getEstStartDateInString() {
+		return estStartDateInString;
+	}
+
+	public void setEstStartDateInString(String estStartDateInString) {
+		this.estStartDateInString = estStartDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(estStartDateInString);
+		} catch (Exception pe) {
+			pe.printStackTrace();
+			this.estStartDateInString = "";
+			date = null;
+		}
+		this.estStartDate = date;
+	}
+
+	public String getEstEndDateInString() {
+		return estEndDateInString;
+	}
+
+	public void setEstEndDateInString(String estEndDateInString) {
+		this.estEndDateInString = estEndDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(estEndDateInString);
+		} catch (Exception pe) {
+			pe.printStackTrace();
+			this.estEndDateInString = "";
+			date = null;
+		}
+		this.estEndDate = date;
+	}	
+}
