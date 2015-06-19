@@ -56,7 +56,8 @@ public class GeneralHolidayHandler extends Action{
 		}
 		else if ("delete".equals(genForm.getTask())) {
 			genForm.getGenHolidayBean().setUpdatedBy(us.getUserId());
-			genManager.deleteGeneralHoliday(genForm.getSelectedId());
+			genForm.getGenHolidayBean().setGenHolidayId(genForm.getSelectedId());
+			genManager.deleteGeneralHoliday(genForm.getGenHolidayBean());
 		}
 		else if ("search".equals(genForm.getTask())) {
 			System.out.println(genForm.getCurrSearchField() + " "+ genForm.getCurrSearchValue()+" " +genForm.getCurrSearchValue2());

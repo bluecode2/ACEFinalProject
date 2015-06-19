@@ -10,7 +10,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import user.UserBean;
-
 import common.CommonFunction;
 import common.Constant;
 
@@ -38,29 +37,50 @@ public class ProjectRoleHandler extends Action {
 			
 			prf.setIsAdd(true);
 			request.setAttribute("pageTitle", "Project Role Entry");
+
+			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE_ENTRY, us, request);
 			
 			return mapping.findForward("projectRoleEntry");
 		}
 		else if ("save".equals(prf.getTask())){
 			
-			prf.getProjectRoleBean().setUpdatedBy(us.getUserId());
-			prm.updateProjectRole(prf.getProjectRoleBean());
+			Boolean isAdd = prf.getIsAdd();
+			if (isAdd) {
+				prf.getProjectRoleBean().setProjectRoleId(prm.getMaxProjectRoleId());
+				prf.getProjectRoleBean().setCreatedBy(us.getUserId());
+				prm.insertProjectRole(prf.getProjectRoleBean());
+			} 
+			else {
+				prf.getProjectRoleBean().setProjectRoleId(prf.getSelectedId());
+				prf.getProjectRoleBean().setUpdatedBy(us.getUserId());
+				prm.updateProjectRole(prf.getProjectRoleBean());
+			}
+			
+			System.out.println(prf.getProjectRoleBean().getProjectRoleId());
+			System.out.println(prf.getProjectRoleBean().getProjectRoleCode());
+			System.out.println(prf.getProjectRoleBean().getProjectRoleName());
+			System.out.println(prf.getProjectRoleBean().getUpdateDate());
+			System.out.println(prf.getProjectRoleBean().getUpdatedBy());
 			
 			response.sendRedirect("projectRole.do");
 			return null;
 		}
 		else if ("edit".equals(prf.getTask())) {
 			request.setAttribute("pageTitle", "Project Role Edit");
+			
 			prf.setProjectRoleBean(prm.getProjectRoleById(prf.getSelectedId()));
 			
-			System.out.println(prf.getProjectRoleBean().getProjectRoleId());
+			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE_ENTRY, us, request);
 
 			return mapping.findForward("projectRoleEntry");
 		}
 		else if ("delete".equals(prf.getTask())) {
-			System.out.println(prf.getSelectedId());
+			
+			prf.getProjectRoleBean().setProjectRoleId(prf.getSelectedId());
 			prf.getProjectRoleBean().setUpdatedBy(us.getUserId());
+			System.out.println(prf.getSelectedId());
 			prm.deleteProjectRole(prf.getProjectRoleBean());
+			
 			System.out.println("selesai");
 		}
 		

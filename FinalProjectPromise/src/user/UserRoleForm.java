@@ -23,6 +23,14 @@ public class UserRoleForm extends ActionForm{
 	private Integer 					pageCount = 1;
 	private Integer						selectedId;
 	
+	private String listMenuId;
+	private String listAllowAdd;
+	private String listAllowBack;
+	private String listAllowSave;
+	private String listAllowApprove;
+	private String listAllowDecline;
+	
+	
 	public List<UserRoleBean> getArrList() {
 		return arrList;
 	}
@@ -88,5 +96,41 @@ public class UserRoleForm extends ActionForm{
 	}
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
+	}
+	public String getListMenuId() {
+		return listMenuId;
+	}
+	public void setListMenuId(String listMenuId) {
+		this.listMenuId = listMenuId;
+	}
+	public String getListAllowAdd() {
+		return listAllowAdd;
+	}
+	public void setListAllowAdd(String listAllowAdd) {
+		this.listAllowAdd = listAllowAdd;
+	}
+	public String getListAllowBack() {
+		return listAllowBack;
+	}
+	public void setListAllowBack(String listAllowBack) {
+		this.listAllowBack = listAllowBack;
+	}
+	public String getListAllowSave() {
+		return listAllowSave;
+	}
+	public void setListAllowSave(String listAllowSave) {
+		this.listAllowSave = listAllowSave;
+	}
+	public String getListAllowApprove() {
+		return listAllowApprove;
+	}
+	public void setListAllowApprove(String listAllowApprove) {
+		this.listAllowApprove = listAllowApprove;
+	}
+	public String getListAllowDecline() {
+		return listAllowDecline;
+	}
+	public void setListAllowDecline(String listAllowDecline) {
+		this.listAllowDecline = listAllowDecline;
 	}
 }
