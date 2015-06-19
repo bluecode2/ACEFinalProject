@@ -56,7 +56,7 @@
 			success : function(response) {
 				$("#tblSearch").find("tr:gt(0)").remove();
 				$("#tblSearch").append(response);
-				registerSearchHeadDeptEvent();
+				registerSearchEmpEvent();
 			},
 			error : function(e) {
 				alert("Error: " + e);
