@@ -10,43 +10,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Role</title>
 
+<script src="js/jquery.js"></script>
+
 <script type="text/javascript">
-	function onBtnAddClick(){
+	function onBtnAddClick() {
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}
-	
+
+
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
 
 		changePage(1);
 	}
-	
+
+
 	function actionForm(task, id, nama) {
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are u sure want to delete General Holiday " + nama + " ?")) {
-			    document.forms[0].submit();
-			}	
-		} 
-		else {
+			if (confirm("Are u sure want to delete General Holiday " + nama
+					+ " ?")) {
+				document.forms[0].submit();
+			}
+
+
+		} else {
 			document.forms[0].submit();
 		}
 	}
+
+	$(document).ready(function() {
+		$('.lnkMenuAccess').on('click', function() {
+			var userRoleId = $(this).closest('tr').find('td').eq(0).html();
+			var userRoleCode = $(this).closest('tr').find('td').eq(1).html();
+			var userRoleName = $(this).closest('tr').find('td').eq(2).html();
+
+			$('#hdnUserRoleCodeId').val(userRoleId);
+			$('#lblUserRoleName').val(userRoleName);
+
+			$('#searchDeptHead').modal();
+		});
+		;
+	});
 </script>
 </head>
 <body>
 	<html:form action="/userRole" method="post">
 		<html:hidden name="userRoleForm" property="task" />
-		<html:hidden name="userRoleForm" property="selectedId"/>
-		
-		<html:hidden property="currSearchValue" name="userRoleForm"/>
-		<html:hidden property="currSearchField" name="userRoleForm"/>
-		<html:hidden property="currPage" name="userRoleForm"/>
-		
+		<html:hidden name="userRoleForm" property="selectedId" />
+
+
+		<html:hidden property="currSearchValue" name="userRoleForm" />
+		<html:hidden property="currSearchField" name="userRoleForm" />
+		<html:hidden property="currPage" name="userRoleForm" />
+
+
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -56,28 +78,35 @@
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;">
-							<html:select name="userRoleForm" property="searchField" styleId="selSearchField" styleClass="form-control">
+						<td style="padding-left: 15px;"><html:select
+								name="userRoleForm" property="searchField"
+								styleId="selSearchField" styleClass="form-control">
+								<option value="">All</option>
 								<option value="userRoleCode">User Role Code</option>
 								<option value="userRoleName">User Role Name</option>
-							</html:select>
-						</td>
+							</html:select></td>
+						<td style="padding-left: 15px"><html:text name="userRoleForm"
+								property="searchValue" styleClass="form-control">
+							</html:text></td>
+
 						<td style="padding-left: 15px">
-							<html:text
-								name="userRoleForm" property="searchValue" styleClass="form-control">
-							</html:text>
-						</td>
-						<td style="padding-left: 15px">
-							<button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
-								title="Search">
+
+
+
+
+
+
+							<button type="button" onclick="search();" id="btnSearch"
+								class="btn btn-info btn-icon" title="Search">
+
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
 					</tr>
 				</table>
 			</div>
-			
+
+
 			<div class="divContent">
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
@@ -85,7 +114,8 @@
 						<tr>
 							<td>User Role Code</td>
 							<td>User Role Name</td>
-				
+							<td align="center">Menu Access</td>
+
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -93,32 +123,107 @@
 						<logic:notEmpty name="userRoleForm" property="arrList">
 							<logic:iterate id="reg" name="userRoleForm" property="arrList">
 								<tr>
+									<td style="display: none"><bean:write name="reg"
+											property="userRoleId" /></td>
 									<td><bean:write name="reg" property="userRoleCode" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
-				
-									<td align="center">
-										<a class="text-success" href="#"
+
+									<td align="center"><a href="#"
+										class="text-info lnkMenuAccess">Menu Access</a></td>
+									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="userRoleId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
-											aria-hidden="true"></span></a>
-										&nbsp; 
-										<a href="#" class="text-danger" 
+											aria-hidden="true"></span></a> &nbsp; <a href="#"
+
+										class="text-danger"
 										onclick="actionForm('delete','<bean:write name="reg" property="userRoleId" />','<bean:write name="reg" property="userRoleName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a>
-									</td>
+											aria-hidden="true"></span></a></td>
+
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="userRoleForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
+								<td colspan="4" align="center" style="padding: 10px">No
+									Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>
 				</table>
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
+
+			<div class="modal fade" id="searchDeptHead" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<html:form action="searchDeptHead" method="post">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">User Role Menu Access</h4>
+							</div>
+							<div class="modal-body">
+								<table width="70%" style="margin-top: 20px; margin-bottom: 20px">
+									<tr>
+										<td width="20%">User Role</td>
+										<td><input type="hidden" id="hdnUserRoleCodeId" /><input
+											type="text" disabled="disabled" id="lblUserRoleName"
+											style="width: 300px"></input></td>
+									</tr>
+								</table>
+								<div style="overflow: auto; height: 350px">
+									<table width="100%" id="tblSearch"
+										class="table table-striped table-hover table-bordered table-clickable">
+										<thead>
+											<tr>
+												<th width="40px"></th>
+												<th width="80px">Menu Code</th>
+												<th>Menu Caption</th>
+												<th></th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<logic:notEmpty name="lstMenu">
+												<logic:iterate id="menu" name="lstMenu">
+													<tr data-dismiss="modal" class="rowSearch">
+														<td style="display: none"><bean:write name="menu"
+																property="menuId" /></td>
+														<td align="center"><input type="checkbox" class="chkSelectedMenu" /></td>
+														<td><bean:write name="menu"
+																property="menuCode" /></td>
+														<td><bean:write name="menu" property="menuCaption" /></td>
+													</tr>
+												</logic:iterate>
+											</logic:notEmpty>
+											<logic:empty name="lstMenu">
+												<tr>
+													<td colspan="3" align="center">No Data Found</td>
+												</tr>
+											</logic:empty>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-info getValue"
+									data-dismiss="modal">Save changes</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+
+							</div>
+						</html:form>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
 
 		</div>
 		<html:hidden name="userRoleForm" property="currPage" />

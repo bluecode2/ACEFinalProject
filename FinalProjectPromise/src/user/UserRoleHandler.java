@@ -1,5 +1,7 @@
 package user;
 
+import general.MenuManager;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,11 +22,15 @@ public class UserRoleHandler extends Action{
 		// TODO Auto-generated method stub
 		UserRoleForm userRoleForm = (UserRoleForm) form;
 		UserRoleManager userRoleManager = new UserRoleManager();
+		MenuManager menuMan = new MenuManager();
 		
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+		
+		CommonFunction.createAllowedMenu(us, request);
+
+
+
 		
 		if("add".equals(userRoleForm.getTask())){
 			userRoleForm.setIsAdd(true);
@@ -71,6 +77,8 @@ public class UserRoleHandler extends Action{
 				userRoleForm.getCurrSearchValue());
 		
 		userRoleForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		
+		request.setAttribute("lstMenu", menuMan.getAllMenuHead());
 		
 		
 		request.setAttribute("pageTitle", "User Role List");
