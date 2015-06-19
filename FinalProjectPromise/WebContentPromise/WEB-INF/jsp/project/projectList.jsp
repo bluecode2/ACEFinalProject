@@ -25,13 +25,13 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 						<html:select
-								name="userForm" property="searchField"
+								name="???" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="projectCode">Employee Name</option>
 								<option value="projectName">Username</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
-								name="userForm" property="searchValue"
+								name="???" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
@@ -49,15 +49,21 @@
 					<thead class="panel panel-info">
 						<tr>
 							
-							<td>Employee Name</td>
-							<td>Username</td>
-							<td>User Role Name</td>
+							<td>Project Name</td>
+							<td>Estimate Date</td>
+							<td>Actual Date</td>
+							<td>Project Manager</td>
+							<td>Progress</td>
+							<td>Status</td>
+							<td>Member</td>
+							<td>Define Task</td>
+							<td>&nbsp;</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="userForm" property="listOfUser">
-							<logic:iterate id="reg" name="userForm" property="listOfUser">
+						<logic:notEmpty name="???" property="???">
+							<logic:iterate id="reg" name="userForm" property="???">
 								<tr>
 									
 									<td><bean:write name="reg" property="employeeName" /></td>

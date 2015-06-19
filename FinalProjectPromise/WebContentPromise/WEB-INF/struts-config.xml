@@ -22,6 +22,7 @@
 		<form-bean name="searchEmpForm" type="search_dialog.SearchEmpForm"></form-bean>
 		<form-bean name="searchDeptForm" type="search_dialog.SearchDeptForm"></form-bean>	
 		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>	
+		<form-bean name="projectForm" type="project.ProjectForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -101,6 +102,9 @@
 		<action path="/searchDept" name="searchDeptForm" type="search_dialog.SearchDeptHandler" scope="request">
 		</action>
 		<action path="/searchSpv" name="searchSpvForm" type="search_dialog.SearchSpvHandler" scope="request">
+		</action>
+		<action path="/project" name="projectForm" type="project.ProjectHandler" scope="request">
+			<forward name="projectList" path="/WEB-INF/jsp/project/projectList.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />

@@ -20,7 +20,6 @@
 			var reTypePass = document.getElementById('reNewPass').value;
 			var oPass = document.getElementById('oldPass').value;
 		if (document.forms[0].task.value == "add") {
-			if (nPass == reTypePass) {
 				document.forms[0].passwordUser.value = nPass;
 				document.forms[0].task.value = "save";
 				document.forms[0].submit();
@@ -42,15 +41,6 @@
 
 	function onLoadForm() {
 				
-		if (document.forms[0].val.value == "0"){
-			if (document.forms[0].task.value == "add") {
-				document.getElementById('newPassword').style.display = 'none';
-				document.getElementById('oldPassword').style.display = 'none';
-			} else if (document.forms[0].task.value == "Edit") {
-				document.getElementById('newPassword').style.display = 'block';
-				document.getElementById('oldPassword').style.display = 'block';
-			}
-		}
 		if (document.forms[0].val.value == "1"){
 			alert("Old Password is wrong");
 		}
@@ -206,13 +196,14 @@
 								property="uBean.username" styleClass="form-control"></html:text>
 						</td>
 					</tr>
-					<tr align="left" id="oldPassword">
+					<logic:equal value="true" name="show">
+					<tr align="left">
 						<td>Old Password</td>
 						<td style="padding-left: 15px;"><input type="password"
 							id="oldPass" Class="form-control" /></td>
 					</tr>
 					<tr align="left">
-						<td><label id="newPassword">New</label> Password</td>
+						<td>New Password</td>
 						<td style="padding-left: 15px;"><input type="password"
 							id="newPass" Class="form-control" /></td>
 					</tr>
@@ -224,7 +215,7 @@
 					<tr>
 						<td>&nbsp;</td>
 					</tr>
-					<logic:equal value="true" name="show">
+					
 					<tr align="left" id="resetBtn">
 						<td>&nbsp;</td>
 						<td style="padding-left: 15px;"  ><input type="button"
@@ -264,7 +255,7 @@
 									<input type="text" id="txtSearchValueRoleId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 									<button type="button" onclick="search();" id="btnSearchUserRole"
-											class="btn btn-sm btn-info btn-icon" title="Back" value="btnRole">
+											class="btn btn-sm btn-info btn-icon" title="BackRole" value="btnRole">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button></td>
 								</tr>
@@ -332,7 +323,7 @@
 									<input type="text" id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 									<button type="button" onclick="search();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="Back" value="btnEmp">
+											class="btn btn-sm btn-info btn-icon" title="BackEmp" value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button></td>
 								</tr>
