@@ -1,0 +1,40 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userRoleMenu">
+	<select id="getUserRoleMenuByUserRole" resultClass="user_access.UserRoleMenuBean" parameterClass="java.lang.Integer">
+			SELECT 
+			USER_ROLE_ID 	as userRoleId,
+	        MENU_ID			as menuId,
+	        MENU_CRUD		as menuCrud
+	        FROM ROLE_MENU 
+	        where user_role_id = #value#
+	</select>
+	
+	<insert id="insertUserRoleMenu" parameterClass="user_access.UserRoleMenuBean">
+		insert into
+		ROLE_MENu(USER_ROLE_ID, MENU_ID, MENU_CRUD)
+		values (#userRoleId#, #menuId#, #menuCrud#)
+	</insert>
+	
+	<select id="getUserRoleMenu" resultClass="user_access.UserRoleMenuBean" parameterClass="java.util.Map">
+	SELECT 
+			USER_ROLE_ID 	as userRoleId,
+	        MENU_ID			as menuId,
+	        MENU_CRUD		as menuCrud
+	        FROM ROLE_MENU 
+	        where user_role_id = #userRoleId# AND menu_id = #menuId#
+	</select>
+	
+	<update id="editUserRoleMenu" parameterClass="user_access.UserRoleMenuBean">
+		UPDATE ROLE_MENU
+		SET
+		MENU_CRUD = #menuCrud#
+		where user_role_id = #userRoleId# AND menu_id = #menuId#
+	</update>
+	
+	<delete id="deleteUserRoleMenu" parameterClass="java.util.Map">
+		DELETE ROLE_MENU
+		where user_role_id = #userRoleId# AND menu_id = #menuId#
+	</delete>
+</sqlMap>

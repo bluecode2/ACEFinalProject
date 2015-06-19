@@ -38,13 +38,14 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<sqlMap resource="sqlmap/generalParameter.xml" />
 	<sqlMap resource="sqlmap/menu.xml" />
 	<sqlMap resource="sqlmap/userRole.xml" />
-	<sqlMap resource="sqlmap/users.xml"/>
-	<sqlMap resource="sqlmap/rank.xml"/>
-	<sqlMap resource="sqlmap/personalHoliday.xml"/>
-	<sqlMap resource="sqlmap/proposedTask.xml"/>
-	<sqlMap resource="sqlmap/project.xml"/>
-	<sqlMap resource="sqlmap/task.xml"/>
-	<sqlMap resource="sqlmap/projectRole.xml"/>
+	<sqlMap resource="sqlmap/userRoleMenu.xml" />
+	<sqlMap resource="sqlmap/users.xml" />
+	<sqlMap resource="sqlmap/rank.xml" />
+	<sqlMap resource="sqlmap/personalHoliday.xml" />
+	<sqlMap resource="sqlmap/proposedTask.xml" />
+	<sqlMap resource="sqlmap/project.xml" />
+	<sqlMap resource="sqlmap/task.xml" />
+	<sqlMap resource="sqlmap/projectRole.xml" />
 </sqlMapConfig>
 
 

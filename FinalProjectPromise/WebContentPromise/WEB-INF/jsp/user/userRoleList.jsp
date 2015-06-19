@@ -94,12 +94,12 @@
 														':checked');
 
 										if (listMenuId != '') {
-											listMenuId += '|';
-											listAllowAdd += '|';
-											listAllowBack += '|';
-											listAllowSave += '|';
-											listAllowApprove += '|';
-											listAllowDecline += '|';
+											listMenuId += '#';
+											listAllowAdd += '#';
+											listAllowBack += '#';
+											listAllowSave += '#';
+											listAllowApprove += '#';
+											listAllowDecline += '#';
 										}
 										listMenuId += menuId;
 										listAllowAdd += allowAdd;
@@ -108,7 +108,7 @@
 										listAllowApprove += allowApprove;
 										listAllowDecline += allowDecline;
 									});
-
+							alert( $("#hdnUserRoleCodeId").val());
 							$.ajax({
 								type : "POST",
 								url : "userRole.do",

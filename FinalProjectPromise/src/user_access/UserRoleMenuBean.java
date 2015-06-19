@@ -1,16 +1,10 @@
-package user;
+package user_access;
 
 public class UserRoleMenuBean {
-	private Integer userRoleMenuId;
 	private Integer userRoleId;
 	private Integer menuId;
+	private String menuCrud;
 	
-	public Integer getUserRoleMenuId() {
-		return userRoleMenuId;
-	}
-	public void setUserRoleMenuId(Integer userRoleMenuId) {
-		this.userRoleMenuId = userRoleMenuId;
-	}
 	public Integer getUserRoleId() {
 		return userRoleId;
 	}
@@ -23,4 +17,12 @@ public class UserRoleMenuBean {
 	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
 	}
+	public String getMenuCrud() {
+		return menuCrud;
+	}
+	public void setMenuCrud(String menuCrud) {
+		this.menuCrud = menuCrud;
+	}
+	
+	
 }
