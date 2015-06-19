@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeBean;
@@ -24,7 +25,9 @@ public class DepartmentHandler extends Action {
 		DepartmentManager dMan = new DepartmentManager();
 		EmployeeManager eMan = new EmployeeManager();
 
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 
 		CommonFunction.createAllowedMenu(null, request);
 

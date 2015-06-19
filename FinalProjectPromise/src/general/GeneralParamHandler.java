@@ -2,12 +2,14 @@ package general;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 
@@ -22,6 +24,11 @@ public class GeneralParamHandler extends Action{
 		GeneralParamForm gpf = (GeneralParamForm) form;
 		
 		CommonFunction.createAllowedMenu(null, request);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
+
+		System.out.println(gpf.getTask());
 		
 		if("add".equals(gpf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
@@ -55,6 +62,8 @@ public class GeneralParamHandler extends Action{
 			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
 
+			System.out.println("IRENE GILAA");
+			
 			return mapping.findForward("entry");
 		}
 		else if ("delete".equals(gpf.getTask())) {

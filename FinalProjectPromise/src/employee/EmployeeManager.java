@@ -62,13 +62,16 @@ public class EmployeeManager {
 		return arr;
 	}
 
-	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel)
+	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel, String col, String input)
 			throws ClassNotFoundException, SQLException {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		
 		Map map = new HashMap();
 		map.put("deptId", deptId);
 		map.put("rankLevel", rankLevel);
+		map.put("searchValue", input);
+		map.put("searchField", col);
+		
 		
 		try {
 			arr = this.ibatis.queryForList("employee.getEmployeeForSupervisor",
@@ -80,7 +83,7 @@ public class EmployeeManager {
 
 		return arr;
 	}
-
+	
 	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
 
 		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
@@ -139,5 +142,19 @@ public class EmployeeManager {
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"employee.countEmployee", map);
 		return result;
+	}
+	
+	public List<EmployeeBean> getListEmployeeForPersonalHoliday()
+			throws ClassNotFoundException, SQLException {
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		
+		try {
+			arr = this.ibatis.queryForList("employee.getEmployeeForPersonalHoliday", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return arr;
 	}
 }

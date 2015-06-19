@@ -59,7 +59,8 @@
 		WHERE is_deleted = 0 AND dept_id = #tmpDeptId#
 	</select>
 	
-	<select id="getDepartmentForSearchDialog" resultClass="department.DepartmentBean">
+	<select id="getDepartmentForSearchDialog" resultClass="department.DepartmentBean" 
+	parameterClass="java.util.Map">
 		SELECT 
 		dept_id 			as deptId ,
 		dept_code 			as deptCode , 
@@ -67,7 +68,26 @@
 		dept_head_name		as deptHeadName
 		from vDepartment
 		WHERE is_deleted = 0
+			
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptCode">
+				LOWER(dept_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(dept_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+				<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptHeadName">
+				LOWER(dept_head_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		
 	</select>
+	
+
 	
 	<select id="getNewDeptId" resultClass="java.lang.Integer">
 		SELECT

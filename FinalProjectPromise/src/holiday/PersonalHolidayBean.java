@@ -19,8 +19,16 @@ public class PersonalHolidayBean {
 	private String createDateInString;
 	private Date updateDate;
 	private String updateDateInString;
+	private String empDisplay;
+	private String employeeName;
+	private String holidayDateDisplay;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	
+	public String getHolidayDateDisplay() {
+		return df2.format(holidayDate);
+	}
 	
 	public Integer getHolidayId() {
 		return holidayId;
@@ -75,7 +83,7 @@ public class PersonalHolidayBean {
 			date = df.parse(holidayDateInString);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.holidayDateInString = "";
 			date = null;
 		}
@@ -107,7 +115,7 @@ public class PersonalHolidayBean {
 		try {
 			date = df.parse(createDateInString);
 		} catch (Exception pe){
-			pe.printStackTrace();
+			//pe.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -133,10 +141,22 @@ public class PersonalHolidayBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception pe){
-			pe.printStackTrace();
+			//pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public String getEmpDisplay() {
+		return empDisplay;
+	}
+	public void setEmpDisplay(String empDisplay) {
+		this.empDisplay = empDisplay;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 }

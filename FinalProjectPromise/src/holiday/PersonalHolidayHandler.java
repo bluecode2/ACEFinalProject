@@ -2,14 +2,17 @@ package holiday;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeManager;
 
 public class PersonalHolidayHandler extends Action{
 	@Override
@@ -19,12 +22,18 @@ public class PersonalHolidayHandler extends Action{
 		// TODO Auto-generated method stub
 		PersonalHolidayForm persForm = (PersonalHolidayForm) form;
 		PersonalHolidayManager persManager = new PersonalHolidayManager();
+		EmployeeManager empManager = new EmployeeManager();
 		
 		CommonFunction.createAllowedMenu(null, request);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "Personal Holiday Entry");
+			
+			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
 			
 			return mapping.findForward("personalHolidayEntry");
 		}
@@ -47,6 +56,8 @@ public class PersonalHolidayHandler extends Action{
 		else if ("edit".equals(persForm.getTask())) {
 			request.setAttribute("pageTitle", "Personal Holiday Edit");
 			persForm.setPersHolidayBean(persManager.getPersonalHolidayEdit(persForm.getSelectedId()));
+			
+			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
 
 			return mapping.findForward("personalHolidayEntry");
 		}
@@ -57,6 +68,10 @@ public class PersonalHolidayHandler extends Action{
 		persForm.setTask("");
 		persForm.setSearchField(persForm.getCurrSearchField());
 		persForm.setSearchValue(persForm.getCurrSearchValue());
+		
+		System.out.println(persForm.getCurrSearchField());
+		System.out.println(persForm.getCurrSearchValue());
+		
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
 				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),

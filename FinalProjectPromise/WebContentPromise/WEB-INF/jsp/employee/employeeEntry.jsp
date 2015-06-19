@@ -26,44 +26,31 @@
 		registerSearchDeptEvent();
 	});
 
+	/* SPV di sini */
 	function registerSearchSpvEvent() {
-
-		$('.rowSearchSupervisor').on('click', function() {
-			var value = $(this).find('td').eq(0).html();
-			var text = $(this).find('td').eq(2).html();
-			$('#hdnSupervisorId').val(value);
+		$('.rowSearchSpv').on('click', function() {
+			var value = $(this).find('td').eq(0).html().trim();
+			var text = $(this).find('td').eq(2).html().trim();
+			alert(value);
+			$('#hdSupervisorId').val(value);
 			$('#txtSupervisor').val(text);
 		});
 	}
 
 	function searchSupervisor() {
-
-	}
-
-	function registerSearchDeptEvent() {
-		$('.rowSearchDept').on('click', function() {
-			var value = $(this).find('td').eq(0).html();
-			var text = $(this).find('td').eq(2).html();
-			$('#hdRankId').val(value);
-			$('#txtDept').val(text);
-			$('#hdnSupervisorId').val('');
-			$('#txtSupervisor').val('');
-		});
-	}
-
-	function searchDept() {
-		var searchField = $('#selSearchFieldRank').val();
-		var searchValue = $('#txtSearchValueRank').val();
-		$
-				.ajax({
+		var searchField = $('#selSearchFieldSpv').val();
+		var searchValue = $('#txtSearchValueSpv').val();
+		var deptId		= $('#hdDeptId').val();
+		var rankId		= $('#hdRankId').val();
+		$.ajax({
 					type : "POST",
-					url : "searchRank.do",
+					url : "searchSpv.do",
 					data : "searchField=" + searchField + "&searchValue="
-							+ searchValue,
+							+ searchValue+"&deptId="+deptId+ "&rankId="+rankId,
 					success : function(response) {
-						$("#tblSearchDept").find("tr:gt(0)").remove();
-						$("#tblSearchDept").append(response);
-						registerSearchRankEvent();
+						$("#tblSearchSpv").find("tr:gt(0)").remove();
+						$("#tblSearchSpv").append(response);
+						registerSearchSpvEvent();
 					},
 					error : function(e) {
 						alert("Error: " + e);
@@ -71,6 +58,54 @@
 				});
 	}
 
+	/* departement di sini  */
+	
+	function registerSearchDeptEvent() {
+		$('.rowSearchDept').on('click', function() {
+			var value = $(this).find('td').eq(0).html().trim();
+			var text = $(this).find('td').eq(2).html().trim();
+			$('#hdDeptId').val(value);
+			$('#txtDept').val(text);
+			$('#hdSupervisorId').val('');
+			$('#txtSupervisor').val('');
+		});
+	}
+
+	function searchDepartment() {
+		var searchField = $('#selSearchFieldDept').val();
+		var searchValue = $('#txtSearchValueDept').val();
+
+		$.ajax({
+					type : "POST",
+					url : "searchDept.do",
+					data : "searchField=" + searchField + "&searchValue="
+							+ searchValue,
+					success : function(response) {
+						$("#tblSearchDept").find("tr:gt(0)").remove();
+						$("#tblSearchDept").append(response);
+						registerSearchDeptEvent();
+					},
+					error : function(e) {
+						alert("Error: " + e);
+					}
+				});
+	}
+
+	/* rank di sini */
+	function registerSearchRankEvent() {
+		$('.rowSearchRank').on(
+				'click',
+				function() {
+					var value = $(this).find('td').eq(0).html();
+					var text = $(this).find('td').eq(1).html() + ' - '
+							+ $(this).find('td').eq(2).html();
+					$('#hdRankId').val(value);
+					$('#txtRankName').val(text);
+					$('#hdSupervisorId').val('');
+					$('#txtSupervisor').val('');
+				});
+	}
+	
 	function searchRank() {
 		var searchField = $('#selSearchFieldRank').val();
 		var searchValue = $('#txtSearchValueRank').val();
@@ -90,19 +125,8 @@
 					}
 				});
 	}
-	function registerSearchRankEvent() {
-		$('.rowSearchRank').on(
-				'click',
-				function() {
-					var value = $(this).find('td').eq(0).html();
-					var text = $(this).find('td').eq(1).html() + ' - '
-							+ $(this).find('td').eq(2).html();
-					$('#hdRankId').val(value);
-					$('#txtRankName').val(text);
-					$('#hdnSupervisorId').val('');
-					$('#txtSupervisor').val('');
-				});
-	}
+	
+
 </script>
 
 </head>
@@ -116,8 +140,6 @@
 		<html:hidden name="employeeForm" property="task" />
 		<html:hidden name="employeeForm" property="isAdd" />
 		<html:hidden name="employeeForm" property="selectedEmp.employeeId" />
-
-
 
 		<div class="container">
 			<div class="divContent form-group has-info">
@@ -173,9 +195,12 @@
 								property="selectedEmp.deptId" />
 							<table width="100%">
 								<tr>
-									<td><html:text styleClass="form-control" styleId="txtDept"
-											readonly="true" name="employeeForm"
-											property="selectedEmp.deptName"></html:text></td>
+									<td>
+										<html:text styleClass="form-control"
+											styleId="txtDept" readonly="true" name="employeeForm"
+											property="selectedEmp.deptName">
+										</html:text>
+									</td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchDept"> <span
 											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
@@ -201,90 +226,113 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Supervisor</label></td>
-						<td><html:hidden styleId="hdnSupervisorId"
-								name="employeeForm" property="selectedEmp.supervisorId" />
+						<td>
+							<html:hidden styleId="hdSupervisorId" name="employeeForm" property="selectedEmp.supervisorId" />
 							<table width="100%">
 								<tr>
-									<td><html:text styleClass="form-control"
+									<td>
+										<html:text styleClass="form-control"
 											styleId="txtSupervisor" readonly="true" name="employeeForm"
-											property="selectedEmp.supervisorName"></html:text></td>
-									<td align="center"><a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchSupervisor"> <span
-											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
-
+											property="selectedEmp.supervisorName">
+										</html:text>
+									</td>
+									<td align="center">
+										<a href="#" class="text-info" data-toggle="modal" data-target="#searchSpv"> 
+										<span class="glyphicon glyphicon-edit" aria-hidden="true" />
+										</a>
+									</td>
 								</tr>
-							</table></td>
+							</table>
+						</td>
 					</tr>
 				</table>
 			</div>
 
 		</div>
 
+		<!-- Fix untuk Dept-->
 		<div class="modal fade" id="searchDept" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Depatment Option</h4>
-					</div>
-					<div class="modal-body">
-						<div class="container form-group">
-							<table>
-								<tr>
-									<td>Search</td>
-									<td style="padding-left: 15px"><select
-										class="form-control" id="selSearchFieldDept"
-										style="width: 150px">
-											<option value="deptCode">Dept Code</option>
-											<option value="deptName">Dept Name</option>
-									</select></td>
-									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchDept" class="form-control" /></td>
-									<td style="padding-left: 15px"><button type="button"
-											onclick="searchDepartment();" id="btnSearch"
-											class="btn btn-sm btn-info btn-icon" title="Back">
-											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										</button></td>
-								</tr>
+					<html:form action="searchDept" method="post">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Rank Option</h4>
+						</div>
+						<div class="modal-body">
+							<div class="container form-group">
+								<table>
+									<tr>
+										<td>Search</td>
+										<td style="padding-left: 15px"><select
+											class="form-control" id="selSearchFieldDept"
+											style="width: 150px">
+												<option value="deptCode">Dept. Code</option>
+												<option value="deptName">Dept. Name</option>
+												<option value="deptHeadName">Dept. Head Name</option>
+										</select></td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtSearchValueDept" class="form-control" />
+										</td>
+										<td style="padding-left: 15px">
+										<button type="button"
+												onclick="searchDepartment();" id="btnSearch"
+												class="btn btn-sm btn-info btn-icon" title="Back">
+												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+											</button></td>
+									</tr>
+								</table>
+							</div>
+
+							<table width="100%" id="tblSearchDept"
+								class="table table-striped table-hover table-bordered table-clickable">
+								<thead>
+									<tr>
+										<th>Dept. Code</th>
+										<th>Dept. Name</th>
+										<th>Dept. Head Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<logic:notEmpty name="listOfDepartment">
+										<logic:iterate id="emp" name="listOfDepartment">
+											<tr data-dismiss="modal" class="rowSearchDept">
+												<td style="display: none">
+													<bean:write name="emp" property="deptId" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="deptCode" />
+												</td>
+												<td>
+													<bean:write name="emp" property="deptName" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="deptHeadName" />
+												</td>
+											</tr>
+										</logic:iterate>
+									</logic:notEmpty>
+									<logic:empty name="listOfDepartment">
+										<tr>
+											<td colspan="3" align="center">No Data Found</td>
+										</tr>
+									</logic:empty>
+								</tbody>
 							</table>
 						</div>
-
-						<table width="100%" id="tblSearchDept"
-							class="table table-striped table-hover table-bordered table-clickable">
-							<thead>
-								<tr>
-									<th>Department Code</th>
-									<th>Department Name</th>
-								</tr>
-							</thead>
-							<logic:notEmpty name="listOfDepartment">
-								<logic:iterate id="dept" name="listOfDepartment">
-									<tr data-dismiss="modal" class="rowSearchDept">
-										<td style="display: none"><bean:write name="dept"
-												property="deptId" /></td>
-										<td width="150px"><bean:write name="dept"
-												property="deptCode" /></td>
-										<td><bean:write name="dept" property="deptName" /></td>
-									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="listOfDepartment">
-								<tr>
-									<td colspan="2" align="center">No Data Found</td>
-								</tr>
-							</logic:empty>
-						</table>
-					</div>
+					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		<!-- FIX UNTUK DEPT-->
+		
 
 		<!-- FIX UNTUK RANK -->
 		<div class="modal fade" id="searchRank" tabindex="-1" role="dialog"
@@ -297,7 +345,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title">Rank List</h4>
+							<h4 class="modal-title">Rank Option</h4>
 						</div>
 						<div class="modal-body">
 							<div class="container form-group">
@@ -361,68 +409,83 @@
 		<!-- /.modal -->
 		<!-- 	FIX UNTUK RANK -->
 
-		<div class="modal fade" id="searchSupervisor" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="searchSpv" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Supervisor Candidate</h4>
-					</div>
-					<div class="modal-body">
-						<div class="container form-group">
-							<table>
-								<tr>
-									<td>Search</td>
-									<td style="padding-left: 15px"><select
-										class="form-control" id="selSearchFieldSupervisor"
-										style="width: 150px">
-											<option value="employeeCode">Employee Code</option>
-											<option value="employeeName">Employee Name</option>
-											<option value="email">Email</option>
-									</select></td>
-									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchValueSupervisor" class="form-control" /></td>
-									<td style="padding-left: 15px"><button type="button"
-											onclick="searchSupervisor();" id="btnSearch"
-											class="btn btn-sm btn-info btn-icon" title="Back">
-											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										</button></td>
-								</tr>
+					<html:form action="searchSpv" method="post">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Supervisor Option</h4>
+						</div>
+						<div class="modal-body">
+							<div class="container form-group">
+								<table>
+									<tr>
+										<td>Search</td>
+										<td style="padding-left: 15px">
+											<select
+											class="form-control" id="selSearchFieldSpv"
+											style="width: 150px">
+												<option value="employeeCode">Employee Code</option>
+												<option value="employeeName">Employee Name</option>
+											</select>
+										</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtSearchValueSpv" class="form-control" />
+										</td>
+										<td style="padding-left: 15px">
+											<button type="button"
+												onclick="searchSupervisor();" id="btnSearch"
+												class="btn btn-sm btn-info btn-icon" title="Back">
+												<span class="glyphicon glyphicon-search" aria-hidden="true">
+												</span>
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+							<table width="100%" id="tblSearchSpv"
+								class="table table-striped table-hover table-bordered table-clickable">
+								<thead>
+									<tr>
+										<th>Employee Code</th>
+										<th>Employee Name</th>
+										<th>Employee Email</th>
+									</tr>
+								</thead>
+								<tbody>
+									<logic:notEmpty name="listOfSupervisor">
+										<logic:iterate id="emp" name="listOfSupervisor">
+											<tr data-dismiss="modal" class="rowSearchSpv">
+												<td style="display: none">
+													<bean:write name="emp" property="employeeId" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="employeeCode" />
+												</td>
+												<td>
+													<bean:write name="emp" property="employeeName" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="employeeEmail" />
+												</td>
+											</tr>
+										</logic:iterate>
+									</logic:notEmpty>
+									<logic:empty name="listOfSupervisor">
+										<tr>
+											<td colspan="3" align="center">No Data Found</td>
+										</tr>
+									</logic:empty>
+								</tbody>
 							</table>
 						</div>
-
-						<table width="100%" id="tblSearchEmp"
-							class="table table-striped table-hover table-bordered table-clickable">
-							<thead>
-								<tr>
-									<th>Employee Code</th>
-									<th>Employee Name</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							<logic:notEmpty name="listOfSupervisor">
-								<logic:iterate id="emp" name="listOfSupervisor">
-									<tr data-dismiss="modal" class="rowSearchSupervisor">
-										<td style="display: none"><bean:write name="emp"
-												property="employeeId" /></td>
-										<td width="150px"><bean:write name="emp"
-												property="employeeCode" /></td>
-										<td><bean:write name="emp" property="employeeName" /></td>
-										<td><bean:write name="emp" property="email" /></td>
-									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="listOfSupervisor">
-								<tr>
-									<td colspan="3" align="center">No Data Found</td>
-								</tr>
-							</logic:empty>
-						</table>
-					</div>
+					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>

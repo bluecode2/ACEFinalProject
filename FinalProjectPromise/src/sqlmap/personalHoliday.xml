@@ -6,16 +6,18 @@
 		select * from(
 		select hol.* , ROWNUM rnum from(
 		SELECT 
-		HOLIDAY_ID			as holidayId,
-		EMPLOYEE_ID			as employeeId,
-		CREATED_BY			as createdBy,
-		UPDATED_BY			as updatedBy,
-		HOLIDAY_DESC		as holidayDesc,
-		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
-		IS_EXCHANGE_DAY		as isExchangeDay,
-		CREATE_DATE			as createDateInString,
-		UPDATE_DATE			as updateDateInString
-		FROM PERSONAL_HOLIDAY 
+		P.HOLIDAY_ID			as holidayId,
+		P.EMPLOYEE_ID			as employeeId,
+		P.CREATED_BY			as createdBy,
+		P.UPDATED_BY			as updatedBy,
+		P.HOLIDAY_DESC			as holidayDesc,
+		TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd')	as holidayDateInString,
+		P.IS_EXCHANGE_DAY		as isExchangeDay,
+		P.CREATE_DATE			as createDateInString,
+		P.UPDATE_DATE			as updateDateInString,
+		E.EMPLOYEE_NAME			as employeeName
+		FROM PERSONAL_HOLIDAY  P
+		JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
 		where HOLIDAY_DATE > SYSDATE
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDesc">
@@ -24,13 +26,12 @@
 		</dynamic>		
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDateInString">
-				LOWER(HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
+					to_char(HOLIDAY_DATE,'yyyy-MM-dd') LIKE ( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>	
 		ORDER BY HOLIDAY_ID) hol
 		where ROWNUM &lt;= #end#)
-		where rnum &gt;
-		#begin#
+		where rnum &gt; #begin#
 	</select>
 	
 	<select id="getPersonalHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.PersonalHolidayBean">

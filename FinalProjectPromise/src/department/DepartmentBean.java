@@ -156,13 +156,4 @@ public class DepartmentBean {
 	public void setDeptHeadName(String deptHeadName) {
 		this.deptHeadName = deptHeadName;
 	}
-
-	public String getDeptHeadDisplay() {
-		if (deptHeadCode != null || deptHeadName != null)
-
-			return deptHeadCode + " - " + deptHeadName;
-		else
-			return "";
-	}
-
 }

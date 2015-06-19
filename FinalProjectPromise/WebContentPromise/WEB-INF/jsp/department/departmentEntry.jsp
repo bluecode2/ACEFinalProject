@@ -108,7 +108,8 @@
 											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 
 								</tr>
-							</table></td>
+							</table>
+						</td>
 					</tr>
 				</table>
 			</div>

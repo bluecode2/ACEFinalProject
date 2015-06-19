@@ -30,7 +30,6 @@
 		$(".datepicker").attr("data-provide", "datepicker");
 // 		$(".datepicker").attr("data-date-start-date", new Date());
 	});
-	
 </script>
 </head>
 <body>

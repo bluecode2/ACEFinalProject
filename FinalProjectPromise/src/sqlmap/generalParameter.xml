@@ -99,6 +99,6 @@
 	</update>
 	
 	<select id="getMaxGenParamId" resultClass="java.lang.Integer" >
-	select max(General_parameter_id)+1 from general_parameter
+	select max(gen_param_id)+1 from general_parameter
 	</select>
 </sqlMap>

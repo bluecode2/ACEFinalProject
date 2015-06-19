@@ -2,6 +2,7 @@ package user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -31,11 +32,13 @@ public class UserHandler extends Action{
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		
-		
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 		CommonFunction.createAllowedMenu(null, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
-			request.setAttribute("show", true);
+			request.setAttribute("show", false);
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			request.setAttribute("pageTitle", "User Entry");
@@ -49,7 +52,7 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
-			request.setAttribute("show", false);
+			request.setAttribute("show", true);
 			uForm.setIsAdd(false);
 			request.setAttribute("pageTitle", "User Edit");
 			uForm.setuBean(uMan.getUserByUserID(uForm
@@ -99,7 +102,10 @@ public class UserHandler extends Action{
 			GeneralParamManager gParamMan = new GeneralParamManager();
 			GeneralParamBean gParamBean = new GeneralParamBean();
 			gParamBean = gParamMan.getGenParamByParamId("password");
+			System.out.println(uForm.getuBean().getUserId()+" "+uForm.getuBean().getUserRoleId()+ " "+uForm.getuBean().getEmployeeId());
+			System.out.println(gParamBean.getGenParamValue());
 			uForm.getuBean().setPasswordUser(gParamBean.getGenParamValue());
+			System.out.println(uForm.getuBean().getUserId()+"berhasil true");
 			uMan.updateUser(uForm.getuBean());
 			response.sendRedirect("users.do");
 			return null;

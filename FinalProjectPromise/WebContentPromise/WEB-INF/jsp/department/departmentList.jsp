@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DepartmentList</title>
+<title>Department List</title>
 <script type="text/javascript">
 	function onBtnAddClick(){
 		document.forms[0].task.value = "add";
@@ -90,7 +90,7 @@
 								<tr>
 									<td><bean:write name="reg" property="deptCode" /></td>
 									<td><bean:write name="reg" property="deptName" /></td>
-									<td><bean:write name="reg" property="deptHeadDisplay" /></td>
+									<td><bean:write name="reg" property="deptHeadName" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="deptId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

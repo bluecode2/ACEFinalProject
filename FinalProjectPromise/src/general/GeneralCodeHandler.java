@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 
@@ -22,7 +23,9 @@ public class GeneralCodeHandler extends Action {
 		GeneralCodeForm gcForm = (GeneralCodeForm) form;
 		GeneralCodeManager gcMan = new GeneralCodeManager();
 		CommonFunction.createAllowedMenu(null, request);
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();	
+		UserBean us = (UserBean) session.getAttribute("currUser");
+		request.setAttribute("username", us.getUsername());
 	
 		/*if ("add".equals(gcForm.getTask())) {
 			request.setAttribute("pageTitle", "Add General Code");
