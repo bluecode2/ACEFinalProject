@@ -100,7 +100,7 @@
 										onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
-										onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="rankName" />');"
+										onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a></td>
 								</tr>
