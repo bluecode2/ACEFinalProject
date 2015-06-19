@@ -22,10 +22,10 @@ public class GeneralCodeHandler extends Action {
 
 		GeneralCodeForm gcForm = (GeneralCodeForm) form;
 		GeneralCodeManager gcMan = new GeneralCodeManager();
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+
+		CommonFunction.createAllowedMenu(us, request);
 	
 		/*if ("add".equals(gcForm.getTask())) {
 			request.setAttribute("pageTitle", "Add General Code");
@@ -51,13 +51,14 @@ public class GeneralCodeHandler extends Action {
 			if (gcForm.getGenCodeBean().getGenCodeId() == "")
 				gcForm.getGenCodeBean().setGenCodeId(null);
 			
-			gcForm.getGenCodeBean().setUpdatedBy(1); 
+			gcForm.getGenCodeBean().setUpdatedBy(us.getUserId()); 
 			gcMan.updateGeneralCode(gcForm.getGenCodeBean());
 				
 			response.sendRedirect("generalCode.do");
 			return null;
 		}
 		else if ("delete".equals(gcForm.getTask())) {
+			gcForm.getGenCodeBean().setUpdatedBy(us.getUserId());
 			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
 		}
 		

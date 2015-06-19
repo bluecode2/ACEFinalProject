@@ -28,9 +28,9 @@ public class EmployeeHandler extends Action{
 		RankEmpManager reMan = new RankEmpManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+
 		
-		CommonFunction.createAllowedMenu(null, request);
+		CommonFunction.createAllowedMenu(us, request);
 		
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);
@@ -57,17 +57,17 @@ public class EmployeeHandler extends Action{
 		}
 
 		else if (eForm.getTask().equals("delete")) {
-			dMan.deleteDepartment(eForm.getSelectedId(), 1);
+			dMan.deleteDepartment(eForm.getSelectedId(),us.getUserId());
 		}
 
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();
 			
 			if (isAdd) {
-				eForm.getSelectedEmp().setCreatedBy(1);
+				eForm.getSelectedEmp().setCreatedBy(us.getUserId());
 				eMan.insertEmployee(eForm.getSelectedEmp());
 			} else {
-				eForm.getSelectedEmp().setUpdatedBy(1);
+				eForm.getSelectedEmp().setUpdatedBy(us.getUserId());
 				eMan.updateEmployee(eForm.getSelectedEmp());
 			}
 

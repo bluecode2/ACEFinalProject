@@ -25,9 +25,8 @@ public class RankEmpHandler extends Action {
 		RankEmpManager dMan = new RankEmpManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
 
-		CommonFunction.createAllowedMenu(null, request);
+		CommonFunction.createAllowedMenu(us, request);
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
@@ -48,6 +47,7 @@ public class RankEmpHandler extends Action {
 		}
 
 		else if (dForm.getTask().equals("delete")) {
+			dForm.getBean().setUpdatedBy(us.getUserId());
 			dMan.deleteEmployeeRank(dForm.getSelectedId());
 		}
 
@@ -55,10 +55,10 @@ public class RankEmpHandler extends Action {
 			Boolean isAdd = dForm.getIsAdd();
 
 			if (isAdd) {
-				dForm.getBean().setCreatedBy(1);
+				dForm.getBean().setCreatedBy(us.getUserId());
 				dMan.insertEmployeeRank(dForm.getBean());
 			} else {
-				dForm.getBean().setUpdatedBy(1);
+				dForm.getBean().setUpdatedBy(us.getUserId());
 				dMan.updateEmployeeRank(dForm.getBean());
 			}
 

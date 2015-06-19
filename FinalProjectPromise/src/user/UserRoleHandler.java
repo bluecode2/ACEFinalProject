@@ -41,11 +41,11 @@ public class UserRoleHandler extends Action{
 			
 			if (isAdd) {
 				userRoleForm.getUserRoleBean().setUserRoleId(userRoleManager.getUserRoleId());
-				userRoleForm.getUserRoleBean().setCreatedBy(1);
+				userRoleForm.getUserRoleBean().setCreatedBy(us.getUserId());
 				userRoleManager.insertUserRole(userRoleForm.getUserRoleBean());
 			} 
 			else {
-				userRoleForm.getUserRoleBean().setUpdatedBy(1);
+				userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 				userRoleManager.editUserRole(userRoleForm.getUserRoleBean());
 			}
 
@@ -59,6 +59,7 @@ public class UserRoleHandler extends Action{
 			return mapping.findForward("userRoleEntry");
 		}
 		else if ("delete".equals(userRoleForm.getTask())) {
+			userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
 		}
 		

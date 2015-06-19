@@ -34,8 +34,7 @@ public class UserHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
-		CommonFunction.createAllowedMenu(null, request);
+		CommonFunction.createAllowedMenu(us, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
 			request.setAttribute("show", false);
@@ -68,6 +67,7 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("delete".equalsIgnoreCase(uForm.getTask())){
+			uForm.getuBean().setUpdatedBy(us.getUserId());
 			uMan.delUsers(uForm.getSelectedId());
 		}
 
@@ -75,12 +75,12 @@ public class UserHandler extends Action{
 			System.out.println("berhasil masuk save");
 			Boolean isAdd = uForm.getIsAdd();
 			if (isAdd) {
-				uForm.getuBean().setCreatedBy(1);
+				uForm.getuBean().setCreatedBy(us.getUserId());
 				uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
 				uMan.insertUser(uForm.getuBean());
 			} else {
 				uForm.setVal("0");
-				uForm.getuBean().setUpdatedBy(1);
+				uForm.getuBean().setUpdatedBy(us.getUserId());
 				if (uMan.getLoginValidasi(uForm.getuBean().getUsername(), uForm.getOldPassword()) != null){
 					uForm.getuBean().setPasswordUser(uForm.getPasswordUser());
 					uMan.updateUser(uForm.getuBean());
@@ -98,7 +98,7 @@ public class UserHandler extends Action{
 		}
 		else if ("resetPass".equalsIgnoreCase(uForm.getTask())){
 			uForm.setVal("0");
-			uForm.getuBean().setUpdatedBy(1);
+			uForm.getuBean().setUpdatedBy(us.getUserId());
 			GeneralParamManager gParamMan = new GeneralParamManager();
 			GeneralParamBean gParamBean = new GeneralParamBean();
 			gParamBean = gParamMan.getGenParamByParamId("password");

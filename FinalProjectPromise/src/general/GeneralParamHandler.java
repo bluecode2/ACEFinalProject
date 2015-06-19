@@ -23,13 +23,10 @@ public class GeneralParamHandler extends Action{
 		GeneralParamManager gpm = new GeneralParamManager();
 		GeneralParamForm gpf = (GeneralParamForm) form;
 		
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+		CommonFunction.createAllowedMenu(us, request);
 
-		System.out.println(gpf.getTask());
-		
 		if("add".equals(gpf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
 			empForm.setListOfJobs(empManager.getJobId());
@@ -51,7 +48,7 @@ public class GeneralParamHandler extends Action{
 				gpm.insertGeneralParam(gpf.getBean());
 			} 
 			else {
-				gpf.getBean().setUpdatedBy(1);
+				gpf.getBean().setUpdatedBy(us.getUserId());
 				gpm.updateGeneralParam(gpf.getBean());
 			}
 
@@ -62,13 +59,12 @@ public class GeneralParamHandler extends Action{
 			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
 
-			System.out.println("IRENE GILAA");
 			
 			return mapping.findForward("entry");
 		}
 		else if ("delete".equals(gpf.getTask())) {
 			System.out.println(gpf.getSelectedId());
-			gpf.getBean().setUpdatedBy(1);
+			gpf.getBean().setUpdatedBy(us.getUserId());
 			gpm.deleteGeneralParam(gpf.getBean());
 			System.out.println("selesai");
 		}
