@@ -18,7 +18,7 @@ public class ProposedTaskManager {
 	}
 
 	public List<ProposedTaskBean> getAllPropTaskFiltered(String col,
-			String input, Integer pageNum, Integer pageSize) {
+			String input, Integer pageNum, Integer pageSize, int userId) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
@@ -28,9 +28,10 @@ public class ProposedTaskManager {
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
+		map.put("userId", userId);
 
 		try {
-			arr = this.ibatis.queryForList("department.getListProposedTask", map);
+			arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -43,7 +44,7 @@ public class ProposedTaskManager {
 	public ProposedTaskBean getPropTaskByPropTaskId(int propTaskId) {
 		ProposedTaskBean task = null;
 		try {
-			task = (ProposedTaskBean) ibatis.queryForObject("proposed_task.getPropTaskByPropTaskId", propTaskId);
+			task = (ProposedTaskBean) ibatis.queryForObject("proposedTask.getPropTaskByPropTaskId", propTaskId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class ProposedTaskManager {
 		List<ProposedTaskBean> arr = new ArrayList<ProposedTaskBean>();
 
 		try {
-			arr = this.ibatis.queryForList("proposed_task.getPropTaskForSearchDialog", m);
+			arr = this.ibatis.queryForList("proposedTask.getPropTaskForSearchDialog", m);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,14 +71,14 @@ public class ProposedTaskManager {
 	
 	public Integer newPropTaskId() throws SQLException {
 		
-		Integer propTaskId = (Integer) ibatis.queryForObject("department.newPropTaskId", null);
+		Integer propTaskId = (Integer) ibatis.queryForObject("proposedTask.newPropTaskId", null);
 		return propTaskId;
 	}
 
 	public void updateProposedTask(ProposedTaskBean task) {
 		try {
 			ibatis.startTransaction();
-			ibatis.update("proposed_task.updateProposedTask", task);
+			ibatis.update("proposedTask.updateProposedTask", task);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -92,7 +93,7 @@ public class ProposedTaskManager {
 			map.put("updatedBy", userId);
 			
 			ibatis.startTransaction();
-			ibatis.delete("proposed_task.deleteProposedTask", map);
+			ibatis.delete("proposedTask.deleteProposedTask", map);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -104,7 +105,7 @@ public class ProposedTaskManager {
 		try {
 			ibatis.startTransaction();
 			task.setPropTaskId(newPropTaskId());
-			ibatis.insert("proposed_task.insertProposedTask", task);
+			ibatis.insert("proposedTask.insertProposedTask", task);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -118,7 +119,7 @@ public class ProposedTaskManager {
 		map.put("searchField", column);
 		map.put("searchValue", value);
 		Integer result = (Integer) this.ibatis.queryForObject(
-				"proposed_task.countProposedTask", map);
+				"proposedTask.countProposedTask", map);
 		return result;
 	}
 }
