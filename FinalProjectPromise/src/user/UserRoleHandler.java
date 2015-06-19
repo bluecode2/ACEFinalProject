@@ -65,6 +65,22 @@ public class UserRoleHandler extends Action{
 			userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
 		}
+		else if ("saveMenuAccess".equals(userRoleForm.getTask())) {
+			String listMenuId = userRoleForm.getListMenuId();
+			String listAllowAdd = userRoleForm.getListAllowAdd();
+			String listAllowBack = userRoleForm.getListAllowBack();
+			String listAllowSave = userRoleForm.getListAllowSave();
+			String listAllowApprove = userRoleForm.getListAllowApprove();
+			String listAllowDecline = userRoleForm.getListAllowDecline();
+			
+			System.out.println(listMenuId);
+			System.out.println(listAllowAdd);
+			System.out.println(listAllowBack);
+			System.out.println(listAllowSave);
+			System.out.println(listAllowApprove);
+			System.out.println(listAllowDecline);
+			return null;
+		}
 		
 		userRoleForm.setTask("");
 		userRoleForm.setSearchField(userRoleForm.getCurrSearchField());

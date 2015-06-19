@@ -18,14 +18,12 @@
 		document.forms[0].submit();
 	}
 
-
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
 
 		changePage(1);
 	}
-
 
 	function actionForm(task, id, nama) {
 		document.forms[0].task.value = task;
@@ -37,25 +35,100 @@
 				document.forms[0].submit();
 			}
 
-
 		} else {
 			document.forms[0].submit();
 		}
 	}
 
-	$(document).ready(function() {
-		$('.lnkMenuAccess').on('click', function() {
-			var userRoleId = $(this).closest('tr').find('td').eq(0).html();
-			var userRoleCode = $(this).closest('tr').find('td').eq(1).html();
-			var userRoleName = $(this).closest('tr').find('td').eq(2).html();
+	$(document).ready(
+			function() {
+				$('.lnkMenuAccess').on(
+						'click',
+						function() {
+							var userRoleId = $(this).closest('tr').find('td')
+									.eq(0).html();
+							var userRoleCode = $(this).closest('tr').find('td')
+									.eq(1).html();
+							var userRoleName = $(this).closest('tr').find('td')
+									.eq(2).html();
 
-			$('#hdnUserRoleCodeId').val(userRoleId);
-			$('#lblUserRoleName').val(userRoleName);
+							$('#hdnUserRoleCodeId').val(userRoleId);
+							$('#lblUserRoleName').val(userRoleName);
 
-			$('#searchDeptHead').modal();
-		});
-		;
-	});
+							$('#searchDeptHead').modal();
+						});
+
+				$("#btnSaveUserRoleMenu").on(
+						'click',
+						function() {
+							var listMenuId = "";
+							var listAllowAdd = "";
+							var listAllowBack = "";
+							var listAllowSave = "";
+							var listAllowApprove = "";
+							var listAllowDecline = "";
+
+							$('.chkSelectedMenu:checked').each(
+									function() {
+										var menuId = $(this).closest('tr')
+												.find('td').eq(0).html();
+										var allowAdd = $(this).closest('tr')
+												.find('td').eq(4).find(
+														'.chkIsAllowAdd').is(
+														':checked');
+										var allowBack = $(this).closest('tr')
+												.find('td').eq(5).find(
+														'.chkIsAllowBack').is(
+														':checked');
+										var allowSave = $(this).closest('tr')
+												.find('td').eq(6).find(
+														'.chkIsAllowSave').is(
+														':checked');
+										var allowApprove = $(this)
+												.closest('tr').find('td').eq(6)
+												.find('.chkIsAllowApprove').is(
+														':checked');
+										var allowDecline = $(this)
+												.closest('tr').find('td').eq(7)
+												.find('.chkIsAllowDecline').is(
+														':checked');
+
+										if (listMenuId != '') {
+											listMenuId += '|';
+											listAllowAdd += '|';
+											listAllowBack += '|';
+											listAllowSave += '|';
+											listAllowApprove += '|';
+											listAllowDecline += '|';
+										}
+										listMenuId += menuId;
+										listAllowAdd += allowAdd;
+										listAllowBack += allowBack;
+										listAllowSave += allowSave;
+										listAllowApprove += allowApprove;
+										listAllowDecline += allowDecline;
+									});
+
+							$.ajax({
+								type : "POST",
+								url : "userRole.do",
+								data : "task=saveMenuAccess&selectedId="
+										+ $("#hdnUserRoleCodeId").val()
+										+ "&listMenuId=" + listMenuId
+										+ "&listAllowAdd=" + listAllowAdd
+										+ "&listAllowBack=" + listAllowBack
+										+ "&listAllowSave=" + listAllowSave
+										+ "&listAllowApprove=" + listAllowApprove
+										+ "&listAllowDecline=" + listAllowDecline,
+								success : function(response) {
+
+								},
+								error : function(e) {
+									alert("Error: " + e);
+								}
+							});
+						});
+			});
 </script>
 </head>
 <body>
@@ -134,7 +207,6 @@
 										onclick="actionForm('edit','<bean:write name="reg" property="userRoleId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#"
-
 										class="text-danger"
 										onclick="actionForm('delete','<bean:write name="reg" property="userRoleId" />','<bean:write name="reg" property="userRoleName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
@@ -183,20 +255,44 @@
 												<th width="40px"></th>
 												<th width="80px">Menu Code</th>
 												<th>Menu Caption</th>
-												<th></th>
+												<th width="40px">Allow Add</th>
+												<th width="40px">Allow Back</th>
+												<th width="40px">Allow Save</th>
+												<th width="40px">Allow Approve</th>
+												<th width="40px">Allow Decline</th>
 											</tr>
 										</thead>
 
 										<tbody>
 											<logic:notEmpty name="lstMenu">
 												<logic:iterate id="menu" name="lstMenu">
-													<tr data-dismiss="modal" class="rowSearch">
+													<tr class="rowSearch">
 														<td style="display: none"><bean:write name="menu"
 																property="menuId" /></td>
-														<td align="center"><input type="checkbox" class="chkSelectedMenu" /></td>
-														<td><bean:write name="menu"
-																property="menuCode" /></td>
+														<td align="center"><input type="checkbox"
+															class="chkSelectedMenu" /></td>
+														<td><bean:write name="menu" property="menuCode" /></td>
 														<td><bean:write name="menu" property="menuCaption" /></td>
+														<td align="center"><logic:equal name="menu"
+																property="isAllowAdd" value="true">
+																<input type="checkbox" class="chkIsAllowAdd" />
+															</logic:equal></td>
+														<td align="center"><logic:equal name="menu"
+																property="isAllowBack" value="true">
+																<input type="checkbox" class="chkIsAllowBack" />
+															</logic:equal></td>
+														<td align="center"><logic:equal name="menu"
+																property="isAllowSave" value="true">
+																<input type="checkbox" class="chkIsAllowSave" />
+															</logic:equal></td>
+														<td align="center"><logic:equal name="menu"
+																property="isAllowApprove" value="true">
+																<input type="checkbox" class="chkIsAllowApprove" />
+															</logic:equal></td>
+														<td align="center"><logic:equal name="menu"
+																property="isAllowDecline" value="true">
+																<input type="checkbox" class="chkIsAllowDecline" />
+															</logic:equal></td>
 													</tr>
 												</logic:iterate>
 											</logic:notEmpty>
@@ -212,7 +308,8 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
-									data-dismiss="modal">Save changes</button>
+									id="btnSaveUserRoleMenu" data-dismiss="modal">Save
+									changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 
