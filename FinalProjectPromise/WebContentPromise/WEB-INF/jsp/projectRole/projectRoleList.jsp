@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-	<html:form action="//projectRole" method="post">
+	<html:form action="/projectRole" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>

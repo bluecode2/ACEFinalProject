@@ -26,7 +26,7 @@ public class ProjectRoleHandler extends Action {
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		CommonFunction.createAllowedMenu(us, request);
+		CommonFunction.initializeHeader(Constant.MenuCode.us, request);
 
 		if("add".equals(prf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
@@ -39,23 +39,23 @@ public class ProjectRoleHandler extends Action {
 			prf.setIsAdd(true);
 			request.setAttribute("pageTitle", "Project Role Entry");
 			
-			return mapping.findForward("entry");
+			return mapping.findForward("projectRoleEntry");
 		}
 		else if ("save".equals(prf.getTask())){
 			
 			prf.getProjectRoleBean().setUpdatedBy(us.getUserId());
 			prm.updateProjectRole(prf.getProjectRoleBean());
 			
-			response.sendRedirect("generalParam.do");
+			response.sendRedirect("projectRole.do");
 			return null;
 		}
 		else if ("edit".equals(prf.getTask())) {
-			request.setAttribute("pageTitle", "General Parameter Edit");
+			request.setAttribute("pageTitle", "Project Role Edit");
 			prf.setProjectRoleBean(prm.getProjectRoleById(prf.getSelectedId()));
 			
 			System.out.println(prf.getProjectRoleBean().getProjectRoleId());
 
-			return mapping.findForward("entry");
+			return mapping.findForward("projectRoleEntry");
 		}
 		else if ("delete".equals(prf.getTask())) {
 			System.out.println(prf.getSelectedId());
@@ -79,7 +79,7 @@ public class ProjectRoleHandler extends Action {
 		
 		prf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
-		request.setAttribute("pageTitle", "General Param List");
+		request.setAttribute("pageTitle", "Project Role List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList( prf.getPageCount(),prf.getCurrPage()));
@@ -88,6 +88,6 @@ public class ProjectRoleHandler extends Action {
 		request.setAttribute("currPage", prf.getCurrPage());
 		request.setAttribute("rowCount", rowCount);
 		
-		return mapping.findForward("list");
+		return mapping.findForward("projectRoleList");
 	}
 }
