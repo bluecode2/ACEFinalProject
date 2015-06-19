@@ -29,8 +29,6 @@ public class UserRoleHandler extends Action{
 		
 		CommonFunction.createAllowedMenu(us, request);
 
-
-
 		
 		if("add".equals(userRoleForm.getTask())){
 			userRoleForm.setIsAdd(true);
