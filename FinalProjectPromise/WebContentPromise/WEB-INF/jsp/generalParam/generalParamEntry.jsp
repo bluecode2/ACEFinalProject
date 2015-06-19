@@ -27,6 +27,7 @@
 	<html:form action="/generalParam" method="post">
 		<html:hidden name="generalParamForm" property="task" />
 		<html:hidden name="generalParamForm" property="isAdd" />
+		<html:hidden name="generalParamForm" property="bean.genParamId"/>
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -47,9 +48,10 @@
 					</tr>
 					<tr>
 						<td>Is Active</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<html:checkbox property="bean.isActive" name="generalParamForm" styleClass="form-control" ></html:checkbox> &nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp; 
+							<html:checkbox property="bean.isActive" name="generalParamForm" value="1"></html:checkbox>
+						</td> 
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>

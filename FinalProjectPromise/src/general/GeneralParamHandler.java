@@ -41,25 +41,25 @@ public class GeneralParamHandler extends Action{
 			return mapping.findForward("entry");
 		}
 		else if ("save".equals(gpf.getTask())){
-			Boolean isAdd = gpf.getIsAdd();
 			
-			if (isAdd) {
-				gpf.getBean().setGenParamId(gpm.getMaxParamId());
-				gpm.insertGeneralParam(gpf.getBean());
-			} 
-			else {
-				gpf.getBean().setUpdatedBy(us.getUserId());
-				gpm.updateGeneralParam(gpf.getBean());
-			}
-
+			gpf.getBean().setUpdatedBy(us.getUserId());
+			gpm.updateGeneralParam(gpf.getBean());
+			
+			System.out.println(gpf.getBean().getGenParamDesc());
+			System.out.println(gpf.getBean().getGenParamValue());
+			System.out.println(gpf.getBean().getUpdatedBy());
+			System.out.println(gpf.getBean().getUpdateDateInString());
+			System.out.println(gpf.getBean().getGenParamId());
+			
 			response.sendRedirect("generalParam.do");
 			return null;
 		}
 		else if ("edit".equals(gpf.getTask())) {
 			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
-
 			
+			System.out.println(gpf.getBean().getGenParamId());
+
 			return mapping.findForward("entry");
 		}
 		else if ("delete".equals(gpf.getTask())) {
