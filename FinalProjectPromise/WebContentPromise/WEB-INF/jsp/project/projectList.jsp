@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<html:form action="/users" method="post">
+	<html:form action="/project" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -25,10 +25,10 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 						<html:select
-								name="???" property="searchField"
+								name="projectForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="projectCode">Employee Name</option>
-								<option value="projectName">Username</option>
+								<option value="projectCode">Project Code</option>
+								<option value="projectName">Project Name</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="???" property="searchValue"
