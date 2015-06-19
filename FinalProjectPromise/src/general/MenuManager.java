@@ -51,7 +51,7 @@ public class MenuManager {
 
 		try {
 			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
-					"menu.selectListAllVisibleMenu", null));
+					"menu.selectListAllMenu", null));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
