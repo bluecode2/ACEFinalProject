@@ -45,24 +45,24 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<html:hidden name="rankEmpForm" property="task" />
-		<html:hidden name="rankEmpForm" property="selectedId" />
-		<html:hidden name="rankEmpForm" property="currSearchField" />
-		<html:hidden name="rankEmpForm" property="currSearchValue" />
+		<html:hidden name="proposedTaskForm" property="task" />
+		<html:hidden name="proposedTaskForm" property="selectedId" />
+		<html:hidden name="proposedTaskForm" property="currSearchField" />
+		<html:hidden name="proposedTaskForm" property="currSearchValue" />
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
-							<html:select name="rankEmpForm" property="searchField"
+							<html:select name="proposedTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="rankCode">Rank Code</option>
-								<option value="rankName">Rank Name</option>
+								<option value="propTaskName">Task Name</option>
+								<option value="propStatus">Status</option>
 							</html:select>
 						</td>
 						<td style="padding-left: 15px"><html:text
-								name="rankEmpForm" property="searchValue"
+								name="proposedTaskForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
@@ -79,30 +79,34 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td>Rank Code</td>
-							<td>Rank Name</td>
-							<td>Rank Level</td>
+							<td>Task Name</td>
+							<td>Estimate Start Date</td>
+							<td>Estimate End Date</td>
+							<td>Proposed To</td>
+							<td>Status</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="rankEmpForm" property="arrList">
-							<logic:iterate id="reg" name="rankEmpForm" property="arrList">
+						<logic:notEmpty name="proposedTaskForm" property="arrList">
+							<logic:iterate id="reg" name="proposedTaskForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="rankCode" /></td>
-									<td><bean:write name="reg" property="rankName" /></td>
-									<td><bean:write name="reg" property="rankLevel" /></td>
+									<td><bean:write name="reg" property="propTaskName" /></td>
+									<td><bean:write name="reg" property="estStartDate" /></td>
+									<td><bean:write name="reg" property="estEndDate" /></td>
+									<td><bean:write name="reg" property="propTo" /></td>
+									<td><bean:write name="reg" property="propStatus" /></td>
 									<td align="center"><a class="text-success" href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="rankId" />');"
+										onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger" 
-										onclick="actionForm('delete','<bean:write name="reg" property="rankId" />','<bean:write name="reg" property="rankName" />');"
+										onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="rankName" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="rankEmpForm" property="arrList">
+						<logic:empty name="proposedTaskForm" property="arrList">
 							<tr>
 								<td colspan="4" align="center" style="padding: 10px">No
 									Data Found</td>
@@ -114,7 +118,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="rankEmpForm" property="currPage" />
+		<html:hidden name="proposedTaskForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>

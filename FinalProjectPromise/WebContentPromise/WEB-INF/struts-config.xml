@@ -89,6 +89,11 @@
 			<forward name="personalHolidayList" path="/WEB-INF/jsp/personalHoliday/personalHolidayList.jsp"></forward>
 			<forward name="personalHolidayEntry" path="/WEB-INF/jsp/personalHoliday/personalHolidayEntry.jsp"></forward>
 		</action>
+		<action path="/proposedTask" name="proposedTaskForm" type="proposed_task.ProposedTaskHandler"
+			scope="request">
+			<forward name="proposedTaskList" path="/WEB-INF/jsp/proposedTask/personalHolidayList.jsp"></forward>
+			<forward name="proposedTaskEntry" path="/WEB-INF/jsp/proposedTask/personalHolidayEntry.jsp"></forward>
+		</action>
 		<action path="/menu" name="menuForm" type="general.MenuHandler" scope="request">
 			<forward name="list" path="/WEB-INF/jsp/menu/menuList.jsp"></forward>
 		</action>
