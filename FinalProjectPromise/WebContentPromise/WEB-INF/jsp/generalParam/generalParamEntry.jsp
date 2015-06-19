@@ -38,20 +38,13 @@
 				<table>
 					<tr>
 						<td>General Parameter Desc</td>
-						<td>  </td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td><html:text property="bean.genParamDesc" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 					<tr>
 						<td>General Parameter Value</td>
-						<td>  </td>
-						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control"></html:text></td>
-					</tr>
-					<tr>
-						<td>Is Active</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td>
-							<html:checkbox property="bean.isActive" name="generalParamForm" value="1"></html:checkbox>
-						</td> 
+						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>

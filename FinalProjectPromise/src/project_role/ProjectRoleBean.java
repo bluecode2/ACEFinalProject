@@ -15,6 +15,7 @@ public class ProjectRoleBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private String ProjectRoleCode;
+	private Integer isDeleted;
 
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
@@ -103,5 +104,11 @@ public class ProjectRoleBean {
 	}
 	public void setProjectRoleCode(String projectRoleCode) {
 		ProjectRoleCode = projectRoleCode;
+	}
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

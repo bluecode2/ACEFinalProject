@@ -3,8 +3,8 @@
 
 <sqlMap namespace="projectRole">
 	<select id="getProjectRole" resultClass="project_role.ProjectRoleBean" parameterClass="java.util.Map">
-		select * from(
-		select hol.* , ROWNUM rnum from(
+		SELECT * FROM(
+		SELECT hol.* , ROWNUM rnum FROM(
 		SELECT 
 		PROJECT_ROLE_ID 	as projectRoleId,
 		UPDATED_BY 			as updatedBy,
@@ -13,8 +13,9 @@
 		CREATE_DATE			as createDate, 
 		UPDATE_DATE 		as updateDate
 		PROJECT_ROLE_CODE	as projectRoleCode
+		IS_DELETED			as isDeleted
 		FROM PROJECT_ROLE 
-		where 1=1
+		WHERE IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectRoleName">
 				LOWER(PROJECT_ROLE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -31,7 +32,7 @@
 		#begin#
 	</select>
 	
-	<select id="getProjectRoleId" parameterClass="java.lang.Integer" resultClass="project_role.ProjectRoleBean">
+	<select id="getProjectRoleById" parameterClass="java.lang.Integer" resultClass="project_role.ProjectRoleBean">
 		SELECT 
 		UPDATED_BY 			as updatedBy,
 		CREATED_BY 			as createdBy,
@@ -39,16 +40,17 @@
 		CREATE_DATE			as createDate, 
 		UPDATE_DATE 		as updateDate
 		PROJECT_ROLE_CODE	as projectRoleCode
+		IS_DELETED			as isDeleted
 		FROM PROJECT_ROLE 
-		where PROJECT_ROLE_ID = #projectRoleId#
+		WHERE PROJECT_ROLE_ID = #projectRoleId#
 	</select>
 	
 	<select id="getMaxProjectRoleId" resultClass="java.lang.Integer" >
-	select max(PROJECT_ROLE_ID)+1 from PROJECT_ROLE
+	SELECT MAX(PROJECT_ROLE_ID)+1 FROM PROJECT_ROLE
 	</select>
 
-	<insert id="insertProjectRoleId" parameterClass="project_role.ProjectRoleBean">
-		insert into
+	<insert id="insertProjectRole" parameterClass="project_role.ProjectRoleBean">
+		INSERT INTO
 		PROJECT_ROLE(
 		PROJECT_ROLE_ID, 
 		UPDATED_BY, 
@@ -56,24 +58,28 @@
 		PROJECT_ROLE_NAME, 
 		CREATE_DATE, 
 		UPDATE_DATE, 
-		PROJECT_ROLE_CODE)
-		values (#projectRoleId#, null, #createdBy#, #projectRoleName#, SYSDATE, NULL, #projectRoleCode#)
+		PROJECT_ROLE_CODE,
+		IS_DELETED)
+		VALUES (#projectRoleId#, NULL, #createdBy#, #projectRoleName#, SYSDATE, NULL, #projectRoleCode#)
 	</insert>
 
-	<update id="editProjectRoleId" parameterClass="project_role.ProjectRoleBean">
-		UPDATE GENERAL_HOLIDAY
+	<update id="editProjectRole" parameterClass="project_role.ProjectRoleBean">
+		UPDATE PROJECT_ROLE
 		SET
 		PROJECT_ROLE_CODE 		= #projectRoleCode#
 		PROJECT_ROLE_NAME 		= #projectRoleName#,
 		UPDATED_BY				= #updatedBy#,
-		UPDATE_DATE=SYSDATE
+		UPDATE_DATE				= SYSDATE
 		WHERE PROJECT_ROLE_ID 	= #projectRoleId#
 	</update>
 
-	<delete id="deleteGeneralHoliday" parameterClass="java.lang.Integer">
-		DELETE FROM PROJECT_ROLE
-		WHERE GEN_HOLIDAY_ID = #projectRoleId#
-	</delete>
+	<update id="deleteProjectRole" parameterClass="java.lang.Integer">
+		UPDATE PROJECT_ROLE
+		SET
+		UPDATED_BY				= #updatedBy#,
+		UPDATE_DATE				= SYSDATE
+		WHERE PROJECT_ROLE_ID 	= #projectRoleId# AND IS_DELETED = 0
+	</update>
 
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM PROJECT_ROLE

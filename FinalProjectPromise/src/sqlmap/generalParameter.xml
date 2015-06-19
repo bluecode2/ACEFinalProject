@@ -5,7 +5,7 @@
 	<select id="selectGenParam" resultClass="general.GeneralParamBean" parameterClass="java.util.Map">
 		SELECT * FROM ( 
 		SELECT 
-		genParam.*, ROWNUM rnum from (
+		genParam.*, ROWNUM rnum FROM (
 		SELECT
 		GEN_PARAM_ID 			as genParamId,
 		GEN_PARAM_DESC 			as genParamDesc,
@@ -13,7 +13,7 @@
 		IS_ACTIVE 				as isActive,
 		UPDATED_BY				as updatedBy,
 		UPDATE_DATE				as updateDateInString
-		from general_parameter
+		FROM GENERAL_PARAMETER
 		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamDesc">
@@ -62,43 +62,42 @@
 		IS_ACTIVE 				as isActive,
 		UPDATED_BY				as updatedBy,
 		UPDATE_DATE				as updateDateInString
-		from general_parameter 
-		where gen_param_id = #tmpGenParamId# and IS_ACTIVE = 1
+		FROM GENERAL_PARAMETER
+		WHERE GEN_PARAM_ID = #tmpGenParamId# AND IS_ACTIVE = 1
 	</select>
 
 	<insert id="insertGenParam" parameterClass="general.GeneralParamBean">
-		insert into
-		general_parameter (
+		INSERT INTO
+		GENERAL_PARAMETER (
 		GEN_PARAM_ID, 
 		GEN_PARAM_DESC,
 		GEN_PARAM_VALUE,
 		IS_ACTIVE, 
 		UPDATED_BY,
 		UPDATE_DATE) 
-		values (#genParamId#, #genParamDesc#, #genParamValue#, 1, null, null)
+		VALUES (#genParamId#, #genParamDesc#, #genParamValue#, 1, null, null)
 	</insert>
 
 	<update id="updateGenParam" parameterClass="general.GeneralParamBean">
-		update
-		general_parameter set
-		GEN_PARAM_DESC = #genParamDesc#,
-		GEN_PARAM_VALUE = #genParamValue#,
-		UPDATED_BY = #updatedBy#,
-		UPDATE_DATE = SYSDATE
-		where GEN_PARAM_ID = #genParamId#
+		UPDATE
+		GENERAL_PARAMETER SET
+		GEN_PARAM_DESC 		= #genParamDesc#,
+		GEN_PARAM_VALUE	 	= #genParamValue#,
+		UPDATED_BY 			= #updatedBy#,
+		UPDATE_DATE 		= SYSDATE
+		WHERE GEN_PARAM_ID 	= #genParamId#
 	</update>
 	
 	<update id="deleteGenParam" parameterClass="general.GeneralParamBean">
-		update
-		general_parameter set
-		IS_ACTIVE = 0,
-		UPDATED_BY = #updatedBy#,
-		UPDATE_DATE = SYSDATE
-		where GEN_PARAM_ID = #genParamId#
-		AND IS_ACTIVE=1
+		UPDATE
+		GENERAL_PARAMETER SET
+		IS_ACTIVE 			= 0,
+		UPDATED_BY 			= #updatedBy#,
+		UPDATE_DATE 		= SYSDATE
+		WHERE GEN_PARAM_ID 	= #genParamId# AND IS_ACTIVE = 1
 	</update>
 	
 	<select id="getMaxGenParamId" resultClass="java.lang.Integer" >
-	select max(gen_param_id)+1 from general_parameter
+	SELECT MAX(GEN_PARAM_ID)+1 FROM GENERAL_PARAMETER
 	</select>
 </sqlMap>
