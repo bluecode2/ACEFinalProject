@@ -25,6 +25,7 @@
 	<html:form action="/projectRole" method="post">
 		<html:hidden name="projectRoleForm" property="task" />
 		<html:hidden name="projectRoleForm" property="isAdd" />
+		<html:hidden name="projectRoleForm" property="selectedId" />
 		<html:hidden name="projectRoleForm" property="projectRoleBean.projectRoleId" />
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
