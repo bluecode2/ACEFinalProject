@@ -23,6 +23,7 @@
 		<form-bean name="searchDeptForm" type="search_dialog.SearchDeptForm"></form-bean>	
 		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>	
 		<form-bean name="projectForm" type="project.ProjectForm"></form-bean>	
+		<form-bean name="taskForm" type="task.TaskForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -105,6 +106,9 @@
 		</action>
 		<action path="/project" name="projectForm" type="project.ProjectHandler" scope="request">
 			<forward name="projectList" path="/WEB-INF/jsp/project/projectList.jsp"></forward>
+		</action>
+		<action path="/task" name="taskForm" type="task.TaskHandler" scope="request">
+			<forward name="assigTask" path="/WEB-INF/jsp/task/assignTask.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
