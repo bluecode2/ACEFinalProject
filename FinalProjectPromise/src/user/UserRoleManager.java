@@ -3,6 +3,7 @@ package user;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,9 +79,10 @@ public class UserRoleManager {
 				"userRole.countUserRole", map);
 		return result;
 	}
-	
+
 	public int getUserRoleId() throws SQLException {
-		int tmpUserRoleId = (Integer) this.ibatis.queryForObject("userRole.getUserRoleId", null);
+		int tmpUserRoleId = (Integer) this.ibatis.queryForObject(
+				"userRole.getUserRoleId", null);
 		return tmpUserRoleId;
 	}
 }

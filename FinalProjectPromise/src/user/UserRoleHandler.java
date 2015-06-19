@@ -1,6 +1,9 @@
 package user;
 
+import general.MenuBean;
 import general.MenuManager;
+
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +35,7 @@ public class UserRoleHandler extends Action{
 		
 		if("add".equals(userRoleForm.getTask())){
 			userRoleForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "User Role Entry");
+			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY, us, request);
 			
 			return mapping.findForward("userRoleEntry");
 		}
@@ -53,7 +56,7 @@ public class UserRoleHandler extends Action{
 			return null;
 		}
 		else if ("edit".equals(userRoleForm.getTask())) {
-			request.setAttribute("pageTitle", "User Role Edit");
+			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY, us, request);
 			userRoleForm.setUserRoleBean(userRoleManager.getUserRoleEdit(userRoleForm.getSelectedId()));
 
 			return mapping.findForward("userRoleEntry");
@@ -78,6 +81,8 @@ public class UserRoleHandler extends Action{
 		userRoleForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE, us, request);
+		
+		request.setAttribute("lstMenu", menuMan.getAllMenu());
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(userRoleForm.getPageCount(),userRoleForm.getCurrPage()));

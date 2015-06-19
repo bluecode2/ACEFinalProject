@@ -22,6 +22,13 @@ public class MenuBean {
 	private String createdByName;
 	private String updatedByName;
 	
+	
+	private Boolean isAllowAdd;
+	private Boolean isAllowBack;
+	private Boolean isAllowSave;
+	private Boolean isAllowApprove;
+	private Boolean isAllowDecline;
+	
 	SimpleDateFormat df = new SimpleDateFormat(common.Constant.StringFormat.dateFormat);
 
 	public String getUpdatedByName() {
@@ -158,4 +165,21 @@ public class MenuBean {
 	public void setIsParent(Integer isParent) {
 		this.isParent = isParent;
 	}
+	public Boolean getIsAllowAdd() {
+		return menuCrud.contains("C");
+	}
+	public Boolean getIsAllowBack() {
+		return isAllowBack;
+	}
+	public Boolean getIsAllowSave() {
+		return isAllowSave;
+	}
+	public Boolean getIsAllowApprove() {
+		return isAllowApprove;
+	}
+	public Boolean getIsAllowDecline() {
+		return isAllowDecline;
+	}
+	
+	
 }

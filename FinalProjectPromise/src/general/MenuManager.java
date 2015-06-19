@@ -46,6 +46,18 @@ public class MenuManager {
 		return arr;
 	}
 	
+	public ArrayList<MenuBean> getAllMenu() {
+		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
+
+		try {
+			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
+					"menu.selectListAllVisibleMenu", null));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
 	
 	public MenuBean getMenuByMenuId(int tmpMenuId) throws SQLException {
 		MenuBean mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuId", tmpMenuId);
