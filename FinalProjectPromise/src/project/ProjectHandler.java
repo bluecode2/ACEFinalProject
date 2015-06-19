@@ -27,6 +27,6 @@ public class ProjectHandler extends Action{
 		request.setAttribute("currPage", 1);
 		request.setAttribute("rowCount", 1);
 		
-		return super.execute(mapping, form, request, response);
+		return mapping.findForward("projectList");
 	}
 }
