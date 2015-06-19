@@ -52,4 +52,15 @@ public class ProjectManager {
 				"project.countProject", map);
 		return result;
 	}
+	
+	public ProjectBean getUserByUserID(Integer tempProjectID) throws SQLException, ClassNotFoundException{
+		ProjectBean pBean = null;
+		pBean = (ProjectBean) this.ibatis.queryForObject("project.getProjectbyId", tempProjectID);
+		return pBean;
+	}
+	
+	public Integer getNewProjectId() throws SQLException{
+		Integer newProjectId = (Integer) this.ibatis.queryForObject("project.getNewProjectId", null);
+		return newProjectId;
+	}
 }

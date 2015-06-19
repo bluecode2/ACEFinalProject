@@ -72,7 +72,6 @@ public class UserHandler extends Action{
 		}
 
 		else if ("save".equalsIgnoreCase(uForm.getTask())){
-			System.out.println("berhasil masuk save");
 			Boolean isAdd = uForm.getIsAdd();
 			if (isAdd) {
 				uForm.getuBean().setCreatedBy(us.getUserId());

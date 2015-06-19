@@ -27,6 +27,12 @@ public class ProjectForm extends ActionForm{
 	private List<ProjectBean> listOfProject;
 	private ProjectBean pBean = new ProjectBean();
 
+	public ProjectBean getpBean() {
+		return pBean;
+	}
+	public void setpBean(ProjectBean pBean) {
+		this.pBean = pBean;
+	}
 	public List<ProjectBean> getListOfProject() {
 		return listOfProject;
 	}

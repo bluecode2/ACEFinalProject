@@ -23,6 +23,33 @@ public class ProjectHandler extends Action{
 		ProjectManager pMan = new ProjectManager();
 		CommonFunction.createAllowedMenu(null, request);
 		
+		if ("add".equalsIgnoreCase(pForm.getTask())){
+			pForm.setIsAdd(true);
+			pForm.setSelectedId(0);
+			request.setAttribute("pageTitle", "Project Entry");
+			
+			return mapping.findForward("projectEntry");
+		}
+		else if ("edit".equalsIgnoreCase(pForm.getTask())){
+			pForm.setIsAdd(false);
+			request.setAttribute("pageTitle", "Project Edit");
+			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			
+			return mapping.findForward("projectEntry");
+		}
+		else if ("save".equalsIgnoreCase(pForm.getTask())){
+			Boolean isAdd = pForm.getIsAdd();
+			if (isAdd) {
+				
+			} else {
+
+			}
+
+			response.sendRedirect("project.do");
+			return null;
+		}
+		
+		
 		pForm.setTask("");
 		pForm.setSearchField(pForm.getCurrSearchField());
 		pForm.setSearchValue(pForm.getCurrSearchValue());

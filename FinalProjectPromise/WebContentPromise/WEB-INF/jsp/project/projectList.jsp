@@ -15,27 +15,44 @@
 		document.forms[0].submit();
 	}
 	
+	
+	
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
 
 		changePage(1);
 	}
+	
+	function onLoadForm(){
+		
+	}
 
+	$(document).ready(
+			function() {
+				onLoadForm();
+			});
+	
 	function actionForm(task, id, nama) {
 
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
 
-		if (task == "delete") {
-			if (confirm("Are you sure want to delete Project " + nama)) {
+		if (task == "cancel") {
+			if (confirm("Are you sure want to cancel Project " + nama)) {
 				document.forms[0].submit();
 			}
-		} else {
+		} 
+		else if (task == "start"){
+			if (confirm("Start Project " + nama)) {
+				document.forms[0].submit();
+			}
+		}
+		else {
 			document.forms[0].submit();
 		}
-
 	}
+	
 </script>
 </head>
 <body>
@@ -112,12 +129,15 @@
 									<td>Member</td>
 									<td>Task</td>
 									<td align="center">
+									<a href="#"	onclick="actionForm('start','<bean:write name="proj" property="projectId" />');"
+										title="Start"><span class="glyphicon glyphicon-play"
+											aria-hidden="true" id="start"></span></a> &nbsp; 
 									<a href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" onclick="actionForm('delete','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />');"
-										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a>
+									<a href="#" onclick="actionForm('cancel','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />');"
+										title="Cancel"><span class="glyphicon glyphicon-remove"
+											aria-hidden="true" id="cancel"></span></a>
 									</td>
 								</tr>
 							</logic:iterate>
