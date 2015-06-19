@@ -28,7 +28,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete Employee Rank " + nama)) {
+			if (confirm("Are you sure want to delete Task " + nama)) {
 				document.forms[0].submit();
 			}
 		} else {
@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-<html:form action="/rankEmployee" method="post">
+<html:form action="/proposedTask" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
