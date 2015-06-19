@@ -49,6 +49,30 @@
 		AND is_visible = 1
 	</select>
 	
+	<select id="selectListAllVisibleMenu" resultClass="general.MenuBean">
+		SELECT
+		MENU_ID as
+		menuId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		MENU_CODE as
+		menuCode,
+		MENU_CAPTION as menuCaption,
+		PARENT_ID as parentId,
+		MENU_CRUD
+		as menuCrud,
+		MENU_INDEX as menuIndex,
+		MENU_URL as menuUrl,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		IS_PARENT as
+		isParent
+		FROM menu
+		WHERE
+		is_visible = 1
+		ORDER BY menu_code
+	</select>
+	
 	<select id="getMenuByMenuId" parameterClass="java.lang.Integer" resultClass="general.MenuBean"> 
 	SELECT
 		MENU_ID 			as menuId,
