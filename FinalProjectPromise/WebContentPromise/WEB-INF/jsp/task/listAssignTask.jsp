@@ -17,17 +17,25 @@
 			var taskCode = $(this).closest('tr').find('.hdnTaskStatus').val();
 			if (taskCode == 'TA_STAT_02') {
 				$(this).addClass('glyphicon glyphicon-pencil');
+				$(this).attr("title","Edit Task");
 			} else if (taskCode == 'TA_STAT_04') {
 				$(this).addClass('glyphicon glyphicon-ok');
+				$(this).attr("title","Approve Task");
 			} else
 				$(this).hide();
 		});
 		$('.secondBtn').each(function() {
 			var taskCode = $(this).closest('tr').find('.hdnTaskStatus').val();
-			if (taskCode == 'TA_STAT_01') {
-				$(this).addClass('glyphicon glyphicon-pencil');
-			} else if (taskCode == 'TA_STAT_04') {
-				$(this).addClass('glyphicon glyphicon-ok');
+			if (taskCode == 'TA_STAT_02') {
+				$(this).addClass('glyphicon glyphicon-remove');
+				$(this).attr("title","Cancel Task");
+			} else if (taskCode == 'TA_STAT_03') {
+				$(this).addClass('glyphicon glyphicon-pause');
+				$(this).attr("title","Pause Task");
+			}
+			else if (taskCode == 'TA_STAT_04') {
+				$(this).addClass('glyphicon glyphicon-remove');
+				$(this).attr("title","Decline Task");
 			} else
 				$(this).hide();
 		});
@@ -92,7 +100,7 @@
 									<td><bean:write name="reg" property="assignedByName" /></td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
-									<td><html:hidden name="reg" property="taskStatus" styleClass="hdnTaskStatus" /> 
+									<td><html:text name="reg" property="taskStatus" styleClass="hdnTaskStatus" /> 
 										<bean:write name="reg" property="taskStatusName"/>
 									</td>
 									<td align="center">
