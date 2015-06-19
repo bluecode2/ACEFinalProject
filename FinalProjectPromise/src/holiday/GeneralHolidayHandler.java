@@ -22,13 +22,10 @@ public class GeneralHolidayHandler extends Action{
 		GeneralHolidayForm genForm = (GeneralHolidayForm) form;
 		GeneralHolidayManager genManager = new GeneralHolidayManager();
 		
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
-		
-//		HttpSession session = request.getSession();	
-//		UserBean us = (UserBean) session.getAttribute("currUser");
+
+		CommonFunction.createAllowedMenu(us, request);
 		
 		if("add".equals(genForm.getTask())){
 			genForm.setIsAdd(true);
@@ -40,11 +37,11 @@ public class GeneralHolidayHandler extends Action{
 			Boolean isAdd = genForm.getIsAdd();
 			if (isAdd) {
 				genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
-				genForm.getGenHolidayBean().setCreatedBy(1);
+				genForm.getGenHolidayBean().setCreatedBy(us.getUserId());
 				genManager.insertGeneralHoliday(genForm.getGenHolidayBean());
 			} 
 			else {
-				genForm.getGenHolidayBean().setUpdatedBy(1);
+				genForm.getGenHolidayBean().setUpdatedBy(us.getUserId());
 				genManager.editGeneralHoliday(genForm.getGenHolidayBean());
 			}
 
@@ -58,6 +55,7 @@ public class GeneralHolidayHandler extends Action{
 			return mapping.findForward("genEntry");
 		}
 		else if ("delete".equals(genForm.getTask())) {
+			genForm.getGenHolidayBean().setUpdatedBy(us.getUserId());
 			genManager.deleteGeneralHoliday(genForm.getSelectedId());
 		}
 		else if ("search".equals(genForm.getTask())) {

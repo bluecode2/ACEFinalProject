@@ -22,10 +22,10 @@ public class MenuHandler extends Action {
 		// TODO Auto-generated method stub
 		MenuForm mnForm = (MenuForm) form;
 		MenuManager mnMan = new MenuManager();
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+
+		CommonFunction.createAllowedMenu(us, request);
 		
 		System.out.println("masuk ke handler");
 		mnForm.setListCount(mnMan.getCountMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue()));

@@ -24,10 +24,10 @@ public class PersonalHolidayHandler extends Action{
 		PersonalHolidayManager persManager = new PersonalHolidayManager();
 		EmployeeManager empManager = new EmployeeManager();
 		
-		CommonFunction.createAllowedMenu(null, request);
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		request.setAttribute("username", us.getUsername());
+		CommonFunction.createAllowedMenu(us, request);
+
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
@@ -42,11 +42,11 @@ public class PersonalHolidayHandler extends Action{
 			
 			if (isAdd) {
 				persForm.getPersHolidayBean().setHolidayId(persManager.getNewGenHolidayId());
-				persForm.getPersHolidayBean().setCreatedBy(1);
+				persForm.getPersHolidayBean().setCreatedBy(us.getUserId());
 				persManager.insertPersonalHoliday(persForm.getPersHolidayBean());
 			} 
 			else {
-				persForm.getPersHolidayBean().setUpdatedBy(1);
+				persForm.getPersHolidayBean().setUpdatedBy(us.getUserId());
 				persManager.editPersonalHoliday(persForm.getPersHolidayBean());
 			}
 
@@ -62,6 +62,7 @@ public class PersonalHolidayHandler extends Action{
 			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("delete".equals(persForm.getTask())) {
+			persForm.getPersHolidayBean().setUpdatedBy(us.getUserId());
 			persManager.deletePersonalHoliday(persForm.getSelectedId());
 		}
 		

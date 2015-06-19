@@ -29,7 +29,7 @@ public class DepartmentHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		request.setAttribute("username", us.getUsername());
 
-		CommonFunction.createAllowedMenu(null, request);
+		CommonFunction.createAllowedMenu(us, request);
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
@@ -52,7 +52,7 @@ public class DepartmentHandler extends Action {
 		}
 
 		else if (dForm.getTask().equals("delete")) {
-			dMan.deleteDepartment(dForm.getSelectedId(), 1);
+			dMan.deleteDepartment(dForm.getSelectedId(), us.getUserId());
 		}
 
 		else if (dForm.getTask().equals("save")) {
@@ -62,10 +62,10 @@ public class DepartmentHandler extends Action {
 				dForm.getSelectedDept().setDeptHeadId(null);
 
 			if (isAdd) {
-				dForm.getSelectedDept().setCreatedBy(1);
+				dForm.getSelectedDept().setCreatedBy(us.getUserId());
 				dMan.insertDepartment(dForm.getSelectedDept());
 			} else {
-				dForm.getSelectedDept().setUpdatedBy(1);
+				dForm.getSelectedDept().setUpdatedBy(us.getUserId());
 				dMan.updateDepartment(dForm.getSelectedDept());
 			}
 
