@@ -18,7 +18,15 @@ public class Constant {
 	public static final Integer pageNavigatorSize = 5;
 	
 	public static class MenuCode{
+		public static final String DEPARTMENT = "MS0101";
+		public static final String DEPARTMENT_ENTRY = "MS0101-E";
+		public static final String EMPLOYEE_RANK = "MS0102";
+		public static final String EMPLOYEE_RANK_ENTRY = "MS0102-E";
+		public static final String EMPLOYEE = "MS0103";
+		public static final String EMPLOYEE_ENTRY = "MS0103-E";
 		
+		public static final String USER_ROLE = "MS0202";
+		public static final String USER_ROLE_ENTRY = "MS0202-E";
 	}
 	 
 }

@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="menu">
-	<select id="selectListMenuHead" resultClass="general.MenuBean">
+	<select id="selectListVisibleMenuHead" resultClass="general.MenuBean">
 		SELECT
 		MENU_ID as
 		menuId,
@@ -22,9 +22,10 @@
 		isParent
 		FROM menu
 		WHERE parent_id IS NULL
+		AND is_visible = 1
 	</select>
 
-	<select id="selectListMenuByParent" parameterClass="java.lang.Integer"
+	<select id="selectListVisibleMenuByParent" parameterClass="java.lang.Integer"
 		resultClass="general.MenuBean">
 		SELECT
 		MENU_ID as menuId,
@@ -45,6 +46,7 @@
 		FROM menu
 		WHERE parent_id =
 		#value#
+		AND is_visible = 1
 	</select>
 	
 	<select id="getMenuByMenuId" parameterClass="java.lang.Integer" resultClass="general.MenuBean"> 
@@ -62,7 +64,25 @@
 		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
 		IS_PARENT 			as isParent
 		FROM menu
-		where menu_id = #tmpMenuId#
+		where menu_id = #value#
+	</select>
+
+	<select id="getMenuByMenuCode" parameterClass="java.lang.String" resultClass="general.MenuBean"> 
+	SELECT
+		MENU_ID 			as menuId,
+		UPDATED_BY 			as updatedBy,
+		CREATED_BY 			as createdBy,
+		MENU_CODE 			as menuCode,
+		MENU_CAPTION 		as menuCaption,
+		PARENT_ID 			as parentId,
+		MENU_CRUD 			as menuCrud,
+		MENU_INDEX 			as menuIndex,
+		MENU_URL 			as menuUrl,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		IS_PARENT 			as isParent
+		FROM menu
+		where menu_code = #value#
 	</select>
 
 	<select id="selectListMenu" resultClass="general.MenuBean"

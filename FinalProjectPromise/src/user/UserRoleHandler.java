@@ -27,8 +27,8 @@ public class UserRoleHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
-		CommonFunction.createAllowedMenu(us, request);
-
+		//CommonFunction.createAllowedMenu(us, request);
+		
 		
 		if("add".equals(userRoleForm.getTask())){
 			userRoleForm.setIsAdd(true);
@@ -77,10 +77,7 @@ public class UserRoleHandler extends Action{
 		
 		userRoleForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
-		request.setAttribute("lstMenu", menuMan.getAllMenuHead());
-		
-		
-		request.setAttribute("pageTitle", "User Role List");
+		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE, us, request);
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(userRoleForm.getPageCount(),userRoleForm.getCurrPage()));

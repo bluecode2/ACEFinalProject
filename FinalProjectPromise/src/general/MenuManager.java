@@ -25,7 +25,7 @@ public class MenuManager {
 
 		try {
 			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
-					"menu.selectListMenuHead", null));
+					"menu.selectListVisibleMenuHead", null));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class MenuManager {
 
 		try {
 			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
-					"menu.selectListMenuByParent", parentId));
+					"menu.selectListVisibleMenuByParent", parentId));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,8 +46,20 @@ public class MenuManager {
 		return arr;
 	}
 	
+	
 	public MenuBean getMenuByMenuId(int tmpMenuId) throws SQLException {
 		MenuBean mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuId", tmpMenuId);
+		return mnBean;
+	}
+	
+	public MenuBean getMenuByMenuId(String menuCode) {
+		MenuBean mnBean = null;
+		try {
+			mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuCode", menuCode);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return mnBean;
 	}
 
