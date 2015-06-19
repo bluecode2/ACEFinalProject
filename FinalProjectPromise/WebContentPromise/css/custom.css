@@ -1,15 +1,18 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: 'Lato', sans-serif;
   background-color: #fff;
-}
-
-h1, p {
-  font-family: 'Lato', sans-serif;
+  margin-bottom: 50px;
 }
 
 h1 {
+  font-family: 'Lato', sans-serif;
   font-size: 24.5px;
   margin: 0;
   padding: 0;
@@ -19,27 +22,38 @@ hr {
   margin: 10px 0 3px;
 }
 
-.breadcrumb {
-  padding: 0 15px 0;
-  margin-left: -10px;
-  background-color: transparent;
+label {
+	font-weight: normal;
 }
 
-.center-block {
-	float: none;
+.logo {
+	width: 23px;
+	height: 30px;
+	position: relative; 
+	top:-3px; 
+	padding-right: 7px;
 }
 
 .btn-icon {
   padding: 10px 14px;
 }
 
-.logo {
-	position: relative; 
-	top:-3px; 
-	padding-right: 7px;
+.breadcrumb {
+  padding: 0 15px 0;
+  margin-left: -10px;
+  background-color: transparent;
 }
 
-/*============== submenu ================*/
+.datepicker{ 
+	z-index: 9999 !important;
+}
+
+.center-block {
+	float: none;
+}
+
+/* Submenu
+-------------------------------------------------- */
 
 .sub-menu {
     left: 100%;
@@ -87,19 +101,8 @@ hr {
     left: -6px;
 }
 
-/*===================================*/
-
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 50px;
-}
 
 .footer {
   position: absolute;
@@ -108,6 +111,12 @@ body {
   /* Set the fixed height of the footer here */
   height: 50px;
 }
+
+.footer-text {
+	margin: 8px;
+}
+
+/* ----------------------------------------------- */
 
 .align-center{
 	text-align: center;
@@ -134,12 +143,4 @@ body {
 
 .table-clickable td {
 	cursor: pointer;
-}
-
-label {
-	font-weight: normal;
-}
-
-.datepicker{ 
-	z-index: 9999 !important;
 }
