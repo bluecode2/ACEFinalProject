@@ -11,7 +11,6 @@ import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
 import common.Constant;
-import rank_employee.RankEmpBean;
 import rank_employee.RankEmpManager;
 import user.UserBean;
 
@@ -48,7 +47,8 @@ public class RankEmpHandler extends Action {
 
 		else if (dForm.getTask().equals("delete")) {
 			dForm.getBean().setUpdatedBy(us.getUserId());
-			dMan.deleteEmployeeRank(dForm.getSelectedId());
+			dForm.getBean().setRankId(dForm.getSelectedId());
+			dMan.deleteEmployeeRank(dForm.getBean());
 		}
 
 		else if (dForm.getTask().equals("save")) {

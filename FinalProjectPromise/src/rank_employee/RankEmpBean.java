@@ -17,6 +17,7 @@ public class RankEmpBean {
 	private Date 	updateDate;
 	private String 	updateDateInString;
 	private String  rankCode;
+	private Integer isDeleted;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
@@ -116,6 +117,12 @@ public class RankEmpBean {
 	}
 	public void setRankCode(String rankCode) {
 		this.rankCode = rankCode;
+	}
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 }

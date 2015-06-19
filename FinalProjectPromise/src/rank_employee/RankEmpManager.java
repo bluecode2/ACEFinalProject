@@ -3,7 +3,6 @@ package rank_employee;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,11 +87,11 @@ public class RankEmpManager {
 		}
 	}
 
-	public void deleteEmployeeRank(Integer EmployeeId)
+	public void deleteEmployeeRank(RankEmpBean eb)
 			throws ClassNotFoundException, SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("rank.deleteEmployeeRank", EmployeeId);
+			this.ibatis.update("rank.deleteEmployeeRank", eb);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception

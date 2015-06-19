@@ -11,9 +11,10 @@
 		rank_level as rankLevel,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
-		rank_code as rankCode
+		rank_code as rankCode,
+		IS_DELETED as isDeleted
 		FROM rank_emp
-		where 1=1
+		where IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankCode">
 				LOWER(rank_code) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -37,7 +38,8 @@
 		rank_level as rankLevel,
 		rank_code as rankCode,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
+		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
+		IS_DELETED as isDeleted
 		FROM rank_emp
 		where rank_id = #tmpRankId#
 	</select>
@@ -49,8 +51,8 @@
 	<insert id="insertEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		insert into
 		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_code, rank_name, rank_level,
-		create_date, update_date)
-		values (#rankId#, #updatedBy#, #createdBy#,#rankCode#,#rankName#, #rankLevel#,SYSDATE, NULL)
+		create_date, update_date, is_deleted)
+		values (#rankId#, #updatedBy#, #createdBy#,#rankCode#,#rankName#, #rankLevel#,SYSDATE, NULL, 0)
 	</insert>
 
 	<update id="updateEmployeeRank" parameterClass="rank_employee.RankEmpBean">
@@ -61,16 +63,26 @@
 		WHERE rank_id=#rankId#
 	</update>
 
-	<delete id="deleteEmployeeRank" parameterClass="java.lang.Integer">
+	<update id="deleteEmployeeRank" parameterClass="rank_employee.RankEmpBean">
+		update
+		RANK_EMP SET
+		IS_DELETED = 1,
+		UPDATED_BY = #updatedBy#,
+		UPDATE_DATE = SYSDATE
+		WHERE RANK_ID=#rankId#
+		AND IS_DELETED=0
+	</update>
+
+	<!-- <delete id="deleteEmployeeRank" parameterClass="java.lang.Integer">
 		DELETE
 		rank_emp
 		WHERE rank_id=#id#
-	</delete>
+	</delete> -->
 
 	<select id="countEmployeeRank" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM RANK_EMP
-			where 1=1
+			where is_deleted=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankCode">
 				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -90,7 +102,8 @@
 		rank_level as rankLevel,
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
-		rank_code as rankCode
+		rank_code as rankCode,
+		IS_DELETED as isDeleted
 		FROM rank_emp
 		where 1=1
 		<dynamic prepend="AND">
