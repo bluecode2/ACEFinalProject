@@ -18,11 +18,11 @@ public class ProposedTaskManager {
 	}
 
 	public List<ProposedTaskBean> getAllPropTaskFiltered(String col,
-			String input, Integer pageNum, Integer pageSize, int userId) {
+			String input, Integer pageNum, Integer pageSize, int userId) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-
-		List<ProposedTaskBean> arr = null;
+		System.out.println(col + "-" + input + "-"+ begin + "-"+ end);
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -30,13 +30,10 @@ public class ProposedTaskManager {
 		map.put("end", end);
 		map.put("userId", userId);
 
-		try {
-			arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
+	
+		List<ProposedTaskBean> 	arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(arr);
 		return arr;
 	}
 	
@@ -86,14 +83,11 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public void deleteProposedTask(int propTaskId,int userId) {
-		try {
-			Map map = new HashMap();
-			map.put("propTaskId", propTaskId);
-			map.put("updatedBy", userId);
-			
+	public void deleteProposedTask(int propTaskId,int userId)
+			throws ClassNotFoundException,SQLException {
+		try {			
 			ibatis.startTransaction();
-			ibatis.delete("proposedTask.deleteProposedTask", map);
+			ibatis.delete("proposedTask.deleteProposedTask", propTaskId);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
