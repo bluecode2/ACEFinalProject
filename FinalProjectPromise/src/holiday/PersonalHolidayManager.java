@@ -72,16 +72,16 @@ public class PersonalHolidayManager {
 		}
 	}
 
-	public void deletePersonalHoliday(Integer genId) throws SQLException {
+	public void deletePersonalHoliday(PersonalHolidayBean persHolidayBean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("personalHoliday.deletePersonalHoliday", genId);
+			this.ibatis.update("personalHoliday.deletePersonalHoliday", persHolidayBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
 		}
 	}
-
+	
 	public Integer getCountPersonalHoliday(String column, String value)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();

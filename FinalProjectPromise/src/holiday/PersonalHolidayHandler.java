@@ -63,7 +63,8 @@ public class PersonalHolidayHandler extends Action{
 		}
 		else if ("delete".equals(persForm.getTask())) {
 			persForm.getPersHolidayBean().setUpdatedBy(us.getUserId());
-			persManager.deletePersonalHoliday(persForm.getSelectedId());
+			persForm.getPersHolidayBean().setHolidayId(persForm.getSelectedId());
+			persManager.deletePersonalHoliday(persForm.getPersHolidayBean());
 		}
 		
 		persForm.setTask("");

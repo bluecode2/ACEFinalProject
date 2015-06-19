@@ -15,10 +15,12 @@
 		P.IS_EXCHANGE_DAY		as isExchangeDay,
 		P.CREATE_DATE			as createDateInString,
 		P.UPDATE_DATE			as updateDateInString,
-		E.EMPLOYEE_NAME			as employeeName
+		E.EMPLOYEE_NAME			as employeeName,
+		IS_DELETED 				as isDeleted
 		FROM PERSONAL_HOLIDAY  P
 		JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
 		where HOLIDAY_DATE > SYSDATE
+		AND IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDesc">
 				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -44,7 +46,8 @@
 		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
 		IS_EXCHANGE_DAY		as isExchangeDay,
 		CREATE_DATE			as createDateInString,			
-		UPDATE_DATE			as updateDateInString
+		UPDATE_DATE			as updateDateInString,
+		IS_DELETED 			as isDeleted
 		FROM PERSONAL_HOLIDAY
 		where HOLIDAY_ID = #holId#
 	</select>
@@ -56,10 +59,10 @@
 	<insert id="insertPersonalHoliday" parameterClass="holiday.PersonalHolidayBean">
 		insert into
 		PERSONAL_HOLIDAY(HOLIDAY_ID, EMPLOYEE_ID, CREATED_BY, UPDATED_BY,
-		HOLIDAY_DESC, HOLIDAY_DATE, IS_EXCHANGE_DAY, CREATE_DATE, UPDATE_DATE)
+		HOLIDAY_DESC, HOLIDAY_DATE, IS_EXCHANGE_DAY, CREATE_DATE, UPDATE_DATE, IS_DELETED)
 		VALUES
 		(#holidayId#, #employeeId#, #createdBy#, NULL, #holidayDesc#, TO_DATE(#holidayDateInString#,'yyyy-MM-dd'),
-		#isExchangeDay#, SYSDATE, NULL)
+		#isExchangeDay#, SYSDATE, NULL, 0)
 	</insert>
 
 	<select id="getPersonalHolidayEdit" resultClass="holiday.PersonalHolidayBean">
@@ -72,7 +75,8 @@
 		TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
 		IS_EXCHANGE_DAY		as isExchangeDay,
 		CREATE_DATE			as createDateInString,			
-		UPDATE_DATE			as updateDateInString
+		UPDATE_DATE			as updateDateInString,
+		IS_DELETED 			as isDeleted
 		FROM PERSONAL_HOLIDAY
 		where HOLIDAY_ID = #value#
 		ORDER BY HOLIDAY_ID
@@ -91,14 +95,24 @@
 		WHERE HOLIDAY_ID=#holidayId#
 	</update>
 
-	<delete id="deletePersonalHoliday" parameterClass="java.lang.Integer">
+	<update id="deletePersonalHoliday" parameterClass="holiday.PersonalHolidayBean">
+		update
+		PERSONAL_HOLIDAY SET
+		IS_DELETED = 1,
+		UPDATED_BY = #updatedBy#,
+		UPDATE_DATE = SYSDATE
+		WHERE HOLIDAY_ID=#holidayId#
+		AND IS_DELETED=0
+	</update>
+
+	<!-- <delete id="deletePersonalHoliday" parameterClass="java.lang.Integer">
 		DELETE FROM PERSONAL_HOLIDAY
 		WHERE HOLIDAY_ID=#persHolidayId#
-	</delete>
+	</delete> -->
 
 	<select id="countPersonalHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM PERSONAL_HOLIDAY WHERE 1=1
+		SELECT COUNT(1) FROM PERSONAL_HOLIDAY WHERE IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayId">
 				LOWER(HOLIDAY_ID) LIKE LOWER( '%' || #searchValue# || '%' )

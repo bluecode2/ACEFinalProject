@@ -22,6 +22,7 @@ public class PersonalHolidayBean {
 	private String empDisplay;
 	private String employeeName;
 	private String holidayDateDisplay;
+	private Integer isDeleted;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
@@ -158,5 +159,13 @@ public class PersonalHolidayBean {
 	}
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
+	}
+
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }
