@@ -183,7 +183,7 @@
 	<delete id="deleteEmployee" parameterClass="java.util.Map">
 		update
 		employee set
-		IS_ACTIVE = 0
+		IS_ACTIVE = 0,
 		UPDATED_BY = #userName#,
 		UPDATE_DATE = SYSDATE
 		where EMPLOYEE_ID = #employeeId#

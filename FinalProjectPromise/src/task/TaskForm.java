@@ -1,5 +1,8 @@
 package task;
 
-public class TaskForm {
+import org.apache.struts.action.ActionForm;
+
+public class TaskForm extends ActionForm
+{
 
 }
