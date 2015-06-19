@@ -108,7 +108,7 @@
 			<forward name="projectList" path="/WEB-INF/jsp/project/projectList.jsp"></forward>
 			<forward name="projectEntry" path="/WEB-INF/jsp/project/projectEntry.jsp"></forward>
 		</action>
-		<action path="/task" name="taskForm" type="task.TaskHandler" scope="request">
+		<action path="/assignTask" name="taskForm" type="task.TaskHandler" scope="request">
 			<forward name="assignTask" path="/WEB-INF/jsp/task/assignTask.jsp"></forward>
 			<forward name="list" path="/WEB-INF/jsp/task/listAssignTask.jsp"></forward>
 		</action>
