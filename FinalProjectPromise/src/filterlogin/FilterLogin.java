@@ -23,8 +23,22 @@ public class FilterLogin implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
-		//System.out.println("Masuk filter...");
-		if(session.getAttribute("currUser") == null)
+		
+		if(request.getServletPath().equals("/login.do")){
+			   chain.doFilter(request, response);
+		}
+		else{  
+			if(session.getAttribute("currUser") == null){
+				response.sendRedirect("login.do");
+			}
+			else
+			{
+				System.out.println(session.getAttribute("currUser"));
+				chain.doFilter(request, response);
+			}
+		}
+		
+		/*if(session.getAttribute("currUser") == null)
 		{
 			System.out.println("session null");
 			response.sendRedirect("login.do");
@@ -32,7 +46,7 @@ public class FilterLogin implements Filter {
 		else {
 			chain.doFilter(req, res);
 			//System.out.println(session.getAttribute("currUser"));	
-		}
+		}*/
 			
 	}
 	

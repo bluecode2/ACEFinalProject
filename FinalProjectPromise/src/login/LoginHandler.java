@@ -23,25 +23,34 @@ public class LoginHandler extends Action {
 		UserManager lMan = new UserManager();
 		HttpSession session = request.getSession(true);
 
-		
 		if ("validasi".equals(lForm.getTask())) {
 			try {
-			
-			if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
-				lForm.setUserBean(lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()));
-				if (lForm.getUserBean().getIsActive()==1) {
-					session.setAttribute("currUser", lForm.getUserBean());
-					response.sendRedirect("home.do");
-					return null;
-				}
-				request.setAttribute("errorMessage", "User is not active");
-			}
 
-		} catch (Exception e) {
-			request.setAttribute("errorMessage", "Invalid username or password");
+				if (lMan.getLoginValidasi(lForm.getUsername(),
+						lForm.getPassword()) != null) {
+					lForm.setUserBean(lMan.getLoginValidasi(
+							lForm.getUsername(), lForm.getPassword()));
+					if (lForm.getUserBean().getIsActive() == 1) {
+						session.setAttribute("currUser", lForm.getUserBean());
+						response.sendRedirect("home.do");
+						return null;
+					}
+					lForm.setPassword("");
+					request.setAttribute("errorMessage", "User is not active");
+				}
+				else{
+					lForm.setPassword("");
+					request.setAttribute("errorMessage",
+							"Invalid username or password");
+				}
+
+			} catch (Exception e) {
+				lForm.setPassword("");
+				request.setAttribute("errorMessage",
+						"Invalid username or password");
+			}
 		}
-		}
-		
+
 		return mapping.findForward("default");
 	}
 }
