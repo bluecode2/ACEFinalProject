@@ -45,7 +45,7 @@
 	<table align="center">
 		<tr>
 			<td colspan="2" height="170px" class="bg-primary"
-				style="border-radius: 6px" valign="middle">
+				style="border-radius: 10px" valign="middle">
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-3 text-center" style="margin-top: 0">
@@ -95,7 +95,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center" class="bg-primary"
-				style="border-radius: 4px">Copyright &copy; 2015 | ACE 21 -
+				style="border-radius:8px;padding:8px;">Copyright &copy; 2015 | ACE 21 -
 				Kelompok 1</td>
 		</tr>
 	</table>

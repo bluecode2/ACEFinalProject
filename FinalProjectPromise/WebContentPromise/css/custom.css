@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato);
+/* @import url(http://fonts.googleapis.com/css?family=Lato); */
 
 html {
   position: relative;
@@ -6,20 +6,21 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+/*   font-family: 'Lato', sans-serif; */
   background-color: #fff;
-  margin-bottom: 50px;
+/*   footer */
+  margin-bottom: 60px;
 }
 
 h1 {
-  font-family: 'Lato', sans-serif;
+/*   font-family: 'Lato', sans-serif; */
   font-size: 24.5px;
   margin: 0;
   padding: 0;
 }
 
 hr {
-  margin: 10px 0 3px;
+  margin: 5px 0 3px;
 }
 
 label {
@@ -39,7 +40,7 @@ label {
 }
 
 .breadcrumb {
-  padding: 0 15px 0;
+  padding: 0 12px 0;
   margin-left: -10px;
   background-color: transparent;
 }
@@ -107,13 +108,20 @@ label {
 .footer {
   position: absolute;
   bottom: 0;
+/*   border-top: 10px solid #E9F4FE; */
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 50px;
+  min-height: 60px;
+/*   background-color: #d9edf7; */
+}
+
+.footer > .container {
+	border-top: 1px solid #ccc;
 }
 
 .footer-text {
-	margin: 8px;
+	margin: 10px;
+	color: #777;
 }
 
 /* ----------------------------------------------- */

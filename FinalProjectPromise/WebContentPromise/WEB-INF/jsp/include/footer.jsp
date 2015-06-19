@@ -1,5 +1,5 @@
 
-<footer class="footer bg-info">
+<footer class="footer">
 	<div class="container">
 		<div class="center-block">
 			<p class="text-center small footer-text">PROJECT MANAGEMENT INFORMATION SYSTEM (PROMISE)<br /> Copyright &copy;

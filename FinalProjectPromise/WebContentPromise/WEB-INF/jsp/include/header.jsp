@@ -10,7 +10,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="icon/favicon.png" type="image/x-icon">
+<link rel="icon" href="/icon/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="/favicon.ico" />
 <!-- CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/material.ripples.min.css" rel="stylesheet">
@@ -27,7 +28,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-material-blue navbar-static-top">
+	<nav class="navbar navbar-material-blue navbar-static-top shadow-z-1">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -37,7 +38,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="home.do"><span class="logo"><img src="icon/logo2.png"></span>PROMISE</a>
+				<a class="navbar-brand" href="home.do"><span class="logo"><img src="icon/logo2.png"></span><b>PROMISE</b></a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
