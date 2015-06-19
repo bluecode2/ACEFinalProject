@@ -98,7 +98,7 @@
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="uBean.username">
+			<isEqual property="searchField" compareValue="username">
 				LOWER(USERNAME)
 				LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>

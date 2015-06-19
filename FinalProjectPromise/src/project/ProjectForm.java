@@ -24,7 +24,15 @@ public class ProjectForm extends ActionForm{
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	private String val;
+	private List<ProjectBean> listOfProject;
+	private ProjectBean pBean = new ProjectBean();
 
+	public List<ProjectBean> getListOfProject() {
+		return listOfProject;
+	}
+	public void setListOfProject(List<ProjectBean> listOfProject) {
+		this.listOfProject = listOfProject;
+	}
 	public String getTask() {
 		return task;
 	}

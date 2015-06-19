@@ -9,6 +9,7 @@ public class ProjectBean {
 	private Integer projectId;
 	private Integer updatedBy;
 	private Integer dept_id;
+	private String deptName;
 	private Integer employeeId;
 	private String genCodeId;
 	private Integer createdBy;
@@ -26,7 +27,33 @@ public class ProjectBean {
 	private String remarks;
 	private Date createDate;
 	private Date updateDate;
+	private String employeeName;
+	private String statusCaption;
 	
+	public String getDeptName() {
+		return deptName;
+	}
+	
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getStatusCaption() {
+		return statusCaption;
+	}
+
+	public void setStatusCaption(String statusCaption) {
+		this.statusCaption = statusCaption;
+	}
+
 	private String estStartDateInString;
 	private String estEndDateInString;
 	private String actStartDateInString;
@@ -59,6 +86,14 @@ public class ProjectBean {
 
 	public void setDept_id(Integer dept_id) {
 		this.dept_id = dept_id;
+	}
+
+	public String getActStartDateInString() {
+		return actStartDateInString;
+	}
+
+	public void setEstStartDateInString(String estStartDateInString) {
+		this.estStartDateInString = estStartDateInString;
 	}
 
 	public Integer getEmployeeId() {
