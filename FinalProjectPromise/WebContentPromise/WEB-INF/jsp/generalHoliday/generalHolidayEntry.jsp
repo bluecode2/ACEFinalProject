@@ -41,7 +41,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<div class="container" style="padding-top: 30px">
+		<div class="container">
 			<div class="divContent">
 				<table>
 					<!-- <tr>
@@ -59,7 +59,6 @@
 						<td>
 							<html:text styleClass="form-control datepicker" styleId="txtGenHolDate"
 								name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
-							<%-- <html:text styleClass="form-control datepicker" styleId="txtGenHolDate" name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text> --%>
 						</td>
 					</tr>
 <!-- 					<tr> -->
