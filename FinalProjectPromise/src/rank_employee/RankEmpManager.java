@@ -63,10 +63,10 @@ public class RankEmpManager {
 	
 	public void insertEmployeeRank(RankEmpBean eb)
 			throws ClassNotFoundException, SQLException {
-
 		try {
 			this.ibatis.startTransaction();
 			eb.setRankId(getNewRankId());
+			
 			this.ibatis.insert("rank.insertEmployeeRank", eb);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {

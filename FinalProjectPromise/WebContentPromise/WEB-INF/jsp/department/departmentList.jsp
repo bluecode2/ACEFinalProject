@@ -78,9 +78,9 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td width="150px">Department Code</td>
-							<td>Department Name</td>
-							<td>Department Head</td>
+							<td width="150px" class="align-center">Department Code</td>
+							<td class="align-center">Department Name</td>
+							<td class="align-center">Department Head</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>

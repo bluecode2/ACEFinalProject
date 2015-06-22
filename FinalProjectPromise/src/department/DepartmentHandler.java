@@ -51,6 +51,10 @@ public class DepartmentHandler extends Action {
 
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT_ENTRY,
+					us, request);
+			
 			return mapping.findForward("entry");
 		}
 
@@ -68,11 +72,14 @@ public class DepartmentHandler extends Action {
 				dForm.getSelectedDept().setCreatedBy(us.getUserId());
 				dMan.insertDepartment(dForm.getSelectedDept());
 			} else {
+				System.out.println(dForm.getSelectedDept().getDeptId());
 				dForm.getSelectedDept().setUpdatedBy(us.getUserId());
 				dMan.updateDepartment(dForm.getSelectedDept());
 			}
 
 			response.sendRedirect("department.do");
+			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
+					us, request);
 			return null;
 		}
 

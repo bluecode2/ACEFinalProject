@@ -155,4 +155,12 @@ public class DepartmentBean {
 	public void setDeptHeadName(String deptHeadName) {
 		this.deptHeadName = deptHeadName;
 	}
+
+	public String getDeptHeadDisplay() {
+		return deptHeadDisplay;
+	}
+
+	public void setDeptHeadDisplay(String deptHeadDisplay) {
+		this.deptHeadDisplay = deptHeadDisplay;
+	}
 }

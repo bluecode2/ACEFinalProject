@@ -45,7 +45,8 @@ public class RankEmpHandler extends Action {
 			request.setAttribute("pageTitle", "Employee Rank Entry");
 
 			dForm.setBean(dMan.getRankByRankId(dForm.getSelectedId()));
-
+			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK_ENTRY,
+					us, request);
 			return mapping.findForward("employeeRankEntry");
 		}
 

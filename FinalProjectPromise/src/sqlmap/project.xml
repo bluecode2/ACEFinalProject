@@ -96,26 +96,22 @@
 	
 	<insert id="insertProject" parameterClass="project.ProjectBean">
 		insert into project 
-		(project_id, updated_by, 
+		(project_id, 
 		dept_id, employee_id, 
 		created_by,project_code, 
 		project_name, project_desc, 
-		est_start_date, est_end_date, 
-		act_start_date, act_end_date, 
-		est_main_days, act_main_days, 
-		project_status, project_progress, 
-		remarks, create_date,
-		update_date) values
-		(#projectId#,'',
+		est_start_date, est_end_date, 	
+		est_main_days, 
+		project_status, 
+		 create_date) values
+		(#projectId#,
 		#dept_id#,#employeeId#,
 		#createdBy#,#projectCode#,
 		#projectName#,#projectDesc#,
 		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),
-		'','',
-		#estMainDays#,'',
-		'PR_STAT_01',#projectProgress#,
-		'',SYSDATE,
-		'');
+		#estMainDays#,
+		'PR_STAT_01',
+		SYSDATE)
 	</insert>
 	
 	<update id="updateProject" parameterClass="project.ProjectBean">
@@ -131,10 +127,11 @@
 			UPDATE_DATE = SYSDATE,
 			est_main_days = #estMainDays#,
 			project_status = #projectStatus#,
+			PROJECT_PROGRESS = #projectProgress#,
 			act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 			act_end_date = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
 			act_main_days = #actMainDays#
 			WHERE PROJECT_ID = 	#projectId#		
 	</update>
-	
+
 </sqlMap>

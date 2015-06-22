@@ -181,7 +181,7 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Address</label></td>
-						<td><html:textarea styleClass="form-control"
+						<td><html:textarea styleClass="form-control" rows="3"
 								name="employeeForm" property="selectedEmp.address"></html:textarea></td>
 					</tr>
 					<tr>

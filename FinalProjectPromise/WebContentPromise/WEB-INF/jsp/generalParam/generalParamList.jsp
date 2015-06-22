@@ -88,10 +88,10 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>General Parameter ID</td>
-							<td>General Parameter Description</td>
-							<td>General Parameter Value</td>
-							<td>Is Active</td>
+							<td class="align-center">General Parameter ID</td>
+							<td class="align-center">General Parameter Description</td>
+							<td class="align-center">General Parameter Value</td>
+							<td class="align-center">Is Active</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>

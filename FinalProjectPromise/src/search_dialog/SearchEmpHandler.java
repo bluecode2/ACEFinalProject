@@ -11,8 +11,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import user.UserRoleBean;
-import user.UserRoleManager;
 import common.Constant;
 import employee.EmployeeBean;
 import employee.EmployeeManager;

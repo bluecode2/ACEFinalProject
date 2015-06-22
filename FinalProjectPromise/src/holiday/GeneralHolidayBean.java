@@ -19,9 +19,15 @@ public class GeneralHolidayBean {
 	private Date updateDate;
 	private String updateDateInString;
 	private Integer isDeleted = 0;
-
+	private String genHolidayDateDisplay;
+	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
-
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	
+	public String getGenHolidayDateDisplay() {
+		return df2.format(genHolidayDate);
+	}
+	
 	public Integer getGenHolidayId() {
 		return genHolidayId;
 	}

@@ -33,6 +33,7 @@ public class FilterLogin implements Filter {
 			}
 			else
 			{
+				session.setAttribute("currUser",session.getAttribute("currUser"));
 				chain.doFilter(request, response);
 			}
 		}

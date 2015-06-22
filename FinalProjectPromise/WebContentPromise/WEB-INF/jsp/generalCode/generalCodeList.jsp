@@ -75,10 +75,10 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>General Code ID</td>
-							<td>General Code Index</td>
-							<td>General Code Caption</td>
-							<td>Parent ID</td>
+							<td class="align-center">General Code ID</td>
+							<td class="align-center">General Code Index</td>
+							<td class="align-center">General Code Caption</td>
+							<td class="align-center">Parent ID</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>

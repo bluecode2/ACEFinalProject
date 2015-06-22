@@ -154,6 +154,7 @@ thead > tr > td , th {
 .tdLabel {
 	padding-right: 20px;
 	margin-right: 20px;
+	text-align: right;
 }
 
 .table-clickable td {

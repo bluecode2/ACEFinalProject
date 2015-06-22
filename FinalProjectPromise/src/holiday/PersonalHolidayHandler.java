@@ -57,11 +57,13 @@ public class PersonalHolidayHandler extends Action{
 			return null;
 		}
 		else if ("edit".equals(persForm.getTask())) {
-			request.setAttribute("pageTitle", "Personal Holiday Edit");
 			persForm.setPersHolidayBean(persManager.getPersonalHolidayEdit(persForm.getSelectedId()));
 			
 			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
 
+			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
+					us, request);
+			
 			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("delete".equals(persForm.getTask())) {

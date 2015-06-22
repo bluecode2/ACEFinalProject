@@ -14,7 +14,9 @@ public class ProposedTaskBean {
 	private Date estEndDate;
 	private String estEndDateInString;
 	private Integer propBy;
+	private String propByName;
 	private Integer propTo;
+	private String propToName;
 	private Integer createdBy;
 	private Integer updatedBy;
 	private Date createDate;
@@ -23,7 +25,23 @@ public class ProposedTaskBean {
 	private String updateDateInString;
 	private Integer taskId;
 	private String propStatus;
+	private String propStatusName;
 	
+	
+	/**
+	 * @return the propStatusName
+	 */
+	public String getPropStatusName() {
+		return propStatusName;
+	}
+
+	/**
+	 * @param propStatusName the propStatusName to set
+	 */
+	public void setPropStatusName(String propStatusName) {
+		this.propStatusName = propStatusName;
+	}
+
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
 	public Integer getPropTaskId() {
@@ -225,5 +243,21 @@ public class ProposedTaskBean {
 			date = null;
 		}
 		this.estEndDate = date;
+	}
+
+	public String getPropByName() {
+		return propByName;
+	}
+
+	public void setPropByName(String propByName) {
+		this.propByName = propByName;
+	}
+
+	public String getPropToName() {
+		return propToName;
+	}
+
+	public void setPropToName(String propToName) {
+		this.propToName = propToName;
 	}	
 }

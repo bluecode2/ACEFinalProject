@@ -274,7 +274,7 @@
 																+ listAllowDecline,
 														success : function(
 																response) {
-
+															$('#searchDeptHead').modal('hide');
 														},
 														error : function(e) {
 															alert("Error: " + e);
@@ -337,8 +337,8 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>User Role Code</td>
-							<td>User Role Name</td>
+							<td class="align-center">User Role Code</td>
+							<td class="align-center">User Role Name</td>
 							<td align="center">Menu Access</td>
 
 							<td class="align-center"></td>
@@ -460,7 +460,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
-									id="btnSaveUserRoleMenu" data-dismiss="modal">Save
+									id="btnSaveUserRoleMenu">Save
 									changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>

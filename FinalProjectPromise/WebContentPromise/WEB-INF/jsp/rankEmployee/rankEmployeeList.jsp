@@ -28,7 +28,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete Employee Rank " + nama)) {
+			if (confirm("Are you sure want to delete Employee Rank " + nama +"?")) {
 				document.forms[0].submit();
 			}
 		} else {
@@ -79,9 +79,9 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td>Rank Code</td>
-							<td>Rank Name</td>
-							<td>Rank Level</td>
+							<td class="align-center">Rank Code</td>
+							<td class="align-center">Rank Name</td>
+							<td class="align-center">Rank Level</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>

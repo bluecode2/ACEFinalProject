@@ -16,18 +16,17 @@
 	}
 
 	function onBtnSaveClick() {
-			var nPass = document.getElementById('newPass').value;
-			var reTypePass = document.getElementById('reNewPass').value;
-			var oPass = document.getElementById('oldPass').value;
+			
 		if (document.forms[0].task.value == "add") {
 				document.forms[0].passwordUser.value = nPass;
 				document.forms[0].task.value = "save";
 				document.forms[0].submit();
-			} else {
-				alert('Password and Re-type Password must be same');
-			}
 		} else if (document.forms[0].task.value == "edit") {
 				if (nPass == reTypePass) {
+					var nPass = document.getElementById('newPass').value;
+					var reTypePass = document.getElementById('reNewPass').value;
+					var oPass = document.getElementById('oldPass').value;
+					
 					document.forms[0].passwordUser.value = nPass;
 					document.forms[0].oldPassword.value = oPass;
 					document.forms[0].task.value = "save";

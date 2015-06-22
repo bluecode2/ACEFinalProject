@@ -69,15 +69,32 @@ public class ProjectManager {
 	}
 	
 	public void insertProject(ProjectBean pBean) throws SQLException, ParseException{
-		pBean.setProjectId(getNewProjectId());
+		Integer newProjId = getNewProjectId();
+		if (newProjId == null){
+			newProjId = 1;
+		}
+		
+		pBean.setProjectId(newProjId);
 		pBean.setCreatedBy(1);
 		pBean.setEstStartDate(sdf.parse(pBean.getEstStartDateInString()));
 		pBean.setEstEndDate(sdf.parse(pBean.getEstEndDateInString()));
-		Integer estMainDays = pBean.getEstStartDate().getDate() - pBean.getEstEndDate().getDate();
+		Integer estMainDays = pBean.getEstEndDate().getDate() - pBean.getEstStartDate().getDate() ;
 		pBean.setEstMainDays(estMainDays);
+		System.out.println("Proj ID "+pBean.getProjectId());
+		System.out.println("Dept ID "+pBean.getDept_id());
+		System.out.println("Employee ID "+pBean.getEmployeeId());
+		System.out.println("created by "+pBean.getCreatedBy());
+		System.out.println("proj code "+pBean.getProjectCode());
+		System.out.println("Proj name "+pBean.getProjectName());
+		System.out.println("Proj desc "+pBean.getProjectDesc());
+		System.out.println("est start date "+pBean.getEstStartDateInString());
+		System.out.println("est end date "+pBean.getEstEndDateInString());
+		System.out.println("est main days "+pBean.getEstMainDays());
 		try {
 			this.ibatis.startTransaction();
+			System.out.println("berhasil masuk ibatis");
 			this.ibatis.insert("project.insertProject", pBean);
+			System.out.println("sukses ibatis");
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -91,7 +108,7 @@ public class ProjectManager {
 		pBean.setUpdatedBy(1);
 		pBean.setEstStartDate(sdf.parse(pBean.getEstStartDateInString()));
 		pBean.setEstEndDate(sdf.parse(pBean.getEstEndDateInString()));
-		Integer estMainDays = pBean.getEstStartDate().getDate() - pBean.getEstEndDate().getDate();
+		Integer estMainDays = pBean.getEstEndDate().getDate() - pBean.getEstStartDate().getDate();
 		pBean.setEstMainDays(estMainDays);
 		try {
 			this.ibatis.startTransaction();

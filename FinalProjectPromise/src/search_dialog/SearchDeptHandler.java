@@ -13,8 +13,6 @@ import org.apache.struts.action.ActionMapping;
 
 import department.DepartmentBean;
 import department.DepartmentManager;
-import rank_employee.RankEmpBean;
-import rank_employee.RankEmpManager;
 
 public class SearchDeptHandler extends Action {
 

@@ -33,15 +33,19 @@
 
 		<div class="container">
 			<div class="divContent">
-				<table>
+				<table width="50%">
+					<colgroup>
+						<col width="30%" class="tdLabel" />
+						<col />
+					</colgroup>
 					<tr>
-						<td>User Role Code</td>
+						<td class="tdLabel" align="right">User Role Code</td>
 						<td>
 							<html:text styleClass="form-control" styleId="txtUserRoleCode" name="userRoleForm" property="userRoleBean.userRoleCode"></html:text>
 						</td>
 					</tr>
 					<tr>
-						<td>User Role Name</td>
+						<td class="tdLabel" align="right">User Role Name</td>
 						<td>
 							<html:text styleClass="form-control" styleId="txtUserRoleName" name="userRoleForm" property="userRoleBean.userRoleName"></html:text>
 						</td>
