@@ -3,7 +3,7 @@
 
 <sqlMap namespace="proposedTask">
 
-	<select id="getNewProposedTaskId">
+	<select id="newPropTaskId">
 		select MAX(PROPOSED_TASK_ID)+1 FROM VPROPOSED_TASK
 	</select>
 	
@@ -15,8 +15,8 @@
 		proposed_task_id 	as propTaskId,
 		proposed_task_name 	as propTaskName,
 		proposed_task_desc 	as propTaskDesc,
-		est_start_date		as estStartDate,
-		est_end_date 		as estEndDate,
+		TO_CHAR(est_start_date,'yyyy-MM-dd') as estStartDateInString,
+		TO_CHAR(est_end_date,'yyyy-MM-dd') as estEndDateInString,
 		proposed_by 		as propBy,
 		proposed_by_name	as propByName,
 		proposed_to			as propTo,
@@ -90,39 +90,30 @@
 		</dynamic>
 	</select>
 	
-<!-- 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean"> -->
-<!-- 		insert into -->
-<!-- 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE, -->
-<!-- 		IS_GENERATED, created_by, updated_by, create_date, update_date) -->
-<!-- 		values -->
-<!-- 		(#genHolidayId#, #genHolidayName#, -->
-<!-- 		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL, -->
-<!-- 		SYSDATE, NULL) -->
-<!-- 	</insert> -->
+	<insert id="insertProposedTask" parameterClass="java.util.Map">
+		insert into
+		PROPOSED_TASK (proposed_task_id, proposed_task_name, proposed_task_desc,
+		est_start_date, est_end_date, proposed_by, proposed_to, created_by, updated_by, create_date, update_date, proposal_status)
+		values
+		(#propTaskId#,#propTaskName#,#propTaskDesc#,to_date(#estStartDateInString#,'yyyy-MM-dd'),to_date(#estEndDateInString#,'yyyy-MM-dd'),
+			#userId#, (select supervisor_id from employee where employee_id = #userId# )
+			,#userId#,NULL,'PROPOSED')
+	</insert>
 	
-<!-- 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean"> -->
-<!-- 		SELECT -->
-<!-- 		GEN_HOLIDAY_ID as genHolidayId, -->
-<!-- 		GEN_HOLIDAY_NAME as genHolidayName, -->
-<!-- 		GEN_HOLIDAY_DATE as genHolidayDateInString, -->
-<!-- 		IS_GENERATED as isGenerated -->
-<!-- 		FROM GENERAL_HOLIDAY -->
-<!-- 		where GEN_HOLIDAY_ID = #value# -->
-<!-- 		ORDER BY -->
-<!-- 		GEN_HOLIDAY_ID -->
-<!-- 	</select> -->
 
-<!-- 	<update id="editGeneralHoliday" parameterClass="holiday.GeneralHolidayBean"> -->
-<!-- 		UPDATE GENERAL_HOLIDAY -->
-<!-- 		SET -->
-<!-- 		GEN_HOLIDAY_NAME=#genHolidayName#, -->
-<!-- 		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'yyyy-MM-dd'), -->
-<!-- 		IS_GENERATED=#isGenerated#, -->
-<!-- 		updated_by=#updatedBy#, -->
-<!-- 		update_date=SYSDATE -->
-<!-- 		WHERE -->
-<!-- 		GEN_HOLIDAY_ID=#genHolidayId# -->
-<!-- 	</update> -->
+
+	<update id="updateProposedTask" parameterClass="java.util.Map">
+		UPDATE PROPOSED_TASK
+		SET
+		proposed_task_name = #propTaskName#,
+		proposed_task_desc = #propTaskDesc#,
+		est_start_date = to_date(#estStartDateInString#,'yyyy-MM-dd'),
+		est_end_date = to_date(#estEndDateInString#,'yyyy-MM-dd'),
+		updated_by = #userId#,
+		update_date = SYSDATE
+		WHERE
+		proposed_task_id=#propTaskId#
+	</update>
 
  	<update id="deleteProposedTask" parameterClass="java.util.Map">
  		update

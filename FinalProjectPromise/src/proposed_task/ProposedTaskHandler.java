@@ -26,20 +26,19 @@ public class ProposedTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
-
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 
-			request.setAttribute("pageTitle", "Proposed Task Entry");
 			return mapping.findForward("proposedTaskEntry");
 		}
 
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Proposed Task Entry");
+			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 
 			dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
 
@@ -81,11 +80,11 @@ public class ProposedTaskHandler extends Action {
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
-		request.setAttribute("pageTitle", "Proposed Task List");
-
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),
 						dForm.getCurrPage()));
+		
+		CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK, us, request);
 
 		request.setAttribute("pageCount", dForm.getPageCount());
 		request.setAttribute("currPage", dForm.getCurrPage());
