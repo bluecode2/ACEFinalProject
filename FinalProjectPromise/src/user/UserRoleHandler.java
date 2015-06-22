@@ -2,6 +2,11 @@ package user;
 
 import general.MenuManager;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,7 +18,6 @@ import org.apache.struts.action.ActionMapping;
 
 import user_access.UserRoleMenuBean;
 import user_access.UserRoleMenuManager;
-
 import common.CommonFunction;
 import common.Constant;
 
@@ -34,6 +38,7 @@ public class UserRoleHandler extends Action {
 
 		if ("add".equals(userRoleForm.getTask())) {
 			userRoleForm.setIsAdd(true);
+			
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
 					us, request);
 
@@ -63,7 +68,46 @@ public class UserRoleHandler extends Action {
 		} else if ("delete".equals(userRoleForm.getTask())) {
 			userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
-		} else if ("saveMenuAccess".equals(userRoleForm.getTask())) {
+		} 
+		else if("openMenuAccess".equals(userRoleForm.getTask())){
+			
+			String listMenuId = "";
+			String listAllowAdd = "";
+			String listAllowBack = "";
+			String listAllowSave = "";
+			String listAllowApprove = "";
+			String listAllowDecline = "";
+			
+			Integer userRoleID = userRoleForm.getSelectedId();
+			
+			UserRoleMenuManager manager = new UserRoleMenuManager();
+			List<UserRoleMenuBean> arrRoleMenu = manager.getUserRoleMenuByUserRole(userRoleID);
+			
+			for (UserRoleMenuBean bean : arrRoleMenu) {
+				if(!listMenuId.equals("")){
+					listMenuId += "#";
+					listAllowAdd += "#";
+					listAllowBack += "#";
+					listAllowSave += "#";
+					listAllowApprove += "#";
+					listAllowDecline += "#";
+				}
+				
+				listMenuId += bean.getMenuId().toString();
+				listAllowAdd += bean.getMenuCrud().contains("C");
+				listAllowBack += bean.getMenuCrud().contains("B");
+				listAllowSave += bean.getMenuCrud().contains("U");
+				listAllowApprove += bean.getMenuCrud().contains("A");
+				listAllowDecline += bean.getMenuCrud().contains("D");
+			}
+			
+			String resp = listMenuId + "$" + listAllowAdd + "$" + listAllowBack + "$" + listAllowSave + "$" + listAllowApprove + "$" + listAllowDecline;
+			PrintWriter out = response.getWriter();
+			out.println(resp);
+			
+			return null;
+		}
+		else if ("saveMenuAccess".equals(userRoleForm.getTask())) {
 			String[] listMenuId = userRoleForm.getListMenuId().split("#");
 			String[] listAllowAdd = userRoleForm.getListAllowAdd().split("#");
 			String[] listAllowBack = userRoleForm.getListAllowBack().split("#");
@@ -74,7 +118,17 @@ public class UserRoleHandler extends Action {
 					.split("#");
 
 			UserRoleMenuManager manager = new UserRoleMenuManager();
-
+			Integer userRoleId = userRoleForm.getSelectedId();
+			List<UserRoleMenuBean> arrRoleMenu = manager.getUserRoleMenuByUserRole(userRoleId);
+			List<UserRoleMenuBean> arrDeletedRoleMenu = new ArrayList<UserRoleMenuBean>();
+			
+			for (UserRoleMenuBean bean : arrRoleMenu) {
+				if(!Arrays.asList(listMenuId).contains(bean.getMenuId().toString())){
+					arrDeletedRoleMenu.add(bean);
+				}
+			}
+			
+			
 			for (int i = 0; i < listMenuId.length; i++) {
 				String menuCrud = "";
 				if (listAllowAdd[i].equals("true"))
@@ -89,10 +143,12 @@ public class UserRoleHandler extends Action {
 					menuCrud += "D";
 
 				Integer menuId = Integer.valueOf(listMenuId[i]);
-				Integer userRoleId = userRoleForm.getSelectedId();
+				
 
 				UserRoleMenuBean bean = manager.getUserRoleMenu(userRoleId,
 						menuId);
+				
+				
 				if (bean == null) {
 					bean = new UserRoleMenuBean();
 					bean.setMenuId(menuId);
@@ -105,6 +161,10 @@ public class UserRoleHandler extends Action {
 					bean.setMenuCrud(menuCrud);
 					manager.editUserRoleMenu(bean);
 				}
+			}
+			
+			for (UserRoleMenuBean bean : arrDeletedRoleMenu) {
+				manager.deleteUserRoleMenu(bean.getUserRoleId(), bean.getMenuId());
 			}
 
 			return null;
