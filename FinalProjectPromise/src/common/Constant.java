@@ -47,7 +47,9 @@ public class Constant {
 		public static final String MENU_MANAGEMENT = "MS0301";
 		
 		public static final String GENERAL_CODE = "MS0302";
+		public static final String GENERAL_CODE_ENTRY = "MS0302-E";
 		public static final String GENERAL_PARAMETER = "MS0303";
+		public static final String GENERAL_PARAMETER_ENTRY = "MS0303-E";
 		
 		public static final String PROJECT = "TR0101";
 		public static final String PROJECT_ENTRY = "TR0101-E";
