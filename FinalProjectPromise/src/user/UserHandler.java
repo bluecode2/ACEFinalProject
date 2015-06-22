@@ -34,13 +34,16 @@ public class UserHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 		
 		if ("add".equalsIgnoreCase(uForm.getTask())){
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.USER_ENTRY,
+					us, request);
+			
 			request.setAttribute("show", false);
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
-			request.setAttribute("pageTitle", "User Entry");
 			uForm.setVal("0");
 			request.setAttribute("lstUserRole", uRoleMan.getUserRole(
 					uRoleForm.getCurrSearchField(), uRoleForm.getCurrSearchValue(),
@@ -51,9 +54,12 @@ public class UserHandler extends Action{
 			return mapping.findForward("userAdd");
 		}
 		else if ("Edit".equalsIgnoreCase(uForm.getTask())){
+
+			CommonFunction.initializeHeader(Constant.MenuCode.USER_ENTRY,
+					us, request);
+			
 			request.setAttribute("show", true);
 			uForm.setIsAdd(false);
-			request.setAttribute("pageTitle", "User Edit");
 			uForm.setuBean(uMan.getUserByUserID(uForm
 					.getSelectedId()));
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
@@ -112,6 +118,10 @@ public class UserHandler extends Action{
 		uForm.setSearchValue(uForm.getCurrSearchValue());
 
 		int rowCount;
+		
+
+		CommonFunction.initializeHeader(Constant.MenuCode.USER,
+				us, request);
 		
 		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue());

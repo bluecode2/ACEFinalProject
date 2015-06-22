@@ -97,10 +97,10 @@
 									<td><bean:write name="reg" property="username" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
 									<td align="center">
-									<a href="#"	onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
+									<a href="#" class="text-success" onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" onclick="actionForm('delete','<bean:write name="reg" property="userId" />','<bean:write name="reg" property="username" />');"
+									<a href="#" class="text-danger" onclick="actionForm('delete','<bean:write name="reg" property="userId" />','<bean:write name="reg" property="username" />');"
 										title="Delete"><span class="glyphicon glyphicon-trash"
 											aria-hidden="true"></span></a>
 									</td>
