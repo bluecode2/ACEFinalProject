@@ -26,6 +26,7 @@
 		<form-bean name="proposedTaskForm" type="proposed_task.ProposedTaskForm"></form-bean>	
 		<form-bean name="assignTaskForm" type="task.AssignTaskForm"></form-bean>	
 		<form-bean name="searchAssignToForm" type="search_dialog.SearchEmpAssignedToForm"></form-bean>
+		<form-bean name="insertRemarkAssignTaskForm" type="search_dialog.InsertRemarkAssignTaskForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -121,6 +122,8 @@
 		</action>
 		<action path="/searchAssignTo" name="searchAssignToForm" type="search_dialog.SearchEmpAssignedToHandler" scope="request">
 		</action>
+		<action path="/insertAssignTo" name="insertRemarkAssignTaskForm" type="search_dialog.InsertRemarkAssignTaskHandler" scope="request">
+		</action>		
 	</action-mappings>
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->
