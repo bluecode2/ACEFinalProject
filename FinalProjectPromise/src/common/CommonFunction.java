@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import user.UserBean;
+import user_access.UserRoleMenuBean;
+import user_access.UserRoleMenuManager;
 
 public class CommonFunction {
 	public static ArrayList<PageNavigator> createPagingNavigatorList(
@@ -121,6 +123,8 @@ public class CommonFunction {
 
 		MenuManager menuMan = new MenuManager();
 		MenuBean menu = menuMan.getMenuByMenuId(menuCode);
+		UserRoleMenuManager roleMenuManager = new UserRoleMenuManager();
+		UserRoleMenuBean roleMenuBean = roleMenuManager.getUserRoleMenu(user.getUserRoleId(), menu.getMenuId());
 		
 		
 		arrMenuLvl1 = menuMan.getAllMenuHead(user.getUserRoleId());
@@ -148,10 +152,10 @@ public class CommonFunction {
 		
 		request.setAttribute("pageTitle", menu.getMenuCaption());
 		
-		request.setAttribute("btnAddVisible", menu.getMenuCrud().contains("C"));
-		request.setAttribute("btnBackVisible", menu.getMenuCrud().contains("B"));
-		request.setAttribute("btnSaveVisible", menu.getMenuCrud().contains("U"));
-		request.setAttribute("btnApproveVisible", menu.getMenuCrud().contains("A"));
-		request.setAttribute("btnDeclineVisible", menu.getMenuCrud().contains("D"));
+		request.setAttribute("btnAddVisible", roleMenuBean.getMenuCrud().contains("C"));
+		request.setAttribute("btnBackVisible", roleMenuBean.getMenuCrud().contains("B"));
+		request.setAttribute("btnSaveVisible", roleMenuBean.getMenuCrud().contains("U"));
+		request.setAttribute("btnApproveVisible", roleMenuBean.getMenuCrud().contains("A"));
+		request.setAttribute("btnDeclineVisible", roleMenuBean.getMenuCrud().contains("D"));
 	}
 }
