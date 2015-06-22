@@ -47,6 +47,7 @@
 		WHERE parent_id IS NULL
 		AND is_visible = 1
 		AND menu_id IN (SELECT menu_id from role_menu where user_role_id = #value#)
+		ORDER BY menu_code
 	</select>
 
 	<select id="selectListVisibleMenuByParent" parameterClass="java.lang.Integer"
@@ -96,6 +97,7 @@
 		#parentId#
 		AND is_visible = 1
 		AND menu_id IN (SELECT menu_id from role_menu where user_role_id = #userRoleId#) 
+		ORDER BY menu_code
 		
 	</select>
 	
