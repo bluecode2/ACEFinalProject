@@ -39,7 +39,6 @@ public class GeneralHolidayHandler extends Action{
 		else if ("save".equals(genForm.getTask())){
 			Boolean isAdd = genForm.getIsAdd();
 			if (isAdd) {
-				genForm.getGenHolidayBean().setGenHolidayId(genManager.getNewGenHolidayId());
 				genForm.getGenHolidayBean().setCreatedBy(us.getUserId());
 				genManager.insertGeneralHoliday(genForm.getGenHolidayBean());
 			} 
@@ -55,6 +54,9 @@ public class GeneralHolidayHandler extends Action{
 			request.setAttribute("pageTitle", "General Holiday Edit");
 			genForm.setGenHolidayBean(genManager.getGeneralHolidayByHolId(genForm.getSelectedId()));
 
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY_ENTRY,
+					us, request);
+			
 			return mapping.findForward("genEntry");
 		}
 		else if ("delete".equals(genForm.getTask())) {

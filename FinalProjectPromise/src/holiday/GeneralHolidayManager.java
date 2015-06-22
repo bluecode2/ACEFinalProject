@@ -61,6 +61,8 @@ public class GeneralHolidayManager {
 			throws SQLException {
 		try {
 			this.ibatis.startTransaction();
+			int newId = getNewGenHolidayId();
+			genHolidayBean.setGenHolidayId(newId);
 			this.ibatis.insert("generalHoliday.insertGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();

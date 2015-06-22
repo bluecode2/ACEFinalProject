@@ -56,7 +56,7 @@ public class PersonalHolidayManager {
 	public PersonalHolidayBean getPersonalHolidayEdit(int genId)
 			throws SQLException {
 		PersonalHolidayBean persHolidayBean = (PersonalHolidayBean) this.ibatis
-				.queryForObject("personalHoliday.getPersonalHolidayEdit", genId);
+				.queryForObject("personalHoliday.getPersonalHolidayByHolId", genId);
 		return persHolidayBean;
 	}
 

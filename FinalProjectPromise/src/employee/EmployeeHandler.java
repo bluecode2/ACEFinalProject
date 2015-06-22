@@ -54,6 +54,10 @@ public class EmployeeHandler extends Action{
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,99,"",""));
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY,
+					us, request);
+			
 			return mapping.findForward("entry");
 		}
 

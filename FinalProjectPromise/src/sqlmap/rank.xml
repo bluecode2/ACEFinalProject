@@ -50,16 +50,19 @@
 
 	<insert id="insertEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		insert into
-		rank_emp(rank_id, UPDATED_BY, CREATED_BY, rank_code, rank_name, rank_level,
-		create_date, update_date, is_deleted)
-		values (#rankId#, #updatedBy#, #createdBy#,#rankCode#,#rankName#, #rankLevel#,SYSDATE, NULL, 0)
+		rank_emp (rank_id, UPDATED_BY, CREATED_BY, rank_code, rank_name, rank_level,
+		create_date, is_deleted)
+		values (#rankId#, #updatedBy#, #createdBy#,#rankCode#,#rankName#, #rankLevel#,SYSDATE, 0)
 	</insert>
 
 	<update id="updateEmployeeRank" parameterClass="rank_employee.RankEmpBean">
 		UPDATE rank_emp
 		SET
 		UPDATED_BY=#updatedBy#,
-		rank_name=#rankName#, UPDATE_DATE=SYSDATE,rank_code = #rankCode#,rank_level = #rankLevel#
+		rank_name=#rankName#, 
+		UPDATE_DATE=SYSDATE,
+		rank_code = #rankCode#,
+		rank_level = #rankLevel#
 		WHERE rank_id=#rankId#
 	</update>
 

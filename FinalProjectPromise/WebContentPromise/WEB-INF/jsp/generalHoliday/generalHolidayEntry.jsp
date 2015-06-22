@@ -36,10 +36,13 @@
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
 		<html:hidden name="generalHolidayForm" property="isAdd" />
+		<html:hidden name="generalHolidayForm" property="genHolidayBean.genHolidayId" />
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
+
+		
 
 		<div class="container">
 			<div class="divContent">
