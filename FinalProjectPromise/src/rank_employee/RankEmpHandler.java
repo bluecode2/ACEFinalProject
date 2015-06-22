@@ -25,13 +25,17 @@ public class RankEmpHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
 
 			request.setAttribute("pageTitle", "Employee Rank Entry");
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK_ENTRY,
+					us, request);
+			
 			return mapping.findForward("employeeRankEntry");
 		}
 
@@ -81,6 +85,9 @@ public class RankEmpHandler extends Action {
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
+		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK,
+				us, request);
+		
 		request.setAttribute("pageTitle", "Employee Rank List");
 
 		request.setAttribute("pageNavigator", CommonFunction

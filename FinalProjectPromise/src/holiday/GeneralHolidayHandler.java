@@ -25,11 +25,14 @@ public class GeneralHolidayHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 		
 		if("add".equals(genForm.getTask())){
 			genForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "General Holiday Entry");
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY_ENTRY,
+					us, request);
 			
 			return mapping.findForward("genEntry");
 		}
@@ -105,6 +108,9 @@ public class GeneralHolidayHandler extends Action{
 				genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
 		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));		
+		
+		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY, us,
+				request);
 		
 		request.setAttribute("pageTitle", "General Holiday List");
 		

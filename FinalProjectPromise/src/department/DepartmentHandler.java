@@ -29,7 +29,7 @@ public class DepartmentHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		request.setAttribute("username", us.getUsername());
 
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
@@ -37,6 +37,10 @@ public class DepartmentHandler extends Action {
 			request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
 			request.setAttribute("pageTitle", "Department Entry");
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT_ENTRY,
+					us, request);
+			
 			return mapping.findForward("entry");
 		}
 
@@ -88,6 +92,9 @@ public class DepartmentHandler extends Action {
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
+		CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
+				us, request);
+		
 		request.setAttribute("pageTitle", "Department List");
 
 		request.setAttribute("pageNavigator", CommonFunction
