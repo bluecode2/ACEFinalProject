@@ -42,13 +42,19 @@ public class UserRoleMenuManager {
 		}
 	}
 
-	public UserRoleMenuBean getUserRoleMenu(Integer userRoleId, Integer menuId) throws SQLException {
+	public UserRoleMenuBean getUserRoleMenu(Integer userRoleId, Integer menuId) {
 		Map map = new HashMap();
 		map.put("userRoleId", userRoleId);
 		map.put("menuId", menuId);
 		
-		UserRoleMenuBean userRoleBean = (UserRoleMenuBean) this.ibatis.queryForObject(
-				"userRoleMenu.getUserRoleMenu", map);
+		UserRoleMenuBean userRoleBean = null;
+		try {
+			userRoleBean = (UserRoleMenuBean) this.ibatis.queryForObject(
+					"userRoleMenu.getUserRoleMenu", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return userRoleBean;
 	}
 
