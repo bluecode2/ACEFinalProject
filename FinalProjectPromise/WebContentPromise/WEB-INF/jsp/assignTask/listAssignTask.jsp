@@ -12,9 +12,21 @@
 <script src="js/jquery.js"></script>
 
 <script type="text/javascript">
+function onBtnAddClick(){
+	document.forms[0].task.value = "add";
+	document.forms[0].submit();
+}
+
+function search() {
+	document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+	document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+	changePage(1);
+}
 	$(document).ready(function() {
 		$('.firstBtn').each(function() {
-			var taskCode = $(this).closest('tr').find('.hdnTaskStatus').val();
+
+			var taskCode = $(this).closest('tr').find('.hdTaskStatus').val();
 			if (taskCode == 'TA_STAT_02') {
 				$(this).addClass('glyphicon glyphicon-pencil');
 				$(this).attr("title","Edit Task");
@@ -23,38 +35,68 @@
 				$(this).addClass('glyphicon glyphicon-ok');
 				$(this).attr("title","Approve Task");
 			}
-			else if (taskCode == 'TA_STAT_06') {
-				$(this).addClass('glyphicon glyphicon-play');
-				$(this).attr("title","Resume Task");
-			}
+
 			else
 				$(this).hide();
 		});
 		$('.secondBtn').each(function() {
-			var taskCode = $(this).closest('tr').find('.hdnTaskStatus').val();
+			var taskCode = $(this).closest('tr').find('.hdTaskStatus').val();
 			if (taskCode == 'TA_STAT_02') {
 				$(this).addClass('glyphicon glyphicon-remove');
 				$(this).attr("title","Cancel Task");
-			} else if (taskCode == 'TA_STAT_03') {
-				$(this).addClass('glyphicon glyphicon-pause');
-				$(this).attr("title","Pause Task");
-			}
+			} 
 			else if (taskCode == 'TA_STAT_04') {
 				$(this).addClass('glyphicon glyphicon-remove');
 				$(this).attr("title","Decline Task");
 			}
-			else if (taskCode == 'TA_STAT_06') {
-				$(this).addClass('glyphicon glyphicon-stop');
-				$(this).attr("title","Stop Task");
-			}
+
 			else
 				$(this).hide();
 		});
 		
-	});
-	function changeStatus() {
-	
+		$('.secondBtn').on('click',function(){
+			var taskId = $(this).closest('tr').find('.hdTaskId').val();
+			var taskName = $(this).closest('tr').find('.hdTaskName').val();
+			var taskStatus = $(this).closest('tr').find('.hdTaskStatus').val(); 
+			$('#txtValueTaskId').val(taskId);
+			$('#txtValueTaskStatus').val(taskStatus);
+			$('#txtValueTaskName').val(taskName);
+			
+			$('#addRemarks').modal();
+			
+		});
+		$('.goInsert').on('click',function(){
+			document.forms[0].selectedId.value = $('#txtValueTaskId').val(); //task ID
+			document.forms[0].task.value = "secondEdit";
+			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
+			var taskStatus = $('#txtValueTaskStatus').val();
+			alert(taskStatus);
+			if(taskStatus == 'TA_STAT_02'){ //Function for cancel task; change status and remarks
+				document.forms[0].selectedEdit.value = "0";
 				
+			}
+			else if(taskStatus == 'TA_STAT_04'){ //Function for decline task; change status and remarks
+				document.forms[0].selectedEdit.value = "1";
+				
+			}
+			
+			document.forms[0].submit();
+		});
+	});
+	function changeStatusFirstBtn(taskId, taskStatus) {
+		document.forms[0].task.value = "firstEdit";
+		document.forms[0].selectedId.value = taskId;
+
+		if(taskStatus == 'TA_STAT_02'){ //Function for edit task; change name and desc
+			document.forms[0].selectedEdit.value = "0";
+			
+		}
+		else if(taskStatus == 'TA_STAT_04'){ //Function for approve task; change status 
+			document.forms[0].selectedEdit.value = "1";
+			
+		}
+		
+		document.forms[0].submit();
 	}
 </script>
 </head>
@@ -65,9 +107,12 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="assignTaskForm" />
+		<html:hidden property="selectedEdit" name="assignTaskForm"/>
 		<html:hidden property="currSearchField" name="assignTaskForm" />
 		<html:hidden property="currSearchValue" name="assignTaskForm" />
 		<html:hidden property="currPage" name="assignTaskForm" />
+		<html:hidden property="selectedId" name="assignTaskForm"/>
+		<html:hidden property="remarksRecord" name="assignTaskForm"/>
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
@@ -100,8 +145,10 @@
 					<thead class="panel panel-info">
 						<tr>
 							<td>Task Name</td>
-							<td>Assign By</td>
 							<td>Assign To</td>
+							<td>Estimate Start Date</td>
+							<td>Estimate End Date</td>
+							
 							<td>Task Progress</td>
 							<td>Task Status</td>
 							<td class="align-center"></td>
@@ -111,25 +158,28 @@
 						<logic:notEmpty name="assignTaskForm" property="arrList">
 							<logic:iterate id="reg" name="assignTaskForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="taskName" /></td>
-									<td><bean:write name="reg" property="assignedByName" /></td>
+									<td><html:hidden property="taskId" name="reg" styleClass="hdTaskId"/>
+									<html:hidden property="taskName" name="reg" styleClass="hdTaskName"/>
+										<a href="#" class="text-info" data-toggle="modal" data-target="#showDesc">
+											<bean:write name="reg" property="taskName" />
+										</a>
+									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /></td>
+									<td><bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
-									<td><html:hidden name="reg" property="taskStatus" styleClass="hdnTaskStatus" /> 
-										<bean:write name="reg" property="taskStatusName"/>
+									<td><html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
+										<bean:write name="reg" property="taskStatusName" />
 									</td>
 									<td align="center">
-										<a class="text-success" href="#" id="tes"
-										onclick="changeStatus()">
-											<span class="firstBtn" aria-hidden="true" id="first"></span>
+										<a class="text-success firstBtn" href="#" id="tes"
+										onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
+											<span aria-hidden="true"></span>
 										</a>
 										&nbsp; 
-										<a class="text-success" href="#"
-										onclick="">
-											<span class="secondBtn" aria-hidden="true"></span>
+										<a href="#" class="text-info secondBtn">
+											<span aria-hidden="true"></span>
 										</a>
-									
-
 									</td>
 								</tr>
 							</logic:iterate>
@@ -145,6 +195,57 @@
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
 		</div>
+		
+		<!-- popup to give remarks -->
+		<div class="modal fade" id="addRemarks" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Task Issue</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table width="100%">
+									<tr>
+										<td style="padding-left: 15px">Task</td>
+										<td style="padding-left: 15px">
+										<input type="hidden" id="txtValueTaskId" />
+										<input type="hidden" id="txtValueTaskStatus" />
+										<input type="text" id="txtValueTaskName" class="form-control" disabled="disabled" />
+											
+										</td>
+										
+									</tr>
+									<tr>
+										<td style="padding-left: 15px">
+											Remarks 
+										</td>
+										<td style="padding-left: 15px">
+											<textarea rows="3" cols="3" class="form-control"  id="selSearchFieldRemark"></textarea>
+										</button></td>
+									</tr>
+								</table>
+								<center>
+								<input type="button" class="goInsert btn btn-sm btn-info" value="Save">
+
+								</center>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+		<!-- popup to show DESC -->
+
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>

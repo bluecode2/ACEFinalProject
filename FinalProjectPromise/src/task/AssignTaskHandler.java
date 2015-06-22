@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeManager;
 
 public class AssignTaskHandler extends Action {
 
@@ -25,9 +26,50 @@ public class AssignTaskHandler extends Action {
 		AssignTaskManager tsMan = new AssignTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		EmployeeManager empMan = new EmployeeManager();
+		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
-		CommonFunction.createAllowedMenu(us, request);
+		if ("add".equals(tsForm.getTask())) {
+			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
+			tsForm.setIsAdd(true);
+			request.setAttribute("pageTitle", "Assign Entry");
+			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
+			return mapping.findForward("assignTask");
+		}
+		else if ("save".equals(tsForm.getTask()	)) {
+			tsForm.getTkBean().setCreatedBy(us.getUserId());
+			
+		}
+		else if ("firstEdit".equals(tsForm.getTask())) {
+			tsForm.setIsAdd(false);
+			
+			if (tsForm.getSelectedEdit() == 0) {
+				request.setAttribute("pageTitle", "Assign Entry");
+				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
+				return mapping.findForward("assignTask");
+			}
+			else if (tsForm.getSelectedEdit() == 2) {
+				tsForm.setStatusTask("TA_STAT_07");
+				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+			}	
+		}
+		else if ("secondEdit".equals(tsForm.getTask())) {
+			if (tsForm.getSelectedEdit() == 0) {
+				tsForm.setStatusTask("TA_STAT_99");
+				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				
+			}
+			else if (tsForm.getSelectedEdit() == 1) {
+				tsForm.setStatusTask("TA_STAT_98");
+				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+			}
+
+		}
 		
+		
+
+		CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
+				us, request);
 		
 		tsForm.setTask("");
 		tsForm.setSearchField(tsForm.getCurrSearchField());
@@ -36,9 +78,9 @@ public class AssignTaskHandler extends Action {
 		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue()));
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.pageSize));
 		
-		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize));
+		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "General Code List");
+		request.setAttribute("pageTitle", "Assign Task List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());

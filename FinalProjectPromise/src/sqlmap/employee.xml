@@ -240,7 +240,7 @@
 		SUPERVISOR_NAME 					AS supervisorName,
 		EMPLOYEE_NAME 						AS employeeName
 		FROM vEMPLOYEE 
-		where SUPERVISOR_ID = #empId# 
+		where SUPERVISOR_ID = #spvId# 
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
