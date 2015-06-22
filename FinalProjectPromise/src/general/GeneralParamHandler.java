@@ -25,7 +25,7 @@ public class GeneralParamHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		CommonFunction.createAllowedMenu(us, request);
+//		CommonFunction.createAllowedMenu(us, request);
 
 		if("add".equals(gpf.getTask())){
 			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
@@ -58,7 +58,8 @@ public class GeneralParamHandler extends Action{
 			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
 			
-			System.out.println(gpf.getBean().getGenParamId());
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER_ENTRY,
+					us, request);
 
 			return mapping.findForward("entry");
 		}
@@ -84,7 +85,10 @@ public class GeneralParamHandler extends Action{
 		
 		gpf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
-		request.setAttribute("pageTitle", "General Param List");
+		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER,
+				us, request);
+		
+		request.setAttribute("pageTitle", "General Parameter List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList( gpf.getPageCount(),gpf.getCurrPage()));

@@ -36,6 +36,7 @@ public class GeneralCodeManager {
 
 	public GeneralCodeBean getGeneralCodeByGenId(String tmpGenId) throws SQLException {
 		GeneralCodeBean genCodeBean = (GeneralCodeBean) this.ibatis.queryForObject("genCode.getGenCodeWithId", tmpGenId);
+		System.out.println(genCodeBean);
 		return genCodeBean;
 	}
 	

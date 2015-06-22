@@ -33,13 +33,13 @@ public class GeneralCodeHandler extends Action {
 		} */
 
 		if ("edit".equals(gcForm.getTask())) {
-			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
-					us, request);
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_CODE_ENTRY,us, request);
 			/*request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
 			request.setAttribute("pageTitle", "General Code Edit");
 
 			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
+			System.out.println(gcForm.getGenCodeBean());
 /*			if(gcForm.getGenCodeBean().getDeptHeadCode() != null)
 				gcForm.setDeptHeadDisplay(gcForm.getSelectedDept().getDeptHeadCode() + " - "
 						+ gcForm.getSelectedDept().getDeptHeadName());
@@ -63,7 +63,7 @@ public class GeneralCodeHandler extends Action {
 			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
 		}
 		
-		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
+		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_CODE,
 				us, request);
 		CommonFunction.createAllowedMenu(us, request);
 		

@@ -37,7 +37,7 @@ public class GeneralCodeBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

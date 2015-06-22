@@ -52,8 +52,7 @@
 						<td style="padding-left: 15px;">
 							<html:select name="generalCodeForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<html:option value="">-- All --</html:option>
-								<option value="genCodeCaption">Gen. Code Caption</option>
+								<option value="genCodeCaption">General Code Caption</option>
 								<option value="parentId">Parent ID</option>
 							</html:select>
 						</td>
