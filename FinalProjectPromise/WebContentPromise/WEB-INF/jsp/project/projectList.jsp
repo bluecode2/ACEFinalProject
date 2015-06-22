@@ -16,8 +16,6 @@
 		document.forms[0].submit();
 	}
 	
-	
-	
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
@@ -32,19 +30,15 @@
 			if (projStat == 'PR_STAT_01') {
 				$(this).addClass('glyphicon glyphicon-play');
 				$(this).attr("title","Start");
-				$(this).val("start");
 			} else if (projStat == 'PR_STAT_02' && projProg == '100.0') {
 				$(this).addClass('glyphicon glyphicon-ok-circle');
 				$(this).attr("title","Submit");
-				$(this).val("submit");
 			} else if (projStat == 'PR_STAT_02') {
 				$(this).addClass('glyphicon glyphicon-pause');
 				$(this).attr("title","Pause");
-				$(this).val("pause");
 			} else if (projStat == 'PR_STAT_05') {
 				$(this).addClass('glyphicon glyphicon-chevron-right');
 				$(this).attr("title","Resume");
-				$(this).val("resume");
 			} else
 				$(this).hide();
 		});
@@ -54,11 +48,9 @@
 			if (projStat == 'PR_STAT_02' && projProg != '100.0') {
 				$(this).addClass('glyphicon glyphicon-remove-circle');
 				$(this).attr("title","Force Close");
-				$(this).val("forceClose");
 			} else if (projStat == 'PR_STAT_01') {
 				$(this).addClass('glyphicon glyphicon-remove');
 				$(this).attr("title","Cancel");
-				$(this).val("cancel");
 			} else
 				$(this).hide();
 		});
@@ -68,7 +60,6 @@
 			if (projStat == 'PR_STAT_01') {
 				$(this).addClass('glyphicon glyphicon-pencil');
 				$(this).attr("title","Edit");
-				$(this).val("edit");
 			} else
 				$(this).hide();
 		});
@@ -80,22 +71,51 @@
 				getStyleClass()
 			});
 	
-	function actionForm(task, id, nama) {
+	function actionForm(task, id, nama, projStatus, projProg) {
 		
-		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
-
-		if (task == "cancel") {
-			if (confirm("Are you sure want to cancel Project " + nama +" ?")) {
-				document.forms[0].submit();
+		if (task == 'firstBtn') {
+			if (projStatus == 'PR_STAT_01'){
+				if (confirm("Start Project " + nama +" ?")) {
+					document.forms[0].task.value = 'start';
+					document.forms[0].submit();
+				}
+			}
+			if (projStatus == 'PR_STAT_02' && projProg != 100.0){
+				if (confirm("Pause " + nama +" ?")) {
+					document.forms[0].task.value = 'pause';
+					document.forms[0].submit();
+				}
+			}
+			if (projStatus == 'PR_STAT_02' && projProg == 100.0){
+				if (confirm("Submit " + nama +" ?")) {
+					document.forms[0].task.value = 'submit';
+					document.forms[0].submit();
+				}
+			}
+			if (projStatus == 'PR_STAT_05'){
+				if (confirm("Resume " + nama +" ?")) {
+					document.forms[0].task.value = 'resume';
+					document.forms[0].submit();
+				}
 			}
 		} 
-		else if (task == "start"){
-			if (confirm("Start Project " + nama + " ?")) {
-				document.forms[0].submit();
+		else if (task == 'thirdBtn') {
+			if (projStatus == 'PR_STAT_01'){
+				if (confirm("Are you sure want to cancel " + nama +" ?")) {
+					document.forms[0].task.value = 'cancel';
+					document.forms[0].submit();
+				}
 			}
-		}
-		else if (task == "edit") {
+			if (projStatus == 'PR_STAT_02'){
+				if (confirm("Are you sure want to Force Close " + nama +" ?")) {
+					document.forms[0].task.value = 'forceClose';
+					document.forms[0].submit();
+				}
+			}
+		} 
+		else if (task == 'edit'){
+			document.forms[0].task.value = 'edit';
 			document.forms[0].submit();
 		}
 	}
@@ -178,15 +198,15 @@
 									<td>Task</td>
 									<td align="center">
 									
-									<a href="#"	onclick="actionForm('start','<bean:write name="proj" property="projectId" />');"
+									<a href="#" onclick="actionForm('firstBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />','<bean:write name="proj" property="projectProgress" />');"
 										><span class="firstBtn"
-											aria-hidden="true" ></span></a> &nbsp; 
+											aria-hidden="true" id="firstBtn" ></span></a> &nbsp; 
 									<a href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
 										title="Edit"><span class="secondBtn"
 											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" onclick="actionForm('cancel','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />');"
+									<a href="#" onclick="actionForm('thirdBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />');"
 										><span class="thirdBtn"
-											aria-hidden="true"></span></a>
+											aria-hidden="true" id="thirdBtn"></span></a>
 									</td>
 								</tr>
 							</logic:iterate>
