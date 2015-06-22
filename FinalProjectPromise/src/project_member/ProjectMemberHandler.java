@@ -31,19 +31,15 @@ public class ProjectMemberHandler extends Action {
 				request);
 		
 		pMemberForm.setTask("");
-		pMemberForm.setSearchField(pMemberForm.getCurrSearchField());
-		pMemberForm.setSearchValue(pMemberForm.getCurrSearchValue());
 
 		int rowCount;
-		rowCount = pMemberMan.getCountProjectMember(pMemberForm.getCurrSearchField(),
-				pMemberForm.getCurrSearchValue());
+		rowCount = pMemberMan.getCountProjectMember();
 		
 		pMemberForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 		System.out.println("pageCount end");
 		
-		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(
-				pMemberForm.getCurrSearchField(), pMemberForm.getCurrSearchValue(),
+		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(				
 				pMemberForm.getCurrPage(), Constant.pageSize));
 		System.out.println("isi list selesai");
 		

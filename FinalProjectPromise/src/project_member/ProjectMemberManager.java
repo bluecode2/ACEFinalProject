@@ -20,7 +20,7 @@ public class ProjectMemberManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<ProjectMemberBean> getAllProjectMember(String col, String input,
+	public List<ProjectMemberBean> getAllProjectMember(
 			Integer pageNum, Integer pageSize) throws SQLException{
 		
 		int begin = (pageNum - 1) * pageSize;
@@ -28,8 +28,6 @@ public class ProjectMemberManager {
 		
 		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
 		Map map = new HashMap();
-		map.put("searchField", col);
-		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 		
@@ -38,13 +36,10 @@ public class ProjectMemberManager {
 		return pmbList;
 	}
 	
-	public Integer getCountProjectMember(String column, String value)
+	public Integer getCountProjectMember()
 			throws SQLException, ClassNotFoundException {
-		Map map = new HashMap();
-		map.put("searchField", column);
-		map.put("searchValue", value);
 		Integer result = (Integer) this.ibatis.queryForObject(
-				"projectMember.countProjectMember", map);
+				"projectMember.countProjectMember", null);
 		return result;
 	}
 }

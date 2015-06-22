@@ -44,33 +44,9 @@
 		
 		<html:hidden name="projectMemberForm" property="task" />
 		<html:hidden name="projectMemberForm" property="selectedId" />
-		<html:hidden name="projectMemberForm" property="currSearchField" />
-		<html:hidden name="projectMemberForm" property="currSearchValue" />
 		<html:hidden property="currPage" name="projectMemberForm"/>
 		
 		<div class="container">
-			<div class="divSearch form-group has-info" style="float: right;">
-				<table>
-					<tr>
-						<td>Search by</td>
-						<td style="padding-left: 15px;">
-						<html:select
-								name="projectMemberForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
-								<option value="projectCode">Project Code</option>
-								<option value="projectName">Project Name</option>
-							</html:select></td>
-						<td style="padding-left: 15px"><html:text
-								name="projectMemberForm" property="searchValue"
-								styleClass="form-control" /></td>
-						<td style="padding-left: 15px"><button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
-								title="Back">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button></td>
-					</tr>
-				</table>
-			</div>
 
 			<div class="divContent">
 				<table class="table table-striped table-bordered table-hover"

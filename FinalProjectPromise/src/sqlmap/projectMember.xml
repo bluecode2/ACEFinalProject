@@ -18,16 +18,6 @@
 		    	IS_DELETED AS isDeleted
 		    	FROM VPROJECTMEMBER
 				where IS_DELETED = 0
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectCode">
-				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectName">
-				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
       	 		order by MEMBER_ID) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
@@ -36,17 +26,6 @@
 	<select id="countProjectMember" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM vprojectMember
-		WHERE 1 = 1
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectCode">
-				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectName">
-				LOWER(PROJECT_NAME)
-				LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
+		where IS_DELETED = 0
 	</select>
 </sqlMap>

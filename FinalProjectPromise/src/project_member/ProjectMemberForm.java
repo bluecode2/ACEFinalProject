@@ -15,10 +15,6 @@ public class ProjectMemberForm extends ActionForm {
 	private String task ="";
 	private Integer selectedId = 0;
 	private boolean isAdd = true;
-	private String searchValue;
-	private String searchField;
-	private String currSearchValue = "";
-	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	
@@ -42,30 +38,6 @@ public class ProjectMemberForm extends ActionForm {
 	}
 	public void setAdd(boolean isAdd) {
 		this.isAdd = isAdd;
-	}
-	public String getSearchValue() {
-		return searchValue;
-	}
-	public void setSearchValue(String searchValue) {
-		this.searchValue = searchValue;
-	}
-	public String getSearchField() {
-		return searchField;
-	}
-	public void setSearchField(String searchField) {
-		this.searchField = searchField;
-	}
-	public String getCurrSearchValue() {
-		return currSearchValue;
-	}
-	public void setCurrSearchValue(String currSearchValue) {
-		this.currSearchValue = currSearchValue;
-	}
-	public String getCurrSearchField() {
-		return currSearchField;
-	}
-	public void setCurrSearchField(String currSearchField) {
-		this.currSearchField = currSearchField;
 	}
 	public Integer getCurrPage() {
 		return currPage;
