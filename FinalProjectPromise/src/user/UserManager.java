@@ -71,12 +71,6 @@ public class UserManager {
 	}
 	
 	public void insertUser(UserBean uBean) throws SQLException, ClassNotFoundException{
-		System.out.println(uBean.getUserId());
-		System.out.println(uBean.getUserId());
-		System.out.println(uBean.getEmployeeId());
-		System.out.println(uBean.getCreatedBy());
-		System.out.println(uBean.getUsername());
-		System.out.println(uBean.getPasswordUser());
 		try {
 			this.ibatis.startTransaction();
 			
