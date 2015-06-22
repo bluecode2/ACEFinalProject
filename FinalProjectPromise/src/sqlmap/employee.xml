@@ -224,7 +224,7 @@
 			</isEqual>
 		</dynamic>								
 	</select>
-	<select id="getEmployeeForAssignTask" resultClass="employee.EmployeeBean" parameterClass="java.lang.Integer">
+	<select id="getEmployeeForAssignTask" resultClass="employee.EmployeeBean" parameterClass="java.util.Map">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
@@ -240,5 +240,15 @@
 		EMPLOYEE_NAME 						AS employeeName
 		FROM vEMPLOYEE 
 		where SUPERVISOR_ID = #empId# 
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeCode">
+				LOWER(EMPLOYEE_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
 	</select>
 </sqlMap>
