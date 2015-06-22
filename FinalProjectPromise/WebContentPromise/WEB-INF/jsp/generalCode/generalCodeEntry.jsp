@@ -42,7 +42,7 @@
 									Code ID</label></td>
 							<td><html:text styleClass="form-control"
 									styleId="txtGenCodeId" name="generalCodeForm"
-									property="genCodeBean.genCodeId"></html:text></td>
+									property="genCodeBean.genCodeId" disabled="true"></html:text></td>
 						</tr>
 						<tr>
 							<td class="tdLabel" align="right"><label>Gen. Code
@@ -60,7 +60,7 @@
 									property="genCodeBean.genCodeCaption">
 								</html:text></td>
 						</tr>
-						<tr>
+						<tr style="display: none">
 							<td class="tdLabel" align="right"><label>Parent ID</label></td>
 							<td><html:select property="genCodeBean.parentId"
 									styleId="txtParentId" styleClass="form-control">

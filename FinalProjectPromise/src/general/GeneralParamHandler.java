@@ -36,7 +36,8 @@ public class GeneralParamHandler extends Action{
 			request.setAttribute("ljob", empManager.getJobId());*/
 			
 			gpf.setIsAdd(true);
-			request.setAttribute("pageTitle", "General Parameter Entry");
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER_ENTRY,
+					us, request);
 			
 			return mapping.findForward("entry");
 		}
@@ -44,18 +45,11 @@ public class GeneralParamHandler extends Action{
 			
 			gpf.getBean().setUpdatedBy(us.getUserId());
 			gpm.updateGeneralParam(gpf.getBean());
-			
-			System.out.println(gpf.getBean().getGenParamDesc());
-			System.out.println(gpf.getBean().getGenParamValue());
-			System.out.println(gpf.getBean().getUpdatedBy());
-			System.out.println(gpf.getBean().getUpdateDateInString());
-			System.out.println(gpf.getBean().getGenParamId());
-			
+
 			response.sendRedirect("generalParam.do");
 			return null;
 		}
 		else if ("edit".equals(gpf.getTask())) {
-			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER_ENTRY,
@@ -64,7 +58,6 @@ public class GeneralParamHandler extends Action{
 			return mapping.findForward("entry");
 		}
 		else if ("delete".equals(gpf.getTask())) {
-			System.out.println(gpf.getSelectedId());
 			gpf.getBean().setUpdatedBy(us.getUserId());
 			gpm.deleteGeneralParam(gpf.getBean());
 			System.out.println("selesai");

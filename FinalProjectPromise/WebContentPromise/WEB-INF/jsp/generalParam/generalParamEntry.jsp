@@ -34,16 +34,22 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container" style="padding-top: 30px">
-			<div class="divContent">
-				<table>
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
 					<tr>
-						<td>General Parameter Desc</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Gen. Parameter ID</td>
+						<td><html:text property="bean.genParamId" name="generalParamForm" styleClass="form-control" disabled="true"></html:text></td>
+					</tr>
+					<tr>
+						<td>Gen. Parameter Desc</td>
 						<td><html:text property="bean.genParamDesc" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 					<tr>
-						<td>General Parameter Value</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Gen. Parameter Value</td>
 						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control"></html:text></td>
 					</tr>
 				</table>

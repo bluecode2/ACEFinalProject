@@ -28,7 +28,7 @@
 				LOWER(Parent_id) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		order by gen_code_index) genCode
+		order by gen_code_id,gen_code_index) genCode
 		WHERE ROWNUM &lt;= #end#)
 		WHERE rnum
 		&gt; #begin#
