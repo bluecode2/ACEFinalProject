@@ -158,10 +158,14 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getEmpForAssignTask(int spvId) {
+	public List<EmployeeBean> getEmpForAssignTask(int spvId, String searchField,String searchValue) {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		Map m = new HashMap();
+		m.put("spvId",spvId);
+		m.put("searchValue", searchValue);
+		m.put("searchField", searchField);
 		try {
-			arr = this.ibatis.queryForList("employee.getEmployeeForAssignTask", spvId);
+			arr = this.ibatis.queryForList("employee.getEmployeeForAssignTask", m);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

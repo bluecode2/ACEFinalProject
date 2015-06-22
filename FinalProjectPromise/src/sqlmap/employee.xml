@@ -98,6 +98,7 @@
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
 		DEPT_ID 							AS deptId,
+		DEPT_NAME							AS deptName,
 		e.RANK_ID 							AS rankId,
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email
