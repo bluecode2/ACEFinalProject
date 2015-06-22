@@ -60,7 +60,6 @@ public class RankEmpHandler extends Action {
 			Boolean isAdd = dForm.getIsAdd();
 
 			if (isAdd) {
-				System.out.println("aa");
 				dForm.getBean().setCreatedBy(us.getUserId());
 				dMan.insertEmployeeRank(dForm.getBean());
 			} else {
