@@ -84,7 +84,7 @@
 							<td>Estimate End Date</td>
 							<td>Proposed To</td>
 							<td>Status</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,10 +92,10 @@
 							<logic:iterate id="reg" name="proposedTaskForm" property="arrList">
 								<tr>
 									<td><bean:write name="reg" property="propTaskName" /></td>
-									<td><bean:write name="reg" property="estStartDate" /></td>
-									<td><bean:write name="reg" property="estEndDate" /></td>
-									<td><bean:write name="reg" property="propTo" /></td>
-									<td><bean:write name="reg" property="propStatus" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /></td>
+									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="propToName" /></td>
+									<td><bean:write name="reg" property="propStatusName" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
@@ -108,7 +108,7 @@
 						</logic:notEmpty>
 						<logic:empty name="proposedTaskForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
+								<td colspan="6" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

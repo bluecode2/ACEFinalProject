@@ -76,7 +76,7 @@ public class ProposedTaskHandler extends Action {
 				dForm.getCurrSearchField(), dForm.getCurrSearchValue(),
 				dForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 		rowCount = dMan.getCountProposedTask(dForm.getCurrSearchField(),
-				dForm.getCurrSearchValue());
+				dForm.getCurrSearchValue(), us.getEmployeeId());
 		
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));

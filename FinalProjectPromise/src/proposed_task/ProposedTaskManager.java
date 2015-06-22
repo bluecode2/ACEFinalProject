@@ -85,9 +85,15 @@ public class ProposedTaskManager {
 
 	public void deleteProposedTask(int propTaskId,int userId)
 			throws ClassNotFoundException,SQLException {
+		
+		
+		Map m = new HashMap();
+		m.put("propTaskId", propTaskId);
+		m.put("userId", userId);
+		
 		try {			
 			ibatis.startTransaction();
-			ibatis.delete("proposedTask.deleteProposedTask", propTaskId);
+			ibatis.delete("proposedTask.deleteProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -107,11 +113,13 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public Integer getCountProposedTask(String column, String value)
+	public Integer getCountProposedTask(String column, String value, int userId)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
+		map.put("userId", userId);
+
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"proposedTask.countProposedTask", map);
 		return result;
