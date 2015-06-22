@@ -1,8 +1,9 @@
 
 <footer class="footer">
 	<div class="container">
-		<div class="center-block">
-			<p class="text-center small footer-text">PROJECT MANAGEMENT INFORMATION SYSTEM (PROMISE)<br /> Copyright &copy;
+		<div class="text-center">
+			<p class="footer-text small">PROJECT MANAGEMENT INFORMATION SYSTEM (PROMISE)<br /> Copyright &copy;
 			Kelompok 1 ACE 2015</p>
+		</div>
 	</div>
 </footer>
