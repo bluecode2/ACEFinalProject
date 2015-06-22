@@ -14,28 +14,34 @@
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 <link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 <script type="text/javascript">
+	
+function onBtnBackClick() {
+	location.href = "department.do";
+}
+
 function onBtnSaveClick() {
 	document.forms[0].task.value = "save";
 	document.forms[0].submit();
 }
+
 $(document).ready(function() {
 	$(".datepicker").attr("data-provide", "datepicker");
 	registerSearchHeadDeptEvent();
 });
 function search() {
-	var deptId = $('#hdnDeptId').val();
-	var searchField = $('#selSearchFieldDeptHead').val();
-	var searchValue = $('#txtSearchValueDeptHead').val();
+	var spvId = $('#hdSpvId').val();
+	var searchField = $('#selSearchFieldAssignTo').val();
+	var searchValue = $('#txtSearchValueAssignTo').val();
 
 	$.ajax({
 		type : "POST",
-		url : "searchDeptHead.do",
-		data : "deptId=" + deptId + "&searchField=" + searchField
+		url : "searchAssignTo.do",
+		data : "spvId=" + spvId + "&searchField=" + searchField
 				+ "&searchValue=" + searchValue,
 		success : function(response) {
 			$("#tblSearch").find("tr:gt(0)").remove();
 			$("#tblSearch").append(response);
-			registerSearchHeadDeptEvent();
+			registerSearchAssignToEvent();
 		},
 		error : function(e) {
 			alert("Error: " + e);
@@ -43,15 +49,15 @@ function search() {
 	});
 }
 
-function registerSearchHeadDeptEvent(){
+function registerSearchAssignToEvent(){
 	$('.rowSearch').on(
 			'click',
 			function() {
 				var value = $(this).find('td').eq(0).html();
 				var text = $(this).find('td').eq(1).html() + ' - '
 						+ $(this).find('td').eq(2).html();
-				$('#hdnDeptHeadId').val(value);
-				$('#txtDeptHead').val(text);
+				$('#hdEmpId').val(value);
+				$('#txtAssignedToName').val(text);
 			});
 }
 </script>
@@ -63,7 +69,8 @@ function registerSearchHeadDeptEvent(){
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 		<html:hidden property="task" name="assignTaskForm"/>
 		<html:hidden property="tkBean.taskId" name="assignTaskForm"/>
-		<html:hidden property="tkBean.assignedBy" name="assignTaskForm"/>
+		<html:hidden property="tkBean.assignedBy" name="assignTaskForm" styleId="hdSpvId"/>
+		<html:hidden property="tkBean.createdBy" name="assignTaskForm"/>
 		
 		<div class="container">
 
@@ -90,6 +97,7 @@ function registerSearchHeadDeptEvent(){
 								name="assignTaskForm" property="tkBean.estStartDateInString"></html:text>
 						</td>
 					</tr>
+					<logic:equal value="true" property="isAdd" name="assignTaskForm">
 					<tr>
 						<td class="tdLabel" align="right"><label>Est. End Date</label></td>
 						<td>
@@ -105,7 +113,7 @@ function registerSearchHeadDeptEvent(){
 							<table width="100%">
 								<tr>
 									<td><html:text styleClass="form-control"
-											styleId="txt" readonly="true" name="assignTaskForm"
+											styleId="txtAssignedToName" readonly="true" name="assignTaskForm"
 											property="tkBean.assignedToName"></html:text></td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchAssTo"> <span
@@ -115,17 +123,18 @@ function registerSearchHeadDeptEvent(){
 							</table>
 						</td>
 					</tr>
+					</logic:equal>
 				</table>
 			</div>
 
 		</div>
 		
-		<!-- popup buat ambil assignedTo -->
+		<!-- popup to take assignedTo -->
 		<div class="modal fade" id="searchAssTo" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<html:form action="searchDeptHead" method="post">
+					<html:form action="searchAssignTo" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -139,14 +148,13 @@ function registerSearchHeadDeptEvent(){
 									<tr>
 										<td>Search</td>
 										<td style="padding-left: 15px"><select
-											class="form-control" id="selSearchFieldDeptHead"
+											class="form-control" id="selSearchFieldAssignTo"
 											style="width: 150px">
 												<option value="employeeCode">Employee Code</option>
 												<option value="employeeName">Employee Name</option>
-												<option value="email">Email</option>
 										</select></td>
 										<td style="padding-left: 15px"><input type="text"
-											id="txtSearchValueDeptHead" class="form-control" /></td>
+											id="txtSearchValueAssignTo" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="search();" id="btnSearch"
 												class="btn btn-sm btn-info btn-icon" title="Back">
@@ -166,20 +174,25 @@ function registerSearchHeadDeptEvent(){
 									</tr>
 								</thead>
 								<tbody>
-									<logic:notEmpty name="lstDeptHead">
-										<logic:iterate id="emp" name="lstDeptHead">
+									<logic:notEmpty name="listAssignTo">
+										<logic:iterate id="emp" name="listAssignTo">
 											<tr data-dismiss="modal" class="rowSearch">
-												<td style="display: none"><bean:write name="emp"
-														property="employeeId" /></td>
-												<td width="150px"><bean:write name="emp"
-														property="employeeCode" /></td>
-												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp"
-														property="email" /></td>
+												<td style="display: none">
+													<bean:write name="emp" property="employeeId" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="employeeCode" />
+												</td>
+												<td>
+													<bean:write name="emp" property="employeeName" />
+												</td>
+												<td width="150px">
+													<bean:write name="emp" property="email" />
+												</td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
-									<logic:empty name="lstDeptHead">
+									<logic:empty name="listAssignTo">
 										<tr>
 											<td colspan="3" align="center">No Data Found</td>
 										</tr>

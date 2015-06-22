@@ -18,7 +18,7 @@ public class AssignTaskManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<TaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize) throws SQLException {
+	public List<TaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 		
@@ -27,6 +27,7 @@ public class AssignTaskManager {
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
+		map.put("empId", empId);
 		
 		List arr = this.ibatis.queryForList("task.getAllListAssignTask", map);
 		
@@ -67,11 +68,12 @@ public class AssignTaskManager {
 		}
 	}
 	
-	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus) throws SQLException {
+	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) throws SQLException {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
 		m.put("taskStatus", taskStatus);
+		m.put("remarks", remarks);
 		
 		try {
 			this.ibatis.startTransaction();

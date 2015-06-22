@@ -7,7 +7,7 @@ import org.apache.struts.action.ActionForm;
 
 public class AssignTaskForm extends ActionForm
 {
-	private String 			task;
+	private String 			task = "";
 	private String 			searchField;
 	private String 			searchValue;
 	private Integer 		currPage = 1;
@@ -15,16 +15,38 @@ public class AssignTaskForm extends ActionForm
 	private Integer 		listCount;
 	private String			currSearchField;
 	private String			currSearchValue;
-	private String			selectedId;
+	private Integer			selectedId;
 	private TaskBean		tkBean = new TaskBean();
 	private List<TaskBean>	arrList = new ArrayList<TaskBean>();
-	private String			status;
+	private Boolean 		isAdd = false;
+	private int				selectedEdit;
+	private String			statusTask;
+	private String			remarksRecord;
 	
-	public String getStatus() {
-		return status;
+
+	public String getRemarksRecord() {
+		return remarksRecord;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRemarksRecord(String remarksRecord) {
+		this.remarksRecord = remarksRecord;
+	}
+	public String getStatusTask() {
+		return statusTask;
+	}
+	public void setStatusTask(String statusTask) {
+		this.statusTask = statusTask;
+	}
+	public int getSelectedEdit() {
+		return selectedEdit;
+	}
+	public void setSelectedEdit(int selectedEdit) {
+		this.selectedEdit = selectedEdit;
+	}
+	public Boolean getIsAdd() {
+		return isAdd;
+	}
+	public void setIsAdd(Boolean isAdd) {
+		this.isAdd = isAdd;
 	}
 	public List<TaskBean> getArrList() {
 		return arrList;
@@ -80,10 +102,10 @@ public class AssignTaskForm extends ActionForm
 	public void setCurrSearchValue(String currSearchValue) {
 		this.currSearchValue = currSearchValue;
 	}
-	public String getSelectedId() {
+	public Integer getSelectedId() {
 		return selectedId;
 	}
-	public void setSelectedId(String selectedId) {
+	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
 	}
 	public TaskBean getTkBean() {
