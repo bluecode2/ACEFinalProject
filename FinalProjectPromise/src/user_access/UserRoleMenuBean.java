@@ -18,7 +18,7 @@ public class UserRoleMenuBean {
 		this.menuId = menuId;
 	}
 	public String getMenuCrud() {
-		return menuCrud;
+		return menuCrud != null ? menuCrud : "";
 	}
 	public void setMenuCrud(String menuCrud) {
 		this.menuCrud = menuCrud;

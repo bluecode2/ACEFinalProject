@@ -49,8 +49,7 @@ public class Constant {
 		public static final String GENERAL_CODE = "MS0302";
 		public static final String GENERAL_PARAMETER = "MS0303";
 		
-		
-		
+		public static final String PROJECT = "TR0101";
+		public static final String PROJECT_ENTRY = "TR0101-E";
 	}
-	 
 }
