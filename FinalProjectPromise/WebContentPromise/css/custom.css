@@ -1,6 +1,7 @@
 /*
 material-blue					#2196f3
 material-light-blue / -info		#03a9f4
+bg-info							#d9edf7
 */
 
 html {
@@ -139,6 +140,11 @@ label {
 .divContent{
 	margin-top: 50px;
 	margin-bottom: 50px;
+}
+
+thead > tr > td , th {
+	background-color: #d9edf7 !important;
+	font-weight: 500;
 }
 
 .divPaging{
