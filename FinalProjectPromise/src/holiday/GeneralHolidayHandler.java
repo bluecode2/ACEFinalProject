@@ -84,6 +84,9 @@ public class GeneralHolidayHandler extends Action{
 				request.setAttribute("currPage", genForm.getCurrPage());
 				request.setAttribute("rowCount", rowCount);
 				
+				CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY, us,
+						request);
+				
 				return mapping.findForward("genList");				
 			}
 			else {

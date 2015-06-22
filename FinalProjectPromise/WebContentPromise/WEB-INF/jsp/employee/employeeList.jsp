@@ -80,11 +80,11 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td width="150px">Employee Code</td>
-							<td>Employee Name</td>
-							<td>Email</td>
-							<td>Department</td>
-							<td>Supervisor</td>
+							<td width="150px" class="align-center">Employee Code</td>
+							<td class="align-center">Employee Name</td>
+							<td class="align-center">Email</td>
+							<td class="align-center">Department</td>
+							<td class="align-center">Supervisor</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>

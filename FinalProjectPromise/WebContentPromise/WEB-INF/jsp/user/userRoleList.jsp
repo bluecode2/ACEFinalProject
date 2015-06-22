@@ -337,8 +337,8 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>User Role Code</td>
-							<td>User Role Name</td>
+							<td class="align-center">User Role Code</td>
+							<td class="align-center">User Role Name</td>
 							<td align="center">Menu Access</td>
 
 							<td class="align-center"></td>

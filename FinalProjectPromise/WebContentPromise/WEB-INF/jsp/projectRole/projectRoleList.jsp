@@ -78,8 +78,8 @@
 					class="tableContent">
 					<thead >
 						<tr class="panel panel-info">
-							<td width="150px">Project Role Code</td>
-							<td>Project Role Name</td>
+							<td width="150px" class="align-center">Project Role Code</td>
+							<td class="align-center">Project Role Name</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>

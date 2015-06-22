@@ -83,9 +83,9 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Personal Holiday Name</td>
-							<td>Personal Holiday Date</td>
-							<td>Employee Name</td>
+							<td class="align-center">Personal Holiday Name</td>
+							<td class="align-center">Personal Holiday Date</td>
+							<td class="align-center">Employee Name</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>

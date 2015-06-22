@@ -103,9 +103,9 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>General Holiday Name</td>
-							<td>General Holiday Date</td>
-							<td>Is Generated</td>
+							<td class="align-center">General Holiday Name</td>
+							<td class="align-center">General Holiday Date</td>
+							<!-- <td>Is Generated</td> -->
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -116,8 +116,8 @@
 								<tr>
 									<td><bean:write name="reg" property="genHolidayName" /></td>
 									<td><bean:write name="reg"
-											property="genHolidayDateInString" /></td>
-									<td><bean:write name="reg" property="isGenerated" /></td>
+											property="genHolidayDateDisplay" /></td>
+									<%-- <td><bean:write name="reg" property="isGenerated" /></td> --%>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
