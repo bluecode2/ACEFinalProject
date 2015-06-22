@@ -62,7 +62,6 @@
 						<td>Search by</td>
 						<td style="padding-left: 15px;">
 							<html:select name="generalParamForm" property="searchField" styleId="selSearchField" styleClass="form-control">
-								<option value="">All</option>
 								<option value="genParamDesc">General Parameter Description</option>
 								<option value="genParamValue">General Parameter Value</option>
 							</html:select>

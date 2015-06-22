@@ -84,7 +84,7 @@ public class GeneralParamHandler extends Action{
 		
 		gpf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
-		request.setAttribute("pageTitle", "General Param List");
+		request.setAttribute("pageTitle", "General Parameter List");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList( gpf.getPageCount(),gpf.getCurrPage()));
