@@ -223,6 +223,22 @@
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>								
-
+	</select>
+	<select id="getEmployeeForAssignTask" resultClass="employee.EmployeeBean" parameterClass="java.lang.Integer">
+	SELECT
+		EMPLOYEE_ID 						AS employeeId,
+		EMPLOYEE_code 						AS employeeCode,
+		DEPT_ID 							AS deptId,
+		DEPT_CODE 							AS deptCode,
+		DEPT_NAME							AS deptName,
+		RANK_ID 							AS rankId,
+		RANK_CODE 							AS rankCode,
+		RANK_NAME 							AS rankName,
+		SUPERVISOR_ID 						AS supervisorId,
+		SUPERVISOR_CODE 					AS supervisorCode,
+		SUPERVISOR_NAME 					AS supervisorName,
+		EMPLOYEE_NAME 						AS employeeName
+		FROM vEMPLOYEE 
+		where SUPERVISOR_ID = #empId# 
 	</select>
 </sqlMap>

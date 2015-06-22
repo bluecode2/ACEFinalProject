@@ -87,8 +87,6 @@
 		
 	</select>
 	
-
-	
 	<select id="getNewDeptId" resultClass="java.lang.Integer">
 		SELECT
 		MAX(dept_id)+1
