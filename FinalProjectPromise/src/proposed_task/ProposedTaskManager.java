@@ -123,15 +123,13 @@ public class ProposedTaskManager {
 		m.put("createdBy", bean.getCreatedBy());
 		m.put("updatedBy", bean.getUpdatedBy());
 		m.put("createDateInString", bean.getCreateDateInString());
-		m.put("updatedDateInString", bean.getUpdateDateInString());
-		
-
+		m.put("updatedDateInString", bean.getUpdateDateInString());	
 		m.put("userId", bean.getUpdatedBy());
 		
 		try {
 			ibatis.startTransaction();
 			bean.setPropTaskId(newPropTaskId());
-			ibatis.insert("proposedTask.insertProposedTask", bean);
+			ibatis.insert("proposedTask.insertProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
