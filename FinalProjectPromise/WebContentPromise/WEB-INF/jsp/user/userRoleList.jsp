@@ -274,7 +274,7 @@
 																+ listAllowDecline,
 														success : function(
 																response) {
-
+															$('#searchDeptHead').modal('hide');
 														},
 														error : function(e) {
 															alert("Error: " + e);
@@ -460,7 +460,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
-									id="btnSaveUserRoleMenu" data-dismiss="modal">Save
+									id="btnSaveUserRoleMenu">Save
 									changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>

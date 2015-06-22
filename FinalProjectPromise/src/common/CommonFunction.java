@@ -87,16 +87,16 @@ public class CommonFunction {
 
 		MenuManager menuMan = new MenuManager();
 
-		arrMenuLvl1 = menuMan.getAllMenuHead();
+		arrMenuLvl1 = menuMan.getAllMenuHead(user.getUserRoleId());
 
 		for (MenuBean menuLvl1 : arrMenuLvl1) {
 			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(menuLvl1
-					.getMenuId());
+					.getMenuId(),user.getUserRoleId());
 
 			for (MenuBean menuLvl2 : tmpLvl2) {
 				arrMenuLvl2.add(menuLvl2);
 				ArrayList<MenuBean> tmpLvl3 = menuMan
-						.getAllMenuByParent(menuLvl2.getMenuId());
+						.getAllMenuByParent(menuLvl2.getMenuId(),user.getUserRoleId());
 
 				for (MenuBean menuLvl3 : tmpLvl3) {
 					arrMenuLvl3.add(menuLvl3);

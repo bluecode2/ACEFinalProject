@@ -32,6 +32,19 @@ public class MenuManager {
 		}
 		return arr;
 	}
+	
+	public ArrayList<MenuBean> getAllMenuHead(Integer userRoleId) {
+		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
+
+		try {
+			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
+					"menu.selectListAuthorizeVisibleMenuHead", userRoleId));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
 
 	public ArrayList<MenuBean> getAllMenuByParent(Integer parentId) {
 		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
@@ -46,6 +59,22 @@ public class MenuManager {
 		return arr;
 	}
 	
+	public ArrayList<MenuBean> getAllMenuByParent(Integer parentId, Integer userRoleId) {
+		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
+
+		Map map = new HashMap();
+		map.put("parentId", parentId);
+		map.put("userRoleId", userRoleId);
+		
+		try {
+			arr = new ArrayList<MenuBean>(this.ibatis.queryForList(
+					"menu.selectListAuthorizeVisibleMenuByParent", map));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
 	public ArrayList<MenuBean> getAllMenu() {
 		ArrayList<MenuBean> arr = new ArrayList<MenuBean>();
 

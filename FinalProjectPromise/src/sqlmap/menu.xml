@@ -24,6 +24,30 @@
 		WHERE parent_id IS NULL
 		AND is_visible = 1
 	</select>
+	
+	<select id="selectListAuthorizeVisibleMenuHead" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
+		SELECT
+		MENU_ID as
+		menuId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		MENU_CODE as
+		menuCode,
+		MENU_CAPTION as menuCaption,
+		PARENT_ID as parentId,
+		MENU_CRUD
+		as menuCrud,
+		MENU_INDEX as menuIndex,
+		MENU_URL as menuUrl,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		IS_PARENT as
+		isParent
+		FROM menu
+		WHERE parent_id IS NULL
+		AND is_visible = 1
+		AND menu_id IN (SELECT menu_id from role_menu where user_role_id = #value#)
+	</select>
 
 	<select id="selectListVisibleMenuByParent" parameterClass="java.lang.Integer"
 		resultClass="general.MenuBean">
@@ -48,6 +72,33 @@
 		#value#
 		AND is_visible = 1
 	</select>
+	
+	<select id="selectListAuthorizeVisibleMenuByParent" parameterClass="java.util.Map"
+		resultClass="general.MenuBean">
+		SELECT
+		MENU_ID as menuId,
+		UPDATED_BY as updatedBy,
+		CREATED_BY
+		as createdBy,
+		MENU_CODE as menuCode,
+		MENU_CAPTION as menuCaption,
+		PARENT_ID as parentId,
+		MENU_CRUD as menuCrud,
+		MENU_INDEX as menuIndex,
+		MENU_URL as menuUrl,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as
+		createDateInString ,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as
+		updateDateInString,
+		IS_PARENT as isParent
+		FROM menu
+		WHERE parent_id =
+		#parentId#
+		AND is_visible = 1
+		AND menu_id IN (SELECT menu_id from role_menu where user_role_id = #userRoleId#) 
+		
+	</select>
+	
 	
 	<select id="selectListAllMenu" resultClass="general.MenuBean">
 		SELECT
