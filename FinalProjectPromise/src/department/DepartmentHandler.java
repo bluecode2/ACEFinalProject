@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
-import employee.EmployeeBean;
 import employee.EmployeeManager;
 
 public class DepartmentHandler extends Action {

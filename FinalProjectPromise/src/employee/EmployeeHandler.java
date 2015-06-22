@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import rank_employee.RankEmpBean;
 import rank_employee.RankEmpManager;
 import user.UserBean;
 import common.CommonFunction;
