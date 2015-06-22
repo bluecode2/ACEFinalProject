@@ -72,14 +72,23 @@ public class ProposedTaskManager {
 		return propTaskId;
 	}
 
-	public void updateProposedTask(ProposedTaskBean task) {
+	public void updateProposedTask(ProposedTaskBean bean) throws SQLException {
+		
+		Map m = new HashMap();
+		m.put("propTaskName", bean.getPropTaskName());
+		m.put("propTaskDesc", bean.getPropTaskDesc());
+		m.put("estStartDateInString", bean.getEstStartDateInString());
+		m.put("estEndDateInString", bean.getEstEndDateInString());
+		m.put("propTaskId", bean.getPropTaskId());
+		m.put("userId", bean.getUpdatedBy());
+		
 		try {
 			ibatis.startTransaction();
-			ibatis.update("proposedTask.updateProposedTask", task);
+			ibatis.update("proposedTask.updateProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			ibatis.endTransaction();
 		}
 	}
 
@@ -96,16 +105,33 @@ public class ProposedTaskManager {
 			ibatis.delete("proposedTask.deleteProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			ibatis.endTransaction();
 		}
 	}
 
-	public void insertProposedTask(ProposedTaskBean task) {
+	public void insertProposedTask(ProposedTaskBean bean) {
+		
+		Map m = new HashMap();
+		m.put("propTaskId", bean.getPropTaskId());
+		m.put("propTaskName", bean.getPropTaskName());
+		m.put("propTaskDesc", bean.getPropTaskDesc());
+		m.put("estStartDateInString", bean.getEstStartDateInString());
+		m.put("estEndDateInString", bean.getEstEndDateInString());
+		m.put("propBy", bean.getPropBy());
+		m.put("propTo", bean.getPropTo());
+		m.put("createdBy", bean.getCreatedBy());
+		m.put("updatedBy", bean.getUpdatedBy());
+		m.put("createDateInString", bean.getCreateDateInString());
+		m.put("updatedDateInString", bean.getUpdateDateInString());
+		
+
+		m.put("userId", bean.getUpdatedBy());
+		
 		try {
 			ibatis.startTransaction();
-			task.setPropTaskId(newPropTaskId());
-			ibatis.insert("proposedTask.insertProposedTask", task);
+			bean.setPropTaskId(newPropTaskId());
+			ibatis.insert("proposedTask.insertProposedTask", bean);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
