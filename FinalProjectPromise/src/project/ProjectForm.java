@@ -16,7 +16,7 @@ public class ProjectForm extends ActionForm{
 	
 	private String task ="";
 	private Integer selectedId = 0;
-	private Boolean isAdd = false;
+	private String isProc = "";
 	private String searchValue;
 	private String searchField;
 	private String currSearchValue = "";
@@ -51,11 +51,12 @@ public class ProjectForm extends ActionForm{
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
 	}
-	public Boolean getIsAdd() {
-		return isAdd;
+	
+	public String getIsProc() {
+		return isProc;
 	}
-	public void setIsAdd(Boolean isAdd) {
-		this.isAdd = isAdd;
+	public void setIsProc(String isProc) {
+		this.isProc = isProc;
 	}
 	public String getSearchValue() {
 		return searchValue;

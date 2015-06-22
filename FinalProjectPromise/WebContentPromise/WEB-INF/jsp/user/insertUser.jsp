@@ -355,7 +355,7 @@
 							</logic:notEmpty>
 							<logic:empty name="lstEmployeeId">
 								<tr>
-									<td colspan="2" align="center">No Data Found</td>
+									<td colspan="3" align="center">No Data Found</td>
 								</tr>
 							</logic:empty>
 						</table>

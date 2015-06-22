@@ -11,7 +11,6 @@ public class ProjectBean {
 	private Integer dept_id;
 	private String deptName;
 	private Integer employeeId;
-	private String genCodeId;
 	private Integer createdBy;
 	private String projectCode;
 	private String projectName;
@@ -102,14 +101,6 @@ public class ProjectBean {
 
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
-	}
-
-	public String getGenCodeId() {
-		return genCodeId;
-	}
-
-	public void setGenCodeId(String genCodeId) {
-		this.genCodeId = genCodeId;
 	}
 
 	public Integer getCreatedBy() {
