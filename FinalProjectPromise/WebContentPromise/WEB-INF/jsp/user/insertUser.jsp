@@ -44,6 +44,9 @@
 		if (document.forms[0].val.value == "1") {
 			alert("Old Password is wrong");
 		}
+		
+		if(document.forms[0].task.value == "edit")
+			$('#txtUserName').attr("disabled","disabled");
 	}
 
 	$(document).ready(function() {
@@ -134,6 +137,7 @@
 		<html:hidden property="oldPassword" name="userForm" />
 		<html:hidden property="uBean.passwordUser" name="userForm" />
 		<html:hidden property="uBean.userId" name="userForm" />
+		<html:hidden property="uBean.username" name="userForm" />
 		<html:hidden property="val" name="userForm" />
 
 
@@ -149,7 +153,7 @@
 						<tr align="left">
 							<td>User Name</td>
 							<td style="padding-left: 15px;"><html:text name="userForm"
-									property="uBean.username" styleClass="form-control">
+									property="uBean.username" styleId="txtUserName" styleClass="form-control">
 								</html:text></td>
 						</tr>
 						<tr align="left">

@@ -51,8 +51,7 @@
 				'click',
 				function() {
 					var value = $(this).find('td').eq(0).html();
-					var text = $(this).find('td').eq(1).html() + ' - '
-							+ $(this).find('td').eq(2).html();
+					var text = $(this).find('td').eq(2).html();
 					$('#hdnDeptHeadId').val(value);
 					$('#txtDeptHead').val(text);
 				});
@@ -102,7 +101,7 @@
 								<tr>
 									<td><html:text styleClass="form-control"
 											styleId="txtDeptHead" readonly="true" name="departmentForm"
-											property="selectedDept.deptHeadDisplay"></html:text></td>
+											property="selectedDept.deptHeadName"></html:text></td>
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchDeptHead"> <span
 											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
