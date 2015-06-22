@@ -45,8 +45,12 @@
 		
 
 		<div class="container">
-			<div class="divContent">
-				<table>
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
 					<!-- <tr>
 						<td>General Holiday ID</td>
 						<td><input type="text" id="txtGoToPage" class="form-control"/></td>

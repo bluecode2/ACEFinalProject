@@ -75,8 +75,12 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divContent">
-				<table>
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
 					<tr>
 						<td>Personal Holiday Name</td>
 						<td>
@@ -117,12 +121,10 @@
 					<tr>
 						<td>Holiday Type</td>
 						<td>
-							<html:select name="personalHolidayForm" property="persHolidayBean.holidayType">
+							<html:select name="personalHolidayForm" property="persHolidayBean.holidayType" styleClass="form-control">
 								<html:option value="">---Choose One---</html:option>
 								<logic:iterate id="id" property="listOfGenCode" name="personalHolidayForm">
 									<html:option value="${id.genCodeId}">
-										<bean:write name="id" property="genCodeId" />
-										-
 										<bean:write name="id" property="genCodeCaption" />
 									</html:option>
 								</logic:iterate>
