@@ -36,8 +36,7 @@
 				'click',
 				function() {
 					var value = $(this).find('td').eq(0).html();
-					var text = $(this).find('td').eq(1).html() + ' - '
-							+ $(this).find('td').eq(2).html();
+					var text = $(this).find('td').eq(2).html();
 					$('#hiddenEmpId').val(value);
 					$('#txtEmp').val(text);
 				});
@@ -92,11 +91,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Employee ID</td>
+						<td>Employee</td>
 						<td>
-							<html:text styleClass="form-control" styleId="txtPersHolCode" name="personalHolidayForm" property="persHolidayBean.holidayDesc"></html:text>
+							<%-- <html:text styleClass="form-control" styleId="txtPersHolCode" name="personalHolidayForm" property="persHolidayBean.employeeId"></html:text>
 						</td>
-						<td>
+						<td> --%>
 							<html:hidden styleId="hiddenEmpId"
 								name="personalHolidayForm" property="persHolidayBean.employeeId" />
 							<table width="100%">
@@ -104,7 +103,7 @@
 									<td>
 										<html:text styleClass="form-control"
 											styleId="txtEmp" readonly="true" name="personalHolidayForm"
-											property="persHolidayBean.empDisplay">
+											property="persHolidayBean.employeeName">
 										</html:text>
 									</td>
 									<td align="center">

@@ -67,6 +67,7 @@ public class RankEmpManager {
 		try {
 			this.ibatis.startTransaction();
 			eb.setRankId(getNewRankId());
+			System.out.println("id:"+getNewRankId());
 			this.ibatis.insert("rank.insertEmployeeRank", eb);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
