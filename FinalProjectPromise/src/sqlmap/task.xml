@@ -75,8 +75,7 @@
 		UPDATE TASK SET 
 		TASK_NAME =#taskName#,
 		TASK_DESC = #taskDesc#,
-		updated_by = #updateBy#,
-		remarks = #remarks#,
+		updated_by = #updatedBy#,
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
 	</update>
@@ -84,8 +83,42 @@
 	<update id="updateStatusAssignTask" parameterClass="java.util.Map">
 		UPDATE task set 
 		act_start_date = SYSDATE,
-		update_by = #updateBy#,
+		updated_by = #updatedBy#,
 		task_status = #taskStatus#
 		where task_id =#taskId#      
 	</update>
+	<update id="updateStatusReason" parameterClass="java.util.Map">
+		update task set
+		updade_date = SYSDATE,
+		updated_by = #updatedBy#,
+		remarks = #remarks#
+		where task_id = #taskId#
+	</update>
+	
+	<select id="getAssignTaskForEdit" resultClass="task.TaskBean" parameterClass="java.lang.Integer">
+	  SELECT
+		          TASK_ID           AS taskId,
+		          PROJECT_ID        as projectId,
+		          ASSIGNED_TO       as assignedTo,
+		          ASSIGNED_TO_NAME  as assignedToName,
+		          ASSIGNED_BY       as assignedBy,    
+		          ASSIGNED_BY_NAME  as assignedByName,
+		          TASK_STATUS       as taskStatus,
+		          TASK_NAME         as taskName,
+		          EST_START_DATE    as estStartDateInString,
+		          EST_END_DATE      as estEndDateInString,
+		          ACT_START_DATE    as actStartDateInString,
+		          ACT_END_DATE      as actEndDateInString,
+		          EST_MAIN_DAYS     as estMainDays,
+		          ACT_MAIN_DAYS     as actmainDays,
+		          TASK_PROGRESS     as taskProgress,
+		          REMARKS           as remarks,
+		          CREATE_DATE       as createDateInString,
+		          UPDATE_DATE       as updateDateInString,
+		          TASK_DESC         as taskDesc,
+		          IS_OUTSOURCE      as isOutsource,
+		          TASK_STATUS_NAME  as taskStatusName
+		          from vindependenttask
+		          where task_id = #id#
+	</select>
 </sqlMap>

@@ -9,11 +9,11 @@ import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
-public class TaskManager {
+public class AssignTaskManager {
 
 	private SqlMapClient ibatis;
 	
-	public TaskManager() {
+	public AssignTaskManager() {
 		// TODO Auto-generated constructor stub
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
@@ -51,12 +51,12 @@ public class TaskManager {
 		}
 	}
 	
-	public void editAssignTask(int taskId, String taskName, String taskDesc, int updateBy, String remarks) throws SQLException {
+	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy, String remarks) throws SQLException {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("taskName", taskName);
 		m.put("taskDesc", taskDesc);
-		m.put("updateBy", updateBy);
+		m.put("updatedBy", updatedBy);
 		m.put("remarks", remarks);
 		try {
 			this.ibatis.startTransaction();
@@ -67,10 +67,10 @@ public class TaskManager {
 		}
 	}
 	
-	public void editStatusAssignTask(int taskId, int updateBy, String taskStatus) throws SQLException {
+	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus) throws SQLException {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
-		m.put("updateBy", updateBy);
+		m.put("updatedBy", updatedBy);
 		m.put("taskStatus", taskStatus);
 		
 		try {
@@ -81,5 +81,10 @@ public class TaskManager {
 			this.ibatis.endTransaction();
 		}
 		
+	}
+	public TaskBean getDataForEdit(int taskId) throws SQLException {
+		
+		TaskBean tBean = (TaskBean) this.ibatis.queryForObject("getAssignTaskForEdit", taskId);	
+		return tBean;
 	}
 }

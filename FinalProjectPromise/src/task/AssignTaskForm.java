@@ -1,10 +1,11 @@
 package task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-public class TaskForm extends ActionForm
+public class AssignTaskForm extends ActionForm
 {
 	private String 			task;
 	private String 			searchField;
@@ -15,9 +16,16 @@ public class TaskForm extends ActionForm
 	private String			currSearchField;
 	private String			currSearchValue;
 	private String			selectedId;
-	private TaskBean		tkBean;
-	private List<TaskBean>	arrList = null;
+	private TaskBean		tkBean = new TaskBean();
+	private List<TaskBean>	arrList = new ArrayList<TaskBean>();
+	private String			status;
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public List<TaskBean> getArrList() {
 		return arrList;
 	}

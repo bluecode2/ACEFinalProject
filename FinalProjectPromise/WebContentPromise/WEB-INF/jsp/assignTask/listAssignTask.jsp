@@ -18,10 +18,16 @@
 			if (taskCode == 'TA_STAT_02') {
 				$(this).addClass('glyphicon glyphicon-pencil');
 				$(this).attr("title","Edit Task");
-			} else if (taskCode == 'TA_STAT_04') {
+			} 		
+			else if (taskCode == 'TA_STAT_04') {
 				$(this).addClass('glyphicon glyphicon-ok');
 				$(this).attr("title","Approve Task");
-			} else
+			}
+			else if (taskCode == 'TA_STAT_06') {
+				$(this).addClass('glyphicon glyphicon-play');
+				$(this).attr("title","Resume Task");
+			}
+			else
 				$(this).hide();
 		});
 		$('.secondBtn').each(function() {
@@ -36,11 +42,20 @@
 			else if (taskCode == 'TA_STAT_04') {
 				$(this).addClass('glyphicon glyphicon-remove');
 				$(this).attr("title","Decline Task");
-			} else
+			}
+			else if (taskCode == 'TA_STAT_06') {
+				$(this).addClass('glyphicon glyphicon-stop');
+				$(this).attr("title","Stop Task");
+			}
+			else
 				$(this).hide();
 		});
 		
 	});
+	function changeStatus() {
+	
+				
+	}
 </script>
 </head>
 <body>
@@ -100,13 +115,13 @@
 									<td><bean:write name="reg" property="assignedByName" /></td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
-									<td><html:text name="reg" property="taskStatus" styleClass="hdnTaskStatus" /> 
+									<td><html:hidden name="reg" property="taskStatus" styleClass="hdnTaskStatus" /> 
 										<bean:write name="reg" property="taskStatusName"/>
 									</td>
 									<td align="center">
-										<a class="text-success" href="#"
-										onclick="">
-											<span class="firstBtn" aria-hidden="true"></span>
+										<a class="text-success" href="#" id="tes"
+										onclick="changeStatus()">
+											<span class="firstBtn" aria-hidden="true" id="first"></span>
 										</a>
 										&nbsp; 
 										<a class="text-success" href="#"

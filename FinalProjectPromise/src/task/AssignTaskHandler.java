@@ -13,7 +13,7 @@ import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 
-public class TaskHandler extends Action {
+public class AssignTaskHandler extends Action {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -21,8 +21,8 @@ public class TaskHandler extends Action {
 			throws Exception {
 		// TODO Auto-generated method stub
 		
-		TaskForm tsForm = (TaskForm) form;
-		TaskManager tsMan = new TaskManager();
+		AssignTaskForm tsForm = (AssignTaskForm) form;
+		AssignTaskManager tsMan = new AssignTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
@@ -46,5 +46,8 @@ public class TaskHandler extends Action {
 		request.setAttribute("rowCount", tsForm.getListCount());
 
 		return mapping.findForward("list");
+/*		return mapping.findForward("assignTask");*/
+		
+		
 	}
 }
