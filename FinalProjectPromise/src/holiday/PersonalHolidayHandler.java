@@ -13,6 +13,7 @@ import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeManager;
+import general.GeneralCodeManager;
 
 public class PersonalHolidayHandler extends Action{
 	@Override
@@ -23,6 +24,7 @@ public class PersonalHolidayHandler extends Action{
 		PersonalHolidayForm persForm = (PersonalHolidayForm) form;
 		PersonalHolidayManager persManager = new PersonalHolidayManager();
 		EmployeeManager empManager = new EmployeeManager();
+		GeneralCodeManager genCodeManager = new GeneralCodeManager();
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -37,7 +39,8 @@ public class PersonalHolidayHandler extends Action{
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
 					us, request);
-			
+			persForm.setListOfGenCode(genCodeManager.getGeneralCodeByParentId(Constant.GeneralCode.PERSONAL_HOLIDAY_TYPE));
+			System.out.println(persForm.getListOfGenCode());
 			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("save".equals(persForm.getTask())){
@@ -46,6 +49,9 @@ public class PersonalHolidayHandler extends Action{
 			if (isAdd) {
 				persForm.getPersHolidayBean().setHolidayId(persManager.getNewGenHolidayId());
 				persForm.getPersHolidayBean().setCreatedBy(us.getUserId());
+				
+				System.out.println(persForm.getPersHolidayBean().getHolidayType());
+				
 				persManager.insertPersonalHoliday(persForm.getPersHolidayBean());
 			} 
 			else {
@@ -63,6 +69,7 @@ public class PersonalHolidayHandler extends Action{
 
 			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
 					us, request);
+			persForm.setListOfGenCode(genCodeManager.getGeneralCodeByParentId(Constant.GeneralCode.PERSONAL_HOLIDAY_TYPE));
 			
 			return mapping.findForward("personalHolidayEntry");
 		}

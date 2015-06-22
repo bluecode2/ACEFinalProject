@@ -58,4 +58,8 @@ public class Constant {
 		public static final String ASSIGN_TASK_ENTRY= "TR0203-E"; 
 		
 	}
+	
+	public static class GeneralCode{
+		public static final String PERSONAL_HOLIDAY_TYPE = "PH_TYPE";
+	}
 }

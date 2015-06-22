@@ -114,6 +114,21 @@
 							</table>
 						</td>
 					</tr>
+					<tr>
+						<td>Holiday Type</td>
+						<td>
+							<html:select name="personalHolidayForm" property="persHolidayBean.holidayType">
+								<html:option value="">---Choose One---</html:option>
+								<logic:iterate id="id" property="listOfGenCode" name="personalHolidayForm">
+									<html:option value="${id.genCodeId}">
+										<bean:write name="id" property="genCodeId" />
+										-
+										<bean:write name="id" property="genCodeCaption" />
+									</html:option>
+								</logic:iterate>
+							</html:select>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>

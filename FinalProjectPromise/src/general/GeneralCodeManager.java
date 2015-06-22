@@ -86,5 +86,9 @@ public class GeneralCodeManager {
 			this.ibatis.endTransaction();
 		}
 	}
-
+	
+	public List<GeneralCodeBean> getGeneralCodeByParentId(String parentId) throws SQLException {
+		List<GeneralCodeBean> arrList = this.ibatis.queryForList("genCode.selectGeneralCodeByParentId", parentId);
+		return arrList;
+	}
 }

@@ -1,5 +1,7 @@
 package holiday;
 
+import general.GeneralCodeBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class PersonalHolidayForm extends ActionForm{
 	private Integer 					currPage = 1;
 	private Integer 					pageCount = 1;
 	private Integer						selectedId;
+	private List<GeneralCodeBean>		listOfGenCode = new ArrayList<GeneralCodeBean>();
 	
 	public List<PersonalHolidayBean> getArrList() {
 		return arrList;
@@ -88,5 +91,11 @@ public class PersonalHolidayForm extends ActionForm{
 	}
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
+	}
+	public List<GeneralCodeBean> getListOfGenCode() {
+		return listOfGenCode;
+	}
+	public void setListOfGenCode(List<GeneralCodeBean> listOfGenCode) {
+		this.listOfGenCode = listOfGenCode;
 	}
 }

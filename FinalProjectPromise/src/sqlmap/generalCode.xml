@@ -92,5 +92,16 @@
 		IS_ACTIVE			=	0
 		where gen_code_id	=	#genCodeId#
 	</delete>
-
+	
+	<select id="selectGeneralCodeByParentId" resultClass="general.GeneralCodeBean"
+		parameterClass="java.lang.String">
+		SELECT 
+        gen_code_id			AS genCodeId,
+        Gen_code_caption	AS genCodeCaption,
+        IS_ACTIVE           AS isActive,
+        GEN_CODE_INDEX      AS genCodeIndex
+        FROM GENERAL_CODE
+        where IS_ACTIVE = 1
+        AND PARENT_ID=#parentId#
+	</select>
 </sqlMap>

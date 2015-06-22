@@ -86,6 +86,7 @@
 							<td class="align-center">Personal Holiday Name</td>
 							<td class="align-center">Personal Holiday Date</td>
 							<td class="align-center">Employee Name</td>
+							<td class="align-center">Holiday Type</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -96,6 +97,7 @@
 									<td><bean:write name="reg" property="holidayDesc" /></td>
 									<td><bean:write name="reg" property="holidayDateDisplay" /></td>
 									<td><bean:write name="reg" property="employeeName" /></td>
+									<td><bean:write name="reg" property="holidayTypeName" /></td>
 									<td align="center">
 										<a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="holidayId" />');"
