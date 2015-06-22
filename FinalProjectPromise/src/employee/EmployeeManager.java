@@ -157,4 +157,16 @@ public class EmployeeManager {
 
 		return arr;
 	}
+	
+	public List<EmployeeBean> getEmpForAssignTask(int spvId) {
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		try {
+			arr = this.ibatis.queryForList("employee.getEmployeeForAssignTask", spvId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
+
 }
