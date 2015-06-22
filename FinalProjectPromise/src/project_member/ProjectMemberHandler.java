@@ -41,13 +41,14 @@ public class ProjectMemberHandler extends Action {
 		pMemberForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 		System.out.println("pageCount end");
+		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(
 				pMemberForm.getCurrSearchField(), pMemberForm.getCurrSearchValue(),
 				pMemberForm.getCurrPage(), Constant.pageSize));
 		System.out.println("isi list selesai");
 		
 		
-		request.setAttribute("pageTitle", "Project List");
+		request.setAttribute("pageTitle", "Project Member Entry");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pMemberForm.getPageCount(),pMemberForm.getCurrPage()));
@@ -56,6 +57,6 @@ public class ProjectMemberHandler extends Action {
 		request.setAttribute("currPage", pMemberForm.getCurrPage());
 		request.setAttribute("rowCount", rowCount);
 		
-		return mapping.findForward("");
+		return mapping.findForward("projectMemberListEntry");
 	}
 }
