@@ -14,8 +14,6 @@ import org.apache.struts.action.ActionMapping;
 import common.Constant;
 import user.UserRoleBean;
 import user.UserRoleManager;
-import employee.EmployeeBean;
-import employee.EmployeeManager;
 
 public class SearchUserRolePopUpHandler extends Action {
 	

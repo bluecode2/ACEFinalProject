@@ -82,10 +82,10 @@
 					<thead class="panel panel-info">
 						<tr>
 							
-							<td>Employee Name</td>
-							<td>Username</td>
-							<td>User Role Name</td>
-							<td class="align-center"></td>
+							<td class="align-center">Employee Name</td>
+							<td class="align-center">Username</td>
+							<td class="align-center">User Role Name</td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>

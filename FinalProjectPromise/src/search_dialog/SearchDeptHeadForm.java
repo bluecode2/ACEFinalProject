@@ -4,6 +4,10 @@ import org.apache.struts.action.ActionForm;
 
 public class SearchDeptHeadForm extends ActionForm {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer deptId;
 	private String searchField;
 	private String searchValue;

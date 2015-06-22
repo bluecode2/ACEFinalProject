@@ -3,6 +3,10 @@ package search_dialog;
 import org.apache.struts.action.ActionForm;
 
 public class SearchRankForm extends ActionForm{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String 	searchField;
 	private String 	searchValue;
 	private int		rankId;
