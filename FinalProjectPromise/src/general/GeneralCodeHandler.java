@@ -25,7 +25,6 @@ public class GeneralCodeHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
 	
 		/*if ("add".equals(gcForm.getTask())) {
 			request.setAttribute("pageTitle", "Add General Code");
@@ -34,6 +33,8 @@ public class GeneralCodeHandler extends Action {
 		} */
 
 		if ("edit".equals(gcForm.getTask())) {
+			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
+					us, request);
 			/*request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
 			request.setAttribute("pageTitle", "General Code Edit");
@@ -61,6 +62,10 @@ public class GeneralCodeHandler extends Action {
 			gcForm.getGenCodeBean().setUpdatedBy(us.getUserId());
 			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
 		}
+		
+		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
+				us, request);
+		CommonFunction.createAllowedMenu(us, request);
 		
 		gcForm.setTask("");
 		gcForm.setSearchField(gcForm.getCurrSearchField());
