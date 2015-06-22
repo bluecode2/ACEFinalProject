@@ -34,9 +34,11 @@ public class Constant {
 		public static final String GENERAL_HOLIDAY = "MS010501";
 		public static final String GENERAL_HOLIDAY_ENTRY = "MS010501-E";
 		public static final String PERSONAL_HOLIDAY = "MS010502";
+		public static final String PERSONAL_HOLIDAY_ENTRY = "MS010502-E";
 		
 		public static final String USER_MANAGEMENT = "MS02";
 		public static final String USER = "MS0201";
+		public static final String USER_ENTRY = "MS0201-E";
 		public static final String USER_ROLE = "MS0202";
 		public static final String USER_ROLE_ENTRY = "MS0202-E";
 		

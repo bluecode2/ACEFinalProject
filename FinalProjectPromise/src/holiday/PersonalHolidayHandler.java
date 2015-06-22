@@ -26,7 +26,7 @@ public class PersonalHolidayHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 
 		
 		if("add".equals(persForm.getTask())){
@@ -34,6 +34,9 @@ public class PersonalHolidayHandler extends Action{
 			request.setAttribute("pageTitle", "Personal Holiday Entry");
 			
 			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
+					us, request);
 			
 			return mapping.findForward("personalHolidayEntry");
 		}
@@ -82,6 +85,9 @@ public class PersonalHolidayHandler extends Action{
 		rowCount = persManager.getCountPersonalHoliday(persForm.getCurrSearchField(), persForm.getCurrSearchValue());
 		
 		persForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		
+		CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY, us,
+				request);
 		
 		request.setAttribute("pageTitle", "Personal Holiday List");
 		

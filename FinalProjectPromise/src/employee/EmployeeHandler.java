@@ -29,8 +29,7 @@ public class EmployeeHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 		
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);
@@ -39,6 +38,9 @@ public class EmployeeHandler extends Action{
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0,"",""));
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY,
+					us, request);
 			
 			return mapping.findForward("entry");
 		}
@@ -90,6 +92,9 @@ public class EmployeeHandler extends Action{
 		eForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 
+		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE,
+				us, request);
+		
 		request.setAttribute("pageTitle", "Employee List");
 
 		request.setAttribute("pageNavigator", CommonFunction
