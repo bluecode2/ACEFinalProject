@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Project List</title>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 	function onBtnAddClick(){
 		document.forms[0].task.value = "add";
@@ -24,31 +25,77 @@
 		changePage(1);
 	}
 	
-	function onLoadForm(){
+	function getStyleClass(){
+		$('.firstBtn').each(function() {
+			var projStat = $(this).closest('tr').find('.hdnProjStatus').val();
+			var projProg = $(this).closest('tr').find('.hdnProjProg').val();
+			if (projStat == 'PR_STAT_01') {
+				$(this).addClass('glyphicon glyphicon-play');
+				$(this).attr("title","Start");
+				$(this).val("start");
+			} else if (projStat == 'PR_STAT_02' && projProg == '100.0') {
+				$(this).addClass('glyphicon glyphicon-ok-circle');
+				$(this).attr("title","Submit");
+				$(this).val("submit");
+			} else if (projStat == 'PR_STAT_02') {
+				$(this).addClass('glyphicon glyphicon-pause');
+				$(this).attr("title","Pause");
+				$(this).val("pause");
+			} else if (projStat == 'PR_STAT_05') {
+				$(this).addClass('glyphicon glyphicon-chevron-right');
+				$(this).attr("title","Resume");
+				$(this).val("resume");
+			} else
+				$(this).hide();
+		});
+		$('.thirdBtn').each(function() {
+			var projStat = $(this).closest('tr').find('.hdnProjStatus').val();
+			var projProg = $(this).closest('tr').find('.hdnProjProg').val();
+			if (projStat == 'PR_STAT_02' && projProg != '100.0') {
+				$(this).addClass('glyphicon glyphicon-remove-circle');
+				$(this).attr("title","Force Close");
+				$(this).val("forceClose");
+			} else if (projStat == 'PR_STAT_01') {
+				$(this).addClass('glyphicon glyphicon-remove');
+				$(this).attr("title","Cancel");
+				$(this).val("cancel");
+			} else
+				$(this).hide();
+		});
+		$('.secondBtn').each(function() {
+			var projStat = $(this).closest('tr').find('.hdnProjStatus').val();
+			var projProg = $(this).closest('tr').find('.hdnProjProg').val();
+			if (projStat == 'PR_STAT_01') {
+				$(this).addClass('glyphicon glyphicon-pencil');
+				$(this).attr("title","Edit");
+				$(this).val("edit");
+			} else
+				$(this).hide();
+		});
 		
 	}
 
 	$(document).ready(
 			function() {
-				onLoadForm();
+				getStyleClass()
 			});
 	
 	function actionForm(task, id, nama) {
-
+		
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
 
 		if (task == "cancel") {
-			if (confirm("Are you sure want to cancel Project " + nama)) {
+			if (confirm("Are you sure want to cancel Project " + nama +" ?")) {
 				document.forms[0].submit();
 			}
 		} 
 		else if (task == "start"){
-			if (confirm("Start Project " + nama)) {
+			if (confirm("Start Project " + nama + " ?")) {
 				document.forms[0].submit();
 			}
 		}
-		else {
+		else if (task == "edit") {
 			document.forms[0].submit();
 		}
 	}
@@ -115,7 +162,8 @@
 						<logic:notEmpty name="projectForm" property="listOfProject">
 							<logic:iterate id="proj" name="projectForm" property="listOfProject">
 								<tr>
-									
+								<html:hidden property="projectStatus" name="proj" styleClass="hdnProjStatus"/>
+								<html:hidden property="projectProgress" name="proj" styleClass="hdnProjProg"/>
 									<td><bean:write name="proj" property="projectCode" /></td>
 									<td><bean:write name="proj" property="projectName" /></td>
 									<td><bean:write name="proj" property="estStartDateInString" /> to 
@@ -124,20 +172,21 @@
 										<bean:write name="proj" property="actEndDateInString" /></td>
 									<td><bean:write name="proj" property="employeeName" /></td>
 									<td><bean:write name="proj" property="deptName" /></td>
-									<td><bean:write name="proj" property="projectStatus" /> : 
-										<bean:write name="proj" property="projectProgress" /></td>
+									<td><bean:write name="proj" property="statusCaption" /> : 
+										<bean:write name="proj" property="projectProgress" />%</td>
 									<td>Member</td>
 									<td>Task</td>
 									<td align="center">
+									
 									<a href="#"	onclick="actionForm('start','<bean:write name="proj" property="projectId" />');"
-										title="Start"><span class="glyphicon glyphicon-play"
-											aria-hidden="true" id="start"></span></a> &nbsp; 
+										><span class="firstBtn"
+											aria-hidden="true" ></span></a> &nbsp; 
 									<a href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
-										title="Edit"><span class="glyphicon glyphicon-pencil"
+										title="Edit"><span class="secondBtn"
 											aria-hidden="true"></span></a> &nbsp; 
 									<a href="#" onclick="actionForm('cancel','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />');"
-										title="Cancel"><span class="glyphicon glyphicon-remove"
-											aria-hidden="true" id="cancel"></span></a>
+										><span class="thirdBtn"
+											aria-hidden="true"></span></a>
 									</td>
 								</tr>
 							</logic:iterate>

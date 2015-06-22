@@ -41,6 +41,7 @@ public class SearchEmpHandler extends Action{
 			out.println("<td style=\"display: none\">" + empBean.getEmployeeId() + "</td>");
 			out.println("<td>" + empBean.getEmployeeCode() + "</td>");
 			out.println("<td>" + empBean.getEmployeeName() + "</td>");
+			out.println("<td>" + empBean.getDeptName() + "</td>");
 			out.println("</tr>");
 		}	
 

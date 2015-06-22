@@ -10,7 +10,6 @@
 		    	UPDATED_BY AS updatedBy,
 		    	DEPT_ID AS dept_id,
 		    	EMPLOYEE_ID AS employeeId,
-		    	GEN_CODE_ID AS genCodeId,
 		    	CREATED_BY AS createdBy,
 		    	PROJECT_CODE AS projectCode,
 		    	PROJECT_NAME AS projectName,
@@ -69,7 +68,6 @@
 		    	UPDATED_BY AS updatedBy,
 		    	DEPT_ID AS dept_id,
 		    	EMPLOYEE_ID AS employeeId,
-		    	GEN_CODE_ID AS genCodeId,
 		    	CREATED_BY AS createdBy,
 		    	PROJECT_CODE AS projectCode,
 		    	PROJECT_NAME AS projectName,
@@ -95,4 +93,48 @@
 	<select id="getNewProjectId" resultClass="java.lang.Integer">
 		SELECT MAX(PROJECT_ID)+1 FROM VPROJECT
 	</select>
+	
+	<insert id="insertProject" parameterClass="project.ProjectBean">
+		insert into project 
+		(project_id, updated_by, 
+		dept_id, employee_id, 
+		created_by,project_code, 
+		project_name, project_desc, 
+		est_start_date, est_end_date, 
+		act_start_date, act_end_date, 
+		est_main_days, act_main_days, 
+		project_status, project_progress, 
+		remarks, create_date,
+		update_date) values
+		(#projectId#,'',
+		#dept_id#,#employeeId#,
+		#createdBy#,#projectCode#,
+		#projectName#,#projectDesc#,
+		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),
+		'','',
+		#estMainDays#,'',
+		'PR_STAT_01',#projectProgress#,
+		'',SYSDATE,
+		'');
+	</insert>
+	
+	<update id="updateProject" parameterClass="project.ProjectBean">
+		update project set
+			PROJECT_NAME = #projectName#,
+			PROJECT_DESC = #projectDesc#,
+			EMPLOYEE_ID = #employeeId#,
+			DEPT_ID = #dept_id#,
+			EST_START_DATE = TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+			EST_END_DATE = TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),
+			REMARKS = #remarks#,
+			UPDATED_BY = #updatedBy#,
+			UPDATE_DATE = SYSDATE,
+			est_main_days = #estMainDays#,
+			project_status = #projectStatus#,
+			act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
+			act_end_date = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
+			act_main_days = #actMainDays#
+			WHERE PROJECT_ID = 	#projectId#		
+	</update>
+	
 </sqlMap>
