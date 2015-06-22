@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeBean;
 import employee.EmployeeForm;
 import employee.EmployeeManager;
 
@@ -34,18 +35,20 @@ public class ProjectHandler extends Action{
 		
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
+		EmployeeBean eBean = new EmployeeBean();
 		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		
+		eBean = eMan.getEmployeeByEmpId(us.getEmployeeId());
 		
 		if ("add".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("add");
 			pForm.setSelectedId(0);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-					eForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
+					eForm.getCurrSearchField(), eForm.getCurrSearchValue()));
 			request.setAttribute("pageTitle", "Project Entry");
 			request.setAttribute("show", false);
 			return mapping.findForward("projectEntry");
@@ -53,9 +56,8 @@ public class ProjectHandler extends Action{
 		else if ("edit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("edit");
 			request.setAttribute("pageTitle", "Project Edit");
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-					eForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
+					eForm.getCurrSearchField(), eForm.getCurrSearchValue()));
 			request.setAttribute("show", true);
 			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,

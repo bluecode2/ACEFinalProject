@@ -37,9 +37,9 @@
 				'click',
 				function() {
 					var valueEmp = $(this).find('td').eq(0).html().trim();
-					var valueDept = $(this).find('td').eq(1).html().trim();
-					var text =  $(this).find('td').eq(3).html().trim();
-					var text2 = $(this).find('td').eq(4).html().trim();
+					var valueDept = $(this).find('td').eq(4).html().trim();
+					var text =  $(this).find('td').eq(2).html().trim();
+					var text2 = $(this).find('td').eq(3).html().trim();
 					$('#txtEmployeeId').val(valueEmp);
 					$('#txtDeptId').val(valueDept);
 					$('#empIdDisplay').val(text);
@@ -47,6 +47,25 @@
 				});
 	}
 	
+function search() {
+			var searchField = $('#selSearchFieldEmpId').val();
+			var searchValue = $('#txtSearchValueEmpId').val();
+	
+			$.ajax({
+				type : "POST",
+				url : "searchEmp.do",
+				data : "&searchField=" + searchField
+						+ "&searchValue=" + searchValue,
+				success : function(response) {
+					$("#tblSearchEmp").find("tr:gt(0)").remove();
+					$("#tblSearchEmp").append(response);
+					registerSearchEmployee();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+			});
+	}
 </script>                 
 </head>
 <body>
@@ -205,14 +224,14 @@
 									<tr data-dismiss="modal" class="rowSearchEmployee">
 										<td style="display: none">
 										<bean:write name="emp" property="employeeId" /></td>
-										<td style="display: none">
-										<bean:write name="emp" property="deptId" /></td>
 										<td width="150px">
 										<bean:write name="emp" property="employeeCode" /></td>
 										<td width="150px">
 										<bean:write name="emp" property="employeeName" /></td>
 										<td width="150px">
 										<bean:write name="emp" property="deptName" /></td>
+										<td style="display: none">
+										<bean:write name="emp" property="deptId" /></td>
 									</tr>
 								</logic:iterate>
 							</logic:notEmpty>

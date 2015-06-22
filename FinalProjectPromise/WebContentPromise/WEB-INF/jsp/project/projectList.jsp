@@ -120,6 +120,11 @@
 		}
 	}
 	
+	function getProjDesc(projDesc){
+		$('#txtProjectDesc').html(projDesc);
+		$('#projDesc').modal();
+	}
+	
 </script>
 </head>
 <body>
@@ -185,7 +190,9 @@
 								<html:hidden property="projectStatus" name="proj" styleClass="hdnProjStatus"/>
 								<html:hidden property="projectProgress" name="proj" styleClass="hdnProjProg"/>
 									<td><bean:write name="proj" property="projectCode" /></td>
-									<td><bean:write name="proj" property="projectName" /></td>
+									<td><a href="#" class="text-info"
+										   onclick="getProjDesc('<bean:write name="proj" property="projectDesc" />');"	data-target="#projDesc">
+											<bean:write name="proj" property="projectName" /></a></td>
 									<td><bean:write name="proj" property="estStartDateInString" /> to 
 										<bean:write name="proj" property="estEndDateInString" /></td>
 									<td><bean:write name="proj" property="actStartDateInString" /> to 
@@ -223,6 +230,32 @@
 			</div>
 
 		</div>
+		
+		
+		<div class="modal fade" id="projDesc" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Project Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtProjectDesc"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
+		
+		
 		<html:hidden name="projectForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
