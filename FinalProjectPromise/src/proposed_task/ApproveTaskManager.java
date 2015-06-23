@@ -35,7 +35,7 @@ public class ApproveTaskManager {
 		return arr;
 	}
 	
-	public void declineTask(ProposedTaskBean task) {
+	public void declineTask(ProposedTaskBean task) throws SQLException {
 		Map map = new HashMap();
 		map.put("userId", task.getUpdatedBy());
 		map.put("selectedId", task.getPropTaskId());
@@ -45,12 +45,12 @@ public class ApproveTaskManager {
 			ibatis.update("approveTask.declineTask", map);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			this.ibatis.endTransaction();
 		}
 	}
 	
-	public void approveTask(ProposedTaskBean task) {
+	public void approveTask(ProposedTaskBean task) throws SQLException {
 		Map map = new HashMap();
 		map.put("userId", task.getUpdatedBy());
 		map.put("selectedId", task.getPropTaskId());
@@ -60,8 +60,8 @@ public class ApproveTaskManager {
 			ibatis.update("approveTask.approveTask", map);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			this.ibatis.endTransaction();
 		}
 	}
 	

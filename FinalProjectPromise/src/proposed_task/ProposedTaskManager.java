@@ -22,7 +22,6 @@ public class ProposedTaskManager {
 			String input, Integer pageNum, Integer pageSize, int userId) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		System.out.println(col + "-" + input + "-"+ begin + "-"+ end);
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -33,8 +32,6 @@ public class ProposedTaskManager {
 
 	
 		List<ProposedTaskBean> 	arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
-
-		System.out.println(arr);
 		return arr;
 	}
 	
