@@ -1,5 +1,6 @@
 package proposed_task;
 
+import holiday.GeneralHolidayBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
@@ -67,7 +68,6 @@ public class ProposedTaskManager {
 	}
 	
 	public Integer newPropTaskId() throws SQLException {
-		
 		Integer propTaskId = (Integer) ibatis.queryForObject("proposedTask.newPropTaskId", null);
 		return propTaskId;
 	}
@@ -110,30 +110,16 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public void insertProposedTask(ProposedTaskBean bean) {
-		
-		Map m = new HashMap();
-		m.put("propTaskId", bean.getPropTaskId());
-		m.put("propTaskName", bean.getPropTaskName());
-		m.put("propTaskDesc", bean.getPropTaskDesc());
-		m.put("estStartDateInString", bean.getEstStartDateInString());
-		m.put("estEndDateInString", bean.getEstEndDateInString());
-		m.put("propBy", bean.getPropBy());
-		m.put("propTo", bean.getPropTo());
-		m.put("createdBy", bean.getCreatedBy());
-		m.put("updatedBy", bean.getUpdatedBy());
-		m.put("createDateInString", bean.getCreateDateInString());
-		m.put("updatedDateInString", bean.getUpdateDateInString());	
-		m.put("userId", bean.getUpdatedBy());
-		
+	public void insertProposedTask(ProposedTaskBean bean)
+			throws SQLException {
 		try {
-			ibatis.startTransaction();
-			bean.setPropTaskId(newPropTaskId());
-			ibatis.insert("proposedTask.insertProposedTask", m);
-			ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.ibatis.startTransaction();
+			int newId = newPropTaskId();
+			bean.setPropTaskId(newId);
+			this.ibatis.insert("proposedTask.insertProposedTask", bean);
+			this.ibatis.commitTransaction();
+		} finally {
+			this.ibatis.endTransaction();
 		}
 	}
 

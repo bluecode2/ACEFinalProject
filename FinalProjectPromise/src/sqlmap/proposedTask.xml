@@ -3,7 +3,7 @@
 
 <sqlMap namespace="proposedTask">
 
-	<select id="newPropTaskId">
+	<select id="newPropTaskId" resultClass="java.lang.Integer" >
 		select MAX(PROPOSED_TASK_ID)+1 FROM VPROPOSED_TASK
 	</select>
 	
@@ -90,14 +90,31 @@
 		</dynamic>
 	</select>
 	
-	<insert id="insertProposedTask" parameterClass="java.util.Map">
+	<insert id="insertProposedTask" parameterClass="proposed_task.ProposedTaskBean">
 		insert into
-		PROPOSED_TASK (proposed_task_id, proposed_task_name, proposed_task_desc,
-		est_start_date, est_end_date, proposed_by, proposed_to, created_by, updated_by, create_date, update_date, proposal_status)
-		values
-		(#propTaskId#,#propTaskName#,#propTaskDesc#,to_date(#estStartDateInString#,'yyyy-MM-dd'),to_date(#estEndDateInString#,'yyyy-MM-dd'),
-			#userId#, (select supervisor_id from employee where employee_id = #userId# )
-			,#userId#,NULL,'PROPOSED')
+		PROPOSED_TASK (
+		proposed_task_id, 
+		proposed_task_name, 
+		proposed_task_desc,
+		est_start_date, 
+		est_end_date, 
+		proposed_by, 
+		proposed_to, 
+		created_by, 
+		create_date, 
+		proposal_status)
+		
+		values (
+		#propTaskId#,
+		#propTaskName#,
+		#propTaskDesc#,
+		to_date(#estStartDateInString#,'yyyy-MM-dd'),
+		to_date(#estEndDateInString#,'yyyy-MM-dd'),
+		#propBy#, 
+		(select supervisor_id from employee where employee_id = #propBy# ), 
+		#createdBy#,
+		SYSDATE,
+		'TA_STAT_01' )
 	</insert>
 	
 
