@@ -16,10 +16,9 @@
 		    	PROJECT_ROLE_NAME AS projRoleName,
 		    	PROJECT_ROLE_CODE AS projRoleCode,
 		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
-		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
-		    	IS_DELETED AS isDeleted
+		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
 		    	FROM VPROJECTMEMBER
-				where IS_DELETED = 0 AND PROJECT_ID = #projId#
+				where PROJECT_ID = #projId#
       	 		order by MEMBER_ID) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
@@ -28,7 +27,7 @@
 	<select id="countProjectMember" resultClass="java.lang.Integer"
 		parameterClass="java.lang.Integer">
 		SELECT COUNT(1) FROM vprojectMember
-		where IS_DELETED = 0 AND PROJECT_ID = #projId#
+		where PROJECT_ID = #projId#
 	</select>
 	
 	<insert id="insertProjectMember" parameterClass="java.util.Map">
