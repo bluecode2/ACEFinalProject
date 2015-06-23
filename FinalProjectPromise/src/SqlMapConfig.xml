@@ -45,7 +45,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<sqlMap resource="sqlmap/proposedTask.xml" />
 	<sqlMap resource="sqlmap/approveTask.xml" />
 	<sqlMap resource="sqlmap/project.xml" />
-	<sqlMap resource="sqlmap/task.xml" />
+	<sqlMap resource="sqlmap/independentTask.xml" />
 	<sqlMap resource="sqlmap/projectRole.xml" />
 	<sqlMap resource="sqlmap/projectMember.xml" />
 </sqlMapConfig>

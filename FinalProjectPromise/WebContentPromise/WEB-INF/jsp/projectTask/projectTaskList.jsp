@@ -12,17 +12,15 @@
 <script src="js/jquery.js"></script>
 
 <script type="text/javascript">
-	function onBtnBackClick(){
+	function onBtnBackClick() {
 		window.location.href = "project.do";
 	}
-	
+
 	function onBtnAddClick() {
 		document.forms[0].task.value = "add";
 		document.forms[0].submit();
 	}
 
-	
-	
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
@@ -145,32 +143,69 @@
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 
 		<div class="container">
-			<div class="divContent">
-
-				<table width="50%">
-					<colgroup>
-						<col width="30%" />
-						<col />
-					</colgroup>
+			<div class="form-group has-info" style="margin-top:40px">
+				<table width="100%">
 					<tr>
-						<td>Project Code</td>
-						<td><bean:write name="projectTaskForm" property="prjBean.projectCode"/>
-					</tr>
-					<tr>
-						<td>Project Name</td>
-						<td><bean:write name="projectTaskForm" property="prjBean.projectName"/>
-					</tr>
-					<tr>
-						<td>Project Manager</td>
-						<td><bean:write name="projectTaskForm" property="prjBean.employeeName"/>
-					</tr>
-					<tr>
-						<td>Estimated Date</td>
-						<td><bean:write name="projectTaskForm" property="prjBean.employeeName"/>
+						<td width="45%">
+							<table width="100%">
+								<colgroup>
+									<col width="40%" />
+									<col />
+								</colgroup>
+								<tr>
+									<td>Project Code</td>
+									<td><html:text name="projectTaskForm"
+											property="prjBean.projectCode" styleClass="form-control"
+											disabled="true"></html:text></td>
+								</tr>
+								<tr>
+									<td>Project Name</td>
+									<td><html:text name="projectTaskForm"
+											property="prjBean.projectName" styleClass="form-control"
+											disabled="true"></html:text></td>
+								</tr>
+								
+							</table>
+						</td>
+						<td>&nbsp;</td>
+						<td width="45%">
+							<table width="100%">
+								<colgroup>
+									<col width="40%" />
+									<col />
+								</colgroup>
+								<tr>
+									<td>Project Manager</td>
+									<td><html:text name="projectTaskForm"
+											property="prjBean.employeeName" styleClass="form-control"
+											disabled="true"></html:text></td>
+								</tr>
+								<tr>
+									<td>Estimated Date</td>
+									<td>
+										<table width="100%">
+											<colgroup>
+												<col width="40%" />
+												<col />
+												<col width="40%" />
+											</colgroup>
+											<tr>
+												<td><html:text name="projectTaskForm"
+														property="prjBean.estStartDateInString"
+														styleClass="form-control" disabled="true"></html:text></td>
+												<td align="center">to</td>
+												<td><html:text name="projectTaskForm"
+														property="prjBean.estEndDateInString"
+														styleClass="form-control" disabled="true"></html:text></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 				</table>
 			</div>
-			
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
