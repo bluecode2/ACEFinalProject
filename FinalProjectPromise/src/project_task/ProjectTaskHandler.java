@@ -12,11 +12,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project.ProjectManager;
 import user.UserBean;
-
 import common.CommonFunction;
 import common.Constant;
-
 import employee.EmployeeManager;
 
 public class ProjectTaskHandler extends Action {
@@ -32,6 +31,13 @@ public class ProjectTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
+		ProjectManager projManager = new ProjectManager();
+		
+		if(tsForm.getPrjBean() == null){
+			Integer projectId = (Integer)session.getAttribute("projectId");
+			tsForm.setPrjBean(projManager.getProjectByID(projectId));
+		}
+		
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
 		if ("add".equals(tsForm.getTask())) {

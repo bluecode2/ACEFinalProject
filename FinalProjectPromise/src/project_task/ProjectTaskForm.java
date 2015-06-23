@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import project.ProjectBean;
+
 public class ProjectTaskForm extends ActionForm
 {
 	private String 			task = "";
@@ -18,6 +20,7 @@ public class ProjectTaskForm extends ActionForm
 	private String			currSearchField;
 	private String			currSearchValue;
 	private Integer			selectedId;
+	private ProjectBean prjBean = null;
 	private IndependentTaskBean		tkBean = new IndependentTaskBean();
 	private List<IndependentTaskBean>	arrList = new ArrayList<IndependentTaskBean>();
 	private Boolean 		isAdd = false;
@@ -115,6 +118,12 @@ public class ProjectTaskForm extends ActionForm
 	}
 	public void setTkBean(IndependentTaskBean tkBean) {
 		this.tkBean = tkBean;
+	}
+	public ProjectBean getPrjBean() {
+		return prjBean;
+	}
+	public void setPrjBean(ProjectBean prjBean) {
+		this.prjBean = prjBean;
 	}
 	
 }

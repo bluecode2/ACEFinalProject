@@ -145,6 +145,32 @@
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 
 		<div class="container">
+			<div class="divContent">
+
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
+					<tr>
+						<td>Project Code</td>
+						<td><bean:write name="projectTaskForm" property="prjBean.projectCode"/>
+					</tr>
+					<tr>
+						<td>Project Name</td>
+						<td><bean:write name="projectTaskForm" property="prjBean.projectName"/>
+					</tr>
+					<tr>
+						<td>Project Manager</td>
+						<td><bean:write name="projectTaskForm" property="prjBean.employeeName"/>
+					</tr>
+					<tr>
+						<td>Estimated Date</td>
+						<td><bean:write name="projectTaskForm" property="prjBean.employeeName"/>
+					</tr>
+				</table>
+			</div>
+			
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
