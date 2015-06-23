@@ -62,6 +62,7 @@ public class EmployeeHandler extends Action{
 		}
 
 		else if (eForm.getTask().equals("delete")) {
+			System.out.println(eForm.getSelectedId());
 			dMan.deleteDepartment(eForm.getSelectedId(),us.getUserId());
 		}
 

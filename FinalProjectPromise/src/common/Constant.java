@@ -53,6 +53,8 @@ public class Constant {
 		
 		public static final String PROJECT = "TR0101";
 		public static final String PROJECT_ENTRY = "TR0101-E";
+		public static final String PROJECT_INVOLVED = "TR0102";
+		public static final String PROJECT_APPROVAL = "TR0103";
 		
 		public static final String PROPOSE_INDEPENDENT_TASK = "TR0201";
 		public static final String PROPOSE_INDEPENDENT_TASK_ENTRY = "TR0201-E";
