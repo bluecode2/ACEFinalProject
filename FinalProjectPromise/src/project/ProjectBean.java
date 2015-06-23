@@ -365,14 +365,6 @@ public class ProjectBean {
 		}
 		this.updateDate = date;
 	}
-
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
-	}
 	
 	
 
