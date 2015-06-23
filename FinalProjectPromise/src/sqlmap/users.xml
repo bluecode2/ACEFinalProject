@@ -121,7 +121,8 @@
 		        TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
 		        employee_name   AS      employeeName,
-		        user_role_name  AS      userRoleName
+		        user_role_name  AS      userRoleName,
+		        dept_id			AS		deptId
 		        from vusers
 		        where is_active = 1 AND USER_ID = #tempUserID#
 	</select>
