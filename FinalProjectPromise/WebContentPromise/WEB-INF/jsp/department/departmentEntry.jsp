@@ -20,10 +20,9 @@
 		document.forms[0].submit();
 	}
 
-	$(document).ready(
-			function() {
-				registerSearchHeadDeptEvent();
-			});
+	$(document).ready(function() {
+		registerSearchHeadDeptEvent();
+	});
 
 	function search() {
 		var deptId = $('#hdnDeptId').val();
@@ -45,8 +44,8 @@
 			}
 		});
 	}
-	
-	function registerSearchHeadDeptEvent(){
+
+	function registerSearchHeadDeptEvent() {
 		$('.rowSearch').on(
 				'click',
 				function() {
@@ -93,24 +92,25 @@
 								styleId="txtDeptName" name="departmentForm"
 								property="selectedDept.deptName"></html:text></td>
 					</tr>
-					<tr>
-						<td class="tdLabel" align="right"><label>Department
-								Head</label></td>
-						<td><html:hidden styleId="hdnDeptHeadId"
-								name="departmentForm" property="selectedDept.deptHeadId" />
-							<table width="100%">
-								<tr>
-									<td><html:text styleClass="form-control"
-											styleId="txtDeptHead" readonly="true" name="departmentForm"
-											property="selectedDept.deptHeadDisplay"></html:text></td>
-									<td align="center"><a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchDeptHead"> <span
-											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
+					<logic:equal value="false" property="isAdd" name="departmentForm">
+						<tr>
+							<td class="tdLabel" align="right"><label>Department
+									Head</label></td>
+							<td><html:hidden styleId="hdnDeptHeadId"
+									name="departmentForm" property="selectedDept.deptHeadId" />
+								<table width="100%">
+									<tr>
+										<td><html:text styleClass="form-control"
+												styleId="txtDeptHead" readonly="true" name="departmentForm"
+												property="selectedDept.deptHeadDisplay"></html:text></td>
+										<td align="center"><a href="#" class="text-info"
+											data-toggle="modal" data-target="#searchDeptHead"> <span
+												class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 
-								</tr>
-							</table>
-						</td>
-					</tr>
+									</tr>
+								</table></td>
+						</tr>
+					</logic:equal>
 				</table>
 			</div>
 

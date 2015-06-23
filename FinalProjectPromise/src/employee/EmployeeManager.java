@@ -106,6 +106,7 @@ public class EmployeeManager {
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			this.ibatis.endTransaction();
 		}
 	}
@@ -122,12 +123,16 @@ public class EmployeeManager {
 		}
 	}
 
-	public void deleteEmployee(Integer EmployeeId)
+	public void deleteEmployee(Integer empId, Integer updatedBy)
 			throws ClassNotFoundException, SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("employee.deleteEmployee", EmployeeId);
-			this.ibatis.commitTransaction();
+			Map map = new HashMap();
+			map.put("employeeId", empId);
+			map.put("updatedBy", updatedBy);
+			
+			ibatis.startTransaction();
+			ibatis.update("employee.deleteEmployee", map);
+			ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			this.ibatis.endTransaction();

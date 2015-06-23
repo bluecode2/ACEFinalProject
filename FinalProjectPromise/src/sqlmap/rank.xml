@@ -108,7 +108,7 @@
 		rank_code as rankCode,
 		IS_DELETED as isDeleted
 		FROM rank_emp
-		where 1=1
+		where IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankCode">
 				LOWER(rank_code) LIKE LOWER( '%' || #searchValue# || '%' )

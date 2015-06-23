@@ -13,7 +13,8 @@ public class EmployeeBean {
 	private Integer 	rankId;
 	private String 		rankCode;
 	private String 		rankName;
-	private Integer 	supervisorId=null;
+	private Integer		rankLevel;
+	private Integer 	supervisorId;
 	private String 		supervisorCode;
 	private String 		supervisorName;
 	private Integer 	createdBy;
@@ -195,6 +196,12 @@ public class EmployeeBean {
 	}
 	public void setSupervisorName(String supervisorName) {
 		this.supervisorName = supervisorName;
+	}
+	public Integer getRankLevel() {
+		return rankLevel;
+	}
+	public void setRankLevel(Integer rankLevel) {
+		this.rankLevel = rankLevel;
 	}
 	
 	
