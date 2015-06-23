@@ -9,6 +9,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project.ProjectBean;
+import project.ProjectForm;
+import project.ProjectManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -29,6 +32,18 @@ public class ProjectMemberHandler extends Action {
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT, us,
 				request);
+		
+		ProjectManager pMan = new ProjectManager();
+		ProjectBean pBean = new ProjectBean();
+		
+		pBean = pMan.getProjectByID(1);
+		
+		request.setAttribute("getProject", pBean);
+		
+		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
+			
+		}
+		
 		
 		pMemberForm.setTask("");
 

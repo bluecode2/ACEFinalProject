@@ -57,7 +57,7 @@ public class ProjectManager {
 		return result;
 	}
 	
-	public ProjectBean getUserByUserID(Integer tempProjectID) throws SQLException, ClassNotFoundException{
+	public ProjectBean getProjectByID(Integer tempProjectID) throws SQLException, ClassNotFoundException{
 		ProjectBean pBean = null;
 		pBean = (ProjectBean) this.ibatis.queryForObject("project.getProjectbyId", tempProjectID);
 		return pBean;

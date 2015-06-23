@@ -15,6 +15,8 @@
 		    	EMPLOYEE_NAME AS empName,
 		    	PROJECT_ROLE_NAME AS projRoleName,
 		    	PROJECT_ROLE_CODE AS projRoleCode,
+		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
 		    	IS_DELETED AS isDeleted
 		    	FROM VPROJECTMEMBER
 				where IS_DELETED = 0

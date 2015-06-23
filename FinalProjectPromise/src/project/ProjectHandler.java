@@ -59,14 +59,14 @@ public class ProjectHandler extends Action{
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
 					eForm.getCurrSearchField(), eForm.getCurrSearchValue()));
 			request.setAttribute("show", true);
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
 			return mapping.findForward("projectEntry");
 		}
 		else if ("start".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("start");
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus("PR_STAT_02");
 			pForm.getpBean().setProjectProgress((float) 0);
 			pForm.getpBean().setActStartDateInString(sdf.format(date));
@@ -76,7 +76,7 @@ public class ProjectHandler extends Action{
 		}
 		else if ("submit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("submit");
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus("PR_STAT_03");
 			
 			pForm.getpBean().setActStartDate(sdf.parse(pForm.getpBean().getActStartDateDateInString()));
@@ -94,7 +94,7 @@ public class ProjectHandler extends Action{
 			pForm.setIsProc("cancel");
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			request.setAttribute("pageTitle", "Project Cancel");
 			request.setAttribute("show", true);
 			return mapping.findForward("projectEntry");
@@ -105,14 +105,14 @@ public class ProjectHandler extends Action{
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
 			pForm.setIsProc("pause");
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			request.setAttribute("pageTitle", "Project Pause");
 			request.setAttribute("show", true);
 			return mapping.findForward("projectEntry");
 		}
 		else if ("resume".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("resume");
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus("PR_STAT_02");
 			pMan.updateProject(pForm.getpBean());
 		}
@@ -120,9 +120,9 @@ public class ProjectHandler extends Action{
 			pForm.setIsProc("forceClose");
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			request.setAttribute("pageTitle", "Project Force Close");
-			pForm.setpBean(pMan.getUserByUserID(pForm.getSelectedId()));
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			request.setAttribute("show", true);
 			
 			return mapping.findForward("projectEntry");

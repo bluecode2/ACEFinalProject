@@ -52,28 +52,53 @@
 					<tr>
 						<td>Project Name
 						</td>
-						<td><bean:write name="projectMemberForm" property="pMemberbean.projName"/>
+						<td style="padding-left: 15px;"><html:text property="projectName" name="getProject" styleClass="form-control" readonly="true"></html:text>
 						</td>
 					</tr>
 					<tr>
 						<td>Manager Name
 						</td>
-						<td><bean:write name="projectMemberForm" property="pMemberbean.empName"/>
+						<td style="padding-left: 15px;"><html:text property="employeeName" name="getProject" styleClass="form-control" readonly="true"></html:text>
 						</td>
 					</tr>
 					<tr>
 						<td>Estimate Date
 						</td>
-						<td>
+						<td style="padding-left: 15px;"><html:text property="estStartDateInString" name="getProject" styleClass="form-control" readonly="true"></html:text>
 						</td>
-						<td>To
+						<td style="padding-left: 15px;">To
 						</td>
-						<td>
+						<td style="padding-left: 15px;"><html:text property="estEndDateInString" name="getProject" styleClass="form-control" readonly="true"></html:text>
 						</td>
 					</tr>
 				</table>
 			</div>
-
+			<div class="divContent">
+				<table border="0" fon
+					cellspacing="0" style="margin-top: 10px;" width="100%"
+					class="tableContent">
+					<tr>
+						<td><hr /></td>
+					</tr>
+				</table>
+				<table class="table table-striped table-bordered table-hover"
+					cellspacing="0" style="margin-top: 10px;" width="100%"
+					class="tableContent">
+					<tr>
+						<td>Employee Name
+						</td>
+						<td style="padding-left: 15px;">
+						<html:text property="pMemberbean.empName" name="projectMemberForm" styleClass="form-control"></html:text>
+						</td>
+					</tr>
+					<tr>
+						<td>Project Role ID
+						</td>
+						<td style="padding-left: 15px;">Employee ID
+						</td>
+					</tr>
+				</table>
+			</div>
 			<div class="divContent">
 				<table class="table table-striped table-bordered table-hover"
 					cellspacing="0" style="margin-top: 10px;" width="100%"

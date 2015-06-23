@@ -1,5 +1,10 @@
 package project_member;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import common.Constant;
+
 public class ProjectMemberBean {
 	private Integer memberId;
 	private Integer projectRoleId;
@@ -11,6 +16,12 @@ public class ProjectMemberBean {
 	private String projRoleName;
 	private String projRoleCode;
 	private Integer isDeleted;
+	private String estStartDateInString;
+	private String estEndDateInString;
+	private Date estStartDate;
+	private Date estEndDate;
+	
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	public Integer getIsDeleted() {
 		return isDeleted;
@@ -71,5 +82,69 @@ public class ProjectMemberBean {
 	}
 	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
+	}
+	
+	public String getEstStartDateInString() {
+		return estStartDateInString;
+	}
+
+	public void setEstStartDateDateInString(String estStartDateInString) {
+		this.estStartDateInString = estStartDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(estStartDateInString);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.estStartDateInString = "";
+			date = null;
+		}
+		this.estStartDate = date;
+	}
+
+	public String getEstEndDateInString() {
+		return estEndDateInString;
+	}
+
+	public void setEstEndDateInString(String estEndDateInString) {
+		this.estEndDateInString = estEndDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(estEndDateInString);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.estEndDateInString = "";
+			date = null;
+		}
+		this.estEndDate = date;
+	}
+	
+	public Date getEstStartDate() {
+		return estStartDate;
+	}
+
+	public void setEstStartDate(Date estStartDate) {
+		this.estStartDate = estStartDate;
+		
+		if (estStartDate != null) {
+			this.estStartDateInString = df.format(estStartDate.getTime());
+		}else{
+			this.estStartDateInString = "";
+		}
+	}
+
+	public Date getEstEndDate() {
+		return estEndDate;
+	}
+
+	public void setEstEndDate(Date estEndDate) {
+		this.estEndDate = estEndDate;
+		
+		if (estEndDate != null) {
+			this.estEndDateInString = df.format(estEndDate.getTime());
+		}else{
+			this.estEndDateInString = "";
+		}
 	}
 }
