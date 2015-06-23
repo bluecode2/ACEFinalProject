@@ -214,7 +214,7 @@
 								name="projectTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="taskName">Task Name</option>
-								<option value="taskDesc">Task Desc</option>
+								<option value="assignToName">Assign To</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="projectTaskForm" property="searchValue"

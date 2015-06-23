@@ -1,8 +1,5 @@
 package project_task;
 
-import independent_task.AssignTaskForm;
-import independent_task.IndependentTaskManager;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +24,7 @@ public class ProjectTaskHandler extends Action {
 		// TODO Auto-generated method stub
 
 		ProjectTaskForm tsForm = (ProjectTaskForm) form;
-		IndependentTaskManager tsMan = new IndependentTaskManager();
+		ProjectTaskManager tsMan = new ProjectTaskManager();
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
@@ -49,12 +46,11 @@ public class ProjectTaskHandler extends Action {
 
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(
-					Constant.MenuCode.ASSIGN_TASK_ENTRY, us, request);
+					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Task Entry");
 			request.setAttribute("listAssignTo",
 					empMan.getEmpForAssignTask(us.getEmployeeId(), "", ""));
-			return mapping.findForward("assignTaskEntry");
+			return mapping.findForward("entry");
 		} else if ("save".equals(tsForm.getTask())) {
 			Boolean isAdd = tsForm.getIsAdd();
 
@@ -63,42 +59,39 @@ public class ProjectTaskHandler extends Action {
 
 			if (isAdd) {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
-				tsMan.createNewAssignTask(tsForm.getTkBean());
+				tsMan.createNewOProjectTask(tsForm.getTkBean());
 			} else {
 
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm
+				tsMan.editProjectTask(tsForm.getTkBean().getTaskId(), tsForm
 						.getTkBean().getTaskName(), tsForm.getTkBean()
 						.getTaskDesc(), tsForm.getTkBean().getUpdatedBy());
 			}
 
-			response.sendRedirect("assignTaskEntry");
-			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
-					us, request);
+			response.sendRedirect("projectTask.do");
 			return null;
 		} else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
 
 			if (tsForm.getSelectedEdit() == 0) {
-				request.setAttribute("pageTitle", "Assign Entry");
 				CommonFunction.initializeHeader(
-						Constant.MenuCode.ASSIGN_TASK_ENTRY, us, request);
-				return mapping.findForward("assignTaskEntry");
+						Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
+				return mapping.findForward("entry");
 			} else if (tsForm.getSelectedEdit() == 2) {
 				tsForm.setStatusTask("TA_STAT_07");
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(),
+				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(), "");
 			}
 		} else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask("TA_STAT_99");
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(),
+				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
 
 			} else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask("TA_STAT_98");
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(),
+				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
 			}
@@ -112,14 +105,14 @@ public class ProjectTaskHandler extends Action {
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 
-		tsForm.setListCount(tsMan.getCountAssignTask(
-				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
+		tsForm.setListCount(tsMan.getCountAssignTaskByProjectId(
+				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),tsForm.getPrjBean().getProjectId()));
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount()
 				/ (double) Constant.pageSize));
 
-		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(),
+		tsForm.setArrList(tsMan.getListProjectTaskByProjectId(tsForm.getCurrSearchField(),
 				tsForm.getCurrSearchValue(), tsForm.getCurrPage(),
-				Constant.pageSize, us.getEmployeeId()));
+				Constant.pageSize, tsForm.getPrjBean().getProjectId()));
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(tsForm.getPageCount(),

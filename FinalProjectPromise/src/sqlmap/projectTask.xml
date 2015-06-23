@@ -1,0 +1,149 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="projectTask">
+	<select id="getNewTaskId" resultClass="java.lang.Integer">
+		select MAX(TASK_ID)+1 FROM
+		TASK
+	</select>
+
+	<select id="getAllProjectTaskByProjectId" resultClass="project_task.ProjectTaskBean"
+		parameterClass="java.util.Map">
+		select * from (
+		select vit.*, ROWNUM rnum from(
+		SELECT
+		TASK_ID AS taskId,
+		PROJECT_ID as projectId,
+		PROJECT_Code as projectCode,
+		PROJECT_name as projectName,
+		ASSIGNED_TO as assignedTo,
+		ASSIGNED_TO_NAME as assignedToName,
+		ASSIGNED_BY as assignedBy,
+		ASSIGNED_BY_NAME as assignedByName,
+		TASK_STATUS as taskStatus,
+		TASK_NAME as taskName,
+		TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as estStartDateInString,
+		TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as estEndDateInString,
+		TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as actStartDateInString,
+		TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as actEndDateInString,
+		EST_MAIN_DAYS as estMainDays,
+		ACT_MAIN_DAYS as actmainDays,
+		TASK_PROGRESS as taskProgress,
+		REMARKS as remarks,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		TASK_DESC as taskDesc,
+		IS_OUTSOURCE as isOutsource,
+		TASK_STATUS_NAME as taskStatusName
+		from vProjecttask
+		WHERE project_id = #project_id#
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskName">
+				LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskDesc">
+				LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="assignToName">
+				LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		order by task_id) vit
+		where ROWNUM &lt;= #end#)
+		where rnum &gt; #begin#
+	</select>
+
+	<select id="getCountProjectTaskByProject" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		select count(1)
+		from vProjectTask
+		WHERE project_id = #projectId#
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskName">
+				LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="taskDesc">
+				LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="assignToName">
+				LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+	</select>
+
+	<insert id="insertToProjectTask" parameterClass="project_task.ProjectTaskBean">
+		insert into task
+		(TASK_ID,PROJECT_ID, TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE
+		,EST_START_DATE,
+		EST_END_DATE,EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status)
+		values( #taskId#, #projectId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# , #isOutsource#,
+		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE,
+		'TA_STAT_02' )
+	</insert>
+
+	<update id="updateProjectTask" parameterClass="java.util.Map">
+		UPDATE TASK
+		SET
+		TASK_NAME =#taskName#,
+		TASK_DESC = #taskDesc#,
+		updated_by = #updatedBy#,
+		update_date = SYSDATE
+		WHERE task_id = #taskId#
+	</update>
+
+	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
+		UPDATE task
+		set
+		act_start_date = SYSDATE,
+		updated_by = #updatedBy#,
+		task_status = #taskStatus#,
+		remarks = #remarks#
+		where task_id =#taskId#
+	</update>
+
+	<select id="getProjectTaskByTaskId" resultClass="project_task.ProjectTaskBean"
+		parameterClass="java.lang.Integer">
+		SELECT
+		TASK_ID AS taskId,
+		PROJECT_ID as projectId,
+		PROJECT_Code as projectCode,
+		PROJECT_name as projectName,
+		ASSIGNED_TO as assignedTo,
+		ASSIGNED_TO_NAME as assignedToName,
+		ASSIGNED_BY as assignedBy,
+		ASSIGNED_BY_NAME as assignedByName,
+		TASK_STATUS as taskStatus,
+		TASK_NAME as taskName,
+		TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as
+		estStartDateInString,
+		TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as
+		estEndDateInString,
+		TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as
+		actStartDateInString,
+		TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as
+		actEndDateInString,
+		EST_MAIN_DAYS as estMainDays,
+		ACT_MAIN_DAYS as
+		actmainDays,
+		TASK_PROGRESS as taskProgress,
+		REMARKS as remarks,
+		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString,
+		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+		TASK_DESC as
+		taskDesc,
+		IS_OUTSOURCE as isOutsource,
+		TASK_STATUS_NAME as
+		taskStatusName
+		from vProjectTask
+		where task_id = #id#
+	</select>
+</sqlMap>

@@ -8,10 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import project_member.ProjectMemberBean;
 import user.UserBean;
 import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+
+import common.Constant;
 
 public class ProjectManager {
 
@@ -145,6 +148,7 @@ public class ProjectManager {
 		map.put("end", end);
 		map.put("employeeId", empId);
 
+
 		try {
 			listProject = this.ibatis.queryForList("project.getProjectInvolved", map);
 		} catch (SQLException e) {
@@ -154,5 +158,40 @@ public class ProjectManager {
 		}
 
 		return listProject;
+	}
+	
+	public List<ProjectBean> getListProjectToEvaluate(String col, String input,
+			Integer pageNum, Integer pageSize, Integer deptId) throws SQLException {
+		
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+		
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("deptId", deptId);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+
+		
+		List<ProjectBean> arr = this.ibatis.queryForList("project.getAllProjectToEvaluate", map); 
+		
+		return arr;
+	}
+	
+	public int getCountProjectToEvaluate(String col, String input, Integer deptId) throws SQLException {
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("deptId", deptId);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+		int tmpCount = (Integer) this.ibatis.queryForObject("project.countProjectToEvaluate", map);
+		return tmpCount;
+	}
+	
+	public List<ProjectMemberBean> getProjectMemberToEvaluate(int projectId) throws SQLException {
+		List<ProjectMemberBean> arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projectId);
+		return arrMember;
 	}
 }
