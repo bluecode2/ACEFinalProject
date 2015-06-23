@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project_member.ProjectMemberManager;
+import project_role.ProjectRoleManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -36,6 +38,9 @@ public class ProjectHandler extends Action{
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		EmployeeBean eBean = new EmployeeBean();
+		
+		ProjectRoleManager pRoleMan = new ProjectRoleManager();
+		ProjectMemberManager pMemberMan = new ProjectMemberManager();
 		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -127,12 +132,18 @@ public class ProjectHandler extends Action{
 			
 			return mapping.findForward("projectEntry");
 		}
+		else if ("toTask".equalsIgnoreCase(pForm.getTask())){
+			session.setAttribute("projectId", pForm.getSelectedId());
+			
+			return mapping.findForward("projectTask.do");
+		}
 		else if ("save".equalsIgnoreCase(pForm.getTask())){
 			String isProc = pForm.getIsProc();
 			System.out.println(isProc);
 			if (isProc.equalsIgnoreCase("add")) {
 				System.out.println("masuk save");
 				pMan.insertProject(pForm.getpBean());
+				pMemberMan.insertProjectMember(pRoleMan.getProjectRoleIdByCode(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
 				System.out.println("berhasil save");
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){

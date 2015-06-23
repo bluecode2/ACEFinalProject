@@ -125,6 +125,12 @@
 		$('#projDesc').modal();
 	}
 	
+	function toTask(projectId){
+		document.forms[0].task.value = 'toTask';
+		document.forms[0].selectedId.value = projectId;
+		document.forms[0].submit(); 
+	}
+	
 </script>
 </head>
 <body>
@@ -202,7 +208,9 @@
 									<td><bean:write name="proj" property="statusCaption" /> : 
 										<bean:write name="proj" property="projectProgress" />%</td>
 									<td>Member</td>
-									<td>Task</td>
+									<td><a href="#" class="text-info"
+										   onclick="toTask('<bean:write name="proj" property="projectId" />');">
+											Task</a></td>
 									<td align="center">
 									
 									<a href="#" onclick="actionForm('firstBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />','<bean:write name="proj" property="projectProgress" />');"

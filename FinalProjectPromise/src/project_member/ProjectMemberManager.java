@@ -20,7 +20,7 @@ public class ProjectMemberManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<ProjectMemberBean> getAllProjectMember(
+	public List<ProjectMemberBean> getAllProjectMember(Integer projId,
 			Integer pageNum, Integer pageSize) throws SQLException{
 		
 		int begin = (pageNum - 1) * pageSize;
@@ -28,6 +28,7 @@ public class ProjectMemberManager {
 		
 		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
 		Map map = new HashMap();
+		map.put("projId", projId);
 		map.put("begin", begin);
 		map.put("end", end);
 		
@@ -48,12 +49,20 @@ public class ProjectMemberManager {
 		return newMemberId;
 	}
 	
-	public void insertProjectMember(ProjectMemberBean pMemberBean) throws SQLException{
+	public void insertProjectMember(Integer pRoleId, Integer empId, Integer projId) throws SQLException{
 		Integer newMemberId = getMemberId();
-		pMemberBean.setMemberId(newMemberId);
+		if (newMemberId == null){
+			newMemberId = 1;
+		}
+		Map map = new HashMap();
+		map.put("newMemberId", newMemberId);
+		map.put("pRoleId", pRoleId);
+		map.put("empId", empId);
+		map.put("projId", projId);
+		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.insert("projectMember.insertProjectMember", pMemberBean);
+			this.ibatis.insert("projectMember.insertProjectMember", map);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception

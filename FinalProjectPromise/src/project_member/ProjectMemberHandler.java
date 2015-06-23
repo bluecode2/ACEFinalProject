@@ -54,7 +54,7 @@ public class ProjectMemberHandler extends Action {
 				/ (double) Constant.pageSize));
 		System.out.println("pageCount end");
 		
-		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(				
+		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(1,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
 		System.out.println("isi list selesai");
 		
