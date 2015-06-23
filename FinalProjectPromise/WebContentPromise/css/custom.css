@@ -185,7 +185,24 @@ thead > tr > td , th {
 
 .dropdown-menu .divider {
   background-color: rgba(229, 229, 229, 0.8);
-  margin: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.dropdown-menu > li > span {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+    cursor: default;
+}
+
+.dropdown-menu-right > li > span,
+.dropdown-menu-right > li > a {
+	text-align: right;
 }
 
 .progress {

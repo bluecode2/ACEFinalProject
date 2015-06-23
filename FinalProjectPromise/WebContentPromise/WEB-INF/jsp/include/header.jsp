@@ -112,8 +112,8 @@
 								<span class="caret">
 							</logic:notEmpty> </span>
 					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a><bean:write name="userName" /> (<bean:write name="userRoleName" />)</a></li>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li><span><bean:write name="userName" /> (<bean:write name="userRoleName" />)</span></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="#" onclick="onChangePasswordClick();">Change Password</a></li>
 							<li><a href="logout.do">Logout</a></li>
