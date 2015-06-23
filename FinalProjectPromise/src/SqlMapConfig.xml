@@ -43,7 +43,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<sqlMap resource="sqlmap/rank.xml" />
 	<sqlMap resource="sqlmap/personalHoliday.xml" />
 	<sqlMap resource="sqlmap/proposedTask.xml" />
-	<sqlMap resource="sqlmap/ApproveTask.xml" />
+	<sqlMap resource="sqlmap/approveTask.xml" />
 	<sqlMap resource="sqlmap/project.xml" />
 	<sqlMap resource="sqlmap/task.xml" />
 	<sqlMap resource="sqlmap/projectRole.xml" />

@@ -32,9 +32,9 @@ public class AssignTaskHandler extends Action {
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Entry");
+			request.setAttribute("pageTitle", "Assign Task Entry");
 			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
-			return mapping.findForward("assignTask");
+			return mapping.findForward("assignTaskEntry");
 		}
 		else if ("save".equals(tsForm.getTask()	)) {
 			Boolean isAdd = tsForm.getIsAdd();
@@ -51,8 +51,8 @@ public class AssignTaskHandler extends Action {
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
 			
-			response.sendRedirect("department.do");
-			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
+			response.sendRedirect("assignTaskEntry");
+			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
 					us, request);
 			return null;
 		}
@@ -62,7 +62,7 @@ public class AssignTaskHandler extends Action {
 			if (tsForm.getSelectedEdit() == 0) {
 				request.setAttribute("pageTitle", "Assign Entry");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
-				return mapping.findForward("assignTask");
+				return mapping.findForward("assignTaskEntry");
 			}
 			else if (tsForm.getSelectedEdit() == 2) {
 				tsForm.setStatusTask("TA_STAT_07");
@@ -103,7 +103,7 @@ public class AssignTaskHandler extends Action {
 		request.setAttribute("currPage", tsForm.getCurrPage());
 		request.setAttribute("rowCount", tsForm.getListCount());
 
-		return mapping.findForward("list");
+		return mapping.findForward("assignTaskList");
 /*		return mapping.findForward("assignTask");*/
 		
 		
