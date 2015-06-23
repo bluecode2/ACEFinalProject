@@ -189,9 +189,4 @@ public class ProjectManager {
 		int tmpCount = (Integer) this.ibatis.queryForObject("project.countProjectToEvaluate", map);
 		return tmpCount;
 	}
-	
-	public List<ProjectMemberBean> getProjectMemberToEvaluate(int projectId) throws SQLException {
-		List<ProjectMemberBean> arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projectId);
-		return arrMember;
-	}
 }
