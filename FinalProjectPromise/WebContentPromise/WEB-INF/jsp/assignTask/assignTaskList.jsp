@@ -133,7 +133,7 @@ function search() {
 								styleId="selSearchField" styleClass="form-control">
 								<html:option value="">-- All --</html:option>
 								<option value="taskName">task Name</option>
-								<option value="taskDesc">task DESC</option>
+								<option value="assignedTo">Assign To</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="assignTaskForm" property="searchValue"
