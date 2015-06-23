@@ -183,6 +183,11 @@ thead > tr > td , th {
 	font-weight: bold;
 }
 
+.dropdown-menu .divider {
+  background-color: rgba(229, 229, 229, 0.8);
+  margin: 8px;
+}
+
 .progress {
 	height: 15px;
 }
