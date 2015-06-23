@@ -1,16 +1,50 @@
 package projectApproval;
 
+import java.util.List;
+
 import org.apache.struts.action.ActionForm;
+
+import project.ProjectBean;
+import project_member.ProjectMemberBean;
 
 public class ProjectApprovalForm extends ActionForm{
 
-	private String 	task;
-	private String 	currSearchField;
-	private String 	currSearchValue;
-	private String 	searchValue;
-	private String 	searchField;
-	private int		currPage;
-	private int		pageCount;
+	private String 				task;
+	private String 				currSearchField;
+	private String 				currSearchValue;
+	private String 				searchValue;
+	private String 				searchField;
+	private int					currPage=1;
+	private int					pageCount=1;
+	private List<ProjectBean> 	arrList;
+	private ProjectBean 		pBean;
+	private List<ProjectMemberBean> arrMember;
+	private int					selectedId=1;
+	
+	public int getSelectedId() {
+		return selectedId;
+	}
+	public void setSelectedId(int selectedId) {
+		this.selectedId = selectedId;
+	}
+	public List<ProjectMemberBean> getArrMember() {
+		return arrMember;
+	}
+	public void setArrMember(List<ProjectMemberBean> arrMember) {
+		this.arrMember = arrMember;
+	}
+	public List<ProjectBean> getArrList() {
+		return arrList;
+	}
+	public void setArrList(List<ProjectBean> arrList) {
+		this.arrList = arrList;
+	}
+	public ProjectBean getpBean() {
+		return pBean;
+	}
+	public void setpBean(ProjectBean pBean) {
+		this.pBean = pBean;
+	}
 	public String getTask() {
 		return task;
 	}

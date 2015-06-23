@@ -23,6 +23,16 @@ $(document).ready(function() {
 		$('#showDesc').modal();
 		
 	});
+	$('.linkMember').on('click',function(){
+		var proDesc = $(this).closest('tr').find('.hdProjectDesc').val();
+		var proName = $(this).closest('tr').find('.hdProjectName').val();
+		var proCode = $(this).closest('tr').find('.hdProjectCode').val();
+		$('#txtProDesc').val(proDesc);
+		$('#txtProName').val(proName);
+		$('#txtProCode').val(proCode);
+		$('#showMember').modal();
+		
+	});
 });
 </script>
 
@@ -39,7 +49,7 @@ $(document).ready(function() {
 		<html:hidden property="currPage" name="projectApprovalForm"/>
 		<html:hidden property="currSearchValue" name="projectApprovalForm"/>
 		<html:hidden property="currSearchField" name="projectApprovalForm"/>
-		
+		<html:hidden property="selectedId" name="projectApprovalForm"/>
 			<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -72,10 +82,8 @@ $(document).ready(function() {
 						<tr>
 							<td>Project Code</td>
 							<td>Project Name</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>	
-							<td>Actual Start Date</td>
-							<td>Actual Start Date</td>
+							<td>Estimate Date</td>
+							<td>Actual Date</td>
 							<td>Project Member</td>
 							<td class="align-center"></td>
 						</tr>
@@ -83,7 +91,7 @@ $(document).ready(function() {
 					<tbody>
 						<logic:notEmpty name="projectApprovalForm" property="arrList">
 							<logic:iterate id="reg" name="projectApprovalForm" property="arrList">
-								<tr>
+								<tr valign="middle">
 									<td>
 										<html:hidden property="projectDesc" name="reg" styleClass="hdProjectDesc"/>
 										<html:hidden property="projectCode" name="reg" styleClass="hdProjectCode"/>
@@ -95,24 +103,15 @@ $(document).ready(function() {
 											<bean:write name="reg" property="projectName" />
 										</a>
 									</td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="actStartDateInString" /></td>
-									<td><bean:write name="reg" property="actEndDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
 									<td>
 										<a href="#" class="text-info linkMember">
-											member
+											Project Member
 										</a>
 									</td>
 									<td align="center">
-										<a class="text-success firstBtn" href="#" id="tes"
-										onclick="changeStatusFirstBtn('<bean:write name="reg" property="projectId" />','<bean:write name="reg" property="taskStatus"/>')">
-											<span aria-hidden="true"></span>
-										</a>
-										&nbsp; 
-										<a href="#" class="text-info secondBtn">
-											<span aria-hidden="true"></span>
-										</a>
+										<html:button property="" value="Evaluate" styleClass="btn btn-xs btn-info"></html:button>
 									</td>
 								</tr>
 							</logic:iterate>
@@ -167,6 +166,49 @@ $(document).ready(function() {
 											<textarea rows="3" cols="3" class="form-control"  id="txtProDesc" disabled="disabled"></textarea>
 										</button></td>
 									</tr>
+								</table>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+			<!-- pop up to show member -->	
+			<div class="modal fade" id="showMember" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Project Member</h4>
+							<br/>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table class="table table-bordered" cellspacing="0"
+					style="margin-top: 10px;" width="100%" class="tableContent">
+									<tr>
+										<th style="padding-left: 15px">Project Member Name</th>
+										<th style="padding-left: 15px">Project Member Role</th>
+										
+									</tr>
+										<logic:notEmpty name="projectApprovalForm" property="arrMember">
+											<logic:iterate id="reg" name="projectApprovalForm" property="arrMember">
+											<tr>
+												<td style="padding-left: 15px">	<bean:write name="reg" property="empName" /></td>
+												<td style="padding-left: 15px">	<bean:write name="reg" property="projRoleName" /></td>
+											</tr>
+											</logic:iterate>
+										</logic:notEmpty>
+
+								
 								</table>
 							</div>
 
