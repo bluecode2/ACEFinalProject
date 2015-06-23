@@ -11,6 +11,7 @@ public class ProposedTaskForm extends ActionForm  {
 	private String task = "";
 	private Integer selectedId = 0;
 	private Boolean isAdd = false;
+	private Boolean allowAdd = false;
 	private List<ProposedTaskBean> arrList = new ArrayList<ProposedTaskBean>();
 	private ProposedTaskBean bean  = new ProposedTaskBean();
 	
@@ -116,6 +117,14 @@ public class ProposedTaskForm extends ActionForm  {
 
 	public void setBean(ProposedTaskBean bean) {
 		this.bean = bean;
+	}
+
+	public Boolean getAllowAdd() {
+		return allowAdd;
+	}
+
+	public void setAllowAdd(Boolean allowAdd) {
+		this.allowAdd = allowAdd;
 	}
 	
 }
