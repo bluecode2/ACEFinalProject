@@ -1,12 +1,12 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="task">
+<sqlMap namespace="independentTask">
 	<select id="getNewTaskId" resultClass="java.lang.Integer">
 		select MAX(TASK_ID)+1 FROM TASK
 	</select>
 	
-	<select id="getAllListAssignTask" resultClass="task.TaskBean" parameterClass="java.util.Map">
+	<select id="getAllListAssignTask" resultClass="independent_task.IndependentTaskBean" parameterClass="java.util.Map">
 		select * from (
 		    select vit.*, ROWNUM rnum from(
 		        SELECT
@@ -39,8 +39,8 @@
 						</isEqual>
 					</dynamic>
 					<dynamic prepend="AND">
-						<isEqual property="searchField" compareValue="taskDesc">
-							LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+						<isEqual property="searchField" compareValue="assignTo">
+							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
 		          order by task_id) vit
@@ -51,31 +51,24 @@
 	<select id="getCountAssignTask" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		select count(1)
 		from vindependenttask
-		WHERE 1=1
+		WHERE assigned_by = #empId#
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="taskName">
 							LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="taskDesc">
-				LOWER(task_desc) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="assignedTo">
+				LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>		          
 	</select>
 	
-	<insert id="insertToAssignTask" parameterClass="task.TaskBean">
-		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
-		EST_END_DATE,EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status) 
-		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
-		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
-	</insert>
-	
-	<insert id="insertToAssignTaskMap" parameterClass="java.util.Map">
+	<insert id="insertToAssignTask" parameterClass="independent_task.IndependentTaskBean">
 		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
 		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status) 
 		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
-		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'TA_STAT_02' )
 	</insert>
 	
 	<update id="updateCommentAssignTask" parameterClass="java.util.Map">
@@ -96,7 +89,7 @@
 		where task_id =#taskId#      
 	</update>
 	
-	<select id="getAssignTaskForEdit" resultClass="task.TaskBean" parameterClass="java.lang.Integer">
+	<select id="getAssignTaskForEdit" resultClass="independent_task.IndependentTaskBean" parameterClass="java.lang.Integer">
 	  	SELECT
 		TASK_ID           AS taskId,
 		PROJECT_ID        as projectId,
@@ -122,4 +115,11 @@
 		from vindependenttask
 		where task_id = #id#
 	</select>
+	
+	<insert id="insertToAssignTaskMap" parameterClass="java.util.Map">
+		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
+		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status) 
+		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
+	</insert>
 </sqlMap>
