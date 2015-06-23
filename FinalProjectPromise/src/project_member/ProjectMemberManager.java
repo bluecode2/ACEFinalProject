@@ -70,4 +70,9 @@ public class ProjectMemberManager {
 		}
 		
 	}
+	
+	public List<ProjectMemberBean> getProjectMemberToEvaluate(int projId) throws SQLException {
+		List<ProjectMemberBean> arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projId);
+		return arrMember;
+	}
 }
