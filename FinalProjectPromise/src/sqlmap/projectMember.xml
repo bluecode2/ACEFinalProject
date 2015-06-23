@@ -30,4 +30,14 @@
 		SELECT COUNT(1) FROM vprojectMember
 		where IS_DELETED = 0
 	</select>
+	
+	<insert id="insertProjectMember" parameterClass="project_member.ProjectMemberBean">
+		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID) 
+		VALUES 
+		(#memberId#,#projectRoleId#,#employeeId#,#projectId#)
+	</insert>
+	
+	<select id="getProjectMemberId" resultClass="java.lang.Integer">
+		SELECT MAX(MEMBER_ID)+1 FROM PROJECT_MEMBER
+	</select>
 </sqlMap>

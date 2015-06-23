@@ -102,4 +102,11 @@
 			</isEqual>
 		</dynamic>	
 	</select>
+	
+	<select id="getProjectRoleIdByCode" resultClass="java.lang.Integer">
+		SELECT 
+		PROJECT_ROLE_ID     as projectRoleId
+		FROM PROJECT_ROLE 
+		WHERE IS_DELETED = 0 AND PROJECT_ROLE_CODE = fGetGeneralParameterValue('ProjectManager')
+	</select>
 </sqlMap>

@@ -42,4 +42,23 @@ public class ProjectMemberManager {
 				"projectMember.countProjectMember", null);
 		return result;
 	}
+	
+	public Integer getMemberId() throws SQLException{
+		Integer newMemberId = (Integer) this.ibatis.queryForObject("", null);
+		return newMemberId;
+	}
+	
+	public void insertProjectMember(ProjectMemberBean pMemberBean) throws SQLException{
+		Integer newMemberId = getMemberId();
+		pMemberBean.setMemberId(newMemberId);
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.insert("projectMember.insertProjectMember", pMemberBean);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.ibatis.endTransaction();
+		}
+		
+	}
 }

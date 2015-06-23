@@ -98,4 +98,9 @@ public class ProjectRoleManager {
 		return maxId;
 	}
 
+	public Integer getProjectRoleIdByCode() throws SQLException {
+		Integer getProjectRoleIdByCode = (Integer) this.ibatis.queryForObject("projectRole.getProjectRoleIdByCode", null);
+		
+		return getProjectRoleIdByCode;
+	}
 }

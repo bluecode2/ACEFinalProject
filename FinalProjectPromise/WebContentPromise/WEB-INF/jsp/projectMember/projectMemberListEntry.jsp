@@ -81,20 +81,24 @@
 						<td><hr /></td>
 					</tr>
 				</table>
-				<table class="table table-striped table-bordered table-hover"
-					cellspacing="0" style="margin-top: 10px;" width="100%"
+				<table cellspacing="0" style="margin-top: 10px;" width="400px"
 					class="tableContent">
 					<tr>
-						<td>Employee Name
+						<td width="40%">Employee Name
 						</td>
-						<td style="padding-left: 15px;">
+						<td style="padding-left: 15px;"  width="50%">
 						<html:text property="pMemberbean.empName" name="projectMemberForm" styleClass="form-control"></html:text>
+						</td>
+						<td width="10%">&nbsp;
 						</td>
 					</tr>
 					<tr>
-						<td>Project Role ID
+						<td width="40%">Project Role Name
 						</td>
-						<td style="padding-left: 15px;">Employee ID
+						<td style="padding-left: 15px;" width="50%">
+						<html:text property="pMemberbean.projRoleName" name="projectMemberForm" styleClass="form-control"></html:text>
+						</td>
+						<td width="10%">&nbsp;
 						</td>
 					</tr>
 				</table>
