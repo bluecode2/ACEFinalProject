@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Assign Task Entry</title>
 <script src="js/jquery.js"></script>
 <script src="js/datepicker/bootstrap-datepicker.js"></script>
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	
 function onBtnBackClick() {
-	location.href = "department.do";
+	location.href = "assignTask.do";
 }
 
 function onBtnSaveClick() {
