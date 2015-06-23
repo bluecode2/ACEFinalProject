@@ -71,6 +71,13 @@
 		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
 	</insert>
 	
+	<insert id="insertToAssignTaskMap" parameterClass="java.util.Map">
+		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
+		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status) 
+		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
+	</insert>
+	
 	<update id="updateCommentAssignTask" parameterClass="java.util.Map">
 		UPDATE TASK SET 
 		TASK_NAME =#taskName#,

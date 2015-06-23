@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import employee.EmployeeBean;
+
 public class ApproveTaskForm extends ActionForm{
 	private static final long serialVersionUID = 1L;
 	private String task = "";
@@ -12,6 +14,8 @@ public class ApproveTaskForm extends ActionForm{
 	private Boolean isAdd = false;
 	private List<ProposedTaskBean> arrList = new ArrayList<ProposedTaskBean>();
 	private ProposedTaskBean bean  = new ProposedTaskBean();
+	private EmployeeBean eBean = new EmployeeBean();
+	private String propTo;
 	
 	private String searchValue;
 	private String searchField;
@@ -87,6 +91,18 @@ public class ApproveTaskForm extends ActionForm{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getPropTo() {
+		return propTo;
+	}
+	public void setPropTo(String propTo) {
+		this.propTo = propTo;
+	}
+	public EmployeeBean geteBean() {
+		return eBean;
+	}
+	public void seteBean(EmployeeBean eBean) {
+		this.eBean = eBean;
 	}
 	
 	

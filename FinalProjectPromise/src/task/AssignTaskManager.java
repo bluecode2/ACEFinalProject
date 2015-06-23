@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import proposed_task.ProposedTaskBean;
 import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -93,5 +94,26 @@ public class AssignTaskManager {
 	public int getNewTaskId() throws SQLException {
 		int tmpNewId = (Integer) this.ibatis.queryForObject("task.getNewTaskId", null);
 		return tmpNewId;
+	}
+	
+	public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
+		
+		Map map = new HashMap();
+		map.put("taskId", getNewTaskId());
+		map.put("taskName", bean.getPropTaskName());
+		map.put("taskDesc", bean.getPropTaskDesc());
+		map.put("assignedBy", bean.getPropTo());
+		map.put("assignedTo", bean.getPropBy());
+		map.put("estStartDateInString", bean.getEstStartDateInString());
+		map.put("estEndDateInString", bean.getEstEndDateInString());
+		map.put("createdBy", bean.getUpdatedBy());
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.insert("task.insertToAssignTaskMap", map);
+			this.ibatis.commitTransaction();
+		} finally {
+			this.ibatis.endTransaction();
+		}
 	}
 }

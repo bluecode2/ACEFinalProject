@@ -9,6 +9,8 @@ import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import employee.EmployeeBean;
+
 public class ApproveTaskManager {
 
 	private SqlMapClient ibatis;
@@ -33,6 +35,11 @@ public class ApproveTaskManager {
 		List<ProposedTaskBean> 	arr = this.ibatis.queryForList("approveTask.getListApproveTask", map);
 
 		return arr;
+	}
+	
+	public ProposedTaskBean getApproveTaskById (Integer id) throws SQLException {
+		ProposedTaskBean bean = (ProposedTaskBean) this.ibatis.queryForObject("approveTask.getPropTaskByPropTaskId", id);
+		return bean;
 	}
 	
 	public void declineTask(ProposedTaskBean task) throws SQLException {
@@ -74,5 +81,12 @@ public class ApproveTaskManager {
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"approveTask.countApproveTask", map);
 		return result;
+	}
+	
+	public EmployeeBean getEmployeeBySpvId(Integer empId) throws SQLException {
+
+		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
+				"approveTask.getEmpList", empId);
+		return empBean;
 	}
 }
