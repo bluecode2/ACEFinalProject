@@ -11,19 +11,19 @@
 </head>
 <body>
 	<div class="container bg-info">
-		<logic:notEmpty name="btnAddVisible">
-			<logic:equal name="btnAddVisible" value="true">
-				<button id="btnAdd" type="button" onclick="onBtnAddClick();"
-					class="btn btn-info btn-icon" title="Add">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				</button>
-			</logic:equal>
-		</logic:notEmpty>
 		<logic:notEmpty name="btnBackVisible">
 			<logic:equal name="btnBackVisible" value="true">
 				<button id="btnBack" type="button" onclick="onBtnBackClick();"
 					class="btn btn-info btn-icon" title="Back">
 					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				</button>
+			</logic:equal>
+		</logic:notEmpty>
+		<logic:notEmpty name="btnAddVisible">
+			<logic:equal name="btnAddVisible" value="true">
+				<button id="btnAdd" type="button" onclick="onBtnAddClick();"
+					class="btn btn-info btn-icon" title="Add">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				</button>
 			</logic:equal>
 		</logic:notEmpty>
