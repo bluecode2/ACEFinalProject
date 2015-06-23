@@ -40,7 +40,7 @@
 		var searchField = $('#selSearchFieldSpv').val();
 		var searchValue = $('#txtSearchValueSpv').val();
 		var deptId		= $('#hdDeptId').val();
-		var rankId		= $('#hdRankId').val();
+		var rankId		= $('#hdnSelectedRankId').val();
 		$.ajax({
 					type : "POST",
 					url : "searchSpv.do",
@@ -99,6 +99,8 @@
 					var value = $(this).find('td').eq(0).html();
 					var text = $(this).find('td').eq(2).html();
 					$('#hdRankId').val(value);
+					$('#hdnSelectedRankId').val(value);
+					
 					$('#txtRankName').val(text);
 					$('#hdSupervisorId').val('');
 					$('#txtSupervisor').val('');
@@ -211,7 +213,10 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Rank</label></td>
-						<td><html:hidden styleId="hdRankId" name="employeeForm" property="selectedEmp.rankCode" />
+						
+						<td>
+							<html:hidden name="employeeForm" property="selectedRankId" styleId="hdnSelectedRankId"/>
+							<html:hidden styleId="hdRankId" name="employeeForm" property="selectedEmp.rankId" />
 							<table width="100%">
 								<tr>
 									<td><html:text styleClass="form-control"

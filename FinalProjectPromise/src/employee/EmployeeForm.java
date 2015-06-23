@@ -14,6 +14,7 @@ public class EmployeeForm extends ActionForm{
 	private static final long serialVersionUID = 1L;
 	private String task = "";
 	private Integer selectedId = 0;
+	private Integer selectedRankId = 0;
 	private Boolean isAdd = false;
 	private List<EmployeeBean> listOfEmployee;
 	private EmployeeBean selectedEmp  = new EmployeeBean();
@@ -110,6 +111,14 @@ public class EmployeeForm extends ActionForm{
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+	}
+
+	public Integer getSelectedRankId() {
+		return selectedRankId;
+	}
+
+	public void setSelectedRankId(Integer selectedRankId) {
+		this.selectedRankId = selectedRankId;
 	}
 	
 }

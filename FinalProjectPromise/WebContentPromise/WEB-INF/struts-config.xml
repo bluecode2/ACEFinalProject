@@ -145,6 +145,10 @@
 			<forward name="list" path="/WEB-INF/jsp/projectApproval/projectApprovalList.jsp"></forward>
 			<forward name="evaluate" path="/WEB-INF/jsp/projectApproval/projectApprovalEvaluate.jsp"></forward>
 		</action>
+		<action path="/projectInvolved" name="projectTaskForm" type="project_task.ProjectTaskHandler"
+			scope="request">
+			<forward name="projectInvolvedList" path="/WEB-INF/jsp/projectInvolved/projectInvolvedList.jsp"></forward>
+		</action>
 		
 	</action-mappings>
 	<message-resources parameter="application" />

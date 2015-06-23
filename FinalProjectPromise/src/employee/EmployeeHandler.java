@@ -47,9 +47,11 @@ public class EmployeeHandler extends Action{
 			eForm.setIsAdd(false);
 			
 			//request.setAttribute("pageTitle", "Employee Entry");
-
+			
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
+			
+			eForm.setSelectedRankId(eForm.getSelectedEmp().getRankId());
 			request.setAttribute("listRank",  reMan.getListRankForSearch("",""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,eForm.getSelectedEmp().getRankLevel(),"",""));
@@ -65,7 +67,7 @@ public class EmployeeHandler extends Action{
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();
 			
-			eForm.getSelectedEmp().setRankId(Integer.valueOf(eForm.getSelectedEmp().getRankCode()));
+			eForm.getSelectedEmp().setRankId(eForm.getSelectedRankId());
 			
 			if(eForm.getSelectedEmp().getSupervisorId()==0){
 				eForm.getSelectedEmp().setSupervisorId(null);
