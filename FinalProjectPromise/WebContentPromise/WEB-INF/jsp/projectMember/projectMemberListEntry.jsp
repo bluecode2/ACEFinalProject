@@ -20,9 +20,10 @@
 			function() {
 				registerSearchEmployee();
 				registerSearchProjRole();
+				empManager()
 			});
 	
-	function actionForm(task, id, nama, projStatus, projProg) {
+	function actionForm() {
 		
 	}
 	
@@ -72,6 +73,17 @@
 				}
 			});
 	}
+	
+	function empManager(){
+			var empMan = document.getElementById('empManager').value;
+			var empId = document.getElementById('txtEmpId').value;
+			if (empMan == empId){
+				document.getElementById('delBtn').style.display = 'none';
+			}
+			else {
+				document.getElementById('delBtn').style.display = 'block';
+			}
+	}
 </script>
 </head>
 <body>
@@ -84,6 +96,7 @@
 		<html:hidden name="projectMemberForm" property="task" />
 		<html:hidden name="projectMemberForm" property="selectedId" />
 		<html:hidden property="currPage" name="projectMemberForm"/>
+		<html:hidden property="employeeId" name="getProject" styleId="empManager"/>
 		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">
@@ -181,10 +194,15 @@
 						<logic:notEmpty name="projectMemberForm" property="listOfProjMember">
 							<logic:iterate id="member" name="projectMemberForm" property="listOfProjMember">
 								<tr>
-									<td><bean:write name="member" property="projCode" /></td>
+									<td><html:hidden property="employeeId" name="member" styleId="txtEmpId"/>
+									<bean:write name="member" property="projCode" /></td>
 									<td><bean:write name="member" property="projName" /></td>
 									<td><bean:write name="member" property="empName" /></td>
 									<td><bean:write name="member" property="projRoleName" /></td>
+									<td><a href="#" onclick="actionForm();" id="delBtn"
+										><span class="glyphicon glyphicon-remove"
+											aria-hidden="true"></span></a>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

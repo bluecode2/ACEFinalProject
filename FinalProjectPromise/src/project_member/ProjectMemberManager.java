@@ -59,13 +59,15 @@ public class ProjectMemberManager {
 		map.put("pRoleId", pRoleId);
 		map.put("empId", empId);
 		map.put("projId", projId);
-		
 		try {
 			this.ibatis.startTransaction();
+			System.out.println("masuk try");
 			this.ibatis.insert("projectMember.insertProjectMember", map);
+			System.out.println("selesai try");
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("gagal try");
 			this.ibatis.endTransaction();
 		}
 		
