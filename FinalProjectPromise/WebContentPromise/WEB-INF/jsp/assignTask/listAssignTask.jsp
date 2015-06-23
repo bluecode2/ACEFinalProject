@@ -188,7 +188,7 @@ function search() {
 											<span aria-hidden="true"></span>
 										</a>
 										&nbsp; 
-										<a href="#" class="text-info secondBtn">
+										<a href="#" class="text-danger secondBtn">
 											<span aria-hidden="true"></span>
 										</a>
 									</td>
