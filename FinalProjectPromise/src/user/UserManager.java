@@ -103,8 +103,13 @@ public class UserManager {
 	}
 
 	public void delUsers(Integer userId) throws SQLException{
+		try {
 		this.ibatis.startTransaction();
 		this.ibatis.update("users.delUsers", userId);
 		this.ibatis.commitTransaction();
+	} catch (Exception e) {
+		e.printStackTrace();
+		this.ibatis.endTransaction();
+	}
 	}
 }

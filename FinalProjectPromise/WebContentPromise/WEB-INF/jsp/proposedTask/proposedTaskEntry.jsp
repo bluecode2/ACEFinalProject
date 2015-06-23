@@ -44,8 +44,12 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divContent">
-				<table>
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
 					<!-- <tr>
 						<td>General Holiday ID</td>
 						<td><input type="text" id="txtGoToPage" class="form-control"/></td>
@@ -59,21 +63,21 @@
 					<tr>
 						<td>Task Desc</td>
 						<td>
-							<html:text styleClass="form-control" styleId="txtTaskDesc" name="proposedTaskForm" property="bean.propTaskDesc"></html:text>
+							<html:textarea styleClass="form-control" styleId="txtTaskDesc" name="proposedTaskForm" property="bean.propTaskDesc"></html:textarea>
 						</td>
 					</tr>
 					<tr>
 						<td>Estimate Start Date</td>
 						<td>
 							<html:text styleClass="form-control datepicker" styleId="txtEstStartDate"
-								name="proposedTaskForm" property="bean.estStartDateInString"></html:text>
+								name="proposedTaskForm" property="bean.estStartDateInString" style="width: 150px"></html:text>
 						</td>
 					</tr>
 					<tr>
 						<td>Estimate End Date</td>
 						<td>
 							<html:text styleClass="form-control datepicker" styleId="txtEstEndDate"
-								name="proposedTaskForm" property="bean.estEndDateInString"></html:text>
+								name="proposedTaskForm" property="bean.estEndDateInString" style="width: 150px"></html:text>
 						</td>
 					</tr>
 <!-- 					<tr> -->

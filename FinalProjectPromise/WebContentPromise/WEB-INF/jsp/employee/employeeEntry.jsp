@@ -140,7 +140,8 @@
 		<html:hidden name="employeeForm" property="task" />
 		<html:hidden name="employeeForm" property="isAdd" />
 		<html:hidden name="employeeForm" property="selectedEmp.employeeId" />
-
+		<html:hidden property="selectedEmp.rankId" name="employeeForm"/>
+		
 		<div class="container">
 			<div class="divContent form-group has-info">
 				<table width="50%">
@@ -472,7 +473,7 @@
 													<bean:write name="emp" property="employeeName" />
 												</td>
 												<td width="150px">
-													<bean:write name="emp" property="employeeEmail" />
+													<bean:write name="emp" property="email" />
 												</td>
 											</tr>
 										</logic:iterate>

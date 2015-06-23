@@ -148,7 +148,7 @@ public class CommonFunction {
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
 		
-		request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("userName", user.getEmployeeName() + " (" + user.getUserRoleName() + ")");
 		
 		request.setAttribute("pageTitle", menu.getMenuCaption());
 		

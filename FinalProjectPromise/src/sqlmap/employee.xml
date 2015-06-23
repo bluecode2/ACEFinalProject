@@ -133,9 +133,10 @@
 		</dynamic>				
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
-		LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>		
+		</dynamic>
+		ORDER BY EMPLOYEE_ID
 	</select>
 	
 	<select id="getEmployeeForPersonalHoliday" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">
@@ -151,7 +152,7 @@
 	</select>
 	
 	<select id="getNewEmpId" resultClass="java.lang.Integer">
-	select max(employee_id)+1 from employee 
+		select max(employee_id)+1 from employee 
 	</select>
 
 	<insert id="insertEmployee" parameterClass="employee.EmployeeBean">

@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeBean;
+import employee.EmployeeManager;
 import proposed_task.ProposedTaskBean;
 import proposed_task.ProposedTaskManager;
 import user.UserBean;
@@ -68,6 +70,11 @@ public class ProposedTaskHandler extends Action {
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
 
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());
+		dForm.setAllowAdd(empBean.getSupervisorId() != null);
+		
 		int rowCount;
 
 		dForm.setArrList(dMan.getAllPropTaskFiltered(
@@ -82,6 +89,7 @@ public class ProposedTaskHandler extends Action {
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),
 						dForm.getCurrPage()));
+		
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK, us, request);
 
