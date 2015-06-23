@@ -134,4 +134,48 @@
 			WHERE PROJECT_ID = 	#projectId#		
 	</update>
 
+	<select id="getProjectInvolved" parameterClass="java.util.Map"
+		resultClass="project.ProjectBean">
+		SELECT * from (
+		    SELECT us.*, ROWNUM rnum from(
+		    	SELECT 
+		    	PROJECT_ID AS projectId,
+		    	UPDATED_BY AS updatedBy,
+		    	DEPT_ID AS dept_id,
+		    	EMPLOYEE_ID AS employeeId,
+		    	CREATED_BY AS createdBy,
+		    	PROJECT_CODE AS projectCode,
+		    	PROJECT_NAME AS projectName,
+		    	PROJECT_DESC AS projectDesc,
+		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
+		    	TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') AS actStartDateInString,
+		    	TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') AS actEndDateInString,
+		    	EST_MAIN_DAYS AS estMainDays,
+		    	ACT_MAIN_DAYS AS actMainDays,
+		    	PROJECT_STATUS AS projectStatus,
+		    	PROJECT_PROGRESS AS projectProgress,
+		    	REMARKS AS remarks,
+		    	TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
+		    	TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
+		    	EMPLOYEE_NAME AS employeeName,
+		    	DEPT_NAME AS deptName,
+		    	STATUS_CAPTION AS statusCaption
+		    	FROM VPROJECT P JOIN PROJECT_MEMBER PM
+		    	ON P.PROJECT_ID=PM.PROJECT_ID
+		    	where PM.EMPLOYEE_ID = #employeeId#
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectCode">
+				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectName">
+				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+      	 		order by PROJECT_ID) us 
+	       WHERE ROWNUM &lt; = #end#)
+        WHERE rnum &gt; #begin#
+	</select>
 </sqlMap>
