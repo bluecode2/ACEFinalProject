@@ -19,9 +19,16 @@ public class UserBean {
 	private String 	updateDateInString;
 	private String	employeeName;
 	private String 	userRoleName;
+	private Integer	deptId;
 
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 
+	public Integer getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
+	}
 	public String getEmployeeName() {
 		return employeeName;
 	}
