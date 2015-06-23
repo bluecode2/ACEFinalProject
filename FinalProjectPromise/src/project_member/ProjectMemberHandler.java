@@ -12,9 +12,14 @@ import org.apache.struts.action.ActionMapping;
 import project.ProjectBean;
 import project.ProjectForm;
 import project.ProjectManager;
+import project_role.ProjectRoleBean;
+import project_role.ProjectRoleForm;
+import project_role.ProjectRoleManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
+import employee.EmployeeForm;
+import employee.EmployeeManager;
 
 public class ProjectMemberHandler extends Action {
 	
@@ -27,6 +32,9 @@ public class ProjectMemberHandler extends Action {
 		ProjectMemberForm pMemberForm = (ProjectMemberForm) form;
 		ProjectMemberManager pMemberMan = new ProjectMemberManager();
 		
+		EmployeeForm eForm = new EmployeeForm();
+		EmployeeManager eMan = new EmployeeManager();
+		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
@@ -36,25 +44,38 @@ public class ProjectMemberHandler extends Action {
 		ProjectManager pMan = new ProjectManager();
 		ProjectBean pBean = new ProjectBean();
 		
-		pBean = pMan.getProjectByID(1);
+		ProjectRoleManager pRoleMan = new ProjectRoleManager();
+		ProjectRoleForm pRoleForm = new ProjectRoleForm();
+				
+		Integer projId = (Integer) session.getAttribute("projectId");
 		
+		pBean = pMan.getProjectByID(projId);
 		request.setAttribute("getProject", pBean);
 		
+		request.setAttribute("showAdd", false);
+		
 		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
+			request.setAttribute("showAdd", true);
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
+				eForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRole(pRoleForm.getCurrSearchField(), pRoleForm.getCurrSearchValue(),
+				pRoleForm.getCurrPage(), Constant.pageSize));
+		}
+		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
+			request.setAttribute("showAdd", false);
 			
 		}
-		
 		
 		pMemberForm.setTask("");
 
 		int rowCount;
-		rowCount = pMemberMan.getCountProjectMember();
+		rowCount = pMemberMan.getCountProjectMember(projId);
 		
 		pMemberForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 		System.out.println("pageCount end");
 		
-		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(				
+		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
 		System.out.println("isi list selesai");
 		

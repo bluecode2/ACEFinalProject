@@ -18,6 +18,13 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/datepicker/bootstrap-datepicker.js"></script>
 <script src="js/material.ripples.min.js"></script>
+<script>
+myFunction() {
+$(".progress-bar").animate({
+    width: "100%"
+}, 2500);	
+}
+</script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,7 +35,7 @@
 
 </head>
 
-<body>
+<body onload="myFunction()">
 	<nav class="navbar navbar-material-blue navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -72,8 +79,8 @@
 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
 							<span class="caret"></span>
 					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li><span>Action</span></li>
 							<li><a href="#">Another action</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li class="divider"></li>
@@ -87,7 +94,15 @@
 
 <div class="full" style="visibility: hidden;">
 	<div class="full-inner">
-	hellodasdsad	
+		<h2>Animated</h2>
+		<div class="progress progress-striped active">
+		  <div class="progress-bar progress-bar-material-lime" style="width: 20%"></div>
+		</div>
+		<div class="col-xs-12 col-sm-12 progress-container">
+		    <div class="progress progress-striped active">
+		        <div class="progress-bar progress-bar-success" style="width:0%"></div>
+		    </div>
+		</div>
 	</div>
 </div>
 

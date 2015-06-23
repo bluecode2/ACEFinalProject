@@ -1,7 +1,6 @@
-package task;
+package independent_task;
 
 import ibatis.IbatisHelper;
-import independent_task.IndependentTaskBean;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -12,11 +11,11 @@ import proposed_task.ProposedTaskBean;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
-public class AssignTaskManager {
+public class IndependentTaskManager {
 
 	private SqlMapClient ibatis;
 	
-	public AssignTaskManager() {
+	public IndependentTaskManager() {
 		// TODO Auto-generated constructor stub
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
@@ -32,16 +31,17 @@ public class AssignTaskManager {
 		map.put("end", end);
 		map.put("empId", empId);
 		
-		List arr = this.ibatis.queryForList("task.getAllListAssignTask", map);
+		List arr = this.ibatis.queryForList("independentTask.getAllListAssignTask", map);
 		
 		return arr;
 	}
 	
-	public int getCountAssignTask(String col, String input) throws SQLException {
+	public int getCountAssignTask(String col, String input,int empId) throws SQLException {
 		Map map = new HashMap();
 		map.put("searchField", col);
+		map.put("empId", empId);
 		map.put("searchValue", input);
-		int tmpCount = (Integer) this.ibatis.queryForObject("task.getCountAssignTask", map);
+		int tmpCount = (Integer) this.ibatis.queryForObject("independentTask.getCountAssignTask", map);
 		return tmpCount;
 	}
 	
@@ -49,7 +49,7 @@ public class AssignTaskManager {
 		try {
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.startTransaction();
-			this.ibatis.insert("task.insertToAssignTask", tsBean);
+			this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -64,7 +64,7 @@ public class AssignTaskManager {
 		m.put("updatedBy", updatedBy);
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("task.updateCommentAssignTask", m);
+			this.ibatis.update("independentTask.updateCommentAssignTask", m);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -80,7 +80,7 @@ public class AssignTaskManager {
 		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("task.updateStatusAssignTask", m);
+			this.ibatis.update("independentTask.updateStatusAssignTask", m);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -89,16 +89,16 @@ public class AssignTaskManager {
 	}
 	public IndependentTaskBean getDataForEdit(int taskId) throws SQLException {
 		
-		IndependentTaskBean tBean = (IndependentTaskBean) this.ibatis.queryForObject("task.getAssignTaskForEdit", taskId);	
+		IndependentTaskBean tBean = (IndependentTaskBean) this.ibatis.queryForObject("independentTask.getAssignTaskForEdit", taskId);	
 		return tBean;
 	}
 	
 	public int getNewTaskId() throws SQLException {
-		int tmpNewId = (Integer) this.ibatis.queryForObject("task.getNewTaskId", null);
+		int tmpNewId = (Integer) this.ibatis.queryForObject("independentTask.getNewTaskId", null);
 		return tmpNewId;
 	}
 	
-	public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
+public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 		
 		Map map = new HashMap();
 		map.put("taskId", getNewTaskId());

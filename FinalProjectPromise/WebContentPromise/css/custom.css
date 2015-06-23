@@ -182,3 +182,54 @@ thead > tr > td , th {
 	color: white;
 	font-weight: bold;
 }
+
+.dropdown-menu .divider {
+  background-color: rgba(229, 229, 229, 0.8);
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.dropdown-menu > li > span {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+    cursor: default;
+}
+
+.dropdown-menu-right > li > span,
+.dropdown-menu-right > li > a {
+	text-align: right;
+}
+
+.progress {
+	height: 15px;
+}
+.progress.active .progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+.progress-bar {
+    position: relative;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 4s;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {width: 0%;}
+    50%   {width: 50%;}
+    100% {width: 100%;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {width: 0%}
+    50%   {width: 50%}
+    100% {width: 100%}
+}

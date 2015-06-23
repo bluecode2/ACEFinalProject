@@ -36,47 +36,54 @@ public class EmployeeHandler extends Action{
 			//request.setAttribute("pageTitle", "Employee Entry");
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
-			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(0,0,"",""));
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId(),eForm.getSelectedEmp().getRankLevel(),"",""));
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY,
 					us, request);
 			
 			return mapping.findForward("entry");
 		}
-
 		else if (eForm.getTask().equals("edit")) {
 			eForm.setIsAdd(false);
 			
 			//request.setAttribute("pageTitle", "Employee Entry");
-
+			
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
+			
+			eForm.setSelectedRankId(eForm.getSelectedEmp().getRankId());
 			request.setAttribute("listRank",  reMan.getListRankForSearch("",""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
-			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,eForm.getSelectedEmp().getRankId(),"",""));
+			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,eForm.getSelectedEmp().getRankLevel(),"",""));
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY,
 					us, request);
 			
 			return mapping.findForward("entry");
 		}
-
 		else if (eForm.getTask().equals("delete")) {
-			System.out.println(eForm.getSelectedId());
-			dMan.deleteDepartment(eForm.getSelectedId(),us.getUserId());
+			eMan.deleteEmployee(eForm.getSelectedId(),us.getUserId());
 		}
-
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();
 			
-			if (isAdd) {
+			eForm.getSelectedEmp().setRankId(eForm.getSelectedRankId());
+			
+			if(eForm.getSelectedEmp().getSupervisorId()==0){
+				eForm.getSelectedEmp().setSupervisorId(null);
+			}
+				
+			if (isAdd) 
+			{
 				eForm.getSelectedEmp().setCreatedBy(us.getUserId());
 				eMan.insertEmployee(eForm.getSelectedEmp());
-			} else {
+			} 
+			else 
+			{
 				eForm.getSelectedEmp().setUpdatedBy(us.getUserId());
 				eMan.updateEmployee(eForm.getSelectedEmp());
 			}
-
+			
 			response.sendRedirect("employee.do");
 			return null;
 		}

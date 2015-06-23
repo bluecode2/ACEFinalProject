@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="projectMember">
-	<select id="getAllProjMember" resultClass="project_member.ProjectMemberBean">
+	<select id="getAllProjMember" resultClass="project_member.ProjectMemberBean" parameterClass="java.util.Map">
 		SELECT * from (
 			SELECT us.*, ROWNUM rnum from(
 		    	SELECT 
@@ -19,22 +19,22 @@
 		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
 		    	IS_DELETED AS isDeleted
 		    	FROM VPROJECTMEMBER
-				where IS_DELETED = 0
+				where IS_DELETED = 0 AND PROJECT_ID = #projId#
       	 		order by MEMBER_ID) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
 	</select>
 	
 	<select id="countProjectMember" resultClass="java.lang.Integer"
-		parameterClass="java.util.Map">
+		parameterClass="java.lang.Integer">
 		SELECT COUNT(1) FROM vprojectMember
-		where IS_DELETED = 0
+		where IS_DELETED = 0 AND PROJECT_ID = #projId#
 	</select>
 	
-	<insert id="insertProjectMember" parameterClass="project_member.ProjectMemberBean">
+	<insert id="insertProjectMember" parameterClass="java.util.Map">
 		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID) 
 		VALUES 
-		(#memberId#,#projectRoleId#,#employeeId#,#projectId#)
+		(#newMemberId#,#pRoleId#,#empId#,#projId#)
 	</insert>
 	
 	<select id="getProjectMemberId" resultClass="java.lang.Integer">

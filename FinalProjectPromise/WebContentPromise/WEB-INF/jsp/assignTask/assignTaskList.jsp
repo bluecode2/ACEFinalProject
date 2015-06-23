@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LIST ASSIGN TASK</title>
+<title>Assign Task List</title>
 <script src="js/jquery.js"></script>
 
 <script type="text/javascript">
@@ -133,7 +133,7 @@ function search() {
 								styleId="selSearchField" styleClass="form-control">
 								<html:option value="">-- All --</html:option>
 								<option value="taskName">task Name</option>
-								<option value="taskDesc">task DESC</option>
+								<option value="assignedTo">Assign To</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="assignTaskForm" property="searchValue"
@@ -160,7 +160,7 @@ function search() {
 							
 							<td>Task Progress</td>
 							<td>Task Status</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -197,7 +197,7 @@ function search() {
 						</logic:notEmpty>
 						<logic:empty name="assignTaskForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

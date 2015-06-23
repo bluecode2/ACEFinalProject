@@ -1,4 +1,4 @@
-package task;
+package independent_task;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ public class AssignTaskHandler extends Action {
 		// TODO Auto-generated method stub
 		
 		AssignTaskForm tsForm = (AssignTaskForm) form;
-		AssignTaskManager tsMan = new AssignTaskManager();
+		IndependentTaskManager tsMan = new IndependentTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
@@ -32,9 +32,9 @@ public class AssignTaskHandler extends Action {
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Entry");
+			request.setAttribute("pageTitle", "Assign Task Entry");
 			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
-			return mapping.findForward("assignTask");
+			return mapping.findForward("assignTaskEntry");
 		}
 		else if ("save".equals(tsForm.getTask()	)) {
 			Boolean isAdd = tsForm.getIsAdd();
@@ -50,10 +50,7 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
-			
-			response.sendRedirect("department.do");
-			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
-					us, request);
+			response.sendRedirect("assignTask.do");
 			return null;
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
@@ -62,9 +59,9 @@ public class AssignTaskHandler extends Action {
 			if (tsForm.getSelectedEdit() == 0) {
 				request.setAttribute("pageTitle", "Assign Entry");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
-				return mapping.findForward("assignTask");
+				return mapping.findForward("assignTaskEntry");
 			}
-			else if (tsForm.getSelectedEdit() == 2) {
+			else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask("TA_STAT_07");
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
 			}	
@@ -91,7 +88,7 @@ public class AssignTaskHandler extends Action {
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		
-		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue()));
+		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.pageSize));
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
@@ -103,7 +100,7 @@ public class AssignTaskHandler extends Action {
 		request.setAttribute("currPage", tsForm.getCurrPage());
 		request.setAttribute("rowCount", tsForm.getListCount());
 
-		return mapping.findForward("list");
+		return mapping.findForward("assignTaskList");
 /*		return mapping.findForward("assignTask");*/
 		
 		

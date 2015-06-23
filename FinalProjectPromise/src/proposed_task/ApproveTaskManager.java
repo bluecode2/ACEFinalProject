@@ -83,10 +83,11 @@ public class ApproveTaskManager {
 		return result;
 	}
 	
-	public EmployeeBean getEmployeeBySpvId(Integer empId) throws SQLException {
+	public List<EmployeeBean> getEmployeeBySpvId(Integer empId) throws SQLException {
 
-		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
+		List<EmployeeBean> empBean = this.ibatis.queryForList(
 				"approveTask.getEmpList", empId);
+		
 		return empBean;
 	}
 }

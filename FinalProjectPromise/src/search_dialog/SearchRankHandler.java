@@ -33,7 +33,7 @@ public ActionForward execute(ActionMapping mapping, ActionForm form,
 	List<RankEmpBean> arrRank = reMan.getListRankForSearch(searchField, searchValue);
 
 	for (RankEmpBean reBean : arrRank) {
-		out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+		out.println("<tr data-dismiss=\"modal\" class=\"rowSearchRank\">");
 		out.println("<td style=\"display: none\">" + reBean.getRankId() + "</td>");
 		out.println("<td>" + reBean.getRankCode() + "</td>");
 		out.println("<td>" + reBean.getRankName() + "</td>");

@@ -1,5 +1,9 @@
 package proposed_task;
 
+
+import independent_task.IndependentTaskBean;
+import independent_task.IndependentTaskManager;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,8 +13,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import task.AssignTaskManager;
-import task.TaskBean;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -24,8 +26,8 @@ public class ApproveTaskHandler extends Action {
 		
 		ApproveTaskForm aForm = (ApproveTaskForm) form;
 		ApproveTaskManager aManager = new ApproveTaskManager();
-		AssignTaskManager atManager = new AssignTaskManager();
-		TaskBean tBean = new TaskBean();
+		IndependentTaskManager atManager = new IndependentTaskManager();
+		IndependentTaskBean tBean = new IndependentTaskBean();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 

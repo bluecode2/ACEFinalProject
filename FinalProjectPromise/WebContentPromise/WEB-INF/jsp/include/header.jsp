@@ -85,11 +85,9 @@
 										<li><a
 											href="<bean:write name="menuLvl2" property="menuUrl" />"><bean:write
 													name="menuLvl2" property="menuCaption" /></a>
-											<ul class="dropdown-menu sub-menu">
-												<logic:iterate id="menuLvl3" name="arrMenuLvl3">
-													<logic:equal name="menuLvl3" property="parentId"
-														value="${menuLvl2.menuId}">
-														<li><a
+											<ul class="dropdown-menu sub-menu"><logic:iterate 
+												id="menuLvl3" name="arrMenuLvl3"><logic:equal name="menuLvl3" property="parentId"
+														value="${menuLvl2.menuId}"><li><a
 															href="<bean:write name="menuLvl3" property="menuUrl" />"><bean:write
 																	name="menuLvl3" property="menuCaption" /></a></li>
 													</logic:equal>
@@ -114,8 +112,8 @@
 								<span class="caret">
 							</logic:notEmpty> </span>
 					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a><bean:write name="userName" /> (<bean:write name="userRoleName" />)</a></li>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li><span><bean:write name="userName" /> (<bean:write name="userRoleName" />)</span></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="#" onclick="onChangePasswordClick();">Change Password</a></li>
 							<li><a href="logout.do">Logout</a></li>

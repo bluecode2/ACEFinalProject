@@ -31,7 +31,6 @@
 		$('.rowSearchSpv').on('click', function() {
 			var value = $(this).find('td').eq(0).html().trim();
 			var text = $(this).find('td').eq(2).html().trim();
-			alert(value);
 			$('#hdSupervisorId').val(value);
 			$('#txtSupervisor').val(text);
 		});
@@ -41,7 +40,7 @@
 		var searchField = $('#selSearchFieldSpv').val();
 		var searchValue = $('#txtSearchValueSpv').val();
 		var deptId		= $('#hdDeptId').val();
-		var rankId		= $('#hdRankId').val();
+		var rankId		= $('#hdnSelectedRankId').val();
 		$.ajax({
 					type : "POST",
 					url : "searchSpv.do",
@@ -68,6 +67,7 @@
 			$('#txtDept').val(text);
 			$('#hdSupervisorId').val('');
 			$('#txtSupervisor').val('');
+			searchSupervisor();
 		});
 	}
 
@@ -97,12 +97,14 @@
 				'click',
 				function() {
 					var value = $(this).find('td').eq(0).html();
-					var text = $(this).find('td').eq(1).html() + ' - '
-							+ $(this).find('td').eq(2).html();
+					var text = $(this).find('td').eq(2).html();
 					$('#hdRankId').val(value);
+					$('#hdnSelectedRankId').val(value);
+					
 					$('#txtRankName').val(text);
 					$('#hdSupervisorId').val('');
 					$('#txtSupervisor').val('');
+					searchSupervisor();
 				});
 	}
 	
@@ -211,8 +213,10 @@
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right"><label>Rank</label></td>
-						<td><html:hidden styleId="hdRankId" name="employeeForm"
-								property="selectedEmp.rankId" />
+						
+						<td>
+							<html:hidden name="employeeForm" property="selectedRankId" styleId="hdnSelectedRankId"/>
+							<html:hidden styleId="hdRankId" name="employeeForm" property="selectedEmp.rankId" />
 							<table width="100%">
 								<tr>
 									<td><html:text styleClass="form-control"
@@ -256,7 +260,6 @@
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<html:form action="searchDept" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -325,7 +328,6 @@
 								</tbody>
 							</table>
 						</div>
-					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>
@@ -340,7 +342,6 @@
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<html:form action="searchRank" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -401,7 +402,6 @@
 								</tbody>
 							</table>
 						</div>
-					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>
@@ -414,7 +414,6 @@
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<html:form action="searchSpv" method="post">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -486,7 +485,6 @@
 								</tbody>
 							</table>
 						</div>
-					</html:form>
 				</div>
 				<!-- /.modal-content -->
 			</div>

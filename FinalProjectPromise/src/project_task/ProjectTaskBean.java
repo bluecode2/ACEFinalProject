@@ -1,15 +1,16 @@
-package task;
+package project_task;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import common.Constant;
 
-public class TaskBean {
-
+public class ProjectTaskBean {
 	private Integer taskId;
 	private String 	taskName;
 	private Integer projectId;
+	private String 	projectCode;
+	private String 	projectName;
 	private Integer assignedTo;
 	private String 	assignedToName;
 	private Integer assignedBy;
@@ -386,4 +387,21 @@ public class TaskBean {
 		}
 		this.updateDate = date;
 	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
 }

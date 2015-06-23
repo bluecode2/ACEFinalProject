@@ -15,11 +15,10 @@
 		if (allowAdd == "true") {
 			document.forms[0].task.value = "add";
 			document.forms[0].submit();
-		}
-		else{
+		} else {
 			alert("You don't have a supervisor to proposed an independent task!");
 		}
-			
+
 	}
 
 	function search() {
@@ -35,7 +34,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete Task " + nama)) {
+			if (confirm("Are you sure want to delete proposed Task " + nama)) {
 				document.forms[0].submit();
 			}
 		} else {
@@ -103,14 +102,17 @@
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /></td>
-									<td align="center"><a class="text-success" href="#"
-										onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
-										title="Edit"><span class="glyphicon glyphicon-pencil"
-											aria-hidden="true"></span></a> &nbsp; <a href="#"
-										class="text-danger"
-										onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
-										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a></td>
+									<td align="center"><logic:equal name="reg"
+											property="propStatus" value="TA_STAT_01">
+											<a class="text-success" href="#"
+												onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
+												title="Edit"><span class="glyphicon glyphicon-pencil"
+												aria-hidden="true"></span></a> &nbsp; <a href="#"
+												class="text-danger"
+												onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
+												title="Delete"><span class="glyphicon glyphicon-trash"
+												aria-hidden="true"></span></a>
+										</logic:equal></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

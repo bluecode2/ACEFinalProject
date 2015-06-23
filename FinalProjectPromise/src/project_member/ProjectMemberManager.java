@@ -20,14 +20,15 @@ public class ProjectMemberManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<ProjectMemberBean> getAllProjectMember(
+	public List<ProjectMemberBean> getAllProjectMember(Integer projId,
 			Integer pageNum, Integer pageSize) throws SQLException{
 		
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		
+		System.out.println(projId);
 		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
 		Map map = new HashMap();
+		map.put("projId", projId);
 		map.put("begin", begin);
 		map.put("end", end);
 		
@@ -36,24 +37,32 @@ public class ProjectMemberManager {
 		return pmbList;
 	}
 	
-	public Integer getCountProjectMember()
+	public Integer getCountProjectMember(Integer projId)
 			throws SQLException, ClassNotFoundException {
 		Integer result = (Integer) this.ibatis.queryForObject(
-				"projectMember.countProjectMember", null);
+				"projectMember.countProjectMember", projId);
 		return result;
 	}
 	
 	public Integer getMemberId() throws SQLException{
-		Integer newMemberId = (Integer) this.ibatis.queryForObject("", null);
+		Integer newMemberId = (Integer) this.ibatis.queryForObject("projectMember.getProjectMemberId", null);
 		return newMemberId;
 	}
 	
-	public void insertProjectMember(ProjectMemberBean pMemberBean) throws SQLException{
+	public void insertProjectMember(Integer pRoleId, Integer empId, Integer projId) throws SQLException{
 		Integer newMemberId = getMemberId();
-		pMemberBean.setMemberId(newMemberId);
+		if (newMemberId == null){
+			newMemberId = 1;
+		}
+		Map map = new HashMap();
+		map.put("newMemberId", newMemberId);
+		map.put("pRoleId", pRoleId);
+		map.put("empId", empId);
+		map.put("projId", projId);
+		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.insert("projectMember.insertProjectMember", pMemberBean);
+			this.ibatis.insert("projectMember.insertProjectMember", map);
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception

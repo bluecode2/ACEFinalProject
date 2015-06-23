@@ -29,6 +29,15 @@ public class ProjectBean {
 	private String employeeName;
 	private String statusCaption;
 	
+	private String estStartDateInString;
+	private String estEndDateInString;
+	private String actStartDateInString;
+	private String actEndDateInString;
+	private String createDateInString;
+	private String updateDateInString;
+	
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	
 	public String getDeptName() {
 		return deptName;
 	}
@@ -52,16 +61,6 @@ public class ProjectBean {
 	public void setStatusCaption(String statusCaption) {
 		this.statusCaption = statusCaption;
 	}
-
-	private String estStartDateInString;
-	private String estEndDateInString;
-	private String actStartDateInString;
-	private String actEndDateInString;
-	private String createDateInString;
-	private String updateDateInString;
-	
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
-
 	
 	public Integer getProjectId() {
 		return projectId;
@@ -365,14 +364,6 @@ public class ProjectBean {
 			date = null;
 		}
 		this.updateDate = date;
-	}
-
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
 	}
 	
 	

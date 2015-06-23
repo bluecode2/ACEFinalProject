@@ -1,28 +1,28 @@
-package proposed_task;
+package project;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-import employee.EmployeeBean;
+public class ProjectInvolvedForm extends ActionForm{
 
-public class ApproveTaskForm extends ActionForm{
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	private String task = "";
-	private Integer selectedId = 0;
-	private Boolean isAdd = false;
-	private List<ProposedTaskBean> arrList = new ArrayList<ProposedTaskBean>();
-	private ProposedTaskBean bean  = new ProposedTaskBean();
-	private List <EmployeeBean> eBean = new ArrayList<EmployeeBean>();
-	private String propTo;
 	
+	private String task ="";
+	private Integer selectedId = 0;
+	private String isProc = "";
 	private String searchValue;
 	private String searchField;
 	private String currSearchValue = "";
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	private String val;
+	private List<ProjectBean> listOfProjectInvolved;
+	private ProjectBean projectBean = new ProjectBean();
 	public String getTask() {
 		return task;
 	}
@@ -35,23 +35,11 @@ public class ApproveTaskForm extends ActionForm{
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
 	}
-	public Boolean getIsAdd() {
-		return isAdd;
+	public String getIsProc() {
+		return isProc;
 	}
-	public void setIsAdd(Boolean isAdd) {
-		this.isAdd = isAdd;
-	}
-	public List<ProposedTaskBean> getArrList() {
-		return arrList;
-	}
-	public void setArrList(List<ProposedTaskBean> arrList) {
-		this.arrList = arrList;
-	}
-	public ProposedTaskBean getBean() {
-		return bean;
-	}
-	public void setBean(ProposedTaskBean bean) {
-		this.bean = bean;
+	public void setIsProc(String isProc) {
+		this.isProc = isProc;
 	}
 	public String getSearchValue() {
 		return searchValue;
@@ -89,20 +77,22 @@ public class ApproveTaskForm extends ActionForm{
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getVal() {
+		return val;
 	}
-	public String getPropTo() {
-		return propTo;
+	public void setVal(String val) {
+		this.val = val;
 	}
-	public void setPropTo(String propTo) {
-		this.propTo = propTo;
+	public List<ProjectBean> getListOfProjectInvolved() {
+		return listOfProjectInvolved;
 	}
-	public List <EmployeeBean> geteBean() {
-		return eBean;
+	public void setListOfProjectInvolved(List<ProjectBean> listOfProjectInvolved) {
+		this.listOfProjectInvolved = listOfProjectInvolved;
 	}
-	public void seteBean(List <EmployeeBean> eBean) {
-		this.eBean = eBean;
+	public ProjectBean getProjectBean() {
+		return projectBean;
 	}
-	
+	public void setProjectBean(ProjectBean projectBean) {
+		this.projectBean = projectBean;
+	}
 }

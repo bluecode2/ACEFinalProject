@@ -98,7 +98,7 @@ public class DepartmentManager {
 			map.put("updatedBy", userId);
 			
 			ibatis.startTransaction();
-			ibatis.delete("department.deleteDepartment", map);
+			ibatis.update("department.deleteDepartment", map);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

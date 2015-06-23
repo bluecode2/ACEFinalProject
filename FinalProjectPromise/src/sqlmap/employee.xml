@@ -20,6 +20,7 @@
 		RANK_ID 							AS rankId,
 		RANK_CODE 							AS rankCode,
 		RANK_NAME 							AS rankName,
+		RANK_LEVEL 							AS rankLevel,
 		SUPERVISOR_ID 						AS supervisorID,
 		SUPERVISOR_CODE 					AS supervisorCode,
 		SUPERVISOR_NAME 					AS supervisorName,
@@ -76,6 +77,7 @@
 		RANK_ID 							AS rankId,
 		RANK_CODE 							AS rankCode,
 		RANK_NAME 							AS rankName,
+		RANK_LEVEL							AS rankLevel,
 		SUPERVISOR_ID 						AS supervisorId,
 		SUPERVISOR_CODE 					AS supervisorCode,
 		SUPERVISOR_NAME 					AS supervisorName,
@@ -157,13 +159,12 @@
 
 	<insert id="insertEmployee" parameterClass="employee.EmployeeBean">
 		INSERT INTO EMPLOYEE
-		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, CREATED_BY,
-		UPDATED_BY, EMPLOYEE_NAME,
+		(EMPLOYEE_ID, DEPT_ID, RANK_ID, SUPERVISOR_ID, CREATED_BY,EMPLOYEE_NAME,
 		GENDER, EMAIL, ADDRESS,
-		PHONE_NUMBER,CREATE_DATE,UPDATE_DATE,IS_ACTIVE,EMPLOYEE_CODE)
+		PHONE_NUMBER,CREATE_DATE,IS_ACTIVE,EMPLOYEE_CODE)
 		VALUES
-		(#employeeId#,#deptId#,#rankId#,#supervisorId#,#createdBy#,null,#employeeName#,
-		#gender#,#email#,#address#,#phoneNumber#,SYSDATE,null,1,#employeeCode#)
+		(#employeeId#,#deptId#,#rankId#, #supervisorId# ,#createdBy#,#employeeName#,
+		#gender#,#email#,#address#,#phoneNumber#,SYSDATE,1,#employeeCode#)
 	</insert>
 
 	<update id="updateEmployee" parameterClass="employee.EmployeeBean">
@@ -186,7 +187,7 @@
 		update
 		employee set
 		IS_ACTIVE = 0,
-		UPDATED_BY = #userName#,
+		UPDATED_BY = #updatedBy#,
 		UPDATE_DATE = SYSDATE
 		where EMPLOYEE_ID = #employeeId#
 	</delete>

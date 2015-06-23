@@ -85,6 +85,7 @@
 							<td class="align-center">Email</td>
 							<td class="align-center">Department</td>
 							<td class="align-center">Supervisor</td>
+							<td class="align-center">Rank</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -98,6 +99,7 @@
 									<td><bean:write name="reg" property="email" /></td>
 									<td><bean:write name="reg" property="deptName" /></td>
 									<td><bean:write name="reg" property="supervisorName" /></td>
+									<td><bean:write name="reg" property="rankName" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="employeeId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

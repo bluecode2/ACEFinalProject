@@ -1,11 +1,15 @@
-package task;
+package project_task;
+
+import independent_task.IndependentTaskBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-public class AssignTaskForm extends ActionForm
+import project.ProjectBean;
+
+public class ProjectTaskForm extends ActionForm
 {
 	private String 			task = "";
 	private String 			searchField;
@@ -16,8 +20,9 @@ public class AssignTaskForm extends ActionForm
 	private String			currSearchField;
 	private String			currSearchValue;
 	private Integer			selectedId;
-	private TaskBean		tkBean = new TaskBean();
-	private List<TaskBean>	arrList = new ArrayList<TaskBean>();
+	private ProjectBean prjBean = null;
+	private IndependentTaskBean		tkBean = new IndependentTaskBean();
+	private List<IndependentTaskBean>	arrList = new ArrayList<IndependentTaskBean>();
 	private Boolean 		isAdd = false;
 	private int				selectedEdit;
 	private String			statusTask;
@@ -48,10 +53,10 @@ public class AssignTaskForm extends ActionForm
 	public void setIsAdd(Boolean isAdd) {
 		this.isAdd = isAdd;
 	}
-	public List<TaskBean> getArrList() {
+	public List<IndependentTaskBean> getArrList() {
 		return arrList;
 	}
-	public void setArrList(List<TaskBean> arrList) {
+	public void setArrList(List<IndependentTaskBean> arrList) {
 		this.arrList = arrList;
 	}
 	public String getTask() {
@@ -108,11 +113,18 @@ public class AssignTaskForm extends ActionForm
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
 	}
-	public TaskBean getTkBean() {
+	public IndependentTaskBean getTkBean() {
 		return tkBean;
 	}
-	public void setTkBean(TaskBean tkBean) {
+	public void setTkBean(IndependentTaskBean tkBean) {
 		this.tkBean = tkBean;
+	}
+	public ProjectBean getPrjBean() {
+		return prjBean;
+	}
+	public void setPrjBean(ProjectBean prjBean) {
+		this.prjBean = prjBean;
 	}
 	
 }
+
