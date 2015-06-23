@@ -9,6 +9,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project_member.ProjectMemberBean;
+import project_member.ProjectMemberForm;
+import project_member.ProjectMemberManager;
 import common.CommonFunction;
 import common.Constant;
 import user.UserBean;
@@ -21,6 +24,7 @@ public class ProjectInvolvedHandler extends Action{
 		// TODO Auto-generated method stub
 		ProjectInvolvedForm projectForm = (ProjectInvolvedForm) form;
 		ProjectManager projectManager = new ProjectManager();
+		ProjectMemberManager projectMemberManager = new ProjectMemberManager();
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -29,6 +33,16 @@ public class ProjectInvolvedHandler extends Action{
 				request);
 		
 		///
+		ProjectMemberBean projMemberBean =  new ProjectMemberBean();
+		ProjectMemberForm projMemberForm = new ProjectMemberForm();
+		
+		System.out.println(projMemberBean.getProjectId());
+		
+		if ("viewMember".equalsIgnoreCase(projectForm.getTask())){
+			request.setAttribute("listProjectMember", projectMemberManager.getAllProjectMember(projMemberForm.getSelectedId(), 
+					1,1));
+		}
+		
 		projectForm.setTask("");
 		projectForm.setSearchField(projectForm.getCurrSearchField());
 		projectForm.setSearchValue(projectForm.getCurrSearchValue());

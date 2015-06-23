@@ -17,7 +17,6 @@ public class ProjectMemberForm extends ActionForm {
 	private boolean isAdd = true;
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
-	
 
 	private List<ProjectMemberBean> listOfProjMember;
 	private ProjectMemberBean pMemberbean = new ProjectMemberBean();
@@ -64,5 +63,4 @@ public class ProjectMemberForm extends ActionForm {
 	public void setpMemberbean(ProjectMemberBean pMemberbean) {
 		this.pMemberbean = pMemberbean;
 	}
-	
 }

@@ -17,15 +17,35 @@
 
 		changePage(1);
 	}
-	
-	$(document).ready(
-			function() {
-				getStyleClass()
-			});
-	
-	function getProjDesc(projDesc){
+
+	$(document).ready(function() {
+		$(".datepicker").attr("data-provide", "datepicker");
+		projectMemberEvent();
+		getStyleClass();
+	});
+
+	function getProjDesc(projDesc) {
 		$('#txtProjectDesc').html(projDesc);
 		$('#projDesc').modal();
+	}
+
+	function getProjMember(projId) {
+		$('#txtProjectDesc').html(projId);
+		$('#projId').modal();
+	}
+
+	function projectMemberEvent() {
+		$('.rowSearch').on('click', function() {
+			var value = $(this).find('td').eq(0).html();
+			var text = $(this).find('td').eq(2).html();
+			$('#hiddenProjId').val(value);
+		});
+	}
+	
+	function viewMember(projId){
+		document.forms[0].selectedId.value = projId;
+		document.forms[0].task = 'viewMember';
+		document.submit();
 	}
 </script>
 </head>
@@ -35,20 +55,19 @@
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
-		
+
 		<html:hidden name="projectInvolvedForm" property="task" />
 		<html:hidden name="projectInvolvedForm" property="selectedId" />
 		<html:hidden name="projectInvolvedForm" property="currSearchField" />
 		<html:hidden name="projectInvolvedForm" property="currSearchValue" />
-		<html:hidden property="currPage" name="projectInvolvedForm"/>
-		
+		<html:hidden property="currPage" name="projectInvolvedForm" />
+
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;">
-						<html:select
+						<td style="padding-left: 15px;"><html:select
 								name="projectInvolvedForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="projectCode">Project Code</option>
@@ -81,51 +100,51 @@
 							<td class="align-center">Progress</td>
 							<td class="align-center">Member</td>
 							<td class="align-center">View Task</td>
-							<td class="align-center"></td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="projectInvolvedForm" property="listOfProjectInvolved">
-							<logic:iterate id="proj" name="projectInvolvedForm" property="listOfProjectInvolved">
+						<logic:notEmpty name="projectInvolvedForm"
+							property="listOfProjectInvolved">
+							<logic:iterate id="proj" name="projectInvolvedForm"
+								property="listOfProjectInvolved">
 								<tr>
-								<html:hidden property="projectStatus" name="proj" styleClass="hdnProjStatus"/>
-								<html:hidden property="projectProgress" name="proj" styleClass="hdnProjProg"/>
+									<html:hidden property="projectStatus" name="proj"
+										styleClass="hdnProjStatus" />
+									<html:hidden property="projectProgress" name="proj"
+										styleClass="hdnProjProg" />
+									<html:hidden styleId="hiddenProjId" name="projectInvolvedForm"
+										property="projectBean.projectId" />
+										
 									<td><bean:write name="proj" property="projectCode" /></td>
 									<td><a href="#" class="text-info"
-										   onclick="getProjDesc('<bean:write name="proj" property="projectDesc" />');"	data-target="#projDesc">
-											<bean:write name="proj" property="projectName" /></a></td>
-									<td><bean:write name="proj" property="estStartDateInString" /> to 
-										<bean:write name="proj" property="estEndDateInString" /></td>
-									<td><bean:write name="proj" property="actStartDateInString" /> to 
-										<bean:write name="proj" property="actEndDateInString" /></td>
+										onclick="getProjDesc('<bean:write name="proj" property="projectDesc" />');"
+										data-target="#projDesc"> <bean:write name="proj"
+												property="projectName" /></a></td>
+									<td><bean:write name="proj"
+											property="estStartDateInString" /> to <bean:write
+											name="proj" property="estEndDateInString" /></td>
+									<td><bean:write name="proj"
+											property="actStartDateInString" /> to <bean:write
+											name="proj" property="actEndDateInString" /></td>
 									<td><bean:write name="proj" property="employeeName" /></td>
 									<td><bean:write name="proj" property="deptName" /></td>
-									<td><bean:write name="proj" property="statusCaption" /> : 
+									<td><bean:write name="proj" property="statusCaption" /> :
 										<bean:write name="proj" property="projectProgress" />%</td>
-									<%-- <td><a href="#" class="text-info"
-										   onclick="toTask('toMember','<bean:write name="proj" property="projectId" />');">
-											Member</a></td>
-									<td><a href="#" class="text-info"
-										   onclick="toTask('toTask','<bean:write name="proj" property="projectId" />');">
-											Task</a></td> --%>
-									<%-- <td align="center">
-									
-									<a href="#" onclick="actionForm('firstBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />','<bean:write name="proj" property="projectProgress" />');"
-										><span class="firstBtn"
-											aria-hidden="true" id="firstBtn" ></span></a> &nbsp; 
-									<a href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
-										title="Edit"><span class="secondBtn"
-											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" onclick="actionForm('thirdBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />');"
-										><span class="thirdBtn"
-											aria-hidden="true" id="thirdBtn"></span></a>
-									</td> --%>
+									<td align="center"><a href="#" class="text-info"
+										data-toggle="modal" data-target="#searchProjMember"> View
+											Member</a>
+									</td>
+									<td align="center"><a href="#" class="text-info"
+										data-toggle="modal" data-target="#searchProjMember"> View
+											Task</a>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="projectInvolvedForm" property="listOfProjectInvolved">
+						<logic:empty name="projectInvolvedForm"
+							property="listOfProjectInvolved">
 							<tr>
-								<td colspan="10" align="center" style="padding: 10px">No
+								<td colspan="9" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
@@ -134,9 +153,9 @@
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
 		</div>
-		
-		<div class="modal fade" id="projDesc" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<div class="modal fade" id="projDesc" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -156,7 +175,47 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
+
+		<div class="modal fade" id="searchProjMember" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Project Member</h4>
+					</div>
+					<div class="modal-body">
+						<table width="100%" id="tblSearch"
+							class="table table-striped table-hover table-bordered table-clickable">
+							<thead>
+								<tr>
+									<th>Employee Name</th>
+									<th>Role Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<logic:notEmpty name="listProjectMember">
+									<logic:iterate id="projMember" name="listProjectMember">
+									</logic:iterate>
+								</logic:notEmpty>
+								<logic:empty name="listProjectMember">
+									<tr>
+										<td colspan="2" align="center">No Data Found</td>
+									</tr>
+								</logic:empty>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
 		<html:hidden name="projectInvolvedForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
