@@ -44,6 +44,7 @@ public class AssignTaskManager {
 	
 	public void createNewAssignTask(TaskBean tsBean) throws SQLException {
 		try {
+			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.startTransaction();
 			this.ibatis.insert("task.insertToAssignTask", tsBean);
 			this.ibatis.commitTransaction();
@@ -52,13 +53,12 @@ public class AssignTaskManager {
 		}
 	}
 	
-	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy, String remarks) throws SQLException {
+	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) throws SQLException {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("taskName", taskName);
 		m.put("taskDesc", taskDesc);
 		m.put("updatedBy", updatedBy);
-		m.put("remarks", remarks);
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("task.updateCommentAssignTask", m);
@@ -86,7 +86,12 @@ public class AssignTaskManager {
 	}
 	public TaskBean getDataForEdit(int taskId) throws SQLException {
 		
-		TaskBean tBean = (TaskBean) this.ibatis.queryForObject("getAssignTaskForEdit", taskId);	
+		TaskBean tBean = (TaskBean) this.ibatis.queryForObject("task.getAssignTaskForEdit", taskId);	
 		return tBean;
+	}
+	
+	public int getNewTaskId() throws SQLException {
+		int tmpNewId = (Integer) this.ibatis.queryForObject("task.getNewTaskId", null);
+		return tmpNewId;
 	}
 }

@@ -37,8 +37,24 @@ public class AssignTaskHandler extends Action {
 			return mapping.findForward("assignTask");
 		}
 		else if ("save".equals(tsForm.getTask()	)) {
-			tsForm.getTkBean().setCreatedBy(us.getUserId());
+			Boolean isAdd = tsForm.getIsAdd();
+
+			if (tsForm.getTkBean().getAssignedTo() == 0)
+				tsForm.getTkBean().setAssignedTo(null);
+
+			if (isAdd) {
+				tsForm.getTkBean().setCreatedBy(us.getUserId());
+				tsMan.createNewAssignTask(tsForm.getTkBean());
+			} else {
+				
+				tsForm.getTkBean().setUpdatedBy(us.getUserId());
+				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
+			}
 			
+			response.sendRedirect("department.do");
+			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
+					us, request);
+			return null;
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
