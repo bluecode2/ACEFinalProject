@@ -36,7 +36,7 @@
 		IS_OUTSOURCE as isOutsource,
 		TASK_STATUS_NAME as taskStatusName
 		from vProjecttask
-		WHERE project_id = #project_id#
+		WHERE project_id = #projectId#
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="taskName">
 				LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -83,7 +83,7 @@
 		insert into task
 		(TASK_ID,PROJECT_ID, TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE
 		,EST_START_DATE,
-		EST_END_DATE,EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status)
+		EST_END_DATE,CREATED_BY, CREATE_DATE,task_status)
 		values( #taskId#, #projectId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# , #isOutsource#,
 		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
 		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE,
