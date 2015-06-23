@@ -50,6 +50,7 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
+			response.sendRedirect("assignTask.do");
 			return null;
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {

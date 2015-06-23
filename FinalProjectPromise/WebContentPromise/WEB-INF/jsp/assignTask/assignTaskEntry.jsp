@@ -97,7 +97,7 @@ function registerSearchAssignToEvent(){
 								name="assignTaskForm" property="tkBean.estStartDateInString"></html:text>
 						</td>
 					</tr>
-					<logic:equal value="true" property="isAdd" name="assignTaskForm">
+			
 					<tr>
 						<td class="tdLabel" align="right"><label>Est. End Date</label></td>
 						<td>
@@ -122,7 +122,7 @@ function registerSearchAssignToEvent(){
 							</table>
 						</td>
 					</tr>
-					</logic:equal>
+
 				</table>
 			</div>
 
