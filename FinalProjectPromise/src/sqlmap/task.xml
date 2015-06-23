@@ -6,7 +6,7 @@
 		select MAX(TASK_ID)+1 FROM TASK
 	</select>
 	
-	<select id="getAllListAssignTask" resultClass="independent_task.TaskBean" parameterClass="java.util.Map">
+	<select id="getAllListAssignTask" resultClass="independent_task.IndependentTaskBean" parameterClass="java.util.Map">
 		select * from (
 		    select vit.*, ROWNUM rnum from(
 		        SELECT
@@ -64,7 +64,7 @@
 		</dynamic>		          
 	</select>
 	
-	<insert id="insertToAssignTask" parameterClass="independent_task.TaskBean">
+	<insert id="insertToAssignTask" parameterClass="independent_task.IndependentTaskBean">
 		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
 		EST_END_DATE,EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status) 
 		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
@@ -89,7 +89,7 @@
 		where task_id =#taskId#      
 	</update>
 	
-	<select id="getAssignTaskForEdit" resultClass="independent_task.TaskBean" parameterClass="java.lang.Integer">
+	<select id="getAssignTaskForEdit" resultClass="independent_task.IndependentTaskBean" parameterClass="java.lang.Integer">
 	  	SELECT
 		TASK_ID           AS taskId,
 		PROJECT_ID        as projectId,

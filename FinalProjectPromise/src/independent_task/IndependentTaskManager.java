@@ -9,16 +9,16 @@ import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
-public class AssignTaskManager {
+public class IndependentTaskManager {
 
 	private SqlMapClient ibatis;
 	
-	public AssignTaskManager() {
+	public IndependentTaskManager() {
 		// TODO Auto-generated constructor stub
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<TaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
+	public List<IndependentTaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 		
@@ -42,7 +42,7 @@ public class AssignTaskManager {
 		return tmpCount;
 	}
 	
-	public void createNewAssignTask(TaskBean tsBean) throws SQLException {
+	public void createNewAssignTask(IndependentTaskBean tsBean) throws SQLException {
 		try {
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.startTransaction();
@@ -84,9 +84,9 @@ public class AssignTaskManager {
 		}
 		
 	}
-	public TaskBean getDataForEdit(int taskId) throws SQLException {
+	public IndependentTaskBean getDataForEdit(int taskId) throws SQLException {
 		
-		TaskBean tBean = (TaskBean) this.ibatis.queryForObject("task.getAssignTaskForEdit", taskId);	
+		IndependentTaskBean tBean = (IndependentTaskBean) this.ibatis.queryForObject("task.getAssignTaskForEdit", taskId);	
 		return tBean;
 	}
 	

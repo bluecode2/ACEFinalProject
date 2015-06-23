@@ -1,6 +1,6 @@
 package search_dialog;
 
-import independent_task.AssignTaskManager;
+import independent_task.IndependentTaskManager;
 
 import java.io.PrintWriter;
 

@@ -1,7 +1,7 @@
 package project_task;
 
 import independent_task.AssignTaskForm;
-import independent_task.AssignTaskManager;
+import independent_task.IndependentTaskManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ public class ProjectTaskHandler extends Action {
 		// TODO Auto-generated method stub
 		
 		ProjectTaskForm tsForm = (ProjectTaskForm) form;
-		AssignTaskManager tsMan = new AssignTaskManager();
+		IndependentTaskManager tsMan = new IndependentTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();

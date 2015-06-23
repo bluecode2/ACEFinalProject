@@ -5,7 +5,7 @@ import java.util.Date;
 
 import common.Constant;
 
-public class TaskBean {
+public class IndependentTaskBean {
 
 	private Integer taskId;
 	private String 	taskName;

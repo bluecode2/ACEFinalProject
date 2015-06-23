@@ -23,7 +23,7 @@ public class AssignTaskHandler extends Action {
 		// TODO Auto-generated method stub
 		
 		AssignTaskForm tsForm = (AssignTaskForm) form;
-		AssignTaskManager tsMan = new AssignTaskManager();
+		IndependentTaskManager tsMan = new IndependentTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();

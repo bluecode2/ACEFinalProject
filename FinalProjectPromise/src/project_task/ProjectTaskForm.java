@@ -1,6 +1,6 @@
 package project_task;
 
-import independent_task.TaskBean;
+import independent_task.IndependentTaskBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public class ProjectTaskForm extends ActionForm
 	private String			currSearchField;
 	private String			currSearchValue;
 	private Integer			selectedId;
-	private TaskBean		tkBean = new TaskBean();
-	private List<TaskBean>	arrList = new ArrayList<TaskBean>();
+	private IndependentTaskBean		tkBean = new IndependentTaskBean();
+	private List<IndependentTaskBean>	arrList = new ArrayList<IndependentTaskBean>();
 	private Boolean 		isAdd = false;
 	private int				selectedEdit;
 	private String			statusTask;
@@ -50,10 +50,10 @@ public class ProjectTaskForm extends ActionForm
 	public void setIsAdd(Boolean isAdd) {
 		this.isAdd = isAdd;
 	}
-	public List<TaskBean> getArrList() {
+	public List<IndependentTaskBean> getArrList() {
 		return arrList;
 	}
-	public void setArrList(List<TaskBean> arrList) {
+	public void setArrList(List<IndependentTaskBean> arrList) {
 		this.arrList = arrList;
 	}
 	public String getTask() {
@@ -110,10 +110,10 @@ public class ProjectTaskForm extends ActionForm
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
 	}
-	public TaskBean getTkBean() {
+	public IndependentTaskBean getTkBean() {
 		return tkBean;
 	}
-	public void setTkBean(TaskBean tkBean) {
+	public void setTkBean(IndependentTaskBean tkBean) {
 		this.tkBean = tkBean;
 	}
 	
