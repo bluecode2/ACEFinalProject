@@ -25,7 +25,7 @@ public class ProjectMemberManager {
 		
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		
+		System.out.println(projId);
 		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
 		Map map = new HashMap();
 		map.put("projId", projId);
@@ -37,10 +37,10 @@ public class ProjectMemberManager {
 		return pmbList;
 	}
 	
-	public Integer getCountProjectMember()
+	public Integer getCountProjectMember(Integer projId)
 			throws SQLException, ClassNotFoundException {
 		Integer result = (Integer) this.ibatis.queryForObject(
-				"projectMember.countProjectMember", null);
+				"projectMember.countProjectMember", projId);
 		return result;
 	}
 	
