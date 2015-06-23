@@ -34,12 +34,15 @@ public class ProjectTaskHandler extends Action {
 			if (session.getAttribute("projectId") != null) {
 				Integer projectId = (Integer) session.getAttribute("projectId");
 				tsForm.setPrjBean(projManager.getProjectByID(projectId));
+				session.setAttribute("projectId",projectId);
 			}
 			else{
 				response.sendRedirect("project.do");
 				return null;
 			}
 				
+		}else{
+			session.setAttribute("projectId",tsForm.getPrjBean().getProjectId());
 		}
 
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());

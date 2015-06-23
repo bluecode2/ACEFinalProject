@@ -134,7 +134,6 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="projectTaskForm" />
-		<html:hidden property="task" name="projectTaskForm" />
 		<html:hidden property="selectedEdit" name="projectTaskForm" />
 		<html:hidden property="currSearchField" name="projectTaskForm" />
 		<html:hidden property="currSearchValue" name="projectTaskForm" />
