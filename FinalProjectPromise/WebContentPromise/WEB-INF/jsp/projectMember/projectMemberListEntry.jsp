@@ -47,6 +47,32 @@
 		<html:hidden property="currPage" name="projectMemberForm"/>
 		
 		<div class="container">
+			<div class="divSearch form-group has-info" style="float: left;">
+				<table>
+					<tr>
+						<td>Project Name
+						</td>
+						<td><bean:write name="projectMemberForm" property="pMemberbean.projName"/>
+						</td>
+					</tr>
+					<tr>
+						<td>Manager Name
+						</td>
+						<td><bean:write name="projectMemberForm" property="pMemberbean.empName"/>
+						</td>
+					</tr>
+					<tr>
+						<td>Estimate Date
+						</td>
+						<td>
+						</td>
+						<td>To
+						</td>
+						<td>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 			<div class="divContent">
 				<table class="table table-striped table-bordered table-hover"
