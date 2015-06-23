@@ -52,7 +52,7 @@
 		    	PROJECT_ROLE_CODE AS projRoleCode,
 		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
 		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
-		    	where PROJECT_ID = #projectId#
-      	 		order by MEMBER_ID
+		    	FROM VPROJECTMEMBER		    			
+		    	where PROJECT_ID = #projId#
 	</select>
 </sqlMap>
