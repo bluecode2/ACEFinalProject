@@ -17,6 +17,16 @@
 
 		changePage(1);
 	}
+	
+	$(document).ready(
+			function() {
+				getStyleClass()
+			});
+	
+	function getProjDesc(projDesc){
+		$('#txtProjectDesc').html(projDesc);
+		$('#projDesc').modal();
+	}
 </script>
 </head>
 <body>
@@ -123,8 +133,30 @@
 				</table>
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
-
 		</div>
+		
+		<div class="modal fade" id="projDesc" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Project Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtProjectDesc"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
 		<html:hidden name="projectInvolvedForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
