@@ -137,44 +137,44 @@
 	<select id="getProjectInvolved" parameterClass="java.util.Map"
 		resultClass="project.ProjectBean">
 		SELECT * from (
-		    SELECT us.*, ROWNUM rnum from(
-		    	SELECT 
-		    	PROJECT_ID AS projectId,
-		    	UPDATED_BY AS updatedBy,
-		    	DEPT_ID AS dept_id,
-		    	EMPLOYEE_ID AS employeeId,
-		    	CREATED_BY AS createdBy,
-		    	PROJECT_CODE AS projectCode,
-		    	PROJECT_NAME AS projectName,
-		    	PROJECT_DESC AS projectDesc,
-		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
-		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
-		    	TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') AS actStartDateInString,
-		    	TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') AS actEndDateInString,
-		    	EST_MAIN_DAYS AS estMainDays,
-		    	ACT_MAIN_DAYS AS actMainDays,
-		    	PROJECT_STATUS AS projectStatus,
-		    	PROJECT_PROGRESS AS projectProgress,
-		    	REMARKS AS remarks,
-		    	TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
-		    	TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
-		    	EMPLOYEE_NAME AS employeeName,
-		    	DEPT_NAME AS deptName,
-		    	STATUS_CAPTION AS statusCaption
-		    	FROM VPROJECT P JOIN PROJECT_MEMBER PM
-		    	ON P.PROJECT_ID=PM.PROJECT_ID
-		    	where PM.EMPLOYEE_ID = #employeeId#
+            SELECT us.*, ROWNUM rnum from(
+                SELECT 
+                P.PROJECT_ID AS projectId,
+                P.UPDATED_BY AS updatedBy,
+                P.DEPT_ID AS dept_id,
+                P.EMPLOYEE_ID AS employeeId,
+                P.CREATED_BY AS createdBy,
+                P.PROJECT_CODE AS projectCode,
+                P.PROJECT_NAME AS projectName,
+                P.PROJECT_DESC AS projectDesc,
+                TO_CHAR(P.EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+                TO_CHAR(P.EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
+                TO_CHAR(P.ACT_START_DATE,'yyyy-MM-dd') AS actStartDateInString,
+                TO_CHAR(P.ACT_END_DATE,'yyyy-MM-dd') AS actEndDateInString,
+                P.EST_MAIN_DAYS AS estMainDays,
+                P.ACT_MAIN_DAYS AS actMainDays,
+                P.PROJECT_STATUS AS projectStatus,
+                P.PROJECT_PROGRESS AS projectProgress,
+                P.REMARKS AS remarks,
+                TO_CHAR(P.CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
+                TO_CHAR(P.UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
+                P.EMPLOYEE_NAME AS employeeName,
+                P.DEPT_NAME AS deptName,
+                P.STATUS_CAPTION AS statusCaption
+                FROM VPROJECT P JOIN PROJECT_MEMBER PM
+                ON P.PROJECT_ID=PM.PROJECT_ID
+                where PM.EMPLOYEE_ID = (SELECT E.EMPLOYEE_ID FROM EMPLOYEE E JOIN USERS S ON E.EMPLOYEE_ID = S.EMPLOYEE_ID WHERE S.USER_ID=#employeeId#)
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectCode">
-				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(P.PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectName">
-				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+				LOWER(P.PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-      	 		order by PROJECT_ID) us 
+      	 		order by P.PROJECT_ID) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
 	</select>
