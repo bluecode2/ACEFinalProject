@@ -46,12 +46,11 @@ public class ProjectTaskHandler extends Action {
 
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(
-					Constant.MenuCode.ASSIGN_TASK_ENTRY, us, request);
+					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Task Entry");
 			request.setAttribute("listAssignTo",
 					empMan.getEmpForAssignTask(us.getEmployeeId(), "", ""));
-			return mapping.findForward("assignTaskEntry");
+			return mapping.findForward("entry");
 		} else if ("save".equals(tsForm.getTask())) {
 			Boolean isAdd = tsForm.getIsAdd();
 
@@ -69,18 +68,15 @@ public class ProjectTaskHandler extends Action {
 						.getTaskDesc(), tsForm.getTkBean().getUpdatedBy());
 			}
 
-			response.sendRedirect("assignTaskEntry");
-			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
-					us, request);
+			response.sendRedirect("projectTask.do");
 			return null;
 		} else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
 
 			if (tsForm.getSelectedEdit() == 0) {
-				request.setAttribute("pageTitle", "Assign Entry");
 				CommonFunction.initializeHeader(
-						Constant.MenuCode.ASSIGN_TASK_ENTRY, us, request);
-				return mapping.findForward("assignTaskEntry");
+						Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
+				return mapping.findForward("entry");
 			} else if (tsForm.getSelectedEdit() == 2) {
 				tsForm.setStatusTask("TA_STAT_07");
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
