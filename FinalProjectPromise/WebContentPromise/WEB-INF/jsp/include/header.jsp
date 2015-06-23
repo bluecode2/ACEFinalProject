@@ -110,11 +110,13 @@
 							class="glyphicon glyphicon-user" aria-hidden="true"
 							style="margin-right: 10px"></span> <logic:notEmpty
 								name="userName">
-								<bean:write name="userName" />
+								<bean:write name="userName" /> &nbsp;
 								<span class="caret">
 							</logic:notEmpty> </span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
+							<li><a><bean:write name="userName" /> (<bean:write name="userRoleName" />)</a></li>
+							<li role="separator" class="divider"></li>
 							<li><a href="#" onclick="onChangePasswordClick();">Change Password</a></li>
 							<li><a href="logout.do">Logout</a></li>
 						</ul></li>

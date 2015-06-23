@@ -92,13 +92,13 @@ public class CommonFunction {
 		arrMenuLvl1 = menuMan.getAllMenuHead(user.getUserRoleId());
 
 		for (MenuBean menuLvl1 : arrMenuLvl1) {
-			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(menuLvl1
-					.getMenuId(),user.getUserRoleId());
+			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(
+					menuLvl1.getMenuId(), user.getUserRoleId());
 
 			for (MenuBean menuLvl2 : tmpLvl2) {
 				arrMenuLvl2.add(menuLvl2);
-				ArrayList<MenuBean> tmpLvl3 = menuMan
-						.getAllMenuByParent(menuLvl2.getMenuId(),user.getUserRoleId());
+				ArrayList<MenuBean> tmpLvl3 = menuMan.getAllMenuByParent(
+						menuLvl2.getMenuId(), user.getUserRoleId());
 
 				for (MenuBean menuLvl3 : tmpLvl3) {
 					arrMenuLvl3.add(menuLvl3);
@@ -110,11 +110,10 @@ public class CommonFunction {
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
 
-		if (user != null)
-			request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("userRoleName", user.getUserRoleName());
 	}
 
-	
 	public static void initializeHeader(String menuCode, UserBean user,
 			HttpServletRequest request) {
 		ArrayList<MenuBean> arrMenuLvl1 = new ArrayList<MenuBean>();
@@ -124,19 +123,19 @@ public class CommonFunction {
 		MenuManager menuMan = new MenuManager();
 		MenuBean menu = menuMan.getMenuByMenuId(menuCode);
 		UserRoleMenuManager roleMenuManager = new UserRoleMenuManager();
-		UserRoleMenuBean roleMenuBean = roleMenuManager.getUserRoleMenu(user.getUserRoleId(), menu.getMenuId());
-		
-		
+		UserRoleMenuBean roleMenuBean = roleMenuManager.getUserRoleMenu(
+				user.getUserRoleId(), menu.getMenuId());
+
 		arrMenuLvl1 = menuMan.getAllMenuHead(user.getUserRoleId());
 
 		for (MenuBean menuLvl1 : arrMenuLvl1) {
-			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(menuLvl1
-					.getMenuId(),user.getUserRoleId());
+			ArrayList<MenuBean> tmpLvl2 = menuMan.getAllMenuByParent(
+					menuLvl1.getMenuId(), user.getUserRoleId());
 
 			for (MenuBean menuLvl2 : tmpLvl2) {
 				arrMenuLvl2.add(menuLvl2);
-				ArrayList<MenuBean> tmpLvl3 = menuMan
-						.getAllMenuByParent(menuLvl2.getMenuId(),user.getUserRoleId());
+				ArrayList<MenuBean> tmpLvl3 = menuMan.getAllMenuByParent(
+						menuLvl2.getMenuId(), user.getUserRoleId());
 
 				for (MenuBean menuLvl3 : tmpLvl3) {
 					arrMenuLvl3.add(menuLvl3);
@@ -147,15 +146,21 @@ public class CommonFunction {
 		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
-		
-		request.setAttribute("userName", user.getEmployeeName() + " (" + user.getUserRoleName() + ")");
-		
+
+		request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("userRoleName", user.getEmployeeName());
+
 		request.setAttribute("pageTitle", menu.getMenuCaption());
-		
-		request.setAttribute("btnAddVisible", roleMenuBean.getMenuCrud().contains("C"));
-		request.setAttribute("btnBackVisible", roleMenuBean.getMenuCrud().contains("B"));
-		request.setAttribute("btnSaveVisible", roleMenuBean.getMenuCrud().contains("U"));
-		request.setAttribute("btnApproveVisible", roleMenuBean.getMenuCrud().contains("A"));
-		request.setAttribute("btnDeclineVisible", roleMenuBean.getMenuCrud().contains("D"));
+
+		request.setAttribute("btnAddVisible", roleMenuBean.getMenuCrud()
+				.contains("C"));
+		request.setAttribute("btnBackVisible", roleMenuBean.getMenuCrud()
+				.contains("B"));
+		request.setAttribute("btnSaveVisible", roleMenuBean.getMenuCrud()
+				.contains("U"));
+		request.setAttribute("btnApproveVisible", roleMenuBean.getMenuCrud()
+				.contains("A"));
+		request.setAttribute("btnDeclineVisible", roleMenuBean.getMenuCrud()
+				.contains("D"));
 	}
 }
