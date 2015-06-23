@@ -56,6 +56,7 @@ public class Constant {
 		public static final String PROJECT_TASK = "TR010101";
 		public static final String PROJECT_INVOLVED = "TR0102";
 		public static final String PROJECT_APPROVAL = "TR0103";
+		public static final String PROJECT_APPROVAL_EVALUATE = "TR0103-E";
 		
 		public static final String PROPOSE_INDEPENDENT_TASK = "TR0201";
 		public static final String PROPOSE_INDEPENDENT_TASK_ENTRY = "TR0201-E";
@@ -66,5 +67,6 @@ public class Constant {
 	
 	public static class GeneralCode{
 		public static final String PERSONAL_HOLIDAY_TYPE = "PH_TYPE";
+		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
 	}
 }
