@@ -135,7 +135,14 @@ public class ProjectHandler extends Action{
 		else if ("toTask".equalsIgnoreCase(pForm.getTask())){
 			session.setAttribute("projectId", pForm.getSelectedId());
 			
-			return mapping.findForward("projectTask.do");
+			response.sendRedirect("projectTask.do");
+			return null;
+		}
+		else if ("toMember".equalsIgnoreCase(pForm.getTask())){
+			session.setAttribute("projectId", pForm.getSelectedId());
+			
+			response.sendRedirect("projectMember.do");
+			return null;
 		}
 		else if ("save".equalsIgnoreCase(pForm.getTask())){
 			String isProc = pForm.getIsProc();

@@ -39,7 +39,8 @@ public class ProjectMemberHandler extends Action {
 		pBean = pMan.getProjectByID(1);
 		
 		request.setAttribute("getProject", pBean);
-		
+		Integer projId = (Integer) session.getAttribute("projectId");
+		session.setAttribute("test", projId);
 		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
 			
 		}
@@ -54,7 +55,7 @@ public class ProjectMemberHandler extends Action {
 				/ (double) Constant.pageSize));
 		System.out.println("pageCount end");
 		
-		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(1,				
+		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
 		System.out.println("isi list selesai");
 		

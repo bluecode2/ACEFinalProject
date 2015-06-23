@@ -16,16 +16,9 @@
 		document.forms[0].submit();
 	}
 	
-	function search() {
-		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
-		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
-
-		changePage(1);
-	}
-	
 	$(document).ready(
 			function() {
-				
+				alert(document.getElementById('testing').value);
 			});
 	
 	function actionForm(task, id, nama, projStatus, projProg) {
@@ -45,6 +38,7 @@
 		<html:hidden name="projectMemberForm" property="task" />
 		<html:hidden name="projectMemberForm" property="selectedId" />
 		<html:hidden property="currPage" name="projectMemberForm"/>
+		<html:hidden property="projId" name="test" styleId="testing"/>
 		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: left;">

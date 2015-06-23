@@ -45,7 +45,7 @@ public class ProjectMemberManager {
 	}
 	
 	public Integer getMemberId() throws SQLException{
-		Integer newMemberId = (Integer) this.ibatis.queryForObject("", null);
+		Integer newMemberId = (Integer) this.ibatis.queryForObject("projectMember.getProjectMemberId", null);
 		return newMemberId;
 	}
 	
