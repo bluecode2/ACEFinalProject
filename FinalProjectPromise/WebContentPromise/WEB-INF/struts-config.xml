@@ -24,11 +24,12 @@
 		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>	
 		<form-bean name="projectForm" type="project.ProjectForm"></form-bean>	
 		<form-bean name="proposedTaskForm" type="proposed_task.ProposedTaskForm"></form-bean>	
-		<form-bean name="assignTaskForm" type="task.AssignTaskForm"></form-bean>	
+		<form-bean name="assignTaskForm" type="independent_task.AssignTaskForm"></form-bean>	
 		<form-bean name="searchAssignToForm" type="search_dialog.SearchEmpAssignedToForm"></form-bean>
 		<form-bean name="insertRemarkAssignTaskForm" type="search_dialog.InsertRemarkAssignTaskForm"></form-bean>
 		<form-bean name="approveTaskForm" type="proposed_task.ApproveTaskForm"></form-bean>
 		<form-bean name="projectMemberForm" type="project_member.ProjectMemberForm"></form-bean>
+		<form-bean name="projectTaskForm" type="project_task.ProjectTaskForm"></form-bean>
 		<form-bean name="projectApprovalForm" type="projectApproval.ProjectApprovalForm"></form-bean>
 	</form-beans>
 
@@ -119,7 +120,7 @@
 			<forward name="projectList" path="/WEB-INF/jsp/project/projectList.jsp"></forward>
 			<forward name="projectEntry" path="/WEB-INF/jsp/project/projectEntry.jsp"></forward>
 		</action>
-		<action path="/assignTask" name="assignTaskForm" type="task.AssignTaskHandler" scope="request">
+		<action path="/assignTask" name="assignTaskForm" type="independent_task.AssignTaskHandler" scope="request">
 			<forward name="assignTaskEntry" path="/WEB-INF/jsp/assignTask/assignTaskEntry.jsp"></forward>
 			<forward name="assignTaskList" path="/WEB-INF/jsp/assignTask/assignTaskList.jsp"></forward>
 		</action>
@@ -134,6 +135,10 @@
 		<action path="/projectMember" name="projectMemberForm" type="project_member.ProjectMemberHandler"
 			scope="request">
 			<forward name="projectMemberListEntry" path="/WEB-INF/jsp/projectMember/projectMemberListEntry.jsp"></forward>
+		</action>
+		<action path="/projectTask" name="projectTaskForm" type="project_task.ProjectTaskHandler"
+			scope="request">
+			<forward name="list" path="/WEB-INF/jsp/projectTask/projectTaskList.jsp"></forward>
 		</action>
 		<action path="/projectApproval" name="projectApprovalForm" type="projectApproval.ProjectApprovalHandler"
 			scope="request">
