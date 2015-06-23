@@ -65,6 +65,15 @@ function search() {
 			$('#addRemarks').modal();
 			
 		});
+		$('.linkDesc').on('click',function(){
+			var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
+			var taskName = $(this).closest('tr').find('.hdTaskName').val();
+			$('#txtSearchFieldDesc').val(taskDesc);
+			$('#txtValueTaskNameDesc').val(taskName);
+			
+			$('#showDesc').modal();
+			
+		});
 		$('.goInsert').on('click',function(){
 			document.forms[0].selectedId.value = $('#txtValueTaskId').val(); //task ID
 			document.forms[0].task.value = "secondEdit";
@@ -158,9 +167,11 @@ function search() {
 						<logic:notEmpty name="assignTaskForm" property="arrList">
 							<logic:iterate id="reg" name="assignTaskForm" property="arrList">
 								<tr>
-									<td><html:hidden property="taskId" name="reg" styleClass="hdTaskId"/>
-									<html:hidden property="taskName" name="reg" styleClass="hdTaskName"/>
-										<a href="#" class="text-info" data-toggle="modal" data-target="#showDesc">
+									<td>
+										<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc"/>
+										<html:hidden property="taskId" name="reg" styleClass="hdTaskId"/>
+										<html:hidden property="taskName" name="reg" styleClass="hdTaskName"/>
+										<a href="#" class="text-info linkDesc">
 											<bean:write name="reg" property="taskName" />
 										</a>
 									</td>
@@ -245,7 +256,45 @@ function search() {
 		<!-- /.modal -->
 		
 		<!-- popup to show DESC -->
+		<div class="modal fade" id="showDesc" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Task Description</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table width="100%">
+									<tr>
+										<td style="padding-left: 15px">Task</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtValueTaskNameDesc" class="form-control" disabled="disabled" />
+										</td>
+										
+									</tr>
+									<tr>
+										<td style="padding-left: 15px">
+											Task Desc 
+										</td>
+										<td style="padding-left: 15px">
+											<textarea rows="3" cols="3" class="form-control"  id="txtSearchFieldDesc" disabled="disabled"></textarea>
+										</button></td>
+									</tr>
+								</table>
+							</div>
 
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
