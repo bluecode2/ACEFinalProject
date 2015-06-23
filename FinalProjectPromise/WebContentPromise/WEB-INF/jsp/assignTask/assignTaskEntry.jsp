@@ -26,7 +26,7 @@ function onBtnSaveClick() {
 
 $(document).ready(function() {
 	$(".datepicker").attr("data-provide", "datepicker");
-	registerSearchHeadDeptEvent();
+	registerSearchAssignToEvent();
 });
 function search() {
 	var spvId = $('#hdSpvId').val();
@@ -54,8 +54,8 @@ function registerSearchAssignToEvent(){
 			'click',
 			function() {
 				var value = $(this).find('td').eq(0).html();
-				var text = $(this).find('td').eq(1).html() + ' - '
-						+ $(this).find('td').eq(2).html();
+				var text = $(this).find('td').eq(2).html();
+				alert(value + " "+ text);
 				$('#hdEmpId').val(value);
 				$('#txtAssignedToName').val(text);
 			});
@@ -118,7 +118,6 @@ function registerSearchAssignToEvent(){
 									<td align="center"><a href="#" class="text-info"
 										data-toggle="modal" data-target="#searchAssTo"> <span
 											class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
-
 								</tr>
 							</table>
 						</td>
@@ -177,17 +176,10 @@ function registerSearchAssignToEvent(){
 									<logic:notEmpty name="listAssignTo">
 										<logic:iterate id="emp" name="listAssignTo">
 											<tr data-dismiss="modal" class="rowSearch">
-												<td style="display: none">
-													<bean:write name="emp" property="employeeId" />
-												</td>
-												<td width="150px">
-													<bean:write name="emp" property="employeeCode" />
-												</td>
-												<td>
-													<bean:write name="emp" property="employeeName" />
-												</td>
-												<td width="150px">
-													<bean:write name="emp" property="email" />
+												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
+												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
+												<td><bean:write name="emp" property="employeeName" /></td>
+												<td width="150px"><bean:write name="emp" property="email" />
 												</td>
 											</tr>
 										</logic:iterate>

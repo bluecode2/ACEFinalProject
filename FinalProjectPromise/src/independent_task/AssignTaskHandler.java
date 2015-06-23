@@ -64,7 +64,7 @@ public class AssignTaskHandler extends Action {
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				return mapping.findForward("assignTaskEntry");
 			}
-			else if (tsForm.getSelectedEdit() == 2) {
+			else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask("TA_STAT_07");
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
 			}	
