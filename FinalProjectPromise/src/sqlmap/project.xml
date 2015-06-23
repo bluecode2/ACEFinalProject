@@ -178,6 +178,7 @@
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
 	</select>
+
 	<select id="getAllProjectToEvaluate" parameterClass="java.util.Map"
 		resultClass="project.ProjectBean">
 		SELECT * from (
