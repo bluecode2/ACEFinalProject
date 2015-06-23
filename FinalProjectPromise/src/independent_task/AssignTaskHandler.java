@@ -50,10 +50,6 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
-			
-			response.sendRedirect("assignTaskEntry");
-			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
-					us, request);
 			return null;
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
@@ -91,7 +87,7 @@ public class AssignTaskHandler extends Action {
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		
-		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue()));
+		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.pageSize));
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));

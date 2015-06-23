@@ -34,9 +34,10 @@ public class IndependentTaskManager {
 		return arr;
 	}
 	
-	public int getCountAssignTask(String col, String input) throws SQLException {
+	public int getCountAssignTask(String col, String input,int empId) throws SQLException {
 		Map map = new HashMap();
 		map.put("searchField", col);
+		map.put("empId", empId);
 		map.put("searchValue", input);
 		int tmpCount = (Integer) this.ibatis.queryForObject("independentTask.getCountAssignTask", map);
 		return tmpCount;
