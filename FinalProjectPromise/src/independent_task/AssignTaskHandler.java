@@ -1,4 +1,4 @@
-package task;
+package independent_task;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

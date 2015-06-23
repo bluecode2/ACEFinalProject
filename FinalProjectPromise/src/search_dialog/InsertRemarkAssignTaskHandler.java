@@ -1,5 +1,7 @@
 package search_dialog;
 
+import independent_task.AssignTaskManager;
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +11,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import task.AssignTaskManager;
 
 public class InsertRemarkAssignTaskHandler extends Action {
 @Override

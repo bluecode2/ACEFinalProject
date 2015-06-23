@@ -1,4 +1,4 @@
-package task;
+package independent_task;
 
 import java.sql.SQLException;
 import java.util.HashMap;
