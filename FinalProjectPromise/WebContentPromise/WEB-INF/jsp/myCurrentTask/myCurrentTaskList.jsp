@@ -22,9 +22,14 @@
 
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
-		confirm("Are you sure want to start Task " + nama) {
+		if(confirm("Are you sure want to "+task+" Task " + nama)) {
 				document.forms[0].submit();
 		}
+	}
+
+	function getTaskDesc(taskDesc) {
+		$('#txtTaskDesc').html(taskDesc);
+		$('#taskDesc').modal();
 	}
 </script>
 </head>
@@ -80,7 +85,9 @@
 							<logic:iterate id="reg" name="myCurrentTaskForm"
 								property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="taskName" /></td>
+									<td><a href="#" class="text-info" 
+									onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');" data-target="taskDesc">
+									<bean:write name="reg" property="taskName" /></a></td>
 									<td><bean:write name="reg" property="estStartDateInString" /></td>
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
@@ -103,7 +110,12 @@
 												aria-hidden="true"></span></a>
 										</logic:equal>
 										<logic:equal name="reg"
-											property="taskStatus" value="TA_STAT_01">
+											property="taskProgress" value="100">
+											<a class="text-success" href="#"
+												onclick="actionForm('submit','<bean:write name="reg" property="taskId" />',
+												'<bean:write name="reg" property="taskName" />');"
+												title="Pause"><span class="glyphicon glyphicon-ok"
+												aria-hidden="true"></span></a>
 										</logic:equal>
 									</td>
 								</tr>
@@ -121,6 +133,29 @@
 			</div>
 
 		</div>
+		
+		<div class="modal fade" id="taskDesc" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Task Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtTaskDesc"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
 		<html:hidden name="myCurrentTaskForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
