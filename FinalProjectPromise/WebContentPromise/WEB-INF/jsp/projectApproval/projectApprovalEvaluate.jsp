@@ -177,11 +177,12 @@
 						<tr>
 							<td>Task Name</td>
 							<td>Assign To</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
+							<td>Estimate Date</td>
+							<td>Actual Date</td>
 
 							<td>Task Progress</td>
 							<td>Task Status</td>
+							<td>Activity</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -198,13 +199,15 @@
 												name="reg" property="taskName" />
 									</a></td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
 									<td><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" /> <bean:write name="reg"
 											property="taskStatusName" /></td>
-									<td align="center"><a class="text-success firstBtn"
+									<td align="center"><a class="text-info firstBtn"
+										href="#">Activity</a> </td>
+									<td align="center"><a class="text-info listActivity"
 										href="#" id="tes"
 										onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
 											<span aria-hidden="true"></span>
