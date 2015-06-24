@@ -14,7 +14,8 @@ public class PersonalHolidayBean {
 	private String holidayDesc;
 	private Date holidayDate;
 	private String holidayDateInString;
-	private Integer isExchangeDay;
+	private Boolean isExchangeDay;
+	private Integer isExchangeDayInt;
 	private Date createDate;
 	private String createDateInString;
 	private Date updateDate;
@@ -92,11 +93,24 @@ public class PersonalHolidayBean {
 		}
 		this.holidayDate = date;
 	}
-	public Integer getIsExchangeDay() {
+	public Boolean getIsExchangeDay() {
 		return isExchangeDay;
 	}
-	public void setIsExchangeDay(Integer isExchangeDay) {
+	public void setIsExchangeDay(Boolean isExchangeDay) {
 		this.isExchangeDay = isExchangeDay;
+	}
+	public Integer getIsExchangeDayInt() {
+		if(getIsExchangeDay()==null)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+	public void setIsExchangeDayInt(Integer isExchangeDayInt) {
+		this.isExchangeDayInt = isExchangeDayInt;
 	}
 	public Date getCreateDate() {
 		return createDate;

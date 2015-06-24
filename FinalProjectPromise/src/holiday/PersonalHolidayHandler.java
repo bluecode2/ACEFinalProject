@@ -29,7 +29,6 @@ public class PersonalHolidayHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		//CommonFunction.createAllowedMenu(us, request);
-
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
@@ -40,7 +39,6 @@ public class PersonalHolidayHandler extends Action{
 			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
 					us, request);
 			persForm.setListOfGenCode(genCodeManager.getGeneralCodeByParentId(Constant.GeneralCode.PERSONAL_HOLIDAY_TYPE));
-			System.out.println(persForm.getListOfGenCode());
 			return mapping.findForward("personalHolidayEntry");
 		}
 		else if ("save".equals(persForm.getTask())){
@@ -49,8 +47,6 @@ public class PersonalHolidayHandler extends Action{
 			if (isAdd) {
 				persForm.getPersHolidayBean().setHolidayId(persManager.getNewGenHolidayId());
 				persForm.getPersHolidayBean().setCreatedBy(us.getUserId());
-				
-				System.out.println(persForm.getPersHolidayBean().getHolidayType());
 				
 				persManager.insertPersonalHoliday(persForm.getPersHolidayBean());
 			} 
@@ -83,26 +79,20 @@ public class PersonalHolidayHandler extends Action{
 		persForm.setSearchField(persForm.getCurrSearchField());
 		persForm.setSearchValue(persForm.getCurrSearchValue());
 		
-		System.out.println(persForm.getCurrSearchField());
-		System.out.println(persForm.getCurrSearchValue());
-		
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
 				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),
 				persForm.getCurrPage(), Constant.pageSize));
 		
 		rowCount = persManager.getCountPersonalHoliday(persForm.getCurrSearchField(), persForm.getCurrSearchValue());
-		
 		persForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY, us,
 				request);
 		
 		request.setAttribute("pageTitle", "Personal Holiday List");
-		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(persForm.getPageCount(),persForm.getCurrPage()));
-		
 		request.setAttribute("pageCount", persForm.getPageCount());
 		request.setAttribute("currPage", persForm.getCurrPage());
 		request.setAttribute("rowCount", rowCount);

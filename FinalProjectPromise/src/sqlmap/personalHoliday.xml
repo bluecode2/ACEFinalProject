@@ -22,7 +22,7 @@
 		fGetGeneralCodeCaption(P.HOLIDAY_TYPE) as holidayTypeName
 		FROM PERSONAL_HOLIDAY  P
 		JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
-		where HOLIDAY_DATE > SYSDATE
+		where HOLIDAY_DATE >= SYSDATE
 		AND IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDesc">
@@ -70,7 +70,7 @@
 		HOLIDAY_DESC, HOLIDAY_DATE, IS_EXCHANGE_DAY, CREATE_DATE, UPDATE_DATE, IS_DELETED, HOLIDAY_TYPE)
 		VALUES
 		(#holidayId#, #employeeId#, #createdBy#, NULL, #holidayDesc#, TO_DATE(#holidayDateInString#,'yyyy-MM-dd'),
-		#isExchangeDay#, SYSDATE, NULL, 0, #holidayType#)
+		#isExchangeDayInt#, SYSDATE, NULL, 0, #holidayType#)
 	</insert>
 
 	<select id="getPersonalHolidayEdit" resultClass="holiday.PersonalHolidayBean">
@@ -100,7 +100,7 @@
 		UPDATED_BY=#updatedBy#,
 		HOLIDAY_DESC=#holidayDesc#,
 		HOLIDAY_DATE=to_date(#holidayDateInString#,'yyyy-MM-dd'),
-		IS_EXCHANGE_DAY=#isExchangeDay#,		
+		IS_EXCHANGE_DAY=#isExchangeDayInt#,		
 		UPDATE_DATE=SYSDATE,
 		HOLIDAY_TYPE=#holidayType#
 		WHERE HOLIDAY_ID=#holidayId#

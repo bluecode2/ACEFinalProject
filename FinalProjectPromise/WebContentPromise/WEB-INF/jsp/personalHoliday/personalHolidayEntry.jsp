@@ -131,6 +131,12 @@
 							</html:select>
 						</td>
 					</tr>
+					<tr>
+						<td>Is Exchange Day</td>
+						<td>
+							<html:checkbox name="personalHolidayForm" property="persHolidayBean.isExchangeDay" />
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>
