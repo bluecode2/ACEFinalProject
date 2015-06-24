@@ -42,7 +42,6 @@ public class GeneralParamHandler extends Action{
 			return mapping.findForward("entry");
 		}
 		else if ("save".equals(gpf.getTask())){
-			
 			gpf.getBean().setUpdatedBy(us.getUserId());
 			gpm.updateGeneralParam(gpf.getBean());
 

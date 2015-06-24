@@ -25,23 +25,18 @@ public class MenuHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
+		//CommonFunction.createAllowedMenu(us, request);
 		
-		System.out.println("masuk ke handler");
+		CommonFunction.initializeHeader(Constant.MenuCode.MENU_MANAGEMENT,us, request);
 		mnForm.setListCount(mnMan.getCountMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue()));
 		mnForm.setPageCount((int) Math.ceil((double) mnForm.getListCount() / (double) Constant.pageSize));
-		System.out.println(mnForm.getListCount());
-		System.out.println(mnForm.getPageCount());
 		mnForm.setArrList(mnMan.selectListMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue(), mnForm.getCurrPage(), Constant.pageSize));
-		System.out.println(mnForm.getArrList());
-		request.setAttribute("pageTitle", "General Code List");
+		request.setAttribute("pageTitle", "Menu List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(mnForm.getPageCount(), mnForm.getCurrPage()));
 
 		request.setAttribute("pageCount", mnForm.getPageCount());
 		request.setAttribute("currPage", mnForm.getCurrPage());
 		request.setAttribute("rowCount", mnForm.getListCount());
 		return mapping.findForward("list");
-	
-	
 	}
 }

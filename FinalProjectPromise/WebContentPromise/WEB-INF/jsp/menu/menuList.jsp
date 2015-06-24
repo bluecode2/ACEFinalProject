@@ -63,19 +63,19 @@ function search() {
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Index</td>
-							<td>Menu Code</td>
-							<td>Menu Caption</td>
-							<td>Parent Name</td>
-							<td>Menu Crud</td>
-							<td>Menu URL</td>
+							<!-- <td class="align-center">Index</td> -->
+							<td class="align-center">Menu Code</td>
+							<td class="align-center">Menu Caption</td>
+							<td class="align-center">Parent Name</td>
+							<td class="align-center">Menu CRUD</td>
+							<td class="align-center">Menu URL</td>
 						</tr>
 					</thead>
 					<tbody>
 						<logic:notEmpty name="menuForm" property="arrList">
 							<logic:iterate id="reg" name="menuForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="menuIndex" /></td>
+									<%-- <td><bean:write name="reg" property="menuIndex" /></td> --%>
 									<td><bean:write name="reg" property="menuCode" /></td>
 									<td><bean:write name="reg" property="menuCaption" /></td>
 									<td><bean:write name="reg" property="parentName" /></td>

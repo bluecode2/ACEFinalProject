@@ -65,8 +65,6 @@ public class GeneralHolidayHandler extends Action{
 			genManager.deleteGeneralHoliday(genForm.getGenHolidayBean());
 		}
 		else if ("search".equals(genForm.getTask())) {
-			System.out.println(genForm.getCurrSearchField() + " "+ genForm.getCurrSearchValue()+" " +genForm.getCurrSearchValue2());
-			
 			if (genForm.getCurrSearchValue()!= "" && genForm.getCurrSearchValue2() != "") {	
 				int rowCount;
 				genForm.setArrList(genManager.getGeneralHoliday(
@@ -93,7 +91,6 @@ public class GeneralHolidayHandler extends Action{
 			}
 			else {
 				genForm.setCurrSearchField("");
-				System.out.println("salah");
 			}
 
 		}
