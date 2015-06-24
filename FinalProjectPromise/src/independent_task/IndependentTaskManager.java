@@ -142,4 +142,19 @@ public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 		int tmpCount = (Integer) this.ibatis.queryForObject("independentTask.getCountMyCurrentTask", map);
 		return tmpCount;
 	}
+	
+	public void updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) throws SQLException {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("independentTask.updateStatusMyCurrentTask", m);
+			this.ibatis.commitTransaction();
+		} finally {
+			this.ibatis.endTransaction();
+		}
+	}
 }

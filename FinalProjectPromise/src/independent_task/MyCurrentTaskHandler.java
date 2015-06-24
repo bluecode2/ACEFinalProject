@@ -29,32 +29,17 @@ public class MyCurrentTaskHandler extends Action {
 		EmployeeManager empMan = new EmployeeManager();
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
-		if ("add".equals(tsForm.getTask())) {
-			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
-			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Task Entry");
-			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
-			return mapping.findForward("assignTaskEntry");
+		if ("start".equals(tsForm.getTask())) {
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_03");
 		}
-		else if ("save".equals(tsForm.getTask()	)) {
-			Boolean isAdd = tsForm.getIsAdd();
-
-			if (tsForm.getTkBean().getAssignedTo() == 0)
-				tsForm.getTkBean().setAssignedTo(null);
-
-			if (isAdd) {
-				tsForm.getTkBean().setCreatedBy(us.getUserId());
-				tsMan.createNewAssignTask(tsForm.getTkBean());
-			} else {
-				
-				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
-			}
-			response.sendRedirect("myCurrentTask.do");
-			return null;
+		else if ("pause".equals(tsForm.getTask())) {
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_06");
+		}
+		else if ("submit".equals(tsForm.getTask())) {
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_04");
 		}
 	
-		CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
+		CommonFunction.initializeHeader(Constant.MenuCode.CURRENT_TASK_LIST,
 				us, request);
 		
 		tsForm.setTask("");
@@ -74,7 +59,6 @@ public class MyCurrentTaskHandler extends Action {
 		request.setAttribute("rowCount", tsForm.getListCount());
 
 		return mapping.findForward("myCurrentTaskList");
-/*		return mapping.findForward("assignTask");*/
 		
 		
 	}

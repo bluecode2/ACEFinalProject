@@ -65,6 +65,7 @@ public class Constant {
 		public static final String PROPOSE_INDEPENDENT_TASK_ENTRY = "TR0201-E";
 		public static final String ASSIGN_TASK_LIST= "TR0203" ; 
 		public static final String ASSIGN_TASK_ENTRY= "TR0203-E"; 
+		public static final String CURRENT_TASK_LIST= "TR0204"; 
 		
 	}
 	
