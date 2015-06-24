@@ -1,5 +1,8 @@
 package project;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,20 +36,34 @@ public class ProjectInvolvedHandler extends Action{
 				request);
 		
 		///
-		ProjectMemberBean projMemberBean =  new ProjectMemberBean();
-		ProjectMemberForm projMemberForm = new ProjectMemberForm();
-		
-		System.out.println(projMemberBean.getProjectId());
-		
-		if ("viewMember".equalsIgnoreCase(projectForm.getTask())){
-			request.setAttribute("listProjectMember", projectMemberManager.getAllProjectMember(projMemberForm.getSelectedId(), 
-					1,1));
+
+		if ("listMembers".equals(projectForm.getTask())) {
+			Integer selId = projectForm.getSelectedId();
+			projectForm.setArrMember(projectMemberManager.getAllProjectMember(selId, 1,1));
+			response.setContentType("text/text;charset=utf-8");
+			response.setHeader("cache-control", "no-cache");
+			PrintWriter out = response.getWriter();
+			
+			List<ProjectMemberBean> arrMember = projectForm.getArrMember();
+
+			for (ProjectMemberBean pmBean : arrMember) {
+				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+				out.println("<td>" + pmBean.getEmpName() + "</td>");
+				out.println("<td>" + pmBean.getProjRoleName() + "</td>");
+				out.println("</tr>");
+			}	
+
+			out.flush();
+			return null;
 		}
+		
+
 		
 		projectForm.setTask("");
 		projectForm.setSearchField(projectForm.getCurrSearchField());
 		projectForm.setSearchValue(projectForm.getCurrSearchValue());
-
+	
+		
 		int rowCount;
 		rowCount = projectManager.getCountProject(projectForm.getCurrSearchField(),
 				projectForm.getCurrSearchValue());

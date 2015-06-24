@@ -23,16 +23,27 @@ $(document).ready(function() {
 		$('#showDesc').modal();
 		
 	});
+	
 	$('.linkMember').on('click',function(){
-		var proDesc = $(this).closest('tr').find('.hdProjectDesc').val();
-		var proName = $(this).closest('tr').find('.hdProjectName').val();
-		var proCode = $(this).closest('tr').find('.hdProjectCode').val();
-		$('#txtProDesc').val(proDesc);
-		$('#txtProName').val(proName);
-		$('#txtProCode').val(proCode);
-		$('#showMember').modal();
+		var selecId = $(this).closest('tr').find('.hdProjectId').val();
 		
+		$.ajax({
+			type : "POST",
+			url : "projectApproval.do",
+			data : "task=listMembers&selectedId="
+					+ selecId,
+			success : function(response) {
+				$("#tblShow").find("tr:gt(0)").remove();
+				$("#tblShow").append(response);
+				$('#showMember').modal();
+			},
+			error : function(e) {
+				alert("Error: " + e);
+			}
+
+		});
 	});
+	
 });
 </script>
 
@@ -49,7 +60,7 @@ $(document).ready(function() {
 		<html:hidden property="currPage" name="projectApprovalForm"/>
 		<html:hidden property="currSearchValue" name="projectApprovalForm"/>
 		<html:hidden property="currSearchField" name="projectApprovalForm"/>
-		<html:hidden property="selectedId" name="projectApprovalForm"/>
+		<html:hidden property="selectedId" name="projectApprovalForm" styleClass="hdSelectedId"/>
 			<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -58,8 +69,7 @@ $(document).ready(function() {
 						<td style="padding-left: 15px;"><html:select
 								name="projectApprovalForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<html:option value="">-- All --</html:option>
-								<option value="taskName">task Name</option>
+								<option value="projectName">Project Name</option>
 								<option value="taskDesc">task DESC</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
@@ -92,7 +102,7 @@ $(document).ready(function() {
 						<logic:notEmpty name="projectApprovalForm" property="arrList">
 							<logic:iterate id="reg" name="projectApprovalForm" property="arrList">
 								<tr valign="middle">
-									<td>
+									<td><html:hidden property="projectId" name="reg" styleClass="hdProjectId"/>
 										<html:hidden property="projectDesc" name="reg" styleClass="hdProjectDesc"/>
 										<html:hidden property="projectCode" name="reg" styleClass="hdProjectCode"/>
 										<html:hidden property="projectName" name="reg" styleClass="hdProjectName"/>
@@ -145,7 +155,7 @@ $(document).ready(function() {
 							<div class="form-group">
 								<table width="100%">
 									<tr>
-										<td style="padding-left: 15px">Project Code</td>
+										<td style="padding-left: 15px">Project Code </td>
 										<td style="padding-left: 15px">
 											<input type="text" id="txtProCode" class="form-control" disabled="disabled" />
 										</td>
@@ -192,8 +202,7 @@ $(document).ready(function() {
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
-								<table class="table table-bordered" cellspacing="0"
-					style="margin-top: 10px;" width="100%" class="tableContent">
+								<table class="table table-bordered" cellspacing="0" id="tblShow" style="margin-top: 10px;" width="100%" class="tableContent">
 									<tr>
 										<th style="padding-left: 15px">Project Member Name</th>
 										<th style="padding-left: 15px">Project Member Role</th>

@@ -20,33 +20,34 @@
 
 	$(document).ready(function() {
 		$(".datepicker").attr("data-provide", "datepicker");
-		projectMemberEvent();
-		getStyleClass();
+		
+		$('.linkMember').on('click',function(){
+			var selecId = $(this).closest('tr').find('.hdProjId').val();
+			alert(selecId);
+			$.ajax({
+				type : "POST",
+				url : "projectInvolved.do",
+				data : "task=listMembers&selectedId="
+						+ selecId,
+				success : function(response) {
+					$("#tblShow").find("tr:gt(0)").remove();
+					$("#tblShow").append(response);
+					$('#searchProjMember').modal();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+
+			});
+		});
+
 	});
 
 	function getProjDesc(projDesc) {
 		$('#txtProjectDesc').html(projDesc);
 		$('#projDesc').modal();
 	}
-
-	function getProjMember(projId) {
-		$('#txtProjectDesc').html(projId);
-		$('#projId').modal();
-	}
-
-	function projectMemberEvent() {
-		$('.rowSearch').on('click', function() {
-			var value = $(this).find('td').eq(0).html();
-			var text = $(this).find('td').eq(2).html();
-			$('#hiddenProjId').val(value);
-		});
-	}
 	
-	function viewMember(projId){
-		document.forms[0].selectedId.value = projId;
-		document.forms[0].task = 'viewMember';
-		document.submit();
-	}
 </script>
 </head>
 <body>
@@ -57,7 +58,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden name="projectInvolvedForm" property="task" />
-		<html:hidden name="projectInvolvedForm" property="selectedId" />
+		<html:hidden name="projectInvolvedForm" property="selectedId"/>
 		<html:hidden name="projectInvolvedForm" property="currSearchField" />
 		<html:hidden name="projectInvolvedForm" property="currSearchValue" />
 		<html:hidden property="currPage" name="projectInvolvedForm" />
@@ -112,10 +113,11 @@
 										styleClass="hdnProjStatus" />
 									<html:hidden property="projectProgress" name="proj"
 										styleClass="hdnProjProg" />
-									<html:hidden styleId="hiddenProjId" name="projectInvolvedForm"
-										property="projectBean.projectId" />
+									
 										
-									<td><bean:write name="proj" property="projectCode" /></td>
+									<td><html:hidden styleClass="hdProjId" name="proj"
+										property="projectId" />
+									<bean:write name="proj" property="projectCode" /></td>
 									<td><a href="#" class="text-info"
 										onclick="getProjDesc('<bean:write name="proj" property="projectDesc" />');"
 										data-target="#projDesc"> <bean:write name="proj"
@@ -130,8 +132,7 @@
 									<td><bean:write name="proj" property="deptName" /></td>
 									<td><bean:write name="proj" property="statusCaption" /> :
 										<bean:write name="proj" property="projectProgress" />%</td>
-									<td align="center"><a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchProjMember"> View
+									<td align="center"><a href="#" class="text-info linkMember"> View
 											Member</a>
 									</td>
 									<td align="center"><a href="#" class="text-info"
@@ -188,7 +189,7 @@
 						<h4 class="modal-title">Project Member</h4>
 					</div>
 					<div class="modal-body">
-						<table width="100%" id="tblSearch"
+						<table width="100%" id="tblShow"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>

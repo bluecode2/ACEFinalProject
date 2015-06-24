@@ -19,7 +19,7 @@ public class ProjectApprovalForm extends ActionForm{
 	private List<ProjectBean> 	arrList;
 	private ProjectBean 		pBean;
 	private List<ProjectMemberBean> arrMember;
-	private int					selectedId=1;
+	private int					selectedId;
 	
 	public int getSelectedId() {
 		return selectedId;

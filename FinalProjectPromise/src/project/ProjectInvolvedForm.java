@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import project_member.ProjectMemberBean;
+
 public class ProjectInvolvedForm extends ActionForm{
 
 	/**
@@ -12,7 +14,7 @@ public class ProjectInvolvedForm extends ActionForm{
 	private static final long serialVersionUID = 1L;
 	
 	private String task ="";
-	private Integer selectedId = 0;
+	private Integer selectedId;
 	private String isProc = "";
 	private String searchValue;
 	private String searchField;
@@ -23,6 +25,14 @@ public class ProjectInvolvedForm extends ActionForm{
 	private String val;
 	private List<ProjectBean> listOfProjectInvolved;
 	private ProjectBean projectBean = new ProjectBean();
+	private List<ProjectMemberBean> arrMember;
+	
+	public List<ProjectMemberBean> getArrMember() {
+		return arrMember;
+	}
+	public void setArrMember(List<ProjectMemberBean> arrMember) {
+		this.arrMember = arrMember;
+	}
 	public String getTask() {
 		return task;
 	}
