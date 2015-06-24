@@ -1,5 +1,8 @@
 package project_task;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import activity.ActivityBean;
+import activity.ActivityManager;
 import project.ProjectManager;
 import project_member.ProjectMemberManager;
 import user.UserBean;
@@ -31,7 +36,8 @@ public class ProjectTaskHandler extends Action {
 		EmployeeManager empMan = new EmployeeManager();
 		ProjectManager projManager = new ProjectManager();
 		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
-
+		ActivityManager actMan = new ActivityManager();
+		
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
 				Integer projectId = (Integer) session.getAttribute("projectId");
@@ -82,6 +88,8 @@ public class ProjectTaskHandler extends Action {
 
 			response.sendRedirect("projectTask.do");
 			return null;
+			
+			
 		} else if ("firstEdit".equals(tsForm.getTask())) {
 			
 			if (tsForm.getSelectedEdit() == 0) {
@@ -100,7 +108,35 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(), "");
 			}
-		} else if ("secondEdit".equals(tsForm.getTask())) {
+		} 
+		else if ("listActivity".equals(tsForm.getTask())) {
+			int selId = tsForm.getSelectedId();
+			System.out.println(selId);
+			tsForm.setArrActivity(actMan.getActivityWithTaskId(selId));
+			response.setContentType("text/text;charset=utf-8");
+			response.setHeader("cache-control", "no-cache");
+			PrintWriter out = response.getWriter();
+			
+			List<ActivityBean> arrActivity = tsForm.getArrActivity();
+
+			System.out.println(arrActivity.size());
+			for (ActivityBean actBean : arrActivity) {
+				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+				out.println("<td>" + actBean.getActivityDesc() + "</td>");
+				if (actBean.getIsCompleted() == 1) {
+					out.println("<td> <input type=\"checkbox\" checked disabled> </td>");					
+				}
+				else {
+					out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");		
+				}
+
+				out.println("</tr>");
+			}	
+
+			out.flush();
+			return null;
+		}
+		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask("TA_STAT_99");
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),

@@ -375,19 +375,19 @@
 									<tr>
 										<td>Project Name</td>
 										<td style="padding-left: 15px">
-											<input type="text" id="txtActivityProjectName" class="form-control" />
+											<input type="text" id="txtActivityProjectName" class="form-control" disabled="true" />
 										</td>
 									</tr>
 									<tr>
 										<td>Task Name</td>
 										<td style="padding-left: 15px">
-											<input type="text" id="txtActivityTaskName" class="form-control" />
+											<input type="text" id="txtActivityTaskName" class="form-control" disabled="true"/>
 										</td>
 									</tr>
 									<tr>
 										<td>Assign To</td>
 										<td style="padding-left: 15px">
-											<input type="text" id="txtActivityAssignTo" class="form-control" />
+											<input type="text" id="txtActivityAssignTo" class="form-control" disabled="true" />
 										</td>
 									</tr>
 								</table>

@@ -63,14 +63,12 @@ public class ProjectApprovalHandler extends Action{
 		}
 		else if ("listActivity".equals(paForm.getTask())) {
 			int selId = paForm.getSelectedId();
-			System.out.println("task id : "+paForm.getSelectedId());
 			paForm.setArrActivity(actMan.getActivityWithTaskId(selId));
 			response.setContentType("text/text;charset=utf-8");
 			response.setHeader("cache-control", "no-cache");
 			PrintWriter out = response.getWriter();
 			
 			List<ActivityBean> arrActivity = paForm.getArrActivity();
-			System.out.println("ukuran arr "+arrActivity.size());
 
 			System.out.println(arrActivity.size());
 			for (ActivityBean actBean : arrActivity) {

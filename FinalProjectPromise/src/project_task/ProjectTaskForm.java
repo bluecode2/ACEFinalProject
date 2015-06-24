@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import activity.ActivityBean;
 import project.ProjectBean;
 
 public class ProjectTaskForm extends ActionForm
@@ -29,8 +30,15 @@ public class ProjectTaskForm extends ActionForm
 	private String			statusTask;
 	private String			remarksRecord;
 	private Integer			empId;
+	private List<ActivityBean> arrActivity;
 	
 
+	public List<ActivityBean> getArrActivity() {
+		return arrActivity;
+	}
+	public void setArrActivity(List<ActivityBean> arrActivity) {
+		this.arrActivity = arrActivity;
+	}
 	public Integer getEmpId() {
 		return empId;
 	}
