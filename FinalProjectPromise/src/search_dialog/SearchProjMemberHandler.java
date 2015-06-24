@@ -34,6 +34,8 @@ public class SearchProjMemberHandler extends Action{
 		String searchField = sEmpForm.getSearchField();
 		String searchValue = sEmpForm.getSearchValue();
 		
+		
+		
 //		List<ProjectMemberBean> arrEmp = pMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
 //		
 //		for (EmployeeBean empBean : arrEmp) {

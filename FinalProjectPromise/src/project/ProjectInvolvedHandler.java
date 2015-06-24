@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import project_member.ProjectMemberBean;
 import project_member.ProjectMemberForm;
 import project_member.ProjectMemberManager;
+import project_task.ProjectTaskForm;
 import common.CommonFunction;
 import common.Constant;
 import user.UserBean;
@@ -28,6 +29,7 @@ public class ProjectInvolvedHandler extends Action{
 		ProjectInvolvedForm projectForm = (ProjectInvolvedForm) form;
 		ProjectManager projectManager = new ProjectManager();
 		ProjectMemberManager projectMemberManager = new ProjectMemberManager();
+
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -53,6 +55,13 @@ public class ProjectInvolvedHandler extends Action{
 			}	
 
 			out.flush();
+			return null;
+		}
+		else if ("toTask".equalsIgnoreCase(projectForm.getTask())){
+			System.out.println(projectForm.getSelectedId());
+			session.setAttribute("projectId", projectForm.getSelectedId());
+			
+			response.sendRedirect("projectInvolvedTask.do");
 			return null;
 		}
 		

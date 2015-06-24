@@ -60,16 +60,10 @@ public class ProjectTaskManager {
 		}
 	}
 
-	public void editProjectTask(int taskId, String taskName, String taskDesc,
-			int updatedBy) throws SQLException {
-		Map m = new HashMap();
-		m.put("taskId", taskId);
-		m.put("taskName", taskName);
-		m.put("taskDesc", taskDesc);
-		m.put("updatedBy", updatedBy);
+	public void editProjectTask(ProjectTaskBean bean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.updateProjectTask", m);
+			this.ibatis.update("projectTask.updateProjectTask", bean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();

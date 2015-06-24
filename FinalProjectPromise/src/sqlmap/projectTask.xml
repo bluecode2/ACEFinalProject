@@ -90,11 +90,14 @@
 		'TA_STAT_02' )
 	</insert>
 
-	<update id="updateProjectTask" parameterClass="java.util.Map">
+	<update id="updateProjectTask" parameterClass="project_task.ProjectTaskBean">
 		UPDATE TASK
 		SET
 		TASK_NAME =#taskName#,
 		TASK_DESC = #taskDesc#,
+		ASSIGNED_TO = #assignedTo#,
+		EST_START_DATE = TO_DATE(#estStartDateInString#,'YYYY-MM-DD'),
+		EST_END_DATE = TO_DATE(#estEndDateInString#,'YYYY-MM-DD'),
 		updated_by = #updatedBy#,
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
@@ -103,7 +106,7 @@
 	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
 		UPDATE task
 		set
-		act_start_date = SYSDATE,
+		update_date = SYSDATE,
 		updated_by = #updatedBy#,
 		task_status = #taskStatus#,
 		remarks = #remarks#

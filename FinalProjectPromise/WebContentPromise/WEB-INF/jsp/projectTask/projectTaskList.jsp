@@ -90,6 +90,19 @@
 							$('#showDesc').modal();
 
 						});
+				$('.lnkRemarks').on(
+						'click',
+						function() {
+							var remarks = $(this).closest('tr').find(
+									'.hdRemarks').val();
+							var taskName = $(this).closest('tr').find(
+									'.hdTaskName').val();
+							$('#txtRemarks').val(remarks);
+							$('#txtValueTaskNameRemarks').val(taskName);
+							
+							$('#showRemarks').modal();
+
+						});
 				$('.goInsert').on(
 						'click',
 						function() {
@@ -235,11 +248,11 @@
 						<tr>
 							<td>Task Name</td>
 							<td>Assign To</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
+							<td align="center" width="200px">Estimate Date</td>
+							<td align="center" width="200px">Actual Date</td>
 
-							<td>Task Progress</td>
-							<td>Task Status</td>
+							<td align="center">Status</td>
+							<td align="center" width="100px">Activity</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -251,21 +264,24 @@
 											styleClass="hdTaskDesc" /> <html:hidden property="taskId"
 											name="reg" styleClass="hdTaskId" /> <html:hidden
 											property="taskName" name="reg" styleClass="hdTaskName" /> <a
+										href="#" class="text-info linkDesc">
+										<html:hidden
+											property="remarks" name="reg" styleClass="hdRemarks" /> <a
 										href="#" class="text-info linkDesc"> <bean:write
 												name="reg" property="taskName" />
 									</a></td>
-									<td><bean:write name="reg" property="assignedToName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="taskProgress" /></td>
-									<td><html:hidden name="reg" property="taskStatus"
+									<td><bean:write name="reg" property="assignedToName" /> <logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
+									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
+									<td align="center"><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" /> <bean:write name="reg"
-											property="taskStatusName" /></td>
+											property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%<logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="lnkRemarks text-info">Remarks</a></logic:notEqual></td>
+									<td align="center"><a href="#" class="text-info">View Activity</a></td>
 									<td align="center"><a class="text-success firstBtn"
 										href="#" id="tes"
 										onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
 											<span aria-hidden="true"></span>
-									</a> &nbsp; <a href="#" class="text-info secondBtn"> <span
+									</a> &nbsp; <a href="#" class="text-danger secondBtn"> <span
 											aria-hidden="true"></span>
 									</a></td>
 								</tr>
@@ -353,7 +369,7 @@
 
 								</tr>
 								<tr>
-									<td style="padding-left: 15px">Task Desc</td>
+									<td style="padding-left: 15px">Remarks</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="txtSearchFieldDesc"
 											disabled="disabled"></textarea>
@@ -369,6 +385,47 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		<!-- popup to show Remarks -->
+		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Task Description</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<table width="100%">
+								<tr>
+									<td style="padding-left: 15px">Task</td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtValueTaskNameRemarks" class="form-control"
+										disabled="disabled" /></td>
+
+								</tr>
+								<tr>
+									<td style="padding-left: 15px">Task Desc</td>
+									<td style="padding-left: 15px"><textarea rows="3" cols="3"
+											class="form-control" id="txtRemarks"
+											disabled="disabled"></textarea>
+										</button></td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>

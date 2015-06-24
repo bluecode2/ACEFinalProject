@@ -207,10 +207,10 @@
 									<td><bean:write name="proj" property="deptName" /></td>
 									<td><bean:write name="proj" property="statusCaption" /> : 
 										<bean:write name="proj" property="projectProgress" />%</td>
-									<td><a href="#" class="text-info"
+									<td align="center"><a href="#" class="text-info"
 										   onclick="toTask('toMember','<bean:write name="proj" property="projectId" />');">
 											Member</a></td>
-									<td><a href="#" class="text-info"
+									<td align="center"><a href="#" class="text-info"
 										   onclick="toTask('toTask','<bean:write name="proj" property="projectId" />');">
 											Task</a></td>
 									<td align="center">
