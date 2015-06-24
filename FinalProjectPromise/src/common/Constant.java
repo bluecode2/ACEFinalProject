@@ -14,7 +14,7 @@ public class Constant {
 		public static final String maxDate = "2100-12-31";
 	}
 	
-	public static final Integer pageSize = 2;
+	public static final Integer pageSize = 10;
 	public static final Integer pageNavigatorSize = 5;
 	
 	public static class MenuCode{
