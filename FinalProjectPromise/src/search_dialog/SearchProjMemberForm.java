@@ -10,6 +10,7 @@ public class SearchProjMemberForm extends ActionForm {
 	private static final long serialVersionUID = 1L;
 	private String searchValue;
 	private String searchField;
+	private Integer projectId;
 	
 	public String getSearchValue() {
 		return searchValue;
@@ -22,6 +23,12 @@ public class SearchProjMemberForm extends ActionForm {
 	}
 	public void setSearchField(String searchField) {
 		this.searchField = searchField;
+	}
+	public Integer getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
 	}
 	
 }

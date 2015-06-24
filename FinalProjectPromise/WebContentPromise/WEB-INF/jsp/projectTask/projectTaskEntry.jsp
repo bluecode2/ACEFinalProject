@@ -29,14 +29,14 @@
 		registerSearchAssignToEvent();
 	});
 	function search() {
-		var spvId = $('#hdSpvId').val();
-		var searchField = $('#selSearchFieldAssignTo').val();
-		var searchValue = $('#txtSearchValueAssignTo').val();
+		var spvId = $('#hdnProjectId').val();
+		var searchField = $('#selSearchFieldProjMember').val();
+		var searchValue = $('#txtSearchValueProjMember').val();
 
 		$.ajax({
 			type : "POST",
-			url : "searchAssignTo.do",
-			data : "spvId=" + spvId + "&searchField=" + searchField
+			url : "searchProjMember.do",
+			data : "projectId=" + spvId + "&searchField=" + searchField
 					+ "&searchValue=" + searchValue,
 			success : function(response) {
 				$("#tblSearch").find("tr:gt(0)").remove();
@@ -70,7 +70,7 @@
 			styleId="hdSpvId" />
 		<html:hidden property="tkBean.createdBy" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
-<%-- 		<html:text property="prjBean.projectId" name="projectTaskForm" /> --%>
+		<html:hidden styleId="hdnProjectId" property="prjBean.projectId" name="projectTaskForm" />
 		<div class="container">
 
 			<div class="divContent form-group has-info">
@@ -154,13 +154,13 @@
 									<tr>
 										<td>Search</td>
 										<td style="padding-left: 15px"><select
-											class="form-control" id="selSearchFieldAssignTo"
+											class="form-control" id="selSearchFieldProjMember"
 											style="width: 150px">
 												<option value="empName">Employee Name</option>
 												<option value="projRoleName">Project Role</option>
 										</select></td>
 										<td style="padding-left: 15px"><input type="text"
-											id="txtSearchValueAssignTo" class="form-control" /></td>
+											id="txtSearchValueProjMember" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="search();" id="btnSearch"
 												class="btn btn-sm btn-info btn-icon" title="Back">
