@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -26,13 +27,16 @@ public class SearchEmpHandler extends Action{
 		response.setHeader("cache-control", "no-cache");
 		PrintWriter out = response.getWriter();
 		
+		HttpSession session = request.getSession();
+		
 		SearchEmpForm sEmpForm = (SearchEmpForm) form;
 		EmployeeManager eMan = new EmployeeManager();
-		
+		Integer deptId = (Integer) session.getAttribute("deptId");
+		System.out.println("testing masuk search"+deptId);
 		String searchField = sEmpForm.getSearchField();
 		String searchValue = sEmpForm.getSearchValue();
 		
-		List<EmployeeBean> arrEmp = eMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
+		List<EmployeeBean> arrEmp = eMan.getAllEmployeeForPM(deptId);
 		
 		for (EmployeeBean empBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");

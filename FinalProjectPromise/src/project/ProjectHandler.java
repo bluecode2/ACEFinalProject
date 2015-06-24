@@ -2,6 +2,7 @@ package project;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,8 +53,8 @@ public class ProjectHandler extends Action{
 			pForm.setSelectedId(0);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee("", "", 1, Constant.pageSize));
-					
+			session.setAttribute("deptId", eBean.getDeptId());
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM(eBean.getDeptId()));
 					/*getAllEmployeeForDeptHead(eBean.getDeptId(), 
 					"", ""));*/
 			request.setAttribute("pageTitle", "Project Entry");
@@ -63,8 +64,7 @@ public class ProjectHandler extends Action{
 		else if ("edit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("edit");
 			request.setAttribute("pageTitle", "Project Edit");
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
-					"", ""));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM(eBean.getDeptId()));
 			request.setAttribute("show", true);
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
