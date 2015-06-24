@@ -11,12 +11,24 @@
 </head>
 <body>
 	<div class="container">
-		<h1><bean:write name="pageTitle"/></h1>
+		<h1>
+			<bean:write name="pageTitle" />
+		</h1>
 		<hr />
 		<ol class="breadcrumb">
-			<li><a href="home.do">Home</a></li>
-			<li><a href="#">Library</a></li>
-			<li class="active">Data</li>
+			<logic:iterate name="breadCrumb" id="menu">
+				<logic:equal name="menu" property="menuId" value="${currMenuId}">
+					<li class="active"><bean:write name="menu"
+							property="menuCaption" /></li>
+				</logic:equal>
+				<logic:notEqual name="menu" property="menuId" value="${currMenuId}">
+					<li><a href="<bean:write name="menu" property="menuUrl" />"><bean:write
+								name="menu" property="menuCaption" /></a></li>
+				</logic:notEqual>
+			</logic:iterate>
+			<!-- 			<li><a href="home.do">Home</a></li> -->
+			<!-- 			<li><a href="#">Library</a></li> -->
+			<!-- 			<li class="active">Data</li> -->
 		</ol>
 	</div>
 </body>
