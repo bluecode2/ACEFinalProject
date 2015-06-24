@@ -50,7 +50,7 @@ public class MyCurrentTaskHandler extends Action {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
-			response.sendRedirect("assignTask.do");
+			response.sendRedirect("myCurrentTask.do");
 			return null;
 		}
 	
@@ -61,10 +61,10 @@ public class MyCurrentTaskHandler extends Action {
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		
-		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
+		tsForm.setListCount(tsMan.getCountMyCurrentTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.pageSize));
 		
-		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+		tsForm.setArrList(tsMan.getListMyCurrentTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 
 		request.setAttribute("pageTitle", "Assign Task List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
@@ -73,7 +73,7 @@ public class MyCurrentTaskHandler extends Action {
 		request.setAttribute("currPage", tsForm.getCurrPage());
 		request.setAttribute("rowCount", tsForm.getListCount());
 
-		return mapping.findForward("assignTaskList");
+		return mapping.findForward("myCurrentTaskList");
 /*		return mapping.findForward("assignTask");*/
 		
 		

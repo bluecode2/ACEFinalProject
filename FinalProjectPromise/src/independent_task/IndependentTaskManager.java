@@ -118,4 +118,28 @@ public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 			this.ibatis.endTransaction();
 		}
 	}
+
+	public List<IndependentTaskBean> getListMyCurrentTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+		
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("empId", empId);
+		
+		List arr = this.ibatis.queryForList("independentTask.getListMyCurrentTask", map);
+		
+		return arr;
+	}
+	public int getCountMyCurrentTask(String col, String input,int empId) throws SQLException {
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("empId", empId);
+		int tmpCount = (Integer) this.ibatis.queryForObject("independentTask.getCountMyCurrentTask", map);
+		return tmpCount;
+	}
 }
