@@ -75,4 +75,9 @@ public class Constant {
 		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
 		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
 	}
+	
+	public static class GeneralParameter{
+		public static final String AD_ADMIN_USERNAME = "ADAdminUser";
+		public static final String AD_ADMIN_PASSWORD = "ADAdminPass";
+	}
 }

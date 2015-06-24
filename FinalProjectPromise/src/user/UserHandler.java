@@ -126,8 +126,12 @@ public class UserHandler extends Action {
 		}
 		else if("chkActiveDirectory".equalsIgnoreCase(uForm.getTask())){
 			ActiveDirectoryManager adMan = new ActiveDirectoryManager();
+			GeneralParamManager genParMan = new GeneralParamManager();
+			GeneralParamBean userBean = genParMan.getGenParamByParamId(Constant.GeneralParameter.AD_ADMIN_USERNAME);
+			GeneralParamBean passBean = genParMan.getGenParamByParamId(Constant.GeneralParameter.AD_ADMIN_PASSWORD);
+			
 			PrintWriter out = response.getWriter();
-			if(adMan.checkValidUser(uForm.getUsername(), "bonaventura.aap", "Ace2015")){
+			if(adMan.checkValidUser(uForm.getUsername(), userBean.getGenParamValue(), passBean.getGenParamValue())){
 				out.print("1");
 			}
 			else
