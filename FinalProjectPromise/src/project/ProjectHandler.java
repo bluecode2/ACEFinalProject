@@ -52,8 +52,10 @@ public class ProjectHandler extends Action{
 			pForm.setSelectedId(0);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue()));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployee("", "", 1, Constant.pageSize));
+					
+					/*getAllEmployeeForDeptHead(eBean.getDeptId(), 
+					"", ""));*/
 			request.setAttribute("pageTitle", "Project Entry");
 			request.setAttribute("show", false);
 			return mapping.findForward("projectEntry");
@@ -62,7 +64,7 @@ public class ProjectHandler extends Action{
 			pForm.setIsProc("edit");
 			request.setAttribute("pageTitle", "Project Edit");
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForDeptHead(eBean.getDeptId(), 
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue()));
+					"", ""));
 			request.setAttribute("show", true);
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
@@ -146,12 +148,9 @@ public class ProjectHandler extends Action{
 		}
 		else if ("save".equalsIgnoreCase(pForm.getTask())){
 			String isProc = pForm.getIsProc();
-			System.out.println(isProc);
 			if (isProc.equalsIgnoreCase("add")) {
-				System.out.println("masuk save");
 				pMan.insertProject(pForm.getpBean());
 				pMemberMan.insertProjectMember(pRoleMan.getProjectRoleIdByCode(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
-				System.out.println("berhasil save");
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){
 				pMan.updateProject(pForm.getpBean());
@@ -175,9 +174,6 @@ public class ProjectHandler extends Action{
 				pForm.getpBean().setProjectStatus("PR_STAT_06");
 				pMan.updateProject(pForm.getpBean());
 			}
-			else {
-				System.out.println("gagal");
-			}
 
 			response.sendRedirect("project.do");
 			return null;
@@ -196,15 +192,12 @@ public class ProjectHandler extends Action{
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-		System.out.println("pageCount end");
 		pForm.setListOfProject(pMan.getAllProject(
 				pForm.getCurrSearchField(), pForm.getCurrSearchValue(),
 				pForm.getCurrPage(), Constant.pageSize));
-		System.out.println("isi list selesai");
 		
 		
 		request.setAttribute("pageTitle", "Project List");
-
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pForm.getPageCount(),pForm.getCurrPage()));
 
