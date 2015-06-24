@@ -209,7 +209,6 @@ public class ProjectManager {
 		}
 	}
 	
-
 	public void setDeclineProject(int projectId,int updatedBy, String remarks) throws SQLException {
 		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_ONGOING;
 		
@@ -228,6 +227,15 @@ public class ProjectManager {
 			e.printStackTrace();
 			this.ibatis.endTransaction();
 		}
-		
+	}
+	
+	public Integer getCountProjectInvolved(Integer empId, String value)
+			throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("employeeId", empId);
+		map.put("searchValue", value);
+		Integer result = (Integer) this.ibatis.queryForObject(
+				"project.countProjectInvolved", map);
+		return result;
 	}
 }

@@ -70,7 +70,7 @@ public class ProjectInvolvedHandler extends Action{
 		projectForm.setSearchValue(projectForm.getCurrSearchValue());
 	
 		int rowCount;
-		rowCount = projectManager.getCountProject(projectForm.getCurrSearchField(),
+		rowCount = projectManager.getCountProjectInvolved(us.getEmployeeId(),
 				projectForm.getCurrSearchValue());
 		
 		projectForm.setPageCount((int) Math.ceil((double) rowCount
