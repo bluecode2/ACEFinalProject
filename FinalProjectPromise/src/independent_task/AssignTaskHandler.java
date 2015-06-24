@@ -32,7 +32,7 @@ public class AssignTaskHandler extends Action {
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Task Entry");
+			request.setAttribute("pageTitle", "Assign Independent Task Entry");
 			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 			return mapping.findForward("assignTaskEntry");
 		}
@@ -57,7 +57,7 @@ public class AssignTaskHandler extends Action {
 			tsForm.setIsAdd(false);
 			
 			if (tsForm.getSelectedEdit() == 0) {
-				request.setAttribute("pageTitle", "Assign Entry");
+				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				return mapping.findForward("assignTaskEntry");
 			}
@@ -93,7 +93,7 @@ public class AssignTaskHandler extends Action {
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "Assign Task List");
+		request.setAttribute("pageTitle", "Assign Independent Task List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());

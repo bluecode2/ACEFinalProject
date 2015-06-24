@@ -22,7 +22,7 @@
 
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
-		if(confirm("Are you sure want to "+task+" Task " + nama)) {
+		if(confirm("Are you sure want to "+task+" Task " + nama + "?")) {
 				document.forms[0].submit();
 		}
 	}
@@ -72,11 +72,12 @@
 					class="tableContent">
 					<thead>
 						<tr class="panel panel-info">
-							<td>Task Name</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
-							<td>Progress</td>
-							<td>Status</td>
+							<td class="align-center">Task Name</td>
+							<td class="align-center">Estimate Start Date</td>
+							<td class="align-center">Estimate End Date</td>
+							<td class="align-center">Progress</td>
+							<td class="align-center">Status</td>
+							<td class="align-center">Activity</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -92,6 +93,7 @@
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
 									<td><bean:write name="reg" property="taskStatusName" /></td>
+									<td align="center"><a href="#" class="text-info linkMember">Manage Activity</a></td>
 									<td align="center">
 										<logic:equal name="reg"
 											property="taskStatus" value="TA_STAT_02">

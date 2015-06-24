@@ -55,7 +55,6 @@ function registerSearchAssignToEvent(){
 			function() {
 				var value = $(this).find('td').eq(0).html();
 				var text = $(this).find('td').eq(2).html();
-				alert(value + " "+ text);
 				$('#hdEmpId').val(value);
 				$('#txtAssignedToName').val(text);
 			});
@@ -86,7 +85,7 @@ function registerSearchAssignToEvent(){
 								property="tkBean.taskName"></html:text></td>
 					</tr>
 					<tr>
-						<td class="tdLabel" align="right"><label>Task DESC</label></td>
+						<td class="tdLabel" align="right"><label>Task Desc</label></td>
 						<td><html:textarea property="tkBean.taskDesc" name="assignTaskForm" styleId="txtTaskDesc" styleClass="form-control"></html:textarea>
 						</td>
 					</tr>
