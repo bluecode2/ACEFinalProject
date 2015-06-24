@@ -65,7 +65,9 @@ public class ProjectMemberHandler extends Action {
 			request.setAttribute("showAdd", false);
 			pMemberMan.insertProjectMember(pMemberForm.getpMemberbean().getProjectRoleId(), pMemberForm.getpMemberbean().getEmployeeId(), projId);
 		}
-		
+		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
+			pMemberMan.delProjMember(pMemberForm.getSelectedId());
+		}
 		pMemberForm.setTask("");
 
 		int rowCount;

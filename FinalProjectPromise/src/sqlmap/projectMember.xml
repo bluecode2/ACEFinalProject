@@ -57,4 +57,10 @@
 		    	FROM VPROJECTMEMBER		    			
 		    	where IS_ACTIVE = 1 PROJECT_ID = #projId#
 	</select>
+	
+	<update id="delProjMember" parameterClass="java.lang.Integer">
+		UPDATE PROJECT_MEMBER SET
+		IS_ACTIVE = 0
+		WHERE MEMBER_ID = #memberId#
+	</update>
 </sqlMap>

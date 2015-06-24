@@ -23,8 +23,12 @@
 				empManager()
 			});
 	
-	function actionForm() {
-		
+	function actionForm(memberId, nama) {
+		if (confirm("Are you sure want to delete Project Member : " + nama)) {
+			document.forms[0].task.value = 'delProjMem';
+			document.forms[0].selectedId.value = memberId;
+			document.forms[0].submit();
+		}
 	}
 	
 	function addProjMember(){
@@ -199,7 +203,7 @@
 									<td><bean:write name="member" property="projName" /></td>
 									<td><bean:write name="member" property="empName" /></td>
 									<td><bean:write name="member" property="projRoleName" /></td>
-									<td><a href="#" onclick="actionForm();" id="delBtn"
+									<td><a href="#" onclick="actionForm('<bean:write name="member" property="memberId" />','<bean:write name="member" property="empName" />');" id="delBtn"
 										><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a>
 									</td>

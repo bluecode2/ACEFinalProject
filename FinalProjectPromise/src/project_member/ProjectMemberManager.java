@@ -73,8 +73,19 @@ public class ProjectMemberManager {
 		
 	}
 	
-	public List<ProjectMemberBean> getProjectMemberToEvaluate(int projId) throws SQLException {
+	public List<ProjectMemberBean> getProjectMemberToEvaluate(Integer projId) throws SQLException {
 		List<ProjectMemberBean> arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projId);
 		return arrMember;
+	}
+	
+	public void delProjMember(Integer memberId) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("projectMember.delProjMember", memberId);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.ibatis.endTransaction();
+		}
 	}
 }
