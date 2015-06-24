@@ -78,12 +78,8 @@ label {
   overflow: visible;
  }
 
-.dropdown-menu li:hover .sub-menu {
+.dropdown-menu li:hover .sub-menu:not(:empty) {
     visibility: visible;
-}
-
-.dropdown-menu li:hover .sub-menu:empty {
-    visibility: hidden;
 }
 
 .dropdown:hover .dropdown-menu {
