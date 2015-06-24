@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proposed Task List</title>
+<title>Current Task List</title>
 <script type="text/javascript">
 
 	function search() {
@@ -33,7 +33,6 @@
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden name="myCurrentTaskForm" property="task" />
 		<html:hidden name="myCurrentTaskForm" property="selectedId" />
@@ -88,11 +87,11 @@
 									<td><bean:write name="reg" property="taskStatusName" /></td>
 									<td align="center">
 										<logic:equal name="reg"
-											property="taskStatus" value="TA_STAT_02">
+											property="taskStatus" value="TA_STAT_07">
 											<a class="text-success" href="#"
 												onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
-												title="Start"><span class="glyphicon glyphicon-pencil"
+												title="Start"><span class="glyphicon glyphicon-play"
 												aria-hidden="true"></span></a>
 										</logic:equal>
 										<logic:equal name="reg"
@@ -100,16 +99,11 @@
 											<a class="text-success" href="#"
 												onclick="actionForm('pause','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
-												title="Pause"><span class="glyphicon glyphicon-pencil"
+												title="Pause"><span class="glyphicon glyphicon-pause"
 												aria-hidden="true"></span></a>
 										</logic:equal>
 										<logic:equal name="reg"
-											property="taskStatus" value="100">
-											<a class="text-success" href="#"
-												onclick="actionForm('submit','<bean:write name="reg" property="taskId" />',
-												'<bean:write name="reg" property="taskName" />');"
-												title="Submit"><span class="glyphicon glyphicon-pencil"
-												aria-hidden="true"></span></a>
+											property="taskStatus" value="TA_STAT_01">
 										</logic:equal>
 									</td>
 								</tr>

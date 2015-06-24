@@ -66,7 +66,7 @@ public class MyCurrentTaskHandler extends Action {
 		
 		tsForm.setArrList(tsMan.getListMyCurrentTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "Assign Task List");
+		request.setAttribute("pageTitle", "Current Task List");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());
