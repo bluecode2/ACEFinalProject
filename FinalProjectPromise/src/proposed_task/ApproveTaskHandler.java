@@ -28,7 +28,7 @@ public class ApproveTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		CommonFunction.createAllowedMenu(us, request);
+		CommonFunction.initializeHeader(Constant.MenuCode.APPROVE_PROPOSED_INDEPENDENT_TASK, us, request);
 
 		if (aForm.getTask().equals("approve")) {
 			request.setAttribute("pageTitle", "Approve Task List");
