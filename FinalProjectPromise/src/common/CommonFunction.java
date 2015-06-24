@@ -111,6 +111,7 @@ public class CommonFunction {
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
 
 		request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("isActiveDirectory", user.getIsActiveDirectory());
 		request.setAttribute("userRoleName", user.getUserRoleName());
 	}
 
@@ -148,6 +149,7 @@ public class CommonFunction {
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
 
 		request.setAttribute("userName", user.getEmployeeName());
+		request.setAttribute("isActiveDirectory", user.getIsActiveDirectory());
 		request.setAttribute("userRoleName", user.getUserRoleName());
 
 		request.setAttribute("pageTitle", menu.getMenuCaption());

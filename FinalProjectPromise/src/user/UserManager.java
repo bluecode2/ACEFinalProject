@@ -31,6 +31,17 @@ public class UserManager {
 		return uBean;
 	}
 	
+	public UserBean getUserByUsername(String username) throws SQLException {
+		UserBean uBean = null;
+		
+		Map m = new HashMap();
+		m.put("username", username);
+		
+		uBean = (UserBean) this.ibatis.queryForObject("users.getUserByUserName", m);
+
+		return uBean;
+	}
+	
 	public List<UserBean> getAllUser(String col, String input,
 	Integer pageNum, Integer pageSize) throws ClassNotFoundException,
 	SQLException {

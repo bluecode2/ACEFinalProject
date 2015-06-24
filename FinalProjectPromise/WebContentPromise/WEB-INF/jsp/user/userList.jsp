@@ -11,11 +11,11 @@
 <title>UserList</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
-	function onBtnAddClick(){
+	function onBtnAddClick() {
 		document.forms[0].task.value = "add";
 		document.forms[0].submit();
 	}
-	
+
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
@@ -37,7 +37,6 @@
 		}
 
 	}
-
 </script>
 </head>
 <body>
@@ -46,7 +45,7 @@
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
-		
+
 		<html:hidden name="userForm" property="task" />
 		<html:hidden name="userForm" property="selectedId" />
 		<html:hidden name="userForm" property="currSearchField" />
@@ -57,16 +56,14 @@
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;">
-						<html:select
-								name="userForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
+						<td style="padding-left: 15px;"><html:select name="userForm"
+								property="searchField" styleId="selSearchField"
+								styleClass="form-control">
 								<option value="employeeName">Employee Name</option>
 								<option value="username">Username</option>
 							</html:select></td>
-						<td style="padding-left: 15px"><html:text
-								name="userForm" property="searchValue"
-								styleClass="form-control" /></td>
+						<td style="padding-left: 15px"><html:text name="userForm"
+								property="searchValue" styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
 								title="Back">
@@ -96,14 +93,18 @@
 									<td><bean:write name="reg" property="username" /></td>
 									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
-									<td align="center"><html:checkbox name="reg" property="isActiveDirectory" value="1" /></td>
-									<td align="center">
-									<a href="#" class="text-success" onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
+									<td align="center"><html:checkbox name="reg"
+											property="isActiveDirectory" value="1" /></td>
+									<td align="center"><a href="#" class="text-success"
+										onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
 											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" class="text-danger" onclick="actionForm('delete','<bean:write name="reg" property="userId" />','<bean:write name="reg" property="username" />');"
-										title="Delete"><span class="glyphicon glyphicon-trash"
-											aria-hidden="true"></span></a>
+											<logic:equal name="reg" property="isActiveDirectory" value="0">
+												<a href="#" class="text-danger"
+												onclick="actionForm('delete','<bean:write name="reg" property="userId" />','<bean:write name="reg" property="username" />');"
+												title="Delete"><span class="glyphicon glyphicon-trash"
+												aria-hidden="true"></span></a>
+											</logic:equal> 
 									</td>
 								</tr>
 							</logic:iterate>

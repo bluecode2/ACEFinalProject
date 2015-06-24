@@ -77,6 +77,16 @@ public class UserHandler extends Action {
 		else if ("save".equalsIgnoreCase(uForm.getTask())) {
 			Boolean isAdd = uForm.getIsAdd();
 			if (isAdd) {
+				ActiveDirectoryManager adMan = new ActiveDirectoryManager();
+				GeneralParamManager genParMan = new GeneralParamManager();
+				GeneralParamBean userBean = genParMan.getGenParamByParamId(Constant.GeneralParameter.AD_ADMIN_USERNAME);
+				GeneralParamBean passBean = genParMan.getGenParamByParamId(Constant.GeneralParameter.AD_ADMIN_PASSWORD);
+				
+				if(adMan.checkValidUser(uForm.getuBean().getUsername(), userBean.getGenParamValue(), passBean.getGenParamValue())){
+					uForm.getuBean().setIsActiveDirectory(1);
+				}
+				else
+					uForm.getuBean().setIsActiveDirectory(0);
 				uForm.getuBean().setCreatedBy(us.getUserId());
 				uMan.insertUser(uForm.getuBean());
 			} else {
