@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import activity.ActivityBean;
+import activity.ActivityManager;
 import project.ProjectManager;
 import project_member.ProjectMemberBean;
 import project_member.ProjectMemberManager;
@@ -36,6 +38,7 @@ public class ProjectApprovalHandler extends Action{
 		ProjectManager paMan = new ProjectManager();
 		ProjectMemberManager pmMan = new ProjectMemberManager();
 		ProjectTaskManager tsMan = new ProjectTaskManager();
+		ActivityManager actMan = new ActivityManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		int rowCount;		
@@ -52,6 +55,34 @@ public class ProjectApprovalHandler extends Action{
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + pmBean.getEmpName() + "</td>");
 				out.println("<td>" + pmBean.getProjRoleName() + "</td>");
+				out.println("</tr>");
+			}	
+
+			out.flush();
+			return null;
+		}
+		else if ("listActivity".equals(paForm.getTask())) {
+			int selId = paForm.getSelectedId();
+			System.out.println("task id : "+paForm.getSelectedId());
+			paForm.setArrActivity(actMan.getActivityWithTaskId(selId));
+			response.setContentType("text/text;charset=utf-8");
+			response.setHeader("cache-control", "no-cache");
+			PrintWriter out = response.getWriter();
+			
+			List<ActivityBean> arrActivity = paForm.getArrActivity();
+			System.out.println("ukuran arr "+arrActivity.size());
+
+			System.out.println(arrActivity.size());
+			for (ActivityBean actBean : arrActivity) {
+				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+				out.println("<td>" + actBean.getActivityDesc() + "</td>");
+				if (actBean.getIsCompleted() == 1) {
+					out.println("<td> <input type=\"checkbox\" checked disabled> </td>");					
+				}
+				else {
+					out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");		
+				}
+
 				out.println("</tr>");
 			}	
 

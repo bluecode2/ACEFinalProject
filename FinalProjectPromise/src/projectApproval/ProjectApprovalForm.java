@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import activity.ActivityBean;
 import project.ProjectBean;
 import project_member.ProjectMemberBean;
 import project_task.ProjectTaskBean;
@@ -24,7 +25,14 @@ public class ProjectApprovalForm extends ActionForm{
 	private int					selectedProjectId;
 	private List<ProjectTaskBean> arrTask;
 	private String 				remarksRecord;
+	private List<ActivityBean>	arrActivity;
 	
+	public List<ActivityBean> getArrActivity() {
+		return arrActivity;
+	}
+	public void setArrActivity(List<ActivityBean> arrActivity) {
+		this.arrActivity = arrActivity;
+	}
 	public String getRemarksRecord() {
 		return remarksRecord;
 	}

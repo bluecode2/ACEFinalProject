@@ -33,6 +33,7 @@
 		$('#addRemarks').modal();
 	}
 
+
 	$(document).ready( function() {
 		
 		$('.insertRemarks').on('click', function() {
@@ -41,7 +42,46 @@
 			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
 			document.forms[0].submit();
 			});
+		
+		$('.linkActivity').on('click',function(){
+			
+			var taskId = $(this).closest('tr').find('.hdTaskId').val();
 
+			$.ajax({
+				type : "POST",
+				url : "projectApproval.do",
+				data : "task=listActivity&selectedId="
+						+ taskId,
+				success : function(response) {
+					$("#tblShow").find("tr:gt(0)").remove();
+					$("#tblShow").append(response);
+					$('#showMember').modal();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+
+			});
+
+			var projectName = $('#txtProjectName').val();
+			var taskName = $(this).closest('tr').find('.hdTaskName').val();
+			var assignedTo = $(this).closest('tr').find('.hdAssignedToName').val();
+			
+			$('#txtActivityProjectName').val(projectName);
+			$('#txtActivityTaskName').val(taskName);
+			$('#txtActivityAssignTo').val(assignedTo);
+			$('#showActivity').modal();
+		});
+		
+		$('.linkDesc').on('click',function(){
+			var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
+			var taskName = $(this).closest('tr').find('.hdTaskName').val();
+			$('#txtSearchFieldDesc').val(taskDesc);
+			$('#txtValueTaskNameDesc').val(taskName);
+			
+			$('#showDesc').modal();
+			
+		});
 	});
 </script>
 </head>
@@ -179,11 +219,10 @@
 							<td>Assign To</td>
 							<td>Estimate Date</td>
 							<td>Actual Date</td>
-
 							<td>Task Progress</td>
 							<td>Task Status</td>
 							<td>Activity</td>
-							<td class="align-center">Action</td>
+					<!-- 		<td class="align-center">Action</td> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -191,13 +230,15 @@
 							<logic:iterate id="reg" name="projectApprovalForm"
 								property="arrTask">
 								<tr>
-									<td><html:hidden property="taskDesc" name="reg"
-											styleClass="hdTaskDesc" /> <html:hidden property="taskId"
-											name="reg" styleClass="hdTaskId" /> <html:hidden
-											property="taskName" name="reg" styleClass="hdTaskName" /> <a
-										href="#" class="text-info linkDesc"> <bean:write
+									<td>
+										<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc" /> 
+										<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
+										<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
+										<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/>
+										<a href="#" class="text-info linkDesc"> <bean:write
 												name="reg" property="taskName" />
-									</a></td>
+										</a>
+									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
@@ -205,15 +246,16 @@
 									<td><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" /> <bean:write name="reg"
 											property="taskStatusName" /></td>
-									<td align="center"><a class="text-info firstBtn"
-										href="#">Activity</a> </td>
-									<td align="center"><a class="text-info listActivity"
+									<td align="center">
+										<a class="text-info linkActivity" href="#">Activity List</a> </td>
+									<%-- <td align="center">
+									<a class="text-info listActivity"
 										href="#" id="tes"
 										onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
 											<span aria-hidden="true"></span>
 									</a> &nbsp; <a href="#" class="text-info secondBtn"> <span
 											aria-hidden="true"></span>
-									</a></td>
+									</a></td> --%>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
@@ -272,6 +314,110 @@
 		</div>
 		<!-- /.modal -->
 
+
+		<!-- pop upn show task DESC -->
+		<div class="modal fade" id="showDesc" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Task Description</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table width="100%">
+									<tr>
+										<td style="padding-left: 15px">Task</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtValueTaskNameDesc" class="form-control" disabled="disabled" />
+										</td>
+										
+									</tr>
+									<tr>
+										<td style="padding-left: 15px">
+											Task Desc 
+										</td>
+										<td style="padding-left: 15px">
+											<textarea rows="3" cols="3" class="form-control"  id="txtSearchFieldDesc" disabled="disabled"></textarea>
+										</button></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+		<!-- popup to show Activity -->
+			<div class="modal fade" id="showActivity" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Project Member</h4>
+							<br/>
+						</div>
+						<div class="modal-body">
+						<div class="container form-group">
+								<table>
+									<tr>
+										<td>Project Name</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityProjectName" class="form-control" />
+										</td>
+									</tr>
+									<tr>
+										<td>Task Name</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityTaskName" class="form-control" />
+										</td>
+									</tr>
+									<tr>
+										<td>Assign To</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityAssignTo" class="form-control" />
+										</td>
+									</tr>
+								</table>
+							</div>
+						
+							<div class="form-group">
+								<table class="table table-bordered" cellspacing="0" id="tblShow" style="margin-top: 10px;" width="100%" class="tableContent">
+									<tr>
+										<th style="padding-left: 15px">Activity Description</th>
+										<th style="padding-left: 15px">Completed</th>
+										
+									</tr>
+										<logic:notEmpty name="projectApprovalForm" property="arrActivity">
+											<logic:iterate id="reg" name="projectApprovalForm" property="arrActivity">
+											<tr>
+												
+											</tr>
+											</logic:iterate>
+										</logic:notEmpty>
+								
+								</table>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
