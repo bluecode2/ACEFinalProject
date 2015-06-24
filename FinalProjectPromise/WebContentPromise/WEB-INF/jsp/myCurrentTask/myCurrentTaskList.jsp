@@ -87,7 +87,7 @@
 									<td><bean:write name="reg" property="taskStatusName" /></td>
 									<td align="center">
 										<logic:equal name="reg"
-											property="taskStatus" value="TA_STAT_07">
+											property="taskStatus" value="TA_STAT_02">
 											<a class="text-success" href="#"
 												onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
