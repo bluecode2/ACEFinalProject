@@ -118,12 +118,12 @@
 															var chkAllowApprove = $(this)
 																	.closest('tr')
 																	.find('td')
-																	.eq(6)
+																	.eq(7)
 																	.find('.chkIsAllowApprove');
 															var chkAllowDecline = $(this)
 																	.closest('tr')
 																	.find('td')
-																	.eq(7)
+																	.eq(8)
 																	.find('.chkIsAllowDecline');
 															
 															var index = $.inArray(menuId,listMenuId);
@@ -219,7 +219,7 @@
 																				'tr')
 																		.find(
 																				'td')
-																		.eq(6)
+																		.eq(7)
 																		.find(
 																				'.chkIsAllowApprove')
 																		.is(
@@ -230,7 +230,7 @@
 																				'tr')
 																		.find(
 																				'td')
-																		.eq(7)
+																		.eq(8)
 																		.find(
 																				'.chkIsAllowDecline')
 																		.is(
