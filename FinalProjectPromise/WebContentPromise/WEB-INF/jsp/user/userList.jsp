@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>UserList</title>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 	function onBtnAddClick(){
 		document.forms[0].task.value = "add";
@@ -36,6 +37,7 @@
 		}
 
 	}
+
 </script>
 </head>
 <body>
@@ -80,10 +82,10 @@
 					class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							
-							<td class="align-center">Employee Name</td>
 							<td class="align-center">Username</td>
+							<td class="align-center">Employee Name</td>
 							<td class="align-center">User Role Name</td>
+							<td class="align-center">Active Dir</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -91,10 +93,10 @@
 						<logic:notEmpty name="userForm" property="listOfUser">
 							<logic:iterate id="reg" name="userForm" property="listOfUser">
 								<tr>
-									
-									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="username" /></td>
+									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
+									<td align="center"><html:checkbox name="reg" property="isActiveDirectory" value="1" /></td>
 									<td align="center">
 									<a href="#" class="text-success" onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

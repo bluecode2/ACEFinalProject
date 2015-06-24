@@ -8,6 +8,7 @@
 			USER_ID, 		USER_ROLE_ID,
 			EMPLOYEE_ID,	CREATED_BY,
 			USERNAME,		PASSWORD_USER,
+			IS_ACTIVE_DIRECTORY,
 			IS_ACTIVE,		CREATE_DATE
 		)
 		VALUES
@@ -15,6 +16,7 @@
 			#userId#, 		#userRoleId#,
 			#employeeId#,	#createdBy#,
 			#username#, 	(dbms_obfuscation_toolkit.md5(input_string=&gt; fGetGeneralParameterValue('password'))),
+			#isActiveDirectory#,
 			1,				SYSDATE
 		)
 	</insert>
@@ -25,11 +27,17 @@
 	
 	<update id="updateUser" parameterClass="user.UserBean">
 	update users set 
-	username = #username#,
 	updated_by = #updatedBy#,
 	update_date = SYSDATE,
 	employee_id = #employeeId#,
-	user_role_id = #userRoleId#,
+	user_role_id = #userRoleId#
+	where user_id = #userId#
+	</update>
+	
+	<update id="changePassword" parameterClass="user.UserBean">
+	update users set 
+	updated_by = #updatedBy#,
+	update_date = SYSDATE,
 	password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #passwordUser#)
 	where user_id = #userId#
 	</update>
@@ -47,6 +55,7 @@
 		        USERNAME        AS      username,
 		        PASSWORD_USER   AS      passwordUser,
 		        IS_ACTIVE       AS      isActive,
+		        IS_ACTIVE_DIRECTORY       AS      isActiveDirectory,
 		        TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
 		        employee_name   AS      employeeName,
@@ -79,6 +88,7 @@
 		USERNAME        AS      username,
 		PASSWORD_USER   AS      passwordUser,
 		IS_ACTIVE       AS      isActive,
+		IS_ACTIVE_DIRECTORY       AS      isActiveDirectory,
 		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
 		employee_name   AS      employeeName,
@@ -119,6 +129,7 @@
 		        USERNAME        AS      username,
 		        PASSWORD_USER   AS      passwordUser,
 		        IS_ACTIVE       AS      isActive,
+		        IS_ACTIVE_DIRECTORY       AS      isActiveDirectory,
 		        TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
 		        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
 		        employee_name   AS      employeeName,

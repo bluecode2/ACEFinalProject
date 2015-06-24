@@ -13,6 +13,7 @@ public class UserBean {
 	private String 	username;
 	private String 	passwordUser;
 	private Integer isActive;
+	private Integer isActiveDirectory;
 	private Date 	createDate;
 	private Date 	updateDate;
 	private String 	createDateInString;
@@ -147,5 +148,11 @@ public class UserBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public Integer getIsActiveDirectory() {
+		return isActiveDirectory;
+	}
+	public void setIsActiveDirectory(Integer isActiveDirectory) {
+		this.isActiveDirectory = isActiveDirectory;
 	}
 }

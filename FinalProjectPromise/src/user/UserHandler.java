@@ -1,5 +1,7 @@
 package user;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import active_directory.ActiveDirectoryManager;
 import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeForm;
@@ -55,6 +58,7 @@ public class UserHandler extends Action {
 
 			uForm.setIsAdd(false);
 			uForm.setuBean(uMan.getUserByUserID(uForm.getSelectedId()));
+			System.out.println(uForm.getuBean().getIsActiveDirectory());
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
 			uForm.setVal("0");
 			request.setAttribute("lstUserRole", uRoleMan.getUserRoleForPopUp());
@@ -90,7 +94,8 @@ public class UserHandler extends Action {
 			GeneralParamBean gParamBean = new GeneralParamBean();
 			gParamBean = gParamMan.getGenParamByParamId("password");
 			uForm.getuBean().setPasswordUser(gParamBean.getGenParamValue());
-			uMan.updateUser(uForm.getuBean());
+			uForm.getuBean().setUpdatedBy(us.getUserId());
+			uMan.changePassword(uForm.getuBean());
 			response.sendRedirect("users.do");
 			return null;
 		}
@@ -104,7 +109,8 @@ public class UserHandler extends Action {
 		else if("saveChangePassword".equalsIgnoreCase(uForm.getTask())) {
 			if (uMan.getLoginValidasi(us.getUsername(), uForm.getOldPassword()) != null){
 				us.setPasswordUser(uForm.getPasswordUser());
-				uMan.updateUser(us);
+				uForm.getuBean().setUpdatedBy(us.getUserId());
+				uMan.changePassword(us);
 				response.sendRedirect("home.do");
 				return null;
 			}
@@ -118,6 +124,16 @@ public class UserHandler extends Action {
 				return mapping.findForward("userAdd");
 			}
 		}
+		else if("chkActiveDirectory".equalsIgnoreCase(uForm.getTask())){
+			ActiveDirectoryManager adMan = new ActiveDirectoryManager();
+			PrintWriter out = response.getWriter();
+			if(adMan.checkValidUser(uForm.getUsername(), "bonaventura.aap", "Ace2015")){
+				out.print("1");
+			}
+			else
+				out.print("0");
+			return null;
+		}
 
 		uForm.setTask("");
 		uForm.setSearchField(uForm.getCurrSearchField());
@@ -129,15 +145,13 @@ public class UserHandler extends Action {
 
 		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue());
-		System.out.println("rowCount selesai");
 		uForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-		System.out.println("pageCount end");
+
 		uForm.setListOfUser(uMan.getAllUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue(), uForm.getCurrPage(),
 				Constant.pageSize));
-		System.out.println("isi list selesai");
-		request.setAttribute("pageTitle", "User List");
+	
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(uForm.getPageCount(),

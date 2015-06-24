@@ -44,15 +44,16 @@
 		if (document.forms[0].val.value == "1") {
 			alert("Old Password is wrong");
 		}
-		
-		if(document.forms[0].task.value == "edit")
-			$('#txtUserName').attr("disabled","disabled");
+
+		if (document.forms[0].task.value == "edit")
+			$('#txtUserName').attr("disabled", "disabled");
 	}
 
 	$(document).ready(function() {
 		onLoadForm();
 		registerSearchUserRole();
 		registerSearchEmployee();
+		chkActiveDirectory();
 	});
 
 	function registerSearchUserRole() {
@@ -122,6 +123,31 @@
 			});
 		}
 	}
+	
+	function chkActiveDirectory(){
+		var username = $('#txtUserName').val();
+		
+		$.ajax({
+			type : "POST",
+			url : "users.do",
+			data : "task=chkActiveDirectory&username=" + username,
+			success : function(response) {
+				if(response == "1"){
+					$("#divValidAD").show();
+					$("#divInvalidAD").hide();
+					$("#hdnIsActiveDirectory").val("1");
+				}
+				else{
+					$("#divValidAD").hide();
+					$("#divInvalidAD").show();
+					$("#hdnIsActiveDirectory").val("0");
+				}
+			},
+			error : function(e) {
+				alert("Error: " + e);
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -137,9 +163,8 @@
 		<html:hidden property="oldPassword" name="userForm" />
 		<html:hidden property="uBean.passwordUser" name="userForm" />
 		<html:hidden property="uBean.userId" name="userForm" />
-		<html:hidden property="uBean.username" name="userForm" />
+		<html:hidden styleId="hdnIsActiveDirectory" property="uBean.isActiveDirectory" name="userForm" />
 		<html:hidden property="val" name="userForm" />
-
 
 
 		<div class="container">
@@ -152,9 +177,30 @@
 					<logic:notEqual value="true" name="changePassword">
 						<tr align="left">
 							<td>User Name</td>
-							<td style="padding-left: 15px;"><html:text name="userForm"
-									property="uBean.username" styleId="txtUserName" styleClass="form-control">
-								</html:text></td>
+							<td style="padding-left: 15px;">
+								<table width="100%">
+									<tr>
+										<td><html:text name="userForm" property="uBean.username"
+												styleId="txtUserName" styleClass="form-control">
+											</html:text></td>
+										<td><button type="button" id="btnCheckActiveDirectory"
+												class="btn btn-xs btn-info" onclick="chkActiveDirectory();">
+												Check<br />Act. Dir.
+											</button></td>
+										<td width="20%">
+											<div id="divValidAD" class="text-success" align="left" style="display: none">
+												<span class="glyphicon glyphicon-ok" aria-hidden="true" />
+												ActDir
+											</div>
+
+											<div id="divInvalidAD" class="text-danger" align="left" style="display: none">
+												<span class="glyphicon glyphicon-remove" aria-hidden="true" />
+												Regular
+											</div>
+										</td>
+									</tr>
+								</table>
+							</td>
 						</tr>
 						<tr align="left">
 							<td>User Role ID</td>
@@ -194,12 +240,15 @@
 							<td>&nbsp;</td>
 						</tr>
 						<logic:notEqual name="userForm" property="isAdd" value="true">
-							<tr align="left" id="resetBtn">
-								<td>&nbsp;</td>
-								<td style="padding-left: 15px;"><input type="button"
-									onclick="resetPass()" class="btn btn-info"
-									value="Reset Password" /></td>
-							</tr>
+							<logic:notEqual property="uBean.isActiveDirectory"
+								name="userForm" value="1">
+								<tr align="left" id="resetBtn">
+									<td>&nbsp;</td>
+									<td style="padding-left: 15px;"><input type="button"
+										onclick="resetPass()" class="btn btn-info"
+										value="Reset Password" /></td>
+								</tr>
+							</logic:notEqual>
 						</logic:notEqual>
 
 					</logic:notEqual>
@@ -396,13 +445,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 
-
-
-
-
-
-
-
+	
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>

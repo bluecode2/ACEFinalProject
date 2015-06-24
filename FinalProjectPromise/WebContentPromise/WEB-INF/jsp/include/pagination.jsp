@@ -13,6 +13,17 @@
 		document.forms[0].currPage.value = page;
 		document.forms[0].submit();
 	}
+	
+	function goToPage(maxPage){
+		var page = document.getElementById("txtGoToPage").value;
+		if(isNaN(page) || parseInt(page) > parseInt(maxPage) || parseInt(page) < 1){
+			alert('Invalid Page!');
+			return;
+		}
+		else{
+			changePage(page);
+		}
+	}
 </script>
 </head>
 <body>

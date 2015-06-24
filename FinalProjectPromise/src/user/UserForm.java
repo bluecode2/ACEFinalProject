@@ -34,6 +34,8 @@ public class UserForm extends ActionForm{
 	private String oldPassword;
 	private String val;
 	
+	private String username;
+	
 	public String getVal() {
 		return val;
 	}
@@ -136,6 +138,14 @@ public class UserForm extends ActionForm{
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

@@ -96,6 +96,18 @@ public class UserManager {
 		}
 	}
 	
+	public void changePassword(UserBean uBean) throws SQLException, ClassNotFoundException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("users.changePassword", uBean);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+	}
+	
 	public UserBean getUserByUserID(Integer tempUserID) throws SQLException, ClassNotFoundException{
 		UserBean uBean = null;
 		uBean = (UserBean) this.ibatis.queryForObject("users.getUserByUserID", tempUserID);
