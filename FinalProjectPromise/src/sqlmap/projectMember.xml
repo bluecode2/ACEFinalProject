@@ -19,7 +19,7 @@
 		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
 		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
 		    	FROM VPROJECTMEMBER
-				where PROJECT_ID = #projId#
+				where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
       	 		order by MEMBER_ID) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
@@ -28,13 +28,13 @@
 	<select id="countProjectMember" resultClass="java.lang.Integer"
 		parameterClass="java.lang.Integer">
 		SELECT COUNT(1) FROM vprojectMember
-		where PROJECT_ID = #projId#
+		where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
 	</select>
 	
 	<insert id="insertProjectMember" parameterClass="java.util.Map">
-		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID) 
+		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID, IS_ACTIVE) 
 		VALUES 
-		(#newMemberId#,#pRoleId#,#empId#,#projId#)
+		(#newMemberId#,#pRoleId#,#empId#,#projId#,1)
 	</insert>
 	
 	<select id="getProjectMemberId" resultClass="java.lang.Integer">
@@ -55,6 +55,6 @@
 		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
 		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
 		    	FROM VPROJECTMEMBER		    			
-		    	where PROJECT_ID = #projId#
+		    	where IS_ACTIVE = 1 PROJECT_ID = #projId#
 	</select>
 </sqlMap>
