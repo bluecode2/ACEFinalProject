@@ -69,6 +69,8 @@ public class Constant {
 	
 	public static class GeneralCode{
 		public static final String PERSONAL_HOLIDAY_TYPE = "PH_TYPE";
+		public static final String PROJECT_STATUS_ONGOING = "PR_STAT_02";
 		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
+		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
 	}
 }
