@@ -29,7 +29,7 @@ public class GeneralHolidayHandler extends Action{
 		
 		if("add".equals(genForm.getTask())){
 			genForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "General Holiday Entry");
+			request.setAttribute("pageTitle", "General Holiday");
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY_ENTRY,
 					us, request);
@@ -75,7 +75,7 @@ public class GeneralHolidayHandler extends Action{
 						genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
 				genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
-				request.setAttribute("pageTitle", "General Holiday List");
+				request.setAttribute("pageTitle", "General Holiday");
 				
 				request.setAttribute("pageNavigator", CommonFunction
 						.createPagingNavigatorList(genForm.getPageCount(),genForm.getCurrPage()));
@@ -114,7 +114,7 @@ public class GeneralHolidayHandler extends Action{
 		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY, us,
 				request);
 		
-		request.setAttribute("pageTitle", "General Holiday List");
+		request.setAttribute("pageTitle", "General Holiday");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(genForm.getPageCount(),genForm.getCurrPage()));

@@ -31,7 +31,7 @@ public class ProposedTaskHandler extends Action {
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
-			
+			request.setAttribute("pageTitle", "Proposed Task Entry");
 			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 
 			return mapping.findForward("proposedTaskEntry");
@@ -40,7 +40,7 @@ public class ProposedTaskHandler extends Action {
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
-
+			request.setAttribute("pageTitle", "Proposed Task Edit");
 			dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
 			return mapping.findForward("proposedTaskEntry");
 		}
@@ -49,7 +49,6 @@ public class ProposedTaskHandler extends Action {
 			dForm.getBean().setUpdatedBy(us.getUserId());
 			dMan.deleteProposedTask(dForm.getSelectedId(),us.getUserId());
 		}
-
 		else if (dForm.getTask().equals("save")) {
 			Boolean isAdd = dForm.getIsAdd();
 
@@ -69,7 +68,7 @@ public class ProposedTaskHandler extends Action {
 		dForm.setTask("");
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
-
+		request.setAttribute("pageTitle", "Proposed Task");
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());
@@ -89,7 +88,6 @@ public class ProposedTaskHandler extends Action {
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),
 						dForm.getCurrPage()));
-		
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK, us, request);
 

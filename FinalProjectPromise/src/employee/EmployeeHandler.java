@@ -33,7 +33,7 @@ public class EmployeeHandler extends Action{
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);
 			eForm.setSelectedId(0);
-			//request.setAttribute("pageTitle", "Employee Entry");
+			request.setAttribute("pageTitle", "Employee Entry");
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId(),eForm.getSelectedEmp().getRankLevel(),"",""));
@@ -46,7 +46,7 @@ public class EmployeeHandler extends Action{
 		else if (eForm.getTask().equals("edit")) {
 			eForm.setIsAdd(false);
 			
-			//request.setAttribute("pageTitle", "Employee Entry");
+			request.setAttribute("pageTitle", "Employee Edit");
 			
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
@@ -56,9 +56,7 @@ public class EmployeeHandler extends Action{
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));
 			request.setAttribute("listOfSupervisor", eMan.getListEmployeeForSupervisor(eForm.getSelectedEmp().getDeptId() ,eForm.getSelectedEmp().getRankLevel(),"",""));
 			
-			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY,
-					us, request);
-			
+			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_ENTRY, us, request);
 			return mapping.findForward("entry");
 		}
 		else if (eForm.getTask().equals("delete")) {
@@ -106,7 +104,7 @@ public class EmployeeHandler extends Action{
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE,
 				us, request);
 		
-		request.setAttribute("pageTitle", "Employee List");
+		request.setAttribute("pageTitle", "Employee");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(eForm.getPageCount(),

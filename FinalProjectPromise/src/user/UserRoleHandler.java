@@ -38,7 +38,7 @@ public class UserRoleHandler extends Action {
 
 		if ("add".equals(userRoleForm.getTask())) {
 			userRoleForm.setIsAdd(true);
-			
+			request.setAttribute("pageTitle", "User Role Entry");
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
 					us, request);
 
@@ -59,6 +59,7 @@ public class UserRoleHandler extends Action {
 			response.sendRedirect("userRole.do");
 			return null;
 		} else if ("edit".equals(userRoleForm.getTask())) {
+			request.setAttribute("pageTitle", "User Role Edit");
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE_ENTRY,
 					us, request);
 			userRoleForm.setUserRoleBean(userRoleManager
@@ -170,6 +171,7 @@ public class UserRoleHandler extends Action {
 			return null;
 		}
 
+		request.setAttribute("pageTitle", "User Role");
 		userRoleForm.setTask("");
 		userRoleForm.setSearchField(userRoleForm.getCurrSearchField());
 		userRoleForm.setSearchValue(userRoleForm.getCurrSearchValue());

@@ -31,24 +31,14 @@ public class ApproveTaskHandler extends Action {
 		CommonFunction.initializeHeader(Constant.MenuCode.APPROVE_PROPOSED_INDEPENDENT_TASK, us, request);
 
 		aForm.setEmpId(us.getEmployeeId());
-		
+		request.setAttribute("pageTitle", "Approve Task");
 		if (aForm.getTask().equals("approve")) {
 			
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			aForm.getBean().setCreatedBy(us.getUserId());
 			
 			aForm.getBean().setPropBy(aForm.getAssignTo());
-			
 			aManager.approveTask(aForm.getBean());
-			
-//			System.out.println(
-//					aForm.getBean().getPropTaskName()+"\n"
-//					+aForm.getBean().getPropTo()+"\n"
-//					+aForm.getBean().getPropBy()+"\n"
-//					+aForm.getBean().getEstEndDateInString()+"\n"
-//					+aForm.getBean().getEstStartDateInString()+"\n"
-//					+aForm.getBean().getUpdatedBy());
-			
 			atManager.createNewAssignTaskMap(aForm.getBean());
 			
 			response.sendRedirect("approveTask.do");

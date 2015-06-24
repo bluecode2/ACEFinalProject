@@ -47,7 +47,7 @@ public class DepartmentHandler extends Action {
 			dForm.setIsAdd(false);
 			request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
-			request.setAttribute("pageTitle", "Department Entry");
+			request.setAttribute("pageTitle", "Department Edit");
 
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
@@ -101,7 +101,7 @@ public class DepartmentHandler extends Action {
 		CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
 				us, request);
 		
-		request.setAttribute("pageTitle", "Department List");
+		request.setAttribute("pageTitle", "Department");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),

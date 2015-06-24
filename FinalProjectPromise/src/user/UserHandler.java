@@ -40,10 +40,9 @@ public class UserHandler extends Action {
 		// CommonFunction.createAllowedMenu(us, request);
 
 		if ("add".equalsIgnoreCase(uForm.getTask())) {
-
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ENTRY, us,
 					request);
-
+			request.setAttribute("pageTitle", "User Entry");
 			request.setAttribute("show", false);
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
@@ -55,7 +54,7 @@ public class UserHandler extends Action {
 
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ENTRY, us,
 					request);
-
+			request.setAttribute("pageTitle", "User Edit");
 			uForm.setIsAdd(false);
 			uForm.setuBean(uMan.getUserByUserID(uForm.getSelectedId()));
 			System.out.println(uForm.getuBean().getIsActiveDirectory());
@@ -68,12 +67,10 @@ public class UserHandler extends Action {
 			uForm.getuBean().setUpdatedBy(us.getUserId());
 			uMan.delUsers(uForm.getSelectedId());
 		}
-
 		else if ("delete".equalsIgnoreCase(uForm.getTask())) {
 			uForm.getuBean().setUpdatedBy(us.getUserId());
 			uMan.delUsers(uForm.getSelectedId());
 		}
-
 		else if ("save".equalsIgnoreCase(uForm.getTask())) {
 			Boolean isAdd = uForm.getIsAdd();
 			if (isAdd) {
@@ -148,7 +145,8 @@ public class UserHandler extends Action {
 				out.print("0");
 			return null;
 		}
-
+		
+		request.setAttribute("pageTitle", "User");
 		uForm.setTask("");
 		uForm.setSearchField(uForm.getCurrSearchField());
 		uForm.setSearchValue(uForm.getCurrSearchValue());

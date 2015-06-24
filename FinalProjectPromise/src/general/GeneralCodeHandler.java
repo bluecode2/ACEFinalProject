@@ -75,7 +75,7 @@ public class GeneralCodeHandler extends Action {
 		
 		gcForm.setArrList(gcMan.getAllGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue(), gcForm.getCurrPage(), Constant.pageSize));
 
-		request.setAttribute("pageTitle", "General Code List");
+		request.setAttribute("pageTitle", "General Code");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getCurrPage()));
 
 		request.setAttribute("pageCount", gcForm.getPageCount());

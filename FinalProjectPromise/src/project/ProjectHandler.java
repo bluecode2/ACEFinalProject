@@ -197,7 +197,7 @@ public class ProjectHandler extends Action{
 				pForm.getCurrPage(), Constant.pageSize));
 		
 		
-		request.setAttribute("pageTitle", "Project List");
+		request.setAttribute("pageTitle", "Project");
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pForm.getPageCount(),pForm.getCurrPage()));
 
@@ -206,6 +206,5 @@ public class ProjectHandler extends Action{
 		request.setAttribute("rowCount", rowCount);
 		
 		return mapping.findForward("projectList");
-		
 	}
 }

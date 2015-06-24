@@ -57,7 +57,7 @@ public class ProjectTaskHandler extends Action {
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
 		if ("add".equals(tsForm.getTask())) {
-
+			request.setAttribute("pageTitle", "Project Task Entry");
 			CommonFunction.initializeHeader(
 					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
 			tsForm.setIsAdd(true);
@@ -119,7 +119,6 @@ public class ProjectTaskHandler extends Action {
 			
 			List<ActivityBean> arrActivity = tsForm.getArrActivity();
 
-			System.out.println(arrActivity.size());
 			for (ActivityBean actBean : arrActivity) {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + actBean.getActivityDesc() + "</td>");
@@ -154,7 +153,7 @@ public class ProjectTaskHandler extends Action {
 
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_TASK, us,
 				request);
-
+		request.setAttribute("pageTitle", "Project Task");
 		tsForm.setTask("");
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());

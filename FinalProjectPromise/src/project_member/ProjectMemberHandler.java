@@ -73,14 +73,11 @@ public class ProjectMemberHandler extends Action {
 		
 		pMemberForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-		System.out.println("pageCount end");
 		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
-		System.out.println("isi list selesai");
 		
-		
-		request.setAttribute("pageTitle", "Project Member Entry");
+		request.setAttribute("pageTitle", "Project Member");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pMemberForm.getPageCount(),pMemberForm.getCurrPage()));

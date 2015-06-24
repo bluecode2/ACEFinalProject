@@ -29,15 +29,12 @@ public class ProjectInvolvedHandler extends Action{
 		ProjectInvolvedForm projectForm = (ProjectInvolvedForm) form;
 		ProjectManager projectManager = new ProjectManager();
 		ProjectMemberManager projectMemberManager = new ProjectMemberManager();
-
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED, us,
 				request);
-		
-		///
 
 		if ("listMembers".equals(projectForm.getTask())) {
 			projectForm.setArrMember(projectMemberManager.getPopUpProjMember(projectForm.getSelectedId()));
@@ -80,7 +77,7 @@ public class ProjectInvolvedHandler extends Action{
 				projectForm.getCurrSearchField(), projectForm.getCurrSearchValue(),
 				projectForm.getCurrPage(), Constant.pageSize,  us.getUserId()));
 		
-		request.setAttribute("pageTitle", "Project Involved List");
+		request.setAttribute("pageTitle", "Project Involved");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(projectForm.getPageCount(),projectForm.getCurrPage()));

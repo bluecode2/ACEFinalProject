@@ -28,14 +28,8 @@ public class GeneralParamHandler extends Action{
 //		CommonFunction.createAllowedMenu(us, request);
 
 		if("add".equals(gpf.getTask())){
-			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
-			empForm.setListOfJobs(empManager.getJobId());
-			empForm.setListOfEmp(empManager.getEmployees());
-			empForm.setListOfDept(empManager.getDeptId());
-			
-			request.setAttribute("ljob", empManager.getJobId());*/
-			
 			gpf.setIsAdd(true);
+			request.setAttribute("pageTitle", "General Parameter Entry");
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER_ENTRY,
 					us, request);
 			
@@ -49,8 +43,8 @@ public class GeneralParamHandler extends Action{
 			return null;
 		}
 		else if ("edit".equals(gpf.getTask())) {
+			request.setAttribute("pageTitle", "General Parameter Edit");
 			gpf.setBean(gpm.getGenParamByParamId(gpf.getSelectedId().toString()));
-			
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER_ENTRY,
 					us, request);
 
@@ -59,7 +53,6 @@ public class GeneralParamHandler extends Action{
 		else if ("delete".equals(gpf.getTask())) {
 			gpf.getBean().setUpdatedBy(us.getUserId());
 			gpm.deleteGeneralParam(gpf.getBean());
-			System.out.println("selesai");
 		}
 		
 		gpf.setTask("");
@@ -80,7 +73,7 @@ public class GeneralParamHandler extends Action{
 		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER,
 				us, request);
 		
-		request.setAttribute("pageTitle", "General Parameter List");
+		request.setAttribute("pageTitle", "General Parameter");
 		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList( gpf.getPageCount(),gpf.getCurrPage()));

@@ -38,24 +38,21 @@ public class RankEmpHandler extends Action {
 			
 			return mapping.findForward("employeeRankEntry");
 		}
-
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Employee Rank Entry");
+			request.setAttribute("pageTitle", "Employee Rank Edit");
 
 			dForm.setBean(dMan.getRankByRankId(dForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK_ENTRY,
 					us, request);
 			return mapping.findForward("employeeRankEntry");
 		}
-
 		else if (dForm.getTask().equals("delete")) {
 			dForm.getBean().setUpdatedBy(us.getUserId());
 			dForm.getBean().setRankId(dForm.getSelectedId());
 			dMan.deleteEmployeeRank(dForm.getBean());
 		}
-
 		else if (dForm.getTask().equals("save")) {
 			Boolean isAdd = dForm.getIsAdd();
 
@@ -89,7 +86,7 @@ public class RankEmpHandler extends Action {
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK,
 				us, request);
 		
-		request.setAttribute("pageTitle", "Employee Rank List");
+		request.setAttribute("pageTitle", "Employee Rank");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),

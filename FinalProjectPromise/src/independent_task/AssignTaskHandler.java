@@ -112,8 +112,6 @@ public class AssignTaskHandler extends Action {
 			out.flush();
 			return null;
 		}
-		
-		
 
 		CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_LIST,
 				us, request);
@@ -127,7 +125,7 @@ public class AssignTaskHandler extends Action {
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "Assign Independent Task List");
+		request.setAttribute("pageTitle", "Assign Independent Task");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());
@@ -135,8 +133,5 @@ public class AssignTaskHandler extends Action {
 		request.setAttribute("rowCount", tsForm.getListCount());
 
 		return mapping.findForward("assignTaskList");
-/*		return mapping.findForward("assignTask");*/
-		
-		
 	}
 }

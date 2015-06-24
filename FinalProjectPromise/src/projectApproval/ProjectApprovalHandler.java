@@ -50,7 +50,6 @@ public class ProjectApprovalHandler extends Action{
 			PrintWriter out = response.getWriter();
 			
 			List<ProjectMemberBean> arrMember = paForm.getArrMember();
-			System.out.println(arrMember.size());
 			for (ProjectMemberBean pmBean : arrMember) {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + pmBean.getEmpName() + "</td>");
@@ -70,7 +69,6 @@ public class ProjectApprovalHandler extends Action{
 			
 			List<ActivityBean> arrActivity = paForm.getArrActivity();
 
-			System.out.println(arrActivity.size());
 			for (ActivityBean actBean : arrActivity) {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + actBean.getActivityDesc() + "</td>");
@@ -89,17 +87,14 @@ public class ProjectApprovalHandler extends Action{
 		}
 		
 		else if ("approve".equals(paForm.getTask())) {
-			System.out.println("proj id "+paForm.getSelectedId());
 			paMan.setApproveProject(paForm.getSelectedId(), us.getUserId());
 		}
 		
-		else if ("decline".equals(paForm.getTask())) {	
-			System.out.println(paForm.getSelectedId());
+		else if ("decline".equals(paForm.getTask())) {
 			paMan.setDeclineProject(paForm.getSelectedId(), us.getUserId(), paForm.getRemarksRecord());
 		}
 		
 		else if ("evaluate".equals(paForm.getTask())) {
-			System.out.println(paForm.getSelectedId());
 			paForm.setpBean(paMan.getProjectByID(paForm.getSelectedId()));
 			paForm.setSearchField(paForm.getCurrSearchField());
 			paForm.setSearchValue(paForm.getCurrSearchValue());
@@ -129,11 +124,11 @@ public class ProjectApprovalHandler extends Action{
 			return mapping.findForward("evaluate");
 		}
 		
+		request.setAttribute("pageTitle", "Project Approval");
 		paForm.setTask("");
 		paForm.setSearchField(paForm.getCurrSearchField());
 		paForm.setSearchValue(paForm.getCurrSearchValue());
 		
-		System.out.println(us.getDeptId());
 		paForm.setArrList(paMan.getListProjectToEvaluate(
 				paForm.getCurrSearchField(), paForm.getCurrSearchValue(),
 				paForm.getCurrPage(), Constant.pageSize,us.getDeptId()));
