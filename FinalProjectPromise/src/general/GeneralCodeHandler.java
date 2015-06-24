@@ -39,7 +39,6 @@ public class GeneralCodeHandler extends Action {
 			request.setAttribute("pageTitle", "General Code Edit");
 
 			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
-			System.out.println(gcForm.getGenCodeBean());
 /*			if(gcForm.getGenCodeBean().getDeptHeadCode() != null)
 				gcForm.setDeptHeadDisplay(gcForm.getSelectedDept().getDeptHeadCode() + " - "
 						+ gcForm.getSelectedDept().getDeptHeadName());

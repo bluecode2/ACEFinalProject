@@ -133,7 +133,7 @@
 						</logic:notEmpty>
 						<logic:empty name="myCurrentTaskForm" property="arrList">
 							<tr>
-								<td colspan="6" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

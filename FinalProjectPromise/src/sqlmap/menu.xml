@@ -23,6 +23,7 @@
 		FROM menu
 		WHERE parent_id IS NULL
 		AND is_visible = 1
+		ORDER BY MENU_CODE
 	</select>
 	
 	<select id="selectListAuthorizeVisibleMenuHead" parameterClass="java.lang.Integer" resultClass="general.MenuBean">
@@ -72,6 +73,7 @@
 		WHERE parent_id =
 		#value#
 		AND is_visible = 1
+		ORDER BY MENU_CODE
 	</select>
 	
 	<select id="selectListAuthorizeVisibleMenuByParent" parameterClass="java.util.Map"
@@ -98,9 +100,7 @@
 		AND is_visible = 1
 		AND menu_id IN (SELECT menu_id from role_menu where user_role_id = #userRoleId#) 
 		ORDER BY menu_code
-		
 	</select>
-	
 	
 	<select id="selectListAllMenu" resultClass="general.MenuBean">
 		SELECT
@@ -140,6 +140,7 @@
 		IS_PARENT 			as isParent
 		FROM menu
 		where menu_id = #value#
+		ORDER BY MENU_CODE
 	</select>
 
 	<select id="getMenuByMenuCode" parameterClass="java.lang.String" resultClass="general.MenuBean"> 
@@ -158,6 +159,7 @@
 		IS_PARENT 			as isParent
 		FROM menu
 		where menu_code = #value#
+		ORDER BY MENU_CODE
 	</select>
 
 	<select id="selectListMenu" resultClass="general.MenuBean"
