@@ -38,7 +38,7 @@ public class ProjectMemberHandler extends Action {
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
-		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT, us,
+		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_MEMBER, us,
 				request);
 		
 		ProjectManager pMan = new ProjectManager();

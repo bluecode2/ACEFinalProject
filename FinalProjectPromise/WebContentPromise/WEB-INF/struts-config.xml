@@ -156,9 +156,9 @@
 			<forward name="projectInvolvedList" path="/WEB-INF/jsp/projectInvolved/projectInvolvedList.jsp"></forward>
 			<forward name="projectInvolvedTask" path="/WEB-INF/jsp/projectInvolved/projectInvolvedTask.jsp"></forward>
 		</action>
-		<action path="/projectInvolvedTask" name="projectTaskForm" type="project.ProjectInvolvedHandler"
+		<action path="/projectInvolvedTask" name="projectTaskForm" type="project_task.ProjectInvolvedTaskHandler"
 			scope="request">
-			<forward name="projectInvolvedTaskList" path="/WEB-INF/jsp/projectInvolved/projectInvolvedTask.jsp"></forward>
+			<forward name="list" path="/WEB-INF/jsp/projectInvolved/projectInvolvedTask.jsp"></forward>
 		</action>
 		<action path="/myCurrentTask" name="myCurrentTaskForm" type="independent_task.MyCurrentTaskHandler"
 			scope="request">
