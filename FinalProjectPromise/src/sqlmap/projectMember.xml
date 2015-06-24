@@ -63,4 +63,24 @@
 		IS_ACTIVE = 0
 		WHERE MEMBER_ID = #memberId#
 	</update>
+	
+	<select id="getPopUpProjMember" resultClass="project_member.ProjectMemberBean"
+		parameterClass="java.util.Map">
+		SELECT
+		MEMBER_ID AS memberId,
+		PROJECT_ROLE_ID AS projectRoleId,
+		EMPLOYEE_ID AS employeeId,
+		PROJECT_ID AS projectId,
+		PROJECT_CODE AS projCode,
+		PROJECT_NAME AS projName,
+		EMPLOYEE_CODE AS empCode,
+		EMPLOYEE_NAME AS empName,
+		PROJECT_ROLE_NAME AS projRoleName,
+		PROJECT_ROLE_CODE AS projRoleCode,
+		TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+		TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
+		FROM VPROJECTMEMBER
+		where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
+		order by MEMBER_ID
+	</select>
 </sqlMap>

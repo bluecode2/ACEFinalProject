@@ -38,8 +38,7 @@ public class ProjectInvolvedHandler extends Action{
 		///
 
 		if ("listMembers".equals(projectForm.getTask())) {
-			Integer selId = projectForm.getSelectedId();
-			projectForm.setArrMember(projectMemberManager.getAllProjectMember(selId, 1,1));
+			projectForm.setArrMember(projectMemberManager.getPopUpProjMember(projectForm.getSelectedId()));
 			response.setContentType("text/text;charset=utf-8");
 			response.setHeader("cache-control", "no-cache");
 			PrintWriter out = response.getWriter();
@@ -57,20 +56,16 @@ public class ProjectInvolvedHandler extends Action{
 			return null;
 		}
 		
-
-		
 		projectForm.setTask("");
 		projectForm.setSearchField(projectForm.getCurrSearchField());
 		projectForm.setSearchValue(projectForm.getCurrSearchValue());
 	
-		
 		int rowCount;
 		rowCount = projectManager.getCountProject(projectForm.getCurrSearchField(),
 				projectForm.getCurrSearchValue());
 		
 		projectForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-		System.out.println("pageCount end");
 		
 		projectForm.setListOfProjectInvolved(projectManager.getProjectInvolved(
 				projectForm.getCurrSearchField(), projectForm.getCurrSearchValue(),

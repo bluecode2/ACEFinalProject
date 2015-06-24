@@ -88,4 +88,15 @@ public class ProjectMemberManager {
 			this.ibatis.endTransaction();
 		}
 	}
+	
+	public List<ProjectMemberBean> getPopUpProjMember(Integer projId) throws SQLException{
+		System.out.println(projId);
+		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		Map map = new HashMap();
+		map.put("projId", projId);
+		
+		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
+		pmbList = this.ibatis.queryForList("projectMember.getPopUpProjMember", map);
+		return pmbList;
+	}
 }

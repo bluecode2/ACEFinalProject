@@ -23,7 +23,6 @@
 		
 		$('.linkMember').on('click',function(){
 			var selecId = $(this).closest('tr').find('.hdProjId').val();
-			alert(selecId);
 			$.ajax({
 				type : "POST",
 				url : "projectInvolved.do",
@@ -191,23 +190,23 @@
 					<div class="modal-body">
 						<table width="100%" id="tblShow"
 							class="table table-striped table-hover table-bordered table-clickable">
-							<thead>
+
 								<tr>
-									<th>Employee Name</th>
-									<th>Role Name</th>
+									<th class="align-center">Employee Name</th>
+									<th class="align-center">Role Name</th>
 								</tr>
-							</thead>
-							<tbody>
-								<logic:notEmpty name="listProjectMember">
-									<logic:iterate id="projMember" name="listProjectMember">
+	
+								<logic:notEmpty name="arrMember">
+									<logic:iterate id="projMember" name="arrMember">
+									
 									</logic:iterate>
 								</logic:notEmpty>
-								<logic:empty name="listProjectMember">
+								<logic:empty name="arrMember">
 									<tr>
 										<td colspan="2" align="center">No Data Found</td>
 									</tr>
 								</logic:empty>
-							</tbody>
+						
 						</table>
 					</div>
 				</div>
