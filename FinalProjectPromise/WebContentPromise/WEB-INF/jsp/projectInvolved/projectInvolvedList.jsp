@@ -65,7 +65,6 @@
 		<html:hidden name="projectInvolvedForm" property="selectedId"/>
 		<html:hidden name="projectInvolvedForm" property="currSearchField" />
 		<html:hidden name="projectInvolvedForm" property="currSearchValue" />
-		<html:hidden property="currPage" name="projectInvolvedForm" />
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
