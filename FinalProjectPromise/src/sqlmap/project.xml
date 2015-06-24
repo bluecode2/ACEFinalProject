@@ -239,4 +239,23 @@
 			</isEqual>
 		</dynamic>
 	</select>
+	
+	<update id="setToApproveProject" parameterClass="java.util.Map">
+		update project set
+			UPDATED_BY = #updatedBy#,
+			UPDATE_DATE = SYSDATE,
+			project_status = #projectStatus#
+			WHERE PROJECT_ID = 	#projectId#		
+	</update>
+	
+	<update id="setToDeclineProject" parameterClass="java.util.Map">
+		update project set
+			ACT_END_DATE = NULL,
+			REMARKS = #remarks#,
+			UPDATED_BY = #updatedBy#,
+			UPDATE_DATE = SYSDATE,
+			project_status = #projectStatus#
+
+			WHERE PROJECT_ID = 	#projectId#		
+	</update>
 </sqlMap>

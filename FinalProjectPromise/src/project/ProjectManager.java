@@ -189,4 +189,45 @@ public class ProjectManager {
 		int tmpCount = (Integer) this.ibatis.queryForObject("project.countProjectToEvaluate", map);
 		return tmpCount;
 	}
+	
+	public void setApproveProject(int projectId,int updatedBy) throws SQLException {
+		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_APPROVE;
+		
+		Map m = new HashMap();
+		m.put("projectId", projectId);
+		m.put("updatedBy", updatedBy);
+		m.put("projectStatus", projectStatus);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("project.setToApproveProject", m);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+	}
+	
+
+	public void setDeclineProject(int projectId,int updatedBy, String remarks) throws SQLException {
+		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_ONGOING;
+		
+		Map m = new HashMap();
+		m.put("projectId", projectId);
+		m.put("updatedBy", updatedBy);
+		m.put("remarks", remarks);
+		m.put("projectStatus", projectStatus);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("project.setToDeclineProject", m);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+		
+	}
 }
