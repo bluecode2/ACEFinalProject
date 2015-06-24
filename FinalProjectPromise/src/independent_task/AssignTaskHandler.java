@@ -41,6 +41,7 @@ public class AssignTaskHandler extends Action {
 			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 			return mapping.findForward("assignTaskEntry");
 		}
+
 		else if ("save".equals(tsForm.getTask()	)) {
 			Boolean isAdd = tsForm.getIsAdd();
 
@@ -51,7 +52,7 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsMan.createNewAssignTask(tsForm.getTkBean());
 			} else {
-				
+				System.out.println("masuk "+ tsForm.getTkBean().getTaskId());
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
@@ -60,8 +61,10 @@ public class AssignTaskHandler extends Action {
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
-			
+
 			if (tsForm.getSelectedEdit() == 0) {
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+
 				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				return mapping.findForward("assignTaskEntry");

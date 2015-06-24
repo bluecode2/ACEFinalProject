@@ -13,7 +13,7 @@ public class AssignTaskForm extends ActionForm
 	private String 			searchField;
 	private String 			searchValue;
 	private Integer 		currPage = 1;
-	private Integer 		pageCount = 0;
+	private Integer 		pageCount = 1;
 	private Integer 		listCount;
 	private String			currSearchField;
 	private String			currSearchValue;

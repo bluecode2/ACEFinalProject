@@ -67,7 +67,7 @@ function registerSearchAssignToEvent(){
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 		<html:hidden property="task" name="assignTaskForm"/>
-<%-- 		<html:hidden property="tkBean.taskId" name="assignTaskForm"/> --%>
+		<html:hidden property="tkBean.taskId" name="assignTaskForm"/>
 		<html:hidden property="tkBean.assignedBy" name="assignTaskForm" styleId="hdSpvId"/>
 		<html:hidden property="tkBean.createdBy" name="assignTaskForm"/>
 		<html:hidden property="isAdd" name="assignTaskForm"/>
