@@ -102,13 +102,26 @@
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
 	</update>
+	
+	<update id="updateProjectStat" parameterClass="project_task.ProjectTaskBean">
+		UPDATE TASK
+		SET
+		TASK_STATUS = #taskStatus#,
+		updated_by = #updatedBy#,
+		TASK_PROGRESS = #taskProgress#,
+		ACT_START_DATE = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
+		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
+		ACT_MAIN_DAYS = #actmainDays#,
+		update_date = to_date(SYSDATE, 'yyyy-MM-dd')
+		WHERE task_id = #taskId#
+	</update>
 
 	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
 		UPDATE task
 		set
 		update_date = SYSDATE,
 		updated_by = #updatedBy#,
-		task_status = #taskStatus#,
+		task_status = #taskStat#,
 		remarks = #remarks#
 		where task_id =#taskId#
 	</update>
@@ -149,4 +162,31 @@
 		from vProjectTask
 		where task_id = #id#
 	</select>
+	
+	<select id="getDataForstatus" resultClass="project_task.ProjectTaskBean" parameterClass="java.lang.Integer">
+		SELECT 
+			TASK_ID			AS taskId,
+			PROJECT_ID		AS projectId,
+			ASSIGNED_TO		AS assignedTo,
+			TASK_STATUS		AS taskStatus,
+			UPDATED_BY		AS updatedBy,
+			CREATED_BY		AS createdBy,
+			TASK_NAME		AS taskName,
+			TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as estStartDateInString,
+			TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as estEndDateInString,
+			TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as actStartDateInString,
+			TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as actEndDateInString, 
+			EST_MAIN_DAYS	AS estMainDays,
+			ACT_MAIN_DAYS	AS actmainDays,
+			TASK_PROGRESS	AS taskProgress,
+			REMARKS			AS remarks,
+			TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString,
+			TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+			TASK_DESC		AS taskDesc,
+			ASSIGNED_BY		AS assignedBy,
+			IS_OUTSOURCE	AS isOutsource
+			FROM TASK
+			WHERE TASK_ID =#taskId#
+	</select>
+	
 </sqlMap>

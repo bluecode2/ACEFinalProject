@@ -55,7 +55,8 @@ public class ProjectTaskManager {
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
 			this.ibatis.commitTransaction();
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
 			this.ibatis.endTransaction();
 		}
 	}
@@ -65,7 +66,28 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateProjectTask", bean);
 			this.ibatis.commitTransaction();
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+	}
+	
+	public void updateTaskStat(ProjectTaskBean bean) throws SQLException{//Integer taskId, Integer updatedBy, String taskStat) throws SQLException {
+		/*Map map = new HashMap();
+		System.out.println("masuk Manager");
+		map.put("taskId", taskId);
+		map.put("updatedBy", updatedBy);
+		map.put("taskStatus", taskStat);
+		System.out.println(taskId +" update "+ updatedBy +" stat "+ taskStat +" testing manager");*/
+	
+		try {
+			this.ibatis.startTransaction();
+			System.out.println("berhasil masuk edit");
+			this.ibatis.update("projectTask.updateProjectStat", bean);
+			System.out.println("Berhasil Edit");
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			e.printStackTrace();
 			this.ibatis.endTransaction();
 		}
 	}
@@ -82,7 +104,8 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateStatusProjectTask", m);
 			this.ibatis.commitTransaction();
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
 			this.ibatis.endTransaction();
 		}
 
@@ -99,5 +122,11 @@ public class ProjectTaskManager {
 		int tmpNewId = (Integer) this.ibatis.queryForObject(
 				"projectTask.getNewTaskId", null);
 		return tmpNewId;
+	}
+	
+	public ProjectTaskBean getDataForstatus(Integer taskId) throws SQLException{
+		ProjectTaskBean pTaskBean = new ProjectTaskBean();
+		pTaskBean = (ProjectTaskBean) this.ibatis.queryForObject("projectTask.getDataForstatus", taskId);
+		return pTaskBean;
 	}
 }

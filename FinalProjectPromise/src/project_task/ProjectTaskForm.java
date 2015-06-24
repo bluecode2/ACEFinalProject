@@ -31,8 +31,15 @@ public class ProjectTaskForm extends ActionForm
 	private String			remarksRecord;
 	private Integer			empId;
 	private List<ActivityBean> arrActivity;
+	private Integer 		testingId =0;
 	
 
+	public Integer getTestingId() {
+		return testingId;
+	}
+	public void setTestingId(Integer testingId) {
+		this.testingId = testingId;
+	}
 	public List<ActivityBean> getArrActivity() {
 		return arrActivity;
 	}
