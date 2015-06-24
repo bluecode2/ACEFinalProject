@@ -28,8 +28,15 @@ public class ProjectTaskForm extends ActionForm
 	private int				selectedEdit;
 	private String			statusTask;
 	private String			remarksRecord;
+	private Integer			empId;
 	
 
+	public Integer getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 	public String getRemarksRecord() {
 		return remarksRecord;
 	}
