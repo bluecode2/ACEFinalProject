@@ -115,7 +115,9 @@
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
 							<li><span><bean:write name="userName" /> (<bean:write name="userRoleName" />)</span></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#" onclick="onChangePasswordClick();">Change Password</a></li>
+							<logic:equal name="isActiveDirectory" value="0">
+								<li><a href="#" onclick="onChangePasswordClick();">Change Password</a></li>
+							</logic:equal>
 							<li><a href="logout.do">Logout</a></li>
 						</ul></li>
 				</ul>
