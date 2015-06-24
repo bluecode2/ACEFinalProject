@@ -90,6 +90,33 @@ function search() {
 			
 			document.forms[0].submit();
 		});
+		$('.linkActivity').on('click',function(){
+			var taskId = $(this).closest('tr').find('.hdTaskId').val();
+			$.ajax({
+				type : "POST",
+				url : "assignTask.do",
+				data : "task=listActivity&selectedId="
+						+ taskId,
+				success : function(response) {
+					$("#tblShow").find("tr:gt(0)").remove();
+					$("#tblShow").append(response);
+					$('#showMember').modal();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+
+			});
+
+			var taskName = $(this).closest('tr').find('.hdTaskName').val();
+			var assignedTo = $(this).closest('tr').find('.hdAssignedToName').val();
+			
+
+			$('#txtActivityTaskName').val(taskName);
+			$('#txtActivityAssignTo').val(assignedTo);
+			$('#showActivity').modal();
+		});
+		
 	});
 	function changeStatusFirstBtn(taskId, taskStatus) {
 		document.forms[0].task.value = "firstEdit";
@@ -153,10 +180,10 @@ function search() {
 						<tr>
 							<td>Task Name</td>
 							<td>Assign To</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
-							
+							<td>Estimate Date</td>
+							<td>Actual Date</td>
 							<td>Task Progress</td>
+							<td>Activity</td>
 							<td>Task Status</td>
 							<td class="align-center">Action</td>
 						</tr>
@@ -169,14 +196,20 @@ function search() {
 										<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc"/>
 										<html:hidden property="taskId" name="reg" styleClass="hdTaskId"/>
 										<html:hidden property="taskName" name="reg" styleClass="hdTaskName"/>
+										<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/>
 										<a href="#" class="text-info linkDesc">
 											<bean:write name="reg" property="taskName" />
 										</a>
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
+									<td>
+										<a  href="#" class="text-info linkActivity">
+											View Activity
+										</a>
+									</td>
 									<td><html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
 										<bean:write name="reg" property="taskStatusName" />
 									</td>
@@ -283,6 +316,63 @@ function search() {
 											<textarea rows="3" cols="3" class="form-control"  id="txtSearchFieldDesc" disabled="disabled"></textarea>
 										</button></td>
 									</tr>
+								</table>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+		<!-- popup to show Activity -->
+			<div class="modal fade" id="showActivity" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Project Member</h4>
+							<br/>
+						</div>
+						<div class="modal-body">
+						<div class="container form-group">
+								<table>
+									<tr>
+										<td>Task Name</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityTaskName" class="form-control" disabled="true"/>
+										</td>
+									</tr>
+									<tr>
+										<td>Assign To</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityAssignTo" class="form-control" disabled="true" />
+										</td>
+									</tr>
+								</table>
+							</div>
+						
+							<div class="form-group">
+								<table class="table table-bordered" cellspacing="0" id="tblShow" style="margin-top: 10px;" width="100%" class="tableContent">
+									<tr>
+										<th style="padding-left: 15px">Activity Description</th>
+										<th style="padding-left: 15px">Completed</th>
+										
+									</tr>
+										<logic:notEmpty name="assignTaskForm" property="arrActivity">
+											<logic:iterate id="reg" name="assignTaskForm" property="arrActivity">
+											<tr>
+												
+											</tr>
+											</logic:iterate>
+										</logic:notEmpty>
+								
 								</table>
 							</div>
 

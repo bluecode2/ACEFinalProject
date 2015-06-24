@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import activity.ActivityBean;
+
 public class AssignTaskForm extends ActionForm
 {
 	private String 			task = "";
@@ -22,8 +24,14 @@ public class AssignTaskForm extends ActionForm
 	private int				selectedEdit;
 	private String			statusTask;
 	private String			remarksRecord;
-	
+	private List<ActivityBean> arrActivity;
 
+	public List<ActivityBean> getArrActivity() {
+		return arrActivity;
+	}
+	public void setArrActivity(List<ActivityBean> arrActivity) {
+		this.arrActivity = arrActivity;
+	}
 	public String getRemarksRecord() {
 		return remarksRecord;
 	}

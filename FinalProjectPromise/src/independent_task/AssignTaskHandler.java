@@ -1,5 +1,8 @@
 package independent_task;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import activity.ActivityBean;
+import activity.ActivityManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -28,7 +33,7 @@ public class AssignTaskHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
-
+		ActivityManager actMan = new ActivityManager();
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);
@@ -77,6 +82,32 @@ public class AssignTaskHandler extends Action {
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
 			}
 
+		}
+		else if ("listActivity".equals(tsForm.getTask())) {
+			int selId = tsForm.getSelectedId();
+			tsForm.setArrActivity(actMan.getActivityWithTaskId(selId));
+			response.setContentType("text/text;charset=utf-8");
+			response.setHeader("cache-control", "no-cache");
+			PrintWriter out = response.getWriter();
+			
+			List<ActivityBean> arrActivity = tsForm.getArrActivity();
+
+			System.out.println(arrActivity.size());
+			for (ActivityBean actBean : arrActivity) {
+				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+				out.println("<td>" + actBean.getActivityDesc() + "</td>");
+				if (actBean.getIsCompleted() == 1) {
+					out.println("<td> <input type=\"checkbox\" checked disabled> </td>");					
+				}
+				else {
+					out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");		
+				}
+
+				out.println("</tr>");
+			}	
+
+			out.flush();
+			return null;
 		}
 		
 		
