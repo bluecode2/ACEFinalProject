@@ -47,7 +47,7 @@
 			<td colspan="2" height="170px" class="bg-primary"
 				style="border-radius: 10px" valign="middle" align="center">
 				<div class="row">
-					<div class="center-block col-md-8 text-center" style="padding-top:25px;float: none">
+					<div class="center-block col-md-9 text-center" style="padding-top:0px;float: none">
 						<div class="row">
 							<div class="col-md-3">
 								<img alt="Logo" src="icon/logo-outline.png" width="90px"

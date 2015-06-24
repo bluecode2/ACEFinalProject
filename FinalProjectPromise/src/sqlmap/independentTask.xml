@@ -170,7 +170,9 @@
 	<select id="getCountMyCurrentTask" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		select count(1)
 		from vindependenttask
-		WHERE ASSIGNED_TO = #empId#
+		WHERE ASSIGNED_TO = #empId# AND 
+		          (TASK_STATUS='TA_STAT_02' OR TASK_STATUS='TA_STAT_03' 
+		          OR TASK_STATUS='TA_STAT_04' OR TASK_STATUS='TA_STAT_05')
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="taskName">
 							LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
