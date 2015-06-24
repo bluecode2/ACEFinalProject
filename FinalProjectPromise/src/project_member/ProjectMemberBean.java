@@ -96,7 +96,7 @@ public class ProjectMemberBean {
 		try {
 			date = df.parse(estStartDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.estStartDateInString = "";
 			date = null;
 		}
@@ -114,7 +114,7 @@ public class ProjectMemberBean {
 		try {
 			date = df.parse(estEndDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.estEndDateInString = "";
 			date = null;
 		}

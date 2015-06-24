@@ -79,7 +79,6 @@ function search() {
 			document.forms[0].task.value = "secondEdit";
 			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
 			var taskStatus = $('#txtValueTaskStatus').val();
-			alert(taskStatus);
 			if(taskStatus == 'TA_STAT_02'){ //Function for cancel task; change status and remarks
 				document.forms[0].selectedEdit.value = "0";
 				

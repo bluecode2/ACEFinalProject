@@ -24,9 +24,10 @@ $(document).ready(function() {
 		
 	});
 	
+	
 	$('.linkMember').on('click',function(){
 		var selecId = $(this).closest('tr').find('.hdProjectId').val();
-		
+
 		$.ajax({
 			type : "POST",
 			url : "projectApproval.do",
@@ -45,6 +46,12 @@ $(document).ready(function() {
 	});
 	
 });
+
+function goToEvaluate(id) {
+	document.forms[0].task.value = "evaluate";
+	document.forms[0].selectedId.value = id;
+	document.forms[0].submit();
+}
 </script>
 
 
@@ -61,6 +68,7 @@ $(document).ready(function() {
 		<html:hidden property="currSearchValue" name="projectApprovalForm"/>
 		<html:hidden property="currSearchField" name="projectApprovalForm"/>
 		<html:hidden property="selectedId" name="projectApprovalForm" styleClass="hdSelectedId"/>
+		<html:hidden property="selectedProjectId" name="projectApprovalForm" styleClass="hdSelectedProjectId"/>
 			<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -121,15 +129,16 @@ $(document).ready(function() {
 										</a>
 									</td>
 									<td align="center">
-										<html:button property="" value="Evaluate" styleClass="btn btn-xs btn-info"></html:button>
+										<button type="button" property="" onclick="goToEvaluate('<bean:write name="reg" property="projectId" />');"  style="margin: 0px" class="btn btn-xs btn-info goEvaluate">Evaluate</button>
 									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="projectApprovalForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
-									Data Found</td>
+								<td colspan="6" align="center" style="padding: 10px">No
+									Data Found
+								</td>
 							</tr>
 						</logic:empty>
 					</tbody>

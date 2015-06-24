@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionForm;
 
 import project.ProjectBean;
 import project_member.ProjectMemberBean;
+import project_task.ProjectTaskBean;
 
 public class ProjectApprovalForm extends ActionForm{
 
@@ -20,7 +21,28 @@ public class ProjectApprovalForm extends ActionForm{
 	private ProjectBean 		pBean;
 	private List<ProjectMemberBean> arrMember;
 	private int					selectedId;
+	private int					selectedProjectId;
+	private List<ProjectTaskBean> arrTask;
+	private String 				remarksRecord;
 	
+	public String getRemarksRecord() {
+		return remarksRecord;
+	}
+	public void setRemarksRecord(String remarksRecord) {
+		this.remarksRecord = remarksRecord;
+	}
+	public List<ProjectTaskBean> getArrTask() {
+		return arrTask;
+	}
+	public void setArrTask(List<ProjectTaskBean> arrTask) {
+		this.arrTask = arrTask;
+	}
+	public int getSelectedProjectId() {
+		return selectedProjectId;
+	}
+	public void setSelectedProjectId(int selectedProjectId) {
+		this.selectedProjectId = selectedProjectId;
+	}
 	public int getSelectedId() {
 		return selectedId;
 	}
