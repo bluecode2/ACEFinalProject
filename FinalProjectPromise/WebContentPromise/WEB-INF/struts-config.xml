@@ -153,8 +153,12 @@
 		<action path="/projectInvolved" name="projectInvolvedForm" type="project.ProjectInvolvedHandler"
 			scope="request">
 			<forward name="projectInvolvedList" path="/WEB-INF/jsp/projectInvolved/projectInvolvedList.jsp"></forward>
+			<forward name="projectInvolvedTask" path="/WEB-INF/jsp/projectInvolved/projectInvolvedTask.jsp"></forward>
 		</action>
-		
+		<action path="/projectInvolvedTask" name="projectTaskForm" type="project.ProjectInvolvedHandler"
+			scope="request">
+			<forward name="projectInvolvedTaskList" path="/WEB-INF/jsp/projectInvolved/projectInvolvedTask.jsp"></forward>
+		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->

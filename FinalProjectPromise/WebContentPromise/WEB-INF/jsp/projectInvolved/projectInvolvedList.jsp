@@ -47,6 +47,11 @@
 		$('#projDesc').modal();
 	}
 	
+	function toTask(task, projectId){
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = projectId;
+		document.forms[0].submit(); 
+	}
 </script>
 </head>
 <body>
@@ -135,7 +140,7 @@
 											Member</a>
 									</td>
 									<td align="center"><a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchProjMember"> View
+										   onclick="toTask('toTask','<bean:write name="proj" property="projectId" />');">
 											Task</a>
 									</td>
 								</tr>

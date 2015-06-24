@@ -55,6 +55,12 @@ public class ProjectInvolvedHandler extends Action{
 			out.flush();
 			return null;
 		}
+		else if ("toTask".equalsIgnoreCase(projectForm.getTask())){
+			System.out.println(projectForm.getSelectedId());
+			session.setAttribute("projectId", projectForm.getSelectedId());
+			
+			return mapping.findForward("projectInvolvedTask");
+		}
 		
 		projectForm.setTask("");
 		projectForm.setSearchField(projectForm.getCurrSearchField());
