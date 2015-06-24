@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-public class AssignTaskForm extends ActionForm
+public class MyCurrentTaskForm extends ActionForm
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String 			task = "";
 	private String 			searchField;
 	private String 			searchValue;
