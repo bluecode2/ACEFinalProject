@@ -30,15 +30,14 @@ public class ApproveTaskHandler extends Action {
 
 		CommonFunction.initializeHeader(Constant.MenuCode.APPROVE_PROPOSED_INDEPENDENT_TASK, us, request);
 
+		aForm.setEmpId(us.getEmployeeId());
+		
 		if (aForm.getTask().equals("approve")) {
-			request.setAttribute("pageTitle", "Approve Task List");
 			
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			aForm.getBean().setCreatedBy(us.getUserId());
 			
-			if (!aForm.getPropTo().isEmpty()) {
-				aForm.getBean().setPropBy(Integer.parseInt(aForm.getPropTo()));
-			}
+			aForm.getBean().setPropBy(aForm.getAssignTo());
 			
 			aManager.approveTask(aForm.getBean());
 			
@@ -57,8 +56,6 @@ public class ApproveTaskHandler extends Action {
 		}
 		else if (aForm.getTask().equals("decline")) {
 			aForm.setIsAdd(false);
-			System.out.println(aForm.getTask());
-			request.setAttribute("pageTitle", "Approve Task List");
 
 			aForm.getBean().setUpdatedBy(us.getUserId());
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
@@ -84,8 +81,6 @@ public class ApproveTaskHandler extends Action {
 		
 		aForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-
-		request.setAttribute("pageTitle", "Approve Task List");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(aForm.getPageCount(),

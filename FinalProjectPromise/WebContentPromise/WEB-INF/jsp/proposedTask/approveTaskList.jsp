@@ -9,16 +9,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Proposed Task List</title>
+<script src="js/jquery.js"></script>
 <script type="text/javascript">
-	function search() {
-		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
-		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
-		changePage(1);
-	}
 	function actionForm(task, id) {
-		document.forms[0].task.value = task;
-		document.forms[0].selectedId.value = id;
-		document.forms[0].submit();
+// 		document.forms[0].task.value = task;
+// 		document.forms[0].selectedId.value = id;
+// 		document.forms[0].submit();
 	}
 	function getTaskDesc(taskDesc) {
 		$('#txtTaskDesc').html(taskDesc);
@@ -32,6 +28,59 @@
 		document.forms[0].propTo.value = id;
 		document.getElementById("propTo").text = name;
 	}
+	
+	var currLink;
+	var currHdnField;
+	
+	$(document).ready(function() {
+		$('.lnkAssignTo').on('click',function(){
+			currLink = $(this);
+			currHdnField = $(this).closest('td').find('.hdnAssignTo');
+			$("#empList").modal();
+		});
+		
+		$('.btnApprove').on('click',function(){
+			var taskId = $(this).closest('tr').find('td').eq(0).html().trim();
+			var assignToId = $(this).closest('tr').find('.hdnAssignTo').val();
+			document.forms[0].task.value = 'approve';
+			document.forms[0].selectedId.value = taskId;
+			document.forms[0].assignTo.value = assignToId;
+			document.forms[0].submit();
+		});
+		
+		registerSearchAssignToEvent();
+	});
+	
+	function registerSearchAssignToEvent(){
+		$('.rowSearch').on('click',function(){
+			var empId = $(this).closest('tr').find('td').eq(0).html();
+			var empName = $(this).closest('tr').find('td').eq(2).html();
+			currHdnField.val(empId);
+			currLink.html(empName);
+		});
+	}
+	
+	function search() {
+		var spvId = $('#hdnEmpId').val();
+		var searchField = $('#selSearchFieldAssignTo').val();
+		var searchValue = $('#txtSearchValueAssignTo').val();
+
+		$.ajax({
+			type : "POST",
+			url : "searchAssignTo.do",
+			data : "spvId=" + spvId + "&searchField=" + searchField
+					+ "&searchValue=" + searchValue,
+			success : function(response) {
+				$("#tblSearch").find("tr:gt(0)").remove();
+				$("#tblSearch").append(response);
+				registerSearchAssignToEvent();
+			},
+			error : function(e) {
+				alert("Error: " + e);
+			}
+		});
+	}
+
 </script>
 </head>
 <body>
@@ -46,6 +95,8 @@
 		<html:hidden name="approveTaskForm" property="currSearchField" />
 		<html:hidden name="approveTaskForm" property="currSearchValue" />
 		<html:hidden name="approveTaskForm" property="propTo"/>
+		<html:hidden name="approveTaskForm" property="empId" styleId="hdnEmpId" />
+		<html:hidden name="approveTaskForm" property="assignTo" styleId="hdnAssignTo" />
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -87,20 +138,20 @@
 						<logic:notEmpty name="approveTaskForm" property="arrList">
 							<logic:iterate id="reg" name="approveTaskForm" property="arrList">
 								<tr>
+									<td style="display: none"><bean:write name="reg" property="propTaskId" /></td>
 									<td><a href="#" class="text-info" 
 									onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');" data-target="taskDesc">
 									<bean:write name="reg" property="propTaskName" /></a>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to </td>
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="propByName" /></td>
-									<td><a href="#" class="text-info" id="propTo"
-									onclick="getEmpList('<bean:write name="reg" property="propTaskDesc" />');" data-target="empList">
+									<td><input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" /><a href="#" class="text-info lnkAssignTo">
 									<bean:write name="reg" property="propByName" /></a></td>
-									<td align="center"><a class="text-success" href="#"
+									<td align="center"><a class="text-success btnApprove" href="#"
 										onclick="actionForm('approve','<bean:write name="reg" property="propTaskId" />');"
 										title="Approve"><span class="glyphicon glyphicon-ok"
 											aria-hidden="true"></span></a> &nbsp; <a href="#"
-										class="text-danger"
+										class="text-danger btnDecline"
 										onclick="actionForm('decline','<bean:write name="reg" property="propTaskId" />');"
 										title="Decline"><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a></td>
@@ -189,8 +240,7 @@
 								<tbody>
 									<logic:notEmpty name="approveTaskForm" property="eBean">
 										<logic:iterate id="emp" name="approveTaskForm" property="eBean">
-											<tr data-dismiss="modal" class="rowSearch" 
-											onclick="getValue('<bean:write name="emp" property="employeeId" />','<bean:write name="emp" property="employeeName" />');">
+											<tr data-dismiss="modal" class="rowSearch">
 												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
 												<td><bean:write name="emp" property="employeeName" /></td>

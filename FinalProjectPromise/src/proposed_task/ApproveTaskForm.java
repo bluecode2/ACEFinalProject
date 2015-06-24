@@ -12,6 +12,8 @@ public class ApproveTaskForm extends ActionForm{
 	private String task = "";
 	private Integer selectedId = 0;
 	private Boolean isAdd = false;
+	private Integer empId;
+	private Integer assignTo;
 	private List<ProposedTaskBean> arrList = new ArrayList<ProposedTaskBean>();
 	private ProposedTaskBean bean  = new ProposedTaskBean();
 	private List <EmployeeBean> eBean = new ArrayList<EmployeeBean>();
@@ -23,6 +25,7 @@ public class ApproveTaskForm extends ActionForm{
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	
 	public String getTask() {
 		return task;
 	}
@@ -103,6 +106,18 @@ public class ApproveTaskForm extends ActionForm{
 	}
 	public void seteBean(List <EmployeeBean> eBean) {
 		this.eBean = eBean;
+	}
+	public Integer getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+	public Integer getAssignTo() {
+		return assignTo;
+	}
+	public void setAssignTo(Integer assignTo) {
+		this.assignTo = assignTo;
 	}
 	
 }
