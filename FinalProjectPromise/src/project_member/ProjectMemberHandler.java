@@ -56,10 +56,8 @@ public class ProjectMemberHandler extends Action {
 		
 		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", true);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-				eForm.getCurrPage(), Constant.pageSize));
-			request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRole(pRoleForm.getCurrSearchField(), pRoleForm.getCurrSearchValue(),
-				pRoleForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+			request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
 		}
 		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", false);

@@ -41,6 +41,19 @@ public class EmployeeManager {
 
 		return arr;
 	}
+	public List<EmployeeBean> getAllEmployeeForPopUp() throws ClassNotFoundException,
+			SQLException {
+		
+		List<EmployeeBean> arr = null;
+		try {
+			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return arr;
+	}
 
 	public List<EmployeeBean> getAllEmployeeForDeptHead(Integer deptId,String searchField, String searchValue)
 			throws ClassNotFoundException, SQLException {

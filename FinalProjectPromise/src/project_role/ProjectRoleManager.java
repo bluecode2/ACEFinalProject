@@ -41,6 +41,19 @@ public class ProjectRoleManager {
 		} 
 		return arr;
 	}
+	public List<ProjectRoleBean> getAllProjectRoleForPopUp() throws SQLException {
+		
+		List<ProjectRoleBean>	arr = new  ArrayList<ProjectRoleBean>(); 
+		
+		try {
+			arr = this.ibatis.queryForList(
+					"projectRole.getProjectRoleForPopUp", null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+		return arr;
+	}
 	
 	public ProjectRoleBean getProjectRoleById(Integer tmpProjectRoleId) throws SQLException {
 		ProjectRoleBean projectRoleBean = (ProjectRoleBean) this.ibatis.queryForObject("projectRole.getProjectRoleById", tmpProjectRoleId);

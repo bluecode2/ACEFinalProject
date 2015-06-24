@@ -31,6 +31,20 @@
 		WHERE rnum &gt;
 		#begin#
 	</select>
+	<select id="getProjectRoleForPopUp" resultClass="project_role.ProjectRoleBean">
+		SELECT 
+		PROJECT_ROLE_ID 	as projectRoleId,
+		UPDATED_BY 			as updatedBy,
+		CREATED_BY 			as createdBy,
+		PROJECT_ROLE_NAME	as projectRoleName,
+		CREATE_DATE			as createDate, 
+		UPDATE_DATE 		as updateDate,
+		PROJECT_ROLE_CODE	as projectRoleCode,
+		IS_DELETED			as isDeleted
+		FROM PROJECT_ROLE 
+		WHERE IS_DELETED = 0
+		ORDER BY PROJECT_ROLE_ID
+	</select>
 	
 	<select id="getProjectRoleById" parameterClass="java.lang.Integer" resultClass="project_role.ProjectRoleBean">
 		SELECT 
