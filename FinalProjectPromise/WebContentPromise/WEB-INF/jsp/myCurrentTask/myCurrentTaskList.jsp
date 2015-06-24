@@ -110,6 +110,14 @@
 												aria-hidden="true"></span></a>
 										</logic:equal>
 										<logic:equal name="reg"
+											property="taskStatus" value="TA_STAT_06">
+											<a class="text-success" href="#"
+												onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
+												'<bean:write name="reg" property="taskName" />');"
+												title="Pause"><span class="glyphicon glyphicon-play"
+												aria-hidden="true"></span></a>
+										</logic:equal>
+										<logic:equal name="reg"
 											property="taskProgress" value="100">
 											<a class="text-success" href="#"
 												onclick="actionForm('submit','<bean:write name="reg" property="taskId" />',
