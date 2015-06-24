@@ -20,6 +20,7 @@ public class ProjectTaskForm extends ActionForm
 	private String			currSearchField;
 	private String			currSearchValue;
 	private Integer			selectedId;
+	private Integer 		projectId;
 	private ProjectBean prjBean = null;
 	private ProjectTaskBean		tkBean = new ProjectTaskBean();
 	private List<ProjectTaskBean>	arrList = new ArrayList<ProjectTaskBean>();
@@ -124,6 +125,12 @@ public class ProjectTaskForm extends ActionForm
 	}
 	public void setPrjBean(ProjectBean prjBean) {
 		this.prjBean = prjBean;
+	}
+	public Integer getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
 	}
 	
 }

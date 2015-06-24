@@ -26,13 +26,34 @@
 		<html:hidden name="userRoleForm" property="task" />
 		<html:hidden name="userRoleForm" property="isAdd" />
 		<html:hidden name="userRoleForm" property="userRoleBean.userRoleId" />
-		
+
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
 			<div class="divContent">
+				<div class="container form-group">
+					<table>
+						<tr>
+							<td>Search</td>
+							<td style="padding-left: 15px"><select class="form-control"
+								id="selSearchFieldEmpId" style="width: 150px">
+									<option value="employeeCode">Employee Code</option>
+									<option value="employeeName">Employee Name</option>
+							</select></td>
+							<td style="padding-left: 15px"><input type="text"
+								id="txtSearchValueEmpId" class="form-control" /></td>
+							<td style="padding-left: 15px">
+								<button type="button" onclick="search();" id="btnSearchEmp"
+									class="btn btn-sm btn-info btn-icon" title="BackEmp"
+									value="btnEmp">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />
@@ -40,20 +61,20 @@
 					</colgroup>
 					<tr>
 						<td class="tdLabel" align="right">User Role Code</td>
-						<td>
-							<html:text styleClass="form-control" styleId="txtUserRoleCode" name="userRoleForm" property="userRoleBean.userRoleCode"></html:text>
-						</td>
+						<td><html:text styleClass="form-control"
+								styleId="txtUserRoleCode" name="userRoleForm"
+								property="userRoleBean.userRoleCode"></html:text></td>
 					</tr>
 					<tr>
 						<td class="tdLabel" align="right">User Role Name</td>
-						<td>
-							<html:text styleClass="form-control" styleId="txtUserRoleName" name="userRoleForm" property="userRoleBean.userRoleName"></html:text>
-						</td>
+						<td><html:text styleClass="form-control"
+								styleId="txtUserRoleName" name="userRoleForm"
+								property="userRoleBean.userRoleName"></html:text></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		
+
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>
