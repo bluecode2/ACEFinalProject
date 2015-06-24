@@ -144,7 +144,6 @@
 		<html:hidden name="projectForm" property="selectedId" />
 		<html:hidden name="projectForm" property="currSearchField" />
 		<html:hidden name="projectForm" property="currSearchValue" />
-		<html:hidden property="currPage" name="projectForm"/>
 		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
@@ -263,9 +262,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
-		
-		
+
 		<html:hidden name="projectForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 

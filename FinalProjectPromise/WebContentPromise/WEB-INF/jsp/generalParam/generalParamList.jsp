@@ -51,7 +51,6 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 		
-		<html:hidden property="currPage" name="generalParamForm"/>
 		<html:hidden property="currSearchField" name="generalParamForm"/>
 		<html:hidden property="currSearchValue" name="generalParamForm"/>
 		

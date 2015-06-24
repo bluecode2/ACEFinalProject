@@ -46,7 +46,6 @@
 		
 		<html:hidden property="currSearchValue" name="personalHolidayForm"/>
 		<html:hidden property="currSearchField" name="personalHolidayForm"/>
-		<html:hidden property="currPage" name="personalHolidayForm"/>
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>

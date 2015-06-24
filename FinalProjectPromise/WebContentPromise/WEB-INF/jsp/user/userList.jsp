@@ -49,7 +49,6 @@
 		<html:hidden name="userForm" property="selectedId" />
 		<html:hidden name="userForm" property="currSearchField" />
 		<html:hidden name="userForm" property="currSearchValue" />
-		<html:hidden property="currPage" name="userForm"/>
 
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">

@@ -59,7 +59,6 @@
 		<html:hidden property="currSearchValue" name="generalHolidayForm" />
 		<html:hidden property="currSearchField" name="generalHolidayForm" />
 		<html:hidden property="currSearchValue2" name="generalHolidayForm" />
-		<html:hidden property="currPage" name="generalHolidayForm" />
 		<html:hidden property="searchField" name="generalHolidayForm" value="genHolidayDateInString" />
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
