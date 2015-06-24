@@ -24,7 +24,7 @@
 			});
 	
 	function actionForm(memberId, nama) {
-		if (confirm("Are you sure want to delete Project Member : " + nama)) {
+		if (confirm("Are you sure want to delete Project Member : " + nama +" ?")) {
 			document.forms[0].task.value = 'delProjMem';
 			document.forms[0].selectedId.value = memberId;
 			document.forms[0].submit();
