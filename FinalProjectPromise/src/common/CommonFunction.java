@@ -122,7 +122,7 @@ public class CommonFunction {
 		ArrayList<MenuBean> arrMenuLvl3 = new ArrayList<MenuBean>();
 
 		MenuManager menuMan = new MenuManager();
-		MenuBean menu = menuMan.getMenuByMenuId(menuCode);
+		MenuBean menu = menuMan.getMenuByMenuCode(menuCode);
 		UserRoleMenuManager roleMenuManager = new UserRoleMenuManager();
 		UserRoleMenuBean roleMenuBean = roleMenuManager.getUserRoleMenu(
 				user.getUserRoleId(), menu.getMenuId());
@@ -164,5 +164,27 @@ public class CommonFunction {
 				.contains("A"));
 		request.setAttribute("btnDeclineVisible", roleMenuBean.getMenuCrud()
 				.contains("D"));
+		
+		
+		
+		ArrayList<MenuBean> arrBreadCrumb = new ArrayList<MenuBean>();
+		arrBreadCrumb.add(menu);
+		generateBreadCrumb(menu.getParentId(), arrBreadCrumb);
+		
+		request.setAttribute("breadCrumb", arrBreadCrumb);
+		request.setAttribute("currMenuId", menu.getMenuId());
+	}
+	
+	
+	private static void generateBreadCrumb(Integer parentId, ArrayList<MenuBean> arrBreadCrumb){
+		if(parentId == null)return;
+		MenuManager menuMan = new MenuManager();
+		MenuBean parent = menuMan.getMenuByMenuId(parentId);
+		if(parent != null){
+			arrBreadCrumb.add(0, parent);
+			generateBreadCrumb(parent.getParentId(),arrBreadCrumb);
+		}
+		else
+			return;
 	}
 }

@@ -88,12 +88,18 @@ public class MenuManager {
 		return arr;
 	}
 	
-	public MenuBean getMenuByMenuId(int tmpMenuId) throws SQLException {
-		MenuBean mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuId", tmpMenuId);
+	public MenuBean getMenuByMenuId(int tmpMenuId) {
+		MenuBean mnBean = null;
+		try {
+			mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuId", tmpMenuId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return mnBean;
 	}
 	
-	public MenuBean getMenuByMenuId(String menuCode) {
+	public MenuBean getMenuByMenuCode(String menuCode) {
 		MenuBean mnBean = null;
 		try {
 			mnBean = (MenuBean) this.ibatis.queryForObject("menu.getMenuByMenuCode", menuCode);
