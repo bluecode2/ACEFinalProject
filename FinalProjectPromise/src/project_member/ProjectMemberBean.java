@@ -12,6 +12,7 @@ public class ProjectMemberBean {
 	private Integer projectId;
 	private String projCode;
 	private String projName;
+	private String empCode;
 	private String empName;
 	private String projRoleName;
 	private String projRoleCode;
@@ -146,5 +147,11 @@ public class ProjectMemberBean {
 		}else{
 			this.estEndDateInString = "";
 		}
+	}
+	public String getEmpCode() {
+		return empCode;
+	}
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
 	}
 }

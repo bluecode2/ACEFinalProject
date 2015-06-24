@@ -40,6 +40,11 @@ label {
 	padding: 10px 14px;
 }
 
+.btn-xs {
+	margin-top: -2px;
+	margin-bottom: -2px;
+}
+
 .breadcrumb {
 	padding: 0 12px 0;
 	margin-left: -10px;
@@ -55,7 +60,7 @@ label {
 }
 
 .center-block {
-	float: none;
+	float: none !important;
 }
 
 /* Submenu

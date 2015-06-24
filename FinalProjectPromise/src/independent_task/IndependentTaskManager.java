@@ -112,7 +112,7 @@ public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 		
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.insert("task.insertToAssignTaskMap", map);
+			this.ibatis.insert("independentTask.insertToAssignTaskMap", map);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();

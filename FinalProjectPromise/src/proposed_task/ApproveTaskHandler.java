@@ -1,7 +1,5 @@
 package proposed_task;
 
-
-import independent_task.IndependentTaskBean;
 import independent_task.IndependentTaskManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +25,6 @@ public class ApproveTaskHandler extends Action {
 		ApproveTaskForm aForm = (ApproveTaskForm) form;
 		ApproveTaskManager aManager = new ApproveTaskManager();
 		IndependentTaskManager atManager = new IndependentTaskManager();
-		IndependentTaskBean tBean = new IndependentTaskBean();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
@@ -38,20 +35,22 @@ public class ApproveTaskHandler extends Action {
 			
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			aForm.getBean().setCreatedBy(us.getUserId());
-//			if (!aForm.getPropTo().equalsIgnoreCase("list")) {
-//				aForm.getBean().setPropBy(Integer.parseInt(aForm.getPropTo()));
-//			}
-//			aManager.approveTask(aForm.getBean());
 			
-			System.out.println(
-					aForm.getBean().getPropTaskName()+"\n"
-					+aForm.getBean().getPropTo()+"\n"
-					+aForm.getBean().getPropBy()+"\n"
-					+aForm.getBean().getEstEndDateInString()+"\n"
-					+aForm.getBean().getEstStartDateInString()+"\n"
-					+aForm.getBean().getUpdatedBy());
+			if (!aForm.getPropTo().isEmpty()) {
+				aForm.getBean().setPropBy(Integer.parseInt(aForm.getPropTo()));
+			}
 			
-//			atManager.createNewAssignTaskMap(aForm.getBean());
+			aManager.approveTask(aForm.getBean());
+			
+//			System.out.println(
+//					aForm.getBean().getPropTaskName()+"\n"
+//					+aForm.getBean().getPropTo()+"\n"
+//					+aForm.getBean().getPropBy()+"\n"
+//					+aForm.getBean().getEstEndDateInString()+"\n"
+//					+aForm.getBean().getEstStartDateInString()+"\n"
+//					+aForm.getBean().getUpdatedBy());
+			
+			atManager.createNewAssignTaskMap(aForm.getBean());
 			
 			response.sendRedirect("approveTask.do");
 			return null;

@@ -120,6 +120,6 @@
 		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
 		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status) 
 		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
-		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'PR_STAT_01' )
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'TA_STAT_02' )
 	</insert>
 </sqlMap>

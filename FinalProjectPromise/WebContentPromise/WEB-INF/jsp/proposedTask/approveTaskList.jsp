@@ -13,16 +13,12 @@
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
-
 		changePage(1);
 	}
-
 	function actionForm(task, id) {
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
-		document.forms[0].propTo.value = document.getElementById("propTo").text;
 		document.forms[0].submit();
-
 	}
 	function getTaskDesc(taskDesc) {
 		$('#txtTaskDesc').html(taskDesc);
@@ -31,6 +27,10 @@
 	function getEmpList(empList) {
 		$('#txtEmpList').html(empList);
 		$('#empList').modal();
+	}
+	function getValue(id,name) {
+		document.forms[0].propTo.value = id;
+		document.getElementById("propTo").text = name;
 	}
 </script>
 </head>
@@ -95,7 +95,7 @@
 									<td><bean:write name="reg" property="propByName" /></td>
 									<td><a href="#" class="text-info" id="propTo"
 									onclick="getEmpList('<bean:write name="reg" property="propTaskDesc" />');" data-target="empList">
-									list</a></td>
+									<bean:write name="reg" property="propByName" /></a></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('approve','<bean:write name="reg" property="propTaskId" />');"
 										title="Approve"><span class="glyphicon glyphicon-ok"
@@ -189,7 +189,8 @@
 								<tbody>
 									<logic:notEmpty name="approveTaskForm" property="eBean">
 										<logic:iterate id="emp" name="approveTaskForm" property="eBean">
-											<tr data-dismiss="modal" class="rowSearch">
+											<tr data-dismiss="modal" class="rowSearch" 
+											onclick="getValue('<bean:write name="emp" property="employeeId" />','<bean:write name="emp" property="employeeName" />');">
 												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
 												<td><bean:write name="emp" property="employeeName" /></td>
@@ -198,7 +199,7 @@
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
-									<logic:empty name="listAssignTo">
+									<logic:empty name="approveTaskForm" property="eBean">
 										<tr>
 											<td colspan="3" align="center">No Data Found</td>
 										</tr>

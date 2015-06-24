@@ -52,7 +52,7 @@
 		proposed_by 		as propBy,
 		proposed_to			as propTo,
 		created_by 			as createdBy,
-		update_by	 		as updatedBy,
+		updated_by	 		as updatedBy,
 		create_date 		as createDate,
 		update_date 		as updateDate,
 		task_id		 		as taskId,

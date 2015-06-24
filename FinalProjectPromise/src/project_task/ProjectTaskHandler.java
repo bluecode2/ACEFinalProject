@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import project.ProjectManager;
+import project_member.ProjectMemberManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -29,6 +30,7 @@ public class ProjectTaskHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
 		ProjectManager projManager = new ProjectManager();
+		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
 
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
@@ -48,11 +50,13 @@ public class ProjectTaskHandler extends Action {
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
 		if ("add".equals(tsForm.getTask())) {
+
 			CommonFunction.initializeHeader(
 					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("listAssignTo",
-					empMan.getEmpForAssignTask(us.getEmployeeId(), "", ""));
+			tsForm.getTkBean().setIsOutsource(0);
+			request.setAttribute("listProjMember",
+					projMbrMgr.getProjectMemberToEvaluate(tsForm.getPrjBean().getProjectId()));
 			return mapping.findForward("entry");
 		} else if ("save".equals(tsForm.getTask())) {
 			Boolean isAdd = tsForm.getIsAdd();
@@ -61,6 +65,7 @@ public class ProjectTaskHandler extends Action {
 				tsForm.getTkBean().setAssignedTo(null);
 
 			if (isAdd) {
+				tsForm.getTkBean().setProjectId(tsForm.getPrjBean().getProjectId());
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsMan.createNewOProjectTask(tsForm.getTkBean());
 			} else {

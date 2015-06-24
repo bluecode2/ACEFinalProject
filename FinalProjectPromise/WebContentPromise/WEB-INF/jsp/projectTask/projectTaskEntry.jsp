@@ -53,7 +53,6 @@
 		$('.rowSearch').on('click', function() {
 			var value = $(this).find('td').eq(0).html();
 			var text = $(this).find('td').eq(2).html();
-			alert(value + " " + text);
 			$('#hdEmpId').val(value);
 			$('#txtAssignedToName').val(text);
 		});
@@ -71,6 +70,7 @@
 			styleId="hdSpvId" />
 		<html:hidden property="tkBean.createdBy" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
+<%-- 		<html:text property="prjBean.projectId" name="projectTaskForm" /> --%>
 		<div class="container">
 
 			<div class="divContent form-group has-info">
@@ -106,10 +106,17 @@
 								styleId="txtEstStartDate" name="projectTaskForm"
 								property="tkBean.estEndDateInString"></html:text></td>
 					</tr>
-					<tr>
+					<tr valign="top">
 						<td class="tdLabel" align="right"><label>Assigned To
 						</label></td>
-						<td><html:hidden styleId="hdEmpId" name="projectTaskForm"
+						<td>
+						<table width="100%">
+							<tr>
+								<td width="50%"><html:radio name="projectTaskForm" property="tkBean.isOutsource" value="0">Project Member</html:radio></td>
+								<td><html:radio name="projectTaskForm" property="tkBean.isOutsource" value="1">Outsource</html:radio></td>
+							</tr>	
+						</table>
+							<html:hidden styleId="hdEmpId" name="projectTaskForm"
 								property="tkBean.assignedTo" />
 							<table width="100%">
 								<tr>
@@ -149,8 +156,8 @@
 										<td style="padding-left: 15px"><select
 											class="form-control" id="selSearchFieldAssignTo"
 											style="width: 150px">
-												<option value="employeeCode">Employee Code</option>
-												<option value="employeeName">Employee Name</option>
+												<option value="empName">Employee Name</option>
+												<option value="projRoleName">Project Role</option>
 										</select></td>
 										<td style="padding-left: 15px"><input type="text"
 											id="txtSearchValueAssignTo" class="form-control" /></td>
@@ -169,24 +176,23 @@
 									<tr>
 										<th>Employee Code</th>
 										<th>Employee Name</th>
-										<th>Email</th>
+										<th>Project Role</th>
 									</tr>
 								</thead>
 								<tbody>
-									<logic:notEmpty name="listAssignTo">
-										<logic:iterate id="emp" name="listAssignTo">
+									<logic:notEmpty name="listProjMember">
+										<logic:iterate id="emp" name="listProjMember">
 											<tr data-dismiss="modal" class="rowSearch">
 												<td style="display: none"><bean:write name="emp"
 														property="employeeId" /></td>
+												<td width="120px"><bean:write name="emp" property="empCode" /></td>
+												<td><bean:write name="emp" property="empName" /></td>
 												<td width="150px"><bean:write name="emp"
-														property="employeeCode" /></td>
-												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp"
-														property="email" /></td>
+														property="projRoleName" /></td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
-									<logic:empty name="listAssignTo">
+									<logic:empty name="listProjMember">
 										<tr>
 											<td colspan="3" align="center">No Data Found</td>
 										</tr>

@@ -45,18 +45,21 @@
 	<table align="center">
 		<tr>
 			<td colspan="2" height="170px" class="bg-primary"
-				style="border-radius: 10px" valign="middle">
+				style="border-radius: 10px" valign="middle" align="center">
 				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-3 text-center" style="margin-top: 0">
-						<img alt="Logo" src="icon/logo-outline.png" width="90px"
-							height="120px" />
+					<div class="center-block col-md-8 text-center" style="padding-top:25px;float: none">
+						<div class="row">
+							<div class="col-md-3">
+								<img alt="Logo" src="icon/logo-outline.png" width="90px"
+									height="120px" />
+							</div>
+							<div class="col-md-9">
+								<h1><b>PROMISE</b></h1>
+								<p class="lead">Project Management Information System</p>
+							</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-8">
-						<h1>PROMISE</h1>
-						<p class="lead">Project Management Information System</p>
-					</div>
-					<div class="col-md-1"></div>
 				</div>
 			</td>
 		</tr>
