@@ -45,13 +45,8 @@ public class UserHandler extends Action {
 			uForm.setIsAdd(true);
 			uForm.setSelectedId(0);
 			uForm.setVal("0");
-			request.setAttribute("lstUserRole", uRoleMan.getUserRole(
-					uRoleForm.getCurrSearchField(),
-					uRoleForm.getCurrSearchValue(), uRoleForm.getCurrPage(),
-					Constant.pageSize));
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-					eForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstUserRole", uRoleMan.getUserRoleForPopUp());
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
 			return mapping.findForward("userAdd");
 		} else if ("Edit".equalsIgnoreCase(uForm.getTask())) {
 
@@ -62,13 +57,8 @@ public class UserHandler extends Action {
 			uForm.setuBean(uMan.getUserByUserID(uForm.getSelectedId()));
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
 			uForm.setVal("0");
-			request.setAttribute("lstUserRole", uRoleMan.getUserRole(
-					uRoleForm.getCurrSearchField(),
-					uRoleForm.getCurrSearchValue(), uRoleForm.getCurrPage(),
-					Constant.pageSize));
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployee(
-					eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-					eForm.getCurrPage(), Constant.pageSize));
+			request.setAttribute("lstUserRole", uRoleMan.getUserRoleForPopUp());
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
 			return mapping.findForward("userAdd");
 		} else if ("delete".equalsIgnoreCase(uForm.getTask())) {
 			uForm.getuBean().setUpdatedBy(us.getUserId());

@@ -29,6 +29,19 @@
 		where ROWNUM &lt;= #end#)
 	where rnum &gt; #begin#
 	</select>
+	<select id="getUserRoleForPopUp" resultClass="user.UserRoleBean">
+			SELECT 
+			USER_ROLE_ID 	as userRoleId,
+	        UPDATED_BY 		as updatedBy, 
+	        CREATED_BY 		as createdBy,
+	        USER_ROLE_NAME 	as userRoleName,
+	        CREATE_DATE 	as createDateInString,
+	        UPDATE_DATE 	as updateDateInString,
+	        user_role_code 	as userRoleCode
+	        FROM USER_ROLE 
+	        where IS_DELETED = 0
+	        ORDER BY USER_ROLE_ID
+	</select>
 	
 	<insert id="insertUserRole" parameterClass="user.UserRoleBean">
 		insert into

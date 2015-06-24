@@ -33,6 +33,14 @@ public class UserRoleManager {
 
 		return arr;
 	}
+	
+	public List<UserRoleBean> getUserRoleForPopUp() throws SQLException {
+		
+		List<UserRoleBean> arr = (List<UserRoleBean>) this.ibatis.queryForList(
+				"userRole.getUserRoleForPopUp", null);
+		
+		return arr;
+	}
 
 	public void insertUserRole(UserRoleBean userRoleBean) throws SQLException {
 		try {
