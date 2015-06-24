@@ -55,7 +55,7 @@
 		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
 		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
 		    	FROM VPROJECTMEMBER		    			
-		    	where IS_ACTIVE = 1 PROJECT_ID = #projId#
+		    	where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
 	</select>
 	
 	<update id="delProjMember" parameterClass="java.lang.Integer">
