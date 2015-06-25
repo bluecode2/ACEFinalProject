@@ -87,6 +87,7 @@
 							<td>Task Name</td>
 							<td>Estimate Start Date</td>
 							<td>Estimate End Date</td>
+							<td>Estimate Main Days</td>
 							<td>Proposed To</td>
 							<td>Status</td>
 							<td class="align-center">Action</td>
@@ -100,6 +101,7 @@
 									<td><bean:write name="reg" property="propTaskName" /></td>
 									<td><bean:write name="reg" property="estStartDateInString" /></td>
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /></td>
 									<td align="center"><logic:equal name="reg"

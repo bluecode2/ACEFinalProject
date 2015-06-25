@@ -26,6 +26,7 @@ public class ProposedTaskBean {
 	private Integer taskId;
 	private String propStatus;
 	private String propStatusName;
+	private Integer estMainDays;
 	
 	
 	/**
@@ -259,5 +260,13 @@ public class ProposedTaskBean {
 
 	public void setPropToName(String propToName) {
 		this.propToName = propToName;
+	}
+
+	public Integer getEstMainDays() {
+		return estMainDays;
+	}
+
+	public void setEstMainDays(Integer estMainDays) {
+		this.estMainDays = estMainDays;
 	}	
 }

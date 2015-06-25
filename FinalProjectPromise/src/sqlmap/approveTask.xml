@@ -79,8 +79,9 @@
 	</select>
 
  	<update id="declineTask" parameterClass="java.util.Map">
- 		UPDATE
- 		PROPOSED_TASK SET
+ 		UPDATE 
+ 		PROPOSED_TASK 
+ 		SET
  		UPDATE_DATE = SYSDATE,
  		UPDATED_BY = #userId#,
  		PROPOSAL_STATUS = 'TA_STAT_98'
@@ -89,9 +90,11 @@
  	
  	<update id="approveTask" parameterClass="java.util.Map">
  		UPDATE
- 		PROPOSED_TASK SET
+ 		PROPOSED_TASK 
+ 		SET
  		UPDATE_DATE = SYSDATE,
  		UPDATED_BY = #userId#,
+ 		TASK_ID = #taskId#,
  		PROPOSAL_STATUS = 'TA_STAT_07'
  		WHERE proposed_task_id=#selectedId#
  	</update>
@@ -124,4 +127,5 @@
 		FROM vEMPLOYEE
 		where is_Active = 1 AND SUPERVISOR_ID = #empId#
 	</select>
+	
 </sqlMap>
