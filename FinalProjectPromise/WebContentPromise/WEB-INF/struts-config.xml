@@ -172,6 +172,7 @@
 		<action path="/propProjTask" name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskHandler"
 			scope="request">
 			<forward name="propProjTaskList" path="/WEB-INF/jsp/proposeProjectTask/proposeProjectTaskList.jsp"></forward>
+			<forward name="propProjTaskEntry" path="/WEB-INF/jsp/proposeProjectTask/proposeProjectTaskEntry.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />

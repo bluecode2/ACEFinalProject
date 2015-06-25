@@ -19,7 +19,7 @@ public class ProposeProjectTaskManager {
 	}
 	
 	public List<ProposeProjectTaskBean> getAllPropProjTask(String col,
-			String input, Integer pageNum, Integer pageSize, Integer userId) throws SQLException{
+			String input, Integer pageNum, Integer pageSize, Integer projId) throws SQLException{
 			List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
 			
 			int begin = (pageNum - 1) * pageSize;
@@ -30,7 +30,7 @@ public class ProposeProjectTaskManager {
 			map.put("searchValue", input);
 			map.put("begin", begin);
 			map.put("end", end);
-			map.put("userId", userId);
+			map.put("projId", projId);
 			
 			list = this.ibatis.queryForList("projProposeTask.getAllTask", map);
 		
@@ -61,15 +61,28 @@ public class ProposeProjectTaskManager {
 		}
 	}
 	
-	public Integer getCountPropProjTask(String column, String value, int userId)
+	public Integer getCountPropProjTask(String column, String value, Integer projId)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
-		map.put("userId", userId);
+		map.put("projId", projId);
 
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"projProposeTask.countGetAllTask", map);
 		return result;
 	}
+	
+	public ProposeProjectTaskBean getPropProjTaskByTaskId(Integer propTaskId) throws SQLException{
+		ProposeProjectTaskBean pProjTask = new ProposeProjectTaskBean();
+		System.out.println(propTaskId+"taslId");
+		pProjTask = (ProposeProjectTaskBean) this.ibatis.queryForObject("projProposeTask.getTaskById", propTaskId);
+		System.out.println(pProjTask.getPropTaskId()+"test");
+		return pProjTask;
+	}
+	
+	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
+		
+	}
+	
 }
