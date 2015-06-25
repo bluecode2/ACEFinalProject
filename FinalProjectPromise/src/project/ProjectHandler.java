@@ -182,20 +182,36 @@ public class ProjectHandler extends Action{
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT, us,
 				request);
 		
+		boolean addBtn = (Boolean) request.getAttribute("btnAddVisible");
+		
+		
 		pForm.setTask("");
 		pForm.setSearchField(pForm.getCurrSearchField());
 		pForm.setSearchValue(pForm.getCurrSearchValue());
 
 		int rowCount;
-		rowCount = pMan.getCountProject(pForm.getCurrSearchField(),
-				pForm.getCurrSearchValue());
+		/*rowCount = pMan.getCountProject(pForm.getCurrSearchField(),
+				pForm.getCurrSearchValue());*/
+		
+		
+		
+		//untuk dept head atau PM
+		if (addBtn){
+			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId());
+			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrPage(), Constant.pageSize));
+		}
+		else {
+			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId());
+			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrPage(), Constant.pageSize));
+		}
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
-		pForm.setListOfProject(pMan.getAllProject(
-				pForm.getCurrSearchField(), pForm.getCurrSearchValue(),
-				pForm.getCurrPage(), Constant.pageSize));
 		
+		//untuk all project
+				/*pForm.setListOfProject(pMan.getAllProject(
+						pForm.getCurrSearchField(), pForm.getCurrSearchValue(),
+						pForm.getCurrPage(), Constant.pageSize));*/
 		
 		request.setAttribute("pageTitle", "Project");
 		request.setAttribute("pageNavigator", CommonFunction

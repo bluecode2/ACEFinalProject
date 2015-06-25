@@ -51,7 +51,43 @@ public class ProjectManager {
 
 		return listProject;
 	}
+	
+	public List<ProjectBean> getProjectListForRole(String col, Integer input,
+			Integer pageNum, Integer pageSize) throws ClassNotFoundException,
+			SQLException {
 
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+
+		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("begin", begin);
+		map.put("end", end);
+
+		try {
+			listProject = this.ibatis
+					.queryForList("project.getProjectListForRole", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.ibatis.endTransaction();
+		}
+
+		return listProject;
+	}
+
+	public Integer getCountProjectListForRole(String column, Integer value)
+			throws SQLException, ClassNotFoundException {
+		Map map = new HashMap();
+		map.put("searchField", column);
+		map.put("searchValue", value);
+		Integer result = (Integer) this.ibatis.queryForObject(
+				"project.countProjectListForRole", map);
+		return result;
+	}
+	
 	public Integer getCountProject(String column, String value)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();

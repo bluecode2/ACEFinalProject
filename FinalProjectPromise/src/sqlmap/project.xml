@@ -275,4 +275,63 @@
 			</isEqual>
 		</dynamic>
 	</select>
+	
+	<select id="getProjectListForRole" parameterClass="java.util.Map" resultClass="project.ProjectBean">
+		SELECT * from (
+		    SELECT us.*, ROWNUM rnum from(
+		    	SELECT 
+		    	PROJECT_ID AS projectId,
+		    	UPDATED_BY AS updatedBy,
+		    	DEPT_ID AS dept_id,
+		    	EMPLOYEE_ID AS employeeId,
+		    	CREATED_BY AS createdBy,
+		    	PROJECT_CODE AS projectCode,
+		    	PROJECT_NAME AS projectName,
+		    	PROJECT_DESC AS projectDesc,
+		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString,
+		    	TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') AS actStartDateInString,
+		    	TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') AS actEndDateInString,
+		    	EST_MAIN_DAYS AS estMainDays,
+		    	ACT_MAIN_DAYS AS actMainDays,
+		    	PROJECT_STATUS AS projectStatus,
+		    	PROJECT_PROGRESS AS projectProgress,
+		    	REMARKS AS remarks,
+		    	TO_CHAR(CREATE_DATE,'yyyy-MM-dd') AS createDateInString,
+		    	TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') AS updateDateInString,
+		    	EMPLOYEE_NAME AS employeeName,
+		    	DEPT_NAME AS deptName,
+		    	STATUS_CAPTION AS statusCaption
+		    	FROM VPROJECT
+		   		where 1 = 1
+		   		<dynamic prepend="AND">
+					<isEqual property="searchField" compareValue="DEPT_ID">
+						DEPT_ID = #searchValue#
+					</isEqual>
+				</dynamic>
+				<dynamic prepend="AND">
+					<isEqual property="searchField" compareValue="EMPLOYEE_ID">
+						EMPLOYEE_ID = #searchValue#
+					</isEqual>
+				</dynamic>
+	      	 		order by PROJECT_ID) us 
+	       WHERE ROWNUM &lt; = #end#)
+        WHERE rnum &gt; #begin#
+	</select>
+	
+	<select id="countProjectListForRole" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM vproject
+		WHERE 1 = 1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="DEPT_ID">
+				DEPT_ID =  #searchValue#
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="EMPLOYEE_ID">
+				EMPLOYEE_ID = #searchValue# 
+			</isEqual>
+		</dynamic>
+	</select>
 </sqlMap>
