@@ -24,6 +24,7 @@
 		  task_id     as taskId,
 		  proposal_status  as propStatus,
 		  proposal_status_name as propStatusName
+		  est_main_days 		as estMainDays
 		  FROM VPROPOSED_TASK
 		WHERE proposal_status = 'TA_STAT_01' AND proposed_to = #userId#
 		<dynamic prepend="AND">
@@ -57,6 +58,7 @@
 		update_date 		as updateDate,
 		task_id		 		as taskId,
 		proposal_status		as propStatus
+		est_main_days 		as estMainDays
 		FROM proposed_task
 		WHERE proposed_task_id = #propTaskId#
 	</select>

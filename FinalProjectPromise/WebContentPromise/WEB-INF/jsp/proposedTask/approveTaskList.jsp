@@ -12,9 +12,9 @@
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
 	function actionForm(task, id) {
-// 		document.forms[0].task.value = task;
-// 		document.forms[0].selectedId.value = id;
-// 		document.forms[0].submit();
+		document.forms[0].task.value = task;
+		document.forms[0].selectedId.value = id;
+ 		document.forms[0].submit();
 	}
 	function getTaskDesc(taskDesc) {
 		$('#txtTaskDesc').html(taskDesc);
@@ -148,7 +148,6 @@
 									<td><input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" /><a href="#" class="text-info lnkAssignTo">
 									<bean:write name="reg" property="propByName" /></a></td>
 									<td align="center"><a class="text-success btnApprove" href="#"
-										onclick="actionForm('approve','<bean:write name="reg" property="propTaskId" />');"
 										title="Approve"><span class="glyphicon glyphicon-ok"
 											aria-hidden="true"></span></a> &nbsp; <a href="#"
 										class="text-danger btnDecline"
