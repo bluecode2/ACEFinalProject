@@ -30,6 +30,22 @@
 			function() {
 				$(".datepicker").attr("data-provide", "datepicker");
 				registerSearchEmployee();
+				var newTask = document.forms[0].task.value;
+				if (newTask == 'add' || newTask == 'edit'){
+					$('#readAbleCode').attr("disabled",false);
+					$('#readAbleName').attr("disabled",false);
+					$('#readAbleDesc').attr("disabled",false);
+					$('#readAbleEstStart').attr("disabled",false);
+					$('#readAbleEstEnd').attr("disabled",false);
+					document.getElementById('popView').style.display = 'block';
+				} else {
+					$('#readAbleCode').attr("disabled",true);
+					$('#readAbleName').attr("disabled",true);
+					$('#readAbleDesc').attr("disabled",true);
+					$('#readAbleEstStart').attr("disabled",true);
+					$('#readAbleEstEnd').attr("disabled",true);
+					document.getElementById('popView').style.display = 'none';
+				}
 			});
 	
 	function registerSearchEmployee(){
@@ -90,19 +106,19 @@ function search() {
 					<tr align="left">
 						<td>Project Code</td>
 						<td style="padding-left: 15px;" colspan="3">
-						<html:text name="projectForm" property="pBean.projectCode" styleClass="form-control" style="width : 200px"></html:text>
+						<html:text name="projectForm" property="pBean.projectCode" styleClass="form-control" style="width : 200px" styleId="readAbleCode"></html:text>
 						</td>
 					</tr>
 					<tr align="left">
 						<td>Project Name</td>
 						<td style="padding-left: 15px;" colspan="3"><html:text name="projectForm"
-								property="pBean.projectName" styleClass="form-control" style="width : 300px"></html:text>
+								property="pBean.projectName" styleClass="form-control" style="width : 300px" styleId="readAbleName"></html:text>
 						</td>
 					</tr>
 					<tr align="left">
 						<td>Project Description</td>
 						<td style="padding-left: 15px;" colspan="3"><html:textarea name="projectForm"
-								property="pBean.projectDesc" styleClass="form-control"  style="width : 400px"></html:textarea>
+								property="pBean.projectDesc" styleClass="form-control"  style="width : 400px" styleId="readAbleDesc"></html:textarea>
 						</td>
 					</tr>
 					<tr align="left">
@@ -121,7 +137,7 @@ function search() {
 										<td>
 											<a href="#" class="text-info"
 											data-toggle="modal" data-target="#searchEmployeeId"> <span
-											class="glyphicon glyphicon-edit" aria-hidden="true" /></a>
+											class="glyphicon glyphicon-edit" aria-hidden="true" id="popView" /></a>
 										</td>
 									</tr>
 								</table>
@@ -148,12 +164,12 @@ function search() {
 						<td>Estimate Date</td>
 						<td style="padding-left: 15px;" colspan="1">
 								<html:text name="projectForm"
-								property="pBean.estStartDateInString" styleClass="form-control datepicker"  style="width : 120px"></html:text> 
+								property="pBean.estStartDateInString" styleClass="form-control datepicker"  style="width : 120px" styleId="readAbleEstStart"></html:text> 
 								</td>
 						<td style="padding-left: 15px;" colspan="1"> To 
 						</td>
 						<td style="padding-left: 15px;" colspan="1"><html:text name="projectForm"
-								property="pBean.estEndDateInString" styleClass="form-control datepicker"  style="width : 120px"></html:text>
+								property="pBean.estEndDateInString" styleClass="form-control datepicker"  style="width : 120px" styleId="readAbleEstEnd"></html:text>
 						</td>
 					</tr>
 					<logic:equal value="true" name="show">
