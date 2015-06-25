@@ -38,8 +38,11 @@ public class ApproveTaskHandler extends Action {
 			aForm.getBean().setCreatedBy(us.getUserId());
 			
 			aForm.getBean().setPropBy(aForm.getAssignTo());
-			aManager.approveTask(aForm.getBean());
+			aForm.getBean().setTaskId(atManager.getNewTaskId());
+			System.out.println("Task Id: "+aForm.getBean().getTaskId());
+			
 			atManager.createNewAssignTaskMap(aForm.getBean());
+			aManager.approveTask(aForm.getBean());
 			
 			response.sendRedirect("approveTask.do");
 			return null;

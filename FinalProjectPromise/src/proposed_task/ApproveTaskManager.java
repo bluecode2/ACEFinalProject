@@ -60,6 +60,7 @@ public class ApproveTaskManager {
 	public void approveTask(ProposedTaskBean task) throws SQLException {
 		Map map = new HashMap();
 		map.put("userId", task.getUpdatedBy());
+		map.put("taskId", task.getTaskId());
 		map.put("selectedId", task.getPropTaskId());
 		
 		try {

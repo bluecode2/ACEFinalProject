@@ -125,4 +125,11 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+	
+	<div class="full" style="visibility: hidden;">
+		<div class="full-inner">
+			<h2>Loading...</h2>
+			<div class="loader">Loading...</div>
+		</div>
+	</div>
 </body>
