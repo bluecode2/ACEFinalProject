@@ -16,7 +16,7 @@
 			document.forms[0].task.value = "add";
 			document.forms[0].submit();
 		} else {
-			alert("You don't have a supervisor to proposed an independent task!");
+			alert("You don't have a supervisor to proposed an Project task!");
 		}
 
 	}
@@ -34,7 +34,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete proposed Task " + nama)) {
+			if (confirm("Are you sure want to delete proposed Project Task " + nama+" ?")) {
 				document.forms[0].submit();
 			}
 		} else {
@@ -55,6 +55,8 @@
 		<html:hidden name="proposeProjectTaskForm" property="selectedId" />
 		<html:hidden name="proposeProjectTaskForm" property="currSearchField" />
 		<html:hidden name="proposeProjectTaskForm" property="currSearchValue" />
+		<html:hidden name="proposeProjectTaskForm" property="bean.projectId"/>
+		
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -97,19 +99,12 @@
 							<logic:iterate id="reg" name="proposeProjectTaskForm"
 								property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="projectName" /></td>
-									<td><bean:write name="reg" property="propTaskName" /></td>
+									<td><bean:write name="reg" property="projectName" />
+									<td><bean:write name="reg" property="propTaskName" />
 									<td>
-										<table>
-											<tr>
-												<td><bean:write name="reg" property="estStartDateInString" />
-												</td>
-												<td>To
-												</td>
-												<td><bean:write name="reg" property="estEndDateInString" />
-												</td>
-											</tr>
-										</table>
+										<bean:write name="reg" property="estStartDateInString" />
+										&nbsp;To&nbsp;
+										<bean:write name="reg" property="estEndDateInString" />
 									</td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /></td>

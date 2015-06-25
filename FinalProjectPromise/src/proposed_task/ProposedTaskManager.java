@@ -73,17 +73,9 @@ public class ProposedTaskManager {
 	}
 
 	public void updateProposedTask(ProposedTaskBean bean) throws SQLException {
-		Map m = new HashMap();
-		m.put("propTaskName", bean.getPropTaskName());
-		m.put("propTaskDesc", bean.getPropTaskDesc());
-		m.put("estStartDateInString", bean.getEstStartDateInString());
-		m.put("estEndDateInString", bean.getEstEndDateInString());
-		m.put("propTaskId", bean.getPropTaskId());
-		m.put("userId", bean.getUpdatedBy());
-
 		try {
 			ibatis.startTransaction();
-			ibatis.update("proposedTask.updateProposedTask", m);
+			ibatis.update("proposedTask.updateProposedTask", bean);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
