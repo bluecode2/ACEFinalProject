@@ -55,9 +55,19 @@
 				});
 	}
 	
-	$(document).ready(
+		$(document).ready(
 			function() {
 				getStyleBtn();
+				
+				$('.linkDesc').on('click',function(){
+					var taskName = $(this).closest('tr').find('.hdTaskName').val();
+					var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
+					$('#txtValueTaskDescName').val(taskName);
+					$('#txtValueTaskDescDesc').val(taskDesc);
+					$('#showDesc').modal();
+					
+				});
+				
 				//LINK MANAGE ACTIVITY
 				$('.lnkMngActivity').each(function (){
 					var assignTo = $(this).closest('tr').find('td').eq(0).html().trim();
@@ -137,6 +147,7 @@
 				$('#showActivity').on('shown.bs.modal', function() {
 					registerBtnActivityEvent();
 				});
+				
 				
 			});
 	
@@ -433,7 +444,7 @@
 			</div>
 		</div>
 
-		<!-- popup to give remarks -->
+	 <!-- 	<!-- popup to give remarks -->
 		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -474,11 +485,11 @@
 
 					</div>
 				</div>
-				<!-- /.modal-content -->
+				/.modal-content
 			</div>
-			<!-- /.modal-dialog -->
+			/.modal-dialog
 		</div>
-		<!-- /.modal -->
+		/.modal -->
 
 		<!-- popup to show DESC -->
 		<div class="modal fade" id="showDesc" tabindex="-1" role="dialog"
@@ -498,14 +509,14 @@
 								<tr>
 									<td style="padding-left: 15px">Task</td>
 									<td style="padding-left: 15px"><input type="text"
-										id="txtValueTaskNameDesc" class="form-control"
+										id="txtValueTaskDescName" class="form-control"
 										disabled="disabled" /></td>
 
 								</tr>
 								<tr>
-									<td style="padding-left: 15px">Remarks</td>
+									<td style="padding-left: 15px">Description</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
-											class="form-control" id="txtSearchFieldDesc"
+											class="form-control" id="txtValueTaskDescDesc"
 											disabled="disabled"></textarea>
 										</button></td>
 								</tr>
@@ -521,7 +532,7 @@
 		<!-- /.modal -->
 		
 		<!-- popup to show Remarks -->
-		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
+	<!-- 	<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -554,11 +565,11 @@
 
 					</div>
 				</div>
-				<!-- /.modal-content -->
+				/.modal-content
 			</div>
-			<!-- /.modal-dialog -->
+			/.modal-dialog
 		</div>
-		<!-- /.modal -->
+		/.modal -->
 		
 		<!-- popup to show Activity -->
 		<div class="modal fade" id="showActivity" tabindex="-1" role="dialog"
