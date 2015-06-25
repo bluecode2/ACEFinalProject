@@ -122,4 +122,16 @@
 			</isEqual>
 		</dynamic>
 	</select>
+	
+	<!-- <insert id="generateWeekend" parameterClass="java.util.Map">
+		EXECUTE generateWeekend(to_date(#startDate#,'dd/mon/yyyy'),to_date(#endDate,'dd/mon/yyyy'), #checkDays#, #createdBy#)
+	</insert> -->
+	
+	<!-- <procedure id="generateWeekend" parameterClass="holiday.GeneralHolidayBean">
+      { call generateWeekend(to_date(#startDate#,'dd/mon/yyyy'),to_date(#endDate,'dd/mon/yyyy'), #checkDays#, #createdBy#) } 
+   </procedure> -->
+   
+   <procedure id="generateWeekend" parameterClass="java.util.Map"> 
+   	{ call generateWeekend(to_date(#startDate#,&apos;yyyy-MM-dd&apos;),to_date(#endDate#,&apos;yyyy-MM-dd&apos;), #checkDays#, #createdBy#) } 
+	</procedure>
 </sqlMap>

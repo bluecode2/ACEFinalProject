@@ -110,4 +110,67 @@ public class GeneralHolidayManager {
 				"generalHoliday.countGeneralHoliday", map);
 		return result;
 	}
+
+	public void generateWeekend(String startDate, String endDate,
+			String checkDays, Integer createdBy) throws SQLException, ClassNotFoundException {
+		try {
+			Map map = new HashMap();
+			map.put("startDate", startDate);
+			map.put("endDate", endDate);
+			map.put("checkDays", checkDays);
+			map.put("createdBy", createdBy);
+			
+			ibatis.startTransaction();
+			this.ibatis.insert("generalHoliday.generateWeekend", map);
+			ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	/*public void generateWeekend(String startDate, String endDate,
+			String checkDays, Integer createdBy) throws SQLException, ClassNotFoundException {
+		try {
+			Map map = new HashMap();
+			map.put("startDate", startDate);
+			map.put("endDate", endDate);
+			map.put("checkDays", checkDays);
+			map.put("createdBy", createdBy);
+			
+			ibatis.startTransaction();
+			this.ibatis.queryForObject("generalHoliday.generateWeekend", map);
+			ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}*/
+	
+	/*public GeneralHolidayBean generateWeekend(String startDate, String endDate,
+			String checkDays, Integer createdBy)
+			throws SQLException {
+		Map map = new HashMap();
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("checkDays", checkDays);
+		map.put("createdBy", createdBy);
+		
+		GeneralHolidayBean genHolBean = (GeneralHolidayBean) this.ibatis
+				.queryForObject("generalHoliday.generateWeekend",
+						map);
+		return genHolBean;
+	}*/
 }
