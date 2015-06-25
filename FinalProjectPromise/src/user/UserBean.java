@@ -127,7 +127,7 @@ public class UserBean {
 		try {
 			date = df.parse(createDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 			this.createDateInString = "";
 			date = null;
 		}
@@ -143,7 +143,7 @@ public class UserBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 			this.updateDateInString = "";
 			date = null;
 		}
