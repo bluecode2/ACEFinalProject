@@ -1,5 +1,7 @@
 package holiday;
 
+import general.GeneralCodeManager;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ public class GeneralHolidayHandler extends Action{
 		// TODO Auto-generated method stub
 		GeneralHolidayForm genForm = (GeneralHolidayForm) form;
 		GeneralHolidayManager genManager = new GeneralHolidayManager();
+		GeneralCodeManager genCodeManager = new GeneralCodeManager();
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -32,6 +35,7 @@ public class GeneralHolidayHandler extends Action{
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY_ENTRY,
 					us, request);
+			genForm.setListOfGenCode(genCodeManager.getGeneralCodeByParentId(Constant.GeneralCode.GENERAL_HOLIDAY_TYPE));
 			
 			return mapping.findForward("genEntry");
 		}
@@ -55,6 +59,7 @@ public class GeneralHolidayHandler extends Action{
 
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY_ENTRY,
 					us, request);
+			genForm.setListOfGenCode(genCodeManager.getGeneralCodeByParentId(Constant.GeneralCode.GENERAL_HOLIDAY_TYPE));
 			
 			return mapping.findForward("genEntry");
 		}

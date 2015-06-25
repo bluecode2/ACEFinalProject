@@ -12,11 +12,12 @@
 		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
 		IS_GENERATED as isGenerated,
 		created_by as createdBy,
-		updated_by as
-		updatedBy,
+		updated_by as updatedBy,
 		TO_CHAR(create_date,'yyyy-MM-dd') as createDateInString,
 		TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString,
-		IS_DELETED as isDeleted
+		IS_DELETED as isDeleted,
+		HOLIDAY_TYPE			as holidayType,
+		fGetGeneralCodeCaption(HOLIDAY_TYPE) as holidayTypeName
 		FROM GENERAL_HOLIDAY
 		where IS_DELETED=0
 		<dynamic prepend="AND">
@@ -45,7 +46,9 @@
 		updatedBy,
 		create_date as createDate,
 		update_date as updateDate,
-		IS_DELETED as isDeleted
+		IS_DELETED as isDeleted,
+		HOLIDAY_TYPE			as holidayType,
+		fGetGeneralCodeCaption(HOLIDAY_TYPE) as holidayTypeName
 		FROM GENERAL_HOLIDAY
 		where gen_holiday_id = #holId#
 	</select>
@@ -57,11 +60,11 @@
 	<insert id="insertGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">
 		insert into
 		GENERAL_HOLIDAY(GEN_HOLIDAY_ID, GEN_HOLIDAY_NAME, GEN_HOLIDAY_DATE,
-		IS_GENERATED, created_by, updated_by, create_date, update_date, IS_DELETED)
+		IS_GENERATED, created_by, updated_by, create_date, update_date, IS_DELETED, HOLIDAY_TYPE)
 		values
 		(#genHolidayId#, #genHolidayName#,
 		TO_DATE(#genHolidayDateInString#,'yyyy-MM-dd'), 0, #createdBy#, NULL,
-		SYSDATE, NULL, 0)
+		SYSDATE, NULL, 0, #holidayType#)
 	</insert>
 
 	<select id="getGeneralHolidayEdit" resultClass="holiday.GeneralHolidayBean">
@@ -70,7 +73,9 @@
 		GEN_HOLIDAY_NAME as genHolidayName,
 		GEN_HOLIDAY_DATE as genHolidayDateInString,
 		IS_GENERATED as isGenerated,
-		IS_DELETED as isDeleted
+		IS_DELETED as isDeleted,
+		HOLIDAY_TYPE			as holidayType,
+		fGetGeneralCodeCaption(HOLIDAY_TYPE) as holidayTypeName
 		FROM GENERAL_HOLIDAY
 		where GEN_HOLIDAY_ID = #value#
 		ORDER BY
@@ -84,9 +89,9 @@
 		GEN_HOLIDAY_DATE=to_date(#genHolidayDateInString#,'yyyy-MM-dd'),
 		<!-- IS_GENERATED=#isGenerated#, -->
 		updated_by=#updatedBy#,
-		update_date=SYSDATE
-		WHERE
-		GEN_HOLIDAY_ID=#genHolidayId#
+		update_date=SYSDATE,
+		HOLIDAY_TYPE=#holidayType#
+		WHERE GEN_HOLIDAY_ID=#genHolidayId#
 	</update>
 
 	<update id="deleteGeneralHoliday" parameterClass="holiday.GeneralHolidayBean">

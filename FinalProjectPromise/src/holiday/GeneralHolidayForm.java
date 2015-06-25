@@ -1,5 +1,7 @@
 package holiday;
 
+import general.GeneralCodeBean;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class GeneralHolidayForm extends ActionForm{
 	private Date						endDate;
 	private String						endDateInString;
 	private String						checkDays;
+	
+	private List<GeneralCodeBean>		listOfGenCode = new ArrayList<GeneralCodeBean>();
 	
 	public GeneralHolidayForm() {
 		// TODO Auto-generated constructor stub
@@ -209,5 +213,13 @@ public class GeneralHolidayForm extends ActionForm{
 	}
 	public void setCheckDays(String checkDays) {
 		this.checkDays = checkDays;
+	}
+
+	public List<GeneralCodeBean> getListOfGenCode() {
+		return listOfGenCode;
+	}
+
+	public void setListOfGenCode(List<GeneralCodeBean> listOfGenCode) {
+		this.listOfGenCode = listOfGenCode;
 	}
 }

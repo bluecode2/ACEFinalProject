@@ -110,7 +110,7 @@
 						<tr>
 							<td class="align-center">General Holiday Name</td>
 							<td class="align-center">General Holiday Date</td>
-							<!-- <td>Is Generated</td> -->
+							<td class="align-center">Holiday Type</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -122,7 +122,7 @@
 									<td><bean:write name="reg" property="genHolidayName" /></td>
 									<td><bean:write name="reg"
 											property="genHolidayDateDisplay" /></td>
-									<%-- <td><bean:write name="reg" property="isGenerated" /></td> --%>
+									<td><bean:write name="reg" property="holidayTypeName" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
