@@ -61,7 +61,7 @@ function goToEvaluate(id) {
 </script>
 
 
-<title>Insert title here</title>
+<title>Project Approval List</title>
 </head>
 <body>
 	<html:form action="/projectApproval" method="post">
