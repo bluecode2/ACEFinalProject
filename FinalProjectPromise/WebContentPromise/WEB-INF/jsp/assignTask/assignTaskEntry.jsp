@@ -29,6 +29,7 @@ $(document).ready(function() {
 	registerSearchAssignToEvent();
 });
 function search() {
+	showLoading();
 	var spvId = $('#hdSpvId').val();
 	var searchField = $('#selSearchFieldAssignTo').val();
 	var searchValue = $('#txtSearchValueAssignTo').val();
@@ -46,7 +47,9 @@ function search() {
 		error : function(e) {
 			alert("Error: " + e);
 		}
+		
 	});
+	hideLoading();	
 }
 
 function registerSearchAssignToEvent(){

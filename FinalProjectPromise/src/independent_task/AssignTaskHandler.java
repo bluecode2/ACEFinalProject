@@ -67,6 +67,7 @@ public class AssignTaskHandler extends Action {
 
 				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
+				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
 			}
 			else if (tsForm.getSelectedEdit() == 1) {
