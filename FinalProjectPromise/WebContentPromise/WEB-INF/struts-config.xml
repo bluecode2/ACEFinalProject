@@ -35,6 +35,7 @@
 		<form-bean name="projectInvolvedForm" type="project.ProjectInvolvedForm"></form-bean>
 		<form-bean name="myCurrentTaskForm" type="independent_task.MyCurrentTaskForm"></form-bean>
 		<form-bean name="activityForm" type="activity.ActivityForm"></form-bean>
+		<form-bean name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -167,6 +168,10 @@
 			<forward name="myCurrentTaskList" path="/WEB-INF/jsp/myCurrentTask/myCurrentTaskList.jsp"></forward>
 		</action>
 		<action path="/activity" name="activityForm" type="activity.ActivityHandler" scope="request">
+		</action>
+		<action path="/propProjTask" name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskHandler"
+			scope="request">
+			<forward name="propProjTaskList" path="/WEB-INF/jsp/proposeProjectTask/proposeProjectTaskList.jsp"></forward>
 		</action>
 	</action-mappings>
 	<message-resources parameter="application" />
