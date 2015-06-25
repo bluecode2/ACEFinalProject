@@ -32,9 +32,73 @@ public class ActivityManager {
 	
 	public ActivityBean getActivityById(Integer activityId){
 		ActivityBean bean = null;
-		
-		
+		try {
+			bean = (ActivityBean) this.ibatis.queryForObject("activity.getActivityById", activityId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return bean;
+	}
+	
+	public Integer getNewActivityId() throws SQLException {
+		Integer newId =  (Integer) this.ibatis.queryForObject("activity.getActivityNewId", null);
+		return newId;
+	}
+	
+	public Integer insertActivity(ActivityBean bean){
+		Integer maxId = null;
+		try {
+			this.ibatis.startTransaction();
+			bean.setActivityId(getNewActivityId());
+			this.ibatis.insert("activity.insertActivity", bean);
+			maxId =  (Integer) this.ibatis.queryForObject("activity.getActivityMaxId", null);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return maxId;
+	}
+	
+	public void updateActivity(ActivityBean bean){
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("activity.updateActivity", bean);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	public void deleteActivity(Integer activityId){
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.delete("activity.deleteActivity", activityId);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }

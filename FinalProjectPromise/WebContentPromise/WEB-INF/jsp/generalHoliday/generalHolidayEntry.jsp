@@ -68,6 +68,19 @@
 								name="generalHolidayForm" property="genHolidayBean.genHolidayDateInString"></html:text>
 						</td>
 					</tr>
+					<tr>
+						<td>Holiday Type</td>
+						<td>
+							<html:select name="generalHolidayForm" property="genHolidayBean.holidayType" styleClass="form-control">
+								<html:option value="">---Choose One---</html:option>
+								<logic:iterate id="id" property="listOfGenCode" name="generalHolidayForm">
+									<html:option value="${id.genCodeId}">
+										<bean:write name="id" property="genCodeCaption" />
+									</html:option>
+								</logic:iterate>
+							</html:select>
+						</td>
+					</tr>
 <!-- 					<tr> -->
 <!-- 						<td>Is Generated</td> -->
 <!-- 						<td> -->

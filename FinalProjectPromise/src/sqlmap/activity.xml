@@ -37,6 +37,32 @@
 		CREATE_DATE as createDateInString,
 		UPDATE_DATE as updateDateInString
 		from vactivity
-		where task_id = #id#
+		where activity_id = #activityId#
 	</select>
+	
+	<select id="getActivityNewId" resultClass="java.lang.Integer">
+		SELECT MAX(activity_id) + 1 as newId FROM activity
+	</select>
+	
+	<select id="getActivityMaxId" resultClass="java.lang.Integer">
+		SELECT MAX(activity_id) as maxId FROM activity
+	</select>
+	
+	<insert id="insertActivity" parameterClass="activity.ActivityBean">
+		INSERT INTO activity (activity_id, task_id, created_by, employee_id, activity_desc, is_completed, create_date)
+		VALUES (#activityId#, #taskId#, #createdBy#, #employeeId#, #activityDesc#, 0, SYSDATE)
+	</insert>
+	
+	<update id="updateActivity" parameterClass="activity.ActivityBean">
+		UPDATE activity
+		SET is_completed = #isCompleted#,
+		updated_by = #updatedBy#,
+		update_date = SYSDATE
+		WHERE activity_id = #activityId#
+	</update>
+	
+	<delete id="deleteActivity" parameterClass="java.lang.Integer">
+		DELETE FROM activity
+		WHERE activity_id = #activityId#
+	</delete>
 </sqlMap>

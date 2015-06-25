@@ -20,6 +20,8 @@ public class GeneralHolidayBean {
 	private String updateDateInString;
 	private Integer isDeleted = 0;
 	private String genHolidayDateDisplay;
+	private String holidayType;
+	private String holidayTypeName;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
@@ -144,5 +146,21 @@ public class GeneralHolidayBean {
 	}
 	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public String getHolidayType() {
+		return holidayType;
+	}
+
+	public void setHolidayType(String holidayType) {
+		this.holidayType = holidayType;
+	}
+
+	public String getHolidayTypeName() {
+		return holidayTypeName;
+	}
+
+	public void setHolidayTypeName(String holidayTypeName) {
+		this.holidayTypeName = holidayTypeName;
 	}
 }

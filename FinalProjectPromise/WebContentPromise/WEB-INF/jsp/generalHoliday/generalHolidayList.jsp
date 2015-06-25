@@ -70,9 +70,12 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<div class="container">
-			<div class="divSearch form-group has-info" style="float: right;">
-				<table>
-					<tr>
+			<div class="divSearch form-group has-info">
+				<table width="100%">
+					<tr valign="middle">
+						<td align="left" width="50%">
+							<button type="button" property="" onclick="flyToPage('generateWeekend');"  style="margin: 0px" class="btn btn-sm btn-info">Generate Weekend</button>
+						</td>
 						<td>Search by Date</td>
 						<%-- <td style="padding-left: 15px;">
 							<html:select
@@ -101,14 +104,13 @@
 				</table>
 			</div>
 			<div class="divContent">
-				<button type="button" property="" onclick="flyToPage('generateWeekend');"  style="margin: 0px" class="btn btn-sm btn-info">Generate Weekend</button>
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
 							<td class="align-center">General Holiday Name</td>
 							<td class="align-center">General Holiday Date</td>
-							<!-- <td>Is Generated</td> -->
+							<td class="align-center">Holiday Type</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -120,7 +122,7 @@
 									<td><bean:write name="reg" property="genHolidayName" /></td>
 									<td><bean:write name="reg"
 											property="genHolidayDateDisplay" /></td>
-									<%-- <td><bean:write name="reg" property="isGenerated" /></td> --%>
+									<td><bean:write name="reg" property="holidayTypeName" /></td>
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="genHolidayId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"

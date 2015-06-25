@@ -21,7 +21,7 @@
 	function onBtnSaveClick(){
 		var str = "";
 		$(".checkDays:checked").each(function(){
-			if(str != "") str += "#";
+			if(str != "") str += ",";
 			str += $(this).val();
 		});
 		
