@@ -16,7 +16,7 @@
 	
 	function goToPage(maxPage){
 		var page = document.getElementById("txtGoToPage").value;
-		if(isNaN(page) || parseInt(page) > parseInt(maxPage) || parseInt(page) < 1){
+		if(isNaN(page) || parseInt(page) > parseInt(maxPage) || parseInt(page) < 1 || page == ''){
 			alert('Invalid Page!');
 			return;
 		}

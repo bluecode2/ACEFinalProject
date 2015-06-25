@@ -85,7 +85,8 @@
 		act_start_date = SYSDATE,
 		updated_by = #updatedBy#,
 		task_status = #taskStatus#,
-		remarks = #remarks#
+		remarks = #remarks#,
+		update_date = SYSDATE
 		where task_id =#taskId#      
 	</update>
 	

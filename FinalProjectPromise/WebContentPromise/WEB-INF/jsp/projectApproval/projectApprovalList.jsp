@@ -46,6 +46,12 @@ $(document).ready(function() {
 	});
 	
 });
+function search() {
+	document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+	document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+	changePage(1);
+}
 
 function goToEvaluate(id) {
 	document.forms[0].task.value = "evaluate";
@@ -55,7 +61,7 @@ function goToEvaluate(id) {
 </script>
 
 
-<title>Insert title here</title>
+<title>Project Approval List</title>
 </head>
 <body>
 	<html:form action="/projectApproval" method="post">
@@ -165,14 +171,14 @@ function goToEvaluate(id) {
 								<table width="100%">
 									<tr>
 										<td style="padding-left: 15px">Project Code </td>
-										<td style="padding-left: 15px">
+										<td >
 											<input type="text" id="txtProCode" class="form-control" disabled="disabled" />
 										</td>
 										
 									</tr>
 									<tr>
 										<td style="padding-left: 15px">Project Name</td>
-										<td style="padding-left: 15px">
+										<td >
 											<input type="text" id="txtProName" class="form-control" disabled="disabled" />
 										</td>
 										
@@ -181,7 +187,7 @@ function goToEvaluate(id) {
 										<td style="padding-left: 15px">
 											Task Desc 
 										</td>
-										<td style="padding-left: 15px">
+										<td >
 											<textarea rows="3" cols="3" class="form-control"  id="txtProDesc" disabled="disabled"></textarea>
 										</button></td>
 									</tr>

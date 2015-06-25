@@ -66,10 +66,15 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("genParam.insertGenParam", genParamBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-
 	}
 	
 	public void updateGeneralParam(GeneralParamBean genParamBean)
@@ -78,8 +83,14 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genParam.updateGenParam", genParamBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -88,8 +99,14 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genParam.deleteGenParam", genParamBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -97,5 +114,4 @@ public class GeneralParamManager {
 		String maxId = (String) this.ibatis.queryForObject("genParam.getMaxGenParamId", null);
 		return maxId;
 	}
-
 }

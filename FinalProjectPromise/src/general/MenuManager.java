@@ -134,8 +134,14 @@ public class MenuManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("menu.insertMenu", bean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -144,8 +150,14 @@ public class MenuManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("menu.updateMenu", bean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -154,8 +166,14 @@ public class MenuManager {
 			this.ibatis.startTransaction();
 			this.ibatis.delete("menu.updateMenu", menuId);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

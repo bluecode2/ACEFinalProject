@@ -54,6 +54,15 @@
 		post('users.do',{task: 'changePassword'});
 	}
 	
+	function showLoading() {
+		var elem = document.getElementById("loading");
+		elem.style.visibility = 'visible';
+	}
+	
+	function hideLoading() {
+		var elem = document.getElementById("loading");
+		elem.style.visibility = 'hidden';
+	}
 	
 </script>
 
@@ -126,7 +135,7 @@
 		</div>
 	</nav>
 	
-	<div class="full" style="visibility: hidden;">
+	<div class="full" id="loading" style="visibility: hidden">
 		<div class="full-inner">
 			<h2>Loading...</h2>
 			<div class="loader">Loading...</div>
