@@ -122,4 +122,8 @@
 			</isEqual>
 		</dynamic>
 	</select>
+	
+   <procedure id="generateWeekend" parameterClass="java.util.Map"> 
+   		{ call generateWeekend(to_date(#startDate#,&apos;yyyy-MM-dd&apos;),to_date(#endDate#,&apos;yyyy-MM-dd&apos;), #checkDays#, #createdBy#) } 
+	</procedure>
 </sqlMap>

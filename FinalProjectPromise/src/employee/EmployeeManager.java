@@ -41,6 +41,7 @@ public class EmployeeManager {
 
 		return arr;
 	}
+	
 	public List<EmployeeBean> getAllEmployeeForPopUp() throws ClassNotFoundException,
 			SQLException {
 		
@@ -67,7 +68,6 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-
 	public List<EmployeeBean> getAllEmployeeForDeptHead(Integer deptId,String searchField, String searchValue)
 			throws ClassNotFoundException, SQLException {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
@@ -97,7 +97,6 @@ public class EmployeeManager {
 		map.put("rankLevel", rankLevel);
 		map.put("searchValue", input);
 		map.put("searchField", col);
-		
 		
 		try {
 			arr = this.ibatis.queryForList("employee.getEmployeeForSupervisor",
@@ -130,10 +129,14 @@ public class EmployeeManager {
 			eb.setEmployeeId(getNewEmpId());
 			this.ibatis.insert("employee.insertEmployee", eb);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -143,9 +146,14 @@ public class EmployeeManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("employee.updateEmployee", eb);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -159,9 +167,14 @@ public class EmployeeManager {
 			ibatis.startTransaction();
 			ibatis.update("employee.deleteEmployee", map);
 			ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -203,5 +216,4 @@ public class EmployeeManager {
 		}
 		return arr;
 	}
-
 }

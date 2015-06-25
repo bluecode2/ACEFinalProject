@@ -109,7 +109,7 @@
 		#createdBy#,#projectCode#,
 		#projectName#,#projectDesc#,
 		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),
-		#estMainDays#,
+		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')),
 		'PR_STAT_01',
 		SYSDATE)
 	</insert>
@@ -125,7 +125,7 @@
 			REMARKS = #remarks#,
 			UPDATED_BY = #updatedBy#,
 			UPDATE_DATE = SYSDATE,
-			est_main_days = #estMainDays#,
+			est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')),
 			project_status = #projectStatus#,
 			PROJECT_PROGRESS = #projectProgress#,
 			act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
@@ -164,7 +164,6 @@
                 FROM VPROJECT P JOIN PROJECT_MEMBER PM
                 ON P.PROJECT_ID=PM.PROJECT_ID
                 where PM.EMPLOYEE_ID = (SELECT E.EMPLOYEE_ID FROM EMPLOYEE E JOIN USERS S ON E.EMPLOYEE_ID = S.EMPLOYEE_ID WHERE S.USER_ID=#employeeId#)
-                AND PM.IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectCode">
 				LOWER(P.PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )

@@ -101,14 +101,14 @@ public class IndependentTaskManager {
 public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 		
 		Map map = new HashMap();
-		map.put("taskId", getNewTaskId());
+		map.put("taskId", bean.getTaskId());
 		map.put("taskName", bean.getPropTaskName());
 		map.put("taskDesc", bean.getPropTaskDesc());
 		map.put("assignedBy", bean.getPropTo());
 		map.put("assignedTo", bean.getPropBy());
 		map.put("estStartDateInString", bean.getEstStartDateInString());
 		map.put("estEndDateInString", bean.getEstEndDateInString());
-		map.put("createdBy", bean.getUpdatedBy());
+		map.put("createdBy", bean.getCreatedBy());
 		
 		try {
 			this.ibatis.startTransaction();

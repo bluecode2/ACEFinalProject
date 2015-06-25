@@ -53,6 +53,12 @@ public class GeneralHolidayHandler extends Action{
 			response.sendRedirect("generalHoliday.do");
 			return null;
 		}
+		else if ("generate".equals(genForm.getTask())){
+			genManager.generateWeekend(genForm.getStartDateInString(), genForm.getEndDateInString(), genForm.getCheckDays(), us.getUserId());
+			
+			response.sendRedirect("generalHoliday.do");
+			return null;
+		}
 		else if ("edit".equals(genForm.getTask())) {
 			request.setAttribute("pageTitle", "General Holiday Edit");
 			genForm.setGenHolidayBean(genManager.getGeneralHolidayByHolId(genForm.getSelectedId()));

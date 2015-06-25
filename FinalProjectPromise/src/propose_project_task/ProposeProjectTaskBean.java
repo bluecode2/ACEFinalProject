@@ -1,11 +1,11 @@
-package proposed_task;
+package propose_project_task;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import common.Constant;
 
-public class ProposedTaskBean {
+public class ProposeProjectTaskBean {
 	private Integer propTaskId;
 	private String propTaskName;
 	private String propTaskDesc;
@@ -26,9 +26,26 @@ public class ProposedTaskBean {
 	private Integer taskId;
 	private String propStatus;
 	private String propStatusName;
-	private Integer estMainDays;
+	private Integer projectId;
+	private String projectName;
 	
 	
+	public Integer getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
 	/**
 	 * @return the propStatusName
 	 */
@@ -260,13 +277,5 @@ public class ProposedTaskBean {
 
 	public void setPropToName(String propToName) {
 		this.propToName = propToName;
-	}
-
-	public Integer getEstMainDays() {
-		return estMainDays;
-	}
-
-	public void setEstMainDays(Integer estMainDays) {
-		this.estMainDays = estMainDays;
 	}	
 }

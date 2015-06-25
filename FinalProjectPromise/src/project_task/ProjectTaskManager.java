@@ -55,9 +55,14 @@ public class ProjectTaskManager {
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -66,9 +71,14 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateProjectTask", bean);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -86,9 +96,14 @@ public class ProjectTaskManager {
 			this.ibatis.update("projectTask.updateProjectStat", bean);
 			System.out.println("Berhasil Edit");
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -104,15 +119,18 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateStatusProjectTask", m);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-
 	}
 
 	public ProjectTaskBean getDataForEdit(int taskId) throws SQLException {
-
 		ProjectTaskBean tBean = (ProjectTaskBean) this.ibatis.queryForObject(
 				"projectTask.getProjectTaskByTaskId", taskId);
 		return tBean;

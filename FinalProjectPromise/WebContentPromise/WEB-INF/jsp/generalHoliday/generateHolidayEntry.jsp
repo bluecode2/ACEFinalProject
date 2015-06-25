@@ -26,7 +26,7 @@
 		});
 		
 		document.forms[0].checkDays.value = str;
-		document.forms[0].task.value = 'save';
+		document.forms[0].task.value = 'generate';
 		document.forms[0].submit();
 	}
 	

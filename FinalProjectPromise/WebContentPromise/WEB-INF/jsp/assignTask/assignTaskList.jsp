@@ -272,10 +272,19 @@ function search() {
 										</button></td>
 									</tr>
 								</table>
-								<center>
-								<input type="button" class="goInsert btn btn-sm btn-info" value="Save">
-
-								</center>
+							<div class="modal-footer">
+							
+								<table align="right">
+								<tr>
+								<td>
+	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
+	      						</td>
+	      						<td>
+	      							<input type="button" class="btn btn-sm " value="Cancel" data-dismiss="modal">
+								</td>
+								</tr>
+								</table>
+     						</div>
 							</div>
 
 						</div>

@@ -21,9 +21,10 @@ public class LoginHandler extends Action {
 		// TODO Auto-generated method stub
 		LoginForm lForm = (LoginForm) form;
 		UserManager lMan = new UserManager();
-		HttpSession session = request.getSession(true);
+
 
 		if ("validasi".equals(lForm.getTask())) {
+			HttpSession session = request.getSession(true);
 			try {
 				UserBean usr = lMan.getUserByUsername(lForm.getUsername());
 				if (usr == null)

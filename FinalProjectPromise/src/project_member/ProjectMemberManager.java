@@ -65,12 +65,15 @@ public class ProjectMemberManager {
 			this.ibatis.insert("projectMember.insertProjectMember", map);
 			System.out.println("selesai try");
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("gagal try");
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-		
 	}
 	
 	public List<ProjectMemberBean> getProjectMemberToEvaluate(Integer projId) throws SQLException {
@@ -83,9 +86,14 @@ public class ProjectMemberManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectMember.delProjMember", memberId);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	

@@ -27,7 +27,8 @@
 		update_date 		as updateDate,
 		task_id		 		as taskId,
 		proposal_status		as propStatus,
-		proposal_status_name as propStatusName
+		proposal_status_name as propStatusName,
+		est_main_days		as estMainDays
 		FROM VPROPOSED_TASK
 		WHERE proposed_by = #userId# and proposal_status != 'TA_STAT_99'
 		<dynamic prepend="AND">
@@ -69,6 +70,7 @@
 		task_id		 		as taskId,
 		proposal_status		as propStatus,
 		proposal_status_name as propStatusName
+		est_main_days		as estMainDays
 		FROM VPROPOSED_TASK
 		WHERE proposed_task_id = #propTaskId#
 	</select>
@@ -102,7 +104,8 @@
 		proposed_to, 
 		created_by, 
 		create_date, 
-		proposal_status)
+		proposal_status,
+		est_main_days)
 		
 		values (
 		#propTaskId#,
@@ -114,7 +117,8 @@
 		(select supervisor_id from employee where employee_id = #propBy# ), 
 		#createdBy#,
 		SYSDATE,
-		'TA_STAT_01' )
+		'TA_STAT_01',
+		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')))
 	</insert>
 	
 
@@ -127,7 +131,8 @@
 		est_start_date = to_date(#estStartDateInString#,'yyyy-MM-dd'),
 		est_end_date = to_date(#estEndDateInString#,'yyyy-MM-dd'),
 		updated_by = #userId#,
-		update_date = SYSDATE
+		update_date = SYSDATE,
+		est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd'))
 		WHERE
 		proposed_task_id=#propTaskId#
 	</update>

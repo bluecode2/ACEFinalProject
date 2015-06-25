@@ -300,10 +300,20 @@
 										</td>
 								</tr>
 							</table>
-							<center>
-								<footer> <input type="button"
-									class="btn btn-sm btn-info insertRemarks" value="Save"> </footer>
-							</center>
+		
+							<div class="modal-footer">
+								<table align="right">
+								<tr>
+								<td>
+	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
+	      						</td>
+	      						<td>
+	      							<input type="button" class="btn btn-sm " value="Cancel" data-dismiss="modal">
+								</td>
+								</tr>
+								</table>
+     						</div>
+
 						</div>
 
 					</div>

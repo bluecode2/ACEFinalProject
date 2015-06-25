@@ -48,8 +48,14 @@ public class PersonalHolidayManager {
 			this.ibatis.insert("personalHoliday.insertPersonalHoliday",
 					persHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -67,8 +73,14 @@ public class PersonalHolidayManager {
 			this.ibatis.update("personalHoliday.editPersonalHoliday",
 					persHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -77,8 +89,14 @@ public class PersonalHolidayManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("personalHoliday.deletePersonalHoliday", persHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	

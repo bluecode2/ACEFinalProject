@@ -66,8 +66,14 @@ public class GeneralHolidayManager {
 			this.ibatis.insert("generalHoliday.insertGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -85,18 +91,34 @@ public class GeneralHolidayManager {
 			this.ibatis.update("generalHoliday.editGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) throws SQLException {
+	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean)
+			throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("generalHoliday.deleteGeneralHoliday", genHolidayBean);
+			this.ibatis.update("generalHoliday.deleteGeneralHoliday",
+					genHolidayBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -109,5 +131,30 @@ public class GeneralHolidayManager {
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"generalHoliday.countGeneralHoliday", map);
 		return result;
+	}
+
+	public void generateWeekend(String startDate, String endDate,
+			String checkDays, Integer createdBy) throws SQLException,
+			ClassNotFoundException {
+		try {
+			Map map = new HashMap();
+			map.put("startDate", startDate);
+			map.put("endDate", endDate);
+			map.put("checkDays", checkDays);
+			map.put("createdBy", createdBy);
+
+			ibatis.startTransaction();
+			this.ibatis.insert("generalHoliday.generateWeekend", map);
+			ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 }
