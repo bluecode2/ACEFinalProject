@@ -218,7 +218,7 @@
 				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-      	 		order by PROJECT_ID) us 
+      	 		order by ACT_END_DATE) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
 	</select>
