@@ -57,19 +57,19 @@
 		proposed_task_id 	as propTaskId,
 		proposed_task_name 	as propTaskName,
 		proposed_task_desc 	as propTaskDesc,
-		est_start_date		as estStartDate,
-		est_end_date 		as estEndDate,
+		TO_CHAR(est_start_date,'yyyy-MM-dd') as estStartDateInString,
+		TO_CHAR(est_end_date,'yyyy-MM-dd') as estEndDateInString,
 		proposed_by 		as propBy,
 		proposed_by_name	as propByName,
 		proposed_to			as propTo,
 		proposed_to_name	as propToName,
 		created_by 			as createdBy,
 		updated_by	 		as updatedBy,
-		create_date 		as createDate,
-		update_date 		as updateDate,
+		TO_CHAR(create_date,'yyyy-MM-dd') 		as createDateInString,
+		TO_CHAR(update_date,'yyyy-MM-dd') 		as updateDateInString,
 		task_id		 		as taskId,
 		proposal_status		as propStatus,
-		proposal_status_name as propStatusName
+		proposal_status_name as propStatusName,
 		est_main_days		as estMainDays
 		FROM VPROPOSED_TASK
 		WHERE proposed_task_id = #propTaskId#

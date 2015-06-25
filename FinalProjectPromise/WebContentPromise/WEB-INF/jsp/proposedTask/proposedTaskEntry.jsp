@@ -38,7 +38,6 @@
 		<html:hidden name="proposedTaskForm" property="isAdd" />
 		<html:hidden name="proposedTaskForm" property="bean.propTaskId" />
 		
-		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
