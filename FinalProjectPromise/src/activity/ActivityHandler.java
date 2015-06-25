@@ -47,7 +47,9 @@ public class ActivityHandler extends Action {
 				out.println("<td colspan=\"2\" align=\"center\">No Data Found</td>");
 				out.println("</tr>");
 			}
-		} else if ("manageActivity".equals(aForm.getTask())) {
+		} 
+		
+		else if ("manageActivity".equals(aForm.getTask())) {
 			List<ActivityBean> arrList = aMan.getActivityByTaskId(aForm
 					.getTaskId());
 			if (arrList.size() > 0) {
@@ -57,24 +59,28 @@ public class ActivityHandler extends Action {
 							+ actBean.getActivityId() + "\" />");
 					out.println("<td>" + actBean.getActivityDesc() + "</td>");
 					if (actBean.getIsCompleted() == 1) {
-						out.println("<td> <input type=\"checkbox\" checked disabled> </td>");
-						out.println("<td align=\"center\"><a class='text-warning btnUndoComplete' href='#' title='Undo Complete'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></td>");
+						out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");
+						out.println("<td align=\"center\"><a class=\"text-warning btnUndoComplete\" href=\"#\" title=\"Undo Complete\"><span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span></a></td>");
 					} else {
 						out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
-						out.println("<td align=\"center\"><a class='text-success btnComplete' href='#' title='Complete'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></a> &nbsp; <a class='text-danger btnDelete' href='#' title='Complete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td>");
+						out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
 					}
 
 					out.println("</tr>");
 				}
 			} else {
-				out.println("<tr>");
+				out.println("<tr class=\"emptyRow\">");
 				out.println("<td colspan=\"3\" align=\"center\">No Data Found</td>");
 				out.println("</tr>");
 			}
 		}
-		if ("addActivity".equals(aForm.getTask())) {
-			
-			Integer id = 0;
+		else if ("addActivity".equals(aForm.getTask())) {
+			ActivityBean newBean = new ActivityBean();
+			newBean.setActivityDesc(aForm.getActDesc());
+			newBean.setTaskId(aForm.getTaskId());
+			newBean.setEmployeeId(us.getEmployeeId());
+			newBean.setCreatedBy(us.getUserId());
+			Integer id = aMan.insertActivity(newBean);
 			ActivityBean actBean = aMan.getActivityById(id);
 			
 			
@@ -83,10 +89,29 @@ public class ActivityHandler extends Action {
 					+ actBean.getActivityId() + "\" />");
 			out.println("<td>" + actBean.getActivityDesc() + "</td>");
 			out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
-			out.println("<td align=\"center\"><a class='text-success btnComplete' href='#' title='Complete'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></a> &nbsp; <a class='text-danger btnDelete' href='#' title='Complete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td>");
+			out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
 
 			out.println("</tr>");
 
+		}
+		
+		else if ("updateActivity".equals(aForm.getTask())) {
+			ActivityBean bean = aMan.getActivityById(aForm.getSelectedId());
+			bean.setIsCompleted(aForm.getIsCompleted());
+			bean.setUpdatedBy(us.getUserId());
+			aMan.updateActivity(bean);
+
+			if (bean.getIsCompleted() == 1) {
+				out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");
+				out.println("<td align=\"center\"><a class=\"text-warning btnUndoComplete\" href=\"#\" title=\"Undo Complete\"><span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span></a></td>");
+			} else {
+				out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
+				out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+			}
+		}
+		
+		else if ("deleteActivity".equals(aForm.getTask())) {
+			aMan.deleteActivity(aForm.getSelectedId());
 		}
 
 		return null;

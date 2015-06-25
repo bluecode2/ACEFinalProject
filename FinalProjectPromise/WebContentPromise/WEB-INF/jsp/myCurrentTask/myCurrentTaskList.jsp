@@ -65,26 +65,92 @@
 							$('#txtActivityTaskName').val(taskName);
 							$('#txtActivityAssignTo').val(assignedTo);
 							$('#showActivity').modal();
+
 						});
-				
-				$('#btnShowEntry').on('click',function(){
+
+				$('#btnShowEntry').on('click', function() {
 					$('#txtActivityDesc').val('');
 					$('#divActivityEntry').show();
 				});
-				$('#btnCancel').on('click',function(){
+				$('#btnCancel').on('click', function() {
 					$('#divActivityEntry').hide();
 				});
-				
-				$('#btnSaveActivity').on('click',function(){
-					var taskId = $('#hdnModalTaskId').val();
-					var activityDesc = $('#txtActivityDesc').val();
-					
+
+				$('#btnSaveActivity').on(
+						'click',
+						function() {
+							var taskId = $('#hdnModalTaskId').val();
+							var activityDesc = $('#txtActivityDesc').val();
+
+							$.ajax({
+								type : "POST",
+								url : "activity.do",
+								data : "task=addActivity&taskId=" + taskId
+										+ "&actDesc=" + activityDesc,
+								success : function(response) {
+									$('.emptyRow').remove();
+									$("#tblShow").append(response);
+									$('#divActivityEntry').hide();
+									registerBtnActivityEvent();
+								},
+								error : function(e) {
+									alert("Error: " + e);
+								}
+
+							});
+						});
+
+				$('#showActivity').on('shown.bs.modal', function() {
+					registerBtnActivityEvent();
+				});
+
+			});
+
+	function registerBtnActivityEvent() {
+		$('.btnActivityDelete').off('click');
+		$('.btnComplete').off('click');
+		$('.btnUndoComplete').off('click');
+		
+		$('.btnActivityDelete')
+				.on(
+						'click',
+						function() {
+							if (confirm('Are you sure you want to delete this activity?')) {
+								var activityId = $(this).closest('tr').find(
+										'.hdnActivityId').val();
+								var row = $(this).closest('tr');
+
+								$.ajax({
+									type : "POST",
+									url : "activity.do",
+									data : "task=deleteActivity&selectedId="
+											+ activityId,
+									success : function(response) {
+										row.remove();
+									},
+									error : function(e) {
+										alert("Error: " + e);
+									}
+
+								});
+							}
+						});
+		$('.btnComplete').on(
+				'click',
+				function() {
+					var activityId = $(this).closest('tr').find(
+							'.hdnActivityId').val();
+					var row = $(this).closest('tr');
+
 					$.ajax({
 						type : "POST",
 						url : "activity.do",
-						data : "task=addActivity&taskId=" + taskId + "&actDesc=" + activityDesc,
+						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=1",
 						success : function(response) {
-							$("#tblShow").append(response);
+							row.find('td').eq(2).remove();
+							row.find('td').eq(1).remove();
+							row.append(response);
+							registerBtnActivityEvent();
 						},
 						error : function(e) {
 							alert("Error: " + e);
@@ -92,7 +158,30 @@
 
 					});
 				});
-			});
+		$('.btnUndoComplete').on(
+				'click',
+				function() {
+					var activityId = $(this).closest('tr').find(
+							'.hdnActivityId').val();
+					var row = $(this).closest('tr');
+
+					$.ajax({
+						type : "POST",
+						url : "activity.do",
+						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=0",
+						success : function(response) {
+							row.find('td').eq(2).remove();
+							row.find('td').eq(1).remove();
+							row.append(response);
+							registerBtnActivityEvent();
+						},
+						error : function(e) {
+							alert("Error: " + e);
+						}
+
+					});
+				});
+	}
 </script>
 </head>
 <body>
@@ -261,20 +350,25 @@
 							</table>
 						</div>
 
-						<div class="form-group" style="overflow-y: auto;height: 350px">
-							<a class="text-info" id="btnShowEntry" href="#" title="Add Activity"><span
-								class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-							<div id="divActivityEntry" style="margin-top:20px; padding:10px; display: none" class="panel form-group has-info">
+						<div class="form-group" style="overflow-y: auto; height: 350px">
+							<a class="text-info" id="btnShowEntry" href="#"
+								title="Add Activity"><span class="glyphicon glyphicon-plus"
+								aria-hidden="true"></span></a>
+							<div id="divActivityEntry"
+								style="margin-top: 20px; padding: 10px; display: none"
+								class="panel form-group has-info">
 								<h4>Activity Entry</h4>
 								<hr>
 								<table width="100%">
 									<tr>
 										<td>Activity Desc</td>
-										<td><input type="text" class="form-control" id="txtActivityDesc" /></td>
+										<td><input type="text" class="form-control"
+											id="txtActivityDesc" /></td>
 									</tr>
 									<tr>
 										<td colspan="2" align="right">
-											<button type="button" id="btnSaveActivity" class="btn btn-sm btn-info">Save</button>
+											<button type="button" id="btnSaveActivity"
+												class="btn btn-sm btn-info">Save</button>
 											<button type="button" id="btnCancel" class="btn btn-sm">Cancel</button>
 										</td>
 									</tr>
