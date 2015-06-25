@@ -41,23 +41,20 @@
 							var taskId = $(this).closest('tr')
 									.find('.hdTaskId').val();
 
-							$
-									.ajax({
-										type : "POST",
-										url : "activity.do",
-										data : "task=viewActivity&taskId="
-												+ taskId,
-										success : function(response) {
-											$("#tblShow").find("tr:gt(0)")
-													.remove();
-											$("#tblShow").append(response);
-											$('#showMember').modal();
-										},
-										error : function(e) {
-											alert("Error: " + e);
-										}
+							$.ajax({
+								type : "POST",
+								url : "activity.do",
+								data : "task=manageActivity&taskId=" + taskId,
+								success : function(response) {
+									$("#tblShow").find("tr:gt(0)").remove();
+									$("#tblShow").append(response);
+									$('#showMember').modal();
+								},
+								error : function(e) {
+									alert("Error: " + e);
+								}
 
-									});
+							});
 
 							var taskName = $(this).closest('tr').find(
 									'.hdTaskName').val();
@@ -124,9 +121,11 @@
 							<logic:iterate id="reg" name="myCurrentTaskForm"
 								property="arrList">
 								<tr>
-									<html:hidden styleClass="hdTaskId" name="reg" property="taskId"/>
-									<html:hidden styleClass="hdTaskName" name="reg" property="taskName"/>
-									<html:hidden styleClass="hdAssignedToName" name="reg" property="assignedToName"/>
+									<html:hidden styleClass="hdTaskId" name="reg" property="taskId" />
+									<html:hidden styleClass="hdTaskName" name="reg"
+										property="taskName" />
+									<html:hidden styleClass="hdAssignedToName" name="reg"
+										property="assignedToName" />
 									<td><a href="#" class="text-info"
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
@@ -213,7 +212,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Project Member</h4>
+						<h4 class="modal-title">Manage Activity</h4>
 						<br />
 					</div>
 					<div class="modal-body">
@@ -234,12 +233,31 @@
 							</table>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" style="overflow-y: auto;height: 350px">
+							<a class="text-info" href="#" title="Add Activity"><span
+								class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+							<div id="divActivityEntry" style="margin-top:20px; padding:10px" class="panel form-group has-info">
+								<h4>Activity Entry</h4>
+								<hr>
+								<table width="100%">
+									<tr>
+										<td>Activity Desc</td>
+										<td><input type="text" class="form-control" id="txtActivityDesc" /></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right">
+											<button type="button" id="btnSaveActivity" class="btn btn-sm btn-info">Save</button>
+											<button type="button" id="btnCancel" class="btn btn-sm">Cancel</button>
+										</td>
+									</tr>
+								</table>
+							</div>
 							<table class="table table-bordered" cellspacing="0" id="tblShow"
 								style="margin-top: 10px;" width="100%" class="tableContent">
 								<tr>
 									<th style="padding-left: 15px">Activity Description</th>
-									<th style="padding-left: 15px">Completed</th>
+									<th align="center" width="100px">Completed</th>
+									<th align="center" width="100px">Action</th>
 								</tr>
 							</table>
 						</div>
