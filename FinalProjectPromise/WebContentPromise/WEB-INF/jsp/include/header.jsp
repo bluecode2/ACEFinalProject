@@ -54,6 +54,13 @@
 		post('users.do',{task: 'changePassword'});
 	}
 	
+	function showLoading() {
+		$(".full").style.visibility = 'visible';
+	}
+	
+	function hideLoading() {
+		$(".full").style.visibility = 'hidden';
+	}
 	
 </script>
 

@@ -44,6 +44,7 @@ public class RankEmpManager {
 				"rank.countEmployeeRank", map);
 		return count;
 	}
+	
 	public List<RankEmpBean> getListRankForSearch(String column, String value) throws SQLException {
 		Map m = new HashMap();
 		m.put("searchField", column);
@@ -51,6 +52,7 @@ public class RankEmpManager {
 		List<RankEmpBean> arrList = this.ibatis.queryForList("rank.getRankListForSearch", m);
 		return arrList;
 	}
+	
 	public RankEmpBean getRankByRankId(int tmpRankId) throws SQLException {
 		RankEmpBean rankBean = (RankEmpBean) this.ibatis.queryForObject("rank.getRankByRankId", tmpRankId);
 		return rankBean;
@@ -69,9 +71,14 @@ public class RankEmpManager {
 			
 			this.ibatis.insert("rank.insertEmployeeRank", eb);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -81,9 +88,14 @@ public class RankEmpManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("rank.updateEmployeeRank", eb);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -93,9 +105,14 @@ public class RankEmpManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("rank.deleteEmployeeRank", eb);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

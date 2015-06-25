@@ -19,10 +19,11 @@ public class ProposedTaskManager {
 	}
 
 	public List<ProposedTaskBean> getAllPropTaskFiltered(String col,
-			String input, Integer pageNum, Integer pageSize, int userId) throws SQLException {
+			String input, Integer pageNum, Integer pageSize, int userId)
+			throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		
+
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -30,47 +31,48 @@ public class ProposedTaskManager {
 		map.put("end", end);
 		map.put("userId", userId);
 
-	
-		List<ProposedTaskBean> 	arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
+		List<ProposedTaskBean> arr = this.ibatis.queryForList(
+				"proposedTask.getListProposedTask", map);
 		return arr;
 	}
-	
 
 	public ProposedTaskBean getPropTaskByPropTaskId(int propTaskId) {
 		ProposedTaskBean task = null;
 		try {
-			task = (ProposedTaskBean) ibatis.queryForObject("proposedTask.getPropTaskByPropTaskId", propTaskId);
+			task = (ProposedTaskBean) ibatis.queryForObject(
+					"proposedTask.getPropTaskByPropTaskId", propTaskId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return task;
 	}
-	
-	public List<ProposedTaskBean> getListPropTaskForSearchDialog(String col, String input) {
-		
+
+	public List<ProposedTaskBean> getListPropTaskForSearchDialog(String col,
+			String input) {
 		Map m = new HashMap();
 		m.put("searchValue", input);
 		m.put("searchField", col);
-		
+
 		List<ProposedTaskBean> arr = new ArrayList<ProposedTaskBean>();
 
 		try {
-			arr = this.ibatis.queryForList("proposedTask.getPropTaskForSearchDialog", m);
+			arr = this.ibatis.queryForList(
+					"proposedTask.getPropTaskForSearchDialog", m);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return arr;
 	}
-	
+
 	public Integer newPropTaskId() throws SQLException {
-		Integer propTaskId = (Integer) ibatis.queryForObject("proposedTask.newPropTaskId", null);
+		Integer propTaskId = (Integer) ibatis.queryForObject(
+				"proposedTask.newPropTaskId", null);
 		return propTaskId;
 	}
 
 	public void updateProposedTask(ProposedTaskBean bean) throws SQLException {
-		
 		Map m = new HashMap();
 		m.put("propTaskName", bean.getPropTaskName());
 		m.put("propTaskDesc", bean.getPropTaskDesc());
@@ -78,45 +80,58 @@ public class ProposedTaskManager {
 		m.put("estEndDateInString", bean.getEstEndDateInString());
 		m.put("propTaskId", bean.getPropTaskId());
 		m.put("userId", bean.getUpdatedBy());
-		
+
 		try {
 			ibatis.startTransaction();
 			ibatis.update("proposedTask.updateProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			ibatis.endTransaction();
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	public void deleteProposedTask(int propTaskId,int userId)
-			throws ClassNotFoundException,SQLException {
-		
-		
+	public void deleteProposedTask(int propTaskId, int userId)
+			throws ClassNotFoundException, SQLException {
 		Map m = new HashMap();
 		m.put("propTaskId", propTaskId);
 		m.put("userId", userId);
-		
-		try {			
+
+		try {
 			ibatis.startTransaction();
 			ibatis.delete("proposedTask.deleteProposedTask", m);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			ibatis.endTransaction();
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	public void insertProposedTask(ProposedTaskBean bean)
-			throws SQLException {
+	public void insertProposedTask(ProposedTaskBean bean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
 			int newId = newPropTaskId();
 			bean.setPropTaskId(newId);
 			this.ibatis.insert("proposedTask.insertProposedTask", bean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
