@@ -47,11 +47,9 @@
 
 	$(document).ready(function() {
 		$(".datepicker").attr("data-provide", "datepicker");
-// 		$(".datepicker").attr("data-date-start-date", new Date());
 	});
 	
-	function goToPage(task) {
-		alert(task);
+	function flyToPage(task) {
 		document.forms[0].task.value = task;
 		document.forms[0].submit();
 	}
@@ -61,11 +59,11 @@
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
 		<html:hidden name="generalHolidayForm" property="selectedId" />
-
 		<html:hidden property="currSearchValue" name="generalHolidayForm" />
 		<html:hidden property="currSearchField" name="generalHolidayForm" />
 		<html:hidden property="currSearchValue2" name="generalHolidayForm" />
 		<html:hidden property="searchField" name="generalHolidayForm" value="genHolidayDateInString" />
+		
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
@@ -103,7 +101,7 @@
 				</table>
 			</div>
 			<div class="divContent">
-				<button type="button" property="" onclick="goToPage('generateWeekend');"  style="margin: 0px" class="btn btn-sm btn-info">Generate Weekend</button>
+				<button type="button" property="" onclick="flyToPage('generateWeekend');"  style="margin: 0px" class="btn btn-sm btn-info">Generate Weekend</button>
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">

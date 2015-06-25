@@ -1,5 +1,6 @@
 package holiday;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,12 +29,17 @@ public class GeneralHolidayForm extends ActionForm{
 	private int							currPage = 1;
 	private int 						pageCount = 1;
 	private Integer						selectedId;
-
+	
+	private Date						startDate;
+	private String						startDateInString;
+	private Date						endDate;
+	private String						endDateInString;
+	private String						checkDays;
+	
 	public GeneralHolidayForm() {
 		// TODO Auto-generated constructor stub
 		currSearchValue = df.format(new Date().getTime());
 	}
-	
 	
 	public List<GeneralHolidayBean> getArrList() {
 		return arrList;
@@ -137,5 +143,71 @@ public class GeneralHolidayForm extends ActionForm{
 
 	public void setSelectedId(Integer selectedId) {
 		this.selectedId = selectedId;
+	}
+
+
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+		
+		if (startDate != null) {
+			this.startDateInString = df.format(startDate.getTime());
+		} else {
+			this.startDateInString = "";
+		}
+	}
+	public String getStartDateInString() {
+		return startDateInString;
+	}
+	public void setStartDateInString(String startDateInString) {
+		this.startDateInString = startDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(startDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			
+			this.startDateInString = "";
+			date = null;
+		}
+		this.startDate = date;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+		
+		if (endDate != null) {
+			this.endDateInString = df.format(endDate.getTime());
+		} else {
+			this.endDateInString = "";
+		}
+	}
+	public String getEndDateInString() {
+		return endDateInString;
+	}
+	public void setEndDateInString(String endDateInString) {
+		this.endDateInString = endDateInString;
+		
+		Date date = new Date();
+		try {
+			date = df.parse(endDateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			
+			this.endDateInString = "";
+			date = null;
+		}
+		this.endDate = date;
+	}
+	public String getCheckDays() {
+		return checkDays;
+	}
+	public void setCheckDays(String checkDays) {
+		this.checkDays = checkDays;
 	}
 }
