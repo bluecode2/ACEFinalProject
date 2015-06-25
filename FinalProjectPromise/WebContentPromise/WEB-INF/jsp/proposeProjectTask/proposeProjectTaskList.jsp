@@ -44,30 +44,30 @@
 </script>
 </head>
 <body>
-	<html:form action="/proposedTask" method="post">
+	<html:form action="/propProjTask" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
-		<html:hidden name="proposedTaskForm" property="task" />
-		<html:hidden name="proposedTaskForm" property="allowAdd" />
-		<html:hidden name="proposedTaskForm" property="selectedId" />
-		<html:hidden name="proposedTaskForm" property="currSearchField" />
-		<html:hidden name="proposedTaskForm" property="currSearchValue" />
+		<html:hidden name="proposeProjectTaskForm" property="task" />
+		<html:hidden name="proposeProjectTaskForm" property="allowAdd" />
+		<html:hidden name="proposeProjectTaskForm" property="selectedId" />
+		<html:hidden name="proposeProjectTaskForm" property="currSearchField" />
+		<html:hidden name="proposeProjectTaskForm" property="currSearchValue" />
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
 						<td style="padding-left: 15px;"><html:select
-								name="proposedTaskForm" property="searchField"
+								name="proposeProjectTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="propTaskName">Task Name</option>
 								<option value="propStatus">Status</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
-								name="proposedTaskForm" property="searchValue"
+								name="proposeProjectTaskForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
 								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
@@ -84,22 +84,33 @@
 					class="tableContent">
 					<thead>
 						<tr class="panel panel-info">
+							<td>Project Name</td>
 							<td>Task Name</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
+							<td>Estimate</td>
 							<td>Proposed To</td>
 							<td>Status</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
-						<logic:notEmpty name="proposedTaskForm" property="arrList">
-							<logic:iterate id="reg" name="proposedTaskForm"
+						<logic:notEmpty name="proposeProjectTaskForm" property="arrList">
+							<logic:iterate id="reg" name="proposeProjectTaskForm"
 								property="arrList">
 								<tr>
+									<td><bean:write name="reg" property="projectName" /></td>
 									<td><bean:write name="reg" property="propTaskName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td>
+										<table>
+											<tr>
+												<td><bean:write name="reg" property="estStartDateInString" />
+												</td>
+												<td>To
+												</td>
+												<td><bean:write name="reg" property="estEndDateInString" />
+												</td>
+											</tr>
+										</table>
+									</td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /></td>
 									<td align="center"><logic:equal name="reg"
@@ -116,7 +127,7 @@
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
-						<logic:empty name="proposedTaskForm" property="arrList">
+						<logic:empty name="proposeProjectTaskForm" property="arrList">
 							<tr>
 								<td colspan="6" align="center" style="padding: 10px">No
 									Data Found</td>
@@ -128,7 +139,7 @@
 			</div>
 
 		</div>
-		<html:hidden name="proposedTaskForm" property="currPage" />
+		<html:hidden name="proposeProjectTaskForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>
