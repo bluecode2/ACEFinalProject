@@ -47,25 +47,27 @@ public class ActivityHandler extends Action {
 				out.println("<td colspan=\"2\" align=\"center\">No Data Found</td>");
 				out.println("</tr>");
 			}
-		}
-		else if ("manageActivity".equals(aForm.getTask())) {
+		} else if ("manageActivity".equals(aForm.getTask())) {
 			List<ActivityBean> arrList = aMan.getActivityWithTaskId(aForm
 					.getTaskId());
 			if (arrList.size() > 0) {
 				for (ActivityBean actBean : arrList) {
 					out.println("<tr>");
+					out.println("<input type=\"hidden\" class=\"hdnActivityId\" value=\"" + actBean.getActivityId() + "\" />");
 					out.println("<td>" + actBean.getActivityDesc() + "</td>");
 					if (actBean.getIsCompleted() == 1) {
 						out.println("<td> <input type=\"checkbox\" checked disabled> </td>");
+						out.println("<td align=\"center\"><a class='text-warning btnUndoComplete' href='#' title='Undo Complete'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></td>");
 					} else {
 						out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
+						out.println("<td align=\"center\"><a class='text-success btnComplete' href='#' title='Complete'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></a> &nbsp; <a class='text-danger btnDelete' href='#' title='Complete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td>");
 					}
 
 					out.println("</tr>");
 				}
 			} else {
 				out.println("<tr>");
-				out.println("<td colspan=\"2\" align=\"center\">No Data Found</td>");
+				out.println("<td colspan=\"3\" align=\"center\">No Data Found</td>");
 				out.println("</tr>");
 			}
 		}
