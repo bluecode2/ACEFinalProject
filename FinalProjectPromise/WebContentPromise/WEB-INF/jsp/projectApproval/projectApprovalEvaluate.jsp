@@ -49,8 +49,8 @@
 
 			$.ajax({
 				type : "POST",
-				url : "projectApproval.do",
-				data : "task=listActivity&selectedId="
+				url : "activity.do",
+				data : "task=viewActivity&taskId="
 						+ taskId,
 				success : function(response) {
 					$("#tblShow").find("tr:gt(0)").remove();
@@ -366,7 +366,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title">Project Member</h4>
+							<h4 class="modal-title">View Activity</h4>
 							<br/>
 						</div>
 						<div class="modal-body">

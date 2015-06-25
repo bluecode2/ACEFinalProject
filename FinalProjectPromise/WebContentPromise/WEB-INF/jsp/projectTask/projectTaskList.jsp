@@ -126,8 +126,8 @@
 					var taskId = $(this).closest('tr').find('.hdTaskId').val();
 					$.ajax({
 						type : "POST",
-						url : "projectTask.do",
-						data : "task=listActivity&selectedId="
+						url : "activity.do",
+						data : "task=viewActivity&taskId="
 								+ taskId,
 						success : function(response) {
 							$("#tblShow").find("tr:gt(0)").remove();
@@ -198,7 +198,7 @@
 								</tr>
 								<tr>
 									<td>Project Name</td>
-									<td><html:text name="projectTaskForm" styleId=""
+									<td><html:text name="projectTaskForm" styleId="txtProjectName"
 											property="prjBean.projectName" styleClass="form-control"
 											disabled="true"></html:text></td>
 								</tr>
