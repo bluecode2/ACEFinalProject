@@ -51,8 +51,14 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -66,8 +72,14 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateCommentAssignTask", m);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -82,11 +94,17 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusAssignTask", m);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
-		
 	}
+	
 	public IndependentTaskBean getDataForEdit(int taskId) throws SQLException {
 		
 		IndependentTaskBean tBean = (IndependentTaskBean) this.ibatis.queryForObject("independentTask.getAssignTaskForEdit", taskId);	
@@ -98,8 +116,7 @@ public class IndependentTaskManager {
 		return tmpNewId;
 	}
 	
-public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
-		
+	public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 		Map map = new HashMap();
 		map.put("taskId", bean.getTaskId());
 		map.put("taskName", bean.getPropTaskName());
@@ -114,8 +131,14 @@ public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("independentTask.insertToAssignTaskMap", map);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -153,8 +176,14 @@ public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusMyCurrentTask", m);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
