@@ -99,9 +99,9 @@ public class ProjectApprovalHandler extends Action{
 			paForm.setSearchField(paForm.getCurrSearchField());
 			paForm.setSearchValue(paForm.getCurrSearchValue());
 			
-			rowCount = paMan.getCountProjectToEvaluate(paForm.getCurrSearchField(),
-					paForm.getCurrSearchValue(),us.getDeptId());
-			
+			rowCount = tsMan.getCountAssignTaskByProjectId(paForm.getCurrSearchField(),
+					paForm.getCurrSearchValue(),paForm.getpBean().getProjectId());
+			System.out.println(rowCount);
 			paForm.setPageCount((int) Math.ceil((double) rowCount
 					/ (double) Constant.pageSize));
 			

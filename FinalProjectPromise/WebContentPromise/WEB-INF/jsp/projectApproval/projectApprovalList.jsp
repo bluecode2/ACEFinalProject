@@ -77,8 +77,8 @@ function goToEvaluate(id) {
 						<td style="padding-left: 15px;"><html:select
 								name="projectApprovalForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
+								<option value="projectCode">Project Code</option>
 								<option value="projectName">Project Name</option>
-								<option value="taskDesc">task DESC</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="projectApprovalForm" property="searchValue"
