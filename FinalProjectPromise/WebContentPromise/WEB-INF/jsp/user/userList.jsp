@@ -94,7 +94,7 @@
 									<td><bean:write name="reg" property="employeeName" /></td>
 									<td><bean:write name="reg" property="userRoleName" /></td>
 									<td align="center"><html:checkbox name="reg"
-											property="isActiveDirectory" value="1" /></td>
+											property="isActiveDirectory" value="1" disabled="true" /></td>
 									<td align="center"><a href="#" class="text-success"
 										onclick="actionForm('edit','<bean:write name="reg" property="userId" />');"
 										title="Edit"><span class="glyphicon glyphicon-pencil"
