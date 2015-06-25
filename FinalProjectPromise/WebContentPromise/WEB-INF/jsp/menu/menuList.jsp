@@ -1,53 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>   
-   
+<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Menu</title>
 <script type="text/javascript">
-function search() {
-	document.forms[0].currSearchField.value = document.forms[0].searchField.value;
-	document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+	function search() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
 
-	changePage(1);
-}
+		changePage(1);
+	}
 </script>
 </head>
 <body>
 	<html:form action="/menu" method="post">
-	
+
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
-		
+
 		<html:hidden property="task" name="menuForm" />
-		<html:hidden property="currSearchField" name="menuForm"/>
-		<html:hidden property="currSearchValue" name="menuForm"/>
-		<html:hidden property="currPage" name="menuForm"/>
-		
+		<html:hidden property="currSearchField" name="menuForm" />
+		<html:hidden property="currSearchValue" name="menuForm" />
+		<html:hidden property="currPage" name="menuForm" />
+
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
 						<td>Search by</td>
-						<td style="padding-left: 15px;">
-							<html:select name="menuForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
+						<td style="padding-left: 15px;"><html:select name="menuForm"
+								property="searchField" styleId="selSearchField"
+								styleClass="form-control">
 								<option value="menuCode">Menu Code</option>
 								<option value="menuCaption">Menu Caption</option>
 								<option value="parentName">ParentName</option>
 								<option value="menuCrud">Menu Crud</option>
 								<option value="menuUrl">Menu URL</option>
-							</html:select>
-						</td>
-						<td style="padding-left: 15px">
-							<html:text name="menuForm" property="searchValue" styleClass="form-control" />
-						</td>
+							</html:select></td>
+						<td style="padding-left: 15px"><html:text name="menuForm"
+								property="searchValue" styleClass="form-control" /></td>
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
 								class="btn btn-info btn-icon" title="Search">
@@ -98,7 +96,7 @@ function search() {
 		</div>
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-		
+
 	</html:form>
 
 </body>

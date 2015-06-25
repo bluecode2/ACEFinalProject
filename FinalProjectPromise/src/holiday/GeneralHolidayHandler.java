@@ -26,7 +26,6 @@ public class GeneralHolidayHandler extends Action{
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
 		//CommonFunction.createAllowedMenu(us, request);
-		
 		if("add".equals(genForm.getTask())){
 			genForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "General Holiday");
@@ -89,21 +88,18 @@ public class GeneralHolidayHandler extends Action{
 				
 				return mapping.findForward("genList");				
 			}
-			else if("generateWeekend".equals(genForm.getTask())){
-				genForm.setIsAdd(true);
-				request.setAttribute("pageTitle", "Generate Holiday Entry");
-				
-				CommonFunction.initializeHeader(Constant.MenuCode.GENERATE_HOLIDAY_ENTRY,
-						us, request);
-				
-				return mapping.findForward("generateEntry");
-			}
 			else {
 				genForm.setCurrSearchField("");
 			}
-
 		}
-
+		else if("generateWeekend".equals(genForm.getTask())){
+			request.setAttribute("pageTitle", "Generate Holiday Entry");
+			
+			CommonFunction.initializeHeader(Constant.MenuCode.GENERATE_HOLIDAY_ENTRY,
+					us, request);
+			return mapping.findForward("generateEntry");
+		}
+		
 		genForm.setTask("");
 		
 		genForm.setSearchField(genForm.getCurrSearchField());

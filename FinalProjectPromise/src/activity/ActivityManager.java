@@ -1,6 +1,7 @@
 package activity;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import ibatis.IbatisHelper;
@@ -16,11 +17,24 @@ public class ActivityManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public List<ActivityBean> getActivityWithTaskId(int id) throws SQLException {
+	public List<ActivityBean> getActivityByTaskId(int id) {
 		
-		List<ActivityBean> arr = this.ibatis.queryForList("activity.getActivityWithTaskId", id);
+		List<ActivityBean> arr = new ArrayList<ActivityBean>();
+		try {
+			arr = this.ibatis.queryForList("activity.getActivityByTaskId", id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return arr;
+	}
+	
+	public ActivityBean getActivityById(Integer activityId){
+		ActivityBean bean = null;
+		
+		
+		return bean;
 	}
 
 }

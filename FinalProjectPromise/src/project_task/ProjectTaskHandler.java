@@ -112,7 +112,7 @@ public class ProjectTaskHandler extends Action {
 		else if ("listActivity".equals(tsForm.getTask())) {
 			int selId = tsForm.getSelectedId();
 			System.out.println(selId);
-			tsForm.setArrActivity(actMan.getActivityWithTaskId(selId));
+			tsForm.setArrActivity(actMan.getActivityByTaskId(selId));
 			response.setContentType("text/text;charset=utf-8");
 			response.setHeader("cache-control", "no-cache");
 			PrintWriter out = response.getWriter();

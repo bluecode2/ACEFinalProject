@@ -62,7 +62,7 @@ public class ProjectApprovalHandler extends Action{
 		}
 		else if ("listActivity".equals(paForm.getTask())) {
 			int selId = paForm.getSelectedId();
-			paForm.setArrActivity(actMan.getActivityWithTaskId(selId));
+			paForm.setArrActivity(actMan.getActivityByTaskId(selId));
 			response.setContentType("text/text;charset=utf-8");
 			response.setHeader("cache-control", "no-cache");
 			PrintWriter out = response.getWriter();
