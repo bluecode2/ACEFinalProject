@@ -2,22 +2,41 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="activity">
-<select id="getActivityWithTaskId" resultClass="activity.ActivityBean" parameterClass="java.lang.Integer">
-	select 
-	ACTIVITY_ID		as activityId,
-	TASK_ID			as taskId,
-	TASK_NAME		as taskName,
-	UPDATED_BY		as updatedBy,
-	CREATED_BY		as createdBy,
-	EMPLOYEE_ID		as employeeId,
-	EMPLOYEE_NAME	as employeeName,
-	EMPLOYEE_CODE	as employeeCode, 
-	ACTIVITY_DESC	as activityDesc,
-	IS_COMPLETED	as isCompleted,
-	CREATE_DATE		as createDateInString,
-	UPDATE_DATE		as updateDateInString
-	from vactivity
-	where task_id = #id#
-</select>
+	<select id="getActivityByTaskId" resultClass="activity.ActivityBean"
+		parameterClass="java.lang.Integer">
+		select
+		ACTIVITY_ID as activityId,
+		TASK_ID as taskId,
+		TASK_NAME as taskName,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		EMPLOYEE_ID as employeeId,
+		EMPLOYEE_NAME as employeeName,
+		EMPLOYEE_CODE as employeeCode,
+		ACTIVITY_DESC as activityDesc,
+		IS_COMPLETED as isCompleted,
+		CREATE_DATE as createDateInString,
+		UPDATE_DATE as updateDateInString
+		from vactivity
+		where task_id = #id#
+	</select>
 
+	<select id="getActivityById" resultClass="activity.ActivityBean"
+		parameterClass="java.lang.Integer">
+		select
+		ACTIVITY_ID as activityId,
+		TASK_ID as taskId,
+		TASK_NAME as taskName,
+		UPDATED_BY as updatedBy,
+		CREATED_BY as createdBy,
+		EMPLOYEE_ID as employeeId,
+		EMPLOYEE_NAME as employeeName,
+		EMPLOYEE_CODE as employeeCode,
+		ACTIVITY_DESC as activityDesc,
+		IS_COMPLETED as isCompleted,
+		CREATE_DATE as createDateInString,
+		UPDATE_DATE as updateDateInString
+		from vactivity
+		where task_id = #id#
+	</select>
 </sqlMap>

@@ -28,7 +28,7 @@ public class ActivityHandler extends Action {
 		PrintWriter out = response.getWriter();
 
 		if ("viewActivity".equals(aForm.getTask())) {
-			List<ActivityBean> arrList = aMan.getActivityWithTaskId(aForm
+			List<ActivityBean> arrList = aMan.getActivityByTaskId(aForm
 					.getTaskId());
 			if (arrList.size() > 0) {
 				for (ActivityBean actBean : arrList) {
@@ -48,12 +48,13 @@ public class ActivityHandler extends Action {
 				out.println("</tr>");
 			}
 		} else if ("manageActivity".equals(aForm.getTask())) {
-			List<ActivityBean> arrList = aMan.getActivityWithTaskId(aForm
+			List<ActivityBean> arrList = aMan.getActivityByTaskId(aForm
 					.getTaskId());
 			if (arrList.size() > 0) {
 				for (ActivityBean actBean : arrList) {
 					out.println("<tr>");
-					out.println("<input type=\"hidden\" class=\"hdnActivityId\" value=\"" + actBean.getActivityId() + "\" />");
+					out.println("<input type=\"hidden\" class=\"hdnActivityId\" value=\""
+							+ actBean.getActivityId() + "\" />");
 					out.println("<td>" + actBean.getActivityDesc() + "</td>");
 					if (actBean.getIsCompleted() == 1) {
 						out.println("<td> <input type=\"checkbox\" checked disabled> </td>");
@@ -70,6 +71,22 @@ public class ActivityHandler extends Action {
 				out.println("<td colspan=\"3\" align=\"center\">No Data Found</td>");
 				out.println("</tr>");
 			}
+		}
+		if ("addActivity".equals(aForm.getTask())) {
+			
+			Integer id = 0;
+			ActivityBean actBean = aMan.getActivityById(id);
+			
+			
+			out.println("<tr>");
+			out.println("<input type=\"hidden\" class=\"hdnActivityId\" value=\""
+					+ actBean.getActivityId() + "\" />");
+			out.println("<td>" + actBean.getActivityDesc() + "</td>");
+			out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
+			out.println("<td align=\"center\"><a class='text-success btnComplete' href='#' title='Complete'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></a> &nbsp; <a class='text-danger btnDelete' href='#' title='Complete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td>");
+
+			out.println("</tr>");
+
 		}
 
 		return null;

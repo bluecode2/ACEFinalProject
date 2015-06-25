@@ -61,10 +61,37 @@
 							var assignedTo = $(this).closest('tr').find(
 									'.hdAssignedToName').val();
 
+							$('#hdnModalTaskId').val(taskId);
 							$('#txtActivityTaskName').val(taskName);
 							$('#txtActivityAssignTo').val(assignedTo);
 							$('#showActivity').modal();
 						});
+				
+				$('#btnShowEntry').on('click',function(){
+					$('#txtActivityDesc').val('');
+					$('#divActivityEntry').show();
+				});
+				$('#btnCancel').on('click',function(){
+					$('#divActivityEntry').hide();
+				});
+				
+				$('#btnSaveActivity').on('click',function(){
+					var taskId = $('#hdnModalTaskId').val();
+					var activityDesc = $('#txtActivityDesc').val();
+					
+					$.ajax({
+						type : "POST",
+						url : "activity.do",
+						data : "task=addActivity&taskId=" + taskId + "&actDesc=" + activityDesc,
+						success : function(response) {
+							$("#tblShow").append(response);
+						},
+						error : function(e) {
+							alert("Error: " + e);
+						}
+
+					});
+				});
 			});
 </script>
 </head>
@@ -217,6 +244,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="container form-group">
+							<input type="hidden" id="hdnModalTaskId" />
 							<table>
 								<tr>
 									<td>Task Name</td>
@@ -234,9 +262,9 @@
 						</div>
 
 						<div class="form-group" style="overflow-y: auto;height: 350px">
-							<a class="text-info" href="#" title="Add Activity"><span
+							<a class="text-info" id="btnShowEntry" href="#" title="Add Activity"><span
 								class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-							<div id="divActivityEntry" style="margin-top:20px; padding:10px" class="panel form-group has-info">
+							<div id="divActivityEntry" style="margin-top:20px; padding:10px; display: none" class="panel form-group has-info">
 								<h4>Activity Entry</h4>
 								<hr>
 								<table width="100%">
