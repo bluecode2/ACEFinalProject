@@ -45,7 +45,6 @@ public class DepartmentManager {
 		try {
 			dept = (DepartmentBean) ibatis.queryForObject("department.getDepartmentbyDeptId", tmpDeptId);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dept;
