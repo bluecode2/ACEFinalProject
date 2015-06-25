@@ -19,7 +19,7 @@ public class ProposedTaskManager {
 	}
 
 	public List<ProposedTaskBean> getAllPropTaskFiltered(String col,
-			String input, Integer pageNum, Integer pageSize, int userId)
+			String input, Integer pageNum, Integer pageSize, int empId)
 			throws SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -29,7 +29,7 @@ public class ProposedTaskManager {
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
-		map.put("userId", userId);
+		map.put("empId", empId);
 
 		List<ProposedTaskBean> arr = this.ibatis.queryForList(
 				"proposedTask.getListProposedTask", map);
@@ -135,12 +135,12 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public Integer getCountProposedTask(String column, String value, int userId)
+	public Integer getCountProposedTask(String column, String value, int empId)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
-		map.put("userId", userId);
+		map.put("empId", empId);
 
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"proposedTask.countProposedTask", map);
