@@ -28,7 +28,7 @@ $(function(){
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 
-		<div class="container-fluid" style="background-color: white; height: 80px; 
+<!-- 		<div class="container-fluid" style="background-color: white; height: 80px; 
 		  margin-top: -20px !important; padding-top: 20px !important">
 			<div class="container">
 			<h1>Dashboard</h1>
@@ -44,7 +44,7 @@ $(function(){
 						<div class="panel-body">
 						
 							<div class="statChartHolder">
-				                <div class="progress-pie-chart" data-percent="67"><!--Pie Chart -->
+				                <div class="progress-pie-chart" data-percent="67">
 				                    <div class="ppc-progress">
 				                        <div class="ppc-progress-fill"></div>
 				                    </div>
@@ -53,7 +53,7 @@ $(function(){
 				                        <span>%</span>
 				                    </div>
 				                    </div>
-				                </div><!--End Chart -->
+				                </div>
 				            </div>
 				            
 						</div>
@@ -92,10 +92,6 @@ $(function(){
 				</div>
 				<div class="col-sm-8">
 					<div style="background-color: #f4f4f4; min-height: 200px">
-<!-- 						<div class="btn-group btn-group-justified" style="width: 200px"> -->
-<!-- 						    <a href="#a" data-toggle="tab" class="btn btn-info">Left</a> -->
-<!-- 						    <a href="#b" data-toggle="tab" class="btn btn-default">1</a> -->
-<!-- 						</div> -->
 						<div class="tab-content">
 		                    <div class="tab-pane active" id="a">Contains all departments</div>
 		                    <div class="tab-pane" id="b">Contains all projects in department</div>
@@ -104,7 +100,7 @@ $(function(){
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		
 <!-- 		<div class="container" style="background-color: white; min-height: 100px; margin-top: 20px">
 
