@@ -37,7 +37,7 @@
 				$('.linkActivity').on(
 						'click',
 						function() {
-
+							showLoading();
 							var taskId = $(this).closest('tr')
 									.find('.hdTaskId').val();
 
@@ -65,7 +65,7 @@
 							$('#txtActivityTaskName').val(taskName);
 							$('#txtActivityAssignTo').val(assignedTo);
 							$('#showActivity').modal();
-
+							hideLoading();
 						});
 
 				$('#btnShowEntry').on('click', function() {
@@ -79,6 +79,7 @@
 				$('#btnSaveActivity').on(
 						'click',
 						function() {
+							showLoading();
 							var taskId = $('#hdnModalTaskId').val();
 							var activityDesc = $('#txtActivityDesc').val();
 
@@ -98,6 +99,8 @@
 								}
 
 							});
+							hideLoading();
+							
 						});
 
 				$('#showActivity').on('shown.bs.modal', function() {
@@ -116,6 +119,7 @@
 						'click',
 						function() {
 							if (confirm('Are you sure you want to delete this activity?')) {
+								showLoading();
 								var activityId = $(this).closest('tr').find(
 										'.hdnActivityId').val();
 								var row = $(this).closest('tr');
@@ -133,11 +137,13 @@
 									}
 
 								});
+								hideLoading();
 							}
 						});
 		$('.btnComplete').on(
 				'click',
 				function() {
+					showLoading();
 					var activityId = $(this).closest('tr').find(
 							'.hdnActivityId').val();
 					var row = $(this).closest('tr');
@@ -157,10 +163,12 @@
 						}
 
 					});
+					hideLoading();
 				});
 		$('.btnUndoComplete').on(
 				'click',
 				function() {
+					showLoading();
 					var activityId = $(this).closest('tr').find(
 							'.hdnActivityId').val();
 					var row = $(this).closest('tr');
@@ -180,6 +188,7 @@
 						}
 
 					});
+					hideLoading();
 				});
 	}
 </script>
