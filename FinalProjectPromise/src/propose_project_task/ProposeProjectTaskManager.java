@@ -50,9 +50,14 @@ public class ProposeProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("projProposeTask.insertPropProjTask", pProjTBean);
 			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -67,5 +72,4 @@ public class ProposeProjectTaskManager {
 				"projProposeTask.countGetAllTask", map);
 		return result;
 	}
-	
 }
