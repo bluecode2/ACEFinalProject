@@ -178,7 +178,6 @@ public class ProjectTaskHandler extends Action {
 		request.setAttribute("rowCount", tsForm.getListCount());
 
 		return mapping.findForward("list");
-		/* return mapping.findForward("assignTask"); */
 
 	}
 }

@@ -74,7 +74,7 @@ function search() {
 			$('#showDesc').modal();
 			
 		});
-		$('.goInsert').on('click',function(){
+		$('.insertRemarks').on('click',function(){
 			document.forms[0].selectedId.value = $('#txtValueTaskId').val(); //task ID
 			document.forms[0].task.value = "secondEdit";
 			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
@@ -280,7 +280,7 @@ function search() {
 	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
 	      						</td>
 	      						<td>
-	      							<input type="button" class="btn btn-sm " value="Cancel" data-dismiss="modal">
+	      							<input type="button" class="btn btn-sm" value="Cancel" data-dismiss="modal">
 								</td>
 								</tr>
 								</table>
