@@ -68,6 +68,76 @@
 						$(this).hide();
 				});
 				
+				$('.lnkMngActivity').on(
+						'click',
+						function() {
+
+							var taskId = $(this).closest('tr')
+									.find('.hdTaskId').val();
+
+							$.ajax({
+								type : "POST",
+								url : "activity.do",
+								data : "task=manageActivity&taskId=" + taskId,
+								success : function(response) {
+									$("#tblShow").find("tr:gt(0)").remove();
+									$("#tblShow").append(response);
+									$('#showMember').modal();
+								},
+								error : function(e) {
+									alert("Error: " + e);
+								}
+
+							});
+
+							var taskName = $(this).closest('tr').find(
+									'.hdTaskName').val();
+							var assignedTo = $(this).closest('tr').find(
+									'.hdAssignedToName').val();
+
+							$('#hdnModalTaskId').val(taskId);
+							$('#txtActivityTaskName').val(taskName);
+							$('#txtActivityAssignTo').val(assignedTo);
+							$('#showActivity').modal();
+
+						});
+
+				$('#btnShowEntry').on('click', function() {
+					$('#txtActivityDesc').val('');
+					$('#divActivityEntry').show();
+				});
+				$('#btnCancel').on('click', function() {
+					$('#divActivityEntry').hide();
+				});
+
+				$('#btnSaveActivity').on(
+						'click',
+						function() {
+							var taskId = $('#hdnModalTaskId').val();
+							var activityDesc = $('#txtActivityDesc').val();
+
+							$.ajax({
+								type : "POST",
+								url : "activity.do",
+								data : "task=addActivity&taskId=" + taskId
+										+ "&actDesc=" + activityDesc,
+								success : function(response) {
+									$('.emptyRow').remove();
+									$("#tblShow").append(response);
+									$('#divActivityEntry').hide();
+									registerBtnActivityEvent();
+								},
+								error : function(e) {
+									alert("Error: " + e);
+								}
+
+							});
+						});
+
+				$('#showActivity').on('shown.bs.modal', function() {
+					registerBtnActivityEvent();
+				});
+				
 			});
 	
 	function changeStatusFirstBtn(taskId, taskStatus) {
@@ -113,6 +183,83 @@
 				document.forms[0].submit();
 			}
 		}
+	}
+	
+	function registerBtnActivityEvent() {
+		$('.btnActivityDelete').off('click');
+		$('.btnComplete').off('click');
+		$('.btnUndoComplete').off('click');
+		
+		$('.btnActivityDelete')
+				.on(
+						'click',
+						function() {
+							if (confirm('Are you sure you want to delete this activity?')) {
+								var activityId = $(this).closest('tr').find(
+										'.hdnActivityId').val();
+								var row = $(this).closest('tr');
+
+								$.ajax({
+									type : "POST",
+									url : "activity.do",
+									data : "task=deleteActivity&selectedId="
+											+ activityId,
+									success : function(response) {
+										row.remove();
+									},
+									error : function(e) {
+										alert("Error: " + e);
+									}
+
+								});
+							}
+						});
+		$('.btnComplete').on(
+				'click',
+				function() {
+					var activityId = $(this).closest('tr').find(
+							'.hdnActivityId').val();
+					var row = $(this).closest('tr');
+
+					$.ajax({
+						type : "POST",
+						url : "activity.do",
+						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=1",
+						success : function(response) {
+							row.find('td').eq(2).remove();
+							row.find('td').eq(1).remove();
+							row.append(response);
+							registerBtnActivityEvent();
+						},
+						error : function(e) {
+							alert("Error: " + e);
+						}
+
+					});
+				});
+		$('.btnUndoComplete').on(
+				'click',
+				function() {
+					var activityId = $(this).closest('tr').find(
+							'.hdnActivityId').val();
+					var row = $(this).closest('tr');
+
+					$.ajax({
+						type : "POST",
+						url : "activity.do",
+						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=0",
+						success : function(response) {
+							row.find('td').eq(2).remove();
+							row.find('td').eq(1).remove();
+							row.append(response);
+							registerBtnActivityEvent();
+						},
+						error : function(e) {
+							alert("Error: " + e);
+						}
+
+					});
+				});
 	}
 	
 </script>
@@ -245,7 +392,8 @@
 									<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
 									<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
 									<a href="#" class="text-info linkDesc">
-									<html:hidden property="remarks" name="reg" styleClass="hdRemarks" /> 
+									<html:hidden property="remarks" name="reg" styleClass="hdRemarks" />
+									<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/> 
 										<bean:write name="reg" property="taskName" />
 									</a>
 	
@@ -412,6 +560,79 @@
 		</div>
 		<!-- /.modal -->
 		
+		<!-- popup to show Activity -->
+		<div class="modal fade" id="showActivity" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Manage Activity</h4>
+						<br />
+					</div>
+					<div class="modal-body">
+						<div class="container form-group">
+							<input type="hidden" id="hdnModalTaskId" />
+							<table>
+								<tr>
+									<td>Task Name</td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtActivityTaskName" class="form-control" disabled="true" />
+									</td>
+								</tr>
+								<tr>
+									<td>Assign To</td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtActivityAssignTo" class="form-control" disabled="true" />
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="form-group" style="overflow-y: auto; height: 350px">
+							<a class="text-info" id="btnShowEntry" href="#"
+								title="Add Activity"><span class="glyphicon glyphicon-plus"
+								aria-hidden="true"></span></a>
+							<div id="divActivityEntry"
+								style="margin-top: 20px; padding: 10px; display: none"
+								class="panel form-group has-info">
+								<h4>Activity Entry</h4>
+								<hr>
+								<table width="100%">
+									<tr>
+										<td>Activity Desc</td>
+										<td><input type="text" class="form-control"
+											id="txtActivityDesc" /></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="right">
+											<button type="button" id="btnSaveActivity"
+												class="btn btn-sm btn-info">Save</button>
+											<button type="button" id="btnCancel" class="btn btn-sm">Cancel</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<table class="table table-bordered" cellspacing="0" id="tblShow"
+								style="margin-top: 10px;" width="100%" class="tableContent">
+								<tr>
+									<th style="padding-left: 15px">Activity Description</th>
+									<th align="center" width="100px">Completed</th>
+									<th align="center" width="100px">Action</th>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
