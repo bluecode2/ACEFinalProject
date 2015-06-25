@@ -129,6 +129,7 @@
 							<td>Task Name</td>
 							<td>Estimate Start Date</td>
 							<td>Estimate End Date</td>
+							<td>Estimate Main Days</td>
 							<td>Proposed By</td>
 							<td>Assign To</td>
 							<td class="align-center">Action</td>
@@ -144,6 +145,7 @@
 									<bean:write name="reg" property="propTaskName" /></a>
 									<td><bean:write name="reg" property="estStartDateInString" /> to </td>
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="propByName" /></td>
 									<td><input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" /><a href="#" class="text-info lnkAssignTo">
 									<bean:write name="reg" property="propByName" /></a></td>
@@ -159,7 +161,7 @@
 						</logic:notEmpty>
 						<logic:empty name="approveTaskForm" property="arrList">
 							<tr>
-								<td colspan="6" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
