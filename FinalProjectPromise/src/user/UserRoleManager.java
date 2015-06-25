@@ -33,12 +33,12 @@ public class UserRoleManager {
 
 		return arr;
 	}
-	
+
 	public List<UserRoleBean> getUserRoleForPopUp() throws SQLException {
-		
+
 		List<UserRoleBean> arr = (List<UserRoleBean>) this.ibatis.queryForList(
 				"userRole.getUserRoleForPopUp", null);
-		
+
 		return arr;
 	}
 
@@ -47,8 +47,14 @@ public class UserRoleManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("userRole.insertUserRole", userRoleBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -63,8 +69,14 @@ public class UserRoleManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("userRole.editUserRole", userRoleBean);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -73,8 +85,14 @@ public class UserRoleManager {
 			this.ibatis.startTransaction();
 			this.ibatis.delete("userRole.deleteUserRole", roleId);
 			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
