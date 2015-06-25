@@ -171,14 +171,14 @@ function goToEvaluate(id) {
 								<table width="100%">
 									<tr>
 										<td style="padding-left: 15px">Project Code </td>
-										<td style="padding-left: 15px">
+										<td >
 											<input type="text" id="txtProCode" class="form-control" disabled="disabled" />
 										</td>
 										
 									</tr>
 									<tr>
 										<td style="padding-left: 15px">Project Name</td>
-										<td style="padding-left: 15px">
+										<td >
 											<input type="text" id="txtProName" class="form-control" disabled="disabled" />
 										</td>
 										
@@ -187,7 +187,7 @@ function goToEvaluate(id) {
 										<td style="padding-left: 15px">
 											Task Desc 
 										</td>
-										<td style="padding-left: 15px">
+										<td >
 											<textarea rows="3" cols="3" class="form-control"  id="txtProDesc" disabled="disabled"></textarea>
 										</button></td>
 									</tr>
