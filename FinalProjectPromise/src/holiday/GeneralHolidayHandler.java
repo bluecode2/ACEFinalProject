@@ -89,6 +89,15 @@ public class GeneralHolidayHandler extends Action{
 				
 				return mapping.findForward("genList");				
 			}
+			else if("generateWeekend".equals(genForm.getTask())){
+				genForm.setIsAdd(true);
+				request.setAttribute("pageTitle", "Generate Holiday Entry");
+				
+				CommonFunction.initializeHeader(Constant.MenuCode.GENERATE_HOLIDAY_ENTRY,
+						us, request);
+				
+				return mapping.findForward("generateEntry");
+			}
 			else {
 				genForm.setCurrSearchField("");
 			}

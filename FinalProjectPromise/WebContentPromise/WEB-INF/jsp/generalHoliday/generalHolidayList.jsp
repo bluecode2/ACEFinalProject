@@ -49,6 +49,12 @@
 		$(".datepicker").attr("data-provide", "datepicker");
 // 		$(".datepicker").attr("data-date-start-date", new Date());
 	});
+	
+	function goToPage(task) {
+		alert(task);
+		document.forms[0].task.value = task;
+		document.forms[0].submit();
+	}
 </script>
 </head>
 <body>
@@ -96,8 +102,8 @@
 					</tr>
 				</table>
 			</div>
-
 			<div class="divContent">
+				<button type="button" property="" onclick="goToPage('generateWeekend');"  style="margin: 0px" class="btn btn-sm btn-info">Generate Weekend</button>
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">

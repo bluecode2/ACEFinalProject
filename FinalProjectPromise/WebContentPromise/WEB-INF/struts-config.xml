@@ -58,6 +58,7 @@
 			scope="request">
 			<forward name="genList" path="/WEB-INF/jsp/generalHoliday/generalHolidayList.jsp"></forward>
 			<forward name="genEntry" path="/WEB-INF/jsp/generalHoliday/generalHolidayEntry.jsp"></forward>
+			<forward name="generateEntry" path="/WEB-INF/jsp/generalHoliday/generateHolidayEntry.jsp"></forward>
 		</action>
 		<action path="/generalCode" name="generalCodeForm" type="general.GeneralCodeHandler"
 			scope="request">
