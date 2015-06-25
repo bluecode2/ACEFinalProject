@@ -179,6 +179,7 @@
 							<td>Project Code</td>
 							<td>Project Name</td>
 							<td>Estimate Date</td>
+							<td>Estimate Main Days</td>
 							<td>Actual Date</td>
 							<td>Project Manager</td>
 							<td>Department Name</td>
@@ -200,6 +201,7 @@
 											<bean:write name="proj" property="projectName" /></a></td>
 									<td><bean:write name="proj" property="estStartDateInString" /> to 
 										<bean:write name="proj" property="estEndDateInString" /></td>
+									<td><bean:write name="proj" property="estMainDays" /></td>
 									<td><bean:write name="proj" property="actStartDateInString" /> to 
 										<bean:write name="proj" property="actEndDateInString" /></td>
 									<td><bean:write name="proj" property="employeeName" /></td>
@@ -229,7 +231,7 @@
 						</logic:notEmpty>
 						<logic:empty name="projectForm" property="listOfProject">
 							<tr>
-								<td colspan="10" align="center" style="padding: 10px">No
+								<td colspan="11" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

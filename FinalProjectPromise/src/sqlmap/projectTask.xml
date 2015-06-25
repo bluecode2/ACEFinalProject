@@ -83,10 +83,12 @@
 		insert into task
 		(TASK_ID,PROJECT_ID, TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE
 		,EST_START_DATE,
-		EST_END_DATE,CREATED_BY, CREATE_DATE,task_status)
+		EST_END_DATE, EST_MAIN_DAYS, CREATED_BY, CREATE_DATE,task_status)
 		values( #taskId#, #projectId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# , #isOutsource#,
 		TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
-		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE,
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),
+		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')), 
+		#createdBy#, SYSDATE,
 		'TA_STAT_02' )
 	</insert>
 
@@ -98,6 +100,7 @@
 		ASSIGNED_TO = #assignedTo#,
 		EST_START_DATE = TO_DATE(#estStartDateInString#,'YYYY-MM-DD'),
 		EST_END_DATE = TO_DATE(#estEndDateInString#,'YYYY-MM-DD'),
+		est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')), 
 		updated_by = #updatedBy#,
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
