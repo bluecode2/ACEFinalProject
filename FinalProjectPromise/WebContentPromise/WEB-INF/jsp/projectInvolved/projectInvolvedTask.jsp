@@ -444,7 +444,7 @@
 			</div>
 		</div>
 
-	 <!-- 	<!-- popup to give remarks -->
+	  	<!-- popup to give remarks (unused) -->
 		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -485,11 +485,11 @@
 
 					</div>
 				</div>
-				/.modal-content
+			<!-- /.modal-content -->
 			</div>
-			/.modal-dialog
+			<!-- /.modal-dialog -->
 		</div>
-		/.modal -->
+		<!-- /.modal  -->
 
 		<!-- popup to show DESC -->
 		<div class="modal fade" id="showDesc" tabindex="-1" role="dialog"
@@ -531,8 +531,8 @@
 		</div>
 		<!-- /.modal -->
 		
-		<!-- popup to show Remarks -->
-	<!-- 	<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
+		<!-- popup to show Remarks (unused) -->
+		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -565,11 +565,11 @@
 
 					</div>
 				</div>
-				/.modal-content
+				<!-- /.modal-content -->
 			</div>
-			/.modal-dialog
+			<!-- /.modal-dialog -->
 		</div>
-		/.modal -->
+		<!-- /.modal  -->
 		
 		<!-- popup to show Activity -->
 		<div class="modal fade" id="showActivity" tabindex="-1" role="dialog"
