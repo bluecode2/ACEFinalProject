@@ -114,7 +114,7 @@
 		TASK_PROGRESS = #taskProgress#,
 		ACT_START_DATE = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
-		ACT_MAIN_DAYS = #actmainDays#,
+		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#),
 		update_date = to_date(SYSDATE, 'yyyy-MM-dd')
 		WHERE task_id = #taskId#
 	</update>

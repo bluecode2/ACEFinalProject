@@ -235,6 +235,7 @@
 							<td class="align-center">Task Name</td>
 							<td class="align-center">Estimate Start Date</td>
 							<td class="align-center">Estimate End Date</td>
+							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Progress</td>
 							<td class="align-center">Status</td>
 							<td class="align-center">Activity</td>
@@ -257,6 +258,7 @@
 												property="taskName" /></a></td>
 									<td><bean:write name="reg" property="estStartDateInString" /></td>
 									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="taskProgress" /></td>
 									<td><bean:write name="reg" property="taskStatusName" /></td>
 									<td align="center"><a href="#"

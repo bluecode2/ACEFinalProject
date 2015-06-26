@@ -393,6 +393,7 @@
 							<td>Task Name</td>
 							<td>Assign To</td>
 							<td align="center" width="200px">Estimate Date</td>
+							<td align="center" width="200px">Estimate Main Days</td>
 							<td align="center" width="200px">Actual Date</td>
 
 							<td align="center">Status</td>
@@ -419,6 +420,7 @@
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /> <logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
 									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td align="center"><bean:write name="reg" property="estMainDays" /></td>
 									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
 									<td align="center"><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" styleId="hdnTaskStat"/> 
