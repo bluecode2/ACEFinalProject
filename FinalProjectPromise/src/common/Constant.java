@@ -71,6 +71,7 @@ public class Constant {
 		public static final String ASSIGN_TASK_LIST= "TR0203" ; 
 		public static final String ASSIGN_TASK_ENTRY= "TR0203-E"; 
 		public static final String CURRENT_TASK_LIST= "TR0204"; 
+
 		
 		public static final String NOTIFICATIONS= "NT01";
 		
@@ -88,8 +89,10 @@ public class Constant {
 		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
 		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
 		public static final String TASK_STATUS_DECLINE = "TA_STAT_06";
+		public static final String TASK_STATUS_APPROVE = "TA_STAT_07";
 		public static final String TASK_STATUS_FORCE = "TA_STAT_97";
 		public static final String TASK_STATUS_CANCELLED = "TA_STAT_99";
+
 	}
 	
 	public static class GeneralParameter{
