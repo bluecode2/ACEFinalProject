@@ -93,7 +93,7 @@
 	</select>
 	
 	<select id="getNewProjectId" resultClass="java.lang.Integer">
-		SELECT MAX(PROJECT_ID)+1 FROM VPROJECT
+		SELECT NVL(MAX(PROJECT_ID)+1,1) FROM VPROJECT
 	</select>
 	
 	<insert id="insertProject" parameterClass="project.ProjectBean">
