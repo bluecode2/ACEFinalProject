@@ -58,7 +58,7 @@
 		FROM notifications
 	</select>
 	
-	<insert id="insertNotification" parameterClass="java.util.Map">
+	<insert id="insertNotification" parameterClass="notification.NotificationBean">
 		INSERT INTo notifications
 		(notification_id, employee_id, notification_desc, notification_date, is_read, notification_url, session_parameter)
 		VALUES

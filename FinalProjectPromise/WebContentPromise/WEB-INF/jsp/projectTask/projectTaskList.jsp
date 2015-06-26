@@ -272,8 +272,8 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Task Name</td>
-							<td>Assign To</td>
+							<td align="center">Task Name</td>
+							<td align="center">Assign To</td>
 							<td align="center" width="200px">Estimate Date</td>
 							<td align="center" width="200px">Estimate Main Days</td>
 							<td align="center" width="200px">Actual Date</td>
@@ -320,7 +320,7 @@
 						</logic:notEmpty>
 						<logic:empty name="projectTaskForm" property="arrList">
 							<tr>
-								<td colspan="7" align="center" style="padding: 10px">No
+								<td colspan="8" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

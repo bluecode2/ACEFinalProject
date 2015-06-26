@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import oracle.jdbc.Const;
+import project.ProjectBean;
+import project.ProjectManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+
 import common.Constant;
 
 public class NotificationManager {
@@ -136,6 +139,22 @@ public class NotificationManager {
 		}
 		
 		return flag;
+	}
+	
+	public boolean createNotificationProjectManager(Integer employeeId,  Integer projectId){
+		ProjectManager projMan = new ProjectManager();
+		ProjectBean projBean =  projMan.getProjectByID(projectId);
+		
+		String desc = "You has been assigned as a Project Manager in a new project : " + projBean.getProjectName();
+		
+		NotificationBean bean = new NotificationBean();
+		
+		bean.setEmployeeId(employeeId);
+		bean.setNotificationUrl("project.do");
+		bean.setNotificationDesc(desc);
+		
+		insertNotification(bean);
+		return true;
 	}
 
 }

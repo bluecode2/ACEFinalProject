@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -149,8 +151,11 @@ public class ProjectHandler extends Action{
 		else if ("save".equalsIgnoreCase(pForm.getTask())){
 			String isProc = pForm.getIsProc();
 			if (isProc.equalsIgnoreCase("add")) {
+				pForm.getpBean().setCreatedBy(us.getUserId());
 				pMan.insertProject(pForm.getpBean());
 				pMemberMan.insertProjectMember(pRoleMan.getProjectRoleIdByCode(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+				NotificationManager nMan = new NotificationManager();
+				nMan.createNotificationProjectManager(pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){
 				pMan.updateProject(pForm.getpBean());
