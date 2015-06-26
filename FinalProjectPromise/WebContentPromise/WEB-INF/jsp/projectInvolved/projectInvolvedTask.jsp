@@ -65,8 +65,15 @@
 					$('#txtValueTaskDescName').val(taskName);
 					$('#txtValueTaskDescDesc').val(taskDesc);
 					$('#showDesc').modal();
-					
 				});
+				$('.lnkRemarks').on('click',function(){
+					var taskName = $(this).closest('tr').find('.hdTaskName').val();
+					var taskRemakrs = $(this).closest('tr').find('.hdTaskRemakrs').val();
+					$('#txtValueTaskNameRemarks').val(taskName);
+					$('#txtValueTaskRemarksRemarks').val(taskRemakrs);
+					$('#showRemarks').modal();
+				});
+				
 				
 				//LINK MANAGE ACTIVITY
 				$('.lnkMngActivity').each(function (){
@@ -403,7 +410,7 @@
 									<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
 									<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
 									<a href="#" class="text-info linkDesc">
-									<html:hidden property="remarks" name="reg" styleClass="hdRemarks" />
+									<html:hidden property="remarks" name="reg" styleClass="hdTaskRemakrs" />
 									<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/> 
 										<bean:write name="reg" property="taskName" />
 									</a>
@@ -531,7 +538,7 @@
 		</div>
 		<!-- /.modal -->
 		
-		<!-- popup to show Remarks (unused) -->
+		<!-- popup to show Remark -->
 		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -541,7 +548,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Task Description</h4>
+						<h4 class="modal-title">Task Remarks</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -554,9 +561,9 @@
 
 								</tr>
 								<tr>
-									<td style="padding-left: 15px">Task Desc</td>
+									<td style="padding-left: 15px" valign="top">Task Remarks</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
-											class="form-control" id="txtRemarks"
+											class="form-control" id="txtValueTaskRemarksRemarks"
 											disabled="disabled"></textarea>
 										</button></td>
 								</tr>
