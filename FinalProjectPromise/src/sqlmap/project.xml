@@ -155,7 +155,7 @@
                 TO_CHAR(P.ACT_END_DATE,'yyyy-MM-dd') AS actEndDateInString,
                 P.EST_MAIN_DAYS AS estMainDays,
                 P.ACT_MAIN_DAYS AS actMainDays,
-                TASK_MAIN_DAYS AS taskMainDays,
+                p.TASK_MAIN_DAYS AS taskMainDays,
                 P.PROJECT_STATUS AS projectStatus,
                 P.PROJECT_PROGRESS AS projectProgress,
                 P.REMARKS AS remarks,
