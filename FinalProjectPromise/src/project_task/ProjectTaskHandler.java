@@ -37,10 +37,10 @@ public class ProjectTaskHandler extends Action {
 		ProjectManager projManager = new ProjectManager();
 		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
 		ActivityManager actMan = new ActivityManager();
-		
+		System.out.println(session.getAttribute("projectId"));
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
-				Integer projectId = (Integer) session.getAttribute("projectId");
+				Integer projectId = Integer.valueOf(session.getAttribute("projectId").toString());
 				tsForm.setPrjBean(projManager.getProjectByID(projectId));
 				tsForm.setProjectId(projectId);
 				session.setAttribute("projectId", projectId);

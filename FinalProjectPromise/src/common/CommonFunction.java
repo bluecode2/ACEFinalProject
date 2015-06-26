@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import notification.NotificationManager;
 import user.UserBean;
 import user_access.UserRoleMenuBean;
 import user_access.UserRoleMenuManager;
@@ -113,6 +114,11 @@ public class CommonFunction {
 		request.setAttribute("userName", user.getEmployeeName());
 		request.setAttribute("isActiveDirectory", user.getIsActiveDirectory());
 		request.setAttribute("userRoleName", user.getUserRoleName());
+
+		// Generate Unread Notification
+		NotificationManager nMan = new NotificationManager();
+		request.setAttribute("unreadNotification",
+				nMan.getListUnreadNotificationByEmployee(user.getEmployeeId()));
 	}
 
 	public static void initializeHeader(String menuCode, UserBean user,
@@ -164,27 +170,31 @@ public class CommonFunction {
 				.contains("A"));
 		request.setAttribute("btnDeclineVisible", roleMenuBean.getMenuCrud()
 				.contains("D"));
-		
-		
-		
+
+		// Generate Unread Notification
+		NotificationManager nMan = new NotificationManager();
+		request.setAttribute("unreadNotification",
+				nMan.getListUnreadNotificationByEmployee(user.getEmployeeId()));
+
+		// Generate BreadCrumb
 		ArrayList<MenuBean> arrBreadCrumb = new ArrayList<MenuBean>();
 		arrBreadCrumb.add(menu);
 		generateBreadCrumb(menu.getParentId(), arrBreadCrumb);
-		
+
 		request.setAttribute("breadCrumb", arrBreadCrumb);
 		request.setAttribute("currMenuId", menu.getMenuId());
 	}
-	
-	
-	private static void generateBreadCrumb(Integer parentId, ArrayList<MenuBean> arrBreadCrumb){
-		if(parentId == null)return;
+
+	private static void generateBreadCrumb(Integer parentId,
+			ArrayList<MenuBean> arrBreadCrumb) {
+		if (parentId == null)
+			return;
 		MenuManager menuMan = new MenuManager();
 		MenuBean parent = menuMan.getMenuByMenuId(parentId);
-		if(parent != null){
+		if (parent != null) {
 			arrBreadCrumb.add(0, parent);
-			generateBreadCrumb(parent.getParentId(),arrBreadCrumb);
-		}
-		else
+			generateBreadCrumb(parent.getParentId(), arrBreadCrumb);
+		} else
 			return;
 	}
 }

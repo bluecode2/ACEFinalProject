@@ -47,6 +47,7 @@
 								.on(
 										'click',
 										function() {
+											showLoading();
 											var userRoleId = $(this).closest(
 													'tr').find('td').eq(0)
 													.html();
@@ -62,106 +63,185 @@
 											$('#lblUserRoleName').val(
 													userRoleName);
 
-											$.ajax({
-												type : "POST",
-												url : "userRole.do",
-												data : "task=openMenuAccess&selectedId="
-														+ userRoleId,
-												success : function(
-														response) {
-													var strMenuId = response
-															.split("$")[0];
-													var strAllowAdd = response
-															.split("$")[1];
-													var strAllowBack = response
-															.split("$")[2];
-													var strAllowSave = response
-															.split("$")[3];
-													var strAllowApprove = response
-															.split("$")[4];
-													var strAllowDecline = response
-															.split("$")[5];
+											$
+													.ajax({
+														type : "POST",
+														url : "userRole.do",
+														data : "task=openMenuAccess&selectedId="
+																+ userRoleId,
+														success : function(
+																response) {
+															var strMenuId = response
+																	.split("$")[0];
+															var strAllowAdd = response
+																	.split("$")[1];
+															var strAllowBack = response
+																	.split("$")[2];
+															var strAllowSave = response
+																	.split("$")[3];
+															var strAllowApprove = response
+																	.split("$")[4];
+															var strAllowDecline = response
+																	.split("$")[5];
 
-													
-													
-													var listMenuId = strMenuId
-															.split("#");
-													var listAllowAdd = strAllowAdd.split("#");
-													var listAllowBack = strAllowBack.split("#");
-													var listAllowSave = strAllowSave.split("#");
-													var listAllowApprove = strAllowApprove.split("#");
-													var listAllowDecline = strAllowDecline.split("#");
-													
-													$('.chkSelectedMenu').each(
-														function() {
-															
-															var menuId = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(0)
-																	.html();
-															var chkAllowAdd = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(4)
-																	.find('.chkIsAllowAdd');
-															var chkAllowBack = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(5)
-																	.find('.chkIsAllowBack');
-															var chkAllowSave = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(6)
-																	.find('.chkIsAllowSave');
-															var chkAllowApprove = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(7)
-																	.find('.chkIsAllowApprove');
-															var chkAllowDecline = $(this)
-																	.closest('tr')
-																	.find('td')
-																	.eq(8)
-																	.find('.chkIsAllowDecline');
-															
-															var index = $.inArray(menuId,listMenuId);
-															
-															if(index > -1){
-																$(this).prop('checked', true);
-																chkAllowAdd.prop('checked', listAllowAdd[index] == "true");
-																chkAllowBack.prop('checked', listAllowBack[index] == "true");
-																chkAllowSave.prop('checked', listAllowSave[index] == "true");
-																chkAllowApprove.prop('checked', listAllowApprove[index] == "true");
-																chkAllowDecline.prop('checked', listAllowDecline[index] == "true");
-															}
-															else{
-																$(this).prop('checked', false);
-																chkAllowAdd.prop('checked', false);
-																chkAllowBack.prop('checked', false);
-																chkAllowSave.prop('checked', false);
-																chkAllowApprove.prop('checked', false);
-																chkAllowDecline.prop('checked', false);
-															}
-																
-														});
-													
-													$('#searchDeptHead').modal();
+															var listMenuId = strMenuId
+																	.split("#");
+															var listAllowAdd = strAllowAdd
+																	.split("#");
+															var listAllowBack = strAllowBack
+																	.split("#");
+															var listAllowSave = strAllowSave
+																	.split("#");
+															var listAllowApprove = strAllowApprove
+																	.split("#");
+															var listAllowDecline = strAllowDecline
+																	.split("#");
 
-												},
-												error : function(e) {
-													alert("Error: " + e);
-												}
-											});
+															$(
+																	'.chkSelectedMenu')
+																	.each(
+																			function() {
 
-									
-								});
+																				var menuId = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								0)
+																						.html();
+																				var chkAllowAdd = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								4)
+																						.find(
+																								'.chkIsAllowAdd');
+																				var chkAllowBack = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								5)
+																						.find(
+																								'.chkIsAllowBack');
+																				var chkAllowSave = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								6)
+																						.find(
+																								'.chkIsAllowSave');
+																				var chkAllowApprove = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								7)
+																						.find(
+																								'.chkIsAllowApprove');
+																				var chkAllowDecline = $(
+																						this)
+																						.closest(
+																								'tr')
+																						.find(
+																								'td')
+																						.eq(
+																								8)
+																						.find(
+																								'.chkIsAllowDecline');
+
+																				var index = $
+																						.inArray(
+																								menuId,
+																								listMenuId);
+
+																				if (index > -1) {
+																					$(
+																							this)
+																							.prop(
+																									'checked',
+																									true);
+																					chkAllowAdd
+																							.prop(
+																									'checked',
+																									listAllowAdd[index] == "true");
+																					chkAllowBack
+																							.prop(
+																									'checked',
+																									listAllowBack[index] == "true");
+																					chkAllowSave
+																							.prop(
+																									'checked',
+																									listAllowSave[index] == "true");
+																					chkAllowApprove
+																							.prop(
+																									'checked',
+																									listAllowApprove[index] == "true");
+																					chkAllowDecline
+																							.prop(
+																									'checked',
+																									listAllowDecline[index] == "true");
+																				} else {
+																					$(
+																							this)
+																							.prop(
+																									'checked',
+																									false);
+																					chkAllowAdd
+																							.prop(
+																									'checked',
+																									false);
+																					chkAllowBack
+																							.prop(
+																									'checked',
+																									false);
+																					chkAllowSave
+																							.prop(
+																									'checked',
+																									false);
+																					chkAllowApprove
+																							.prop(
+																									'checked',
+																									false);
+																					chkAllowDecline
+																							.prop(
+																									'checked',
+																									false);
+																				}
+
+																			});
+
+															$('#searchDeptHead')
+																	.modal();
+															hideLoading();
+														},
+														error : function(e) {
+															alert("Error: " + e);
+															hideLoading();
+														}
+
+													});
+
+											hideLoading();
+										});
 
 						$("#btnSaveUserRoleMenu")
 								.on(
 										'click',
 										function() {
+											showLoading();
 											var listMenuId = "";
 											var listAllowAdd = "";
 											var listAllowBack = "";
@@ -274,12 +354,17 @@
 																+ listAllowDecline,
 														success : function(
 																response) {
-															$('#searchDeptHead').modal('hide');
+															$('#searchDeptHead')
+																	.modal(
+																			'hide');
+															hideLoading();
 														},
 														error : function(e) {
 															alert("Error: " + e);
+															hideLoading();
 														}
 													});
+											
 										});
 					});
 </script>
@@ -460,8 +545,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
-									id="btnSaveUserRoleMenu">Save
-									changes</button>
+									id="btnSaveUserRoleMenu">Save changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 

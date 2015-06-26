@@ -8,7 +8,7 @@ import common.Constant;
 public class NotificationBean {
 	private Integer notificationId;
 	private Integer employeeId;
-	private Integer notificationDesc;
+	private String notificationDesc;
 	private Date notificationDate;
 	private Integer isRead;
 	private Date readDate;
@@ -36,11 +36,11 @@ public class NotificationBean {
 		this.employeeId = employeeId;
 	}
 
-	public Integer getNotificationDesc() {
+	public String getNotificationDesc() {
 		return notificationDesc;
 	}
 
-	public void setNotificationDesc(Integer notificationDesc) {
+	public void setNotificationDesc(String notificationDesc) {
 		this.notificationDesc = notificationDesc;
 	}
 

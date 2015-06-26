@@ -15,6 +15,7 @@ public class Constant {
 	}
 	
 	public static final Integer pageSize = 10;
+	public static final Integer notificationSize = 5;
 	public static final Integer pageNavigatorSize = 5;
 	
 	public static class MenuCode{
@@ -69,6 +70,8 @@ public class Constant {
 		public static final String ASSIGN_TASK_ENTRY= "TR0203-E"; 
 		public static final String CURRENT_TASK_LIST= "TR0204"; 
 		
+		public static final String NOTIFICATIONS= "NT01";
+		
 	}
 	
 	public static class GeneralCode{
@@ -78,6 +81,7 @@ public class Constant {
 		public static final String PROJECT_STATUS_ONGOING = "PR_STAT_02";
 		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
 		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
+		
 		public static final String TASK_STATUS_ONGOING = "TA_STAT_03";
 		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
 		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
@@ -88,5 +92,20 @@ public class Constant {
 	public static class GeneralParameter{
 		public static final String AD_ADMIN_USERNAME = "ADAdminUser";
 		public static final String AD_ADMIN_PASSWORD = "ADAdminPass";
+	}
+	
+//	public static class NotificationType{
+//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
+//		public static final String ASSIGNED_AS_PROJ_MEMBER = "NOTIF-02";
+//		public static final String ASSIGNED_PROJECT_TASK = "NOTIF-03";
+//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-04";
+//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
+//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
+//	}
+	
+	public enum NotificationType{
+		ASSIGNED_AS_PROJ_MANAGER,
+		ASSIGNED_AS_PROJ_MEMBER,
+		
 	}
 }

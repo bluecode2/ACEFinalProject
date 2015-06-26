@@ -23,6 +23,11 @@
 <script>
 	$(document).ready(function() {
 		$.material.init();
+		
+		$('.notificationNode').on('click',function(){
+			var notificationId = $(this).closest('li').find('.hdnNotifId').val();
+			post('notification.do',{task: 'select', selectedId: notificationId});
+		});
 	});
 
 	
@@ -110,8 +115,22 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="home.do" title="Home"><span
 							class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-					<li><a href="#" title="Notification"><span
-							class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" 
+						data-toggle="dropdown" role="button" aria-expanded="false" title="Notification"><span
+							class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+						<ul class="dropdown-menu">
+							<logic:notEmpty name="unreadNotification">
+								<logic:iterate id="notif" name="unreadNotification">
+									<li><html:hidden styleClass="hdnNotifId" name="notif" property="notificationId" /><a href="#" class="notificationNode"><bean:write name="notif" property="notificationDesc" /></a></li>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="unreadNotification">
+								<li><span>No Unread Notification</span></li>
+							</logic:empty>
+							<li role="separator" class="divider"></li>
+							<li style="text-align: center"><a href="notification.do" class="text-info">See All</a></li>
+						</ul>
+					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false"> <span
 							class="glyphicon glyphicon-user" aria-hidden="true"
