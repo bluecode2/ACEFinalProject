@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import proposed_task.ProposedTaskBean;
 import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -53,8 +54,46 @@ public class ApprovePropProjManager {
 			throws SQLException {
 		List<EmployeeBean> empBean = this.ibatis.queryForList(
 				"approveTask.getEmpList", empId);
-
 		return empBean;
 	}
 	
+	public ProposeProjectTaskBean getApproveTaskById(Integer id) throws SQLException {
+		ProposeProjectTaskBean bean = (ProposeProjectTaskBean) this.ibatis.queryForObject(
+				"appPropProjTask.getPropTaskByPropTaskId", id);
+		return bean;
+	}
+	
+	public void createNewAssignTaskMap(ProposeProjectTaskBean bean) throws SQLException {
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.insert("appPropProjTask.insertToAssignTaskMap", bean);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				ibatis.endTransaction();
+		}
+	}
+	
+	public void approveTask(ProposeProjectTaskBean pPropProjTask) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("appPropProjTask.approveTask", pPropProjTask);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.ibatis.endTransaction();
+		}
+	}
+
+	public void declineTask(ProposeProjectTaskBean bean) throws SQLException {
+		try {
+			ibatis.startTransaction();
+			ibatis.update("appPropProjTask.declineTask", bean);
+			ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+				ibatis.endTransaction();
+		}
+	}
 }

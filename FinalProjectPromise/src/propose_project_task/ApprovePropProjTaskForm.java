@@ -26,7 +26,14 @@ public class ApprovePropProjTaskForm extends ActionForm{
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	private String remarks;
 	
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 	public String getTask() {
 		return task;
 	}

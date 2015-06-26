@@ -126,6 +126,7 @@
 					class="tableContent">
 					<thead>
 						<tr class="panel panel-info">
+							<td>Project Name</td>
 							<td>Task Name</td>
 							<td>Estimate Start Date</td>
 							<td>Estimate End Date</td>
@@ -140,6 +141,7 @@
 							<logic:iterate id="reg" name="approvePropProjForm" property="arrList">
 								<tr>
 									<td style="display: none"><bean:write name="reg" property="propTaskId" /></td>
+									<td><bean:write name="reg" property="projectName"/></td>
 									<td><a href="#" class="text-info" 
 									onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');" data-target="taskDesc">
 									<bean:write name="reg" property="propTaskName" /></a>
@@ -152,8 +154,7 @@
 									<td align="center"><a class="text-success btnApprove" href="#"
 										title="Approve"><span class="glyphicon glyphicon-ok"
 											aria-hidden="true"></span></a> &nbsp; <a href="#"
-										class="text-danger btnDecline"
-										onclick="actionForm('decline','<bean:write name="reg" property="propTaskId" />');"
+										 data-target="#setRemarks" data-toggle="modal"
 										title="Decline"><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a></td>
 								</tr>
@@ -161,7 +162,7 @@
 						</logic:notEmpty>
 						<logic:empty name="approvePropProjForm" property="arrList">
 							<tr>
-								<td colspan="7" align="center" style="padding: 10px">No
+								<td colspan="8" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
@@ -239,8 +240,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<logic:notEmpty name="approveTaskForm" property="eBean">
-										<logic:iterate id="emp" name="approveTaskForm" property="eBean">
+									<logic:notEmpty name="approvePropProjForm" property="eBean">
+										<logic:iterate id="emp" name="approvePropProjForm" property="eBean">
 											<tr data-dismiss="modal" class="rowSearch">
 												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
@@ -250,7 +251,7 @@
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
-									<logic:empty name="approveTaskForm" property="eBean">
+									<logic:empty name="approvePropProjForm" property="eBean">
 										<tr>
 											<td colspan="3" align="center">No Data Found</td>
 										</tr>
@@ -265,6 +266,50 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		<!-- untuk set Remarks decline  -->
+		<div class="modal fade" id="setRemarks" tabindex="-1" role="dialog"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Remarks Decline</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<table width="100%">
+							<tr>
+								<td>Remarks :
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<html:textarea property="remarks" name="approvePropProjForm" style="width: 100%"></html:textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+							</tr>
+							<tr align="right">
+								<td>
+								<button onclick="actionForm('decline','<bean:write name="reg" property="propTaskId" />');" value="Submit">Submit</button>
+								&nbsp;
+								<button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
 		
 		<html:hidden name="approvePropProjForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
