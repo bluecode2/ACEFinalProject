@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proposed Task Entry</title>
+<title>Proposed Project Task Entry</title>
 
 <link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 
@@ -33,7 +33,7 @@
 </script>
 </head>
 <body>
-	<html:form action="/proposedTask" method="post">
+	<html:form action="/propProjTask" method="post">
 		<html:hidden name="proposeProjectTaskForm" property="task" />
 		<html:hidden name="proposeProjectTaskForm" property="isAdd" />
 		<html:hidden name="proposeProjectTaskForm" property="bean.propTaskId" />
@@ -100,16 +100,7 @@
 								name="proposeProjectTaskForm" property="bean.estEndDateInString" style="width: 150px"></html:text>
 						</td>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Is Generated</td> -->
-<!-- 						<td> -->
-<%-- 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="1">Yes</html:radio> --%>
-<!-- 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -->
-<%-- 							<html:radio name="generalHolidayForm" property="genHolidayBean.isGenerated" value="0">No</html:radio> --%>
-<!-- 						</td> -->
-<!-- 					</tr> -->
 				</table>
-				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>
 			</div>
 
 		</div>

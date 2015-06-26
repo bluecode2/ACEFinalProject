@@ -21,6 +21,7 @@ public class ProjectBean {
 	private Date 		actEndDate;
 	private Integer 	estMainDays;
 	private Integer 	actMainDays;
+	private Integer 	taskMainDays;
 	private String 		projectStatus;
 	private Float 		projectProgress;
 	private String 		remarks;
@@ -364,5 +365,13 @@ public class ProjectBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+
+	public Integer getTaskMainDays() {
+		return taskMainDays;
+	}
+
+	public void setTaskMainDays(Integer taskMainDays) {
+		this.taskMainDays = taskMainDays;
 	}
 }
