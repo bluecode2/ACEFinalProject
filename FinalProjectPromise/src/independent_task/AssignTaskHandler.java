@@ -52,7 +52,6 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsMan.createNewAssignTask(tsForm.getTkBean());
 			} else {
-				System.out.println("masuk "+ tsForm.getTkBean().getTaskId());
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
 			}
@@ -101,7 +100,7 @@ public class AssignTaskHandler extends Action {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + actBean.getActivityDesc() + "</td>");
 				if (actBean.getIsCompleted() == 1) {
-					out.println("<td> <input type=\"checkbox\" checked disabled> </td>");					
+					out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");					
 				}
 				else {
 					out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");		

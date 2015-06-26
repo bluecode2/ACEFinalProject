@@ -35,7 +35,7 @@ public class ActivityHandler extends Action {
 					out.println("<tr>");
 					out.println("<td>" + actBean.getActivityDesc() + "</td>");
 					if (actBean.getIsCompleted() == 1) {
-						out.println("<td> <input type=\"checkbox\" checked disabled> </td>");
+						out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");
 					} else {
 						out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
 					}
