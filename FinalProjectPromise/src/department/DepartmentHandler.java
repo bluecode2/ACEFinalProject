@@ -64,15 +64,15 @@ public class DepartmentHandler extends Action {
 
 		else if (dForm.getTask().equals("save")) {
 			Boolean isAdd = dForm.getIsAdd();
-
-			if (dForm.getSelectedDept().getDeptHeadId() == 0)
-				dForm.getSelectedDept().setDeptHeadId(null);
-
+			
 			if (isAdd) {
+				System.out.println("MASUK ADD");
 				dForm.getSelectedDept().setCreatedBy(us.getUserId());
 				dMan.insertDepartment(dForm.getSelectedDept());
 			} else {
-				System.out.println(dForm.getSelectedDept().getDeptId());
+				if (dForm.getSelectedDept().getDeptHeadId() == 0)
+					dForm.getSelectedDept().setDeptHeadId(null);
+				
 				dForm.getSelectedDept().setUpdatedBy(us.getUserId());
 				dMan.updateDepartment(dForm.getSelectedDept());
 			}

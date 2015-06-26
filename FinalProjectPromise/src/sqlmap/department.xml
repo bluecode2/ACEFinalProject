@@ -98,7 +98,7 @@
 		DEPARTMENT
 		(dept_id, dept_head_id, created_by, updated_by, dept_code,
 		dept_name, create_date, update_date,is_deleted)
-		VALUES (#deptId#, #deptHeadId#,
+		VALUES (#deptId#, NULL,
 		#createdBy#, NULL, #deptCode#, #deptName#, SYSDATE,
 		NULL, 0)
 	</insert>

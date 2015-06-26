@@ -28,7 +28,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete Department " + nama)) {
+			if (confirm("Are you sure want to delete Department " + nama + "?")) {
 				document.forms[0].submit();
 			}
 		} else {
