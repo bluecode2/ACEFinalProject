@@ -105,7 +105,7 @@
 								property="tkBean.taskName"></html:text></td>
 					</tr>
 					<tr>
-						<td class="tdLabel" align="right"><label>Task DESC</label></td>
+						<td class="tdLabel" align="right"><label>Task Desc</label></td>
 						<td><html:textarea property="tkBean.taskDesc"
 								name="projectTaskForm" styleId="txtTaskDesc"
 								styleClass="form-control"></html:textarea></td>
