@@ -181,6 +181,7 @@
 							<td>Estimate Date</td>
 							<td>Estimate Main Days</td>
 							<td>Actual Date</td>
+							<td>Actual Main Days</td>
 							<td>Project Manager</td>
 							<td>Department Name</td>
 							<td>Progress</td>
@@ -204,6 +205,7 @@
 									<td><bean:write name="proj" property="estMainDays" /></td>
 									<td><bean:write name="proj" property="actStartDateInString" /> to 
 										<bean:write name="proj" property="actEndDateInString" /></td>
+									<td><bean:write name="proj" property="actMainDays" /></td>
 									<td><bean:write name="proj" property="employeeName" /></td>
 									<td><bean:write name="proj" property="deptName" /></td>
 									<td><bean:write name="proj" property="statusCaption" /> : 

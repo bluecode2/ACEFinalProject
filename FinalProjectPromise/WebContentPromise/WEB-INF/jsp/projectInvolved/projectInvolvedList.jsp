@@ -98,7 +98,9 @@
 							<td class="align-center">Project Code</td>
 							<td class="align-center">Project Name</td>
 							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Actual Date</td>
+							<td class="align-center">Actual Main Days</td>
 							<td class="align-center">Project Manager</td>
 							<td class="align-center">Department Name</td>
 							<td class="align-center">Progress</td>
@@ -128,9 +130,11 @@
 									<td><bean:write name="proj"
 											property="estStartDateInString" /> to <bean:write
 											name="proj" property="estEndDateInString" /></td>
+									<td><bean:write name="proj" property="estMainDays" /></td>
 									<td><bean:write name="proj"
 											property="actStartDateInString" /> to <bean:write
 											name="proj" property="actEndDateInString" /></td>
+									<td><bean:write name="proj" property="actMainDays" /></td>
 									<td><bean:write name="proj" property="employeeName" /></td>
 									<td><bean:write name="proj" property="deptName" /></td>
 									<td><bean:write name="proj" property="statusCaption" /> :

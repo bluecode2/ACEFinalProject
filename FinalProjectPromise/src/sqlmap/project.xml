@@ -132,7 +132,7 @@
 			PROJECT_PROGRESS = #projectProgress#,
 			act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 			act_end_date = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
-			act_main_days = #actMainDays#
+			act_main_days = fGetActualProjectMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),#projectId#)
 			WHERE PROJECT_ID = 	#projectId#		
 	</update>
 
