@@ -4,7 +4,7 @@
 <sqlMap namespace="appPropProjTask">
 	
 	<select id="getListToApp" parameterClass="java.util.Map" 
-		resultClass="proposed_task.ProposedTaskBean">
+		resultClass="propose_project_task.ProposeProjectTaskBean">
 		SELECT * FROM ( 
 		  SELECT protask.*, ROWNUM rnum from ( 
 		  SELECT 
@@ -28,7 +28,7 @@
 		  PROJECT_ID AS projectId,
 		  PROJECT_NAME AS projectName
 		  FROM VPROPOSED_TASK
-		WHERE proposal_status = 'TA_STAT_01' AND proposed_to = #empId#
+		WHERE proposal_status = 'TA_STAT_01' AND proposed_to = #empId# AND PROJECT_ID IS NOT NULL
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="propTaskName">
 				LOWER(proposed_task_name) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -47,7 +47,7 @@
 	<select id="countListToApp" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM proposed_task
-		WHERE proposal_status = 'TA_STAT_01' AND proposed_to = #userId#
+		WHERE proposal_status = 'TA_STAT_01' AND proposed_to = #empId# AND PROJECT_ID IS NOT NULL
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="propTaskId">
 				LOWER(proposed_task_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -60,5 +60,60 @@
 			</isEqual>
 		</dynamic>
 	</select>
+	
+		<select id="getPropTaskByPropTaskId" parameterClass="java.lang.Integer"
+		resultClass="propose_project_task.ProposeProjectTaskBean">
+		SELECT 
+		  proposed_task_id  as propTaskId,
+		  proposed_task_name  as propTaskName,
+		  proposed_task_desc  as propTaskDesc,
+		  TO_CHAR(est_start_date,'yyyy-MM-dd') as estStartDateInString,
+		  TO_CHAR(est_end_date,'yyyy-MM-dd') as estEndDateInString,
+		  proposed_by   as propBy,
+		  proposed_by_name as propByName,
+		  proposed_to   as propTo,
+		  proposed_to_name as propToName,
+		  created_by    as createdBy,
+		  updated_by    as updatedBy,
+		  create_date   as createDate,
+		  update_date   as updateDate,
+		  task_id     as taskId,
+		  proposal_status  as propStatus,
+		  proposal_status_name as propStatusName,
+		  est_main_days 		as estMainDays,
+		  PROJECT_ID AS projectId,
+		  PROJECT_NAME AS projectName
+		FROM VPROPOSED_TASK
+		WHERE proposed_task_id = #propTaskId#
+	</select>
+	
+	<insert id="insertToAssignTaskMap" parameterClass="propose_project_task.ProposeProjectTaskBean">
+		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
+		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status, project_id) 
+		values( #taskId#, #propTaskName#, #propTaskDesc#, #propTo#,#propBy# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'TA_STAT_02', #projectId# )
+	</insert>
+	
+	<update id="approveTask" parameterClass="propose_project_task.ProposeProjectTaskBean">
+ 		UPDATE
+ 		PROPOSED_TASK 
+ 		SET
+ 		UPDATE_DATE = SYSDATE,
+ 		UPDATED_BY = #updatedBy#,
+ 		TASK_ID = #taskId#,
+ 		PROPOSAL_STATUS = 'TA_STAT_07'
+ 		WHERE proposed_task_id=#propTaskId#
+ 	</update>
+ 	
+ 	 <update id="declineTask" parameterClass="propose_project_task.ProposeProjectTaskBean">
+ 		UPDATE 
+ 		PROPOSED_TASK 
+ 		SET
+ 		UPDATE_DATE = SYSDATE,
+ 		UPDATED_BY = #updatedBy#,
+ 		PROPOSAL_STATUS = 'TA_STAT_98',
+ 		remarks = #remakrs#
+ 		WHERE proposed_task_id=#propTaskId#
+ 	</update>
 	
 </sqlMap>

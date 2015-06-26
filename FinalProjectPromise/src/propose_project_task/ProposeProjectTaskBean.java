@@ -28,8 +28,27 @@ public class ProposeProjectTaskBean {
 	private String propStatusName;
 	private Integer projectId;
 	private String projectName;
+	private String remakrs;
+	private Integer estMainDays;
 	
 	
+	
+	public Integer getEstMainDays() {
+		return estMainDays;
+	}
+
+	public void setEstMainDays(Integer estMainDays) {
+		this.estMainDays = estMainDays;
+	}
+
+	public String getRemakrs() {
+		return remakrs;
+	}
+
+	public void setRemakrs(String remakrs) {
+		this.remakrs = remakrs;
+	}
+
 	public Integer getProjectId() {
 		return projectId;
 	}
