@@ -124,6 +124,7 @@
 	<select id="countPersonalHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM PERSONAL_HOLIDAY WHERE IS_DELETED=0
+		AND HOLIDAY_DATE >= SYSDATE
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayId">
 				LOWER(HOLIDAY_ID) LIKE LOWER( '%' || #searchValue# || '%' )

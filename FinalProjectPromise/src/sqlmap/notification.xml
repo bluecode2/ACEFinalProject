@@ -1,0 +1,63 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="notification">
+	<select id="getAllNotificationByEmployee" resultClass="notification.NotificationBean" parameterClass="java.util.Map">
+		SELECT
+			notification_id as notificationId,
+			employee_id as employeeId,
+			notification_desc as notificationDesc,
+			TO_CHAR(notification_date,'yyyy-MM-dd') as notificationDateInString,
+			is_read as isRead,
+			TO_CHAR(read_date,'yyyy-MM-dd') as readDateInString,
+			notification_url as notificationUrl,
+			session_parameter as sessionParameter
+		FROM notifications
+		WHERE 1=1
+		<dynamic prepend="AND">
+			<isNotEmpty property="isRead">
+				is_read = #isRead#
+			</isNotEmpty>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isNotEmpty property="employeeId">
+				employee_id = #employeeId#
+			</isNotEmpty>
+		</dynamic>
+		
+	</select>
+	
+	<select id="getNotificationById" resultClass="notification.NotificationBean" parameterClass="java.lang.Integer">
+		SELECT
+			notification_id as notificationId,
+			employee_id as employeeId,
+			notification_desc as notificationDesc,
+			TO_CHAR(notification_date,'yyyy-MM-dd') as notificationDateInString,
+			is_read as isRead,
+			TO_CHAR(read_date,'yyyy-MM-dd') as readDateInString,
+			notification_url as notificationUrl,
+			session_parameter as sessionParameter
+		FROM notifications
+		WHERE notification_id = #notificationId#
+	</select>
+	
+	<select id="getNotificationNewId" resultClass="java.lang.Integer">
+		SELECT
+			NVL(MAX(notification_id)+1,1)
+		FROM notifications
+	</select>
+	
+	<insert id="insertNotification" parameterClass="java.util.Map">
+		INSERT INTo notifications
+		(notification_id, employee_id, notification_desc, notification_date, is_read, notification_url, session_parameter)
+		VALUES
+		(#notificationId#, #employeeId#, #notificationDesc#, SYSDATE, 0, #notificationUrl#, #sessionParameter# )
+	</insert>
+	
+	<update id="updateReadNotification" parameterClass="java.lang.Integer">
+		UPDATE notifications
+		SET is_read = 1,
+		read_date = SYSDATE
+		WHERE notification_id = #notificationId#
+	</update>
+</sqlMap>

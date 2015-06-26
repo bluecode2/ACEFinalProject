@@ -122,7 +122,7 @@ function search() {
 						</td>
 					</tr>
 					<tr align="left">
-						<td>Employee Name</td>
+						<td>Project Manager</td>
 						<td style="padding-left: 15px;" colspan="3">
 								<table>
 									<tr>

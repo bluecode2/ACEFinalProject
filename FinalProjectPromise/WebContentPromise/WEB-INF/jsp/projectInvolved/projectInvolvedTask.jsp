@@ -155,7 +155,10 @@
 					registerBtnActivityEvent();
 				});
 				
-				
+				//TASK PROGRESS
+				$('#showActivity').on('hidden.bs.modal', function() {
+				     window.location.href = "projectInvolvedTask.do";
+				    });
 			});
 	
 	function changeStatusFirstBtn(taskId, taskStatus) {
