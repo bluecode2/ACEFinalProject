@@ -106,6 +106,10 @@
 				$('#showActivity').on('shown.bs.modal', function() {
 					registerBtnActivityEvent();
 				});
+				
+				$('#showActivity').on('hidden.bs.modal', function() {
+					window.location.href = "myCurrentTask.do";
+				});
 
 			});
 
