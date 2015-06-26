@@ -9,7 +9,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Proposed Task List</title>
+<script src="js/jquery.js"></script>
 <script type="text/javascript">
+	$(document).ready(
+		function() {
+		$('.lnkRemarks').on(
+				'click',
+				function() {
+					var remarks = $(this).closest('tr').find(
+							'.hdRemarks').val();
+					var taskName = $(this).closest('tr').find(
+							'.hdTaskName').val();
+					$('#txtRemarks').val(remarks);
+					$('#txtValueTaskNameRemarks').val(taskName);
+					$('#showRemarks').modal();
+		
+		});
+	});
+
 	function onBtnAddClick() {
 		var allowAdd = document.forms[0].allowAdd.value;
 		if (allowAdd == "true") {
@@ -97,17 +114,21 @@
 							<logic:iterate id="reg" name="proposedTaskForm"
 								property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="propTaskName" /></td>
+									<td>
+										<html:hidden property="remarks" name="reg" styleClass="hdRemarks"/>
+										<html:hidden property="propTaskName" name="reg" styleClass="hdTaskName"/>
+										<bean:write name="reg" property="propTaskName" />
+									</td>
 									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="propToName" /></td>
-									<td><bean:write name="reg" property="propStatusName" /></td>
-									<td align="center"><logic:equal name="reg"
-											property="propStatus" value="TA_STAT_01">
-											<a class="text-success" href="#"
-												onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
-												title="Edit"><span class="glyphicon glyphicon-pencil"
-												aria-hidden="true"></span></a> &nbsp; <a href="#"
+									<td><bean:write name="reg" property="propStatusName" /> <logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="text-info lnkRemarks">Remarks</a></logic:notEqual></td>
+									<td align="center">
+										<logic:equal name="reg" property="propStatus" value="TA_STAT_01">
+											<a class="text-success" href="#" onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');" title="Edit">
+											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+											</a> &nbsp; 
+												<a href="#"
 												class="text-danger"
 												onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
 												title="Delete"><span class="glyphicon glyphicon-trash"
@@ -129,6 +150,47 @@
 
 		</div>
 		<html:hidden name="proposedTaskForm" property="currPage" />
+		
+		<!-- popup to show Remarks -->
+		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Remarks Description</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<table width="100%">
+								<tr>
+									<td style="padding-left: 15px" valign="top">Remarks Name</td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtValueTaskNameRemarks" class="form-control"
+										disabled="disabled" /></td>
+
+								</tr>
+								<tr>
+									<td style="padding-left: 15px" valign="top">Remarks Description</td>
+									<td style="padding-left: 15px"><textarea rows="3" cols="3"
+											class="form-control" id="txtRemarks"
+											disabled="disabled"></textarea>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>

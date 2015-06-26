@@ -31,7 +31,6 @@
 	function getStyleBtn(){
 			
 				$('.firstBtn').each(function() {	
-		
 					var assgTo = $(this).closest('tr').find('.assTo').val();
 					var currUser = $('#users_empId').val();
 					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
@@ -56,33 +55,18 @@
 				});
 	}
 	
-	function getStyleBtn2() {
-		$('.secondBtn').each(function() {
-			var assgTo = $(this).closest('tr').find('.assTo').val();
-			var currUser = $('#users_empId').val();
-			var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
-			var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
-				if (assgTo == currUser){
-					if (taskStat == 'TA_STAT_03') {
-						$(this).addClass('glyphicon glyphicon-stop');
-						$(this).attr("title","Force Close");
-					}  else{
-						$(this).hide();
-					}
-				}
-		});
 
-	}
-	
 		$(document).ready(
 			function() {
 				getStyleBtn();
-				getStyleBtn2();
+		
 				
 				//link to show popup Desc
 				$('.linkDesc').on('click',function(){
+				
 					var taskName = $(this).closest('tr').find('.hdTaskName').val();
 					var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
+				
 					$('#txtValueTaskDescName').val(taskName);
 					$('#txtValueTaskDescDesc').val(taskDesc);
 					$('#showDesc').modal();
@@ -94,6 +78,7 @@
 					var taskRemarks = $(this).closest('tr').find('.hdTaskRemakrs').val();
 					$('#txtValueTaskNameRemarks').val(taskName);
 					$('#txtValueTaskRemarksRemarks').val(taskRemarks);
+				
 					$('#showRemarks').modal();
 				});
 				
@@ -143,25 +128,7 @@
 					document.forms[0].submit();
 					});
 				
-				//link to manage second button on going
-				$('.secondBtn').on('click',function(){
-					var assgTo = $(this).closest('tr').find('.assTo').val();
-					var currUser = $('#users_empId').val();
-					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
-					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
-						if (assgTo == currUser){
-							if (taskStat == 'TA_STAT_03') {
-								document.forms[0].task.value = 'forceCloseTask';
-								$('#txtAddRemarksValueTaskId').val(taskId);
-								$('#txtAddRemarksValueTaskName').val(nama);
-								$('#txtAddRemarksValueTaskStatus').val(taskStat);
-								$('#addRemarks').modal();
-								$('#addRemarks').modal();
-							}  else{
-								$(this).hide();
-							}
-						}
-				});
+	
 				
 				//LINK MANAGE ACTIVITY
 				$('.lnkMngActivity').each(function (){
@@ -240,10 +207,12 @@
 
 				$('#showActivity').on('shown.bs.modal', function() {
 					registerBtnActivityEvent();
-				});
-				
-				
+				});	
+				$('#showActivity').on('hidden.bs.modal', function() {
+				     window.location.href = "projectInvolvedTask.do";
+				    });
 			});
+
 	
 	
 	function registerBtnActivityEvent() {
@@ -482,9 +451,9 @@
 											<span class="firstBtn" aria-hidden="true" ></span>
 										</a> 
 										&nbsp; 
-										<a href="#" onclick="">
+									<!-- 	<a href="#" onclick="">
 											<span class="secondBtn" aria-hidden="true" ></span>
-										</a> 
+										</a>  -->
 									</td>
 								</tr>
 							</logic:iterate>
@@ -530,7 +499,7 @@
 									<td style="padding-left: 15px">Remarks</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="txtAddRemarksValueTaskRemarks"></textarea>
-										</button></td>
+									</td>
 								</tr>
 							</table>
 							<div class="modal-footer">
@@ -552,6 +521,7 @@
 			<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
+		</div>
 		</div>
 		<!-- /.modal  -->
 
@@ -582,7 +552,7 @@
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="txtValueTaskDescDesc"
 											disabled="disabled"></textarea>
-										</button></td>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -612,17 +582,16 @@
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
-									<td style="padding-left: 15px"><input type="text"
-										id="txtValueTaskNameRemarks" class="form-control"
-										disabled="disabled" /></td>
+									<td style="padding-left: 15px">
+									<input type="text" id="txtValueTaskNameRemarks" class="form-control" disabled="disabled" /></td>
 
 								</tr>
 								<tr>
 									<td style="padding-left: 15px" valign="top">Task Remarks</td>
-									<td style="padding-left: 15px"><textarea rows="3" cols="3"
-											class="form-control" id="txtValueTaskRemarksRemarks"
-											disabled="disabled"></textarea>
-										</button></td>
+									<td style="padding-left: 15px">
+										<textarea rows="3" cols="3" class="form-control" id="txtValueTaskRemarksRemarks" disabled="disabled">
+									</textarea>
+								</td>
 								</tr>
 							</table>
 						</div>

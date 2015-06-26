@@ -74,6 +74,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONHOLD;
 			String remarks = tsForm.getRemarksRecord();
+			System.out.println(taskStatus + " ");
 			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus, remarks);
 		}
 		else if ("resumeTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO RESUME TASK
@@ -83,12 +84,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 	
 		}
 
-		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO PAUSE TASK
-			int taskId = tsForm.getTestingId();
-			String taskStatus = Constant.GeneralCode.TASK_STATUS_FORCE;
-			String remarks = tsForm.getRemarksRecord();
-			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus, remarks);
-		}
 
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED_TASK, us,
 				request);

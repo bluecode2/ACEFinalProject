@@ -77,6 +77,7 @@
 							$('#addRemarks').modal();
 
 						});
+				
 				$('.linkDesc').on(
 						'click',
 						function() {
@@ -286,34 +287,37 @@
 						<logic:notEmpty name="projectTaskForm" property="arrList">
 							<logic:iterate id="reg" name="projectTaskForm" property="arrList">
 								<tr>
-									<td><html:hidden property="taskDesc" name="reg"
-											styleClass="hdTaskDesc" /> 
-											<html:hidden property="taskId"
-											name="reg" styleClass="hdTaskId" /> 
-											<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
-											<html:hidden property="assignedTo" name="reg" styleClass="hdAssignedToName"/>
-											<a
-										href="#" class="text-info linkDesc">
-										
-										<html:hidden
-											property="remarks" name="reg" styleClass="hdRemarks" /> <a
-										href="#" class="text-info linkDesc"> <bean:write
-												name="reg" property="taskName" />
-									</a></td>
-									<td><bean:write name="reg" property="assignedToName" /> <logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
-									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td align="center"><bean:write name="reg" property="estMainDays" /></td>
+									<td>
+										<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc" /> 
+										<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
+										<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
+										<html:hidden property="assignedTo" name="reg" styleClass="hdAssignedToName"/>
+										<html:hidden property="remarks" name="reg" styleClass="hdRemarks" /> 
+										<a href="#" class="text-info linkDesc"> 
+											<bean:write name="reg" property="taskName" />
+										</a>
+									</td>
+									<td><bean:write name="reg" property="assignedToName" /> 
+										<logic:equal name="reg" property="isOutsource" value="1">
+											(Out)
+										</logic:equal></td>
+									<td align="center">
+										<bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" />
+									</td>
+									<td align="center">
+										<bean:write name="reg" property="estMainDays" />
+									</td>
 									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td align="center"><html:hidden name="reg" property="taskStatus"
-											styleClass="hdTaskStatus" /> <bean:write name="reg"
-											property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%<logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="lnkRemarks text-info">Remarks</a></logic:notEqual></td>
+									<td align="center">
+									<html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
+									<bean:write name="reg" property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%<logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="lnkRemarks text-info">Remarks</a></logic:notEqual></td>
 									<td align="center"><a href="#" class="text-info linkActivity">View Activity</a></td>
-									<td align="center"><a class="text-success firstBtn"
-										href="#" id="tes"
-										onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
+									<td align="center">
+										<a class="text-success firstBtn" href="#" id="tes" onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
 											<span aria-hidden="true"></span>
-									</a> &nbsp; <a href="#" class="text-danger secondBtn"> <span
-											aria-hidden="true"></span>
+									</a> 
+										&nbsp; 
+										<a href="#" class="text-danger secondBtn"> <span aria-hidden="true"></span>
 									</a></td>
 								</tr>
 							</logic:iterate>
@@ -427,24 +431,24 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Task Description</h4>
+						<h4 class="modal-title">Remarks Description</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<table width="100%">
 								<tr>
-									<td style="padding-left: 15px">Task</td>
+									<td style="padding-left: 15px" valign="top">Remarks Name</td>
 									<td style="padding-left: 15px"><input type="text"
 										id="txtValueTaskNameRemarks" class="form-control"
 										disabled="disabled" /></td>
 
 								</tr>
 								<tr>
-									<td style="padding-left: 15px">Task Desc</td>
+									<td style="padding-left: 15px" valign="top">Remarks Description</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="txtRemarks"
 											disabled="disabled"></textarea>
-										</button></td>
+									</td>
 								</tr>
 							</table>
 						</div>

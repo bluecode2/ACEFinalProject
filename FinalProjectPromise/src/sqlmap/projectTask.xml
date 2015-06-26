@@ -125,9 +125,9 @@
 		set
 		update_date = SYSDATE,
 		updated_by = #updatedBy#,
-		task_status = #taskStat#,
+		task_status = #taskStatus#,
 		remarks = #remarks#
-		where task_id =#taskId#
+		where task_id = #taskId#
 	</update>
 
 	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
@@ -135,7 +135,7 @@
 		set
 		update_date = SYSDATE,
 		updated_by = #updatedBy#,
-		task_status = #taskStat#
+		task_status = #taskStatus#
 		where task_id =#taskId#
 	</update>
 

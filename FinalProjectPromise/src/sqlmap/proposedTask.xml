@@ -28,7 +28,8 @@
 		task_id		 		as taskId,
 		proposal_status		as propStatus,
 		proposal_status_name as propStatusName,
-		est_main_days		as estMainDays
+		est_main_days		as estMainDays,
+		remarks				as remarks
 		FROM VPROPOSED_TASK
 		WHERE proposed_by = #empId# and proposal_status != 'TA_STAT_99'
 		<dynamic prepend="AND">

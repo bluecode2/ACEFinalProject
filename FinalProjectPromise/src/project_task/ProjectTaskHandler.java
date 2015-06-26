@@ -103,8 +103,8 @@ public class ProjectTaskHandler extends Action {
 				request.setAttribute("lstEmployeeId",
 						empMan.getAllEmployee("", "", 1, Constant.pageSize));
 				return mapping.findForward("entry");
-			} else if (tsForm.getSelectedEdit() == 2) {
-				tsForm.setStatusTask("TA_STAT_07");
+			} else if (tsForm.getSelectedEdit() == 1) {
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask());
 			}
@@ -123,7 +123,7 @@ public class ProjectTaskHandler extends Action {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + actBean.getActivityDesc() + "</td>");
 				if (actBean.getIsCompleted() == 1) {
-					out.println("<td> <input type=\"checkbox\" checked disabled> </td>");					
+					out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");					
 				}
 				else {
 					out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");		
@@ -137,13 +137,13 @@ public class ProjectTaskHandler extends Action {
 		}
 		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
-				tsForm.setStatusTask("TA_STAT_99");
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_CANCELLED);
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
 
 			} else if (tsForm.getSelectedEdit() == 1) {
-				tsForm.setStatusTask("TA_STAT_98");
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_ONGOING);
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());

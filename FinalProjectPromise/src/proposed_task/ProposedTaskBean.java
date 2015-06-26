@@ -27,8 +27,16 @@ public class ProposedTaskBean {
 	private String propStatus;
 	private String propStatusName;
 	private Integer estMainDays;
+	private String remarks;
 	
-	
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 	/**
 	 * @return the propStatusName
 	 */
