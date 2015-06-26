@@ -86,6 +86,7 @@ public class Constant {
 		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
 		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
 		public static final String TASK_STATUS_DECLINE = "TA_STAT_06";
+		public static final String TASK_STATUS_FORCE = "TA_STAT_97";
 		public static final String TASK_STATUS_CANCELLED = "TA_STAT_99";
 	}
 	
