@@ -104,11 +104,11 @@ function goToEvaluate(id) {
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Project Code</td>
-							<td>Project Name</td>
-							<td>Estimate Date</td>
-							<td>Actual Date</td>
-							<td>Project Member</td>
+							<td class="align-center">Project Code</td>
+							<td class="align-center">Project Name</td>
+							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Actual Date</td>
+							<td class="align-center">Project Member</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>

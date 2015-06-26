@@ -237,8 +237,7 @@
 					<thead>
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
-							<td class="align-center">Estimate Start Date</td>
-							<td class="align-center">Estimate End Date</td>
+							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Progress</td>
 							<td class="align-center">Status</td>
@@ -260,10 +259,9 @@
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
 												property="taskName" /></a></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="estMainDays" /></td>
-									<td><bean:write name="reg" property="taskProgress" /></td>
+									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
 									<td><bean:write name="reg" property="taskStatusName" /></td>
 									<td align="center"><a href="#"
 										class="text-info linkActivity">Manage Activity</a></td>
@@ -292,7 +290,7 @@
 											<a class="text-success" href="#"
 												onclick="actionForm('submit','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
-												title="Pause"><span class="glyphicon glyphicon-ok"
+												title="Submit"><span class="glyphicon glyphicon-ok"
 												aria-hidden="true"></span></a>
 										</logic:equal></td>
 								</tr>

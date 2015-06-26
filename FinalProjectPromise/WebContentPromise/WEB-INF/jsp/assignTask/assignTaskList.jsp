@@ -178,13 +178,13 @@ function search() {
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Task Name</td>
-							<td>Assign To</td>
-							<td>Estimate Date</td>
-							<td>Actual Date</td>
-							<td>Task Progress</td>
-							<td>Activity</td>
-							<td>Task Status</td>
+							<td class="align-center">Task Name</td>
+							<td class="align-center">Assign To</td>
+							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Actual Date</td>
+							<td class="align-center">Task Progress</td>
+							<td class="align-center">Activity</td>
+							<td class="align-center">Task Status</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -204,7 +204,7 @@ function search() {
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td><bean:write name="reg" property="taskProgress" /></td>
+									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
 									<td>
 										<a  href="#" class="text-info linkActivity">
 											View Activity
