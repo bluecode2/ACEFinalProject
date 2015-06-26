@@ -107,13 +107,35 @@ public class ProjectTaskManager {
 		}
 	}
 
-	public void editStatusProjectTask(int taskId, int updatedBy,
+	public void editStatusRemarksProjectTask(int taskId, int updatedBy,
 			String taskStatus, String remarks) throws SQLException {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
 		m.put("taskStatus", taskStatus);
 		m.put("remarks", remarks);
+
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("projectTask.updateStatusRemarksProjectTask", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	public void editStatusProjectTask(int taskId, int updatedBy,
+			String taskStatus) throws SQLException {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
 
 		try {
 			this.ibatis.startTransaction();

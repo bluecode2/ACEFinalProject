@@ -115,8 +115,19 @@
 		ACT_START_DATE = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
 		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#),
-		update_date = to_date(SYSDATE, 'yyyy-MM-dd')
+		update_date = to_date(SYSDATE, 'yyyy-MM-dd'),
+		remarks = #remarks#
 		WHERE task_id = #taskId#
+	</update>
+
+	<update id="updateStatusRemarksProjectTask" parameterClass="java.util.Map">
+		UPDATE task
+		set
+		update_date = SYSDATE,
+		updated_by = #updatedBy#,
+		task_status = #taskStat#,
+		remarks = #remarks#
+		where task_id =#taskId#
 	</update>
 
 	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
@@ -124,8 +135,7 @@
 		set
 		update_date = SYSDATE,
 		updated_by = #updatedBy#,
-		task_status = #taskStat#,
-		remarks = #remarks#
+		task_status = #taskStat#
 		where task_id =#taskId#
 	</update>
 

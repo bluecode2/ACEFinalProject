@@ -29,11 +29,13 @@
 	}
 	
 	function getStyleBtn(){
-				$('.firstBtn').each(function() {
-					var assgTo = $(this).closest('tr').find('td').eq(0).html().trim();
+			
+				$('.firstBtn').each(function() {	
+		
+					var assgTo = $(this).closest('tr').find('.assTo').val();
 					var currUser = $('#users_empId').val();
-					var taskStat = $(this).closest('tr').find('td').eq(6).html().trim();
-					var taskProg = $(this).closest('tr').find('td').eq(7).html().trim();
+					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
+					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
 						if (assgTo == currUser){
 							if (taskStat == 'TA_STAT_02') {
 								$(this).addClass('glyphicon glyphicon-play');
@@ -46,8 +48,7 @@
 								$(this).attr("title","Pause");
 							} else if (taskStat == 'TA_STAT_06') {
 								$(this).addClass('glyphicon glyphicon-chevron-right');
-								$(this).attr("title","Resume");
-							
+								$(this).attr("title","Resume");				
 							} else{
 								$(this).hide();
 							}
@@ -55,10 +56,30 @@
 				});
 	}
 	
+	function getStyleBtn2() {
+		$('.secondBtn').each(function() {
+			var assgTo = $(this).closest('tr').find('.assTo').val();
+			var currUser = $('#users_empId').val();
+			var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
+			var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
+				if (assgTo == currUser){
+					if (taskStat == 'TA_STAT_03') {
+						$(this).addClass('glyphicon glyphicon-stop');
+						$(this).attr("title","Force Close");
+					}  else{
+						$(this).hide();
+					}
+				}
+		});
+
+	}
+	
 		$(document).ready(
 			function() {
 				getStyleBtn();
+				getStyleBtn2();
 				
+				//link to show popup Desc
 				$('.linkDesc').on('click',function(){
 					var taskName = $(this).closest('tr').find('.hdTaskName').val();
 					var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
@@ -66,18 +87,85 @@
 					$('#txtValueTaskDescDesc').val(taskDesc);
 					$('#showDesc').modal();
 				});
+				
+				//link to show popup remarks
 				$('.lnkRemarks').on('click',function(){
 					var taskName = $(this).closest('tr').find('.hdTaskName').val();
-					var taskRemakrs = $(this).closest('tr').find('.hdTaskRemakrs').val();
+					var taskRemarks = $(this).closest('tr').find('.hdTaskRemakrs').val();
 					$('#txtValueTaskNameRemarks').val(taskName);
-					$('#txtValueTaskRemarksRemarks').val(taskRemakrs);
+					$('#txtValueTaskRemarksRemarks').val(taskRemarks);
 					$('#showRemarks').modal();
 				});
 				
+				//link to manage first button on going
+				$('.firstBtn').on('click',function(){
+					var assgTo = $(this).closest('tr').find('.assTo').val();
+					var currUser = $('#users_empId').val();
+					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
+					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
+					var nama = $(this).closest('tr').find('.hdTaskName').val();
+					var taskId = $(this).closest('tr').find('.hdTaskId').val();
+					document.forms[0].testingId.value = taskId;
+					
+						if (assgTo == currUser){
+							if (taskStat == 'TA_STAT_02') {//this task for start task
+								if (confirm("Start Task " + nama +" ?")) {
+									document.forms[0].task.value = 'startTask';
+									document.forms[0].submit();
+								}
+							} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {// this task for submit task
+								if (confirm("Submit Task " + nama +" ?")) {
+									document.forms[0].task.value = 'submitTask';
+									document.forms[0].submit();									
+								}
+							} else if (taskStat == 'TA_STAT_03') {//this task for pause task
+								if (confirm("Pause Task " + nama +" ?")) {
+									document.forms[0].task.value = 'pauseTask';
+									$('#txtAddRemarksValueTaskId').val(taskId);
+									$('#txtAddRemarksValueTaskName').val(nama);
+									$('#txtAddRemarksValueTaskStatus').val(taskStat);
+									$('#addRemarks').modal();
+
+								}
+							} else if (taskStat == 'TA_STAT_06') {//this task for resume
+								if (confirm("Resume Task " + nama +" ?")) {
+									document.forms[0].task.value = 'resumeTask';
+									document.forms[0].submit();
+								}			
+							} else{
+								$(this).hide();
+							}
+						}
+				});
+				
+				$('.insertRemarks').on('click', function() {
+					document.forms[0].remarksRecord.value = $('#txtAddRemarksValueTaskRemarks').val();
+					document.forms[0].submit();
+					});
+				
+				//link to manage second button on going
+				$('.secondBtn').on('click',function(){
+					var assgTo = $(this).closest('tr').find('.assTo').val();
+					var currUser = $('#users_empId').val();
+					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
+					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
+						if (assgTo == currUser){
+							if (taskStat == 'TA_STAT_03') {
+								document.forms[0].task.value = 'forceCloseTask';
+								$('#txtAddRemarksValueTaskId').val(taskId);
+								$('#txtAddRemarksValueTaskName').val(nama);
+								$('#txtAddRemarksValueTaskStatus').val(taskStat);
+								$('#addRemarks').modal();
+								$('#addRemarks').modal();
+							}  else{
+								$(this).hide();
+							}
+						}
+				});
 				
 				//LINK MANAGE ACTIVITY
 				$('.lnkMngActivity').each(function (){
-					var assignTo = $(this).closest('tr').find('td').eq(0).html().trim();
+					var assignTo = $(this).closest('tr').find('.assTo').val();
 					var currEmpId = $('#users_empId').val();
 					if(assignTo == currEmpId)
 						$(this).show();
@@ -85,8 +173,7 @@
 						$(this).hide();
 				});
 				
-				$('.lnkMngActivity').on(
-						'click',
+				$('.lnkMngActivity').on('click',
 						function() {
 
 							var taskId = $(this).closest('tr')
@@ -155,56 +242,9 @@
 					registerBtnActivityEvent();
 				});
 				
-				//TASK PROGRESS
-				$('#showActivity').on('hidden.bs.modal', function() {
-				     window.location.href = "projectInvolvedTask.do";
-				    });
+				
 			});
 	
-	function changeStatusFirstBtn(taskId, taskStatus) {
-		document.forms[0].task.value = "firstEdit";
-		document.forms[0].selectedId.value = taskId;
-
-		if (taskStatus == 'TA_STAT_02') { //Function for edit task; change name and desc
-			document.forms[0].selectedEdit.value = "0";
-
-		} else if (taskStatus == 'TA_STAT_04') { //Function for approve task; change status 
-			document.forms[0].selectedEdit.value = "1";
-
-		}
-
-		document.forms[0].submit();
-	}
-	
-	//action for button Action Task
-	function updateTask(id, nama, taskStat, taskProg){
-		document.forms[0].testingId.value = id;
-		//alert(document.forms[0].testingId.value+' id sebenarnya '+id);
-		if (taskStat == 'TA_STAT_02'){ // if not started
-			if (confirm("Start Task " + nama +" ?")) {
-				document.forms[0].task.value = 'startTask';
-				document.forms[0].submit();
-			}
-		}
-		else if (taskStat == 'TA_STAT_03' && taskProg == '100.0'){ // if on going and progress 100%
-			if (confirm("Submit Task " + nama +" ?")) {
-				document.forms[0].task.value = 'submitTask';
-				document.forms[0].submit();
-			}
-		}
-		else if (taskStat == 'TA_STAT_03'){ // if on going and progress < 100%
-			if (confirm("Pause Task " + nama +" ?")) {
-				document.forms[0].task.value = 'pauseTask';
-				document.forms[0].submit();
-			}
-		}
-		else if (taskStat == 'TA_STAT_06'){ // if resume
-			if (confirm("Resume Task " + nama +" ?")) {
-				document.forms[0].task.value = 'resumeTask';
-				document.forms[0].submit();
-			}
-		}
-	}
 	
 	function registerBtnActivityEvent() {
 		$('.btnActivityDelete').off('click');
@@ -408,27 +448,28 @@
 						<logic:notEmpty name="projectTaskForm" property="arrList">
 							<logic:iterate id="reg" name="projectTaskForm" property="arrList">
 								<tr>
-								<td style="display:none"> <bean:write name="reg" property="assignedTo"/> </td>
-									<td><html:hidden property="assignedTo" name="reg" styleId="assTo"/>
+								<td style="display:none"> 
+									<html:hidden property="assignedTo" name="reg" styleClass="assTo"/>
 									<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc" /> 
 									<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
 									<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
-									<a href="#" class="text-info linkDesc">
 									<html:hidden property="remarks" name="reg" styleClass="hdTaskRemakrs" />
 									<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/> 
+									<html:hidden name="reg" property="taskProgress" styleClass="hdTaskProg" />
+									<html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
+								
+									<bean:write name="reg" property="assignedTo"/> </td>
+								<td>
+									<a href="#" class="text-info linkDesc">
 										<bean:write name="reg" property="taskName" />
-									</a>
-	
-									
+									</a>			
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /> <logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
 									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td align="center"><bean:write name="reg" property="estMainDays" /></td>
 									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td align="center"><html:hidden name="reg" property="taskStatus"
-											styleClass="hdTaskStatus" styleId="hdnTaskStat"/> 
-											<html:hidden name="reg" property="taskProgress"
-											styleClass="hdTaskProg" styleId="hdnTaskProg"/>
+									<td align="center">
+											
 											<bean:write name="reg"
 											property="taskStatusName" /> : 
 											<bean:write name="reg" property="taskProgress" />%<logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="lnkRemarks text-info">Remarks</a></logic:notEqual></td>
@@ -437,9 +478,13 @@
 									<td align="center"><a href="#" class="text-info lnkMngActivity" id="mngAct">Manage Activity</a>
 									</td>
 									<td align="center">
-										<a href="#" onclick="updateTask('<bean:write name="reg" property="taskId" />', '<bean:write name="reg" property="taskName" />', '<bean:write name="reg" property="taskStatus" />', '<bean:write name="reg" property="taskProgress" />');">
-											<span class="firstBtn" aria-hidden="true" id="firstBtn" ></span>
-										</a> &nbsp; 
+										<a href="#" onclick="">
+											<span class="firstBtn" aria-hidden="true" ></span>
+										</a> 
+										&nbsp; 
+										<a href="#" onclick="">
+											<span class="secondBtn" aria-hidden="true" ></span>
+										</a> 
 									</td>
 								</tr>
 							</logic:iterate>
@@ -456,7 +501,7 @@
 			</div>
 		</div>
 
-	  	<!-- popup to give remarks (unused) -->
+	  	<!-- popup to give remarks  -->
 		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -473,10 +518,10 @@
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
-									<td style="padding-left: 15px"><input type="hidden"
-										id="txtValueTaskId" /> <input type="hidden"
-										id="txtValueTaskStatus" /> <input type="text"
-										id="txtValueTaskName" class="form-control" disabled="disabled" />
+									<td style="padding-left: 15px">
+									<input type="hidden" id="txtAddRemarksValueTaskId" /> 
+									<input type="hidden" id="txtAddRemarksValueTaskStatus" />
+									<input type="text" id="txtAddRemarksValueTaskName" class="form-control" disabled="disabled" />
 
 									</td>
 
@@ -484,15 +529,22 @@
 								<tr>
 									<td style="padding-left: 15px">Remarks</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
-											class="form-control" id="selSearchFieldRemark"></textarea>
+											class="form-control" id="txtAddRemarksValueTaskRemarks"></textarea>
 										</button></td>
 								</tr>
 							</table>
-							<center>
-								<input type="button" class="goInsert btn btn-sm btn-info"
-									value="Save">
-
-							</center>
+							<div class="modal-footer">
+							<table align="right">
+							<tr>
+								<td>
+									<input type="button" class="insertRemarks btn btn-sm btn-info" value="Save">
+								</td>
+								<td>
+									<input type="button" class="btn btn-sm " data-dismiss="modal" value="Cancel">
+								</td>
+							</tr>
+							</table>
+							
 						</div>
 
 					</div>

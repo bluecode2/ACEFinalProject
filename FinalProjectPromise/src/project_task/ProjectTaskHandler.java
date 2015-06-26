@@ -106,7 +106,7 @@ public class ProjectTaskHandler extends Action {
 			} else if (tsForm.getSelectedEdit() == 2) {
 				tsForm.setStatusTask("TA_STAT_07");
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
-						us.getUserId(), tsForm.getStatusTask(), "");
+						us.getUserId(), tsForm.getStatusTask());
 			}
 		} 
 		else if ("listActivity".equals(tsForm.getTask())) {
@@ -138,13 +138,13 @@ public class ProjectTaskHandler extends Action {
 		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask("TA_STAT_99");
-				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
+				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
 
 			} else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask("TA_STAT_98");
-				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
+				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
 			}

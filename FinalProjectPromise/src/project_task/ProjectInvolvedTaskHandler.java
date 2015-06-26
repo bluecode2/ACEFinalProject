@@ -58,108 +58,37 @@ public class ProjectInvolvedTaskHandler extends Action {
 
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
-		if ("startTask".equalsIgnoreCase(tsForm.getTask())){
-			pTaskBean = tsMan.getDataForstatus(tsForm.getTestingId());
-			pTaskBean.setUpdatedBy(us.getUserId());
-			pTaskBean.setTaskStatus("TA_STAT_03");
-			pTaskBean.setTaskProgress((float) 0);
-			pTaskBean.setActStartDateInString(sdf.format(date));
-			tsMan.updateTaskStat(pTaskBean);
-			//tsMan.updateTaskStat(tsForm.getTestingId(), us.getEmployeeId(), "TA_STAT_03");
-		}
-		else if ("submitTask".equalsIgnoreCase(tsForm.getTask())){
-			pTaskBean = tsMan.getDataForstatus(tsForm.getTestingId());
-			pTaskBean.setUpdatedBy(us.getUserId());
-			pTaskBean.setTaskStatus("TA_STAT_04");
-			pTaskBean.setActEndDateInString(sdf.format(date));
-			Integer actMain = sdf.parse(pTaskBean.getActStartDateInString()).getDate() - sdf.parse(pTaskBean.getActEndDateInString()).getDate();
-			pTaskBean.setActmainDays(actMain);
-			tsMan.updateTaskStat(pTaskBean);
-			
-			//tsMan.updateTaskStat(tsForm.getTestingId(), us.getEmployeeId(), "TA_STAT_04");
-		}
-		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){
-			//tsMan.updateTaskStat(tsForm.getTestingId(), us.getEmployeeId(), "TA_STAT_06");
-			pTaskBean = tsMan.getDataForstatus(tsForm.getTestingId());
-			pTaskBean.setUpdatedBy(us.getUserId());
-			pTaskBean.setTaskStatus("TA_STAT_06");
-			tsMan.updateTaskStat(pTaskBean);
-		}
-		else if ("resumeTask".equalsIgnoreCase(tsForm.getTask())){
-			//tsMan.updateTaskStat(tsForm.getTestingId(), us.getEmployeeId(), "TA_STAT_03");
-			pTaskBean = tsMan.getDataForstatus(tsForm.getTestingId());
-			pTaskBean.setUpdatedBy(us.getUserId());
-			pTaskBean.setTaskStatus("TA_STAT_03");
-			tsMan.updateTaskStat(pTaskBean);
-		}
+		if ("startTask".equalsIgnoreCase(tsForm.getTask())){// TASK TO START TASK
+			int taskId = tsForm.getTestingId();
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
+			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
 		
-		/*
-		if ("add".equals(tsForm.getTask())) {
-
-			CommonFunction.initializeHeader(
-					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
-			tsForm.setIsAdd(true);
-			tsForm.getTkBean().setIsOutsource(0);
-			request.setAttribute("listProjMember", projMbrMgr
-					.getProjectMemberToEvaluate(tsForm.getPrjBean()
-							.getProjectId()));
-			request.setAttribute("lstEmployeeId",
-					empMan.getAllEmployee("", "", 1, Constant.pageSize));
-
-			return mapping.findForward("entry");
-		} else if ("save".equals(tsForm.getTask())) {
-			Boolean isAdd = tsForm.getIsAdd();
-
-			if (tsForm.getTkBean().getAssignedTo() == 0)
-				tsForm.getTkBean().setAssignedTo(null);
-
-			if (isAdd) {
-				tsForm.getTkBean().setProjectId(
-						tsForm.getPrjBean().getProjectId());
-				tsForm.getTkBean().setCreatedBy(us.getUserId());
-				tsMan.createNewOProjectTask(tsForm.getTkBean());
-			} else {
-
-				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editProjectTask(tsForm.getTkBean());
-			}
-
-			response.sendRedirect("projectTask.do");
-			return null;
-		} else if ("firstEdit".equals(tsForm.getTask())) {
-			
-			if (tsForm.getSelectedEdit() == 0) {
-				tsForm.setIsAdd(false);
-				CommonFunction.initializeHeader(
-						Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
-				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
-				request.setAttribute("listProjMember", projMbrMgr
-						.getProjectMemberToEvaluate(tsForm.getPrjBean()
-								.getProjectId()));
-				request.setAttribute("lstEmployeeId",
-						empMan.getAllEmployee("", "", 1, Constant.pageSize));
-				return mapping.findForward("entry");
-			} else if (tsForm.getSelectedEdit() == 2) {
-				tsForm.setStatusTask("TA_STAT_07");
-				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
-						us.getUserId(), tsForm.getStatusTask(), "");
-			}
-		} else if ("secondEdit".equals(tsForm.getTask())) {
-			if (tsForm.getSelectedEdit() == 0) {
-				tsForm.setStatusTask("TA_STAT_99");
-				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
-						us.getUserId(), tsForm.getStatusTask(),
-						tsForm.getRemarksRecord());
-
-			} else if (tsForm.getSelectedEdit() == 1) {
-				tsForm.setStatusTask("TA_STAT_98");
-				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
-						us.getUserId(), tsForm.getStatusTask(),
-						tsForm.getRemarksRecord());
-			}
-
 		}
-		*/
+		else if ("submitTask".equalsIgnoreCase(tsForm.getTask())){//TASK TO SUBMIT TASK
+			int taskId = tsForm.getTestingId();
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING;
+			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+	
+		}
+		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO PAUSE TASK
+			int taskId = tsForm.getTestingId();
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONHOLD;
+			String remarks = tsForm.getRemarksRecord();
+			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus, remarks);
+		}
+		else if ("resumeTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO RESUME TASK
+			int taskId = tsForm.getTestingId();
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
+			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+	
+		}
+
+		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO PAUSE TASK
+			int taskId = tsForm.getTestingId();
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_FORCE;
+			String remarks = tsForm.getRemarksRecord();
+			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus, remarks);
+		}
 
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED_TASK, us,
 				request);
