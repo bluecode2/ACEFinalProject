@@ -49,9 +49,9 @@ public class ApproveTaskHandler extends Action {
 		else if (aForm.getTask().equals("decline")) {
 			aForm.setIsAdd(false);
 
-			aForm.getBean().setUpdatedBy(us.getUserId());
+
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
-			aManager.declineTask(aForm.getBean());
+			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
 
 			response.sendRedirect("approveTask.do");
 			return null;

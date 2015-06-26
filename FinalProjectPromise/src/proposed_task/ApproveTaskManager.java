@@ -102,4 +102,25 @@ public class ApproveTaskManager {
 
 		return empBean;
 	}
+	
+	public void addRemarksProposedTask(int userId, int propId, String remarks) {
+		
+		Map m = new HashMap();
+		m.put("userId", userId);
+		m.put("propTaskId", propId);
+		m.put("remarks", remarks);
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("proposedTask.addRemarksProposedTask", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 }

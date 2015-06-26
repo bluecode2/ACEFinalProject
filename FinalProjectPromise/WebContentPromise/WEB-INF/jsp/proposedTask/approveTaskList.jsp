@@ -38,6 +38,22 @@
 			currHdnField = $(this).closest('td').find('.hdnAssignTo');
 			$("#empList").modal();
 		});
+		$('.insertRemarks').on('click',function(){
+			document.forms[0].selectedId.value = $('#txtValueTaskId').val(); //task ID
+			document.forms[0].task.value = "decline";
+			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
+			document.forms[0].submit();
+		});
+		$('.secondBtn').on('click',function(){
+			var taskId = $(this).closest('tr').find('.hdnTaskId').val();
+			var taskName = $(this).closest('tr').find('.hdnTaskName').val();
+		
+			$('#txtValueTaskId').val(taskId);
+			$('#txtValueTaskName').val(taskName);
+			
+			$('#addRemarks').modal();
+			
+		});
 		
 		$('.btnApprove').on('click',function(){
 			var taskId = $(this).closest('tr').find('td').eq(0).html().trim();
@@ -97,6 +113,7 @@
 		<html:hidden name="approveTaskForm" property="propTo"/>
 		<html:hidden name="approveTaskForm" property="empId" styleId="hdnEmpId" />
 		<html:hidden name="approveTaskForm" property="assignTo" styleId="hdnAssignTo" />
+		<html:hidden property="remarksRecord" name="approveTaskForm"/>
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -139,7 +156,10 @@
 						<logic:notEmpty name="approveTaskForm" property="arrList">
 							<logic:iterate id="reg" name="approveTaskForm" property="arrList">
 								<tr>
-									<td style="display: none"><bean:write name="reg" property="propTaskId" /></td>
+									<td style="display: none">
+									<html:hidden property="propTaskId" name="reg" styleClass="hdnTaskId"/>
+									<html:hidden property="propTaskName" name="reg" styleClass="hdnTaskName"/>
+									<bean:write name="reg" property="propTaskId" /></td>
 									<td><a href="#" class="text-info" 
 									onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');" data-target="taskDesc">
 									<bean:write name="reg" property="propTaskName" /></a>
@@ -151,9 +171,9 @@
 									<bean:write name="reg" property="propByName" /></a></td>
 									<td align="center"><a class="text-success btnApprove" href="#"
 										title="Approve"><span class="glyphicon glyphicon-ok"
-											aria-hidden="true"></span></a> &nbsp; <a href="#"
-										class="text-danger btnDecline"
-										onclick="actionForm('decline','<bean:write name="reg" property="propTaskId" />');"
+											aria-hidden="true"></span></a> &nbsp; 
+										<a href="#" class="text-danger secondBtn"
+										onclick=""
 										title="Decline"><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a></td>
 								</tr>
@@ -259,6 +279,62 @@
 							</table>
 						</div>
 					</html:form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+		<!-- popup to give remarks -->
+		<div class="modal fade" id="addRemarks" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Task Issue</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table width="100%">
+									<tr>
+										<td style="padding-left: 15px">Task</td>
+										<td style="padding-left: 15px">
+										<input type="text" id="txtValueTaskId" />
+										<input type="text" id="txtValueTaskName" class="form-control" disabled="disabled" />
+											
+										</td>
+										
+									</tr>
+									<tr>
+										<td style="padding-left: 15px">
+											Remarks 
+										</td>
+										<td style="padding-left: 15px">
+											<textarea rows="3" cols="3" class="form-control"  id="selSearchFieldRemark"></textarea>
+										</button></td>
+									</tr>
+								</table>
+							<div class="modal-footer">
+							
+								<table align="right">
+								<tr>
+								<td>
+	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
+	      						</td>
+	      						<td>
+	      							<input type="button" class="btn btn-sm" value="Cancel" data-dismiss="modal">
+								</td>
+								</tr>
+								</table>
+     						</div>
+							</div>
+
+						</div>
 				</div>
 				<!-- /.modal-content -->
 			</div>

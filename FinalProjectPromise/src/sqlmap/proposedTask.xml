@@ -136,7 +136,16 @@
 		WHERE
 		proposed_task_id=#propTaskId#
 	</update>
-
+	<update id="addRemarksProposedTask" parameterClass="java.util.Map">
+		UPDATE PROPOSED_TASK
+		SET
+		updated_by = #userId#,
+		update_date = SYSDATE,
+		proposal_status='TA_STAT_98',
+		remarks = #remarks#
+		WHERE
+		proposed_task_id=#propTaskId#
+	</update>
  	<update id="deleteProposedTask" parameterClass="java.util.Map">
  		update
  		PROPOSED_TASK

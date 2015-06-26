@@ -25,7 +25,14 @@ public class ApproveTaskForm extends ActionForm{
 	private String currSearchField = "";
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
+	private String remarksRecord;
 	
+	public String getRemarksRecord() {
+		return remarksRecord;
+	}
+	public void setRemarksRecord(String remarksRecord) {
+		this.remarksRecord = remarksRecord;
+	}
 	public String getTask() {
 		return task;
 	}
