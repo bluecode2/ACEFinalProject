@@ -78,6 +78,11 @@ public class Constant {
 		public static final String PROJECT_STATUS_ONGOING = "PR_STAT_02";
 		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
 		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
+		public static final String TASK_STATUS_ONGOING = "TA_STAT_03";
+		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
+		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
+		public static final String TASK_STATUS_DECLINE = "TA_STAT_06";
+		public static final String TASK_STATUS_CANCELLED = "TA_STAT_99";
 	}
 	
 	public static class GeneralParameter{
