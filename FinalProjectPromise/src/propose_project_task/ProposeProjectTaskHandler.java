@@ -55,9 +55,27 @@ public class ProposeProjectTaskHandler extends Action {
 			return mapping.findForward("propProjTaskEntry");
 		}
 		else if ("delete".equalsIgnoreCase(pProjTaskForm.getTask())){
-			
+			pProjtaskMan.delPropProjTask(us.getEmployeeId(), pProjTaskForm.getSelectedId());
 		}
-
+		
+		else if ("save".equalsIgnoreCase(pProjTaskForm.getTask())){
+			Boolean isAdd = pProjTaskForm.getIsAdd();
+			System.out.println(isAdd+ "lalala");
+			if (isAdd){
+				pProjTaskForm.getBean().setProjectId(projId);
+				pProjTaskForm.getBean().setCreatedBy(us.getUserId());
+				pProjTaskForm.getBean().setPropBy(us.getEmployeeId());
+				pProjtaskMan.insertPropProjTask(pProjTaskForm.getBean());
+			}
+			else {
+				pProjTaskForm.getBean().setProjectId(projId);
+				pProjTaskForm.getBean().setUpdatedBy(us.getUserId());
+				pProjtaskMan.editPropProjTask(pProjTaskForm.getBean());
+			}
+			response.sendRedirect("propProjTask.do");
+			return null;
+		}
+		
 		pProjTaskForm.setTask("");
 		pProjTaskForm.setSearchField(pProjTaskForm.getCurrSearchField());
 		pProjTaskForm.setSearchValue(pProjTaskForm.getCurrSearchValue());

@@ -52,12 +52,7 @@ public class ProposeProjectTaskManager {
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			try {
 				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 	}
 	
@@ -81,8 +76,33 @@ public class ProposeProjectTaskManager {
 		return pProjTask;
 	}
 	
-	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
+	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean) throws SQLException{
+		try {
+			this.ibatis.startTransaction();
+			System.out.println("masuk try");
+			this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
+			System.out.println("Berhasil");
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("gagal");
+			this.ibatis.endTransaction();
+		}
+	}
+	
+	public void delPropProjTask(Integer userId, Integer propTaskId) throws SQLException{
+		Map map = new HashMap();
+		map.put("userId", userId);
+		map.put("propTaskId", propTaskId);
 		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("projProposeTask.delPropProjTask", map);
+			this.ibatis.commitTransaction();
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.ibatis.endTransaction();
+		}
 	}
 	
 }
