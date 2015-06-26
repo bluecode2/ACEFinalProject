@@ -101,7 +101,6 @@
 </head>
 <body>
 	<html:form action="/approveTask" method="post">
-
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -143,12 +142,11 @@
 					class="tableContent">
 					<thead>
 						<tr class="panel panel-info">
-							<td>Task Name</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
-							<td>Estimate Main Days</td>
-							<td>Proposed By</td>
-							<td>Assign To</td>
+							<td class="align-center">Task Name</td>
+							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Estimate Main Days</td>
+							<td class="align-center">Proposed By</td>
+							<td class="align-center">Assign To</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -163,8 +161,7 @@
 									<td><a href="#" class="text-info" 
 									onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');" data-target="taskDesc">
 									<bean:write name="reg" property="propTaskName" /></a>
-									<td><bean:write name="reg" property="estStartDateInString" /> to </td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="propByName" /></td>
 									<td><input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" /><a href="#" class="text-info lnkAssignTo">
@@ -304,7 +301,7 @@
 									<tr>
 										<td style="padding-left: 15px">Task</td>
 										<td style="padding-left: 15px">
-										<input type="text" id="txtValueTaskId" />
+										<input type="hidden" id="txtValueTaskId" />
 										<input type="text" id="txtValueTaskName" class="form-control" disabled="disabled" />
 											
 										</td>

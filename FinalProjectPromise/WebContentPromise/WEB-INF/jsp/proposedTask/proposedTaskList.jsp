@@ -84,12 +84,11 @@
 					class="tableContent">
 					<thead>
 						<tr class="panel panel-info">
-							<td>Task Name</td>
-							<td>Estimate Start Date</td>
-							<td>Estimate End Date</td>
-							<td>Estimate Main Days</td>
-							<td>Proposed To</td>
-							<td>Status</td>
+							<td class="align-center">Task Name</td>
+							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Estimate Main Days</td>
+							<td class="align-center">Proposed To</td>
+							<td class="align-center">Status</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -99,8 +98,7 @@
 								property="arrList">
 								<tr>
 									<td><bean:write name="reg" property="propTaskName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /></td>
-									<td><bean:write name="reg" property="estEndDateInString" /></td>
+									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
 									<td><bean:write name="reg" property="estMainDays" /></td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /></td>
