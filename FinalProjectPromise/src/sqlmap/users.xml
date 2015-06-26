@@ -76,6 +76,7 @@
       	 		order by user_id) us 
 	       WHERE ROWNUM &lt; = #end#)
         WHERE rnum &gt; #begin#
+        ORDER BY USERNAME
 	</select>
 	
 	<select id="checkLogin" resultClass="user.UserBean" parameterClass="java.util.Map">
