@@ -24,6 +24,8 @@ $(".progress-bar").animate({
     width: "100%"
 }, 2500);	
 }
+
+ 
 </script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -98,6 +100,17 @@ $(".progress-bar").animate({
 		<div class="loader">Loading...</div>
 	</div>
 </div>
+
+<div class="progress-pie-chart" data-percent="74"><!--Pie Chart -->
+                    <div class="ppc-progress">
+                        <div class="ppc-progress-fill"></div>
+                    </div>
+                    <div class="ppc-percents">
+                    <div class="pcc-percents-wrapper">
+                        <span>%</span>
+                    </div>
+                    </div>
+                </div><!--End Chart -->
 
 	<div class="container">
 		<h1>Title Page</h1>
@@ -353,6 +366,17 @@ $(".progress-bar").animate({
 			      }
 			    }
 			  }
+			  
+			  $(function(){
+				    var $ppc = $('.progress-pie-chart'),
+				      percent = parseInt($ppc.data('percent')),
+				      deg = 360*percent/100;
+				    if (percent > 50) {
+				      $ppc.addClass('gt-50');
+				    }
+				    $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+				    $('.ppc-percents span').html(percent+'%');
+				  });
 		</script>
 </body>
 </html>

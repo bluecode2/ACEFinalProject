@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
-import employee.EmployeeManager;
 
 public class MyCurrentTaskHandler extends Action {
 
@@ -26,7 +25,6 @@ public class MyCurrentTaskHandler extends Action {
 		IndependentTaskManager tsMan = new IndependentTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		EmployeeManager empMan = new EmployeeManager();
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
 		if ("start".equals(tsForm.getTask())) {

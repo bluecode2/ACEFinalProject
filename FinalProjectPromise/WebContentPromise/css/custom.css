@@ -37,7 +37,7 @@ label {
 }
 
 .btn-icon {
-	padding: 10px 14px;
+	padding: 10px 13px 13px 13px;
 }
 
 .btn-xs {
@@ -75,8 +75,32 @@ label {
 	background-color: #03a9f4 !important;
 }
 .badge {
-	background-color: #f77;
+	background-color: #ffeb3b;
 	color: #2196f3;
+}
+
+.notif {
+  cursor:pointer;
+  background-color: rgba(3,	169, 244, 0.2);
+  color: #03a9f4;
+  border-radius:4px;
+  margin:4px;
+  padding: 12px 15px ;
+}
+.notif::after {
+	content: "new!";
+	float: right;
+}
+.notif:hover {
+  background-color: rgba(3,	169, 244, 0.5);
+}
+.notif.checked {
+  background-color: rgba(3,	169, 244, 0.05);
+  color: #03a9f4;
+}
+.notif.checked::after {
+   content: "v";
+	float: right;
 }
 /* Submenu
 -------------------------------------------------- */
@@ -138,7 +162,7 @@ label {
 }
 
 .footer-text {
-	margin: 14px;
+	margin: 10px;
 	color: #777;
 }
 
@@ -282,7 +306,7 @@ thead > tr > td , th {
   width: 200px;
   height: 200px;
   clip: rect(0, 100px, 200px, 0);
-  background: #03a9f4;
+  background: #81CE97;
   transform: rotate(60deg);
 }
 .gt-50 .ppc-progress {
@@ -297,10 +321,10 @@ thead > tr > td , th {
   content: "";
   position: absolute;
   border-radius: 50%;
-  left: calc(50% - 173.91304px/2);
-  top: calc(50% - 173.91304px/2);
-  width: 173.91304px;
-  height: 173.91304px;
+  left: calc(50% - 150px/2);
+  top: calc(50% - 150px/2);
+  width: 150px;
+  height: 150px;
   background: #fff;
   text-align: center;
   display: table;

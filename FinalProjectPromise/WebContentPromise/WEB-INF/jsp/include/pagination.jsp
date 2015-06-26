@@ -49,7 +49,7 @@
 					</ul>
 				</td>
 				<td>Go to Page &nbsp; <input type="text" id="txtGoToPage" />
-					<button type="button" class="btn btn-info btn-sm"
+					<button type="button" class="btn btn-raised btn-info btn-sm"
 						onclick="goToPage('<bean:write name="pageCount"
 											 />');">Go</button>
 				</td>

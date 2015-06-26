@@ -9,6 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home</title>
 
+<!-- 
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/material.ripples.min.css">
+<link rel="stylesheet" href="css/calendar.min.css">
+<link rel="stylesheet" href="css/custom.css">
+
 <script type="text/javascript">
 $(function(){
     var $ppc = $('.progress-pie-chart'),
@@ -21,13 +27,16 @@ $(function(){
     $('.ppc-percents span').html(percent+'%');
   });
  
-</script>
+</script> -->
+
 </head>
 <body>
 	<html:form action="/home" method="post">
 
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 
+		<div id="calendar"></div>
+    
 <!-- 		<div class="container-fluid" style="background-color: white; height: 80px; 
 		  margin-top: -20px !important; padding-top: 20px !important">
 			<div class="container">
@@ -121,7 +130,21 @@ $(function(){
 		</div> -->
 		
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-	
+		
+<!-- 		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/underscore-min.js"></script>
+	    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="js/calendar.min.js"></script>
+	    <script type="text/javascript">
+	    $(document).ready(function () {
+	    	var calendar = $("#calendar").calendar(
+		            {
+		                tmpl_path: "/tmpls/",
+		                events_source: function () { return []; }
+		            });  
+	    	});
+	               
+	    </script>  -->
  </html:form>
 </body>
 </html>

@@ -117,7 +117,9 @@
 							class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" 
 						data-toggle="dropdown" role="button" aria-expanded="false" title="Notification"><span
-							class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+							class="glyphicon glyphicon-envelope" aria-hidden="true"></span> 
+<!-- 							<span class="badge" id="badge">42</span> -->
+							</a>
 						<ul class="dropdown-menu">
 							<logic:notEmpty name="unreadNotification">
 								<logic:iterate id="notif" name="unreadNotification">

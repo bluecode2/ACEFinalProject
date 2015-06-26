@@ -22,11 +22,19 @@
 		<html:hidden name="notificationForm" property="selectedId" />
 
 		<div class="container divContent">
-			<logic:iterate id="notif" name="notificationForm" property="lstBean">
-				<div class="rowSearch" style="cursor: pointer;">
-					<bean:write name="notif" property="notificationDesc" />
+			<div class="row">
+				<div class="col-md-6">
+					<logic:iterate id="notif" name="notificationForm" property="lstBean">
+						<div class="rowSearch alert alert-info notif">
+							<strong><bean:write name="notif" property="notificationDesc" /></strong>
+						</div>
+					</logic:iterate>
+		<div class="alert alert-info notif checked" style="cursor: pointer;border-radius: 3px;">
+		    <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+		</div>
 				</div>
-			</logic:iterate>
+			</div>
+			
 		</div>
 
 		<div class="container">
