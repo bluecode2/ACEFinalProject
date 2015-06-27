@@ -18,6 +18,7 @@ import activity.ActivityBean;
 import activity.ActivityManager;
 import project.ProjectManager;
 import project_member.ProjectMemberManager;
+import propose_project_task.ProposeProjectTaskManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -33,6 +34,9 @@ public class ProjectTaskHandler extends Action {
 
 		ProjectTaskForm tsForm = (ProjectTaskForm) form;
 		ProjectTaskManager tsMan = new ProjectTaskManager();
+		
+		
+		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();

@@ -99,9 +99,7 @@ public class ProposeProjectTaskManager {
 	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
 		try {
 			this.ibatis.startTransaction();
-			System.out.println("masuk try");
 			this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
-			System.out.println("Berhasil");
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception

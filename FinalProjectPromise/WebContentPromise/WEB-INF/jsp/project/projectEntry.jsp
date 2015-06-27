@@ -22,8 +22,10 @@
 	}
 
 	function onBtnSaveClick() {
+		if(validateForm()){
 			document.forms[0].task.value = "save";
 			document.forms[0].submit();
+		}
 	}
 
 	$(document).ready(
@@ -82,6 +84,67 @@ function search() {
 				}
 			});
 	}
+	
+	function validateForm(){
+	
+	var projectCode	= document.getElementById("readAbleCode").value;
+	var projectName = document.getElementById("readAbleName").value;
+	var projectDesc	= document.getElementById("readAbleDesc").value;
+	var projectMgr 	= document.getElementById("txtEmployeeId").value;
+	var startDate 	= document.getElementById("readAbleEstStart").value; 
+	var endDate 	= document.getElementById("readAbleEstEnd").value;
+	
+	var str = "";
+	var isValid = true;
+	
+	if(projectCode.trim() == '') {
+		str+= "Project Code can not be empty!\n";
+		isValid = false;
+	}
+	else if(projectCode.length > 26) {
+		str+= "Project Code can not be more than 25 characters!\n";
+		isValid = false;
+	}
+	
+	if(projectName.trim() == '') {
+		str+= "Project name can not be empty!\n";
+		isValid = false;
+	}
+	else if(projectName.length > 26) {
+		str+= "Project Name can not be more than 25 characters!\n";
+		isValid = false;
+	}
+	
+	if(projectDesc.trim() == '') {
+		str+= "Project Description can not be empty!\n";
+		isValid = false;
+	}
+	else if(projectDesc.length > 101) {
+		str+= "Project Description can not be more than 100 characters!\n";
+		isValid = false;
+	}
+	
+	if(projectMgr.trim() == '') {
+		str+= "Project Manager can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(startDate.trim() == '') {
+		str+= "Start Date Date can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(endDate.trim() == '') {
+		str+= "End Date Date can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(!isValid){
+		alert(str);
+	}
+	
+	return isValid;
+}
 </script>                 
 </head>
 <body>

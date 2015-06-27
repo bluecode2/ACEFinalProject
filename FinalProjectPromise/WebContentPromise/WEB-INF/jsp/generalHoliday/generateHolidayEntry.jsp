@@ -19,19 +19,46 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		var str = "";
-		$(".checkDays:checked").each(function(){
-			if(str != "") str += ",";
-			str += $(this).val();
-		});
-		
-		document.forms[0].checkDays.value = str;
-		document.forms[0].task.value = 'generate';
-		document.forms[0].submit();
+		if(validateForm()){
+			var str = "";
+			$(".checkDays:checked").each(function(){
+				if(str != "") str += ",";
+				str += $(this).val();
+			});
+			
+			document.forms[0].checkDays.value = str;
+			document.forms[0].task.value = 'generate';
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
 		location.href = "generalHoliday.do";
+	}
+	
+	function validateForm(){
+		
+		var genHolStartDate	= document.getElementById("txtGenStartDate").value;
+		var genHolEndDate 	= document.getElementById("txtGenEndDate").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(genHolStartDate.trim() == '') {
+			str+= "Start Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(genHolEndDate.trim() == '') {
+			str+= "End Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 	
 	$(document).ready(function() {

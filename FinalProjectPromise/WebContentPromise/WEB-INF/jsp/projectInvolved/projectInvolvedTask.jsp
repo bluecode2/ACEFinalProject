@@ -9,9 +9,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Project Task List</title>
+<link href="css/datepicker/bootstrap-datepicker.min.css"
+	rel="stylesheet">
+
 <script src="js/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
+	function showTask(task) {
+		document.forms[0].showDiv.value = task;
+	}
+
 	function onBtnBackClick() {
 		window.location.href = "project.do";
 	}
@@ -27,199 +36,249 @@
 
 		changePage(1);
 	}
-	
-	function getStyleBtn(){
-			
-				$('.firstBtn').each(function() {	
-					var assgTo = $(this).closest('tr').find('.assTo').val();
-					var currUser = $('#users_empId').val();
-					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
-					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
-						if (assgTo == currUser){
-							if (taskStat == 'TA_STAT_02') {
-								$(this).addClass('glyphicon glyphicon-play');
-								$(this).attr("title","Start");
-							} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {
-								$(this).addClass('glyphicon glyphicon-ok-circle');
-								$(this).attr("title","Submit");
-							} else if (taskStat == 'TA_STAT_03') {
-								$(this).addClass('glyphicon glyphicon-pause');
-								$(this).attr("title","Pause");
-							} else if (taskStat == 'TA_STAT_06') {
-								$(this).addClass('glyphicon glyphicon-chevron-right');
-								$(this).attr("title","Resume");				
-							} else{
-								$(this).hide();
-							}
-						}
-				});
+
+	function getStyleBtn() {
+
+		$('.firstBtn').each(function() {
+			var assgTo = $(this).closest('tr').find('.assTo').val();
+			var currUser = $('#users_empId').val();
+			var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
+			var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
+			if (assgTo == currUser) {
+				if (taskStat == 'TA_STAT_02') {
+					$(this).addClass('glyphicon glyphicon-play');
+					$(this).attr("title", "Start");
+				} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {
+					$(this).addClass('glyphicon glyphicon-ok-circle');
+					$(this).attr("title", "Submit");
+				} else if (taskStat == 'TA_STAT_03') {
+					$(this).addClass('glyphicon glyphicon-pause');
+					$(this).attr("title", "Pause");
+				} else if (taskStat == 'TA_STAT_06') {
+					$(this).addClass('glyphicon glyphicon-chevron-right');
+					$(this).attr("title", "Resume");
+				} else {
+					$(this).hide();
+				}
+			}
+		});
 	}
-	
 
-		$(document).ready(
-			function() {
-				getStyleBtn();
-		
-				
-				//link to show popup Desc
-				$('.linkDesc').on('click',function(){
-				
-					var taskName = $(this).closest('tr').find('.hdTaskName').val();
-					var taskDesc = $(this).closest('tr').find('.hdTaskDesc').val();
-				
-					$('#txtValueTaskDescName').val(taskName);
-					$('#txtValueTaskDescDesc').val(taskDesc);
-					$('#showDesc').modal();
-				});
-				
-				//link to show popup remarks
-				$('.lnkRemarks').on('click',function(){
-					var taskName = $(this).closest('tr').find('.hdTaskName').val();
-					var taskRemarks = $(this).closest('tr').find('.hdTaskRemakrs').val();
-					$('#txtValueTaskNameRemarks').val(taskName);
-					$('#txtValueTaskRemarksRemarks').val(taskRemarks);
-				
-					$('#showRemarks').modal();
-				});
-				
-				//link to manage first button on going
-				$('.firstBtn').on('click',function(){
-					var assgTo = $(this).closest('tr').find('.assTo').val();
-					var currUser = $('#users_empId').val();
-					var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
-					var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
-					var nama = $(this).closest('tr').find('.hdTaskName').val();
-					var taskId = $(this).closest('tr').find('.hdTaskId').val();
-					document.forms[0].testingId.value = taskId;
-					
-						if (assgTo == currUser){
-							if (taskStat == 'TA_STAT_02') {//this task for start task
-								if (confirm("Start Task " + nama +" ?")) {
-									document.forms[0].task.value = 'startTask';
-									document.forms[0].submit();
-								}
-							} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {// this task for submit task
-								if (confirm("Submit Task " + nama +" ?")) {
-									document.forms[0].task.value = 'submitTask';
-									document.forms[0].submit();									
-								}
-							} else if (taskStat == 'TA_STAT_03') {//this task for pause task
-								if (confirm("Pause Task " + nama +" ?")) {
-									document.forms[0].task.value = 'pauseTask';
-									$('#txtAddRemarksValueTaskId').val(taskId);
-									$('#txtAddRemarksValueTaskName').val(nama);
-									$('#txtAddRemarksValueTaskStatus').val(taskStat);
-									$('#addRemarks').modal();
+	$(document)
+			.ready(
+					function() {
+						getStyleBtn();
+						$(".datepicker").attr("data-provide", "datepicker");
 
-								}
-							} else if (taskStat == 'TA_STAT_06') {//this task for resume
-								if (confirm("Resume Task " + nama +" ?")) {
-									document.forms[0].task.value = 'resumeTask';
+						//link to show popup Desc
+						$('.linkDesc').on(
+								'click',
+								function() {
+
+									var taskName = $(this).closest('tr').find(
+											'.hdTaskName').val();
+									var taskDesc = $(this).closest('tr').find(
+											'.hdTaskDesc').val();
+
+									$('#txtValueTaskDescName').val(taskName);
+									$('#txtValueTaskDescDesc').val(taskDesc);
+									$('#showDesc').modal();
+								});
+
+						//link to show popup remarks
+						$('.lnkRemarks')
+								.on(
+										'click',
+										function() {
+											var taskName = $(this)
+													.closest('tr').find(
+															'.hdTaskName')
+													.val();
+											var taskRemarks = $(this).closest(
+													'tr')
+													.find('.hdTaskRemakrs')
+													.val();
+											$('#txtValueTaskNameRemarks').val(
+													taskName);
+											$('#txtValueTaskRemarksRemarks')
+													.val(taskRemarks);
+
+											$('#showRemarks').modal();
+										});
+
+						//link to manage first button on going
+						$('.firstBtn')
+								.on(
+										'click',
+										function() {
+											var assgTo = $(this).closest('tr')
+													.find('.assTo').val();
+											var currUser = $('#users_empId')
+													.val();
+											var taskStat = $(this)
+													.closest('tr').find(
+															'.hdTaskStatus')
+													.val();
+											var taskProg = $(this)
+													.closest('tr').find(
+															'.hdTaskProg')
+													.val();
+											var nama = $(this).closest('tr')
+													.find('.hdTaskName').val();
+											var taskId = $(this).closest('tr')
+													.find('.hdTaskId').val();
+											document.forms[0].testingId.value = taskId;
+
+											if (assgTo == currUser) {
+												if (taskStat == 'TA_STAT_02') {//this task for start task
+													if (confirm("Start Task "
+															+ nama + " ?")) {
+														document.forms[0].task.value = 'startTask';
+														document.forms[0]
+																.submit();
+													}
+												} else if (taskStat == 'TA_STAT_03'
+														&& taskProg == '100.0') {// this task for submit task
+													if (confirm("Submit Task "
+															+ nama + " ?")) {
+														document.forms[0].task.value = 'submitTask';
+														document.forms[0]
+																.submit();
+													}
+												} else if (taskStat == 'TA_STAT_03') {//this task for pause task
+													if (confirm("Pause Task "
+															+ nama + " ?")) {
+														document.forms[0].task.value = 'pauseTask';
+														$(
+																'#txtAddRemarksValueTaskId')
+																.val(taskId);
+														$(
+																'#txtAddRemarksValueTaskName')
+																.val(nama);
+														$(
+																'#txtAddRemarksValueTaskStatus')
+																.val(taskStat);
+														$('#addRemarks')
+																.modal();
+
+													}
+												} else if (taskStat == 'TA_STAT_06') {//this task for resume
+													if (confirm("Resume Task "
+															+ nama + " ?")) {
+														document.forms[0].task.value = 'resumeTask';
+														document.forms[0]
+																.submit();
+													}
+												} else {
+													$(this).hide();
+												}
+											}
+										});
+
+						$('.insertRemarks').on(
+								'click',
+								function() {
+									document.forms[0].remarksRecord.value = $(
+											'#txtAddRemarksValueTaskRemarks')
+											.val();
 									document.forms[0].submit();
-								}			
-							} else{
-								$(this).hide();
-							}
-						}
-				});
-				
-				$('.insertRemarks').on('click', function() {
-					document.forms[0].remarksRecord.value = $('#txtAddRemarksValueTaskRemarks').val();
-					document.forms[0].submit();
+								});
+
+						//LINK MANAGE ACTIVITY
+						$('.lnkMngActivity').each(
+								function() {
+									var assignTo = $(this).closest('tr').find(
+											'.assTo').val();
+									var currEmpId = $('#users_empId').val();
+									if (assignTo == currEmpId)
+										$(this).show();
+									else
+										$(this).hide();
+								});
+
+						$('.lnkMngActivity').on(
+								'click',
+								function() {
+
+									var taskId = $(this).closest('tr').find(
+											'.hdTaskId').val();
+
+									$.ajax({
+										type : "POST",
+										url : "activity.do",
+										data : "task=manageActivity&taskId="
+												+ taskId,
+										success : function(response) {
+											$("#tblShow").find("tr:gt(0)")
+													.remove();
+											$("#tblShow").append(response);
+											$('#showMember').modal();
+										},
+										error : function(e) {
+											alert("Error: " + e);
+										}
+
+									});
+
+									var taskName = $(this).closest('tr').find(
+											'.hdTaskName').val();
+									var assignedTo = $(this).closest('tr')
+											.find('.hdAssignedToName').val();
+
+									$('#hdnModalTaskId').val(taskId);
+									$('#txtActivityTaskName').val(taskName);
+									$('#txtActivityAssignTo').val(assignedTo);
+									$('#showActivity').modal();
+
+								});
+
+						$('#btnShowEntry').on('click', function() {
+							$('#txtActivityDesc').val('');
+							$('#divActivityEntry').show();
+						});
+						$('#btnCancel').on('click', function() {
+							$('#divActivityEntry').hide();
+						});
+
+						$('#btnSaveActivity').on(
+								'click',
+								function() {
+									var taskId = $('#hdnModalTaskId').val();
+									var activityDesc = $('#txtActivityDesc')
+											.val();
+
+									$.ajax({
+										type : "POST",
+										url : "activity.do",
+										data : "task=addActivity&taskId="
+												+ taskId + "&actDesc="
+												+ activityDesc,
+										success : function(response) {
+											$('.emptyRow').remove();
+											$("#tblShow").append(response);
+											$('#divActivityEntry').hide();
+											registerBtnActivityEvent();
+										},
+										error : function(e) {
+											alert("Error: " + e);
+										}
+
+									});
+								});
+
+						$('#showActivity').on('shown.bs.modal', function() {
+							registerBtnActivityEvent();
+						});
+						$('#showActivity').on('hidden.bs.modal', function() {
+							window.location.href = "projectInvolvedTask.do";
+						});
 					});
-				
-	
-				
-				//LINK MANAGE ACTIVITY
-				$('.lnkMngActivity').each(function (){
-					var assignTo = $(this).closest('tr').find('.assTo').val();
-					var currEmpId = $('#users_empId').val();
-					if(assignTo == currEmpId)
-						$(this).show();
-					else
-						$(this).hide();
-				});
-				
-				$('.lnkMngActivity').on('click',
-						function() {
 
-							var taskId = $(this).closest('tr')
-									.find('.hdTaskId').val();
-
-							$.ajax({
-								type : "POST",
-								url : "activity.do",
-								data : "task=manageActivity&taskId=" + taskId,
-								success : function(response) {
-									$("#tblShow").find("tr:gt(0)").remove();
-									$("#tblShow").append(response);
-									$('#showMember').modal();
-								},
-								error : function(e) {
-									alert("Error: " + e);
-								}
-
-							});
-
-							var taskName = $(this).closest('tr').find(
-									'.hdTaskName').val();
-							var assignedTo = $(this).closest('tr').find(
-									'.hdAssignedToName').val();
-
-							$('#hdnModalTaskId').val(taskId);
-							$('#txtActivityTaskName').val(taskName);
-							$('#txtActivityAssignTo').val(assignedTo);
-							$('#showActivity').modal();
-
-						});
-
-				$('#btnShowEntry').on('click', function() {
-					$('#txtActivityDesc').val('');
-					$('#divActivityEntry').show();
-				});
-				$('#btnCancel').on('click', function() {
-					$('#divActivityEntry').hide();
-				});
-
-				$('#btnSaveActivity').on(
-						'click',
-						function() {
-							var taskId = $('#hdnModalTaskId').val();
-							var activityDesc = $('#txtActivityDesc').val();
-
-							$.ajax({
-								type : "POST",
-								url : "activity.do",
-								data : "task=addActivity&taskId=" + taskId
-										+ "&actDesc=" + activityDesc,
-								success : function(response) {
-									$('.emptyRow').remove();
-									$("#tblShow").append(response);
-									$('#divActivityEntry').hide();
-									registerBtnActivityEvent();
-								},
-								error : function(e) {
-									alert("Error: " + e);
-								}
-
-							});
-						});
-
-				$('#showActivity').on('shown.bs.modal', function() {
-					registerBtnActivityEvent();
-				});	
-				$('#showActivity').on('hidden.bs.modal', function() {
-				     window.location.href = "projectInvolvedTask.do";
-				    });
-			});
-
-	
-	
 	function registerBtnActivityEvent() {
 		$('.btnActivityDelete').off('click');
 		$('.btnComplete').off('click');
 		$('.btnUndoComplete').off('click');
-		
+
 		$('.btnActivityDelete')
 				.on(
 						'click',
@@ -254,7 +313,8 @@
 					$.ajax({
 						type : "POST",
 						url : "activity.do",
-						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=1",
+						data : "task=updateActivity&selectedId=" + activityId
+								+ "&isCompleted=1",
 						success : function(response) {
 							row.find('td').eq(2).remove();
 							row.find('td').eq(1).remove();
@@ -277,7 +337,8 @@
 					$.ajax({
 						type : "POST",
 						url : "activity.do",
-						data : "task=updateActivity&selectedId=" + activityId + "&isCompleted=0",
+						data : "task=updateActivity&selectedId=" + activityId
+								+ "&isCompleted=0",
 						success : function(response) {
 							row.find('td').eq(2).remove();
 							row.find('td').eq(1).remove();
@@ -291,7 +352,33 @@
 					});
 				});
 	}
-	
+
+	//function untuk edit dan delete dari propose project task
+	function actionForm(task, id, nama) {
+
+		document.forms[0].taskForProp.value = task;
+		document.forms[0].selectTaskId.value = id;
+
+		if (task == "delete") {
+			if (confirm("Are you sure want to delete proposed Project Task "
+					+ nama + " ?")) {
+				document.forms[0].submit();
+			}
+		} else {
+			document.forms[0].submit();
+		}
+	}
+
+	function btnAddProp(task) {
+		var allowAdd = document.forms[0].allowAdd.value;
+		if (allowAdd == "true") {
+			document.forms[0].taskForProp.value = task;
+			document.forms[0].submit();
+		} else {
+			alert("You don't have a supervisor to proposed an Project task!");
+		}
+
+	}
 </script>
 </head>
 <body>
@@ -307,11 +394,18 @@
 		<html:hidden property="currPage" name="projectTaskForm" />
 		<html:hidden property="selectedId" name="projectTaskForm" />
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
-		<html:hidden property="empId" name="projectTaskForm" styleId="users_empId"/>
-		<html:hidden property="testingId" name="projectTaskForm"/>
+		<html:hidden property="empId" name="projectTaskForm"
+			styleId="users_empId" />
+		<html:hidden property="testingId" name="projectTaskForm" />
+		<html:hidden property="showDiv" name="projectTaskForm" />
+		<html:hidden property="selectTaskId" name="projectTaskForm" />
+		<html:hidden property="taskForProp" name="projectTaskForm" />
+		<html:hidden property="allowAdd" name="projectTaskForm" />
+		<html:hidden property="isAdd" name="projectTaskForm" />
+		<html:hidden property="bean.propTaskId" name="projectTaskForm" />
 
-		<div class="container">
-			<div class="form-group has-info" style="margin-top:40px">
+		<div class="container divContent">
+			<div class="form-group has-info" style="margin-top: 40px">
 				<table width="100%">
 					<tr>
 						<td width="45%">
@@ -332,7 +426,7 @@
 											property="prjBean.projectName" styleClass="form-control"
 											disabled="true"></html:text></td>
 								</tr>
-								
+
 							</table>
 						</td>
 						<td>&nbsp;</td>
@@ -374,103 +468,245 @@
 					</tr>
 				</table>
 			</div>
-			<div class="divSearch form-group has-info" style="float: right;">
-				<table>
-					<tr>
-						<td>Search by</td>
-						<td style="padding-left: 15px;"><html:select
-								name="projectTaskForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
-								<option value="taskName">Task Name</option>
-								<option value="assignToName">Assign To</option>
-							</html:select></td>
-						<td style="padding-left: 15px"><html:text
-								name="projectTaskForm" property="searchValue"
-								styleClass="form-control" /></td>
-						<td style="padding-left: 15px">
-							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-							</button>
-						</td>
-					</tr>
-				</table>
+			<div>
+				<button onclick="showTask('true')" class="btn btn-sm btn-info">Project
+					Task</button>
+				&nbsp;
+				<button onclick="showTask('false')" class="btn btn-sm btn-info">Propose
+					Project Task</button>
 			</div>
-
-			<div class="divContent">
-				<table class="table table-bordered" cellspacing="0"
-					style="margin-top: 10px;" width="100%" class="tableContent">
-					<thead class="panel panel-info">
+			<logic:equal value="true" name="projectTaskForm" property="showDiv">
+				<div class="divSearch form-group has-info" align="right">
+					<table width="100%">
+						<tr valign="middle">
+							<td width="60%"></td>
+							<td>Search by</td>
+							<td style="padding-left: 15px;"><html:select
+									name="projectTaskForm" property="searchField"
+									styleId="selSearchField" styleClass="form-control">
+									<option value="taskName">Task Name</option>
+									<option value="assignToName">Assign To</option>
+								</html:select></td>
+							<td style="padding-left: 15px"><html:text
+									name="projectTaskForm" property="searchValue"
+									styleClass="form-control" /></td>
+							<td style="padding-left: 15px">
+								<button type="button" onclick="search();" id="btnSearch"
+									class="btn btn-info btn-icon" title="Search">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</logic:equal>
+			<logic:equal value="false" name="projectTaskForm" property="showDiv">
+				<div class="divSearch form-group has-info" align="right">
+					<table width="100%">
+						<tr valign="middle">
+							<td width="60%"><div align="left">
+									<button type="button" href="#" onclick="btnAddProp('add');" class="btn btn-raised btn-info btn-icon"
+										title="Proposed Task"><span
+										class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								</div></td>
+							<td>Search by</td>
+							<td style="padding-left: 15px;"><html:select
+									name="projectTaskForm" property="searchField"
+									styleId="selSearchField" styleClass="form-control">
+									<option value="propTaskName">Task Name</option>
+									<option value="propToName">Propose To</option>
+								</html:select></td>
+							<td style="padding-left: 15px"><html:text
+									name="projectTaskForm" property="searchValue"
+									styleClass="form-control" /></td>
+							<td style="padding-left: 15px"><button type="button"
+									onclick="search();" id="btnSearch"
+									class="btn btn-info btn-icon" title="Search">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button></td>
+						</tr>
+					</table>
+				</div>
+			</logic:equal>
+			<logic:equal value="show" name="viewAddEdit">
+				<div class="panel form-group has-info" style="padding: 20px">
+					<h4>Propose Task Entry</h4>
+					<hr>
+					<table width="50%">
+						<colgroup>
+							<col width="30%" />
+							<col />
+						</colgroup>
 						<tr>
 							<td>Task Name</td>
-							<td>Assign To</td>
-							<td align="center" width="200px">Estimate Date</td>
-							<td align="center" width="200px">Estimate Main Days</td>
-							<td align="center" width="200px">Actual Date</td>
-
-							<td align="center">Status</td>
-							<td align="center" width="100px">Activity</td>
-							<td class="align-center">Action</td>
+							<td><html:text styleClass="form-control"
+									styleId="txtTaskName" name="projectTaskForm"
+									property="bean.propTaskName"></html:text></td>
 						</tr>
-					</thead>
-					<tbody>
-						<logic:notEmpty name="projectTaskForm" property="arrList">
-							<logic:iterate id="reg" name="projectTaskForm" property="arrList">
-								<tr>
-								<td style="display:none"> 
-									<html:hidden property="assignedTo" name="reg" styleClass="assTo"/>
-									<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc" /> 
-									<html:hidden property="taskId" name="reg" styleClass="hdTaskId" /> 
-									<html:hidden property="taskName" name="reg" styleClass="hdTaskName" /> 
-									<html:hidden property="remarks" name="reg" styleClass="hdTaskRemakrs" />
-									<html:hidden property="assignedToName" name="reg" styleClass="hdAssignedToName"/> 
-									<html:hidden name="reg" property="taskProgress" styleClass="hdTaskProg" />
-									<html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
-								
-									<bean:write name="reg" property="assignedTo"/> </td>
-								<td>
-									<a href="#" class="text-info linkDesc">
-										<bean:write name="reg" property="taskName" />
-									</a>			
-									</td>
-									<td><bean:write name="reg" property="assignedToName" /> <logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
-									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td align="center"><bean:write name="reg" property="estMainDays" /></td>
-									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td align="center">
-											
-											<bean:write name="reg"
-											property="taskStatusName" /> : 
-											<bean:write name="reg" property="taskProgress" />%<logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="lnkRemarks text-info">Remarks</a></logic:notEqual></td>
-									<td style="display:none"><bean:write name="reg" property="taskStatus" /></td>
-									<td style="display:none"><bean:write name="reg" property="taskProgress" /></td>
-									<td align="center"><a href="#" class="text-info lnkMngActivity" id="mngAct">Manage Activity</a>
-									</td>
-									<td align="center">
-										<a href="#" onclick="">
-											<span class="firstBtn" aria-hidden="true" ></span>
-										</a> 
-										&nbsp; 
-									<!-- 	<a href="#" onclick="">
-											<span class="secondBtn" aria-hidden="true" ></span>
-										</a>  -->
-									</td>
-								</tr>
-							</logic:iterate>
-						</logic:notEmpty>
-						<logic:empty name="projectTaskForm" property="arrList">
+						<tr>
+							<td>Task Desc</td>
+							<td><html:textarea styleClass="form-control"
+									styleId="txtTaskDesc" name="projectTaskForm"
+									property="bean.propTaskDesc"></html:textarea></td>
+						</tr>
+						<tr>
+							<td>Estimate Start Date</td>
+							<td><html:text styleClass="form-control datepicker"
+									styleId="txtEstStartDate" name="projectTaskForm"
+									property="bean.estStartDateInString" style="width: 150px"></html:text>
+							</td>
+						</tr>
+						<tr>
+							<td>Estimate End Date</td>
+							<td><html:text styleClass="form-control datepicker"
+									styleId="txtEstEndDate" name="projectTaskForm"
+									property="bean.estEndDateInString" style="width: 150px"></html:text>
+							</td>
+						</tr>
+					</table>
+					<div align="right">
+						<button onclick="btnAddProp('save');" class="btn btn-sm btn-info">Save</button>
+						&nbsp;
+						<button onclick="btnAddProp('cancel');" class="btn btn-sm">Cancel</button>
+					</div>
+				</div>
+			</logic:equal>
+			<logic:equal value="true" name="projectTaskForm" property="showDiv">
+				<div id="projTask">
+					<table class="table table-bordered" cellspacing="0" width="100%"
+						class="">
+						<thead class="panel panel-info">
 							<tr>
-								<td colspan="7" align="center" style="padding: 10px">No
-									Data Found</td>
+								<td>Task Name</td>
+								<td>Assign To</td>
+								<td align="center" width="200px">Estimate Date</td>
+								<td align="center" width="200px">Actual Date</td>
+
+								<td align="center">Status</td>
+								<td align="center" width="100px">Activity</td>
+								<td class="align-center">Action</td>
 							</tr>
-						</logic:empty>
-					</tbody>
-				</table>
-				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
-			</div>
+						</thead>
+						<tbody>
+							<logic:notEmpty name="projectTaskForm" property="arrList">
+								<logic:iterate id="reg" name="projectTaskForm"
+									property="arrList">
+									<tr>
+										<td style="display: none"><html:hidden
+												property="assignedTo" name="reg" styleClass="assTo" /> <html:hidden
+												property="taskDesc" name="reg" styleClass="hdTaskDesc" /> <html:hidden
+												property="taskId" name="reg" styleClass="hdTaskId" /> <html:hidden
+												property="taskName" name="reg" styleClass="hdTaskName" /> <html:hidden
+												property="remarks" name="reg" styleClass="hdTaskRemakrs" />
+											<html:hidden property="assignedToName" name="reg"
+												styleClass="hdAssignedToName" /> <html:hidden name="reg"
+												property="taskProgress" styleClass="hdTaskProg" /> <html:hidden
+												name="reg" property="taskStatus" styleClass="hdTaskStatus" />
+
+											<bean:write name="reg" property="assignedTo" /></td>
+										<td><a href="#" class="text-info linkDesc"> <bean:write
+													name="reg" property="taskName" />
+										</a></td>
+										<td><bean:write name="reg" property="assignedToName" />
+											<logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
+										<td align="center"><bean:write name="reg"
+												property="estStartDateInString" /> to <bean:write
+												name="reg" property="estEndDateInString" /> : 
+												<bean:write name="reg"
+												property="estMainDays" /></td>
+										<td align="center"><bean:write name="reg"
+												property="actStartDateInString" /> to <bean:write
+												name="reg" property="actEndDateInString" /></td>
+										<td align="center"><bean:write name="reg"
+												property="taskStatusName" /> : <bean:write name="reg"
+												property="taskProgress" />%<logic:notEqual name="reg"
+												property="remarks" value="">
+												<br />
+												<a href="#" class="lnkRemarks text-info">Remarks</a>
+											</logic:notEqual></td>
+										<td style="display: none"><bean:write name="reg"
+												property="taskStatus" /></td>
+										<td style="display: none"><bean:write name="reg"
+												property="taskProgress" /></td>
+										<td align="center"><a href="#"
+											class="text-info lnkMngActivity" id="mngAct">Manage
+												Activity</a></td>
+										<td align="center"><a href="#" onclick=""> <span
+												class="firstBtn" aria-hidden="true"></span>
+										</a> &nbsp; <!-- 	<a href="#" onclick="">
+											<span class="secondBtn" aria-hidden="true" ></span>
+										</a>  --></td>
+									</tr>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="projectTaskForm" property="arrList">
+								<tr>
+									<td colspan="7" align="center" style="padding: 10px">No
+										Data Found</td>
+								</tr>
+							</logic:empty>
+						</tbody>
+					</table>
+					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+				</div>
+			</logic:equal>
+
+			<logic:equal value="false" name="projectTaskForm" property="showDiv">
+				<div>
+					<table class="table table-striped table-bordered table-hover"
+						cellspacing="0" style="margin-top: 10px;" width="100%"
+						class="tableContent">
+						<thead>
+							<tr class="panel panel-info">
+								<td>Project Name</td>
+								<td>Task Name</td>
+								<td>Estimate</td>
+								<td>Proposed To</td>
+								<td>Status</td>
+								<td class="align-center">Action</td>
+							</tr>
+						</thead>
+						<tbody>
+							<logic:notEmpty name="projectTaskForm" property="arrListProp">
+								<logic:iterate id="reg" name="projectTaskForm"
+									property="arrListProp">
+									<tr>
+										<td><bean:write name="reg" property="projectName" />
+										<td><bean:write name="reg" property="propTaskName" />
+										<td><bean:write name="reg"
+												property="estStartDateInString" /> &nbsp;To&nbsp; <bean:write
+												name="reg" property="estEndDateInString" /></td>
+										<td><bean:write name="reg" property="propToName" /></td>
+										<td><bean:write name="reg" property="propStatusName" /></td>
+										<td align="center"><logic:equal name="reg"
+												property="propStatus" value="TA_STAT_01">
+												<a class="text-success" href="#"
+													onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
+													title="Edit"><span class="glyphicon glyphicon-pencil"
+													aria-hidden="true"></span></a> &nbsp; <a href="#"
+													class="text-danger"
+													onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
+													title="Delete"><span class="glyphicon glyphicon-trash"
+													aria-hidden="true"></span></a>
+											</logic:equal></td>
+									</tr>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="projectTaskForm" property="arrListProp">
+								<tr>
+									<td colspan="6" align="center" style="padding: 10px">No
+										Data Found</td>
+								</tr>
+							</logic:empty>
+						</tbody>
+					</table>
+					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+				</div>
+			</logic:equal>
+
 		</div>
 
-	  	<!-- popup to give remarks  -->
+		<!-- popup to give remarks  -->
 		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -487,12 +723,11 @@
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
-									<td style="padding-left: 15px">
-									<input type="hidden" id="txtAddRemarksValueTaskId" /> 
-									<input type="hidden" id="txtAddRemarksValueTaskStatus" />
-									<input type="text" id="txtAddRemarksValueTaskName" class="form-control" disabled="disabled" />
-
-									</td>
+									<td style="padding-left: 15px"><input type="hidden"
+										id="txtAddRemarksValueTaskId" /> <input type="hidden"
+										id="txtAddRemarksValueTaskStatus" /> <input type="text"
+										id="txtAddRemarksValueTaskName" class="form-control"
+										disabled="disabled" /></td>
 
 								</tr>
 								<tr>
@@ -503,25 +738,24 @@
 								</tr>
 							</table>
 							<div class="modal-footer">
-							<table align="right">
-							<tr>
-								<td>
-									<input type="button" class="insertRemarks btn btn-sm btn-info" value="Save">
-								</td>
-								<td>
-									<input type="button" class="btn btn-sm " data-dismiss="modal" value="Cancel">
-								</td>
-							</tr>
-							</table>
-							
-						</div>
+								<table align="right">
+									<tr>
+										<td><input type="button"
+											class="insertRemarks btn btn-sm btn-info" value="Save">
+										</td>
+										<td><input type="button" class="btn btn-sm "
+											data-dismiss="modal" value="Cancel"></td>
+									</tr>
+								</table>
 
+							</div>
+
+						</div>
 					</div>
+					<!-- /.modal-content -->
 				</div>
-			<!-- /.modal-content -->
+				<!-- /.modal-dialog -->
 			</div>
-			<!-- /.modal-dialog -->
-		</div>
 		</div>
 		<!-- /.modal  -->
 
@@ -551,8 +785,7 @@
 									<td style="padding-left: 15px">Description</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="txtValueTaskDescDesc"
-											disabled="disabled"></textarea>
-									</td>
+											disabled="disabled"></textarea></td>
 								</tr>
 							</table>
 						</div>
@@ -564,7 +797,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
+
 		<!-- popup to show Remark -->
 		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -582,16 +815,17 @@
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
-									<td style="padding-left: 15px">
-									<input type="text" id="txtValueTaskNameRemarks" class="form-control" disabled="disabled" /></td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtValueTaskNameRemarks" class="form-control"
+										disabled="disabled" /></td>
 
 								</tr>
 								<tr>
 									<td style="padding-left: 15px" valign="top">Task Remarks</td>
-									<td style="padding-left: 15px">
-										<textarea rows="3" cols="3" class="form-control" id="txtValueTaskRemarksRemarks" disabled="disabled">
-									</textarea>
-								</td>
+									<td style="padding-left: 15px"><textarea rows="3" cols="3"
+											class="form-control" id="txtValueTaskRemarksRemarks"
+											disabled="disabled">
+									</textarea></td>
 								</tr>
 							</table>
 						</div>
@@ -603,7 +837,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal  -->
-		
+
 		<!-- popup to show Activity -->
 		<div class="modal fade" id="showActivity" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
