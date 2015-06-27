@@ -34,7 +34,7 @@
 	<insert id="insertProjectMember" parameterClass="project_member.ProjectMemberBean">
 		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID, IS_ACTIVE) 
 		VALUES 
-		(#newMemberId#,#pRoleId#,#empId#,#projId#,1)
+		(#memberId#,#projectRoleId#,#employeeId#,#projectId#,1)
 	</insert>
 	
 	<select id="getProjectMemberId" resultClass="java.lang.Integer">
