@@ -56,7 +56,7 @@ public class ProjectManager {
 		return listProject;
 	}
 
-	public List<ProjectBean> getProjectListForRole(String col, Integer input,
+	public List<ProjectBean> getProjectListForRole(String checkField, Integer inputField, String col, String input,
 			Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
@@ -64,6 +64,8 @@ public class ProjectManager {
 
 		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
 		Map map = new HashMap();
+		map.put("checkField", checkField);
+		map.put("searchValue2", inputField);
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
@@ -86,9 +88,11 @@ public class ProjectManager {
 		return listProject;
 	}
 
-	public Integer getCountProjectListForRole(String column, Integer value)
+	public Integer getCountProjectListForRole(String checkField, Integer val, String column, String value)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
+		map.put("checkField", checkField);
+		map.put("searchValue2", val);
 		map.put("searchField", column);
 		map.put("searchValue", value);
 		Integer result = (Integer) this.ibatis.queryForObject(

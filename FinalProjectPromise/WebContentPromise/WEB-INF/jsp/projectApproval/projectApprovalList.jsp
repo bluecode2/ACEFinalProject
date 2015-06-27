@@ -128,7 +128,19 @@ function goToEvaluate(id) {
 										</a>
 									</td>
 									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
+									<td>
+										<logic:notEmpty name="reg" property="actStartDateInString">
+											<bean:write name="reg" property="actStartDateInString" /> to 
+												<logic:notEmpty name="reg" property="actEndDateInString">
+													<bean:write name="reg" property="actEndDateInString" />
+												</logic:notEmpty>
+												<logic:empty  name="reg" property="actEndDateInString">
+													-
+												</logic:empty>
+										</logic:notEmpty>
+										<logic:empty name="reg" property="actStartDateInString">
+											-
+										</logic:empty>
 									<td>
 										<a href="#" class="text-info linkMember">
 											Project Member
