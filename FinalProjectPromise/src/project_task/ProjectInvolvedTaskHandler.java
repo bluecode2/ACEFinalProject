@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -37,6 +39,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 		tsForm.setEmpId(us.getEmployeeId());
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		NotificationManager noMan = new NotificationManager();
 		
 		ProjectTaskBean pTaskBean = new ProjectTaskBean();
 		
@@ -69,6 +73,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL;
 			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
 	
+			tsForm.setTkBean(tsMan.getDataForEdit(taskId));				
+			noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedBy(), tsForm.getTkBean().getTaskId());
 		}
 		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO PAUSE TASK
 			int taskId = tsForm.getTestingId();

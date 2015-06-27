@@ -43,7 +43,7 @@ public class ProjectHandler extends Action{
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		EmployeeBean eBean = new EmployeeBean();
-		
+		NotificationManager nMan = new NotificationManager();
 		ProjectRoleManager pRoleMan = new ProjectRoleManager();
 		ProjectMemberManager pMemberMan = new ProjectMemberManager();
 		
@@ -91,6 +91,10 @@ public class ProjectHandler extends Action{
 			pForm.getpBean().setActEndDate(now);
 			
 			pMan.updateProject(pForm.getpBean());
+			
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
+			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+
 			
 		}
 		else if ("cancel".equalsIgnoreCase(pForm.getTask())){
@@ -158,7 +162,7 @@ public class ProjectHandler extends Action{
 				pMemberMan.insertProjectMember(memberBean);
 				
 				//Create notification 
-				NotificationManager nMan = new NotificationManager();
+		
 				nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){
@@ -177,7 +181,6 @@ public class ProjectHandler extends Action{
 					pMemberMan.insertProjectMember(memberBean);
 					
 					//Create notification
-					NotificationManager nMan = new NotificationManager();
 					nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 					nMan.createNotificationRemoveProjectMember(us.getEmployeeId(),oldBean.getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 				}
