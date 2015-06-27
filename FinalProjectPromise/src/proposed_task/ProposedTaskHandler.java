@@ -74,7 +74,7 @@ public class ProposedTaskHandler extends Action {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());
 		dForm.setAllowAdd(empBean.getSupervisorId() != null);
-		
+
 		int rowCount;
 
 		dForm.setArrList(dMan.getAllPropTaskFiltered(

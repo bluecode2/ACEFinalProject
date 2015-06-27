@@ -28,7 +28,7 @@ public class MyCurrentTaskHandler extends Action {
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
 		if ("start".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_03");
+			tsMan.startMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_03");
 		}
 		else if ("pause".equals(tsForm.getTask())) {
 			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_06");

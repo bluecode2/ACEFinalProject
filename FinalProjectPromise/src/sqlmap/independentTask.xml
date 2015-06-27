@@ -91,6 +91,16 @@
 		where task_id =#taskId#      
 	</update>
 	
+	<update id="updateStatusAssignTaskApprove" parameterClass="java.util.Map">
+		UPDATE task set
+		ACT_END_DATE = SYSDATE,
+		updated_by = #updatedBy#,
+		task_status = #taskStatus#,
+		remarks = #remarks#,
+		update_date = SYSDATE
+		where task_id =#taskId#      
+	</update>
+	
 	<select id="getAssignTaskForEdit" resultClass="independent_task.IndependentTaskBean" parameterClass="java.lang.Integer">
 	  	SELECT
 		TASK_ID           AS taskId,
@@ -190,12 +200,20 @@
 		</dynamic>		          
 	</select>
 	
-	<update id="updateStatusMyCurrentTask" parameterClass="java.util.Map">
+	<update id="startMyCurrentTask" parameterClass="java.util.Map">
 		UPDATE TASK SET 
+		ACT_START_DATE = SYSDATE,
 		TASK_STATUS = #taskStatus#,
 		updated_by = #updatedBy#,
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
 	</update>
 	
+	<update id="updateStatusMyCurrentTask" parameterClass="java.util.Map">
+		UPDATE TASK SET
+		TASK_STATUS = #taskStatus#,
+		updated_by = #updatedBy#,
+		update_date = SYSDATE
+		WHERE task_id = #taskId#
+	</update>
 </sqlMap>

@@ -69,9 +69,9 @@ public class AssignTaskHandler extends Action {
 				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
 			}
-			else if (tsForm.getSelectedEdit() == 1) {
+			else if (tsForm.getSelectedEdit() == 1) { //APPROVED
 				tsForm.setStatusTask("TA_STAT_07");
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+				tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
 			}	
 		}
 		else if ("secondEdit".equals(tsForm.getTask())) {
