@@ -55,7 +55,7 @@ public class IndependentTaskManager {
 	
 	public void createNewAssignTask(IndependentTaskBean tsBean) {
 		try {
-			tsBean.setTaskId(getNewTaskId());
+			
 			this.ibatis.startTransaction();
 			this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
 			this.ibatis.commitTransaction();

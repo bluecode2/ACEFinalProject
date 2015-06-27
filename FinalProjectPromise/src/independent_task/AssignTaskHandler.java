@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+import oracle.jdbc.Const;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -32,6 +35,7 @@ public class AssignTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
+		NotificationManager noMan = new NotificationManager();
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 		ActivityManager actMan = new ActivityManager();
 		if ("add".equals(tsForm.getTask())) {
@@ -49,11 +53,15 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setAssignedTo(null);
 
 			if (isAdd) {
+				tsForm.getTkBean().setTaskId(tsMan.getNewTaskId());
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsMan.createNewAssignTask(tsForm.getTkBean());
+				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
+				
 			} else {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
 				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
+				
 			}
 			response.sendRedirect("assignTask.do");
 			return null;
@@ -63,26 +71,30 @@ public class AssignTaskHandler extends Action {
 
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
-
 				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
 			}
 			else if (tsForm.getSelectedEdit() == 1) {
-				tsForm.setStatusTask("TA_STAT_07");
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}	
 		}
 		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
-				tsForm.setStatusTask("TA_STAT_99");
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_CANCELLED);
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
-				
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 			else if (tsForm.getSelectedEdit() == 1) {
-				tsForm.setStatusTask("TA_STAT_98");
+				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_ONGOING);
 				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 
 		}

@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -26,19 +28,20 @@ public class MyCurrentTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
-
+		NotificationManager noMan = new NotificationManager();
 		if ("start".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_03");
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ONGOING);
 		}
 		else if ("pause".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_06");
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ON_HOLD);
 		}
 		else if ("submit".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), "TA_STAT_04");
+			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL);
+			tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedBy(), tsForm.getTkBean().getTaskId());
 		}
 	
-		CommonFunction.initializeHeader(Constant.MenuCode.CURRENT_TASK_LIST,
-				us, request);
+		CommonFunction.initializeHeader(Constant.MenuCode.CURRENT_TASK_LIST, us, request);
 		
 		tsForm.setTask("");
 		tsForm.setSearchField(tsForm.getCurrSearchField());
