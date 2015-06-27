@@ -215,16 +215,14 @@ public class ProjectHandler extends Action{
 		/*rowCount = pMan.getCountProject(pForm.getCurrSearchField(),
 				pForm.getCurrSearchValue());*/
 		
-		
-		
 		//untuk dept head atau PM
 		if (addBtn){
-			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId());
-			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrPage(), Constant.pageSize));
+			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
+			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
 		}
 		else {
-			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId());
-			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrPage(), Constant.pageSize));
+			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
+			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
 		}
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount
