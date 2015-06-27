@@ -171,7 +171,6 @@ function registerSearchAssignToEvent(){
 									<tr>
 										<th>Employee Code</th>
 										<th>Employee Name</th>
-										<th>Email</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -181,8 +180,6 @@ function registerSearchAssignToEvent(){
 												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
 												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp" property="email" />
-												</td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
