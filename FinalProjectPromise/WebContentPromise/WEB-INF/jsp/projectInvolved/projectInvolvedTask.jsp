@@ -9,9 +9,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Project Task List</title>
+<link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
 <script src="js/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
+	function showTask(task){
+			document.forms[0].showDiv.value = task;
+	}
+
 	function onBtnBackClick() {
 		window.location.href = "project.do";
 	}
@@ -59,7 +67,7 @@
 		$(document).ready(
 			function() {
 				getStyleBtn();
-		
+				$(".datepicker").attr("data-provide", "datepicker");
 				
 				//link to show popup Desc
 				$('.linkDesc').on('click',function(){
@@ -292,6 +300,31 @@
 				});
 	}
 	
+	//function untuk edit dan delete dari propose project task
+	function actionForm(task, id, nama) {
+
+		document.forms[0].taskForProp.value = task;
+		document.forms[0].selectTaskId.value = id;
+
+		if (task == "delete") {
+			if (confirm("Are you sure want to delete proposed Project Task " + nama+" ?")) {
+				document.forms[0].submit();
+			}
+		} else {
+			document.forms[0].submit();
+		}
+	}
+	
+	function btnAddProp(task) {
+		var allowAdd = document.forms[0].allowAdd.value;
+		if (allowAdd == "true") {
+			document.forms[0].taskForProp.value = task;
+			document.forms[0].submit();
+		} else {
+			alert("You don't have a supervisor to proposed an Project task!");
+		}
+
+	}
 </script>
 </head>
 <body>
@@ -309,6 +342,12 @@
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 		<html:hidden property="empId" name="projectTaskForm" styleId="users_empId"/>
 		<html:hidden property="testingId" name="projectTaskForm"/>
+		<html:hidden property="showDiv" name="projectTaskForm"/>
+		<html:hidden property="selectTaskId" name="projectTaskForm"/>
+		<html:hidden property="taskForProp" name="projectTaskForm"/>
+		<html:hidden property="allowAdd" name="projectTaskForm"/>
+		<html:hidden property="isAdd" name="projectTaskForm"/>
+		<html:hidden property="bean.propTaskId" name="projectTaskForm"/>
 
 		<div class="container">
 			<div class="form-group has-info" style="margin-top:40px">
@@ -374,6 +413,8 @@
 					</tr>
 				</table>
 			</div>
+			
+			<logic:equal value="true" name="projectTaskForm" property="showDiv">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
@@ -396,8 +437,85 @@
 					</tr>
 				</table>
 			</div>
-
-			<div class="divContent">
+			</logic:equal>
+			<logic:equal value="false" name="projectTaskForm" property="showDiv">
+			<div class="divSearch form-group has-info" style="float: right;">
+				<table>
+					<tr>
+						<td>Search by</td>
+						<td style="padding-left: 15px;"><html:select
+								name="projectTaskForm" property="searchField"
+								styleId="selSearchField" styleClass="form-control">
+								<option value="propTaskName">Task Name</option>
+								<option value="propToName">Propose To</option>
+							</html:select></td>
+						<td style="padding-left: 15px"><html:text
+								name="projectTaskForm" property="searchValue"
+								styleClass="form-control" /></td>
+						<td style="padding-left: 15px"><button type="button"
+								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								title="Search">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button></td>
+					</tr>
+				</table>
+			</div>
+			</logic:equal>
+			<div class="divContent" >
+				<button onclick="showTask('true')" class="btn btn-sm btn-info">Project Task</button> 
+				&nbsp; 
+				<button onclick="showTask('false')" class="btn btn-sm btn-info">Propose Project Task</button>
+			</div>
+			<logic:equal value="false" name="projectTaskForm" property="showDiv">
+			<div>
+				<hr />
+				<br>
+				<button onclick="btnAddProp('add');" class="btn btn-sm btn-info" >Add</button>
+			</div>
+			</logic:equal>
+			<logic:equal value="show"  name="viewAddEdit">
+			<div class="divContent form-group has-info">
+				<table width="50%">
+					<colgroup>
+						<col width="30%" />
+						<col />
+					</colgroup>
+					<tr>
+						<td>Task Name</td>
+						<td>
+							<html:text styleClass="form-control" styleId="txtTaskName" name="projectTaskForm" property="bean.propTaskName"></html:text>
+						</td>
+					</tr>
+					<tr>
+						<td>Task Desc</td>
+						<td>
+							<html:textarea styleClass="form-control" styleId="txtTaskDesc" name="projectTaskForm" property="bean.propTaskDesc"></html:textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>Estimate Start Date</td>
+						<td>
+							<html:text styleClass="form-control datepicker" styleId="txtEstStartDate"
+								name="projectTaskForm" property="bean.estStartDateInString" style="width: 150px"></html:text>
+						</td>
+					</tr>
+					<tr>
+						<td>Estimate End Date</td>
+						<td>
+							<html:text styleClass="form-control datepicker" styleId="txtEstEndDate"
+								name="projectTaskForm" property="bean.estEndDateInString" style="width: 150px"></html:text>
+						</td>
+					</tr>
+				</table>
+				<p><button onclick="btnAddProp('save');" class="btn btn-sm btn-info" >Save</button>
+					&nbsp; 
+					<button onclick="btnAddProp('cancel');" class="btn btn-sm btn-info" >Cancel</button>
+				</p>
+			</div>
+			</logic:equal>
+			
+			<logic:equal value="true" name="projectTaskForm" property="showDiv">
+			<div class="divContent" id="projTask">
 				<table class="table table-bordered" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
@@ -468,6 +586,63 @@
 				</table>
 				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 			</div>
+			</logic:equal>
+			
+			<logic:equal value="false" name="projectTaskForm" property="showDiv">
+			<div class="divContent">
+				<table class="table table-striped table-bordered table-hover"
+					cellspacing="0" style="margin-top: 10px;" width="100%"
+					class="tableContent">
+					<thead>
+						<tr class="panel panel-info">
+							<td>Project Name</td>
+							<td>Task Name</td>
+							<td>Estimate</td>
+							<td>Proposed To</td>
+							<td>Status</td>
+							<td class="align-center">Action</td>
+						</tr>
+					</thead>
+					<tbody>
+						<logic:notEmpty name="projectTaskForm" property="arrListProp">
+							<logic:iterate id="reg" name="projectTaskForm"
+								property="arrListProp">
+								<tr>
+									<td><bean:write name="reg" property="projectName" />
+									<td><bean:write name="reg" property="propTaskName" />
+									<td>
+										<bean:write name="reg" property="estStartDateInString" />
+										&nbsp;To&nbsp;
+										<bean:write name="reg" property="estEndDateInString" />
+									</td>
+									<td><bean:write name="reg" property="propToName" /></td>
+									<td><bean:write name="reg" property="propStatusName" /></td>
+									<td align="center"><logic:equal name="reg"
+											property="propStatus" value="TA_STAT_01">
+											<a class="text-success" href="#"
+												onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
+												title="Edit"><span class="glyphicon glyphicon-pencil"
+												aria-hidden="true"></span></a> &nbsp; <a href="#"
+												class="text-danger"
+												onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
+												title="Delete"><span class="glyphicon glyphicon-trash"
+												aria-hidden="true"></span></a>
+										</logic:equal></td>
+								</tr>
+							</logic:iterate>
+						</logic:notEmpty>
+						<logic:empty name="projectTaskForm" property="arrListProp">
+							<tr>
+								<td colspan="6" align="center" style="padding: 10px">No
+									Data Found</td>
+							</tr>
+						</logic:empty>
+					</tbody>
+				</table>
+				<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+			</div>
+			</logic:equal>
+			
 		</div>
 
 	  	<!-- popup to give remarks  -->

@@ -1,14 +1,13 @@
 package project_task;
 
-import independent_task.IndependentTaskBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-import activity.ActivityBean;
 import project.ProjectBean;
+import propose_project_task.ProposeProjectTaskBean;
+import activity.ActivityBean;
 
 public class ProjectTaskForm extends ActionForm
 {
@@ -32,8 +31,60 @@ public class ProjectTaskForm extends ActionForm
 	private Integer			empId;
 	private List<ActivityBean> arrActivity;
 	private Integer 		testingId =0;
+	private String showDiv = "true";
+	
+	//penambahan fitur pada form untuk propose project task
+	private Boolean allowAdd = false;
+	private List<ProposeProjectTaskBean> arrListProp = new ArrayList<ProposeProjectTaskBean>();
+	private ProposeProjectTaskBean bean  = new ProposeProjectTaskBean();
+	private String rankIdDisplay;
+	private Integer selectTaskId;
+	private String taskForProp;
+	
+	public String getTaskForProp() {
+		return taskForProp;
+	}
+	public void setTaskForProp(String taskForProp) {
+		this.taskForProp = taskForProp;
+	}
+	public Integer getSelectTaskId() {
+		return selectTaskId;
+	}
+	public void setSelectTaskId(Integer selectTaskId) {
+		this.selectTaskId = selectTaskId;
+	}
 	
 
+	public Boolean getAllowAdd() {
+		return allowAdd;
+	}
+	public void setAllowAdd(Boolean allowAdd) {
+		this.allowAdd = allowAdd;
+	}
+	public List<ProposeProjectTaskBean> getArrListProp() {
+		return arrListProp;
+	}
+	public void setArrListProp(List<ProposeProjectTaskBean> arrListProp) {
+		this.arrListProp = arrListProp;
+	}
+	public ProposeProjectTaskBean getBean() {
+		return bean;
+	}
+	public void setBean(ProposeProjectTaskBean bean) {
+		this.bean = bean;
+	}
+	public String getRankIdDisplay() {
+		return rankIdDisplay;
+	}
+	public void setRankIdDisplay(String rankIdDisplay) {
+		this.rankIdDisplay = rankIdDisplay;
+	}
+	public String getShowDiv() {
+		return showDiv;
+	}
+	public void setShowDiv(String showDiv) {
+		this.showDiv = showDiv;
+	}
 	public Integer getTestingId() {
 		return testingId;
 	}

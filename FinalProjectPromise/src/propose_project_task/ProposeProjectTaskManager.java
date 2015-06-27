@@ -79,13 +79,10 @@ public class ProposeProjectTaskManager {
 	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean) throws SQLException{
 		try {
 			this.ibatis.startTransaction();
-			System.out.println("masuk try");
 			this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
-			System.out.println("Berhasil");
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("gagal");
 			this.ibatis.endTransaction();
 		}
 	}
