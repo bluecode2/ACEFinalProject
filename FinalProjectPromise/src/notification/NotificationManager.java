@@ -14,8 +14,9 @@ import project_role.ProjectRoleBean;
 import project_role.ProjectRoleManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import common.Constant;
 
+import common.CommonFunction;
+import common.Constant;
 import employee.EmployeeBean;
 import employee.EmployeeManager;
 
@@ -159,7 +160,11 @@ public class NotificationManager {
 		NotificationBean bean = new NotificationBean();
 		
 		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationUrl("project.do");
+		
+		if(projectRoleId == Integer.valueOf(CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.PROJECT_MANAGER_ROLE_ID)))
+			bean.setNotificationUrl("project.do");
+		else
+			bean.setNotificationUrl("projectInvoled.do");
 		bean.setNotificationDesc(desc);
 		
 		insertNotification(bean);

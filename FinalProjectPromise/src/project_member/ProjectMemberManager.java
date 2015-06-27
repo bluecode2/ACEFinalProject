@@ -59,7 +59,7 @@ public class ProjectMemberManager {
 
 		try {
 			this.ibatis.startTransaction();
-			bean.setProjectRoleId(getNewMemberId());   
+			bean.setMemberId(getNewMemberId());   
 			this.ibatis.insert("projectMember.insertProjectMember", bean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
@@ -114,5 +114,17 @@ public class ProjectMemberManager {
 			e.printStackTrace();
 		}
 		return pmbList;
+	}
+	
+	public ProjectMemberBean getProjectMemberById(Integer memberId){
+		ProjectMemberBean bean = null;
+		try {
+			bean = (ProjectMemberBean) this.ibatis.queryForObject("projectMember.getProjectMemberById", memberId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return bean;
 	}
 }
