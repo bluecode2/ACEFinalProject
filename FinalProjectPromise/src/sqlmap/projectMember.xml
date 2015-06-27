@@ -31,7 +31,7 @@
 		where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
 	</select>
 	
-	<insert id="insertProjectMember" parameterClass="java.util.Map">
+	<insert id="insertProjectMember" parameterClass="project_member.ProjectMemberBean">
 		INSERT INTO PROJECT_MEMBER (MEMBER_ID, PROJECT_ROLE_ID, EMPLOYEE_ID, PROJECT_ID, IS_ACTIVE) 
 		VALUES 
 		(#newMemberId#,#pRoleId#,#empId#,#projId#,1)

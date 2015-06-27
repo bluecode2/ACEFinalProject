@@ -50,29 +50,21 @@ public class ProjectMemberManager {
 		return result;
 	}
 	
-	public Integer getMemberId() throws SQLException{
+	public Integer getNewMemberId() throws SQLException{
 		Integer newMemberId = (Integer) this.ibatis.queryForObject("projectMember.getProjectMemberId", null);
 		return newMemberId;
 	}
 	
-	public void insertProjectMember(Integer pRoleId, Integer empId, Integer projId) throws SQLException{
-		Integer newMemberId = getMemberId();
-		if (newMemberId == null){
-			newMemberId = 1;
-		}
-		Map map = new HashMap();
-		map.put("newMemberId", newMemberId);
-		map.put("pRoleId", pRoleId);
-		map.put("empId", empId);
-		map.put("projId", projId);
+	public void insertProjectMember(ProjectMemberBean bean){
+
 		try {
 			this.ibatis.startTransaction();
-			System.out.println("masuk try");
-			this.ibatis.insert("projectMember.insertProjectMember", map);
-			System.out.println("selesai try");
+			bean.setProjectRoleId(getNewMemberId());   
+			this.ibatis.insert("projectMember.insertProjectMember", bean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			try {
 				ibatis.endTransaction();
 			} catch (SQLException e1) {

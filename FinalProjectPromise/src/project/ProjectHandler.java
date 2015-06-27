@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project_member.ProjectMemberBean;
 import project_member.ProjectMemberManager;
 import project_role.ProjectRoleManager;
 import user.UserBean;
@@ -150,7 +151,11 @@ public class ProjectHandler extends Action{
 				pMan.insertProject(pForm.getpBean());
 				
 				//Insert PM into Projet Member
-				pMemberMan.insertProjectMember(pRoleMan.getProjectManagerRoleId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+				ProjectMemberBean memberBean = new ProjectMemberBean();
+				memberBean.setEmployeeId(pForm.getpBean().getEmployeeId());
+				memberBean.setProjectRoleId(pRoleMan.getProjectManagerRoleId());
+				memberBean.setProjectId(pForm.getpBean().getProjectId());
+				pMemberMan.insertProjectMember(memberBean);
 				
 				//Create notification 
 				NotificationManager nMan = new NotificationManager();
@@ -165,7 +170,11 @@ public class ProjectHandler extends Action{
 				//Condition if PM is changed
 				if(pForm.getpBean().getEmployeeId() != oldBean.getEmployeeId()){
 					//Insert new PM to Project Member
-					pMemberMan.insertProjectMember(pRoleMan.getProjectManagerRoleId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+					ProjectMemberBean memberBean = new ProjectMemberBean();
+					memberBean.setEmployeeId(pForm.getpBean().getEmployeeId());
+					memberBean.setProjectRoleId(pRoleMan.getProjectManagerRoleId());
+					memberBean.setProjectId(pForm.getpBean().getProjectId());
+					pMemberMan.insertProjectMember(memberBean);
 					
 					//Create notification
 					NotificationManager nMan = new NotificationManager();
@@ -182,12 +191,7 @@ public class ProjectHandler extends Action{
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("forceClose")){
-				pForm.getpBean().setActStartDate(sdf.parse(pForm.getpBean().getActStartDateDateInString()));
 				pForm.getpBean().setActEndDate(now);
-				Integer actMainDays = pForm.getpBean().getActEndDate().getDate() - pForm.getpBean().getActStartDate().getDate();
-				
-				pForm.getpBean().setActEndDateInString(sdf.format(now));
-				pForm.getpBean().setActMainDays(actMainDays);
 				
 				pForm.getpBean().setProjectStatus("PR_STAT_06");
 				pMan.updateProject(pForm.getpBean());

@@ -61,7 +61,8 @@ public class ProjectMemberHandler extends Action {
 		}
 		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", false);
-			pMemberMan.insertProjectMember(pMemberForm.getpMemberbean().getProjectRoleId(), pMemberForm.getpMemberbean().getEmployeeId(), projId);
+			pMemberForm.getpMemberbean().setProjectId(projId);
+			pMemberMan.insertProjectMember(pMemberForm.getpMemberbean());
 		}
 		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
 			pMemberMan.delProjMember(pMemberForm.getSelectedId());

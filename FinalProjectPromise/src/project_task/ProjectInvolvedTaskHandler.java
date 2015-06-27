@@ -66,13 +66,13 @@ public class ProjectInvolvedTaskHandler extends Action {
 		}
 		else if ("submitTask".equalsIgnoreCase(tsForm.getTask())){//TASK TO SUBMIT TASK
 			int taskId = tsForm.getTestingId();
-			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING;
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL;
 			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
 	
 		}
 		else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())){ //TASK TO PAUSE TASK
 			int taskId = tsForm.getTestingId();
-			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONHOLD;
+			String taskStatus = Constant.GeneralCode.TASK_STATUS_ON_HOLD;
 			String remarks = tsForm.getRemarksRecord();
 			System.out.println(taskStatus + " ");
 			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus, remarks);

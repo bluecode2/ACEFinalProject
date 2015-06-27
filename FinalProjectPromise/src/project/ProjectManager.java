@@ -233,7 +233,7 @@ public class ProjectManager {
 
 	public void setApproveProject(int projectId, int updatedBy)
 			throws SQLException {
-		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_APPROVE;
+		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_COMPLETED;
 
 		Map m = new HashMap();
 		m.put("projectId", projectId);

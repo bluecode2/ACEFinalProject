@@ -84,15 +84,19 @@ public class Constant {
 		public static final String PROJECT_STATUS_NOT_STARTED = "PR_STAT_01";
 		public static final String PROJECT_STATUS_ONGOING = "PR_STAT_02";
 		public static final String PROJECT_STATUS_WAITING_FOR_APPROVAL = "PR_STAT_03";
-		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
-//		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
-//		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
+		public static final String PROJECT_STATUS_COMPLETED = "PR_STAT_04";
+		public static final String PROJECT_STATUS_ON_HOLD = "PR_STAT_05";
+		public static final String PROJECT_STATUS_FORCE_CLOSED = "PR_STAT_06";
+		public static final String PROJECT_STATUS_CANCELLED = "PR_STAT_99";
 		
+		public static final String TASK_STATUS_PROPOSED = "TA_STAT_01";
+		public static final String TASK_STATUS_NOT_STARTED = "TA_STAT_02";
 		public static final String TASK_STATUS_ONGOING = "TA_STAT_03";
-		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
-		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
-		public static final String TASK_STATUS_DECLINE = "TA_STAT_98";
+		public static final String TASK_STATUS_WAITING_FOR_APPROVAL = "TA_STAT_04";
+		public static final String TASK_STATUS_COMPLETED = "TA_STAT_05";
+		public static final String TASK_STATUS_ON_HOLD = "TA_STAT_06";
 		public static final String TASK_STATUS_APPROVE = "TA_STAT_07";
+		public static final String TASK_STATUS_DECLINE = "TA_STAT_98";
 		public static final String TASK_STATUS_FORCE = "TA_STAT_97";
 		public static final String TASK_STATUS_CANCELLED = "TA_STAT_99";
 
