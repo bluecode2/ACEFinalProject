@@ -65,6 +65,8 @@ public class ProjectMemberHandler extends Action {
 		}
 		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
 			pMemberMan.delProjMember(pMemberForm.getSelectedId());
+			
+			
 		}
 		pMemberForm.setTask("");
 

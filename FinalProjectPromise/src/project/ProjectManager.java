@@ -142,18 +142,13 @@ public class ProjectManager {
 
 	public void updateProject(ProjectBean pBean) throws ParseException,
 			SQLException {
-		pBean.setUpdatedBy(1);
-		pBean.setEstStartDate(sdf.parse(pBean.getEstStartDateInString()));
-		pBean.setEstEndDate(sdf.parse(pBean.getEstEndDateInString()));
-		Integer estMainDays = pBean.getEstEndDate().getDate()
-				- pBean.getEstStartDate().getDate();
-		pBean.setEstMainDays(estMainDays);
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("project.updateProject", pBean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			try {
 				ibatis.endTransaction();
 			} catch (SQLException e1) {
@@ -203,7 +198,7 @@ public class ProjectManager {
 		map.put("begin", begin);
 		map.put("end", end);
 		map.put("deptId", deptId);
-		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 
 		List<ProjectBean> arr = this.ibatis.queryForList(
 				"project.getAllProjectToEvaluate", map);
@@ -217,7 +212,7 @@ public class ProjectManager {
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("deptId", deptId);
-		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 		int tmpCount = (Integer) this.ibatis.queryForObject(
 				"project.countProjectToEvaluate", map);
 		return tmpCount;

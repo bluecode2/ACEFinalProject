@@ -23,6 +23,7 @@ import common.Constant;
 import employee.EmployeeBean;
 import employee.EmployeeForm;
 import employee.EmployeeManager;
+import general.GeneralParamManager;
 
 public class ProjectHandler extends Action{
 
@@ -35,7 +36,7 @@ public class ProjectHandler extends Action{
 		ProjectForm pForm = (ProjectForm) form;
 		ProjectManager pMan = new ProjectManager();
 //		CommonFunction.createAllowedMenu(null, request);
-		Date date = new Date();
+		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		EmployeeForm eForm = new EmployeeForm();
@@ -76,9 +77,8 @@ public class ProjectHandler extends Action{
 		else if ("start".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("start");
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			pForm.getpBean().setProjectStatus("PR_STAT_02");
-			pForm.getpBean().setProjectProgress((float) 0);
-			pForm.getpBean().setActStartDateInString(sdf.format(date));
+			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
+			pForm.getpBean().setActStartDate(now);
 			
 			pMan.updateProject(pForm.getpBean());
 			
@@ -86,15 +86,8 @@ public class ProjectHandler extends Action{
 		else if ("submit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("submit");
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			pForm.getpBean().setProjectStatus("PR_STAT_03");
-			
-			pForm.getpBean().setActStartDate(sdf.parse(pForm.getpBean().getActStartDateDateInString()));
-			pForm.getpBean().setActEndDate(date);
-			Integer actMainDays = pForm.getpBean().getActEndDate().getDate() - pForm.getpBean().getActStartDate().getDate();
-			
-			pForm.getpBean().setActEndDateInString(sdf.format(date));
-			pForm.getpBean().setActMainDays(actMainDays);
-			
+			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
+			pForm.getpBean().setActEndDate(now);
 			
 			pMan.updateProject(pForm.getpBean());
 			
@@ -122,7 +115,7 @@ public class ProjectHandler extends Action{
 		else if ("resume".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("resume");
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			pForm.getpBean().setProjectStatus("PR_STAT_02");
+			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
 			pMan.updateProject(pForm.getpBean());
 		}
 		else if ("forceClose".equalsIgnoreCase(pForm.getTask())){
@@ -152,13 +145,33 @@ public class ProjectHandler extends Action{
 			String isProc = pForm.getIsProc();
 			if (isProc.equalsIgnoreCase("add")) {
 				pForm.getpBean().setCreatedBy(us.getUserId());
+				
+				//Insert new project
 				pMan.insertProject(pForm.getpBean());
-				pMemberMan.insertProjectMember(pRoleMan.getProjectRoleIdByCode(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+				
+				//Insert PM into Projet Member
+				pMemberMan.insertProjectMember(pRoleMan.getProjectManagerRoleId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+				
+				//Create notification 
 				NotificationManager nMan = new NotificationManager();
-				nMan.createNotificationProjectManager(pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+				nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){
+				ProjectBean oldBean = pMan.getProjectByID(pForm.getpBean().getProjectId());
+				
+				//Update Project
 				pMan.updateProject(pForm.getpBean());
+				
+				//Condition if PM is changed
+				if(pForm.getpBean().getEmployeeId() != oldBean.getEmployeeId()){
+					//Insert new PM to Project Member
+					pMemberMan.insertProjectMember(pRoleMan.getProjectManagerRoleId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+					
+					//Create notification
+					NotificationManager nMan = new NotificationManager();
+					nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
+					nMan.createNotificationRemoveProjectMember(us.getEmployeeId(),oldBean.getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
+				}
 			}
 			else if (isProc.equalsIgnoreCase("cancel")){
 				pForm.getpBean().setProjectStatus("PR_STAT_99");
@@ -170,10 +183,10 @@ public class ProjectHandler extends Action{
 			}
 			else if (isProc.equalsIgnoreCase("forceClose")){
 				pForm.getpBean().setActStartDate(sdf.parse(pForm.getpBean().getActStartDateDateInString()));
-				pForm.getpBean().setActEndDate(date);
+				pForm.getpBean().setActEndDate(now);
 				Integer actMainDays = pForm.getpBean().getActEndDate().getDate() - pForm.getpBean().getActStartDate().getDate();
 				
-				pForm.getpBean().setActEndDateInString(sdf.format(date));
+				pForm.getpBean().setActEndDateInString(sdf.format(now));
 				pForm.getpBean().setActMainDays(actMainDays);
 				
 				pForm.getpBean().setProjectStatus("PR_STAT_06");

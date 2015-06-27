@@ -55,11 +55,16 @@ public class ProjectRoleManager {
 		return arr;
 	}
 
-	public ProjectRoleBean getProjectRoleById(Integer tmpProjectRoleId)
-			throws SQLException {
-		ProjectRoleBean projectRoleBean = (ProjectRoleBean) this.ibatis
-				.queryForObject("projectRole.getProjectRoleById",
-						tmpProjectRoleId);
+	public ProjectRoleBean getProjectRoleById(Integer tmpProjectRoleId) {
+		ProjectRoleBean projectRoleBean = null;
+		try {
+			projectRoleBean = (ProjectRoleBean) this.ibatis
+					.queryForObject("projectRole.getProjectRoleById",
+							tmpProjectRoleId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return projectRoleBean;
 	}
 
@@ -80,6 +85,7 @@ public class ProjectRoleManager {
 
 		try {
 			this.ibatis.startTransaction();
+			projectRoleBean.setProjectRoleId(getNewProjectRoleId());
 			this.ibatis
 					.insert("projectRole.insertProjectRole", projectRoleBean);
 			this.ibatis.commitTransaction();
@@ -129,16 +135,21 @@ public class ProjectRoleManager {
 		}
 	}
 
-	public Integer getMaxProjectRoleId() throws SQLException {
-		Integer maxId = (Integer) this.ibatis.queryForObject(
-				"projectRole.getMaxProjectRoleId", null);
-		return maxId;
+	public Integer getNewProjectRoleId() throws SQLException {
+		Integer newId = (Integer) this.ibatis.queryForObject(
+				"projectRole.getNewProjectRoleId", null);
+		return newId;
 	}
 
-	public Integer getProjectRoleIdByCode() throws SQLException {
-		Integer getProjectRoleIdByCode = (Integer) this.ibatis.queryForObject(
-				"projectRole.getProjectRoleIdByCode", null);
-
+	public Integer getProjectManagerRoleId() {
+		Integer getProjectRoleIdByCode = null;
+		try {
+			getProjectRoleIdByCode = (Integer) this.ibatis.queryForObject(
+					"projectRole.getProjectManagerRoleId", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return getProjectRoleIdByCode;
 	}
 }

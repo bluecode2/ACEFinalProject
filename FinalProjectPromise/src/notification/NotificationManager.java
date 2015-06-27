@@ -8,13 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import oracle.jdbc.Const;
 import project.ProjectBean;
 import project.ProjectManager;
+import project_role.ProjectRoleBean;
+import project_role.ProjectRoleManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import common.Constant;
+
+import employee.EmployeeBean;
+import employee.EmployeeManager;
 
 public class NotificationManager {
 	private SqlMapClient ibatis;
@@ -141,15 +144,43 @@ public class NotificationManager {
 		return flag;
 	}
 	
-	public boolean createNotificationProjectManager(Integer employeeId,  Integer projectId){
+	public boolean createNotificationProjectMember(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer projectId, Integer projectRoleId){
 		ProjectManager projMan = new ProjectManager();
-		ProjectBean projBean =  projMan.getProjectByID(projectId);
+		ProjectRoleManager projRoleMan = new ProjectRoleManager();
 		
-		String desc = "You has been assigned as a Project Manager in a new project : " + projBean.getProjectName();
+		ProjectBean projBean =  projMan.getProjectByID(projectId);
+		ProjectRoleBean projRoleBean = projRoleMan.getProjectRoleById(projectRoleId);
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
+		
+		String desc = creatorEmp.getEmployeeName() + " just assigned you as a " + projRoleBean.getProjectRoleName() +" in a new project : " + projBean.getProjectName();
 		
 		NotificationBean bean = new NotificationBean();
 		
-		bean.setEmployeeId(employeeId);
+		bean.setEmployeeId(assignedEmployeeId);
+		bean.setNotificationUrl("project.do");
+		bean.setNotificationDesc(desc);
+		
+		insertNotification(bean);
+		return true;
+	}
+	
+	public boolean createNotificationRemoveProjectMember(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer projectId, Integer projectRoleId){
+		ProjectManager projMan = new ProjectManager();
+		ProjectRoleManager projRoleMan = new ProjectRoleManager();
+		
+		ProjectBean projBean =  projMan.getProjectByID(projectId);
+		ProjectRoleBean projRoleBean = projRoleMan.getProjectRoleById(projectRoleId);
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
+		
+		String desc = creatorEmp.getEmployeeName() + " just remove your position as a " + projRoleBean.getProjectRoleName() +" from project : " + projBean.getProjectName();
+		
+		NotificationBean bean = new NotificationBean();
+		
+		bean.setEmployeeId(assignedEmployeeId);
 		bean.setNotificationUrl("project.do");
 		bean.setNotificationDesc(desc);
 		

@@ -81,14 +81,17 @@ public class Constant {
 		public static final String PERSONAL_HOLIDAY_TYPE = "PH_TYPE";
 		public static final String GENERAL_HOLIDAY_TYPE = "GH_TYPE";
 		
+		public static final String PROJECT_STATUS_NOT_STARTED = "PR_STAT_01";
 		public static final String PROJECT_STATUS_ONGOING = "PR_STAT_02";
-		public static final String PROJECT_STATUS_WAITING = "PR_STAT_03";
+		public static final String PROJECT_STATUS_WAITING_FOR_APPROVAL = "PR_STAT_03";
 		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
+//		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
+//		public static final String PROJECT_STATUS_APPROVE = "PR_STAT_04";
 		
 		public static final String TASK_STATUS_ONGOING = "TA_STAT_03";
 		public static final String TASK_STATUS_WAITING = "TA_STAT_04";
 		public static final String TASK_STATUS_ONHOLD = "TA_STAT_06";
-		public static final String TASK_STATUS_DECLINE = "TA_STAT_06";
+		public static final String TASK_STATUS_DECLINE = "TA_STAT_98";
 		public static final String TASK_STATUS_APPROVE = "TA_STAT_07";
 		public static final String TASK_STATUS_FORCE = "TA_STAT_97";
 		public static final String TASK_STATUS_CANCELLED = "TA_STAT_99";
@@ -98,20 +101,6 @@ public class Constant {
 	public static class GeneralParameter{
 		public static final String AD_ADMIN_USERNAME = "ADAdminUser";
 		public static final String AD_ADMIN_PASSWORD = "ADAdminPass";
-	}
-	
-//	public static class NotificationType{
-//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
-//		public static final String ASSIGNED_AS_PROJ_MEMBER = "NOTIF-02";
-//		public static final String ASSIGNED_PROJECT_TASK = "NOTIF-03";
-//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-04";
-//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
-//		public static final String ASSIGNED_AS_PROJ_MANAGER = "NOTIF-01";
-//	}
-	
-	public enum NotificationType{
-		ASSIGNED_AS_PROJ_MANAGER,
-		ASSIGNED_AS_PROJ_MEMBER,
-		
+		public static final String PROJECT_MANAGER_ROLE_ID = "ProjectManager";
 	}
 }

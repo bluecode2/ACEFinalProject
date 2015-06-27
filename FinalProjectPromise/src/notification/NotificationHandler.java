@@ -27,7 +27,7 @@ public class NotificationHandler extends Action {
 		
 		if("select".equals(nForm.getTask())){
 			NotificationBean bean = nMan.getNotificationById(nForm.getSelectedId());
-			
+			nMan.updateNotificationAsRead(nForm.getSelectedId());
 			if(bean.getSessionParameter() != null && !bean.getSessionParameter().equals("")){
 				String[] sessionStr = bean.getSessionParameter().split("#");
 				session.setAttribute(sessionStr[0], sessionStr[1]);

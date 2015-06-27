@@ -118,7 +118,7 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle" 
 						data-toggle="dropdown" role="button" aria-expanded="false" title="Notification"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span> 
-<!-- 							<span class="badge" id="badge">42</span> -->
+							<span class="badge" id="badge"><bean:write name="unreadCount" /></span>
 							</a>
 						<ul class="dropdown-menu">
 							<logic:notEmpty name="unreadNotification">

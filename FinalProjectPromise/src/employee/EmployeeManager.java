@@ -109,10 +109,16 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
+	public EmployeeBean getEmployeeByEmpId(Integer empId){
 
-		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
-				"employee.getEmployeeByEmpId", empId);
+		EmployeeBean empBean = null;
+		try {
+			empBean = (EmployeeBean) this.ibatis.queryForObject(
+					"employee.getEmployeeByEmpId", empId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return empBean;
 	}
 
