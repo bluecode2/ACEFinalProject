@@ -19,7 +19,7 @@ public class ProposeProjectTaskManager {
 	}
 	
 	public List<ProposeProjectTaskBean> getAllPropProjTask(String col,
-			String input, Integer pageNum, Integer pageSize, Integer projId) throws SQLException{
+			String input, Integer pageNum, Integer pageSize, Integer projId){
 			List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
 			
 			int begin = (pageNum - 1) * pageSize;
@@ -32,7 +32,12 @@ public class ProposeProjectTaskManager {
 			map.put("end", end);
 			map.put("projId", projId);
 			
-			list = this.ibatis.queryForList("projProposeTask.getAllTask", map);
+			try {
+				list = this.ibatis.queryForList("projProposeTask.getAllTask", map);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		return list;
 	}
@@ -43,8 +48,13 @@ public class ProposeProjectTaskManager {
 		return newTaskId;
 	}
 	
-	public void insertPropProjTask(ProposeProjectTaskBean pProjTBean) throws SQLException{
-		pProjTBean.setPropTaskId(getNewTaskId());
+	public void insertPropProjTask(ProposeProjectTaskBean pProjTBean){
+		try {
+			pProjTBean.setPropTaskId(getNewTaskId());
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		try {
 			this.ibatis.startTransaction();
@@ -52,12 +62,16 @@ public class ProposeProjectTaskManager {
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-				ibatis.endTransaction();
+				try {
+					ibatis.endTransaction();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}
 	}
 	
-	public Integer getCountPropProjTask(String column, String value, Integer projId)
-			throws SQLException, ClassNotFoundException {
+	public Integer getCountPropProjTask(String column, String value, Integer projId) throws SQLException{
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
@@ -68,15 +82,21 @@ public class ProposeProjectTaskManager {
 		return result;
 	}
 	
-	public ProposeProjectTaskBean getPropProjTaskByTaskId(Integer propTaskId) throws SQLException{
+	public ProposeProjectTaskBean getPropProjTaskByTaskId(Integer propTaskId){
 		ProposeProjectTaskBean pProjTask = new ProposeProjectTaskBean();
-		System.out.println(propTaskId+"taslId");
-		pProjTask = (ProposeProjectTaskBean) this.ibatis.queryForObject("projProposeTask.getTaskById", propTaskId);
-		System.out.println(pProjTask.getPropTaskId()+"test");
+
+		try {
+			pProjTask = (ProposeProjectTaskBean) this.ibatis.queryForObject("projProposeTask.getTaskById", propTaskId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		return pProjTask;
 	}
 	
-	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean) throws SQLException{
+	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
 		try {
 			this.ibatis.startTransaction();
 			System.out.println("masuk try");
@@ -86,11 +106,16 @@ public class ProposeProjectTaskManager {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("gagal");
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
-	public void delPropProjTask(Integer userId, Integer propTaskId) throws SQLException{
+	public void delPropProjTask(Integer userId, Integer propTaskId){
 		Map map = new HashMap();
 		map.put("userId", userId);
 		map.put("propTaskId", propTaskId);
@@ -101,7 +126,12 @@ public class ProposeProjectTaskManager {
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	

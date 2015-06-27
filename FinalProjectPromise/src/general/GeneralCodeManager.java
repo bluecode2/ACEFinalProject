@@ -3,6 +3,7 @@ package general;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,24 +19,37 @@ public class GeneralCodeManager {
 	}
 
 	public List<GeneralCodeBean> getAllGeneralCode(String col, String input,
-			Integer pageNum, Integer pageSize) throws SQLException {
+			Integer pageNum, Integer pageSize){
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-	
+		List<GeneralCodeBean> arr = new ArrayList<GeneralCodeBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);		
 
-		List<GeneralCodeBean> arr = this.ibatis.queryForList(
-					"genCode.selectGeneralCode", map);
+		try {
+			arr = this.ibatis.queryForList(
+						"genCode.selectGeneralCode", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return arr;
 	}
 
-	public GeneralCodeBean getGeneralCodeByGenId(String tmpGenId) throws SQLException {
-		GeneralCodeBean genCodeBean = (GeneralCodeBean) this.ibatis.queryForObject("genCode.getGenCodeWithId", tmpGenId);
+	public GeneralCodeBean getGeneralCodeByGenId(String tmpGenId) {
+		GeneralCodeBean genCodeBean = null;
+
+		try {
+			genCodeBean = (GeneralCodeBean) this.ibatis.queryForObject("genCode.getGenCodeWithId", tmpGenId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(genCodeBean);
 		return genCodeBean;
 	}
@@ -104,8 +118,15 @@ public class GeneralCodeManager {
 		}
 	}
 	
-	public List<GeneralCodeBean> getGeneralCodeByParentId(String parentId) throws SQLException {
-		List<GeneralCodeBean> arrList = this.ibatis.queryForList("genCode.selectGeneralCodeByParentId", parentId);
+	public List<GeneralCodeBean> getGeneralCodeByParentId(String parentId) {
+		List<GeneralCodeBean> arrList = new ArrayList<GeneralCodeBean>();
+		
+		try {
+			arrList = this.ibatis.queryForList("genCode.selectGeneralCodeByParentId", parentId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return arrList;
 	}
 }

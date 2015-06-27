@@ -41,7 +41,6 @@ public class GeneralParamManager {
 		} 
 		return arr;
 	}
-	
 	public GeneralParamBean getGenParamByParamId(String genParamId) {
 		GeneralParamBean genParamBean = null;
 		try {
@@ -116,8 +115,8 @@ public class GeneralParamManager {
 		}
 	}
 	
-	public String getMaxParamId() throws SQLException{
-		String maxId = (String) this.ibatis.queryForObject("genParam.getMaxGenParamId", null);
+	public String getNewParamId() throws SQLException{
+		String maxId = (String) this.ibatis.queryForObject("genParam.getNewParamId", null);
 		return maxId;
 	}
 }

@@ -27,8 +27,7 @@ public class ProjectManager {
 	}
 
 	public List<ProjectBean> getAllProject(String col, String input,
-			Integer pageNum, Integer pageSize) throws ClassNotFoundException,
-			SQLException {
+			Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -46,15 +45,19 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
 	}
 
 	public List<ProjectBean> getProjectListForRole(String col, Integer input,
-			Integer pageNum, Integer pageSize) throws ClassNotFoundException,
-			SQLException {
+			Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -72,7 +75,12 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
@@ -98,8 +106,7 @@ public class ProjectManager {
 		return result;
 	}
 
-	public ProjectBean getProjectByID(Integer tempProjectID)
-			 {
+	public ProjectBean getProjectByID(Integer tempProjectID){
 		ProjectBean pBean = null;
 		try {
 			pBean = (ProjectBean) this.ibatis.queryForObject(
@@ -159,8 +166,7 @@ public class ProjectManager {
 	}
 
 	public List<ProjectBean> getProjectInvolved(String col, String input,
-			Integer pageNum, Integer pageSize, Integer empId)
-			throws ClassNotFoundException, SQLException {
+			Integer pageNum, Integer pageSize, Integer empId) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -179,7 +185,12 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
@@ -192,6 +203,8 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<ProjectBean> arr  = new ArrayList<ProjectBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -200,9 +213,9 @@ public class ProjectManager {
 		map.put("deptId", deptId);
 		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 
-		List<ProjectBean> arr = this.ibatis.queryForList(
+		arr = this.ibatis.queryForList(
 				"project.getAllProjectToEvaluate", map);
-
+		
 		return arr;
 	}
 

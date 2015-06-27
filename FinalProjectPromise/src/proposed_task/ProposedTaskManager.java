@@ -20,10 +20,12 @@ public class ProposedTaskManager {
 
 	public List<ProposedTaskBean> getAllPropTaskFiltered(String col,
 			String input, Integer pageNum, Integer pageSize, int empId)
-			throws SQLException {
+			{
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<ProposedTaskBean> arr = new ArrayList<ProposedTaskBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -31,8 +33,12 @@ public class ProposedTaskManager {
 		map.put("end", end);
 		map.put("empId", empId);
 
-		List<ProposedTaskBean> arr = this.ibatis.queryForList(
-				"proposedTask.getListProposedTask", map);
+		try {
+			arr = this.ibatis.queryForList("proposedTask.getListProposedTask", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return arr;
 	}
 
@@ -72,7 +78,7 @@ public class ProposedTaskManager {
 		return propTaskId;
 	}
 
-	public void updateProposedTask(ProposedTaskBean bean) throws SQLException {
+	public void updateProposedTask(ProposedTaskBean bean) {
 		try {
 			ibatis.startTransaction();
 			ibatis.update("proposedTask.updateProposedTask", bean);
@@ -109,7 +115,7 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public void insertProposedTask(ProposedTaskBean bean) throws SQLException {
+	public void insertProposedTask(ProposedTaskBean bean) {
 		try {
 			this.ibatis.startTransaction();
 			int newId = newPropTaskId();
