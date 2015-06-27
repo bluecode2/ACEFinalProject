@@ -21,19 +21,25 @@ public class ProjectMemberManager {
 	}
 	
 	public List<ProjectMemberBean> getAllProjectMember(Integer projId,
-			Integer pageNum, Integer pageSize) throws SQLException{
+			Integer pageNum, Integer pageSize) {
 		
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		System.out.println(projId);
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+
+		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
+		
 		Map map = new HashMap();
 		map.put("projId", projId);
 		map.put("begin", begin);
 		map.put("end", end);
 		
-		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
-		pmbList = this.ibatis.queryForList("projectMember.getAllProjMember", map);
+		
+		try {
+			pmbList = this.ibatis.queryForList("projectMember.getAllProjMember", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return pmbList;
 	}
 	
@@ -44,29 +50,21 @@ public class ProjectMemberManager {
 		return result;
 	}
 	
-	public Integer getMemberId() throws SQLException{
+	public Integer getNewMemberId() throws SQLException{
 		Integer newMemberId = (Integer) this.ibatis.queryForObject("projectMember.getProjectMemberId", null);
 		return newMemberId;
 	}
 	
-	public void insertProjectMember(Integer pRoleId, Integer empId, Integer projId) throws SQLException{
-		Integer newMemberId = getMemberId();
-		if (newMemberId == null){
-			newMemberId = 1;
-		}
-		Map map = new HashMap();
-		map.put("newMemberId", newMemberId);
-		map.put("pRoleId", pRoleId);
-		map.put("empId", empId);
-		map.put("projId", projId);
+	public void insertProjectMember(ProjectMemberBean bean){
+
 		try {
 			this.ibatis.startTransaction();
-			System.out.println("masuk try");
-			this.ibatis.insert("projectMember.insertProjectMember", map);
-			System.out.println("selesai try");
+			bean.setMemberId(getNewMemberId());   
+			this.ibatis.insert("projectMember.insertProjectMember", bean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			try {
 				ibatis.endTransaction();
 			} catch (SQLException e1) {
@@ -76,8 +74,15 @@ public class ProjectMemberManager {
 		}
 	}
 	
-	public List<ProjectMemberBean> getProjectMemberToEvaluate(Integer projId) throws SQLException {
-		List<ProjectMemberBean> arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projId);
+	public List<ProjectMemberBean> getProjectMemberToEvaluate(Integer projId) {
+		List<ProjectMemberBean> arrMember = new ArrayList<ProjectMemberBean>();
+		
+		try {
+			arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return arrMember;
 	}
 	
@@ -97,14 +102,29 @@ public class ProjectMemberManager {
 		}
 	}
 	
-	public List<ProjectMemberBean> getPopUpProjMember(Integer projId) throws SQLException{
-		System.out.println(projId);
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+	public List<ProjectMemberBean> getPopUpProjMember(Integer projId){
 		Map map = new HashMap();
 		map.put("projId", projId);
 		
 		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
-		pmbList = this.ibatis.queryForList("projectMember.getPopUpProjMember", map);
+		try {
+			pmbList = this.ibatis.queryForList("projectMember.getPopUpProjMember", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return pmbList;
+	}
+	
+	public ProjectMemberBean getProjectMemberById(Integer memberId){
+		ProjectMemberBean bean = null;
+		try {
+			bean = (ProjectMemberBean) this.ibatis.queryForObject("projectMember.getProjectMemberById", memberId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return bean;
 	}
 }

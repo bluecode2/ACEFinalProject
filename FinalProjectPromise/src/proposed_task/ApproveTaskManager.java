@@ -1,6 +1,7 @@
 package proposed_task;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +21,12 @@ public class ApproveTaskManager {
 	}
 
 	public List<ProposedTaskBean> getListApproveTask(String col, String input,
-			Integer pageNum, Integer pageSize, int userId) throws SQLException {
+			Integer pageNum, Integer pageSize, int userId)  {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<ProposedTaskBean> arr = new ArrayList<ProposedTaskBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -31,19 +34,30 @@ public class ApproveTaskManager {
 		map.put("end", end);
 		map.put("userId", userId);
 
-		List<ProposedTaskBean> arr = this.ibatis.queryForList(
-				"approveTask.getListApproveTask", map);
+		try {
+			arr = this.ibatis.queryForList(
+					"approveTask.getListApproveTask", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return arr;
 	}
 
-	public ProposedTaskBean getApproveTaskById(Integer id) throws SQLException {
-		ProposedTaskBean bean = (ProposedTaskBean) this.ibatis.queryForObject(
-				"approveTask.getPropTaskByPropTaskId", id);
+	public ProposedTaskBean getApproveTaskById(Integer id)  {
+		ProposedTaskBean bean = null;
+		
+		try {
+			bean = (ProposedTaskBean) this.ibatis.queryForObject("approveTask.getPropTaskByPropTaskId", id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return bean;
 	}
 
-	public void declineTask(ProposedTaskBean task) throws SQLException {
+	public void declineTask(ProposedTaskBean task)  {
 		Map map = new HashMap();
 		map.put("userId", task.getUpdatedBy());
 		map.put("selectedId", task.getPropTaskId());
@@ -63,7 +77,7 @@ public class ApproveTaskManager {
 		}
 	}
 
-	public void approveTask(ProposedTaskBean task) throws SQLException {
+	public void approveTask(ProposedTaskBean task)  {
 		Map map = new HashMap();
 		map.put("userId", task.getUpdatedBy());
 		map.put("taskId", task.getTaskId());
@@ -84,8 +98,7 @@ public class ApproveTaskManager {
 		}
 	}
 
-	public Integer getCountApproveTask(String column, String value, int userId)
-			throws SQLException, ClassNotFoundException {
+	public Integer getCountApproveTask(String column, String value, int userId) throws SQLException{
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
@@ -95,10 +108,16 @@ public class ApproveTaskManager {
 		return result;
 	}
 
-	public List<EmployeeBean> getEmployeeBySpvId(Integer empId)
-			throws SQLException {
-		List<EmployeeBean> empBean = this.ibatis.queryForList(
-				"approveTask.getEmpList", empId);
+	public List<EmployeeBean> getEmployeeBySpvId(Integer empId){
+		List<EmployeeBean> empBean = new ArrayList<EmployeeBean>();
+		
+		try {
+			empBean = this.ibatis.queryForList(
+					"approveTask.getEmpList", empId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return empBean;
 	}

@@ -18,8 +18,7 @@ public class GeneralHolidayManager {
 	}
 
 	public List<GeneralHolidayBean> getGeneralHoliday(String col, String input,
-			String input2, Integer pageNum, Integer pageSize)
-			throws SQLException {
+			String input2, Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -44,10 +43,16 @@ public class GeneralHolidayManager {
 	}
 
 	public GeneralHolidayBean getGeneralHolidayByHolId(int holId)
-			throws SQLException {
-		GeneralHolidayBean genHolBean = (GeneralHolidayBean) this.ibatis
-				.queryForObject("generalHoliday.getGeneralHolidayByHolId",
-						holId);
+		{
+		GeneralHolidayBean genHolBean = null;
+		
+		try {
+			genHolBean = (GeneralHolidayBean) this.ibatis.queryForObject("generalHoliday.getGeneralHolidayByHolId",
+							holId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return genHolBean;
 	}
 
@@ -77,10 +82,15 @@ public class GeneralHolidayManager {
 		}
 	}
 
-	public GeneralHolidayBean getGeneralHolidayEdit(int genId)
-			throws SQLException {
-		GeneralHolidayBean genHolidayBean = (GeneralHolidayBean) this.ibatis
-				.queryForObject("generalHoliday.getGeneralHolidayEdit", genId);
+	public GeneralHolidayBean getGeneralHolidayEdit(int genId){
+		GeneralHolidayBean genHolidayBean = null;
+			try {
+				genHolidayBean = (GeneralHolidayBean) this.ibatis
+					.queryForObject("generalHoliday.getGeneralHolidayEdit", genId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return genHolidayBean;
 	}
 
@@ -103,8 +113,7 @@ public class GeneralHolidayManager {
 		}
 	}
 
-	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean)
-			throws SQLException {
+	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) {
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("generalHoliday.deleteGeneralHoliday",

@@ -27,8 +27,7 @@ public class ProjectManager {
 	}
 
 	public List<ProjectBean> getAllProject(String col, String input,
-			Integer pageNum, Integer pageSize) throws ClassNotFoundException,
-			SQLException {
+			Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -46,15 +45,19 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
 	}
 
 	public List<ProjectBean> getProjectListForRole(String col, Integer input,
-			Integer pageNum, Integer pageSize) throws ClassNotFoundException,
-			SQLException {
+			Integer pageNum, Integer pageSize) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -72,7 +75,12 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
@@ -98,8 +106,7 @@ public class ProjectManager {
 		return result;
 	}
 
-	public ProjectBean getProjectByID(Integer tempProjectID)
-			 {
+	public ProjectBean getProjectByID(Integer tempProjectID){
 		ProjectBean pBean = null;
 		try {
 			pBean = (ProjectBean) this.ibatis.queryForObject(
@@ -142,18 +149,13 @@ public class ProjectManager {
 
 	public void updateProject(ProjectBean pBean) throws ParseException,
 			SQLException {
-		pBean.setUpdatedBy(1);
-		pBean.setEstStartDate(sdf.parse(pBean.getEstStartDateInString()));
-		pBean.setEstEndDate(sdf.parse(pBean.getEstEndDateInString()));
-		Integer estMainDays = pBean.getEstEndDate().getDate()
-				- pBean.getEstStartDate().getDate();
-		pBean.setEstMainDays(estMainDays);
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("project.updateProject", pBean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			try {
 				ibatis.endTransaction();
 			} catch (SQLException e1) {
@@ -164,8 +166,7 @@ public class ProjectManager {
 	}
 
 	public List<ProjectBean> getProjectInvolved(String col, String input,
-			Integer pageNum, Integer pageSize, Integer empId)
-			throws ClassNotFoundException, SQLException {
+			Integer pageNum, Integer pageSize, Integer empId) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -184,7 +185,12 @@ public class ProjectManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return listProject;
@@ -197,17 +203,19 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<ProjectBean> arr  = new ArrayList<ProjectBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 		map.put("deptId", deptId);
-		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 
-		List<ProjectBean> arr = this.ibatis.queryForList(
+		arr = this.ibatis.queryForList(
 				"project.getAllProjectToEvaluate", map);
-
+		
 		return arr;
 	}
 
@@ -217,7 +225,7 @@ public class ProjectManager {
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("deptId", deptId);
-		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING);
+		map.put("projectStatus", Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 		int tmpCount = (Integer) this.ibatis.queryForObject(
 				"project.countProjectToEvaluate", map);
 		return tmpCount;
@@ -225,7 +233,7 @@ public class ProjectManager {
 
 	public void setApproveProject(int projectId, int updatedBy)
 			throws SQLException {
-		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_APPROVE;
+		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_COMPLETED;
 
 		Map m = new HashMap();
 		m.put("projectId", projectId);

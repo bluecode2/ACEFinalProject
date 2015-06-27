@@ -201,7 +201,7 @@
 									<td><bean:write name="member" property="projName" /></td>
 									<td><bean:write name="member" property="empName" /></td>
 									<td><bean:write name="member" property="projRoleName" /></td>
-									<td><a href="#"
+									<td align="center"><a href="#"
 										onclick="actionForm('<bean:write name="member" property="memberId" />','<bean:write name="member" property="empName" />');"
 										id="delBtn"><span
 											class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>

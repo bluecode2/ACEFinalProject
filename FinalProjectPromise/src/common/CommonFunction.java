@@ -1,12 +1,16 @@
 package common;
 
+import general.GeneralParamBean;
+import general.GeneralParamManager;
 import general.MenuBean;
 import general.MenuManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import notification.NotificationBean;
 import notification.NotificationManager;
 import user.UserBean;
 import user_access.UserRoleMenuBean;
@@ -117,8 +121,9 @@ public class CommonFunction {
 
 		// Generate Unread Notification
 		NotificationManager nMan = new NotificationManager();
-		request.setAttribute("unreadNotification",
-				nMan.getListUnreadNotificationByEmployee(user.getEmployeeId()));
+		List<NotificationBean> lstUnreadNotification = nMan.getListUnreadNotificationByEmployee(user.getEmployeeId());
+		request.setAttribute("unreadNotification",lstUnreadNotification);
+		request.setAttribute("unreadCount", lstUnreadNotification.size());
 	}
 
 	public static void initializeHeader(String menuCode, UserBean user,
@@ -173,9 +178,10 @@ public class CommonFunction {
 
 		// Generate Unread Notification
 		NotificationManager nMan = new NotificationManager();
-		request.setAttribute("unreadNotification",
-				nMan.getListUnreadNotificationByEmployee(user.getEmployeeId()));
-
+		List<NotificationBean> lstUnreadNotification = nMan.getListUnreadNotificationByEmployee(user.getEmployeeId());
+		request.setAttribute("unreadNotification",lstUnreadNotification);
+		request.setAttribute("unreadCount", lstUnreadNotification.size());
+		
 		// Generate BreadCrumb
 		ArrayList<MenuBean> arrBreadCrumb = new ArrayList<MenuBean>();
 		arrBreadCrumb.add(menu);
@@ -196,5 +202,12 @@ public class CommonFunction {
 			generateBreadCrumb(parent.getParentId(), arrBreadCrumb);
 		} else
 			return;
+	}
+	
+	public static String getGeneralParameterValue(String genParamId){
+		GeneralParamManager manager = new GeneralParamManager();
+		GeneralParamBean bean = manager.getGenParamByParamId(genParamId);
+		
+		return bean.getGenParamValue();
 	}
 }

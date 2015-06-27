@@ -97,7 +97,7 @@
 		WHERE GEN_PARAM_ID 	= #genParamId# AND IS_ACTIVE = 1
 	</update>
 	
-	<select id="getMaxGenParamId" resultClass="java.lang.Integer" >
+	<select id="getNewParamId" resultClass="java.lang.Integer" >
 	SELECT MAX(GEN_PARAM_ID)+1 FROM GENERAL_PARAMETER
 	</select>
 </sqlMap>

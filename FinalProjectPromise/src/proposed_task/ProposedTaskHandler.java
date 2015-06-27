@@ -41,9 +41,8 @@ public class ProposedTaskHandler extends Action {
 			dForm.setIsAdd(false);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 			request.setAttribute("pageTitle", "Proposed Task Edit");
-			System.out.println("id "+dForm.getSelectedId());
 			dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
-			System.out.println(dForm.getBean());
+			
 			return mapping.findForward("proposedTaskEntry");
 		}
 
@@ -75,7 +74,7 @@ public class ProposedTaskHandler extends Action {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());
 		dForm.setAllowAdd(empBean.getSupervisorId() != null);
-		
+
 		int rowCount;
 
 		dForm.setArrList(dMan.getAllPropTaskFiltered(

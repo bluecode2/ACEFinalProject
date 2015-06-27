@@ -20,8 +20,10 @@ function onBtnBackClick() {
 }
 
 function onBtnSaveClick() {
-	document.forms[0].task.value = "save";
-	document.forms[0].submit();
+	if(validateForm()){
+		document.forms[0].task.value = "save";
+		document.forms[0].submit();
+	}
 }
 
 $(document).ready(function() {
@@ -61,6 +63,56 @@ function registerSearchAssignToEvent(){
 				$('#hdEmpId').val(value);
 				$('#txtAssignedToName').val(text);
 			});
+}
+
+function validateForm(){
+	
+	var taskName 		= document.getElementById("txtTaskName").value;
+	var taskDesc 		= document.getElementById("txtTaskDesc").value;
+	var estStartDate 	= document.getElementById("txtEstStartDate").value;
+	var estEndDate 		= document.getElementById("txtEstEndDate").value;
+	var assignedTo 		= document.getElementById("txtAssignedToName").value;
+	var str = "";
+	var isValid = true;
+	
+	if(taskName.trim() == '') {
+		str+= "Task Name can not be empty!\n";
+		isValid = false;
+	}
+	else if(taskName.length > 25) {
+		str+= "Task Name can not more than 25 character!\n";
+		isValid = false;
+	}
+	
+	if(taskDesc.trim() == '') {
+		str+= "Task Description can not be empty!\n";
+		isValid = false;
+	}
+	else if(taskDesc.length > 200) {
+		str+= "Task Description can not more than 200 character!\n";
+		isValid = false;
+	}
+	
+	if(estStartDate.trim() == '') {
+		str+= "Estimate Start Date can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(estEndDate.trim() == '') {
+		str+= "Estimate End Date can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(assignedTo.trim() == '') {
+		str+= "Assigned To can not be empty!\n";
+		isValid = false;
+	}
+	
+	if(!isValid){
+		alert(str);
+	}
+	
+	return isValid;
 }
 </script>
 </head>
@@ -103,7 +155,7 @@ function registerSearchAssignToEvent(){
 					<tr>
 						<td class="tdLabel" align="right"><label>Est. End Date</label></td>
 						<td>
-							<html:text styleClass="form-control datepicker" styleId="txtEstStartDate"
+							<html:text styleClass="form-control datepicker" styleId="txtEstEndDate"
 								name="assignTaskForm" property="tkBean.estEndDateInString"></html:text>
 						</td>
 					</tr>
@@ -171,7 +223,6 @@ function registerSearchAssignToEvent(){
 									<tr>
 										<th>Employee Code</th>
 										<th>Employee Name</th>
-										<th>Email</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -181,8 +232,6 @@ function registerSearchAssignToEvent(){
 												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
 												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp" property="email" />
-												</td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>

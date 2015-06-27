@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -61,10 +63,21 @@ public class ProjectMemberHandler extends Action {
 		}
 		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", false);
-			pMemberMan.insertProjectMember(pMemberForm.getpMemberbean().getProjectRoleId(), pMemberForm.getpMemberbean().getEmployeeId(), projId);
+			pMemberForm.getpMemberbean().setProjectId(projId);
+			
+			pMemberMan.insertProjectMember(pMemberForm.getpMemberbean());
+			
+			//Create notification
+			NotificationManager nMan = new NotificationManager();
+			nMan.createNotificationProjectMember(us.getEmployeeId(),pMemberForm.getpMemberbean().getEmployeeId(), pMemberForm.getpMemberbean().getProjectId(),pMemberForm.getpMemberbean().getProjectRoleId());
 		}
 		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
 			pMemberMan.delProjMember(pMemberForm.getSelectedId());
+			ProjectMemberBean bean = pMemberMan.getProjectMemberById(pMemberForm.getSelectedId());
+			
+			//Create Notification
+			NotificationManager nMan = new NotificationManager();
+			nMan.createNotificationProjectMember(us.getEmployeeId(),pMemberForm.getpMemberbean().getEmployeeId(), pMemberForm.getpMemberbean().getProjectId(),pMemberForm.getpMemberbean().getProjectRoleId());
 		}
 		pMemberForm.setTask("");
 

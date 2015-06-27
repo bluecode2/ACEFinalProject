@@ -129,7 +129,6 @@
 			UPDATE_DATE = SYSDATE,
 			est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')),
 			project_status = #projectStatus#,
-			PROJECT_PROGRESS = #projectProgress#,
 			act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 			act_end_date = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
 			act_main_days = fGetActualProjectMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),#projectId#)

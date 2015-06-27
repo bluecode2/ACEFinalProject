@@ -3,6 +3,7 @@ package holiday;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,22 +18,37 @@ public class PersonalHolidayManager {
 	}
 
 	public List<PersonalHolidayBean> getPersonalHoliday(String col, String input,
-			Integer pageNum, Integer pageSize) throws SQLException {
+			Integer pageNum, Integer pageSize) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<PersonalHolidayBean> listResult = new ArrayList<PersonalHolidayBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
-		List<PersonalHolidayBean> listResult = this.ibatis.queryForList(
-				"personalHoliday.getPersonalHoliday", map);
+		
+		try {
+			listResult = this.ibatis.queryForList(
+					"personalHoliday.getPersonalHoliday", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listResult;
 	}
 
-	public PersonalHolidayBean getPersonalHolidayByHolId(int holId) throws SQLException {
-		PersonalHolidayBean persHolidayBean = (PersonalHolidayBean) this.ibatis.queryForObject("personalHoliday.getPersonalHolidayByHolId", holId);
+	public PersonalHolidayBean getPersonalHolidayByHolId(int holId) {
+		PersonalHolidayBean persHolidayBean = null;
+		
+		try {
+			persHolidayBean = (PersonalHolidayBean) this.ibatis.queryForObject("personalHoliday.getPersonalHolidayByHolId", holId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return persHolidayBean;
 	}
 	
@@ -59,10 +75,16 @@ public class PersonalHolidayManager {
 		}
 	}
 
-	public PersonalHolidayBean getPersonalHolidayEdit(int genId)
-			throws SQLException {
-		PersonalHolidayBean persHolidayBean = (PersonalHolidayBean) this.ibatis
-				.queryForObject("personalHoliday.getPersonalHolidayByHolId", genId);
+	public PersonalHolidayBean getPersonalHolidayEdit(int genId){
+		PersonalHolidayBean persHolidayBean = null;
+		
+		try {
+			persHolidayBean = (PersonalHolidayBean) this.ibatis
+					.queryForObject("personalHoliday.getPersonalHolidayByHolId", genId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return persHolidayBean;
 	}
 
