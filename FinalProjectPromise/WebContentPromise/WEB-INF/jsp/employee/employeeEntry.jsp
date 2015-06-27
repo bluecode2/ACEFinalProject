@@ -147,7 +147,7 @@ function validateForm(){
 			isValid = false;
 		}
 		else if(empCode.length > 21) {
-			str+= "Employee Code can not more than 20 character!\n";
+			str+= "Employee Code can not be more than 20 characters!\n";
 			isValid = false;
 		}
 		
@@ -156,7 +156,7 @@ function validateForm(){
 			isValid = false;
 		}
 		else if(empName.length > 51) {
-			str+= "Employee Name can not more than 50 character!\n";
+			str+= "Employee Name can not be more than 50 characters!\n";
 			isValid = false;
 		}
 		
@@ -165,7 +165,7 @@ function validateForm(){
 			isValid = false;
 		}
 		else if(email.length > 51) {
-			str+= "Email can not more than 50 character!\n";
+			str+= "Email can not be more than 50 characters!\n";
 			isValid = false;
 		}
 		
@@ -174,7 +174,7 @@ function validateForm(){
 			isValid = false;
 		}
 		else if(address.length > 101) {
-			str+= "Address can not more than 100 character!\n";
+			str+= "Address can not be more than 100 characters!\n";
 			isValid = false;
 		}
 		
@@ -183,7 +183,7 @@ function validateForm(){
 			isValid = false;
 		}
 		else if(phone.length > 26) {
-			str+= "Phone number can not more than 25 character!\n";
+			str+= "Phone number can not be more than 25 characters!\n";
 			isValid = false;
 		}
 		

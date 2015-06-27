@@ -80,7 +80,7 @@
 			isValid = false;
 		}
 		else if(persHolDesc.length > 26) {
-			str+= "Personal Holiday Name can not more than 25!\n";
+			str+= "Personal Holiday Name can not be more than 25 characters!\n";
 			isValid = false;
 		}
 		

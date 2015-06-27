@@ -42,7 +42,7 @@
 			isValid = false;
 		}
 		else if(genHolName.length > 26) {
-			str+= "General Holiday Name can not more than 25!\n";
+			str+= "General Holiday Name can not be more than 25 characters!\n";
 			isValid = false;
 		}
 		

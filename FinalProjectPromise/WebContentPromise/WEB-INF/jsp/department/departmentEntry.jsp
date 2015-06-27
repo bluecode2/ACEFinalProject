@@ -71,7 +71,7 @@
 			isValid = false;
 		}
 		else if(deptCode.length > 11) {
-			str+= "Department Code can not more than 10 character!\n";
+			str+= "Department Code can not be more than 10 characters!\n";
 			isValid = false;
 		}
 		
@@ -80,7 +80,7 @@
 			isValid = false;
 		}
 		else if(deptName.length > 101) {
-			str+= "Department Name can not more than 100 character!\n";
+			str+= "Department Name can not be more than 100 characters!\n";
 			isValid = false;
 		}
 		

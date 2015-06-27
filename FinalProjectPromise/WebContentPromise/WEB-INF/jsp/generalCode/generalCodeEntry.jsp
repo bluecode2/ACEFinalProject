@@ -42,7 +42,7 @@
 			isValid = false;
 		}
 		else if(genCodeCaption.length > 51) {
-			str+= "General Code Caption can not more than 50 character!\n";
+			str+= "General Code Caption can not be more than 50 characters!\n";
 			isValid = false;
 		}
 		

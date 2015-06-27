@@ -36,7 +36,7 @@
 			isValid = false;
 		}
 		else if(genParamDesc.length > 101) {
-			str+= "General Parameter Description can not more than 100!\n";
+			str+= "General Parameter Description can not be more than 100 characters!\n";
 			isValid = false;
 		}
 		
@@ -45,7 +45,7 @@
 			isValid = false;
 		}
 		else if(genParamValue.length > 51) {
-			str+= "General Parameter Value can not more than 50!\n";
+			str+= "General Parameter Value can not be more than 50 characters!\n";
 			isValid = false;
 		}
 		
