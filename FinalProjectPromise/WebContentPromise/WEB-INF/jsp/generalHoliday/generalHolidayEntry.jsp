@@ -18,12 +18,49 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
 		location.href = "generalHoliday.do";
+	}
+	
+	function validateForm(){
+		
+		var genHolName	= document.getElementById("txtGenHolName").value;
+		var genHolDate 	= document.getElementById("txtGenHolDate").value;
+		var genHolType 	= document.getElementById("genHolType").selectedIndex;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(genHolName.trim() == '') {
+			str+= "General Holiday Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(genHolName.length > 26) {
+			str+= "General Holiday Name can not more than 25!\n";
+			isValid = false;
+		}
+		
+		if(genHolDate.trim() == '') {
+			str+= "General Holiday Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(genHolType == 0) {
+			str+= "General Holiday type must be chosen!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 	
 	$(document).ready(function() {
@@ -71,7 +108,7 @@
 					<tr>
 						<td>Holiday Type</td>
 						<td>
-							<html:select name="generalHolidayForm" property="genHolidayBean.holidayType" styleClass="form-control">
+							<html:select name="generalHolidayForm" property="genHolidayBean.holidayType" styleClass="form-control" styleId="genHolType" >
 								<html:option value="">---Choose One---</html:option>
 								<logic:iterate id="id" property="listOfGenCode" name="generalHolidayForm">
 									<html:option value="${id.genCodeId}">

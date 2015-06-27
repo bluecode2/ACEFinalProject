@@ -11,12 +11,46 @@
 <title>General Code Entry</title>
 <script type="text/javascript">
 	function onBtnSaveClick() {
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	function onBtnBackClick() {
 		location.href = "generalCode.do";
+	}
+	
+	function validateForm(){
+		
+		var genCodeIndex 	= document.getElementById("txtGenCodeIndex").value;
+		var genCodeCaption 	= document.getElementById("txtGenCodeCaption").value;
+		var str = "";
+		var isValid = true;
+		
+		if(genCodeIndex.trim() == '') {
+			str+= "General Code Index can not be empty!\n";
+			isValid = false;
+		}
+		else if(isNaN(genCodeIndex)) {
+			str+= "General Code Index must be a number!\n";
+			isValid = false;
+		}
+		
+		if(genCodeCaption.trim() == '') {
+			str+= "General Code Caption can not be empty!\n";
+			isValid = false;
+		}
+		else if(genCodeCaption.length > 51) {
+			str+= "General Code Caption can not more than 50 character!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 </script>
 </head>

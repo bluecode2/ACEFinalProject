@@ -79,7 +79,7 @@ function validateForm(){
 		str+= "Task Name can not be empty!\n";
 		isValid = false;
 	}
-	else if(taskName.length > 25) {
+	else if(taskName.length > 26) {
 		str+= "Task Name can not more than 25 character!\n";
 		isValid = false;
 	}
@@ -88,7 +88,7 @@ function validateForm(){
 		str+= "Task Description can not be empty!\n";
 		isValid = false;
 	}
-	else if(taskDesc.length > 200) {
+	else if(taskDesc.length > 201) {
 		str+= "Task Description can not more than 200 character!\n";
 		isValid = false;
 	}

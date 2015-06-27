@@ -13,12 +13,47 @@
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
 		location.href = "generalParam.do";
+	}
+	
+	function validateForm(){
+		
+		var genParamDesc	= document.getElementById("txtGenParamDesc").value;
+		var genParamValue 	= document.getElementById("txtGenParamValue").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(genParamDesc.trim() == '') {
+			str+= "General Parameter Description can not be empty!\n";
+			isValid = false;
+		}
+		else if(genParamDesc.length > 101) {
+			str+= "General Parameter Description can not more than 100!\n";
+			isValid = false;
+		}
+		
+		if(genParamValue.trim() == '') {
+			str+= "General Parameter Value can not be empty!\n";
+			isValid = false;
+		}
+		else if(genParamValue.length > 51) {
+			str+= "General Parameter Value can not more than 50!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 	
 </script>
@@ -46,11 +81,11 @@
 					</tr>
 					<tr>
 						<td>Gen. Parameter Desc</td>
-						<td><html:text property="bean.genParamDesc" name="generalParamForm" styleClass="form-control"></html:text></td>
+						<td><html:text property="bean.genParamDesc" name="generalParamForm" styleClass="form-control" styleId="txtGenParamDesc"></html:text></td>
 					</tr>
 					<tr>
 						<td>Gen. Parameter Value</td>
-						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control"></html:text></td>
+						<td><html:text property="bean.genParamValue" name="generalParamForm" styleClass="form-control" styleId="txtGenParamValue"></html:text></td>
 					</tr>
 				</table>
 				<%-- <jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include> --%>

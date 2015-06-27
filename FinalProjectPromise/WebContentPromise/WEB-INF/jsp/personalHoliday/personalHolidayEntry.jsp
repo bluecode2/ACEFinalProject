@@ -18,8 +18,10 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
@@ -62,6 +64,47 @@
 			}
 		});
 	}
+	
+	function validateForm(){
+		
+		var persHolDesc	= document.getElementById("txtPersHolDesc").value;
+		var persHolDate = document.getElementById("txtPersHolDate").value;
+		var emp 		= document.getElementById("txtEmp").value;
+		var persHolType = document.getElementById("persHolType").selectedIndex;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(persHolDesc.trim() == '') {
+			str+= "Personal Holiday Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(persHolDesc.length > 26) {
+			str+= "Personal Holiday Name can not more than 25!\n";
+			isValid = false;
+		}
+		
+		if(persHolDate.trim() == '') {
+			str+= "Personal Holiday Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(emp.trim() == '') {
+			str+= "Employee can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(persHolType == 0) {
+			str+= "General Holiday type must be chosen!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
+	}
 </script>
 </head>
 <body>
@@ -84,7 +127,7 @@
 					<tr>
 						<td>Personal Holiday Name</td>
 						<td>
-							<html:text styleClass="form-control" styleId="txtPersHolCode" name="personalHolidayForm" property="persHolidayBean.holidayDesc"></html:text>
+							<html:text styleClass="form-control" styleId="txtPersHolDesc" name="personalHolidayForm" property="persHolidayBean.holidayDesc"></html:text>
 						</td>
 					</tr>
 					<tr>
@@ -121,7 +164,7 @@
 					<tr>
 						<td>Holiday Type</td>
 						<td>
-							<html:select name="personalHolidayForm" property="persHolidayBean.holidayType" styleClass="form-control">
+							<html:select name="personalHolidayForm" property="persHolidayBean.holidayType" styleClass="form-control" styleId="persHolType">
 								<html:option value="">---Choose One---</html:option>
 								<logic:iterate id="id" property="listOfGenCode" name="personalHolidayForm">
 									<html:option value="${id.genCodeId}">

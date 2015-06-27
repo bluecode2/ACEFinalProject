@@ -22,8 +22,10 @@
 	}
 
 	function onBtnSaveClick() {
+		if(validateForm()){
 			document.forms[0].task.value = "save";
 			document.forms[0].submit();
+		}
 	}
 
 	$(document).ready(
