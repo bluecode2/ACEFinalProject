@@ -11,6 +11,23 @@
 <title>My Notifications</title>
 <script src="js/jquery.js"></script>
 </head>
+<script>
+	$(document).ready(
+			function() {
+				$.material.init();
+
+				$('.notificationNodeList').on(
+						'click',
+						function() {
+							var notificationId = $(this).find(
+									'.hdnNotifId').val();
+							document.forms[0].task.value = "select";
+							document.forms[0].selectedId.value = notificationId;
+							document.forms[0].submit();								
+						});
+			});
+</script>
+
 <body>
 	<html:form action="/notification" method="post">
 
@@ -24,17 +41,32 @@
 		<div class="container divContent">
 			<div class="row">
 				<div class="col-md-6">
-					<logic:iterate id="notif" name="notificationForm" property="lstBean">
-						<div class="rowSearch alert alert-info notif">
-							<strong><bean:write name="notif" property="notificationDesc" /></strong>
+					<logic:iterate id="notif" name="notificationForm"
+						property="lstBean">
+						<logic:equal name="notif" property="isRead" value="0">
+							<div class="notificationNodeList alert alert-info notif">
+								<html:hidden styleClass="hdnNotifId" name="notif" property="notificationId"/>
+								<bean:write name="notif"
+										property="notificationDesc" />
+										<br />
+								<span style="font-size: xx-small;"><bean:write name="notif" property="notificationDateInString" /></span>
+							</div>
+						</logic:equal>
+						<logic:equal name="notif" property="isRead" value="1">
+							<div class="notificationNodeList alert alert-info notif checked">
+							<html:hidden styleClass="hdnNotifId" name="notif" property="notificationId"/>
+							<bean:write name="notif"
+									property="notificationDesc" />
+							<br />
+							<span style="font-size: xx-small;"><bean:write name="notif" property="notificationDateInString" /></span>
+							<span style="font-size: xx-small;padding-left:30px">Read <bean:write name="notif" property="readDateInString"   /></span>
 						</div>
+						</logic:equal>
+						
 					</logic:iterate>
-		<div class="alert alert-info notif checked" style="cursor: pointer;border-radius: 3px;">
-		    <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
-		</div>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<div class="container">

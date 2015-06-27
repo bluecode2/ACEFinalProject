@@ -113,6 +113,28 @@ public class IndependentTaskManager {
 		}
 	}
 	
+	public void editStatusAssignTaskApprove(int taskId, int updatedBy, String taskStatus, String remarks) {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
+		m.put("remarks", remarks);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("independentTask.updateStatusAssignTaskApprove", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
 	public IndependentTaskBean getDataForEdit(int taskId) {
 		IndependentTaskBean tBean = null;
 		
@@ -185,6 +207,27 @@ public class IndependentTaskManager {
 		map.put("empId", empId);
 		int tmpCount = (Integer) this.ibatis.queryForObject("independentTask.getCountMyCurrentTask", map);
 		return tmpCount;
+	}
+	
+	public void startMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("independentTask.startMyCurrentTask", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 	public void updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) {

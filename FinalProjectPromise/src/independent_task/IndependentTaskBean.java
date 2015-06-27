@@ -165,7 +165,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.estStartDateInString = "";
 			date = null;
 		}
@@ -200,7 +199,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.estEndDateInString = "";
 			date = null;
 		}
@@ -235,7 +233,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.actStartDateInString = "";
 			date = null;
 		}
@@ -270,7 +267,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.actEndDateInString = "";
 			date = null;
 		}
@@ -345,7 +341,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -380,7 +375,6 @@ public class IndependentTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

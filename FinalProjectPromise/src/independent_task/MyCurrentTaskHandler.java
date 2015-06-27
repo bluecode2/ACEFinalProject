@@ -30,7 +30,9 @@ public class MyCurrentTaskHandler extends Action {
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 		NotificationManager noMan = new NotificationManager();
 		if ("start".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ONGOING);
+
+			tsMan.startMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ONGOING);
+
 		}
 		else if ("pause".equals(tsForm.getTask())) {
 			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ON_HOLD);

@@ -185,6 +185,8 @@
 			<forward name="list" path="/WEB-INF/jsp/notification/notificationList.jsp"></forward>
 		</action>
 	</action-mappings>
+	
+	
 	<message-resources parameter="application" />
 <!-- 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn"> -->
 <!-- 		<set-property property="pathnames" -->

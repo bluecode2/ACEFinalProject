@@ -73,6 +73,7 @@ public class ProjectMemberHandler extends Action {
 		}
 		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
 			pMemberMan.delProjMember(pMemberForm.getSelectedId());
+			ProjectMemberBean bean = pMemberMan.getProjectMemberById(pMemberForm.getSelectedId());
 			
 			//Create Notification
 			NotificationManager nMan = new NotificationManager();

@@ -83,25 +83,35 @@ label {
   cursor:pointer;
   background-color: rgba(3,	169, 244, 0.2);
   color: #03a9f4;
-  border-radius:4px;
-  margin:4px;
+  margin:2px;
   padding: 12px 15px ;
 }
 .notif::after {
 	content: "new!";
+   font-weight: bold;
 	float: right;
 }
 .notif:hover {
   background-color: rgba(3,	169, 244, 0.5);
+  color: white;
 }
 .notif.checked {
   background-color: rgba(3,	169, 244, 0.05);
   color: #03a9f4;
 }
 .notif.checked::after {
-   content: "v";
+   content: "";
+   font-weight: bold;
 	float: right;
 }
+.dropdown-menu-notif {
+	min-width: 250px;
+}
+.dropdown-menu-notif > li > a {
+  white-space: normal;
+}
+
+
 /* Submenu
 -------------------------------------------------- */
 

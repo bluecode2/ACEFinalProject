@@ -76,11 +76,13 @@ public class AssignTaskHandler extends Action {
 				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
 			}
-			else if (tsForm.getSelectedEdit() == 1) {
+			
+			else if (tsForm.getSelectedEdit() == 1) { //APPROVED
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+				tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
+
 			}	
 		}
 		else if ("secondEdit".equals(tsForm.getTask())) {
