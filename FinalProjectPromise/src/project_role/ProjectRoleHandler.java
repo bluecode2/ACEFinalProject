@@ -46,7 +46,7 @@ public class ProjectRoleHandler extends Action {
 			
 			Boolean isAdd = prf.getIsAdd();
 			if (isAdd) {
-				prf.getProjectRoleBean().setProjectRoleId(prm.getMaxProjectRoleId());
+				prf.getProjectRoleBean().setProjectRoleId(prm.getNewProjectRoleId());
 				prf.getProjectRoleBean().setCreatedBy(us.getUserId());
 				prm.insertProjectRole(prf.getProjectRoleBean());
 			} 

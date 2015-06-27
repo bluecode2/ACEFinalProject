@@ -59,7 +59,7 @@
 		WHERE PROJECT_ROLE_ID = #projectRoleId#
 	</select>
 	
-	<select id="getMaxProjectRoleId" resultClass="java.lang.Integer" >
+	<select id="getNewProjectRoleId" resultClass="java.lang.Integer" >
 	SELECT MAX(PROJECT_ROLE_ID)+1 FROM PROJECT_ROLE
 	</select>
 

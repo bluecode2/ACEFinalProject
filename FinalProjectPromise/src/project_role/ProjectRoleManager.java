@@ -20,7 +20,7 @@ public class ProjectRoleManager {
 	}
 
 	public List<ProjectRoleBean> getAllProjectRole(String col, String input,
-			Integer pageNum, Integer pageSize) throws SQLException {
+			Integer pageNum, Integer pageSize) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
@@ -41,8 +41,7 @@ public class ProjectRoleManager {
 		return arr;
 	}
 
-	public List<ProjectRoleBean> getAllProjectRoleForPopUp()
-			throws SQLException {
+	public List<ProjectRoleBean> getAllProjectRoleForPopUp() {
 		List<ProjectRoleBean> arr = new ArrayList<ProjectRoleBean>();
 
 		try {
@@ -55,11 +54,18 @@ public class ProjectRoleManager {
 		return arr;
 	}
 
-	public ProjectRoleBean getProjectRoleById(Integer tmpProjectRoleId)
-			throws SQLException {
-		ProjectRoleBean projectRoleBean = (ProjectRoleBean) this.ibatis
-				.queryForObject("projectRole.getProjectRoleById",
-						tmpProjectRoleId);
+	public ProjectRoleBean getProjectRoleById(Integer tmpProjectRoleId){
+		
+		ProjectRoleBean projectRoleBean  = null;
+		
+		try {
+			projectRoleBean = (ProjectRoleBean) this.ibatis
+					.queryForObject("projectRole.getProjectRoleById",
+							tmpProjectRoleId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return projectRoleBean;
 	}
 
@@ -129,9 +135,9 @@ public class ProjectRoleManager {
 		}
 	}
 
-	public Integer getMaxProjectRoleId() throws SQLException {
+	public Integer getNewProjectRoleId() throws SQLException {
 		Integer maxId = (Integer) this.ibatis.queryForObject(
-				"projectRole.getMaxProjectRoleId", null);
+				"projectRole.getNewProjectRoleId", null);
 		return maxId;
 	}
 

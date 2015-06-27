@@ -26,7 +26,7 @@ public class EmployeeManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<EmployeeBean> arr = null;
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -42,10 +42,9 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getAllEmployeeForPopUp() throws ClassNotFoundException,
-			SQLException {
+	public List<EmployeeBean> getAllEmployeeForPopUp()  {
 		
-		List<EmployeeBean> arr = null;
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>() ;
 		try {
 			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", null);
 		} catch (SQLException e) {
@@ -55,10 +54,9 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getAllEmployeeForPM(Integer deptId) throws ClassNotFoundException,
-	SQLException {
+	public List<EmployeeBean> getAllEmployeeForPM(Integer deptId) {
 		
-		List<EmployeeBean> arr = null;
+		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		try {
 			arr = this.ibatis.queryForList("employee.getAllEmployeeForPM", deptId);
 		} catch (SQLException e) {
@@ -109,16 +107,22 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public EmployeeBean getEmployeeByEmpId(Integer empId) throws SQLException {
+	public EmployeeBean getEmployeeByEmpId(Integer empId) {
+		EmployeeBean empBean= null;
 
-		EmployeeBean empBean = (EmployeeBean) this.ibatis.queryForObject(
-				"employee.getEmployeeByEmpId", empId);
+		try {
+			empBean = (EmployeeBean) this.ibatis.queryForObject("employee.getEmployeeByEmpId", empId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return empBean;
 	}
 
-	public int getNewEmpId() throws SQLException {
-		int tempNewEmp = (Integer) this.ibatis.queryForObject(
-				"employee.getNewEmpId", null);
+	public int getNewEmpId() throws SQLException  {
+		
+		Integer tempNewEmp = (Integer) this.ibatis.queryForObject("employee.getNewEmpId", null);
+		
 		return tempNewEmp;
 	}
 
@@ -158,7 +162,7 @@ public class EmployeeManager {
 	}
 
 	public void deleteEmployee(Integer empId, Integer updatedBy)
-			throws ClassNotFoundException, SQLException {
+			throws ClassNotFoundException {
 		try {
 			Map map = new HashMap();
 			map.put("employeeId", empId);
@@ -179,17 +183,16 @@ public class EmployeeManager {
 	}
 
 	public Integer getCountEmployee(String column, String value)
-			throws SQLException, ClassNotFoundException {
+			throws ClassNotFoundException, SQLException {
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
-		Integer result = (Integer) this.ibatis.queryForObject(
-				"employee.countEmployee", map);
+		Integer result = (Integer) this.ibatis.queryForObject("employee.countEmployee", map);
+
 		return result;
 	}
 	
-	public List<EmployeeBean> getListEmployeeForPersonalHoliday()
-			throws ClassNotFoundException, SQLException {
+	public List<EmployeeBean> getListEmployeeForPersonalHoliday() {
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
 		
 		try {

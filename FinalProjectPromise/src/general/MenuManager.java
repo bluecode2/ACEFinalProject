@@ -111,21 +111,26 @@ public class MenuManager {
 	}
 
 	public List<MenuBean> selectListMenu(String col, String input,
-			Integer pageNum, Integer pageSize) throws SQLException {
+			Integer pageNum, Integer pageSize){
 
-		System.out.println(pageNum +" " + pageSize + " "+ col + " "+ input);
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		System.out.println(begin + " "+end);
-
+		
+		List<MenuBean> listResult = new ArrayList<MenuBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
 
-		List<MenuBean> listResult = this.ibatis.queryForList(
-				"menu.selectListMenu", map);
+		try {
+			listResult = this.ibatis.queryForList(
+					"menu.selectListMenu", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listResult;
 	}
 

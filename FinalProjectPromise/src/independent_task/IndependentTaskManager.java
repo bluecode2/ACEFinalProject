@@ -3,6 +3,7 @@ package independent_task;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,11 @@ public class IndependentTaskManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<IndependentTaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
+	public List<IndependentTaskBean> getListAssignTask(String col, String input, int pageNum, int pageSize, int empId) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
+		
+		List<IndependentTaskBean> arr = new ArrayList<IndependentTaskBean>();
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -31,7 +34,12 @@ public class IndependentTaskManager {
 		map.put("end", end);
 		map.put("empId", empId);
 		
-		List arr = this.ibatis.queryForList("independentTask.getAllListAssignTask", map);
+		try {
+			arr = this.ibatis.queryForList("independentTask.getAllListAssignTask", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return arr;
 	}
@@ -45,7 +53,7 @@ public class IndependentTaskManager {
 		return tmpCount;
 	}
 	
-	public void createNewAssignTask(IndependentTaskBean tsBean) throws SQLException {
+	public void createNewAssignTask(IndependentTaskBean tsBean) {
 		try {
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.startTransaction();
@@ -62,7 +70,7 @@ public class IndependentTaskManager {
 		}
 	}
 	
-	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) throws SQLException {
+	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("taskName", taskName);
@@ -83,7 +91,7 @@ public class IndependentTaskManager {
 		}
 	}
 	
-	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) throws SQLException {
+	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -105,9 +113,15 @@ public class IndependentTaskManager {
 		}
 	}
 	
-	public IndependentTaskBean getDataForEdit(int taskId) throws SQLException {
+	public IndependentTaskBean getDataForEdit(int taskId) {
+		IndependentTaskBean tBean = null;
 		
-		IndependentTaskBean tBean = (IndependentTaskBean) this.ibatis.queryForObject("independentTask.getAssignTaskForEdit", taskId);	
+		try {
+			tBean = (IndependentTaskBean) this.ibatis.queryForObject("independentTask.getAssignTaskForEdit", taskId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		return tBean;
 	}
 	
@@ -116,7 +130,7 @@ public class IndependentTaskManager {
 		return tmpNewId;
 	}
 	
-	public void createNewAssignTaskMap(ProposedTaskBean bean) throws SQLException {
+	public void createNewAssignTaskMap(ProposedTaskBean bean) {
 		Map map = new HashMap();
 		map.put("taskId", bean.getTaskId());
 		map.put("taskName", bean.getPropTaskName());
@@ -142,9 +156,11 @@ public class IndependentTaskManager {
 		}
 	}
 
-	public List<IndependentTaskBean> getListMyCurrentTask(String col, String input, int pageNum, int pageSize, int empId) throws SQLException {
+	public List<IndependentTaskBean> getListMyCurrentTask(String col, String input, int pageNum, int pageSize, int empId) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
+		
+		List<IndependentTaskBean> arr = new ArrayList<IndependentTaskBean>();
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -153,7 +169,12 @@ public class IndependentTaskManager {
 		map.put("end", end);
 		map.put("empId", empId);
 		
-		List arr = this.ibatis.queryForList("independentTask.getListMyCurrentTask", map);
+		try {
+			arr = this.ibatis.queryForList("independentTask.getListMyCurrentTask", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return arr;
 	}
@@ -166,7 +187,7 @@ public class IndependentTaskManager {
 		return tmpCount;
 	}
 	
-	public void updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) throws SQLException {
+	public void updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);

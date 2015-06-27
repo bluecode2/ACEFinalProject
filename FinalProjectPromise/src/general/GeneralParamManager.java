@@ -42,8 +42,15 @@ public class GeneralParamManager {
 		return arr;
 	}
 	
-	public GeneralParamBean getGenParamByParamId(String tmpGenParamId) throws SQLException {
-		GeneralParamBean genParamBean = (GeneralParamBean) this.ibatis.queryForObject("genParam.getGenParamByGenParamId", tmpGenParamId);
+	public GeneralParamBean getGenParamByParamId(String tmpGenParamId) {
+		GeneralParamBean genParamBean=null;
+		
+		try {
+			genParamBean = (GeneralParamBean) this.ibatis.queryForObject("genParam.getGenParamByGenParamId", tmpGenParamId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return genParamBean;
 	}
 
@@ -110,8 +117,8 @@ public class GeneralParamManager {
 		}
 	}
 	
-	public String getMaxParamId() throws SQLException{
-		String maxId = (String) this.ibatis.queryForObject("genParam.getMaxGenParamId", null);
+	public String getNewParamId() throws SQLException{
+		String maxId = (String) this.ibatis.queryForObject("genParam.getNewParamId", null);
 		return maxId;
 	}
 }

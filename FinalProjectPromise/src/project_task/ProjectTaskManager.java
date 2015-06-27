@@ -3,6 +3,7 @@ package project_task;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,12 @@ public class ProjectTaskManager {
 	}
 
 	public List<ProjectTaskBean> getListProjectTaskByProjectId(String col,
-			String input, int pageNum, int pageSize, int projectId)
-			throws SQLException {
+			String input, int pageNum, int pageSize, int projectId) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
+		List<ProjectTaskBean> arr = new ArrayList<ProjectTaskBean>();
+		
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -30,14 +32,17 @@ public class ProjectTaskManager {
 		map.put("end", end);
 		map.put("projectId", projectId);
 
-		List arr = this.ibatis.queryForList(
-				"projectTask.getAllProjectTaskByProjectId", map);
-
+	try {
+		arr = this.ibatis.queryForList("projectTask.getAllProjectTaskByProjectId", map);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		return arr;
 	}
 
 	public int getCountAssignTaskByProjectId(String col, String input,
-			Integer projectId) throws SQLException {
+			Integer projectId) throws SQLException  {
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -49,7 +54,7 @@ public class ProjectTaskManager {
 	}
 
 	public void createNewOProjectTask(ProjectTaskBean tsBean)
-			throws SQLException {
+			 {
 		try {
 			this.ibatis.startTransaction();
 			tsBean.setTaskId(getNewTaskId());
@@ -66,7 +71,7 @@ public class ProjectTaskManager {
 		}
 	}
 
-	public void editProjectTask(ProjectTaskBean bean) throws SQLException {
+	public void editProjectTask(ProjectTaskBean bean)  {
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateProjectTask", bean);
@@ -82,13 +87,7 @@ public class ProjectTaskManager {
 		}
 	}
 	
-	public void updateTaskStat(ProjectTaskBean bean) throws SQLException{//Integer taskId, Integer updatedBy, String taskStat) throws SQLException {
-		/*Map map = new HashMap();
-		System.out.println("masuk Manager");
-		map.put("taskId", taskId);
-		map.put("updatedBy", updatedBy);
-		map.put("taskStatus", taskStat);
-		System.out.println(taskId +" update "+ updatedBy +" stat "+ taskStat +" testing manager");*/
+	public void updateTaskStat(ProjectTaskBean bean) {
 	
 		try {
 			this.ibatis.startTransaction();
@@ -108,7 +107,7 @@ public class ProjectTaskManager {
 	}
 
 	public void editStatusRemarksProjectTask(int taskId, int updatedBy,
-			String taskStatus, String remarks) throws SQLException {
+			String taskStatus, String remarks) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -131,7 +130,7 @@ public class ProjectTaskManager {
 	}
 	
 	public void editStatusProjectTask(int taskId, int updatedBy,
-			String taskStatus) throws SQLException {
+			String taskStatus)  {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -152,21 +151,33 @@ public class ProjectTaskManager {
 		}
 	}
 
-	public ProjectTaskBean getDataForEdit(int taskId) throws SQLException {
-		ProjectTaskBean tBean = (ProjectTaskBean) this.ibatis.queryForObject(
-				"projectTask.getProjectTaskByTaskId", taskId);
+	public ProjectTaskBean getDataForEdit(int taskId)  {
+		
+		ProjectTaskBean tBean = null;
+		
+		try {
+			tBean = (ProjectTaskBean) this.ibatis.queryForObject(
+					"projectTask.getProjectTaskByTaskId", taskId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tBean;
 	}
 
-	public int getNewTaskId() throws SQLException {
-		int tmpNewId = (Integer) this.ibatis.queryForObject(
-				"projectTask.getNewTaskId", null);
+	public int getNewTaskId() throws SQLException  {
+		int tmpNewId = (Integer) this.ibatis.queryForObject("projectTask.getNewTaskId", null);
 		return tmpNewId;
 	}
 	
-	public ProjectTaskBean getDataForstatus(Integer taskId) throws SQLException{
-		ProjectTaskBean pTaskBean = new ProjectTaskBean();
-		pTaskBean = (ProjectTaskBean) this.ibatis.queryForObject("projectTask.getDataForstatus", taskId);
+	public ProjectTaskBean getDataForstatus(Integer taskId) {
+		ProjectTaskBean pTaskBean = null;
+		try {
+			pTaskBean = (ProjectTaskBean) this.ibatis.queryForObject("projectTask.getDataForstatus", taskId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return pTaskBean;
 	}
 }
