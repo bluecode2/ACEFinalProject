@@ -95,10 +95,6 @@ public class ProjectBean {
 		return actStartDateInString;
 	}
 
-	public void setEstStartDateInString(String estStartDateInString) {
-		this.estStartDateInString = estStartDateInString;
-	}
-
 	public Integer getEmployeeId() {
 		return employeeId;
 	}
@@ -267,7 +263,7 @@ public class ProjectBean {
 		return estStartDateInString;
 	}
 
-	public void setEstStartDateDateInString(String estStartDateInString) {
+	public void setEstStartDateInString(String estStartDateInString) {
 		this.estStartDateInString = estStartDateInString;
 		
 		Date date = new Date();

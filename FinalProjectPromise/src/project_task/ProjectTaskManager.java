@@ -91,9 +91,7 @@ public class ProjectTaskManager {
 	
 		try {
 			this.ibatis.startTransaction();
-			System.out.println("berhasil masuk edit");
 			this.ibatis.update("projectTask.updateProjectStat", bean);
-			System.out.println("Berhasil Edit");
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
