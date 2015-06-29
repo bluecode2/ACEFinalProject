@@ -63,7 +63,7 @@ public class ApprovePropProjHandler extends Action {
 		
 		aPropPForm.setArrList(aPropPMan.getAllPropTask(
 				aPropPForm.getCurrSearchField(), aPropPForm.getCurrSearchValue(),
-				aPropPForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+				aPropPForm.getCurrPage(), Constant.pageSize, us.getEmployeeId(), 2));
 		rowCount = aPropPMan.getCountAllPropTask(aPropPForm.getCurrSearchField(),
 				aPropPForm.getCurrSearchValue(), us.getEmployeeId());
 		

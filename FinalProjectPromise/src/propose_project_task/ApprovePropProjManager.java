@@ -22,7 +22,7 @@ public class ApprovePropProjManager {
 	}
 	
 	public List<ProposeProjectTaskBean> getAllPropTask(String col, String input,
-			Integer pageNum, Integer pageSize, Integer empId){
+			Integer pageNum, Integer pageSize, Integer empId, Integer projId){
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
@@ -32,6 +32,7 @@ public class ApprovePropProjManager {
 		map.put("begin", begin);
 		map.put("end", end);
 		map.put("empId", empId);
+		map.put("projId", projId);
 		
 		List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
 		
