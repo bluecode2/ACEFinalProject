@@ -129,13 +129,12 @@
 		REMARKS = #remarks#,
 		UPDATED_BY = #updatedBy#,
 		UPDATE_DATE = SYSDATE,
-		est_main_days =
-		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')),
+		est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')),
 		project_status = #projectStatus#,
 		act_start_date = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 		act_end_date = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
-		act_main_days =
-		fGetActualProjectMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),#projectId#)
+		act_main_days = fGetActualProjectMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
+		TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),#projectId#)
 		WHERE PROJECT_ID = #projectId#
 	</update>
 
