@@ -342,14 +342,17 @@
 						});
 
 						$('#btnSaveProposeTask').on('click', function() {
-							document.forms[0].taskForProp.value = "save";
-
-							if ($("#hdnPropTaskId").val().length > 0)
-								document.forms[0].isAdd.value = false;
-							else
-								document.forms[0].isAdd.value = true;
-
-							document.forms[0].submit();
+							if(validateForm()){
+								document.forms[0].taskForProp.value = "save";
+	
+								if ($("#hdnPropTaskId").val().length > 0)
+									document.forms[0].isAdd.value = false;
+								else
+									document.forms[0].isAdd.value = true;
+	
+								
+									document.forms[0].submit();
+							}
 						});
 						
 						hideLoading();
@@ -464,6 +467,51 @@
 	function showRemarksProp(remarks) {
 		$('#txtRemarksDec').html(remarks);
 		$('#remarksProp').modal();
+	}
+	
+	function validateForm(){
+		
+		var taskName	= document.getElementById("txtTaskName").value;
+		var taskDesc 	= document.getElementById("txtTaskDesc").value;
+		var startDate 	= document.getElementById("txtEstStartDate").value;
+		var endDate 	= document.getElementById("txtEstEndDate").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(taskName.trim() == '') {
+			str+= "Task Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskName.length > 26) {
+			str+= "Task Name can not be more than 25 characters!\n";
+			isValid = false;
+		}
+		
+		if(taskDesc.trim() == '') {
+			str+= "Task Description can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskDesc.length > 201) {
+			str+= "Task Description can not be more than 200 characters!\n";
+			isValid = false;
+		}
+		
+		if(startDate.trim() == '') {
+			str+= "Estimate Start Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(endDate.trim() == '') {
+			str+= "Estimate End Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 </script>
 </head>
@@ -1078,9 +1126,9 @@
 							</tr>
 						</table>
 						<div align="right">
-							<button id="btnSaveProposeTask" class="btn btn-sm btn-info">Save</button>
+							<button type="button" id="btnSaveProposeTask" class="btn btn-sm btn-info">Save</button>
 							&nbsp;
-							<button id="btnCancelAdd" class="btn btn-sm">Cancel</button>
+							<button type="button" id="btnCancelAdd" class="btn btn-sm">Cancel</button>
 						</div>
 					</div>
 				</div>

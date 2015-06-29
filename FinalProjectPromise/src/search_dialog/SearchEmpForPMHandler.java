@@ -13,11 +13,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import common.Constant;
-
 import employee.EmployeeBean;
 import employee.EmployeeManager;
 
-public class SearchEmpHandler extends Action {
+public class SearchEmpForPMHandler extends Action{
+
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -27,13 +27,16 @@ public class SearchEmpHandler extends Action {
 		response.setHeader("cache-control", "no-cache");
 		PrintWriter out = response.getWriter();
 		
-		SearchEmpForm sEmpForm = (SearchEmpForm) form;
+		HttpSession session = request.getSession();
+		
+		SearchEmpForPMForm sEmpForm = (SearchEmpForPMForm) form;
 		EmployeeManager eMan = new EmployeeManager();
+		Integer deptId = (Integer) session.getAttribute("deptId");
 		
 		String searchField = sEmpForm.getSearchField();
 		String searchValue = sEmpForm.getSearchValue();
 		
-		List<EmployeeBean> arrEmp = eMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
+		List<EmployeeBean> arrEmp = eMan.getAllEmployeeForPM(deptId);
 		
 		for (EmployeeBean empBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");

@@ -66,21 +66,24 @@
 	}
 	
 	function search() {
+			showLoading();
 			var searchField = $('#selSearchFieldEmpId').val();
 			var searchValue = $('#txtSearchValueEmpId').val();
 	
 			$.ajax({
 				type : "POST",
-				url : "searchEmp.do",
+				url : "searchEmpForPM.do",
 				data : "&searchField=" + searchField
 						+ "&searchValue=" + searchValue,
 				success : function(response) {
 					$("#tblSearchEmp").find("tr:gt(0)").remove();
 					$("#tblSearchEmp").append(response);
 					registerSearchEmployee();
+					hideLoading();
 				},
 				error : function(e) {
 					alert("Error: " + e);
+					hideLoading();
 				}
 			});
 	}

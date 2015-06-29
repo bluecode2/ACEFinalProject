@@ -16,8 +16,9 @@
 	}
 
 	function onBtnAddClick() {
-		document.forms[0].task.value = "add";
-		document.forms[0].submit();
+// 		document.forms[0].task.value = "add";
+// 		document.forms[0].submit();
+		$('#divEntryProjectMember').show();
 	}
 
 	$(document).ready(function() {
@@ -61,6 +62,7 @@
 	}
 
 	function search() {
+		showLoading();
 		var searchField = $('#selSearchFieldEmpId').val();
 		var searchValue = $('#txtSearchValueEmpId').val();
 
@@ -73,9 +75,11 @@
 				$("#tblSearchEmp").find("tr:gt(0)").remove();
 				$("#tblSearchEmp").append(response);
 				registerSearchEmployee();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
 		});
 	}
@@ -161,8 +165,8 @@
 					</tr>
 				</table>
 			</div>
-			<logic:equal value="true" name="showAdd">
-				<div class="panel form-group has-info" id="divEntryProjectMember" style="padding: 20px">
+<%-- 			<logic:equal value="true" name="showAdd"> --%>
+				<div class="panel form-group has-info" id="divEntryProjectMember" style="padding: 20px; display: none">
 					<h4>Project Member Entry</h4>
 					<hr>
 					<table cellspacing="0" style="margin-top: 10px;" width="100%"
@@ -206,7 +210,7 @@
 						</tr>
 					</table>
 				</div>
-			</logic:equal>
+<%-- 			</logic:equal> --%>
 			<div>
 				<table class="table table-striped table-bordered table-hover"
 					cellspacing="0" style="margin-top: 10px;" width="100%"
@@ -264,6 +268,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title">Employee</h4>
+						<hr>
 					</div>
 					<div class="modal-body">
 						<div class="container form-group">
@@ -337,31 +342,9 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title">Project Role</h4>
+						<hr>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
-							<table>
-								<tr>
-									<td>Search</td>
-									<td style="padding-left: 15px"><select
-										class="form-control" id="selSearchFieldRoleId"
-										style="width: 150px">
-											<option value="projRoleCode">Project Role Code</option>
-											<option value="projRoleName">Project Role Name</option>
-									</select></td>
-									<td style="padding-left: 15px"><input type="text"
-										id="txtSearchValueRoleId" class="form-control" /></td>
-									<td style="padding-left: 15px">
-										<button type="button" onclick="search();" id="btnSearchRole"
-											class="btn btn-sm btn-info btn-icon" title="BackRole"
-											value="btnRole">
-											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-
 						<table width="100%" id="tblSearchProjRole"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
@@ -393,6 +376,8 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		
+		
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 

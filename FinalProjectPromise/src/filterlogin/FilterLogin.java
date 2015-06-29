@@ -27,10 +27,20 @@ public class FilterLogin implements Filter {
 		
 		if(request.getServletPath().equals("/login.do")){
 			   chain.doFilter(request, response);
+			   
 		}
 
 		else{  
 			if(session.getAttribute("currUser") == null){
+				if("XMLHttpRequest".equals(
+						request.getHeader("X-Requested-With")))
+				{
+					PrintWriter out = response.getWriter();
+					out.println("<script type=\"text/javascript\">");
+					out.println("window.location.href = \"login.do\";");
+					out.println("</script>");
+				}
+				else
 					response.sendRedirect("login.do");
 			}
 			else

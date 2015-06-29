@@ -56,12 +56,7 @@ public class ProjectMemberHandler extends Action {
 		
 		request.setAttribute("showAdd", false);
 		
-		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
-			request.setAttribute("showAdd", true);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
-			request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
-		}
-		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
+		if ("save".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", false);
 			pMemberForm.getpMemberbean().setProjectId(projId);
 			
@@ -72,12 +67,14 @@ public class ProjectMemberHandler extends Action {
 			nMan.createNotificationProjectMember(us.getEmployeeId(),pMemberForm.getpMemberbean().getEmployeeId(), pMemberForm.getpMemberbean().getProjectId(),pMemberForm.getpMemberbean().getProjectRoleId());
 		}
 		else if ("delProjMem".equalsIgnoreCase(pMemberForm.getTask())){
-			pMemberMan.delProjMember(pMemberForm.getSelectedId());
+			
 			ProjectMemberBean bean = pMemberMan.getProjectMemberById(pMemberForm.getSelectedId());
+			
+			pMemberMan.delProjMember(pMemberForm.getSelectedId());
 			
 			//Create Notification
 			NotificationManager nMan = new NotificationManager();
-			nMan.createNotificationProjectMember(us.getEmployeeId(),pMemberForm.getpMemberbean().getEmployeeId(), pMemberForm.getpMemberbean().getProjectId(),pMemberForm.getpMemberbean().getProjectRoleId());
+			nMan.createNotificationRemoveProjectMember(us.getEmployeeId(),bean.getEmployeeId(), bean.getProjectId(),bean.getProjectRoleId());
 		}
 		pMemberForm.setTask("");
 
@@ -89,8 +86,8 @@ public class ProjectMemberHandler extends Action {
 		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
-		
-		request.setAttribute("pageTitle", "Project Member");
+		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pMemberForm.getPageCount(),pMemberForm.getCurrPage()));
