@@ -86,7 +86,7 @@ public class Constant {
 		public static final String PROJECT_STATUS_WAITING_FOR_APPROVAL = "PR_STAT_03";
 		public static final String PROJECT_STATUS_COMPLETED = "PR_STAT_04";
 		public static final String PROJECT_STATUS_ON_HOLD = "PR_STAT_05";
-		public static final String PROJECT_STATUS_FORCE_CLOSED = "PR_STAT_06";
+		public static final String PROJECT_STATUS_FORCE_CLOSED = "PR_STAT_98";
 		public static final String PROJECT_STATUS_CANCELLED = "PR_STAT_99";
 		
 		public static final String TASK_STATUS_PROPOSED = "TA_STAT_01";

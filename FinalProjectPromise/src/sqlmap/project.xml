@@ -317,7 +317,7 @@
 		DEPT_NAME AS deptName,
 		STATUS_CAPTION AS statusCaption
 		FROM VPROJECT
-		where 1 = 1
+		where PROJECT_STATUS NOT IN ('PR_STAT_04','PR_STAT_98','PR_STAT_99')
 		<dynamic prepend="AND">
 			<isEqual property="checkField" compareValue="DEPT_ID">
 				DEPT_ID = #searchValue2#
