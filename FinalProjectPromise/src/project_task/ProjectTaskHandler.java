@@ -1,5 +1,6 @@
 package project_task;
 
+import independent_task.IndependentTaskBean;
 import independent_task.IndependentTaskManager;
 
 import java.io.PrintWriter;
@@ -179,10 +180,18 @@ public class ProjectTaskHandler extends Action {
 		
 		if ("approve".equalsIgnoreCase(tsForm.getTaskForProp())){
 			tsForm.setBean(aPropPMan.getApproveTaskById(tsForm.getSelectTaskId()));
-			tsForm.getBean().setCreatedBy(us.getUserId());
-			tsForm.getBean().setPropBy(tsForm.getAssignTo());
-			tsForm.getBean().setTaskId(iTaskMan.getNewTaskId());
-			aPropPMan.createNewAssignTaskMap(tsForm.getBean());
+			
+			IndependentTaskBean iTaskBean = new IndependentTaskBean();
+			iTaskBean.setTaskName(tsForm.getBean().getPropTaskName());
+			iTaskBean.setTaskDesc(tsForm.getBean().getPropTaskDesc());
+			iTaskBean.setAssignedBy(tsForm.getBean().getPropTo());
+			iTaskBean.setAssignedTo(tsForm.getAssignTo());
+			iTaskBean.setCreatedBy(us.getUserId());
+			iTaskBean.setEstStartDateInString(tsForm.getBean().getEstStartDateInString());
+			iTaskBean.setEstEndDateInString(tsForm.getBean().getEstEndDateInString());
+			
+			iTaskMan.createNewAssignTask(iTaskBean);
+			
 			aPropPMan.approveTask(tsForm.getBean());
 			
 			response.sendRedirect("projectTask.do");

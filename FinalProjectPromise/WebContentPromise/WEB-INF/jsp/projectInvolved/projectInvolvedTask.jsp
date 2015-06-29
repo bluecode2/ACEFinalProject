@@ -67,6 +67,14 @@
 	$(document)
 			.ready(
 					function() {
+						$('.statusCheck').each(
+								function() {
+									var statusRemark = $(this).closest('td').find('.propStatusId').val();
+									if (statusRemark != 'TA_STAT_98'){
+										$(this).hide();
+									}
+								});
+						
 						getStyleBtn();
 						$(".datepicker").attr("data-provide", "datepicker");
 
@@ -379,6 +387,11 @@
 		}
 
 	}
+	
+	function showRemarksProp(remarks){
+		$('#txtRemarksDec').html(remarks);
+		$('#remarksProp').modal();
+	}
 </script>
 </head>
 <body>
@@ -682,7 +695,10 @@
 												property="estStartDateInString" /> &nbsp;To&nbsp; <bean:write
 												name="reg" property="estEndDateInString" /></td>
 										<td><bean:write name="reg" property="propToName" /></td>
-										<td><bean:write name="reg" property="propStatusName" /></td>
+										<td><html:hidden property="propStatus" name="reg" styleClass="propStatusId"/>
+											<bean:write name="reg" property="propStatusName" />
+											<a href="#" onclick="showRemarksProp('<bean:write name="reg" property="remakrs" />');" class="statusCheck" >remarks</a>
+										</td>
 										<td align="center"><logic:equal name="reg"
 												property="propStatus" value="TA_STAT_01">
 												<a class="text-success" href="#"
@@ -923,6 +939,28 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		<div class="modal fade" id="remarksProp" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Remarks Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtRemarksDec"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>

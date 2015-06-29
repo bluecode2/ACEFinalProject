@@ -152,7 +152,7 @@ public class IndependentTaskManager {
 		return tmpNewId;
 	}
 	
-	public void createNewAssignTaskMap(ProposedTaskBean bean) {
+/*	public void createNewAssignTaskMap(ProposedTaskBean bean) {
 		Map map = new HashMap();
 		map.put("taskId", bean.getTaskId());
 		map.put("taskName", bean.getPropTaskName());
@@ -176,7 +176,7 @@ public class IndependentTaskManager {
 				e1.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	public List<IndependentTaskBean> getListMyCurrentTask(String col, String input, int pageNum, int pageSize, int empId) {
 		int begin = (pageNum - 1) * pageSize;
