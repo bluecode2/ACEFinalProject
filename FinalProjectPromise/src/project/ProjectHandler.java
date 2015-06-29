@@ -43,7 +43,7 @@ public class ProjectHandler extends Action{
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		EmployeeBean eBean = new EmployeeBean();
-		
+		NotificationManager nMan = new NotificationManager();
 		ProjectRoleManager pRoleMan = new ProjectRoleManager();
 		ProjectMemberManager pMemberMan = new ProjectMemberManager();
 		
@@ -91,6 +91,10 @@ public class ProjectHandler extends Action{
 			pForm.getpBean().setActEndDate(now);
 			
 			pMan.updateProject(pForm.getpBean());
+			
+			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
+			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+
 			
 		}
 		else if ("cancel".equalsIgnoreCase(pForm.getTask())){
@@ -158,7 +162,7 @@ public class ProjectHandler extends Action{
 				pMemberMan.insertProjectMember(memberBean);
 				
 				//Create notification 
-				NotificationManager nMan = new NotificationManager();
+		
 				nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){
@@ -177,7 +181,6 @@ public class ProjectHandler extends Action{
 					pMemberMan.insertProjectMember(memberBean);
 					
 					//Create notification
-					NotificationManager nMan = new NotificationManager();
 					nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 					nMan.createNotificationRemoveProjectMember(us.getEmployeeId(),oldBean.getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 				}
@@ -215,16 +218,14 @@ public class ProjectHandler extends Action{
 		/*rowCount = pMan.getCountProject(pForm.getCurrSearchField(),
 				pForm.getCurrSearchValue());*/
 		
-		
-		
 		//untuk dept head atau PM
 		if (addBtn){
-			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId());
-			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrPage(), Constant.pageSize));
+			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
+			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
 		}
 		else {
-			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId());
-			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrPage(), Constant.pageSize));
+			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
+			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
 		}
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount

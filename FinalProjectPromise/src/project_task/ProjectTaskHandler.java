@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -41,7 +43,8 @@ public class ProjectTaskHandler extends Action {
 		ProjectManager projManager = new ProjectManager();
 		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
 		ActivityManager actMan = new ActivityManager();
-		System.out.println(session.getAttribute("projectId"));
+		NotificationManager noMan = new NotificationManager();
+		
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
 				Integer projectId = Integer.valueOf(session.getAttribute("projectId").toString());
@@ -80,10 +83,14 @@ public class ProjectTaskHandler extends Action {
 				tsForm.getTkBean().setAssignedTo(null);
 
 			if (isAdd) {
+				int tmpNewId = tsMan.getNewTaskId();
 				tsForm.getTkBean().setProjectId(
 						tsForm.getPrjBean().getProjectId());
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
+				tsForm.getTkBean().setTaskId(tmpNewId);
 				tsMan.createNewOProjectTask(tsForm.getTkBean());
+				tsForm.setTkBean(tsMan.getDataForEdit(tmpNewId));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			} else {
 
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
@@ -111,6 +118,9 @@ public class ProjectTaskHandler extends Action {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask());
+				
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 		} 
 		else if ("listActivity".equals(tsForm.getTask())) {
@@ -145,12 +155,17 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
+
 
 			} else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_ONGOING);
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
+				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 
 		}

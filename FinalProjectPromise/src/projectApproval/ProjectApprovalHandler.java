@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -41,7 +43,9 @@ public class ProjectApprovalHandler extends Action{
 		ActivityManager actMan = new ActivityManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		NotificationManager noMan = new NotificationManager();
 		int rowCount;		
+	
 		if ("listMembers".equals(paForm.getTask())) {
 			Integer selId = paForm.getSelectedId();
 			paForm.setArrMember(pmMan.getProjectMemberToEvaluate(selId));
@@ -88,10 +92,16 @@ public class ProjectApprovalHandler extends Action{
 		
 		else if ("approve".equals(paForm.getTask())) {
 			paMan.setApproveProject(paForm.getSelectedId(), us.getUserId());
+			paForm.setpBean(paMan.getProjectByID(paForm.getSelectedId()));
+			noMan.createNotificationProject(us.getEmployeeId(), paForm.getpBean().getEmployeeId(), paForm.getpBean().getProjectId());
+			
 		}
 		
 		else if ("decline".equals(paForm.getTask())) {
 			paMan.setDeclineProject(paForm.getSelectedId(), us.getUserId(), paForm.getRemarksRecord());
+			paForm.setpBean(paMan.getProjectByID(paForm.getSelectedId()));
+			noMan.createNotificationProject(us.getEmployeeId(), paForm.getpBean().getEmployeeId(), paForm.getpBean().getProjectId());
+
 		}
 		
 		else if ("evaluate".equals(paForm.getTask())) {
@@ -101,15 +111,12 @@ public class ProjectApprovalHandler extends Action{
 			
 			rowCount = tsMan.getCountAssignTaskByProjectId(paForm.getCurrSearchField(),
 					paForm.getCurrSearchValue(),paForm.getpBean().getProjectId());
-			System.out.println(rowCount);
-			paForm.setPageCount((int) Math.ceil((double) rowCount
-					/ (double) Constant.pageSize));
+
+			paForm.setPageCount((int) Math.ceil((double) rowCount / (double) Constant.pageSize));
 			
 			paForm.setArrTask(tsMan.getListProjectTaskByProjectId(paForm.getCurrSearchField(),
 					paForm.getCurrSearchValue(), paForm.getCurrPage(),
 					Constant.pageSize, paForm.getpBean().getProjectId()));
-			List<ProjectTaskBean> arr = paForm.getArrTask();
-
 
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_APPROVAL_EVALUATE,
 					us, request);

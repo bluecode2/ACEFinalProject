@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -27,7 +29,8 @@ public class ApproveTaskHandler extends Action {
 		IndependentTaskManager atManager = new IndependentTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-
+		NotificationManager noMan = new NotificationManager();
+		
 		CommonFunction.initializeHeader(Constant.MenuCode.APPROVE_PROPOSED_INDEPENDENT_TASK, us, request);
 
 		aForm.setEmpId(us.getEmployeeId());
@@ -35,15 +38,23 @@ public class ApproveTaskHandler extends Action {
 		if (aForm.getTask().equals("approve")) {
 			
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
-			aForm.getBean().setCreatedBy(us.getUserId());
+
+			aForm.getBean().setUpdatedBy(us.getUserId());
+			aManager.approveTask(aForm.getBean());
+			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
+			
 			
 			aForm.getBean().setPropBy(aForm.getAssignTo());
+			aForm.getBean().setCreatedBy(us.getUserId());
 			aForm.getBean().setTaskId(atManager.getNewTaskId());
-
 			atManager.createNewAssignTaskMap(aForm.getBean());
-			aManager.approveTask(aForm.getBean());
+			
 			
 			response.sendRedirect("approveTask.do");
+
+			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
+
+			
 			return null;
 		}
 		else if (aForm.getTask().equals("decline")) {
@@ -52,7 +63,7 @@ public class ApproveTaskHandler extends Action {
 
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
 			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
-
+			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
 			response.sendRedirect("approveTask.do");
 			return null;
 		}

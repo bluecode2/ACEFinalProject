@@ -16,8 +16,10 @@
 	}
 
 	function onBtnSaveClick() {
-		document.forms[0].task.value = "save";
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	$(document).ready(function() {
@@ -55,6 +57,38 @@
 					$('#hdnDeptHeadId').val(value);
 					$('#txtDeptHead').val(text);
 				});
+	}
+	
+	function validateForm(){
+		
+		var deptCode 		= document.getElementById("txtDeptCode").value;
+		var deptName 		= document.getElementById("txtDeptName").value;
+		var str = "";
+		var isValid = true;
+		
+		if(deptCode.trim() == '') {
+			str+= "Department Code can not be empty!\n";
+			isValid = false;
+		}
+		else if(deptCode.length > 11) {
+			str+= "Department Code can not be more than 10 characters!\n";
+			isValid = false;
+		}
+		
+		if(deptName.trim() == '') {
+			str+= "Department Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(deptName.length > 101) {
+			str+= "Department Name can not be more than 100 characters!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 </script>
 </head>
