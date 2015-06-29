@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import project.ProjectBean;
+
 public class HomeForm extends ActionForm {
 
 	/**
@@ -15,7 +17,21 @@ public class HomeForm extends ActionForm {
 	private String username;
 	private List<IndependentTaskBean> listTaskBean;
 	private Float avgTaskProg;
+	private List<ProjectBean> listProjBean;
+	private Float avgProjProg;
 	
+	public List<ProjectBean> getListProjBean() {
+		return listProjBean;
+	}
+	public void setListProjBean(List<ProjectBean> listProjBean) {
+		this.listProjBean = listProjBean;
+	}
+	public Float getAvgProjProg() {
+		return avgProjProg;
+	}
+	public void setAvgProjProg(Float avgProjProg) {
+		this.avgProjProg = avgProjProg;
+	}
 	public Float getAvgTaskProg() {
 		return avgTaskProg;
 	}

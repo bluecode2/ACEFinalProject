@@ -56,6 +56,29 @@ public class ProjectManager {
 		return listProject;
 	}
 
+	public List<ProjectBean> getProjForHome(Integer empId,Integer pageNum, Integer pageSize) throws SQLException{
+
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+
+		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		Map map = new HashMap();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("empId", empId);
+
+			listProject = this.ibatis
+					.queryForList("project.getProjForHome", map);
+
+		return listProject;
+	}
+	
+	public Float avgProjProg(Integer empId) throws SQLException{
+		Float avgProjProgress = (Float) this.ibatis.queryForObject("project.avgProjProg", empId);
+		
+		return avgProjProgress;
+	}
+	
 	public List<ProjectBean> getProjectListForRole(String checkField, Integer inputField, String col, String input,
 			Integer pageNum, Integer pageSize) {
 

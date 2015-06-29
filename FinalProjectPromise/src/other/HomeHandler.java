@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project.ProjectManager;
 import common.CommonFunction;
 import user.UserBean;
 
@@ -32,9 +33,14 @@ public class HomeHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
 		IndependentTaskManager iTaskMan = new IndependentTaskManager();
+		
 		hmForm.setListTaskBean(iTaskMan.getListForIndividualTask(1, 5, us.getEmployeeId()));
-
 		hmForm.setAvgTaskProg(iTaskMan.getAvgTaskProg(us.getEmployeeId()));
+		
+		ProjectManager pMan = new ProjectManager();
+		
+		hmForm.setListProjBean(pMan.getProjForHome(us.getEmployeeId(), 1, 5));
+		hmForm.setAvgProjProg(pMan.avgProjProg(us.getEmployeeId()));
 		
 		CommonFunction.createAllowedMenu(us, request);
 		
