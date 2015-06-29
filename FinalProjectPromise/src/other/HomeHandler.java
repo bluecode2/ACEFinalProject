@@ -1,5 +1,7 @@
 package other;
 
+import independent_task.IndependentTaskManager;
+
 import java.util.ArrayList;
 
 import general.MenuBean;
@@ -14,7 +16,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import common.CommonFunction;
-
 import user.UserBean;
 
 public class HomeHandler extends Action {
@@ -29,7 +30,13 @@ public class HomeHandler extends Action {
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-
+		
+		IndependentTaskManager iTaskMan = new IndependentTaskManager();
+		
+		hmForm.setListTaskBean(iTaskMan.getListForIndividualTask(1, 5, us.getEmployeeId()));
+		
+		hmForm.setAvgTaskProg(iTaskMan.getAvgTaskProg(us.getEmployeeId()));
+		
 		CommonFunction.createAllowedMenu(us, request);
 		
 		return mapping.findForward("index");

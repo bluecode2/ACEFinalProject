@@ -44,6 +44,33 @@ public class IndependentTaskManager {
 		return arr;
 	}
 	
+	public List<IndependentTaskBean> getListForIndividualTask(int pageNum, int pageSize, int empId) {
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+		
+		List<IndependentTaskBean> arr = new ArrayList<IndependentTaskBean>();
+		
+		Map map = new HashMap();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("empId", empId);
+		
+		try {
+			arr = this.ibatis.queryForList("independentTask.getListForIndividualTask", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return arr;
+	}
+	
+	public Float getAvgTaskProg(Integer empId) throws SQLException{
+		Float avgTaskProg = (Float) this.ibatis.queryForObject("independentTask.getAvgProgress", empId);
+		
+		return avgTaskProg;
+	}
+	
 	public int getCountAssignTask(String col, String input,int empId) throws SQLException {
 		Map map = new HashMap();
 		map.put("searchField", col);
