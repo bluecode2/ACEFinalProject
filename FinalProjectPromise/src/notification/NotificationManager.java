@@ -176,10 +176,10 @@ public class NotificationManager {
 		
 		bean.setEmployeeId(assignedEmployeeId);
 		
-		if(projectRoleId == Integer.valueOf(CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.PROJECT_MANAGER_ROLE_ID)))
+		if(projectRoleId.intValue() == projRoleMan.getProjectManagerRoleId().intValue())
 			bean.setNotificationUrl("project.do");
 		else
-			bean.setNotificationUrl("projectInvoled.do");
+			bean.setNotificationUrl("projectInvolved.do");
 		bean.setNotificationDesc(desc);
 		
 		insertNotification(bean);
