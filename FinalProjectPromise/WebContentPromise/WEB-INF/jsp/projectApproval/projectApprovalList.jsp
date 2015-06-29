@@ -223,7 +223,7 @@ function goToEvaluate(id) {
 										</td>
 										<td >
 											<textarea rows="3" cols="3" class="form-control"  id="txtProDesc" disabled="disabled"></textarea>
-										</button></td>
+										</td>
 									</tr>
 								</table>
 							</div>
@@ -257,16 +257,6 @@ function goToEvaluate(id) {
 										<th style="padding-left: 15px">Project Member Role</th>
 										
 									</tr>
-										<logic:notEmpty name="projectApprovalForm" property="arrMember">
-											<logic:iterate id="reg" name="projectApprovalForm" property="arrMember">
-											<tr>
-												<td style="padding-left: 15px">	<bean:write name="reg" property="empName" /></td>
-												<td style="padding-left: 15px">	<bean:write name="reg" property="projRoleName" /></td>
-											</tr>
-											</logic:iterate>
-										</logic:notEmpty>
-
-								
 								</table>
 							</div>
 

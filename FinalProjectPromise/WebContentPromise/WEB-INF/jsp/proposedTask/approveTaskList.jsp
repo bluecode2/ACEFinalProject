@@ -44,8 +44,9 @@
 	$(document).ready(
 			function() {
 				$('.lnkAssignTo').on('click', function() {
-					currLink = $(this);
-					currHdnField = $(this).closest('td').find('.hdnAssignTo');
+					/* currLink = $(this);
+					currHdnField = $(this).closest('td').find('.hdnAssignTo'); */
+					search();
 					$("#empList").modal();
 				});
 				$('.insertRemarks').on(
@@ -296,7 +297,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<logic:notEmpty name="approveTaskForm" property="eBean">
+									<%-- <logic:notEmpty name="approveTaskForm" property="eBean">
 										<logic:iterate id="emp" name="approveTaskForm"
 											property="eBean">
 											<tr data-dismiss="modal" class="rowSearch">
@@ -314,7 +315,7 @@
 										<tr>
 											<td colspan="3" align="center">No Data Found</td>
 										</tr>
-									</logic:empty>
+									</logic:empty> --%>
 								</tbody>
 							</table>
 						</div>
@@ -354,7 +355,7 @@
 									<td style="padding-left: 15px">Remarks</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
 											class="form-control" id="selSearchFieldRemark"></textarea>
-										</button></td>
+									</td>
 								</tr>
 							</table>
 							<div class="modal-footer">

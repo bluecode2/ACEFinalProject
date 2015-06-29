@@ -32,15 +32,25 @@ public class SearchEmpAssignedToHandler extends Action {
 		String searchValue = seatForm.getSearchValue();
 		
 		List<EmployeeBean> arrEmp = eman.getEmpForAssignTask(spvId, searchField, searchValue);
-		
-		for (EmployeeBean employeeBean : arrEmp) {
+		System.out.println(arrEmp.size());
+		if (arrEmp.size() == 0) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
-			out.println("<td style=\"display: none\">" + employeeBean.getEmployeeId() + "</td>");
-			out.println("<td>" + employeeBean.getEmployeeCode() + "</td>");
-			out.println("<td>" + employeeBean.getEmployeeName() + "</td>");
-			out.println("<td>" + employeeBean.getEmail() + "</td>");
+			out.println("<td colspan=\"3\" align=\"center\">No Data Found</td>");	
 			out.println("</tr>");
-		}	
+			
+		}
+		else {
+			for (EmployeeBean employeeBean : arrEmp) {
+				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
+				out.println("<td style=\"display: none\">" + employeeBean.getEmployeeId() + "</td>");
+				out.println("<td>" + employeeBean.getEmployeeCode() + "</td>");
+				out.println("<td>" + employeeBean.getEmployeeName() + "</td>");
+				out.println("<td>" + employeeBean.getEmail() + "</td>");
+				out.println("</tr>");
+			}				
+		}
+		
+
 
 		out.flush();
 		return null;

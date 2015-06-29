@@ -428,7 +428,7 @@
 										</td>
 										<td >
 											<textarea rows="3" cols="3" class="form-control"  id="txtValueRemarksTaskRemarks" readonly="readonly"></textarea>
-										</button></td>
+										</td>
 									</tr>
 								</table>
 							</div>
