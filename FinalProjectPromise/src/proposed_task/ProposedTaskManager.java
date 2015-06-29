@@ -118,8 +118,7 @@ public class ProposedTaskManager {
 	public void insertProposedTask(ProposedTaskBean bean) {
 		try {
 			this.ibatis.startTransaction();
-			int newId = newPropTaskId();
-			bean.setPropTaskId(newId);
+
 			this.ibatis.insert("proposedTask.insertProposedTask", bean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {

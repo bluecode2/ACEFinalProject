@@ -58,11 +58,15 @@ public class ProposedTaskHandler extends Action {
 			Boolean isAdd = dForm.getIsAdd();
 
 			if (isAdd) {
+				
 				dForm.getBean().setCreatedBy(us.getUserId());
 				dForm.getBean().setPropBy(us.getEmployeeId());
+				int newId = dMan.newPropTaskId();
+				dForm.getBean().setPropTaskId(newId);
 				dMan.insertProposedTask(dForm.getBean());
+
 				
-				dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
+				dForm.setBean(dMan.getPropTaskByPropTaskId(newId));
 				noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());
 			} else {
 				dForm.getBean().setUpdatedBy(us.getUserId());
