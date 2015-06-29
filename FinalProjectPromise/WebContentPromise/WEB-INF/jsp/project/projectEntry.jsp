@@ -65,7 +65,7 @@
 				});
 	}
 	
-function search() {
+	function search() {
 			var searchField = $('#selSearchFieldEmpId').val();
 			var searchValue = $('#txtSearchValueEmpId').val();
 	

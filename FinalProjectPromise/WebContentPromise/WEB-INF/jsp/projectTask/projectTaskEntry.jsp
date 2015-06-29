@@ -20,8 +20,10 @@
 	}
 
 	function onBtnSaveClick() {
-		document.forms[0].task.value = "save";
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	$(document).ready(function() {
@@ -75,6 +77,57 @@
 		else
 			$('#searchEmployeeId').modal();
 	}
+	
+	function validateForm(){
+		
+		var taskName	= document.getElementById("txtTaskName").value;
+		var taskDesc 	= document.getElementById("txtTaskDesc").value;
+		var estStart 	= document.getElementById("txtEstStartDate").value;
+		var estEnd 		= document.getElementById("txtEstEndDate").value;
+		var assignedTo 	= document.getElementById("txtAssignedToName").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(taskName.trim() == '') {
+			str+= "Task Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskName.length > 26) {
+			str+= "Task Name can not be more than 25 characters!\n";
+			isValid = false;
+		}
+		
+		if(taskDesc.trim() == '') {
+			str+= "Task Description can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskDesc.length > 201) {
+			str+= "Task Description can not be more than 200 characters!\n";
+			isValid = false;
+		}
+		
+		if(estStart.trim() == '') {
+			str+= "Estimate Start Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(estEnd.trim() == '') {
+			str+= "Estimate End Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(assignedTo.trim() == '') {
+			str+= "Assigned To can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
+	}
 </script>
 </head>
 <body>
@@ -122,7 +175,7 @@
 						<td class="tdLabel" align="right"><label>Est. End
 								Date</label></td>
 						<td><html:text styleClass="form-control datepicker"
-								styleId="txtEstStartDate" name="projectTaskForm"
+								styleId="txtEstEndDate" name="projectTaskForm"
 								property="tkBean.estEndDateInString"></html:text></td>
 					</tr>
 					<tr valign="top">
