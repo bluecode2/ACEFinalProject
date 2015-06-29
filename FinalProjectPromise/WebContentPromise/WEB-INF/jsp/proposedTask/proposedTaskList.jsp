@@ -103,7 +103,6 @@
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
 							<td class="align-center">Estimate Date</td>
-							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Proposed To</td>
 							<td class="align-center">Status</td>
 							<td class="align-center">Action</td>
@@ -135,7 +134,12 @@
 							          </logic:empty>
 							         </td>
 									<td><bean:write name="reg" property="propToName" /></td>
-									<td><bean:write name="reg" property="propStatusName" /> <logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="text-info lnkRemarks">Remarks</a></logic:notEqual></td>
+									<td>
+										<bean:write name="reg" property="propStatusName" /> 
+										<logic:notEqual name="reg" property="remarks" value="">
+											<br/><a href="#" class="text-info lnkRemarks">Remarks</a>
+										</logic:notEqual>
+									</td>
 									<td align="center">
 										<logic:equal name="reg" property="propStatus" value="TA_STAT_01">
 											<a class="text-success" href="#" onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');" title="Edit">
@@ -152,7 +156,7 @@
 						</logic:notEmpty>
 						<logic:empty name="proposedTaskForm" property="arrList">
 							<tr>
-								<td colspan="6" align="center" style="padding: 10px">No
+								<td colspan="5" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
