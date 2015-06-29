@@ -64,9 +64,37 @@
 							$('#hdnModalTaskId').val(taskId);
 							$('#txtActivityTaskName').val(taskName);
 							$('#txtActivityAssignTo').val(assignedTo);
-							$('#showActivity').modal();
+							$('#manageActivity').modal();
 							hideLoading();
 						});
+				
+				$('.viewActivity').on('click',function(){
+					showLoading();
+					var taskId = $(this).closest('tr').find('.hdTaskId').val();
+					$.ajax({
+						type : "POST",
+						url : "activity.do",
+						data : "task=viewActivity&taskId="
+								+ taskId,
+						success : function(response) {
+							$("#tblShow2").find("tr:gt(0)").remove();
+							$("#tblShow2").append(response);
+							$('#showMember').modal();
+						},
+						error : function(e) {
+							alert("Error: " + e);
+						}
+
+					});
+
+					var taskName = $(this).closest('tr').find('.hdTaskName').val();
+					var assignedTo = $(this).closest('tr').find('.hdAssignedToName').val();
+					
+					$('#txtActivityTaskName1').val(taskName);
+					$('#txtActivityAssignTo1').val(assignedTo);
+					$('#showActivity').modal();
+					hideLoading();
+				});
 
 				$('#btnShowEntry').on('click', function() {
 					$('#txtActivityDesc').val('');
@@ -102,12 +130,14 @@
 							hideLoading();
 							
 						});
+				
+				
 
-				$('#showActivity').on('shown.bs.modal', function() {
+				$('#manageActivity').on('shown.bs.modal', function() {
 					registerBtnActivityEvent();
 				});
 				
-				$('#showActivity').on('hidden.bs.modal', function() {
+				$('#manageActivity').on('hidden.bs.modal', function() {
 					window.location.href = "myCurrentTask.do";
 				});
 
@@ -238,7 +268,6 @@
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
 							<td class="align-center">Estimate Date</td>
-							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Progress</td>
 							<td class="align-center">Status</td>
 							<td class="align-center">Activity</td>
@@ -259,40 +288,62 @@
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
 												property="taskName" /></a></td>
-									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="estMainDays" /></td>
+									<td align="center">
+							          <logic:notEmpty name="reg" property="estStartDateInString">
+							           <bean:write name="reg" property="estStartDateInString" /> to 
+							            <logic:notEmpty name="reg" property="estEndDateInString">
+							             <bean:write name="reg" property="estEndDateInString" />
+							            </logic:notEmpty>
+							            <logic:empty  name="reg" property="estEndDateInString">
+							             -
+							            </logic:empty>
+							            <br/>(<bean:write name="reg" property="estMainDays" /> main days)
+							          </logic:notEmpty>
+							          <logic:empty name="reg" property="estStartDateInString">
+							           -
+							          </logic:empty>
+							         </td>
 									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
 									<td><bean:write name="reg" property="taskStatusName" /></td>
-									<td align="center"><a href="#"
-										class="text-info linkActivity">Manage Activity</a></td>
-									<td align="center"><logic:equal name="reg"
-											property="taskStatus" value="TA_STAT_02">
-											<a class="text-success" href="#"
-												onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
-												'<bean:write name="reg" property="taskName" />');"
-												title="Start"><span class="glyphicon glyphicon-play"
-												aria-hidden="true"></span></a>
-										</logic:equal> <logic:equal name="reg" property="taskStatus"
-											value="TA_STAT_03">
+									<td align="center">
+									<!-- edit di sini -->
+									<logic:equal name="reg" value="TA_STAT_04" property="taskStatus">
+										<a href="#" class="text-info viewActivity">View Activity</a>
+									</logic:equal>
+									<logic:notEqual name="reg" value="TA_STAT_04" property="taskStatus">
+										<a href="#" class="text-info linkActivity">Manage Activity</a>
+									</logic:notEqual>
+									<!-- sampe sini -->
+									</td>
+									<td align="center">
+									<logic:equal name="reg" property="taskStatus" value="TA_STAT_02">
+										<a class="text-success" href="#" onclick="actionForm('start','<bean:write name="reg" property="taskId" />', '<bean:write name="reg" property="taskName" />');" title="Start">
+												<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+										</a>
+									</logic:equal> 
+									<logic:equal name="reg" property="taskStatus" value="TA_STAT_03">
 											<a class="text-success" href="#"
 												onclick="actionForm('pause','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
 												title="Pause"><span class="glyphicon glyphicon-pause"
 												aria-hidden="true"></span></a>
-										</logic:equal> <logic:equal name="reg" property="taskStatus"
-											value="TA_STAT_06">
-											<a class="text-success" href="#"
-												onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
-												'<bean:write name="reg" property="taskName" />');"
-												title="Pause"><span class="glyphicon glyphicon-play"
-												aria-hidden="true"></span></a>
-										</logic:equal> <logic:equal name="reg" property="taskProgress" value="100">
+									</logic:equal> 
+									<logic:equal name="reg" property="taskStatus" value="TA_STAT_06">
+											<a class="text-success" href="#" onclick="actionForm('start','<bean:write name="reg" property="taskId" />',
+												'<bean:write name="reg" property="taskName" />');" title="Pause">
+												<span class="glyphicon glyphicon-play" aria-hidden="true">
+												</span>
+											</a>
+									</logic:equal> 
+									<logic:equal name="reg" property="taskProgress" value="100">
+										<logic:equal name="reg" property="taskStatus" value="TA_STAT_03">
 											<a class="text-success" href="#"
 												onclick="actionForm('submit','<bean:write name="reg" property="taskId" />',
 												'<bean:write name="reg" property="taskName" />');"
 												title="Submit"><span class="glyphicon glyphicon-ok"
 												aria-hidden="true"></span></a>
-										</logic:equal></td>
+										</logic:equal>
+									</logic:equal></td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
@@ -331,8 +382,8 @@
 			<!-- /.modal-dialog -->
 		</div>
 
-		<!-- popup to show Activity -->
-		<div class="modal fade" id="showActivity" tabindex="-1" role="dialog"
+		<!-- popup to manage Activity -->
+		<div class="modal fade" id="manageActivity" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -404,7 +455,57 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		<!-- popup to show Activity -->
+			<div class="modal fade" id="showActivity" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">View Activity</h4>
+							<br/>
+						</div>
+						<div class="modal-body">
+						<div class="container form-group">
+								<table>
+									<tr>
+										<td>Task Name</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityTaskName1" class="form-control" disabled="true"/>
+										</td>
+									</tr>
+									<tr>
+										<td>Assign To</td>
+										<td style="padding-left: 15px">
+											<input type="text" id="txtActivityAssignTo1" class="form-control" disabled="true" />
+										</td>
+									</tr>
+								</table>
+							</div>
+						
+							<div class="form-group">
+								<table class="table table-bordered" cellspacing="0" id="tblShow2" style="margin-top: 10px;" width="100%" class="tableContent">
+									<tr>
+										<th style="padding-left: 15px">Activity Description</th>
+										<th style="padding-left: 15px">Completed</th>
+										
+									</tr>
+								
+								</table>
+							</div>
 
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
 		<html:hidden name="myCurrentTaskForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
