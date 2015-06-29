@@ -172,6 +172,7 @@
 							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Proposed By</td>
 							<td class="align-center">Assign To</td>
+							<td class="align-center">Task Status</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -196,6 +197,7 @@
 										value="<bean:write name="reg" property="propBy" />" /><a
 										href="#" class="text-info lnkAssignTo"> <bean:write
 												name="reg" property="propByName" /></a></td>
+									<td><bean:write name="reg" property="taskStatusName" /></td>
 									<td align="center"><a class="text-success btnApprove"
 										href="#" title="Approve"><span
 											class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
@@ -207,7 +209,7 @@
 						</logic:notEmpty>
 						<logic:empty name="approveTaskForm" property="arrList">
 							<tr>
-								<td colspan="5" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

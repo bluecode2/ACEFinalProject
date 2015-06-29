@@ -186,6 +186,24 @@
 		WHERE ROWNUM &lt; = #end#)
 		WHERE rnum &gt; #begin#
 	</select>
+	
+	<select id="countProjectInvolved" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM VPROJECT P JOIN PROJECT_MEMBER PM
+		ON P.PROJECT_ID=PM.PROJECT_ID
+		where PM.EMPLOYEE_ID = #employeeId#
+		AND IS_ACTIVE=1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectCode">
+				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="projectName">
+				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+	</select>
 
 	<select id="getAllProjectToEvaluate" parameterClass="java.util.Map"
 		resultClass="project.ProjectBean">
@@ -270,23 +288,6 @@
 
 		WHERE PROJECT_ID = #projectId#
 	</update>
-
-	<select id="countProjectInvolved" resultClass="java.lang.Integer"
-		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM VPROJECT P JOIN PROJECT_MEMBER PM
-		ON P.PROJECT_ID=PM.PROJECT_ID
-		where PM.EMPLOYEE_ID = #employeeId#
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectCode">
-				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectName">
-				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-	</select>
 
 	<select id="getProjectListForRole" parameterClass="java.util.Map"
 		resultClass="project.ProjectBean">
