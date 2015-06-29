@@ -34,18 +34,18 @@
 				registerSearchEmployee();
 				var newTask = document.forms[0].task.value;
 				if (newTask == 'add' || newTask == 'edit'){
-					$('#readAbleCode').attr("disabled",false);
-					$('#readAbleName').attr("disabled",false);
-					$('#readAbleDesc').attr("disabled",false);
-					$('#readAbleEstStart').attr("disabled",false);
-					$('#readAbleEstEnd').attr("disabled",false);
+					$('#readAbleCode').attr("readonly",false);
+					$('#readAbleName').attr("readonly",false);
+					$('#readAbleDesc').attr("readonly",false);
+					$('#readAbleEstStart').attr("readonly",false);
+					$('#readAbleEstEnd').attr("readonly",false);
 					document.getElementById('popView').style.display = 'block';
 				} else {
-					$('#readAbleCode').attr("disabled",true);
-					$('#readAbleName').attr("disabled",true);
-					$('#readAbleDesc').attr("disabled",true);
-					$('#readAbleEstStart').attr("disabled",true);
-					$('#readAbleEstEnd').attr("disabled",true);
+					$('#readAbleCode').attr("readonly",true);
+					$('#readAbleName').attr("readonly",true);
+					$('#readAbleDesc').attr("readonly",true);
+					$('#readAbleEstStart').attr("readonly",true);
+					$('#readAbleEstEnd').attr("readonly",true);
 					document.getElementById('popView').style.display = 'none';
 				}
 			});

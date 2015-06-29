@@ -190,6 +190,9 @@ public class ProjectHandler extends Action{
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("pause")){
+				System.out.println(pForm.getpBean());
+				System.out.println(pForm.getpBean().getProjectName() + " - " + pForm.getpBean().getProjectDesc());
+				
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
 				pMan.updateProject(pForm.getpBean());
 			}
