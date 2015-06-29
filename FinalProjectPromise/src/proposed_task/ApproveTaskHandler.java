@@ -67,16 +67,16 @@ public class ApproveTaskHandler extends Action {
 			response.sendRedirect("approveTask.do");
 			return null;
 		}
-
+	
 		aForm.setTask("");
 		aForm.setSearchField(aForm.getCurrSearchField());
 		aForm.setSearchValue(aForm.getCurrSearchValue());
-
 		int rowCount;
 		
 		aForm.setArrList(aManager.getListApproveTask(
 				aForm.getCurrSearchField(), aForm.getCurrSearchValue(),
 				aForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+		
 		rowCount = aManager.getCountApproveTask(aForm.getCurrSearchField(),
 				aForm.getCurrSearchValue(), us.getEmployeeId());
 		
