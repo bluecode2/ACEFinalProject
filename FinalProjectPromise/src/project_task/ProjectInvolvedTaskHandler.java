@@ -131,7 +131,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 				tsForm.getBean().setUpdatedBy(us.getUserId());
 				pProjtaskMan.editPropProjTask(tsForm.getBean());
 			}
-			
+			response.sendRedirect("projectInvolvedTask.do");
+			return null;
 		}
 
 		//Default View

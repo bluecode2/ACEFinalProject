@@ -290,12 +290,12 @@
 							$('#divProposeTaskEntry').show();
 						});
 
-						$('#btnEditProposeTask').on('click', function() {
-							var propTaskId = $(this).find('tr').find('.hdnListPropTaskId').val();
-							var propTaskName = $(this).find('tr').find('.hdnListPropTaskName').val();
-							var propTaskDesc = $(this).find('tr').find('.hdnListPropTaskDesc').val();
-							var propTaskStartDate = $(this).find('tr').find('.hdnListPropTaskStartDate').val();
-							var propTaskEndDate = $(this).find('tr').find('.hdnListPropTaskEndDate').val();
+						$('.btnEditProposeTask').on('click', function() {
+							var propTaskId = $(this).closest('tr').find('.hdnListPropTaskId').val();
+							var propTaskName = $(this).closest('tr').find('.hdnListPropTaskName').val();
+							var propTaskDesc = $(this).closest('tr').find('.hdnListPropTaskDesc').val();
+							var propTaskStartDate = $(this).closest('tr').find('.hdnListPropTaskStartDate').val();
+							var propTaskEndDate = $(this).closest('tr').find('.hdnListPropTaskEndDate').val();
 							
 							
 							$('#hdnPropTaskId').val(propTaskId);
@@ -732,8 +732,8 @@
 											<html:hidden styleClass="hdnListPropTaskId" name="reg" property="propTaskId"/>
 											<html:hidden styleClass="hdnListPropTaskDesc" name="reg" property="propTaskDesc"/>
 											<html:hidden styleClass="hdnListPropTaskName" name="reg" property="propTaskName"/>
-											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg" property="estStartDate"/>
-											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg" property="estStartDate"/>
+											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg" property="estStartDateInString"/>
+											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg" property="estStartDateInString"/>
 
 											
 											<td><bean:write name="reg" property="projectName" />
