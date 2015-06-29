@@ -12,9 +12,6 @@
 <script src="js/jquery.js"></script>
 
 <script type="text/javascript">
-	function visDiv(showDiv) {
-		document.forms[0].showDiv.value = showDiv;
-	}
 
 	function onBtnBackClick() {
 		window.location.href = "project.do";
@@ -37,6 +34,7 @@
 	
 	$(document).ready(
 			function() {
+				showLoading();
 				assignTo();
 				$('.firstBtn').each(
 						function() {
@@ -163,6 +161,18 @@
 							$('#txtActivityAssignTo').val(assignedTo);
 							$('#showActivity').modal();
 						});
+				
+				$('#btnDeclinePropTask').on('click',function(){
+					var propTaskId = $('#hdnSelectedId').val();
+					actionForm('decline', propTaskId);
+				});
+				
+				$('.btnDeclinePropTask').on('click',function(){
+					var propTask = $(this).closest('tr').find('.hdnPropTaskId').val();
+					$('#hdnSelectedId').val(propTask);
+					$('#setRemarks').modal();
+				});
+				hideLoading();
 			});
 	
 	function assignTo(){
@@ -259,17 +269,18 @@
 		<html:hidden property="currSearchField" name="projectTaskForm" />
 		<html:hidden property="currSearchValue" name="projectTaskForm" />
 		<html:hidden property="currPage" name="projectTaskForm" />
-		<html:hidden property="selectedId" name="projectTaskForm" />
+		<html:hidden styleId="hdnSelectedId" property="selectedId" name="projectTaskForm" />
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 		<html:hidden property="showDiv" name="projectTaskForm" />
-		<html:hidden name="projectTaskForm" property="empId" styleId="hdnEmpId" />
-		<html:hidden property="taskForProp" name="projectTaskForm"/>
-		<html:hidden property="selectTaskId" name="projectTaskForm"/>
-		<html:hidden property="remarksProp" name="projectTaskForm"/>
-		<html:hidden property="assignTo" name="projectTaskForm"/>
+		<html:hidden name="projectTaskForm" property="empId"
+			styleId="hdnEmpId" />
+		<html:hidden property="taskForProp" name="projectTaskForm" />
+		<html:hidden property="selectTaskId" name="projectTaskForm" />
+		<html:hidden property="remarksProp" name="projectTaskForm" />
+		<html:hidden property="assignTo" name="projectTaskForm" />
 
-		<div class="container">
-			<div class="form-group has-info" style="margin-top: 40px">
+		<div class="container divContent">
+			<div class="form-group has-info">
 				<table width="100%">
 					<tr>
 						<td width="45%">
@@ -332,195 +343,203 @@
 					</tr>
 				</table>
 			</div>
+
 			<div>
-				<button onclick="visDiv('true');" class="btn btn-sm btn-info">Project
-					Task</button>
-				&nbsp;
-				<button onclick="visDiv('false');" class="btn btn-sm btn-info">Propose Task
-				</button>
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#projectTask" data-toggle="tab">Project
+							Task</a></li>
+					<li><a href="#proposeTask" data-toggle="tab">Propose Task</a></li>
+				</ul>
 			</div>
 
-
-			<logic:equal value="true" name="projectTaskForm" property="showDiv">
-				<div class="divSearch form-group has-info" style="float: right;">
-					<table>
-						<tr>
-							<td>Search by</td>
-							<td style="padding-left: 15px;"><html:select
-									name="projectTaskForm" property="searchField"
-									styleId="selSearchField" styleClass="form-control">
-									<option value="taskName">Task Name</option>
-									<option value="assignToName">Assign To</option>
-								</html:select></td>
-							<td style="padding-left: 15px"><html:text
-									name="projectTaskForm" property="searchValue"
-									styleClass="form-control" /></td>
-							<td style="padding-left: 15px">
-								<button type="button" onclick="search();" id="btnSearch"
-									class="btn btn-info btn-icon" title="Search">
-									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="divContent">
-					<table class="table table-bordered" cellspacing="0"
-						style="margin-top: 10px;" width="100%" class="tableContent">
-						<thead class="panel panel-info">
+			<%-- 			<logic:equal value="true" name="projectTaskForm" property="showDiv"> --%>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade active in" id="projectTask">
+					<div class="divSearch form-group has-info" style="float: right;">
+						<table>
 							<tr>
-								<td align="center">Task Name</td>
-								<td align="center">Assign To</td>
-								<td align="center" width="200px">Estimate Date</td>
-								<td align="center" width="200px">Estimate Main Days</td>
-								<td align="center" width="200px">Actual Date</td>
-								<td align="center">Status</td>
-								<td align="center" width="100px">Activity</td>
-								<td class="align-center">Action</td>
+								<td>Search by</td>
+								<td style="padding-left: 15px;"><html:select
+										name="projectTaskForm" property="searchField"
+										styleId="selSearchField" styleClass="form-control">
+										<option value="taskName">Task Name</option>
+										<option value="assignToName">Assign To</option>
+									</html:select></td>
+								<td style="padding-left: 15px"><html:text
+										name="projectTaskForm" property="searchValue"
+										styleClass="form-control" /></td>
+								<td style="padding-left: 15px">
+									<button type="button" onclick="search();" id="btnSearch"
+										class="btn btn-info btn-icon" title="Search">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<logic:notEmpty name="projectTaskForm" property="arrList">
-								<logic:iterate id="reg" name="projectTaskForm"
-									property="arrList">
-									<tr>
-										<td><html:hidden property="taskDesc" name="reg"
-												styleClass="hdTaskDesc" /> <html:hidden property="taskId"
-												name="reg" styleClass="hdTaskId" /> <html:hidden
-												property="taskName" name="reg" styleClass="hdTaskName" /> <html:hidden
-												property="assignedTo" name="reg"
-												styleClass="hdAssignedToName" /> <html:hidden
-												property="remarks" name="reg" styleClass="hdRemarks" /> <a
-											href="#" class="text-info linkDesc"> <bean:write
-													name="reg" property="taskName" />
-										</a></td>
-										<td><bean:write name="reg" property="assignedToName" />
-											<logic:equal name="reg" property="isOutsource" value="1">
+						</table>
+					</div>
+					<div>
+						<table class="table table-striped table-bordered" cellspacing="0"
+							style="margin-top: 10px;" width="100%" class="tableContent">
+							<thead class="panel panel-info">
+								<tr>
+									<td align="center">Task Name</td>
+									<td align="center">Assign To</td>
+									<td align="center" width="200px">Estimate Date</td>
+									<td align="center" width="200px">Estimate Main Days</td>
+									<td align="center" width="200px">Actual Date</td>
+									<td align="center">Status</td>
+									<td align="center" width="100px">Activity</td>
+									<td class="align-center">Action</td>
+								</tr>
+							</thead>
+							<tbody>
+								<logic:notEmpty name="projectTaskForm" property="arrList">
+									<logic:iterate id="reg" name="projectTaskForm"
+										property="arrList">
+										<tr>
+											<td><html:hidden property="taskDesc" name="reg"
+													styleClass="hdTaskDesc" /> <html:hidden property="taskId"
+													name="reg" styleClass="hdTaskId" /> <html:hidden
+													property="taskName" name="reg" styleClass="hdTaskName" />
+												<html:hidden property="assignedTo" name="reg"
+													styleClass="hdAssignedToName" /> <html:hidden
+													property="remarks" name="reg" styleClass="hdRemarks" /> <a
+												href="#" class="text-info linkDesc"> <bean:write
+														name="reg" property="taskName" />
+											</a></td>
+											<td><bean:write name="reg" property="assignedToName" />
+												<logic:equal name="reg" property="isOutsource" value="1">
 											(Out)
 										</logic:equal></td>
-										<td align="center"><bean:write name="reg"
-												property="estStartDateInString" /> to <bean:write
-												name="reg" property="estEndDateInString" /></td>
-										<td align="center"><bean:write name="reg"
-												property="estMainDays" /></td>
-										<td align="center"><bean:write name="reg"
-												property="actStartDateInString" /> to <bean:write
-												name="reg" property="actEndDateInString" /></td>
-										<td align="center"><html:hidden name="reg"
-												property="taskStatus" styleClass="hdTaskStatus" /> <bean:write
-												name="reg" property="taskStatusName" /> : <bean:write
-												name="reg" property="taskProgress" />%<logic:notEqual
-												name="reg" property="remarks" value="">
-												<br />
-												<a href="#" class="lnkRemarks text-info">Remarks</a>
-											</logic:notEqual></td>
-										<td align="center"><a href="#"
-											class="text-info linkActivity">View Activity</a></td>
-										<td align="center"><a class="text-success firstBtn"
-											href="#" id="tes"
-											onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
-												<span aria-hidden="true"></span>
-										</a> &nbsp; <a href="#" class="text-danger secondBtn"> <span
-												aria-hidden="true"></span>
-										</a></td>
-									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="projectTaskForm" property="arrList">
-								<tr>
-									<td colspan="8" align="center" style="padding: 10px">No
-										Data Found</td>
-								</tr>
-							</logic:empty>
-						</tbody>
-					</table>
-					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
-				</div>
-			</logic:equal>
-
-			<logic:equal value="false" name="projectTaskForm" property="showDiv">
-				<div class="divSearch form-group has-info" style="float: right;">
-					<table>
-						<tr>
-							<td>Search by</td>
-							<td style="padding-left: 15px;"><html:select
-									name="projectTaskForm" property="searchField"
-									styleId="selSearchField" styleClass="form-control">
-									<option value="propTaskName">Task Name</option>
-									<option value="propBy">Proposed By</option>
-								</html:select></td>
-							<td style="padding-left: 15px"><html:text
-									name="projectTaskForm" property="searchValue"
-									styleClass="form-control" /></td>
-							<td style="padding-left: 15px"><button type="button"
-									onclick="search();" id="btnSearch"
-									class="btn btn-info btn-icon" title="Search">
-									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								</button></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="divContent">
-					<table class="table table-striped table-bordered table-hover"
-						cellspacing="0" style="margin-top: 10px;" width="100%"
-						class="tableContent">
-						<thead>
-							<tr class="panel panel-info">
-								<td>Project Name</td>
-								<td>Task Name</td>
-								<td>Estimate Start Date</td>
-								<td>Estimate End Date</td>
-								<td>Estimate Main Days</td>
-								<td>Proposed By</td>
-								<td>Assign To</td>
-								<td class="align-center">Action</td>
-							</tr>
-						</thead>
-						<tbody>
-							<logic:notEmpty name="projectTaskForm" property="arrListProp">
-								<logic:iterate id="reg" name="projectTaskForm"
-									property="arrListProp">
+											<td align="center"><bean:write name="reg"
+													property="estStartDateInString" /> to <bean:write
+													name="reg" property="estEndDateInString" /></td>
+											<td align="center"><bean:write name="reg"
+													property="estMainDays" /></td>
+											<td align="center"><bean:write name="reg"
+													property="actStartDateInString" /> to <bean:write
+													name="reg" property="actEndDateInString" /></td>
+											<td align="center"><html:hidden name="reg"
+													property="taskStatus" styleClass="hdTaskStatus" /> <bean:write
+													name="reg" property="taskStatusName" /> : <bean:write
+													name="reg" property="taskProgress" />%<logic:notEqual
+													name="reg" property="remarks" value="">
+													<br />
+													<a href="#" class="lnkRemarks text-info">Remarks</a>
+												</logic:notEqual></td>
+											<td align="center"><a href="#"
+												class="text-info linkActivity">View Activity</a></td>
+											<td align="center"><a class="text-success firstBtn"
+												href="#" id="tes"
+												onclick="changeStatusFirstBtn('<bean:write name="reg" property="taskId" />','<bean:write name="reg" property="taskStatus"/>')">
+													<span aria-hidden="true"></span>
+											</a> &nbsp; <a href="#" class="text-danger secondBtn"> <span
+													aria-hidden="true"></span>
+											</a></td>
+										</tr>
+									</logic:iterate>
+								</logic:notEmpty>
+								<logic:empty name="projectTaskForm" property="arrList">
 									<tr>
-										<td style="display: none">
-										<bean:write name="reg"
-												property="propTaskId" /></td>
-										<td><bean:write name="reg" property="projectName" /></td>
-										<td><a href="#" class="text-info"
-											onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
-											data-target="taskDesc"> <bean:write name="reg"
-													property="propTaskName" /></a>
-										<td><bean:write name="reg"
-												property="estStartDateInString" /> to</td>
-										<td><bean:write name="reg" property="estEndDateInString" /></td>
-										<td><bean:write name="reg" property="estMainDays" /></td>
-										<td><bean:write name="reg" property="propByName" /></td>
-										<td><input type="hidden" class="hdnAssignTo"
-											value="<bean:write name="reg" property="propBy" />" />
-										<a href="#" class="text-info lnkAssignTo"> <bean:write
-													name="reg" property="propByName" /></a></td>
-										<td align="center"><a class="text-success btnApprove"
-											href="#" onclick="actionForm('approve','<bean:write name="reg"
-											property="propTaskId" />');" title="Approve"><span
-												class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
-											&nbsp; <a href="#" data-target="#setRemarks"
-											data-toggle="modal" title="Decline"><span
-												class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+										<td colspan="8" align="center" style="padding: 10px">No
+											Data Found</td>
 									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="projectTaskForm" property="arrListProp">
-								<tr>
-									<td colspan="8" align="center" style="padding: 10px">No
-										Data Found</td>
-								</tr>
-							</logic:empty>
-						</tbody>
-					</table>
-					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+								</logic:empty>
+							</tbody>
+						</table>
+						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+					</div>
 				</div>
-		</div>
-		</logic:equal>
+				<%-- 					</logic:equal> --%>
+
+				<%-- 					<logic:equal value="false" name="projectTaskForm" --%>
+				<!-- 						property="showDiv"> -->
+				<div class="tab-pane fade" id="proposeTask">
+					<div class="divSearch form-group has-info" style="float: right;">
+						<table>
+							<tr>
+								<td>Search by</td>
+								<td style="padding-left: 15px;"><html:select
+										name="projectTaskForm" property="searchField"
+										styleId="selSearchField" styleClass="form-control">
+										<option value="propTaskName">Task Name</option>
+										<option value="propBy">Proposed By</option>
+									</html:select></td>
+								<td style="padding-left: 15px"><html:text
+										name="projectTaskForm" property="searchValue"
+										styleClass="form-control" /></td>
+								<td style="padding-left: 15px"><button type="button"
+										onclick="search();" id="btnSearch"
+										class="btn btn-info btn-icon" title="Search">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button></td>
+							</tr>
+						</table>
+					</div>
+
+					<div>
+						<table class="table table-striped table-bordered table-hover"
+							cellspacing="0" style="margin-top: 10px;" width="100%"
+							class="tableContent">
+							<thead>
+								<tr class="panel panel-info">
+									<td>Project Name</td>
+									<td>Task Name</td>
+									<td>Estimate Start Date</td>
+									<td>Estimate End Date</td>
+									<td>Estimate Main Days</td>
+									<td>Proposed By</td>
+									<td>Assign To</td>
+									<td class="align-center">Action</td>
+								</tr>
+							</thead>
+							<tbody>
+								<logic:notEmpty name="projectTaskForm" property="arrListProp">
+									<logic:iterate id="reg" name="projectTaskForm"
+										property="arrListProp">
+										<tr>
+											<html:hidden styleClass="hdnPropTaskId" name="reg" property="propTaskId"/>
+											<td style="display: none"><bean:write name="reg"
+													property="propTaskId" /></td>
+											<td><bean:write name="reg" property="projectName" /></td>
+											<td><a href="#" class="text-info"
+												onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
+												data-target="taskDesc"> <bean:write name="reg"
+														property="propTaskName" /></a>
+											<td><bean:write name="reg"
+													property="estStartDateInString" /> to</td>
+											<td><bean:write name="reg" property="estEndDateInString" /></td>
+											<td><bean:write name="reg" property="estMainDays" /></td>
+											<td><bean:write name="reg" property="propByName" /></td>
+											<td><input type="hidden" class="hdnAssignTo"
+												value="<bean:write name="reg" property="propBy" />" /> <a
+												href="#" class="text-info lnkAssignTo"> <bean:write
+														name="reg" property="propByName" /></a></td>
+											<td align="center"><a class="text-success btnApprove"
+												href="#"
+												onclick="actionForm('approve','<bean:write name="reg"
+											property="propTaskId" />');"
+												title="Approve"><span class="glyphicon glyphicon-ok"
+													aria-hidden="true"></span></a> &nbsp; <a href="#" class="text-danger btnDeclinePropTask"
+												data-toggle="modal"
+												title="Decline"><span class="glyphicon glyphicon-remove"
+													aria-hidden="true"></span></a></td>
+										</tr>
+									</logic:iterate>
+								</logic:notEmpty>
+								<logic:empty name="projectTaskForm" property="arrListProp">
+									<tr>
+										<td colspan="8" align="center" style="padding: 10px">No
+											Data Found</td>
+									</tr>
+								</logic:empty>
+							</tbody>
+						</table>
+						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+					</div>
+				</div>
+			</div>
+			<%-- 				</logic:equal> --%>
 
 		</div>
 
@@ -544,9 +563,7 @@
 									<td style="padding-left: 15px"><input type="hidden"
 										id="txtValueTaskId" /> <input type="hidden"
 										id="txtValueTaskStatus" /> <input type="text"
-										id="txtValueTaskName" class="form-control" disabled="disabled" />
-
-									</td>
+										id="txtValueTaskName" class="form-control" disabled="disabled" /></td>
 
 								</tr>
 								<tr>
@@ -637,8 +654,7 @@
 									<td style="padding-left: 15px" valign="top">Remarks
 										Description</td>
 									<td style="padding-left: 15px"><textarea rows="3" cols="3"
-											class="form-control" id="txtRemarks" disabled="disabled"></textarea>
-									</td>
+											class="form-control" id="txtRemarks" disabled="disabled"></textarea></td>
 								</tr>
 							</table>
 						</div>
@@ -715,7 +731,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
+
 		<div class="modal fade" id="taskDesc" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -737,11 +753,11 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
-		
-				<!-- popup to take assignedTo -->
-		<div class="modal fade" id="projMemList" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+		<!-- popup to take assignedTo -->
+		<div class="modal fade" id="projMemList" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<html:form action="searchAssignTo" method="post">
@@ -753,7 +769,7 @@
 							<h4 class="modal-title">Assign To</h4>
 						</div>
 						<div class="modal-body">
-						<!-- dibawah untuk search project member tapi tidak dipakai jadi untuk function search nya belum dibenerin -->
+							<!-- dibawah untuk search project member tapi tidak dipakai jadi untuk function search nya belum dibenerin -->
 							<!-- <div class="container form-group">
 								<table>
 									<tr>
@@ -786,13 +802,16 @@
 								</thead>
 								<tbody>
 									<logic:notEmpty name="projectTaskForm" property="eBean">
-										<logic:iterate id="memProj" name="projectTaskForm" property="eBean">
+										<logic:iterate id="memProj" name="projectTaskForm"
+											property="eBean">
 											<tr data-dismiss="modal" class="rowSearch">
-												<td style="display: none"><bean:write name="memProj" property="employeeId" /></td>
-												<td width="150px"><bean:write name="memProj" property="empCode" /></td>
+												<td style="display: none"><bean:write name="memProj"
+														property="employeeId" /></td>
+												<td width="150px"><bean:write name="memProj"
+														property="empCode" /></td>
 												<td><bean:write name="memProj" property="empName" /></td>
-												<td width="150px"><bean:write name="memProj" property="projRoleName" />
-												</td>
+												<td width="150px"><bean:write name="memProj"
+														property="projRoleName" /></td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
@@ -811,7 +830,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
+
 		<!-- untuk set Remarks decline  -->
 		<div class="modal fade" id="setRemarks" tabindex="-1" role="dialog"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -823,28 +842,25 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title">Remarks Decline</h4>
+						<hr />
 					</div>
 					<div class="modal-body">
-						<hr />
-						<br>
-						<table width="100%">
+						<table width="100%" class="form-group has-info">
 							<tr>
-								<td>Remarks :
-								</td>
+								<td>Remarks :</td>
 							</tr>
 							<tr>
-								<td>
-									<textarea rows="3" cols="3" class="form-control" id="remarksToProp"></textarea>
-								</td>
+								<td><textarea rows="3" cols="3" class="form-control"
+										id="remarksToProp"></textarea></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
 							</tr>
 							<tr align="right">
 								<td>
-								<button onclick="actionForm('decline','<bean:write name="reg" property="propTaskId" />');" value="Submit">Submit</button>
-								&nbsp;
-								<button type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+									<button type="button" class="btn btn-sm btn-info" id="btnDeclinePropTask"
+										value="Submit">Submit</button> &nbsp;
+									<button type="button" class="btn btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
 								</td>
 							</tr>
 						</table>
@@ -854,7 +870,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
+
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>

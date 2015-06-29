@@ -501,7 +501,7 @@
 			name="projectTaskForm" value="" />
 
 		<div class="container divContent">
-			<div class="form-group has-info" style="margin-top: 40px">
+			<div class="form-group has-info">
 				<table width="100%">
 					<tr>
 						<td width="45%">
@@ -566,7 +566,7 @@
 			</div>
 
 			<div>
-				<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+				<ul class="nav nav-tabs">
 					<li class="active"><a href="#projectTask" data-toggle="tab">Project
 							Task</a></li>
 					<li><a href="#proposeTask" data-toggle="tab">Propose Task</a></li>
