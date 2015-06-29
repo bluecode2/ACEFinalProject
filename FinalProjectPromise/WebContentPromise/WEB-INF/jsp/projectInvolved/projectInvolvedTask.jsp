@@ -311,8 +311,13 @@
 						});						
 						
 						$('#btnSaveProposeTask').on('click', function() {
-							alert('aaa');
 							document.forms[0].taskForProp.value = "save";
+							
+							if($("#hdnPropTaskId").val().length > 0)
+								document.forms[0].isAdd.value = false;
+							else 
+								document.forms[0].isAdd.value = true;
+							
 							document.forms[0].submit();
 						});
 					});
@@ -450,7 +455,7 @@
 		<html:hidden property="taskForProp" name="projectTaskForm" />
 		<html:hidden property="allowAdd" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
-		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId" name="projectTaskForm" />
+		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId" name="projectTaskForm" value=""/>
 
 		<div class="container divContent">
 			<div class="form-group has-info" style="margin-top: 40px">
@@ -628,95 +633,7 @@
 						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 					</div>
 				</div>
-<<<<<<< HEAD
-=======
-<%-- 			</logic:equal> --%>
-			
-				<div class="divSearch form-group has-info" align="right">
-					<table width="100%">
-						<tr valign="middle">
-							<td width="60%"><div align="left">
-									<button type="button" href="#" onclick="btnAddProp('add');" class="btn btn-raised btn-info btn-icon"
-										title="Proposed Task"><span
-										class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-								</div></td>
-							<td>Search by</td>
-							<td style="padding-left: 15px;"><html:select
-									name="projectTaskForm" property="searchField"
-									styleId="selSearchField" styleClass="form-control">
-									<option value="propTaskName">Task Name</option>
-									<option value="propToName">Propose To</option>
-								</html:select></td>
-							<td style="padding-left: 15px"><html:text
-									name="projectTaskForm" property="searchValue"
-									styleClass="form-control" /></td>
-							<td style="padding-left: 15px"><button type="button"
-									onclick="search();" id="btnSearch"
-									class="btn btn-info btn-icon" title="Search">
-									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								</button></td>
-						</tr>
-					</table>
-				</div>
-				<div>
-					<table class="table table-striped table-bordered table-hover"
-						cellspacing="0" style="margin-top: 10px;" width="100%"
-						class="tableContent">
-						<thead>
-							<tr class="panel panel-info">
-								<td>Project Name</td>
-								<td>Task Name</td>
-								<td>Estimate</td>
-								<td>Proposed To</td>
-								<td>Status</td>
-								<td class="align-center">Action</td>
-							</tr>
-						</thead>
-						<tbody>
-							<logic:notEmpty name="projectTaskForm" property="arrListProp">
-								<logic:iterate id="reg" name="projectTaskForm"
-									property="arrListProp">
-									<tr>
-										<td><bean:write name="reg" property="projectName" />
-										<td><bean:write name="reg" property="propTaskName" />
-										<td><bean:write name="reg"
-												property="estStartDateInString" /> &nbsp;To&nbsp; <bean:write
-												name="reg" property="estEndDateInString" /></td>
-										<td><bean:write name="reg" property="propToName" /></td>
-										<td><html:hidden property="propStatus" name="reg" styleClass="propStatusId"/>
-											<bean:write name="reg" property="propStatusName" />
-											<a href="#" onclick="showRemarksProp('<bean:write name="reg" property="remakrs" />');" class="statusCheck" >remarks</a>
-										</td>
-										<td align="center"><logic:equal name="reg"
-												property="propStatus" value="TA_STAT_01">
-												<a class="text-success" href="#"
-													onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
-													title="Edit"><span class="glyphicon glyphicon-pencil"
-													aria-hidden="true"></span></a> &nbsp; <a href="#"
-													class="text-danger"
-													onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
-													title="Delete"><span class="glyphicon glyphicon-trash"
-													aria-hidden="true"></span></a>
-											</logic:equal></td>
-									</tr>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="projectTaskForm" property="arrListProp">
-								<tr>
-									<td colspan="6" align="center" style="padding: 10px">No
-										Data Found</td>
-								</tr>
-							</logic:empty>
-						</tbody>
-					</table>
-					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
-				</div>
-			</div>
-<%-- 			</logic:equal> --%>
-			
-<%-- 			<logic:equal value="true" name="projectTaskForm" property="showDiv"> --%>
-<%-- 			</logic:equal> --%>
->>>>>>> branch 'master' of https://github.com/bluecode2/ACEFinalProject.git
+
 
 				<div class="tab-pane fade" id="proposeTask">
 					<%-- 			<logic:equal value="show" name="viewAddEdit"> --%>
@@ -813,10 +730,10 @@
 										property="arrListProp">
 										<tr>
 											<html:hidden styleClass="hdnListPropTaskId" name="reg" property="propTaskId"/>
-											<html:hidden styleClass="hdnListPropTaskCode" name="reg" property="propTaskCode"/>
+											<html:hidden styleClass="hdnListPropTaskDesc" name="reg" property="propTaskDesc"/>
 											<html:hidden styleClass="hdnListPropTaskName" name="reg" property="propTaskName"/>
-											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg" property="propEstStartDate"/>
-											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg" property="propStartStartDate"/>
+											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg" property="estStartDate"/>
+											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg" property="estStartDate"/>
 
 											
 											<td><bean:write name="reg" property="projectName" />
