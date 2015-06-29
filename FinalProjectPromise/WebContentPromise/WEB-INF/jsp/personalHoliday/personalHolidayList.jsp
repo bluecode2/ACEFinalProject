@@ -124,7 +124,6 @@
 		</div>
 		<html:hidden name="personalHolidayForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-
 	</html:form>
 </body>
 </html>

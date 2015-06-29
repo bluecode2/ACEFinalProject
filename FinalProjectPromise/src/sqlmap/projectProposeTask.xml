@@ -23,7 +23,8 @@
 		proposal_status		as propStatus,
 		proposal_status_name as propStatusName,
 		project_id			as projectId,
-		project_name		as projectName
+		project_name		as projectName,
+		REMARKS				as remakrs
 		FROM VPROPOSED_TASK
 		WHERE proposal_status != 'TA_STAT_99' and project_id = #projId#
 		<dynamic prepend="AND">

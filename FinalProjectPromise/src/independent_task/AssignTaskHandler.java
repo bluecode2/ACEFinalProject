@@ -53,7 +53,6 @@ public class AssignTaskHandler extends Action {
 				tsForm.getTkBean().setAssignedTo(null);
 
 			if (isAdd) {
-				tsForm.getTkBean().setTaskId(tsMan.getNewTaskId());
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsMan.createNewAssignTask(tsForm.getTkBean());
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());

@@ -67,6 +67,14 @@
 	$(document)
 			.ready(
 					function() {
+						$('.statusCheck').each(
+								function() {
+									var statusRemark = $(this).closest('td').find('.propStatusId').val();
+									if (statusRemark != 'TA_STAT_98'){
+										$(this).hide();
+									}
+								});
+						
 						getStyleBtn();
 						$(".datepicker").attr("data-provide", "datepicker");
 
@@ -414,6 +422,11 @@
 		// 		}
 
 	}
+	
+	function showRemarksProp(remarks){
+		$('#txtRemarksDec').html(remarks);
+		$('#remarksProp').modal();
+	}
 </script>
 </head>
 <body>
@@ -615,6 +628,95 @@
 						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
 					</div>
 				</div>
+<<<<<<< HEAD
+=======
+<%-- 			</logic:equal> --%>
+			
+				<div class="divSearch form-group has-info" align="right">
+					<table width="100%">
+						<tr valign="middle">
+							<td width="60%"><div align="left">
+									<button type="button" href="#" onclick="btnAddProp('add');" class="btn btn-raised btn-info btn-icon"
+										title="Proposed Task"><span
+										class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								</div></td>
+							<td>Search by</td>
+							<td style="padding-left: 15px;"><html:select
+									name="projectTaskForm" property="searchField"
+									styleId="selSearchField" styleClass="form-control">
+									<option value="propTaskName">Task Name</option>
+									<option value="propToName">Propose To</option>
+								</html:select></td>
+							<td style="padding-left: 15px"><html:text
+									name="projectTaskForm" property="searchValue"
+									styleClass="form-control" /></td>
+							<td style="padding-left: 15px"><button type="button"
+									onclick="search();" id="btnSearch"
+									class="btn btn-info btn-icon" title="Search">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<table class="table table-striped table-bordered table-hover"
+						cellspacing="0" style="margin-top: 10px;" width="100%"
+						class="tableContent">
+						<thead>
+							<tr class="panel panel-info">
+								<td>Project Name</td>
+								<td>Task Name</td>
+								<td>Estimate</td>
+								<td>Proposed To</td>
+								<td>Status</td>
+								<td class="align-center">Action</td>
+							</tr>
+						</thead>
+						<tbody>
+							<logic:notEmpty name="projectTaskForm" property="arrListProp">
+								<logic:iterate id="reg" name="projectTaskForm"
+									property="arrListProp">
+									<tr>
+										<td><bean:write name="reg" property="projectName" />
+										<td><bean:write name="reg" property="propTaskName" />
+										<td><bean:write name="reg"
+												property="estStartDateInString" /> &nbsp;To&nbsp; <bean:write
+												name="reg" property="estEndDateInString" /></td>
+										<td><bean:write name="reg" property="propToName" /></td>
+										<td><html:hidden property="propStatus" name="reg" styleClass="propStatusId"/>
+											<bean:write name="reg" property="propStatusName" />
+											<a href="#" onclick="showRemarksProp('<bean:write name="reg" property="remakrs" />');" class="statusCheck" >remarks</a>
+										</td>
+										<td align="center"><logic:equal name="reg"
+												property="propStatus" value="TA_STAT_01">
+												<a class="text-success" href="#"
+													onclick="actionForm('edit','<bean:write name="reg" property="propTaskId" />');"
+													title="Edit"><span class="glyphicon glyphicon-pencil"
+													aria-hidden="true"></span></a> &nbsp; <a href="#"
+													class="text-danger"
+													onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
+													title="Delete"><span class="glyphicon glyphicon-trash"
+													aria-hidden="true"></span></a>
+											</logic:equal></td>
+									</tr>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="projectTaskForm" property="arrListProp">
+								<tr>
+									<td colspan="6" align="center" style="padding: 10px">No
+										Data Found</td>
+								</tr>
+							</logic:empty>
+						</tbody>
+					</table>
+					<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+				</div>
+			</div>
+<%-- 			</logic:equal> --%>
+			
+<%-- 			<logic:equal value="true" name="projectTaskForm" property="showDiv"> --%>
+<%-- 			</logic:equal> --%>
+>>>>>>> branch 'master' of https://github.com/bluecode2/ACEFinalProject.git
 
 				<div class="tab-pane fade" id="proposeTask">
 					<%-- 			<logic:equal value="show" name="viewAddEdit"> --%>
@@ -963,6 +1065,28 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		<div class="modal fade" id="remarksProp" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Remarks Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtRemarksDec"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>

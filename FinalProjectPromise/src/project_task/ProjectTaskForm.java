@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import project.ProjectBean;
 import propose_project_task.ProposeProjectTaskBean;
 import activity.ActivityBean;
+import employee.EmployeeBean;
 
 public class ProjectTaskForm extends ActionForm
 {
@@ -41,6 +42,43 @@ public class ProjectTaskForm extends ActionForm
 	private Integer selectTaskId;
 	private String taskForProp;
 	
+	//penambahan fitur pada form untuk approve propose project task
+	private Integer assignTo;
+	private List <EmployeeBean> eBean = new ArrayList<EmployeeBean>();
+	private String propTo;
+	private String remarks;
+	private String remarksProp;
+	
+	public String getRemarksProp() {
+		return remarksProp;
+	}
+	public void setRemarksProp(String remarksProp) {
+		this.remarksProp = remarksProp;
+	}
+	public Integer getAssignTo() {
+		return assignTo;
+	}
+	public void setAssignTo(Integer assignTo) {
+		this.assignTo = assignTo;
+	}
+	public List<EmployeeBean> geteBean() {
+		return eBean;
+	}
+	public void seteBean(List<EmployeeBean> eBean) {
+		this.eBean = eBean;
+	}
+	public String getPropTo() {
+		return propTo;
+	}
+	public void setPropTo(String propTo) {
+		this.propTo = propTo;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 	public String getTaskForProp() {
 		return taskForProp;
 	}

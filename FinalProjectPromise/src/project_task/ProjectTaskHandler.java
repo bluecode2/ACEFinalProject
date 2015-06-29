@@ -1,5 +1,8 @@
 package project_task;
 
+import independent_task.IndependentTaskBean;
+import independent_task.IndependentTaskManager;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -18,6 +21,7 @@ import activity.ActivityBean;
 import activity.ActivityManager;
 import project.ProjectManager;
 import project_member.ProjectMemberManager;
+import propose_project_task.ApprovePropProjManager;
 import propose_project_task.ProposeProjectTaskManager;
 import user.UserBean;
 import common.CommonFunction;
@@ -35,7 +39,7 @@ public class ProjectTaskHandler extends Action {
 		ProjectTaskForm tsForm = (ProjectTaskForm) form;
 		ProjectTaskManager tsMan = new ProjectTaskManager();
 		
-		
+		ApprovePropProjManager aPropPMan = new ApprovePropProjManager();
 		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
@@ -43,6 +47,10 @@ public class ProjectTaskHandler extends Action {
 		ProjectManager projManager = new ProjectManager();
 		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
 		ActivityManager actMan = new ActivityManager();
+		
+		IndependentTaskManager iTaskMan = new IndependentTaskManager();
+		
+		Integer projId = (Integer) session.getAttribute("projectId");
 		NotificationManager noMan = new NotificationManager();
 		
 		if (tsForm.getPrjBean() == null) {
@@ -169,6 +177,34 @@ public class ProjectTaskHandler extends Action {
 			}
 
 		}
+		
+		if ("approve".equalsIgnoreCase(tsForm.getTaskForProp())){
+			tsForm.setBean(aPropPMan.getApproveTaskById(tsForm.getSelectTaskId()));
+			
+			IndependentTaskBean iTaskBean = new IndependentTaskBean();
+			iTaskBean.setTaskName(tsForm.getBean().getPropTaskName());
+			iTaskBean.setTaskDesc(tsForm.getBean().getPropTaskDesc());
+			iTaskBean.setAssignedBy(tsForm.getBean().getPropTo());
+			iTaskBean.setAssignedTo(tsForm.getAssignTo());
+			iTaskBean.setCreatedBy(us.getUserId());
+			iTaskBean.setEstStartDateInString(tsForm.getBean().getEstStartDateInString());
+			iTaskBean.setEstEndDateInString(tsForm.getBean().getEstEndDateInString());
+			
+			iTaskMan.createNewAssignTask(iTaskBean);
+			
+			aPropPMan.approveTask(tsForm.getBean());
+			
+			response.sendRedirect("projectTask.do");
+			return null;
+		}
+		else if ("decline".equalsIgnoreCase(tsForm.getTaskForProp())){
+			tsForm.getBean().setUpdatedBy(us.getUserId());
+			tsForm.getBean().setPropTaskId(tsForm.getSelectTaskId());
+			tsForm.getBean().setRemakrs(tsForm.getRemarksProp());
+			aPropPMan.declineTask(tsForm.getBean());
+			response.sendRedirect("projectTask.do");
+			return null;
+		}
 
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_TASK, us,
 				request);
@@ -177,17 +213,32 @@ public class ProjectTaskHandler extends Action {
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 
-		tsForm.setListCount(tsMan.getCountAssignTaskByProjectId(
-				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),
-				tsForm.getPrjBean().getProjectId()));
+		if (tsForm.getShowDiv().equalsIgnoreCase("true")){
+			tsForm.setListCount(tsMan.getCountAssignTaskByProjectId(
+					tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),
+					us.getEmployeeId()));
+		}
+		else if (tsForm.getShowDiv().equalsIgnoreCase("false")){
+			tsForm.setListCount(aPropPMan.getCountAllPropTask(tsForm.getCurrSearchField(),
+					tsForm.getCurrSearchValue(), us.getEmployeeId()));
+		}
+		
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount()
 				/ (double) Constant.pageSize));
 
+		tsForm.seteBean(aPropPMan.getEmployeeBySpvId(us.getEmployeeId()));
+		
+		tsForm.setEmpId(us.getEmployeeId());
+		
 		tsForm.setArrList(tsMan.getListProjectTaskByProjectId(tsForm
 				.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm
 				.getCurrPage(), Constant.pageSize, tsForm.getPrjBean()
 				.getProjectId()));
 
+		tsForm.setArrListProp(aPropPMan.getAllPropTask(
+				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),
+				tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId(),tsForm.getPrjBean().getProjectId()));
+		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(tsForm.getPageCount(),
 						tsForm.getCurrPage()));
