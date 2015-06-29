@@ -162,7 +162,6 @@ public class ProjectHandler extends Action{
 				pMemberMan.insertProjectMember(memberBean);
 				
 				//Create notification 
-		
 				nMan.createNotificationProjectMember(us.getEmployeeId(),pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId(),pRoleMan.getProjectManagerRoleId());
 			} 
 			else if (isProc.equalsIgnoreCase("edit")){

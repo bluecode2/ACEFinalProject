@@ -142,14 +142,14 @@ public class ProjectRoleManager {
 	}
 
 	public Integer getProjectManagerRoleId() {
-		Integer getProjectRoleIdByCode = null;
+		Integer projectRoleId = null;
 		try {
-			getProjectRoleIdByCode = (Integer) this.ibatis.queryForObject(
+			projectRoleId = (Integer) this.ibatis.queryForObject(
 					"projectRole.getProjectManagerRoleId", null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return getProjectRoleIdByCode;
+		return projectRoleId;
 	}
 }
