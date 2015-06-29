@@ -21,12 +21,16 @@ public class ProjectTaskBean {
 	private Integer createdBy;
 	private Date 	estStartDate;
 	private String 	estStartDateInString;
+	private String 	estStartDateDisplay;
 	private Date 	estEndDate;
 	private String 	estEndDateInString;
+	private String 	estEndDateDisplay;
 	private Date 	actStartDate;
 	private String 	actStartDateInString;
+	private String 	actStartDateDisplay;
 	private Date 	actEndDate;
 	private String 	actEndDateInString;
+	private String 	actEndDateDisplay;
 	private Integer estMainDays;
 	private Integer actmainDays;
 	private Float 	taskProgress;
@@ -38,9 +42,8 @@ public class ProjectTaskBean {
 	private Integer isOutsource;
 	private String 	taskDesc;
 	
-
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
-
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getTaskDesc() {
 		return taskDesc;
@@ -166,7 +169,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.estStartDateInString = "";
 			date = null;
 		}
@@ -201,7 +204,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.estEndDateInString = "";
 			date = null;
 		}
@@ -236,7 +239,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.actStartDateInString = "";
 			date = null;
 		}
@@ -271,7 +274,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.actEndDateInString = "";
 			date = null;
 		}
@@ -346,7 +349,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -381,7 +384,7 @@ public class ProjectTaskBean {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}
@@ -404,4 +407,19 @@ public class ProjectTaskBean {
 		this.projectName = projectName;
 	}
 
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
+	}
+
+	public String getActStartDateDisplay() {
+		return df2.format(actStartDate);
+	}
+
+	public String getActEndDateDisplay() {
+		return df2.format(actEndDate);
+	}
 }

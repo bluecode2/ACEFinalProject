@@ -111,11 +111,10 @@
 		SET
 		TASK_STATUS = #taskStatus#,
 		updated_by = #updatedBy#,
-		TASK_PROGRESS = #taskProgress#,
 		ACT_START_DATE = TO_DATE(#actStartDateInString#,'yyyy-MM-dd'),
 		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
-		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#),
-		update_date = to_date(SYSDATE, 'yyyy-MM-dd'),
+		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#,assigned_to),
+		update_date = SYSDATE,
 		remarks = #remarks#
 		WHERE task_id = #taskId#
 	</update>
@@ -130,9 +129,29 @@
 		where task_id = #taskId#
 	</update>
 
+	<update id="startProjectTask" parameterClass="java.util.Map">
+		UPDATE task
+		set
+		act_start_date = SYSDATE,
+		update_date = SYSDATE,
+		updated_by = #updatedBy#,
+		task_status = #taskStatus#
+		where task_id =#taskId#
+	</update>
+
 	<update id="updateStatusProjectTask" parameterClass="java.util.Map">
 		UPDATE task
 		set
+		update_date = SYSDATE,
+		updated_by = #updatedBy#,
+		task_status = #taskStatus#
+		where task_id =#taskId#
+	</update>
+
+	<update id="submitProjectTask" parameterClass="java.util.Map">
+		UPDATE task
+		set
+		act_end_date = to_date(SYSDATE, 'yyyy-MM-dd'),
 		update_date = SYSDATE,
 		updated_by = #updatedBy#,
 		task_status = #taskStatus#

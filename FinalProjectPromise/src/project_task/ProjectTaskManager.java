@@ -95,6 +95,7 @@ public class ProjectTaskManager {
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			try {
 				ibatis.endTransaction();
 			} catch (SQLException e1) {
@@ -115,6 +116,50 @@ public class ProjectTaskManager {
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateStatusRemarksProjectTask", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	public void startProjectTask(int taskId, int updatedBy,
+			String taskStatus)  {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
+
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("projectTask.startProjectTask", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	public void submitProjectTask(int taskId, int updatedBy,
+			String taskStatus)  {
+		Map m = new HashMap();
+		m.put("taskId", taskId);
+		m.put("updatedBy", updatedBy);
+		m.put("taskStatus", taskStatus);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("projectTask.submitProjectTask", m);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -149,7 +194,7 @@ public class ProjectTaskManager {
 		}
 	}
 
-	public ProjectTaskBean getDataForEdit(int taskId)  {
+	public ProjectTaskBean getTaskById(int taskId)  {
 		
 		ProjectTaskBean tBean = null;
 		

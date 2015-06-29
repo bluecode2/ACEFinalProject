@@ -39,11 +39,11 @@ public class ProjectInvolvedTaskHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
 		ProjectManager projManager = new ProjectManager();
-		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
+
 		request.setAttribute("user", us.getEmployeeId());
 		tsForm.setEmpId(us.getEmployeeId());
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date now = new Date();
+
 
 		NotificationManager noMan = new NotificationManager();
 
@@ -54,7 +54,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 
 		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());
 		tsForm.setAllowAdd(empBean.getSupervisorId() != null);
-
+		
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
 				Integer projectId = (Integer) session.getAttribute("projectId");
@@ -75,22 +75,36 @@ public class ProjectInvolvedTaskHandler extends Action {
 
 		// Handling Task Project Task
 		if ("startTask".equalsIgnoreCase(tsForm.getTask())) {// TASK TO START
-																// TASK
+							// TASK
 			int taskId = tsForm.getTestingId();
-			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
-			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+			//String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
+			//tsMan.startProjectTask(taskId, us.getUserId(), taskStatus);
+			pTaskBean = tsMan.getTaskById(taskId);
+			pTaskBean.setActStartDate(now);
+			pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_ONGOING);
+			pTaskBean.setUpdatedBy(us.getUserId());
+
+			tsMan.updateTaskStat(pTaskBean);
 
 		} else if ("submitTask".equalsIgnoreCase(tsForm.getTask())) {// TASK TO
 																		// SUBMIT
 																		// TASK
-			int taskId = tsForm.getTestingId();
+			/*int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL;
-			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+			tsMan.submitProjectTask(taskId, us.getUserId(), taskStatus);
 
-			tsForm.setTkBean(tsMan.getDataForEdit(taskId));
+			tsForm.setTkBean(tsMan.getTaskById(taskId));
 			noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 					.getTkBean().getAssignedBy(), tsForm.getTkBean()
-					.getTaskId());
+					.getTaskId());*/
+			
+			int taskId = tsForm.getTestingId();
+			pTaskBean = tsMan.getTaskById(taskId);
+			pTaskBean.setActEndDate(now);
+			pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL);
+			pTaskBean.setUpdatedBy(us.getUserId());
+
+			tsMan.updateTaskStat(pTaskBean);
 		} else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())) { // TASK TO
 																		// PAUSE
 																		// TASK

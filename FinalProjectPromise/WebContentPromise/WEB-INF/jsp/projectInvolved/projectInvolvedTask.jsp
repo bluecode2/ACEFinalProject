@@ -637,9 +637,34 @@
 											<td><bean:write name="reg" property="assignedToName" />
 												<logic:equal name="reg" property="isOutsource" value="1">(Out)</logic:equal></td>
 											<td align="center"><bean:write name="reg"
-													property="estStartDateInString" /> to <bean:write
-													name="reg" property="estEndDateInString" /> : <bean:write
-													name="reg" property="estMainDays" /></td>
+													property="estStartDateDisplay" /> to <bean:write
+													name="reg" property="estEndDateDisplay" />
+													<br/>(<bean:write
+													name="reg" property="estMainDays" /> main days)
+											</td>
+											<%-- <td align="center">
+												<logic:notEmpty name="reg" property="actStartDateInString">
+													<bean:write name="reg" property="actStartDateDisplay" /> to 
+														<logic:notEmpty name="reg" property="actEndDateInString">
+															<bean:write name="reg" property="actEndDateDisplay" />
+														</logic:notEmpty>
+														<logic:empty  name="reg" property="actEndDateInString">
+															-
+														</logic:empty>
+														<br/>(
+															<logic:notEmpty name="reg" property="actMainDays">
+																<bean:write name="reg" property="actMainDays" />
+															</logic:notEmpty>
+															<logic:empty name="reg" property="actMainDays">
+																-
+															</logic:empty>
+														 main days)
+												</logic:notEmpty>
+												<logic:empty name="reg" property="actStartDateInString">
+													-
+												</logic:empty>
+											</td> --%>
+											
 											<td align="center"><bean:write name="reg"
 													property="actStartDateInString" /> to <bean:write
 													name="reg" property="actEndDateInString" /></td>
