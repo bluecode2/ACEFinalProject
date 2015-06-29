@@ -1,5 +1,4 @@
 package proposed_task;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,8 +10,10 @@ public class ProposedTaskBean {
 	private String propTaskDesc;
 	private Date estStartDate;
 	private String estStartDateInString;
+	private String estStartDateDisplay;
 	private Date estEndDate;
 	private String estEndDateInString;
+	private String estEndDateDisplay;
 	private Integer propBy;
 	private String propByName;
 	private Integer propTo;
@@ -28,6 +29,8 @@ public class ProposedTaskBean {
 	private String propStatusName;
 	private Integer estMainDays;
 	private String remarks;
+	
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getRemarks() {
 		return remarks;
@@ -276,5 +279,13 @@ public class ProposedTaskBean {
 
 	public void setEstMainDays(Integer estMainDays) {
 		this.estMainDays = estMainDays;
+	}
+
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
 	}	
 }

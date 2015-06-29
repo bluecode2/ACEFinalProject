@@ -119,8 +119,21 @@
 										<html:hidden property="propTaskName" name="reg" styleClass="hdTaskName"/>
 										<bean:write name="reg" property="propTaskName" />
 									</td>
-									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="estMainDays" /></td>
+									<td align="center">
+							          <logic:notEmpty name="reg" property="estStartDateInString">
+							           <bean:write name="reg" property="estStartDateDisplay" /> to 
+							            <logic:notEmpty name="reg" property="estEndDateInString">
+							             <bean:write name="reg" property="estEndDateDisplay" />
+							            </logic:notEmpty>
+							            <logic:empty  name="reg" property="estEndDateInString">
+							             -
+							            </logic:empty>
+							            <br/>(<bean:write name="reg" property="estMainDays" /> main days)
+							          </logic:notEmpty>
+							          <logic:empty name="reg" property="estStartDateInString">
+							           -
+							          </logic:empty>
+							         </td>
 									<td><bean:write name="reg" property="propToName" /></td>
 									<td><bean:write name="reg" property="propStatusName" /> <logic:notEqual name="reg" property="remarks" value=""><br/><a href="#" class="text-info lnkRemarks">Remarks</a></logic:notEqual></td>
 									<td align="center">
