@@ -20,12 +20,16 @@ public class IndependentTaskBean {
 	private Integer createdBy;
 	private Date 	estStartDate;
 	private String 	estStartDateInString;
+	private String 	estStartDateDisplay;
 	private Date 	estEndDate;
 	private String 	estEndDateInString;
+	private String 	estEndDateDisplay;
 	private Date 	actStartDate;
 	private String 	actStartDateInString;
+	private String 	actStartDateDisplay;
 	private Date 	actEndDate;
 	private String 	actEndDateInString;
+	private String 	actEndDateDisplay;
 	private Integer estMainDays;
 	private Integer actmainDays;
 	private Float 	taskProgress;
@@ -36,10 +40,9 @@ public class IndependentTaskBean {
 	private String 	updateDateInString;
 	private Integer isOutsource;
 	private String 	taskDesc;
-	
 
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
-
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getTaskDesc() {
 		return taskDesc;
@@ -379,5 +382,21 @@ public class IndependentTaskBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
+	}
+
+	public String getActStartDateDisplay() {
+		return df2.format(actStartDate);
+	}
+
+	public String getActEndDateDisplay() {
+		return df2.format(actEndDate);
 	}
 }

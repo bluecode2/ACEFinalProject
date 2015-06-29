@@ -201,7 +201,7 @@
 										<logic:notEmpty name="proj" property="estStartDateInString">
 											<bean:write name="proj" property="estStartDateInString" /> to 
 												<logic:notEmpty name="proj" property="estEndDateInString">
-													<bean:write name="proj" property="estEndDateInString" />
+													<bean:write name="proj" property="estEndDateDisplay" />
 												</logic:notEmpty>
 												<logic:empty  name="proj" property="estEndDateInString">
 													-
@@ -214,9 +214,9 @@
 									</td>
 									<td align="center">
 										<logic:notEmpty name="proj" property="actStartDateInString">
-											<bean:write name="proj" property="actStartDateInString" /> to 
+											<bean:write name="proj" property="actStartDateDisplay" /> to 
 												<logic:notEmpty name="proj" property="actEndDateInString">
-													<bean:write name="proj" property="actEndDateInString" />
+													<bean:write name="proj" property="actEndDateDisplay" />
 												</logic:notEmpty>
 												<logic:empty  name="proj" property="actEndDateInString">
 													-
