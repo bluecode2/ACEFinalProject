@@ -3,18 +3,17 @@
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
+<jsp:include page="/WEB-INF/jsp/include/head.jsp"></jsp:include>
 
-<!-- 
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/material.ripples.min.css">
 <link rel="stylesheet" href="css/calendar.min.css">
-<link rel="stylesheet" href="css/custom.css">
-
+<!--
 <script type="text/javascript">
 $(function(){
     var $ppc = $('.progress-pie-chart'),
@@ -31,9 +30,28 @@ $(function(){
 
 </head>
 <body>
-	<html:form action="/home" method="post">
+<jsp:include page="/WEB-INF/jsp/include/navbar.jsp"></jsp:include>
 
-		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
+	<html:form action="/home" method="post">
+	
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
+			    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			    <li><a href="#profile" data-toggle="tab">Profile</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+			    <div class="tab-pane fade active in" id="home">
+			        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+			    </div>
+			    <div class="tab-pane fade" id="profile">
+			        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
 
 		<div id="calendar"></div>
     

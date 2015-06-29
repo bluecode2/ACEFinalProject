@@ -1,16 +1,11 @@
 <%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
-
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-</head>
-<body>
-	<div class="container bg-info" style="border-radius: 3px">
+<!-- 	This is toolbar -->
+	<div class="container bg-info" style="border-radius: 3px;background-color: #E8F4FA">
 		<logic:notEmpty name="btnBackVisible">
 			<logic:equal name="btnBackVisible" value="true">
 				<button id="btnBack" type="button" onclick="onBtnBackClick();"
@@ -52,8 +47,4 @@
 			</logic:equal>
 		</logic:notEmpty>
 	</div>
-
-
-
-</body>
-</html>
+<!-- 	toolbar end -->

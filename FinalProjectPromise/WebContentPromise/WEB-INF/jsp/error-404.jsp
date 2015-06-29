@@ -30,15 +30,15 @@
 		
 		<div class="container">
 			<div class="row" style="margin-top:-20px;">
-				<div class="col-md-8 text-center" style="padding-right: 40px;">
-					<h1 style="font-size: 404px;">404</h1>
+				<div class="col-md-8 text-center text404">
+					<h1 style="padding-top:20px">404</h1>
 				</div>
-				<div class="col-md-4 text-center">
-					<p style="font-size: 111px">Page not found.</p>
+				<div class="col-md-4 text-center textNotFound">
+					<p>Page not found.</p>
 				</div>
 			</div>
 			<div class="row text-center">
-				<div class="col-md-4 col-md-push-8"><hr style="margin-top: -10px;" />
+				<div class="col-md-4 col-md-push-8"><hr style="margin-top: 0px;margin-bottom: -5px;" />
 					<p style="padding-top: 20px;margin-bottom:0;">Let's going back to home...
 					<span style="margin-left: 10px;">
 					<a href="home.do">

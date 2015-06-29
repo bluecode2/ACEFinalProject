@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!-- This is footer -->
 <footer class="footer">
 	<div class="container">
 		<div class="text-center">
@@ -7,3 +9,4 @@
 		</div>
 	</div>
 </footer>
+<!-- footer end -->

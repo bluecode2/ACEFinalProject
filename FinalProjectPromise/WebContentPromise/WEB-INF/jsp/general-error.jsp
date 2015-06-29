@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="center-block col-md-8 text-center" style="padding-right: 40px;">
-					<h1 style="font-size: 112px;padding-top: 10px;">Oops.. Something wrong!</h1>
+					<h1 class="wrong">Oops..<br>Something<br>wrong!</h1>
 				</div>
 				<div class="center-block col-md-4 text-center">
 					<p style="padding-top: 40px;">Let's going back to home</p>

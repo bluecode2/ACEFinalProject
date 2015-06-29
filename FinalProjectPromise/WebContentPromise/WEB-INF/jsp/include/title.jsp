@@ -1,35 +1,11 @@
-<%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-</head>
-<body>
+<%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%><%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%><%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%><%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!-- 	This is title -->
 	<div class="container">
-		<h1>
-			<bean:write name="pageTitle" />
-		</h1>
+		<h1><bean:write name="pageTitle" /></h1>
 		<hr />
-		<ol class="breadcrumb">
-			<logic:iterate name="breadCrumb" id="menu">
-				<logic:equal name="menu" property="menuId" value="${currMenuId}">
-					<li class="active"><bean:write name="menu"
-							property="menuCaption" /></li>
-				</logic:equal>
-				<logic:notEqual name="menu" property="menuId" value="${currMenuId}">
-					<li><a href="<bean:write name="menu" property="menuUrl" />"><bean:write
-								name="menu" property="menuCaption" /></a></li>
-				</logic:notEqual>
-			</logic:iterate>
-			<!-- 			<li><a href="home.do">Home</a></li> -->
-			<!-- 			<li><a href="#">Library</a></li> -->
-			<!-- 			<li class="active">Data</li> -->
+		<ol class="breadcrumb"><logic:iterate name="breadCrumb" id="menu"><logic:equal name="menu" property="menuId" value="${currMenuId}">
+			<li class="active"><bean:write name="menu" property="menuCaption" /></li></logic:equal><logic:notEqual name="menu" property="menuId" value="${currMenuId}">
+			<li><a href="<bean:write name="menu" property="menuUrl" />"><bean:write	name="menu" property="menuCaption" /></a></li></logic:notEqual></logic:iterate>
 		</ol>
 	</div>
-</body>
-</html>
+<!-- 	title end -->

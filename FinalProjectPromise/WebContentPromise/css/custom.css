@@ -67,35 +67,41 @@ label {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #ddd;
+  background: #fff;
+  border-bottom: 1px solid #81D4FA;
 }
 .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
 }
+.nav-tabs > li:first-child {
+  padding-left: 20px;
+}
 .nav-tabs > li > a {
+  color: #03a9f4 !important;
   margin-right: 2px;
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
 }
 .nav-tabs > li > a:hover {
-  border-color: #eee #eee #ddd;
+  color: #03a9f4 !important;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #555;
-  cursor: default;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
+  color: #2196f3 !important;
+  background: rgba(217, 237, 247, 0.3) !important;
+  cursor: default !important;
+  border: 1px solid #81D4FA !important;
+  border-bottom-color: #fff !important;
 }
 
 .nav-stacked > li.active > a {
 	border-radius: 2px;
 	background-color: #03a9f4 !important;
 }
+
 .badge {
 	background-color: #ffeb3b;
 	color: #2196f3;
@@ -131,6 +137,73 @@ label {
 }
 .dropdown-menu-notif > li > a {
   white-space: normal;
+}
+
+@media (max-width: 480px) {
+    .text404 > h1 {
+    	font-size: 114px;
+    }
+    .textNotFound > p {
+    	font-size: 24px;
+    }
+    .wrong {
+    	font-size: 44px;
+    	padding-top: 10px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .text404 > h1 {
+    	font-size: 212px;
+    }
+    .textNotFound > p {
+    	font-size: 51px;
+    }
+    .wrong {
+    	font-size: 54px;
+    	padding-top: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.text404 > h1 {
+   		font-size: 254px;
+    }
+    .textNotFound > p {
+    	font-size: 74px;
+    }
+    .wrong {
+    	font-size: 74px;
+    	padding-top: 10px;
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+	.text404 > h1 {
+   		font-size: 345px;
+    }
+    .textNotFound > p {
+    	font-size: 91px;
+    }
+    .wrong {
+    	font-size: 92px;
+    	padding-top: 10px;
+    }
+}
+@media (min-width: 1200px) {
+	.text404 {
+		padding-right: 40px;
+	}
+	.text404 > h1 {
+   		font-size: 404px;
+    }
+    .textNotFound > p {
+    	font-size: 111px;
+    }
+    .wrong {
+    	font-size: 112px;
+    	padding-top: 10px;
+    }
 }
 
 /* Submenu
