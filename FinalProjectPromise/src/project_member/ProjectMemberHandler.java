@@ -56,12 +56,7 @@ public class ProjectMemberHandler extends Action {
 		
 		request.setAttribute("showAdd", false);
 		
-		if ("add".equalsIgnoreCase(pMemberForm.getTask())){
-			request.setAttribute("showAdd", true);
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
-			request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
-		}
-		else if ("save".equalsIgnoreCase(pMemberForm.getTask())){
+		if ("save".equalsIgnoreCase(pMemberForm.getTask())){
 			request.setAttribute("showAdd", false);
 			pMemberForm.getpMemberbean().setProjectId(projId);
 			
@@ -89,6 +84,9 @@ public class ProjectMemberHandler extends Action {
 		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.pageSize));
+		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
+		
 		
 		request.setAttribute("pageTitle", "Project Member");
 

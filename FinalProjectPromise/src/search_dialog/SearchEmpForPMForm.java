@@ -2,7 +2,12 @@ package search_dialog;
 
 import org.apache.struts.action.ActionForm;
 
-public class SearchEmpForm extends ActionForm {
+public class SearchEmpForPMForm extends ActionForm {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String searchField;
 	private String searchValue;
 	
@@ -18,4 +23,5 @@ public class SearchEmpForm extends ActionForm {
 	public void setSearchValue(String searchValue) {
 		this.searchValue = searchValue;
 	}
+
 }

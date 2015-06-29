@@ -20,6 +20,7 @@
 		<form-bean name="searchRankForm" type="search_dialog.SearchRankForm"></form-bean>	
 		<form-bean name="searchUserRoleForm" type="search_dialog.SearchUserRoleForm"></form-bean>
 		<form-bean name="searchEmpForm" type="search_dialog.SearchEmpForm"></form-bean>
+		<form-bean name="searchEmpForPMForm" type="search_dialog.SearchEmpForPMForm"></form-bean>
 		<form-bean name="searchDeptForm" type="search_dialog.SearchDeptForm"></form-bean>	
 		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>
 		<form-bean name="searchProjMemberForm" type="search_dialog.SearchProjMemberForm"></form-bean>		
@@ -119,6 +120,8 @@
 		<action path="/searchUserRole" name="searchUserRoleForm" type="search_dialog.SearchUserRolePopUpHandler" scope="request">
 		</action>
 		<action path="/searchEmp" name="searchEmpForm" type="search_dialog.SearchEmpHandler" scope="request">
+		</action>
+		<action path="/searchEmpForPM" name="searchEmpForPMForm" type="search_dialog.SearchEmpForPMHandler" scope="request">
 		</action>
 		<action path="/searchDept" name="searchDeptForm" type="search_dialog.SearchDeptHandler" scope="request">
 		</action>
