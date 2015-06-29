@@ -96,6 +96,17 @@
 					hideLoading();
 				});
 
+				$('.viewRemarks').on('click',function(){
+					showLoading();
+					var remarks = $(this).closest('tr').find('.hdRemarks').val();
+					var taskName = $(this).closest('tr').find('.hdTaskName').val();
+					
+					$('#txtValueRemarksTaskRemarks').val(remarks);
+					$('#txtValueRemarksTaskName').val(taskName);
+					$('#showRemarks').modal();
+					hideLoading();
+				});
+				
 				$('#btnShowEntry').on('click', function() {
 					$('#txtActivityDesc').val('');
 					$('#divActivityEntry').show();
@@ -284,6 +295,7 @@
 										property="taskName" />
 									<html:hidden styleClass="hdAssignedToName" name="reg"
 										property="assignedToName" />
+										<html:hidden property="remarks" name="reg" styleClass="hdRemarks"/>
 									<td><a href="#" class="text-info"
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
@@ -304,7 +316,12 @@
 							          </logic:empty>
 							         </td>
 									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
-									<td><bean:write name="reg" property="taskStatusName" /></td>
+									<td align="center">
+										<bean:write name="reg" property="taskStatusName" /><br/>
+										<logic:notEmpty name="reg" property="remarks">
+											<a href="#" class="text-info viewRemarks">Remarks</a>
+										</logic:notEmpty>
+									</td>
 									<td align="center">
 									<!-- edit di sini -->
 									<logic:equal name="reg" value="TA_STAT_04" property="taskStatus">
@@ -343,7 +360,8 @@
 												title="Submit"><span class="glyphicon glyphicon-ok"
 												aria-hidden="true"></span></a>
 										</logic:equal>
-									</logic:equal></td>
+									</logic:equal>
+									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
@@ -381,6 +399,47 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+
+			<!-- pop up to show remarks -->	
+			<div class="modal fade" id="showRemarks" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Task Remarks</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<table width="100%">
+									<tr>
+										<td style="padding-left: 15px">Task Name</td>
+										<td >
+											<input type="text" id="txtValueRemarksTaskName" class="form-control" readonly="readonly" />
+										</td>
+										
+									</tr>
+									<tr>
+										<td style="padding-left: 15px" valign="top">
+											Task Desc 
+										</td>
+										<td >
+											<textarea rows="3" cols="3" class="form-control"  id="txtValueRemarksTaskRemarks" readonly="readonly"></textarea>
+										</button></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
 		<!-- popup to manage Activity -->
 		<div class="modal fade" id="manageActivity" tabindex="-1" role="dialog"
