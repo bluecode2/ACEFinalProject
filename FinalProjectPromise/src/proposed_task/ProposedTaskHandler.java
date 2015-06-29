@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import notification.NotificationManager;
+
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,6 +15,7 @@ import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeBean;
 import employee.EmployeeManager;
+import general.NotificationBean;
 import proposed_task.ProposedTaskBean;
 import proposed_task.ProposedTaskManager;
 import user.UserBean;
@@ -27,6 +30,7 @@ public class ProposedTaskHandler extends Action {
 		ProposedTaskManager dMan = new ProposedTaskManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		NotificationManager noMan = new NotificationManager();
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
@@ -57,6 +61,9 @@ public class ProposedTaskHandler extends Action {
 				dForm.getBean().setCreatedBy(us.getUserId());
 				dForm.getBean().setPropBy(us.getEmployeeId());
 				dMan.insertProposedTask(dForm.getBean());
+				
+				dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
+				noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());
 			} else {
 				dForm.getBean().setUpdatedBy(us.getUserId());
 				dMan.updateProposedTask(dForm.getBean());

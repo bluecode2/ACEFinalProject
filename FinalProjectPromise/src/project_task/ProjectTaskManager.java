@@ -57,7 +57,7 @@ public class ProjectTaskManager {
 			 {
 		try {
 			this.ibatis.startTransaction();
-			tsBean.setTaskId(getNewTaskId());
+			
 			this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {

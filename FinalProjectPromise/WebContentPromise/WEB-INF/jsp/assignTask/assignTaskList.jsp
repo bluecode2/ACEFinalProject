@@ -182,9 +182,8 @@ function search() {
 							<td class="align-center">Assign To</td>
 							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Actual Date</td>
-							<td class="align-center">Task Progress</td>
 							<td class="align-center">Activity</td>
-							<td class="align-center">Task Status</td>
+							<td class="align-center">Progress</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -203,15 +202,27 @@ function search() {
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td align="center"><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
-									<td>
+									<td align="center">
+										<logic:notEmpty name="reg" property="actStartDateInString">
+											<bean:write name="reg" property="actStartDateInString" /> to 
+												<logic:notEmpty name="reg" property="actEndDateInString">
+													<bean:write name="reg" property="actEndDateInString" />
+												</logic:notEmpty>
+												<logic:empty  name="reg" property="actEndDateInString">
+													-
+												</logic:empty>
+										</logic:notEmpty>
+										<logic:empty name="reg" property="actStartDateInString">
+											-
+										</logic:empty>
+									</td>
+									<td align="center">
 										<a  href="#" class="text-info linkActivity">
 											View Activity
 										</a>
 									</td>
 									<td><html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" /> 
-										<bean:write name="reg" property="taskStatusName" />
+										<bean:write name="reg" property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%
 									</td>
 									<td align="center">
 										<a class="text-success firstBtn" href="#" id="tes"

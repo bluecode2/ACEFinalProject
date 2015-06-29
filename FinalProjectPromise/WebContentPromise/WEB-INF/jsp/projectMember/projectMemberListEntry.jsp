@@ -87,6 +87,10 @@
 			document.getElementById('delBtn').style.display = 'block';
 		}
 	}
+	
+	function hideEntryPanel(){
+		$('#divEntryProjectMember').hide();
+	}
 </script>
 </head>
 <body>
@@ -102,8 +106,8 @@
 		<html:hidden property="employeeId" name="getProject"
 			styleId="empManager" />
 
-		<div class="container">
-			<div class="divSearch form-group has-info" style="float: left;">
+		<div class="container divContent">
+			<div class="form-group has-info"  style="padding-bottom: 20px">
 				<table>
 					<tr>
 						<td>Project Name</td>
@@ -130,18 +134,14 @@
 				</table>
 			</div>
 			<logic:equal value="true" name="showAdd">
-				<div class="divContent">
-					<table border="0" fon cellspacing="0" style="margin-top: 10px;"
-						width="100%" class="tableContent">
-						<tr>
-							<td><hr /></td>
-						</tr>
-					</table>
-					<table cellspacing="0" style="margin-top: 10px;" width="400px"
+				<div class="panel form-group has-info" id="divEntryProjectMember" style="padding: 20px">
+					<h4>Project Member Entry</h4>
+					<hr>
+					<table cellspacing="0" style="margin-top: 10px;" width="100%"
 						class="tableContent">
 						<tr>
-							<td width="40%">Employee Name</td>
-							<td style="padding-left: 15px;" width="50%"><html:hidden
+							<td width="15%">Employee Name</td>
+							<td style="padding-left: 15px;" width="30%"><html:hidden
 									property="pMemberbean.employeeId" name="projectMemberForm"
 									styleId="txtEmployeeId" /> <html:text
 									property="pMemberbean.empName" name="projectMemberForm"
@@ -151,8 +151,8 @@
 									class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 						</tr>
 						<tr>
-							<td width="40%">Project Role Name</td>
-							<td style="padding-left: 15px;" width="50%"><html:hidden
+							<td width="15%">Project Role Name</td>
+							<td style="padding-left: 15px;" width="30%"><html:hidden
 									property="pMemberbean.projectRoleId" name="projectMemberForm"
 									styleId="txtRoled" /> <html:text
 									property="pMemberbean.projRoleName" name="projectMemberForm"
@@ -163,19 +163,23 @@
 									class="glyphicon glyphicon-edit" aria-hidden="true" /></a></td>
 						</tr>
 						<tr>
-							<td width="40%">&nbsp;</td>
-							<td style="padding-left: 15px;" width="50%">
+							<td width="15%">&nbsp;</td>
+							<td></td>
+							<td></td>
+							<td style="padding-left: 15px;" width="50%" align="right">
 								<button id="btnSave" type="button" onclick="addProjMember();"
-									class="btn btn-info btn-icon" title="Add Member">
-									<span class="glyphicon glyphicon-floppy-disk"
-										aria-hidden="true"></span>
+									class="btn btn-info btn-sm" title="Add Member">
+									Save</button>
+								<button type="button" onclick="hideEntryPanel();"
+									class="btn btn-sm" title="Cancel">
+									Cancel</button>
 							</td>
 							<td width="10%">&nbsp;</td>
 						</tr>
 					</table>
 				</div>
 			</logic:equal>
-			<div class="divContent">
+			<div>
 				<table class="table table-striped table-bordered table-hover"
 					cellspacing="0" style="margin-top: 10px;" width="100%"
 					class="tableContent">
