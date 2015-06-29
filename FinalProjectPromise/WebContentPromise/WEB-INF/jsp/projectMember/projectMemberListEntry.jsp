@@ -171,7 +171,7 @@
 									class="btn btn-info btn-sm" title="Add Member">
 									Save</button>
 								<button type="button" onclick="hideEntryPanel();"
-									class="btn btn-sm" title="Add Member">
+									class="btn btn-sm" title="Cancel">
 									Cancel</button>
 							</td>
 							<td width="10%">&nbsp;</td>
