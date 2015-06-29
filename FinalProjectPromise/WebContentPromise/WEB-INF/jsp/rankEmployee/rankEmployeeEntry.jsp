@@ -11,12 +11,57 @@
 <title>General Code Entry</title>
 <script type="text/javascript">
 	function onBtnSaveClick() {
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	function onBtnBackClick() {
 		location.href = "rankEmployee.do";
+	}
+	
+	function validateForm(){
+		
+		var rankCode	= document.getElementById("txtRankCode").value;
+		var rankName 	= document.getElementById("txtRankName").value;
+		var rankLevel 	= document.getElementById("txtRankLevel").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(rankCode.trim() == '') {
+			str+= "Rank Code can not be empty!\n";
+			isValid = false;
+		}
+		else if(rankCode.length > 11) {
+			str+= "Rank Code can not be more than 10 characters!\n";
+			isValid = false;
+		}
+		
+		if(rankName.trim() == '') {
+			str+= "Rank Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(rankName.length > 26) {
+			str+= "Rank Name can not be more than 25 characters!\n";
+			isValid = false;
+		}
+		
+		if(rankLevel.trim() == '') {
+			str+= "Rank Level can not be empty!\n";
+			isValid = false;
+		}
+		else if(isNaN(rankLevel)) {
+			str+= "Rank Level must consist of number!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 </script>
 </head>

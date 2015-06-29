@@ -11,71 +11,93 @@
 <title>Proposed Task List</title>
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
+	function search2() {
+		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+		changePage(1);
+	}
+
 	function actionForm(task, id) {
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
- 		document.forms[0].submit();
+		document.forms[0].submit();
 	}
+	
 	function getTaskDesc(taskDesc) {
 		$('#txtTaskDesc').html(taskDesc);
 		$('#taskDesc').modal();
 	}
+	
 	function getEmpList(empList) {
 		$('#txtEmpList').html(empList);
 		$('#empList').modal();
 	}
-	function getValue(id,name) {
+	
+	function getValue(id, name) {
 		document.forms[0].propTo.value = id;
 		document.getElementById("propTo").text = name;
 	}
-	
+
 	var currLink;
 	var currHdnField;
-	
-	$(document).ready(function() {
-		$('.lnkAssignTo').on('click',function(){
-			currLink = $(this);
-			currHdnField = $(this).closest('td').find('.hdnAssignTo');
-			$("#empList").modal();
-		});
-		$('.insertRemarks').on('click',function(){
-			document.forms[0].selectedId.value = $('#txtValueTaskId').val(); //task ID
-			document.forms[0].task.value = "decline";
-			document.forms[0].remarksRecord.value = $('#selSearchFieldRemark').val();
-			document.forms[0].submit();
-		});
-		$('.secondBtn').on('click',function(){
-			var taskId = $(this).closest('tr').find('.hdnTaskId').val();
-			var taskName = $(this).closest('tr').find('.hdnTaskName').val();
-		
-			$('#txtValueTaskId').val(taskId);
-			$('#txtValueTaskName').val(taskName);
-			
-			$('#addRemarks').modal();
-			
-		});
-		
-		$('.btnApprove').on('click',function(){
-			var taskId = $(this).closest('tr').find('td').eq(0).html().trim();
-			var assignToId = $(this).closest('tr').find('.hdnAssignTo').val();
-			document.forms[0].task.value = 'approve';
-			document.forms[0].selectedId.value = taskId;
-			document.forms[0].assignTo.value = assignToId;
-			document.forms[0].submit();
-		});
-		
-		registerSearchAssignToEvent();
-	});
-	
-	function registerSearchAssignToEvent(){
-		$('.rowSearch').on('click',function(){
+
+	$(document).ready(
+			function() {
+				$('.lnkAssignTo').on('click', function() {
+					currLink = $(this);
+					currHdnField = $(this).closest('td').find('.hdnAssignTo');
+					$("#empList").modal();
+				});
+				$('.insertRemarks').on(
+						'click',
+						function() {
+							document.forms[0].selectedId.value = $(
+									'#txtValueTaskId').val(); //task ID
+							document.forms[0].task.value = "decline";
+							document.forms[0].remarksRecord.value = $(
+									'#selSearchFieldRemark').val();
+							document.forms[0].submit();
+						});
+				$('.secondBtn').on(
+						'click',
+						function() {
+							var taskId = $(this).closest('tr').find(
+									'.hdnTaskId').val();
+							var taskName = $(this).closest('tr').find(
+									'.hdnTaskName').val();
+
+							$('#txtValueTaskId').val(taskId);
+							$('#txtValueTaskName').val(taskName);
+
+							$('#addRemarks').modal();
+
+						});
+
+				$('.btnApprove').on(
+						'click',
+						function() {
+							var taskId = $(this).closest('tr').find('td').eq(0)
+									.html().trim();
+							var assignToId = $(this).closest('tr').find(
+									'.hdnAssignTo').val();
+							document.forms[0].task.value = 'approve';
+							document.forms[0].selectedId.value = taskId;
+							document.forms[0].assignTo.value = assignToId;
+							document.forms[0].submit();
+						});
+
+				registerSearchAssignToEvent();
+			});
+
+	function registerSearchAssignToEvent() {
+		$('.rowSearch').on('click', function() {
 			var empId = $(this).closest('tr').find('td').eq(0).html();
 			var empName = $(this).closest('tr').find('td').eq(2).html();
 			currHdnField.val(empId);
 			currLink.html(empName);
 		});
 	}
-	
+
 	function search() {
 		var spvId = $('#hdnEmpId').val();
 		var searchField = $('#selSearchFieldAssignTo').val();
@@ -96,7 +118,6 @@
 			}
 		});
 	}
-
 </script>
 </head>
 <body>
@@ -107,12 +128,17 @@
 
 		<html:hidden name="approveTaskForm" property="task" />
 		<html:hidden name="approveTaskForm" property="selectedId" />
+		<html:hidden name="approveTaskForm" property="currPage" />
 		<html:hidden name="approveTaskForm" property="currSearchField" />
 		<html:hidden name="approveTaskForm" property="currSearchValue" />
-		<html:hidden name="approveTaskForm" property="propTo"/>
-		<html:hidden name="approveTaskForm" property="empId" styleId="hdnEmpId" />
-		<html:hidden name="approveTaskForm" property="assignTo" styleId="hdnAssignTo" />
-		<html:hidden property="remarksRecord" name="approveTaskForm"/>
+
+		<html:hidden name="approveTaskForm" property="propTo" />
+		<html:hidden name="approveTaskForm" property="empId"
+			styleId="hdnEmpId" />
+		<html:hidden name="approveTaskForm" property="assignTo"
+			styleId="hdnAssignTo" />
+		<html:hidden property="remarksRecord" name="approveTaskForm" />
+
 		<div class="container">
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
@@ -127,8 +153,8 @@
 						<td style="padding-left: 15px"><html:text
 								name="approveTaskForm" property="searchValue"
 								styleClass="form-control" /></td>
-						<td style="padding-left: 15px"><button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+						<td style="padding-left: 15px">
+						<button type="button" onclick="search2();" id="btnSearch" class="btn btn-info btn-icon"
 								title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
@@ -144,7 +170,6 @@
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
 							<td class="align-center">Estimate Date</td>
-							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Proposed By</td>
 							<td class="align-center">Assign To</td>
 							<td class="align-center">Action</td>
@@ -154,23 +179,27 @@
 						<logic:notEmpty name="approveTaskForm" property="arrList">
 							<logic:iterate id="reg" name="approveTaskForm" property="arrList">
 								<tr>
-									<td style="display: none">
-									<html:hidden property="propTaskId" name="reg" styleClass="hdnTaskId"/>
-									<html:hidden property="propTaskName" name="reg" styleClass="hdnTaskName"/>
-									<bean:write name="reg" property="propTaskId" /></td>
-									<td><a href="#" class="text-info" 
-									onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');" data-target="taskDesc">
-									<bean:write name="reg" property="propTaskName" /></a>
-									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="estMainDays" /></td>
+									<td style="display: none"><html:hidden
+											property="propTaskId" name="reg" styleClass="hdnTaskId" /> <html:hidden
+											property="propTaskName" name="reg" styleClass="hdnTaskName" />
+										<bean:write name="reg" property="propTaskId" /></td>
+									<td><a href="#" class="text-info"
+										onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
+										data-target="taskDesc"> <bean:write name="reg"
+												property="propTaskName" /></a>
+									<td align="center"><bean:write name="reg"
+											property="estStartDateInString" /> to <bean:write name="reg"
+											property="estEndDateInString" /> <br />(<bean:write
+											name="reg" property="estMainDays" /> main days)</td>
 									<td><bean:write name="reg" property="propByName" /></td>
-									<td><input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" /><a href="#" class="text-info lnkAssignTo">
-									<bean:write name="reg" property="propByName" /></a></td>
-									<td align="center"><a class="text-success btnApprove" href="#"
-										title="Approve"><span class="glyphicon glyphicon-ok"
-											aria-hidden="true"></span></a> &nbsp; 
-										<a href="#" class="text-danger secondBtn"
-										onclick=""
+									<td><input type="hidden" class="hdnAssignTo"
+										value="<bean:write name="reg" property="propBy" />" /><a
+										href="#" class="text-info lnkAssignTo"> <bean:write
+												name="reg" property="propByName" /></a></td>
+									<td align="center"><a class="text-success btnApprove"
+										href="#" title="Approve"><span
+											class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+										&nbsp; <a href="#" class="text-danger secondBtn" onclick=""
 										title="Decline"><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a></td>
 								</tr>
@@ -178,7 +207,7 @@
 						</logic:notEmpty>
 						<logic:empty name="approveTaskForm" property="arrList">
 							<tr>
-								<td colspan="7" align="center" style="padding: 10px">No
+								<td colspan="5" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>
@@ -210,10 +239,10 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
+
 		<!-- popup to take assignedTo -->
-		<div class="modal fade" id="empList" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="empList" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<html:form action="searchAssignTo" method="post">
@@ -257,13 +286,16 @@
 								</thead>
 								<tbody>
 									<logic:notEmpty name="approveTaskForm" property="eBean">
-										<logic:iterate id="emp" name="approveTaskForm" property="eBean">
+										<logic:iterate id="emp" name="approveTaskForm"
+											property="eBean">
 											<tr data-dismiss="modal" class="rowSearch">
-												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
-												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
+												<td style="display: none"><bean:write name="emp"
+														property="employeeId" /></td>
+												<td width="150px"><bean:write name="emp"
+														property="employeeCode" /></td>
 												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp" property="email" />
-												</td>
+												<td width="150px"><bean:write name="emp"
+														property="email" /></td>
 											</tr>
 										</logic:iterate>
 									</logic:notEmpty>
@@ -282,64 +314,61 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
+
 		<!-- popup to give remarks -->
-		<div class="modal fade" id="addRemarks" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title">Task Issue</h4>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<table width="100%">
-									<tr>
-										<td style="padding-left: 15px">Task</td>
-										<td style="padding-left: 15px">
-										<input type="hidden" id="txtValueTaskId" />
-										<input type="text" id="txtValueTaskName" class="form-control" disabled="disabled" />
-											
-										</td>
-										
-									</tr>
-									<tr>
-										<td style="padding-left: 15px">
-											Remarks 
-										</td>
-										<td style="padding-left: 15px">
-											<textarea rows="3" cols="3" class="form-control"  id="selSearchFieldRemark"></textarea>
-										</button></td>
-									</tr>
-								</table>
-							<div class="modal-footer">
-							
-								<table align="right">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Task Issue</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<table width="100%">
 								<tr>
-								<td>
-	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
-	      						</td>
-	      						<td>
-	      							<input type="button" class="btn btn-sm" value="Cancel" data-dismiss="modal">
-								</td>
-								</tr>
-								</table>
-     						</div>
-							</div>
+									<td style="padding-left: 15px">Task</td>
+									<td style="padding-left: 15px"><input type="hidden"
+										id="txtValueTaskId" /> <input type="text"
+										id="txtValueTaskName" class="form-control" disabled="disabled" />
 
+									</td>
+
+								</tr>
+								<tr>
+									<td style="padding-left: 15px">Remarks</td>
+									<td style="padding-left: 15px"><textarea rows="3" cols="3"
+											class="form-control" id="selSearchFieldRemark"></textarea>
+										</button></td>
+								</tr>
+							</table>
+							<div class="modal-footer">
+
+								<table align="right">
+									<tr>
+										<td><input type="button"
+											class="btn btn-sm btn-info insertRemarks" value="Save">
+										</td>
+										<td><input type="button" class="btn btn-sm"
+											value="Cancel" data-dismiss="modal"></td>
+									</tr>
+								</table>
+							</div>
 						</div>
+
+					</div>
 				</div>
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+
 		
-		<html:hidden name="approveTaskForm" property="currPage" />
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 	</html:form>
 </body>

@@ -12,12 +12,47 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
 		location.href = "projectRole.do";
+	}
+	
+	function validateForm(){
+		
+		var projRoleCode	= document.getElementById("txtProjectRoleCode").value;
+		var projRoleName 	= document.getElementById("txtProjectRoleName").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(projRoleCode.trim() == '') {
+			str+= "Project Role Code can not be empty!\n";
+			isValid = false;
+		}
+		else if(projRoleCode.length > 11) {
+			str+= "Project Role Code can not be more than 10 characters!\n";
+			isValid = false;
+		}
+		
+		if(projRoleName.trim() == '') {
+			str+= "Project Role Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(projRoleName.length > 26) {
+			str+= "Project Role Name can not be more than 25 characters!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
 	}
 </script>
 </head>

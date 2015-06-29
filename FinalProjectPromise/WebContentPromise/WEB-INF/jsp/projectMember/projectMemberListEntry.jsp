@@ -36,8 +36,10 @@
 	}
 
 	function addProjMember() {
-		document.forms[0].task.value = "save";
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	function registerSearchEmployee() {
@@ -91,6 +93,32 @@
 	function hideEntryPanel(){
 		$('#divEntryProjectMember').hide();
 	}
+	
+	function validateForm(){
+		
+		var empId	= document.getElementById("txtEmployeeId").value;
+		var role = document.getElementById("txtRoled").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(empId.trim() == '') {
+			str+= "Employee Name can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(role.trim() == '') {
+			str+= "Project Role can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
+	}
+
 </script>
 </head>
 <body>
@@ -171,7 +199,7 @@
 									class="btn btn-info btn-sm" title="Add Member">
 									Save</button>
 								<button type="button" onclick="hideEntryPanel();"
-									class="btn btn-sm" title="Cancel">
+									class="btn btn-sm" title="Add Member">
 									Cancel</button>
 							</td>
 							<td width="10%">&nbsp;</td>

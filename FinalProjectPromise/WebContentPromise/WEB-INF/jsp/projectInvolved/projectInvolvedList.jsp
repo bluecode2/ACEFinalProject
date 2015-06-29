@@ -98,9 +98,7 @@
 							<td class="align-center">Project Code</td>
 							<td class="align-center">Project Name</td>
 							<td class="align-center">Estimate Date</td>
-							<td class="align-center">Estimate Main Days</td>
 							<td class="align-center">Actual Date</td>
-							<td class="align-center">Actual Main Days</td>
 							<td class="align-center">Project Manager</td>
 							<td class="align-center">Department Name</td>
 							<td class="align-center">Progress</td>
@@ -127,14 +125,43 @@
 										onclick="getProjDesc('<bean:write name="proj" property="projectDesc" />');"
 										data-target="#projDesc"> <bean:write name="proj"
 												property="projectName" /></a></td>
-									<td><bean:write name="proj"
-											property="estStartDateInString" /> to <bean:write
-											name="proj" property="estEndDateInString" /></td>
-									<td><bean:write name="proj" property="estMainDays" /></td>
-									<td><bean:write name="proj"
-											property="actStartDateInString" /> to <bean:write
-											name="proj" property="actEndDateInString" /></td>
-									<td><bean:write name="proj" property="actMainDays" /></td>
+									<td align="center">
+							          <logic:notEmpty name="proj" property="estStartDateInString">
+							           <bean:write name="proj" property="estStartDateInString" /> to 
+							            <logic:notEmpty name="proj" property="estEndDateInString">
+							             <bean:write name="proj" property="estEndDateInString" />
+							            </logic:notEmpty>
+							            <logic:empty  name="proj" property="estEndDateInString">
+							             -
+							            </logic:empty>
+							            <br/>(<bean:write name="proj" property="estMainDays" /> main days)
+							          </logic:notEmpty>
+							          <logic:empty name="proj" property="estStartDateInString">
+							           -
+							          </logic:empty>
+							         </td>
+							         <td align="center">
+							          <logic:notEmpty name="proj" property="actStartDateInString">
+							           <bean:write name="proj" property="actStartDateInString" /> to 
+							            <logic:notEmpty name="proj" property="actEndDateInString">
+							             <bean:write name="proj" property="actEndDateInString" />
+							            </logic:notEmpty>
+							            <logic:empty  name="proj" property="actEndDateInString">
+							             -
+							            </logic:empty>
+							            <br/>(
+							             <logic:notEmpty name="proj" property="actMainDays">
+							              <bean:write name="proj" property="actMainDays" />
+							             </logic:notEmpty>
+							             <logic:empty name="proj" property="actMainDays">
+							              -
+							             </logic:empty>
+							             main days)
+							          </logic:notEmpty>
+							          <logic:empty name="proj" property="actStartDateInString">
+							           -
+							          </logic:empty>
+							         </td>
 									<td><bean:write name="proj" property="employeeName" /></td>
 									<td><bean:write name="proj" property="deptName" /></td>
 									<td><bean:write name="proj" property="statusCaption" /> :
