@@ -1,5 +1,6 @@
 package proposed_task;
 
+import independent_task.IndependentTaskBean;
 import independent_task.IndependentTaskManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,32 +35,33 @@ public class ApproveTaskHandler extends Action {
 		CommonFunction.initializeHeader(Constant.MenuCode.APPROVE_PROPOSED_INDEPENDENT_TASK, us, request);
 
 		aForm.setEmpId(us.getEmployeeId());
-		request.setAttribute("pageTitle", "Approve Task");
 		if (aForm.getTask().equals("approve")) {
-			
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
-
+			
+			//Insert new Task
+			IndependentTaskBean taskBean = new IndependentTaskBean();
+			taskBean.setTaskName(aForm.getBean().getPropTaskName());
+			taskBean.setTaskDesc(aForm.getBean().getPropTaskDesc());
+			taskBean.setEstStartDate(aForm.getBean().getEstStartDate());
+			taskBean.setEstEndDate(aForm.getBean().getEstEndDate());
+			taskBean.setAssignedBy(aForm.getBean().getPropTo());
+			taskBean.setAssignedTo(aForm.getAssignTo());
+			taskBean.setCreatedBy(us.getUserId());
+			
+			atManager.createNewAssignTask(taskBean);
+			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
+			
+			//Update Proposed Task
 			aForm.getBean().setUpdatedBy(us.getUserId());
+			aForm.getBean().setTaskId(taskBean.getTaskId());
 			aManager.approveTask(aForm.getBean());
 			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
 			
-			
-			aForm.getBean().setPropBy(aForm.getAssignTo());
-			aForm.getBean().setCreatedBy(us.getUserId());
-			aForm.getBean().setTaskId(atManager.getNewTaskId());
-			atManager.createNewAssignTaskMap(aForm.getBean());
-			
-			
 			response.sendRedirect("approveTask.do");
-
-			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
-
-			
 			return null;
 		}
 		else if (aForm.getTask().equals("decline")) {
 			aForm.setIsAdd(false);
-
 
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
 			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
