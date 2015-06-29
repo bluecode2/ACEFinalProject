@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="reports">
-	<select id="" resultClass="reports.ReportBean">
+	<select id="getListReports" resultClass="reports.ReportBean">
 		SELECT 
 		REPORT_ID		AS reportId,
 		REPORT_CODE		AS reportCode,
@@ -11,5 +11,6 @@
 		FILTERFIELD		AS filterField,
 		FILTERPANEL		AS filterPanel
 		FROM REPORTS	
+		order by report_code 
 	</select>
 </sqlMap>

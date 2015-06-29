@@ -1,13 +1,14 @@
 package reports;
 
 public class ReportRoleBean {
-	private Integer userId;
+	private Integer userRoleId;
 	private Integer reportId;
-	public Integer getUserId() {
-		return userId;
+
+	public Integer getUserRoleId() {
+		return userRoleId;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 	public Integer getReportId() {
 		return reportId;

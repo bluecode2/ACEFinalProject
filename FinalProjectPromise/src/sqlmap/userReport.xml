@@ -3,13 +3,17 @@
 
 <sqlMap namespace="userReport">
 	<insert id="insertUserReport" parameterClass="java.util.Map">
-		INSERT INTO USER_ROLE_REPORT (user_id, report_id) 
+		INSERT INTO USER_ROLE_REPORT (user_role_id, report_id) 
 			VALUES(#userId#, #reportId#)
 	</insert>
 	<delete id="deleteUserReport" parameterClass="java.util.Map">
 		DELETE FROM USER_ROLE_REPORT 
-			WHERE user_id = #userId#
+			WHERE user_role_id = #userId#
 			AND report_id = #reportId#
 	</delete>
+	<select id="getUserReportsByUserRole" resultClass="reports.ReportRoleBean">
+		SELECT 
+		USER_ROLE_ID
+	</select>
 
 </sqlMap>
