@@ -16,9 +16,17 @@ public class ProjectBean {
 	private String 		projectName;
 	private String 		projectDesc;
 	private Date 		estStartDate;
+	private String 		estStartDateInString;
+	private String 		estStartDateDisplay;
 	private Date 		estEndDate;
+	private String 		estEndDateInString;
+	private String 		estEndDateDisplay;
 	private Date 		actStartDate;
+	private String 		actStartDateInString;
+	private String 		actStartDateDisplay;
 	private Date 		actEndDate;
+	private String 		actEndDateInString;
+	private String 		actEndDateDisplay;
 	private Integer 	estMainDays;
 	private Integer 	actMainDays;
 	private Integer 	taskMainDays;
@@ -26,18 +34,14 @@ public class ProjectBean {
 	private Float 		projectProgress;
 	private String 		remarks;
 	private Date 		createDate;
+	private String 		createDateInString;
 	private Date 		updateDate;
+	private String 		updateDateInString;
 	private String 		employeeName;
 	private String 		statusCaption;
 	
-	private String estStartDateInString;
-	private String estEndDateInString;
-	private String actStartDateInString;
-	private String actEndDateInString;
-	private String createDateInString;
-	private String updateDateInString;
-	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getDeptName() {
 		return deptName;
@@ -373,5 +377,21 @@ public class ProjectBean {
 
 	public void setTaskMainDays(Integer taskMainDays) {
 		this.taskMainDays = taskMainDays;
+	}
+	
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
+	}
+
+	public String getActStartDateDisplay() {
+		return df2.format(actStartDate);
+	}
+
+	public String getActEndDateDisplay() {
+		return df2.format(actEndDate);
 	}
 }

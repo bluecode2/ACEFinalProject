@@ -290,9 +290,9 @@
 												property="taskName" /></a></td>
 									<td align="center">
 							          <logic:notEmpty name="reg" property="estStartDateInString">
-							           <bean:write name="reg" property="estStartDateInString" /> to 
+							           <bean:write name="reg" property="estStartDateDisplay" /> to 
 							            <logic:notEmpty name="reg" property="estEndDateInString">
-							             <bean:write name="reg" property="estEndDateInString" />
+							             <bean:write name="reg" property="estEndDateDisplay" />
 							            </logic:notEmpty>
 							            <logic:empty  name="reg" property="estEndDateInString">
 							             -
@@ -492,7 +492,6 @@
 									<tr>
 										<th style="padding-left: 15px">Activity Description</th>
 										<th style="padding-left: 15px">Completed</th>
-										
 									</tr>
 								
 								</table>

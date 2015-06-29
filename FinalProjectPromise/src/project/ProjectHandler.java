@@ -186,17 +186,17 @@ public class ProjectHandler extends Action{
 				}
 			}
 			else if (isProc.equalsIgnoreCase("cancel")){
-				pForm.getpBean().setProjectStatus("PR_STAT_99");
+				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_CANCELLED);
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("pause")){
-				pForm.getpBean().setProjectStatus("PR_STAT_05");
+				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("forceClose")){
 				pForm.getpBean().setActEndDate(now);
 				
-				pForm.getpBean().setProjectStatus("PR_STAT_06");
+				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_FORCE_CLOSED);
 				pMan.updateProject(pForm.getpBean());
 			}
 

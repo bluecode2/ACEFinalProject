@@ -201,16 +201,25 @@ function search() {
 										</a>
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
-									<td align="center"><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
+									<td align="center"><bean:write name="reg" property="estStartDateDisplay" /> to <bean:write name="reg" property="estEndDateDisplay" />
+										<br/>(<bean:write name="reg" property="estMainDays" /> main days)</td>
 									<td align="center">
 										<logic:notEmpty name="reg" property="actStartDateInString">
-											<bean:write name="reg" property="actStartDateInString" /> to 
+											<bean:write name="reg" property="actStartDateDisplay" /> to 
 												<logic:notEmpty name="reg" property="actEndDateInString">
-													<bean:write name="reg" property="actEndDateInString" />
+													<bean:write name="reg" property="actEndDateDisplay" />
 												</logic:notEmpty>
 												<logic:empty  name="reg" property="actEndDateInString">
 													-
 												</logic:empty>
+												<br/>(
+													<logic:notEmpty name="reg" property="actmainDays">
+														<bean:write name="reg" property="actmainDays" />
+													</logic:notEmpty>
+													<logic:empty name="reg" property="actmainDays">
+														-
+													</logic:empty>
+												 main days)
 										</logic:notEmpty>
 										<logic:empty name="reg" property="actStartDateInString">
 											-

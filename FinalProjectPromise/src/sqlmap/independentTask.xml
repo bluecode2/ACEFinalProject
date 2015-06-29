@@ -70,11 +70,11 @@
 	</select>
 	
 	<insert id="insertToAssignTask" parameterClass="independent_task.IndependentTaskBean">
-		insert into task (TASK_ID,TASK_NAME, TASK_DESC,ASSIGNED_BY,ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
+		insert into task (TASK_ID, TASK_NAME, TASK_DESC, ASSIGNED_BY, ASSIGNED_TO, IS_OUTSOURCE ,EST_START_DATE, 
 		EST_END_DATE, CREATED_BY, CREATE_DATE,task_status, EST_MAIN_DAYS) 
 		values( #taskId#, #taskName#, #taskDesc#, #assignedBy#,#assignedTo# ,0, TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),
 		TO_DATE(#estEndDateInString#,'yyyy-MM-dd'), #createdBy#, SYSDATE, 'TA_STAT_02',
-		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')))
+		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'), TO_DATE(#estEndDateInString#,'yyyy-MM-dd')))
 	</insert>
 	
 	<update id="updateCommentAssignTask" parameterClass="java.util.Map">

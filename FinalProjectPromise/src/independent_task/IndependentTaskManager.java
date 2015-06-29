@@ -58,7 +58,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			tsBean.setTaskId(getNewTaskId());
 			this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
-			this.ibatis.commitTransaction();
+			this.ibatis.commitTransaction();	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

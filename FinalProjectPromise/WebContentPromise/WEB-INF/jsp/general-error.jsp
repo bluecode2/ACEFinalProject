@@ -22,13 +22,6 @@
 	<nav class="navbar navbar-material-blue navbar-static-top shadow-z-1">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="home.do"><span class="logo"><img
 						src="icon/logo2.png"></span><b>PROMISE</b></a>
 			</div>
@@ -42,7 +35,10 @@
 				</div>
 				<div class="center-block col-md-4 text-center">
 					<p style="padding-top: 40px;">Let's going back to home</p>
-					<a href="home.do"><button class="btn btn-danger">Home</button></a>
+					<a href="home.do">
+					<button class="btn btn-raised btn-danger" style="top:-10px;"><span
+							class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
+					</a>
 				</div>
 			</div>
 		</div>

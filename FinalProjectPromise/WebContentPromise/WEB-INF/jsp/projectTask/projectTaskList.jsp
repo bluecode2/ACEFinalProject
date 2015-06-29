@@ -167,9 +167,10 @@
 	
 	function assignTo(){
 		$('.lnkAssignTo').on('click',function(){
+			
 			currLink = $(this);
 			currHdnField = $(this).closest('td').find('.hdnAssignTo');
-			$("#empList").modal();
+			$("#projMemList").modal();
 		});
 		
 		$('.btnApprove').on('click',function(){
@@ -214,7 +215,8 @@
 		});
 	}
 	
-	function searchEmp() {
+	//dibawah untuk search projMember tapi belum di sesuaikan fungsinya
+/* 	function searchProjMem() {
 		var spvId = $('#hdnEmpId').val();
 		var searchField = $('#selSearchFieldAssignTo').val();
 		var searchValue = $('#txtSearchValueAssignTo').val();
@@ -233,7 +235,7 @@
 				alert("Error: " + e);
 			}
 		});
-	}
+	} */
 	
 	function actionForm(task, id) {
 		var remark = $('#remarksToProp').val();
@@ -738,7 +740,7 @@
 		
 		
 				<!-- popup to take assignedTo -->
-		<div class="modal fade" id="empList" tabindex="-1"
+		<div class="modal fade" id="projMemList" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -751,7 +753,8 @@
 							<h4 class="modal-title">Assign To</h4>
 						</div>
 						<div class="modal-body">
-							<div class="container form-group">
+						<!-- dibawah untuk search project member tapi tidak dipakai jadi untuk function search nya belum dibenerin -->
+							<!-- <div class="container form-group">
 								<table>
 									<tr>
 										<td>Search</td>
@@ -764,13 +767,13 @@
 										<td style="padding-left: 15px"><input type="text"
 											id="txtSearchValueAssignTo" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
-												onclick="searchEmp();" id="btnSearch"
+												onclick="searchProjMem();" id="btnSearch"
 												class="btn btn-sm btn-info btn-icon" title="Back">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button></td>
 									</tr>
 								</table>
-							</div>
+							</div> -->
 
 							<table width="100%" id="tblSearch"
 								class="table table-striped table-hover table-bordered table-clickable">
@@ -778,17 +781,17 @@
 									<tr>
 										<th>Employee Code</th>
 										<th>Employee Name</th>
-										<th>Email</th>
+										<th>Project Role Name</th>
 									</tr>
 								</thead>
 								<tbody>
 									<logic:notEmpty name="projectTaskForm" property="eBean">
-										<logic:iterate id="emp" name="projectTaskForm" property="eBean">
+										<logic:iterate id="memProj" name="projectTaskForm" property="eBean">
 											<tr data-dismiss="modal" class="rowSearch">
-												<td style="display: none"><bean:write name="emp" property="employeeId" /></td>
-												<td width="150px"><bean:write name="emp" property="employeeCode" /></td>
-												<td><bean:write name="emp" property="employeeName" /></td>
-												<td width="150px"><bean:write name="emp" property="email" />
+												<td style="display: none"><bean:write name="memProj" property="employeeId" /></td>
+												<td width="150px"><bean:write name="memProj" property="empCode" /></td>
+												<td><bean:write name="memProj" property="empName" /></td>
+												<td width="150px"><bean:write name="memProj" property="projRoleName" />
 												</td>
 											</tr>
 										</logic:iterate>
