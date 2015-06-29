@@ -22,13 +22,6 @@
 	<nav class="navbar navbar-material-blue navbar-static-top shadow-z-1">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="home.do"><span class="logo"><img
 						src="icon/logo2.png"></span><b>PROMISE</b></a>
 			</div>
@@ -36,7 +29,7 @@
 	</nav>
 		
 		<div class="container">
-			<div class="row" style="padding: 0px;margin: 0px;">
+			<div class="row" style="margin-top:-20px;">
 				<div class="col-md-8 text-center" style="padding-right: 40px;">
 					<h1 style="font-size: 404px;">404</h1>
 				</div>
@@ -45,9 +38,16 @@
 				</div>
 			</div>
 			<div class="row text-center">
+				<div class="col-md-4 col-md-push-8"><hr style="margin-top: -10px;" />
+					<p style="padding-top: 20px;margin-bottom:0;">Let's going back to home...
+					<span style="margin-left: 10px;">
 					<a href="home.do">
-					<button class="btn btn-lg btn-danger" style="top: -25px;">Go Home</button>
+					<button class="btn btn-raised btn-danger" style="top:-10px;"><span
+							class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 					</a>
+					</span>
+					</p>
+				</div>
 			</div>
 		</div>
 		
