@@ -42,7 +42,12 @@
 						<isEqual property="searchField" compareValue="assignTo">
 							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
-					</dynamic>		          
+					</dynamic>
+					<dynamic prepend="AND">
+						<isEqual property="searchField" compareValue="taskStatus">
+							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
+						</isEqual>
+					</dynamic>			          
 		          order by task_id) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
