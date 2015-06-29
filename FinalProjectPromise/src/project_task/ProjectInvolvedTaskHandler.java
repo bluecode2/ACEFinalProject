@@ -73,6 +73,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 
+		
+		//Handling Task Project Task
 		if ("startTask".equalsIgnoreCase(tsForm.getTask())){// TASK TO START TASK
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
@@ -101,14 +103,10 @@ public class ProjectInvolvedTaskHandler extends Action {
 	
 		}
 		
-		if ("add".equalsIgnoreCase(tsForm.getTaskForProp())){
-			tsForm.setIsAdd(true);
-			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
-			request.setAttribute("viewAddEdit", "show");
-		}
-		else if ("edit".equalsIgnoreCase(tsForm.getTaskForProp())){
+		
+		//Handling Task Propose Task
+		if ("edit".equalsIgnoreCase(tsForm.getTaskForProp())){
 			tsForm.setIsAdd(false);
-			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 			tsForm.setBean(pProjtaskMan.getPropProjTaskByTaskId(tsForm.getSelectTaskId()));
 			request.setAttribute("viewAddEdit", "show");
 		}
@@ -137,6 +135,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 			request.setAttribute("viewAddEdit", "hide");
 		}
 
+		//Default View
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED_TASK, us,
 				request);
 
