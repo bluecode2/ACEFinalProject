@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.struts.action.ActionForm;
 
 import project.ProjectBean;
+import project_member.ProjectMemberBean;
 import propose_project_task.ProposeProjectTaskBean;
 import activity.ActivityBean;
-import employee.EmployeeBean;
 
 public class ProjectTaskForm extends ActionForm
 {
@@ -44,7 +44,7 @@ public class ProjectTaskForm extends ActionForm
 	
 	//penambahan fitur pada form untuk approve propose project task
 	private Integer assignTo;
-	private List <EmployeeBean> eBean = new ArrayList<EmployeeBean>();
+	private List <ProjectMemberBean> eBean = new ArrayList<ProjectMemberBean>();
 	private String propTo;
 	private String remarks;
 	private String remarksProp;
@@ -61,10 +61,10 @@ public class ProjectTaskForm extends ActionForm
 	public void setAssignTo(Integer assignTo) {
 		this.assignTo = assignTo;
 	}
-	public List<EmployeeBean> geteBean() {
+	public List<ProjectMemberBean> geteBean() {
 		return eBean;
 	}
-	public void seteBean(List<EmployeeBean> eBean) {
+	public void seteBean(List<ProjectMemberBean> eBean) {
 		this.eBean = eBean;
 	}
 	public String getPropTo() {

@@ -115,20 +115,24 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="home.do" title="Home"><span
 							class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+					<logic:notEmpty name="unreadNotification">
 					<li class="dropdown"><a href="#" class="dropdown-toggle" 
 						data-toggle="dropdown" role="button" aria-expanded="false" title="Notification"><span
 							class="glyphicon glyphicon-envelope" aria-hidden="true"></span> 
-							<span class="badge" id="badge"><bean:write name="unreadCount" /></span>
-							</a>
+							<span class="badge" id="badge"><bean:write name="unreadCount" /></span></a>
 						<ul class="dropdown-menu dropdown-menu-notif">
-							<logic:notEmpty name="unreadNotification">
-								<logic:iterate id="notif" name="unreadNotification">
-									<li><html:hidden styleClass="hdnNotifId" name="notif" property="notificationId" /><a href="#" class="notificationNode"><bean:write name="notif" property="notificationDesc" /></a></li>
-								</logic:iterate>
-							</logic:notEmpty>
-							<logic:empty name="unreadNotification">
-								<li><span>No Unread Notification</span></li>
-							</logic:empty>
+							<logic:iterate id="notif" name="unreadNotification">
+								<li><html:hidden styleClass="hdnNotifId" name="notif" property="notificationId" /><a href="#" class="notificationNode"><bean:write name="notif" property="notificationDesc" /></a></li>
+							</logic:iterate>
+					</logic:notEmpty>
+					<logic:empty name="unreadNotification">
+					<li class="dropdown"><a href="#" class="dropdown-toggle" 
+						data-toggle="dropdown" role="button" aria-expanded="false" title="Notification"><span
+							class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;
+							</a>
+						<ul class="dropdown-menu dropdown-menu-notif" style="min-width: 200px;">
+							<li><span>No Unread Notification</span></li>
+					</logic:empty>
 							<li role="separator" class="divider"></li>
 							<li style="text-align: center"><a href="notification.do" class="text-info">See All</a></li>
 						</ul>

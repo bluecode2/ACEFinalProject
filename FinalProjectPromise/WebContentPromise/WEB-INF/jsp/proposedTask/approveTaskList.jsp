@@ -76,10 +76,11 @@
 				$('.btnApprove').on(
 						'click',
 						function() {
-							var taskId = $(this).closest('tr').find('td').eq(0)
-									.html().trim();
+							
+							var taskId = $(this).closest('tr').find('.hdnTaskId').val();
 							var assignToId = $(this).closest('tr').find(
 									'.hdnAssignTo').val();
+							alert(taskId);
 							document.forms[0].task.value = 'approve';
 							document.forms[0].selectedId.value = taskId;
 							document.forms[0].assignTo.value = assignToId;
@@ -180,9 +181,9 @@
 						<logic:notEmpty name="approveTaskForm" property="arrList">
 							<logic:iterate id="reg" name="approveTaskForm" property="arrList">
 								<tr>
-									<td style="display: none"><html:hidden
-											property="propTaskId" name="reg" styleClass="hdnTaskId" /> <html:hidden
-											property="propTaskName" name="reg" styleClass="hdnTaskName" />
+									<td style="display: none">
+										<html:hidden property="propTaskId" name="reg" styleClass="hdnTaskId" /> 
+										<html:hidden property="propTaskName" name="reg" styleClass="hdnTaskName" />
 										<bean:write name="reg" property="propTaskId" /></td>
 									<td><a href="#" class="text-info"
 										onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
@@ -192,6 +193,26 @@
 											property="estStartDateInString" /> to <bean:write name="reg"
 											property="estEndDateInString" /> <br />(<bean:write
 											name="reg" property="estMainDays" /> main days)</td>
+<<<<<<< HEAD
+									<td><bean:write name="reg" property="propByName" /></td>				
+									<td>
+										<input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" />
+											<a href="#" class="text-info lnkAssignTo"> 
+												<bean:write name="reg" property="propByName" />
+											</a>
+									</td>
+									<td align="center">
+										<a class="text-success btnApprove" href="#" title="Approve">
+											<span class="glyphicon glyphicon-ok" aria-hidden="true">
+											</span>
+										</a>
+										&nbsp; 
+										<a href="#" class="text-danger secondBtn" onclick=""title="Decline">
+											<span class="glyphicon glyphicon-remove" aria-hidden="true">
+											</span>
+										</a>
+									</td>
+=======
 									<td><bean:write name="reg" property="propByName" /></td>
 									<td><input type="hidden" class="hdnAssignTo"
 										value="<bean:write name="reg" property="propBy" />" /><a
@@ -204,6 +225,7 @@
 										&nbsp; <a href="#" class="text-danger secondBtn" onclick=""
 										title="Decline"><span class="glyphicon glyphicon-remove"
 											aria-hidden="true"></span></a></td>
+>>>>>>> branch 'master' of https://github.com/bluecode2/ACEFinalProject.git
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>

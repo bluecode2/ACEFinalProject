@@ -36,27 +36,27 @@ public class ApproveTaskHandler extends Action {
 
 		aForm.setEmpId(us.getEmployeeId());
 		if (aForm.getTask().equals("approve")) {
+
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
-			
 			//Insert new Task
 			IndependentTaskBean taskBean = new IndependentTaskBean();
-			taskBean.setTaskName(aForm.getBean().getPropTaskName());
+			taskBean.setTaskName(aForm.getBean().getPropTaskName());	
 			taskBean.setTaskDesc(aForm.getBean().getPropTaskDesc());
-			taskBean.setEstStartDate(aForm.getBean().getEstStartDate());
-			taskBean.setEstEndDate(aForm.getBean().getEstEndDate());
 			taskBean.setAssignedBy(aForm.getBean().getPropTo());
 			taskBean.setAssignedTo(aForm.getAssignTo());
+			taskBean.setEstStartDateInString(aForm.getBean().getEstStartDateInString());
+			taskBean.setEstEndDateInString(aForm.getBean().getEstEndDateInString());
 			taskBean.setCreatedBy(us.getUserId());
-			
 			atManager.createNewAssignTask(taskBean);
-			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
-			
+			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), taskBean.getAssignedTo(), taskBean.getTaskId());
+
 			//Update Proposed Task
 			aForm.getBean().setUpdatedBy(us.getUserId());
 			aForm.getBean().setTaskId(taskBean.getTaskId());
 			aManager.approveTask(aForm.getBean());
 			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
 			
+
 			response.sendRedirect("approveTask.do");
 			return null;
 		}

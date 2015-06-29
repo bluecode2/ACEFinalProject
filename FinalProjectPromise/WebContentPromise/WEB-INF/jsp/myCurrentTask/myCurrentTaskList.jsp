@@ -492,7 +492,6 @@
 									<tr>
 										<th style="padding-left: 15px">Activity Description</th>
 										<th style="padding-left: 15px">Completed</th>
-										
 									</tr>
 								
 								</table>

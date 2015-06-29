@@ -16,8 +16,12 @@ import project_role.ProjectRoleBean;
 import project_role.ProjectRoleManager;
 import project_task.ProjectTaskBean;
 import project_task.ProjectTaskManager;
+import proposed_task.ProposedTaskBean;
+import proposed_task.ProposedTaskManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+
+
 
 
 
@@ -205,17 +209,18 @@ public class NotificationManager {
 	}
 	
 	public boolean createNotificationAssignIndependentTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
+		System.out.println(taskId);
 		IndependentTaskManager itMan = new IndependentTaskManager();
 		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
-		
+		System.out.println(itBean);
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
 		NotificationBean bean = new NotificationBean();
-		
 		//not started assign, waiting, completed, decline,cancel
 		String desc="";
-		if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){
+		
+		if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){	
 
 			desc = creatorEmp.getEmployeeName() + " assigned you a task : " + itBean.getTaskName();
 			bean.setNotificationUrl("myCurrentTask.do");
@@ -257,6 +262,9 @@ public class NotificationManager {
 		IndependentTaskManager itMan = new IndependentTaskManager();
 		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
 		
+		ProposedTaskManager ptMan = new ProposedTaskManager();
+		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(taskId);
+		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
@@ -264,19 +272,19 @@ public class NotificationManager {
 		
 		//propose, approve, decline
 		String desc="";
-		if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
+		if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
 
-			desc = creatorEmp.getEmployeeName() + " proposed you a task : " + itBean.getTaskName();			
+			desc = creatorEmp.getEmployeeName() + " proposed you a task : " + ptBean.getPropTaskName();			
 			bean.setNotificationUrl("approveTask.do");
 		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
+		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
 		
-			desc = creatorEmp.getEmployeeName() + " declined your task : " + itBean.getTaskName();
+			desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getPropTaskName();
 			bean.setNotificationUrl("proposedTask.do");
 		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
 			
-			desc = creatorEmp.getEmployeeName() + " approve your task : " + itBean.getTaskName();
+			desc = creatorEmp.getEmployeeName() + " approve your task : " + ptBean.getPropTaskName();
 			bean.setNotificationUrl("proposedTask.do");
 		}
 
