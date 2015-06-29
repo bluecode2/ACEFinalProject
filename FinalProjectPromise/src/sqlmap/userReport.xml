@@ -1,0 +1,15 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userReport">
+	<insert id="insertUserReport" parameterClass="java.util.Map">
+		INSERT INTO USER_ROLE_REPORT (user_id, report_id) 
+			VALUES(#userId#, #reportId#)
+	</insert>
+	<delete id="deleteUserReport" parameterClass="java.util.Map">
+		DELETE FROM USER_ROLE_REPORT 
+			WHERE user_id = #userId#
+			AND report_id = #reportId#
+	</delete>
+
+</sqlMap>
