@@ -110,6 +110,8 @@ public class CommonFunction {
 				}
 			}
 		}
+		
+		request.setAttribute("reportMenuCode", Constant.MenuCode.REPORTS);
 
 		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
@@ -155,6 +157,8 @@ public class CommonFunction {
 			}
 		}
 
+		request.setAttribute("reportMenuCode", Constant.MenuCode.REPORTS);
+		
 		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);

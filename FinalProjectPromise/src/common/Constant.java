@@ -75,6 +75,8 @@ public class Constant {
 		
 		public static final String NOTIFICATIONS= "NT01";
 		
+		public static final String REPORTS = "ZZ01";
+		
 	}
 	
 	public static class GeneralCode{

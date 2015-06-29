@@ -39,6 +39,7 @@
 		<form-bean name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskForm"></form-bean>
 		<form-bean name="approvePropProjForm" type="propose_project_task.ApprovePropProjTaskForm"></form-bean>
 		<form-bean name="notificationForm" type="notification.NotificationForm"></form-bean>
+		<form-bean name="reportForm" type="reports.ReportForm"></form-bean>
 	</form-beans>
 
 	<action-mappings>
@@ -186,6 +187,10 @@
 		<action path="/notification" name="notificationForm" type="notification.NotificationHandler"
 			scope="request">
 			<forward name="list" path="/WEB-INF/jsp/notification/notificationList.jsp"></forward>
+		</action>
+		<action path="/report" name="reportForm" type="reports.ReportHandler"
+			scope="request">
+			<forward name="list" path="/WEB-INF/jsp/reports/reportList.jsp"></forward>
 		</action>
 	</action-mappings>
 	
