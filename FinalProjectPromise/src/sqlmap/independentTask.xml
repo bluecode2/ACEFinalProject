@@ -216,7 +216,7 @@
 		          (TASK_STATUS='TA_STAT_03' 
 		          OR TASK_STATUS='TA_STAT_04'
 		          OR TASK_STATUS='TA_STAT_06')  order by EST_END_DATE
-		          order by task_id) vit
+		          ) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>	

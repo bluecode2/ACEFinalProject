@@ -32,9 +32,8 @@ public class HomeHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
 		IndependentTaskManager iTaskMan = new IndependentTaskManager();
-		
 		hmForm.setListTaskBean(iTaskMan.getListForIndividualTask(1, 5, us.getEmployeeId()));
-		
+
 		hmForm.setAvgTaskProg(iTaskMan.getAvgTaskProg(us.getEmployeeId()));
 		
 		CommonFunction.createAllowedMenu(us, request);
