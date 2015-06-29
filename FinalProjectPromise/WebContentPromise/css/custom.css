@@ -4,6 +4,9 @@ material-light-blue / -info		#03a9f4
 bg-info							#d9edf7
 */
 
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,900,400italic);
+
 html {
   position: relative;
   min-height: 100%;
@@ -130,7 +133,6 @@ label {
   white-space: normal;
 }
 
-
 /* Submenu
 -------------------------------------------------- */
 
@@ -209,6 +211,11 @@ label {
 .divContent{
 	margin-top: 50px;
 	margin-bottom: 50px;
+}
+
+.divNotif {
+	margin-top: 0px; 
+	padding-bottom: 20px;
 }
 
 thead > tr > td , th {

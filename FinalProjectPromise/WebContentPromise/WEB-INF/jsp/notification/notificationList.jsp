@@ -50,7 +50,7 @@
 		<html:hidden name="notificationForm" property="task" />
 		<html:hidden name="notificationForm" property="selectedId" />
 
-		<div class="container divContent">
+		<div class="container divContent divNotif">
 			<div>
 				<logic:notEqual name="currPage" value="1">
 					<a href='#' class="text-info btnPrevNotif"
