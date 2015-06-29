@@ -18,8 +18,10 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick(){
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 	
 	function onBtnBackClick(){
@@ -30,6 +32,51 @@
 		$(".datepicker").attr("data-provide", "datepicker");
 // 		$(".datepicker").attr("data-date-start-date", new Date());
 	});
+	
+	function validateForm(){
+		
+		var taskName	= document.getElementById("txtTaskName").value;
+		var taskDesc 	= document.getElementById("txtTaskDesc").value;
+		var estStart 	= document.getElementById("txtEstStartDate").value;
+		var estEnd 		= document.getElementById("txtEstEndDate").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(taskName.trim() == '') {
+			str+= "Task Name can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskName.length > 26) {
+			str+= "Task Name can not be more than 25 characters!\n";
+			isValid = false;
+		}
+		
+		if(taskDesc.trim() == '') {
+			str+= "Task Description can not be empty!\n";
+			isValid = false;
+		}
+		else if(taskDesc.length > 201) {
+			str+= "Task Description can not be more than 200 characters!\n";
+			isValid = false;
+		}
+		
+		if(estStart.trim() == '') {
+			str+= "Estimate Start Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(estEnd.trim() == '') {
+			str+= "Estimate End Date can not be empty!\n";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			alert(str);
+		}
+		
+		return isValid;
+	}
 </script>
 </head>
 <body>

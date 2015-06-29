@@ -245,8 +245,8 @@
 						<td style="padding-left: 15px;"><html:select
 								name="myCurrentTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
-								<option value="propTaskName">Task Name</option>
-								<option value="propStatus">Status</option>
+								<option value="taskName">Task Name</option>
+								<option value="taskStatus">Status</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="myCurrentTaskForm" property="searchValue"

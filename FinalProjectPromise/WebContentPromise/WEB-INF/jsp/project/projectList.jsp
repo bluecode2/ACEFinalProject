@@ -221,7 +221,14 @@
 												<logic:empty  name="proj" property="actEndDateInString">
 													-
 												</logic:empty>
-												<br/>(<bean:write name="proj" property="actMainDays" /> main days)
+												<br/>(
+													<logic:notEmpty name="proj" property="actMainDays">
+														<bean:write name="proj" property="actMainDays" />
+													</logic:notEmpty>
+													<logic:empty name="proj" property="actMainDays">
+														-
+													</logic:empty>
+												 main days)
 										</logic:notEmpty>
 										<logic:empty name="proj" property="actStartDateInString">
 											-
