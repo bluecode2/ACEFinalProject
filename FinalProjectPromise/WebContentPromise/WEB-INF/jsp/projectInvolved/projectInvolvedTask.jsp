@@ -17,6 +17,8 @@
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
+
+
 	function showTask(task) {
 		document.forms[0].showDiv.value = task;
 	}
@@ -33,6 +35,13 @@
 	function search() {
 		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
+
+		changePage(1);
+	}
+	
+	function search2() {
+		document.forms[0].currSearchField2.value = document.forms[0].searchField2.value;
+		document.forms[0].currSearchValue2.value = document.forms[0].searchValue2.value;
 
 		changePage(1);
 	}
@@ -67,14 +76,16 @@
 	$(document)
 			.ready(
 					function() {
+						showLoading();
 						$('.statusCheck').each(
 								function() {
-									var statusRemark = $(this).closest('td').find('.propStatusId').val();
-									if (statusRemark != 'TA_STAT_98'){
+									var statusRemark = $(this).closest('td')
+											.find('.propStatusId').val();
+									if (statusRemark != 'TA_STAT_98') {
 										$(this).hide();
 									}
 								});
-						
+
 						getStyleBtn();
 						$(".datepicker").attr("data-provide", "datepicker");
 
@@ -287,39 +298,61 @@
 							$('#txtTaskDesc').val('');
 							$('#txtEstStartDate').val('');
 							$('#txtEstEndDate').val('');
-							$('#divProposeTaskEntry').show();
+							$('#modalPropTaskEntry').modal();
 						});
 
-						$('.btnEditProposeTask').on('click', function() {
-							var propTaskId = $(this).closest('tr').find('.hdnListPropTaskId').val();
-							var propTaskName = $(this).closest('tr').find('.hdnListPropTaskName').val();
-							var propTaskDesc = $(this).closest('tr').find('.hdnListPropTaskDesc').val();
-							var propTaskStartDate = $(this).closest('tr').find('.hdnListPropTaskStartDate').val();
-							var propTaskEndDate = $(this).closest('tr').find('.hdnListPropTaskEndDate').val();
-							
-							
-							$('#hdnPropTaskId').val(propTaskId);
-							$('#txtTaskName').val(propTaskName);
-							$('#txtTaskDesc').val(propTaskDesc);
-							$('#txtEstStartDate').val(propTaskStartDate);
-							$('#txtEstEndDate').val(propTaskEndDate);
-							$('#divProposeTaskEntry').show();
-						});
-						
+						$('.btnEditProposeTask')
+								.on(
+										'click',
+										function() {
+											var propTaskId = $(this).closest(
+													'tr').find(
+													'.hdnListPropTaskId').val();
+											var propTaskName = $(this).closest(
+													'tr').find(
+													'.hdnListPropTaskName')
+													.val();
+											var propTaskDesc = $(this).closest(
+													'tr').find(
+													'.hdnListPropTaskDesc')
+													.val();
+											var propTaskStartDate = $(this)
+													.closest('tr')
+													.find(
+															'.hdnListPropTaskStartDate')
+													.val();
+											var propTaskEndDate = $(this)
+													.closest('tr')
+													.find(
+															'.hdnListPropTaskEndDate')
+													.val();
+
+											$('#hdnPropTaskId').val(propTaskId);
+											$('#txtTaskName').val(propTaskName);
+											$('#txtTaskDesc').val(propTaskDesc);
+											$('#txtEstStartDate').val(
+													propTaskStartDate);
+											$('#txtEstEndDate').val(
+													propTaskEndDate);
+											$('#modalPropTaskEntry').modal();
+										});
+
 						$('#btnCancelAdd').on('click', function() {
-							$('#divProposeTaskEntry').hide();
-						});						
-						
+							$('#modalPropTaskEntry').modal('hide');
+						});
+
 						$('#btnSaveProposeTask').on('click', function() {
 							document.forms[0].taskForProp.value = "save";
-							
-							if($("#hdnPropTaskId").val().length > 0)
+
+							if ($("#hdnPropTaskId").val().length > 0)
 								document.forms[0].isAdd.value = false;
-							else 
+							else
 								document.forms[0].isAdd.value = true;
-							
+
 							document.forms[0].submit();
 						});
+						
+						hideLoading();
 					});
 
 	function registerBtnActivityEvent() {
@@ -427,8 +460,8 @@
 		// 		}
 
 	}
-	
-	function showRemarksProp(remarks){
+
+	function showRemarksProp(remarks) {
 		$('#txtRemarksDec').html(remarks);
 		$('#remarksProp').modal();
 	}
@@ -441,10 +474,19 @@
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
 
 		<html:hidden property="task" name="projectTaskForm" />
+		<html:hidden property="taskForProp" name="projectTaskForm" />
+		
+		
 		<html:hidden property="selectedEdit" name="projectTaskForm" />
 		<html:hidden property="currSearchField" name="projectTaskForm" />
 		<html:hidden property="currSearchValue" name="projectTaskForm" />
 		<html:hidden property="currPage" name="projectTaskForm" />
+		
+		<html:hidden property="currSearchField2" name="projectTaskForm" />
+		<html:hidden property="currSearchValue2" name="projectTaskForm" />
+		<html:hidden property="currPage2" name="projectTaskForm" />
+		
+		
 		<html:hidden property="selectedId" name="projectTaskForm" />
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 		<html:hidden property="empId" name="projectTaskForm"
@@ -452,10 +494,11 @@
 		<html:hidden property="testingId" name="projectTaskForm" />
 		<html:hidden property="showDiv" name="projectTaskForm" />
 		<html:hidden property="selectTaskId" name="projectTaskForm" />
-		<html:hidden property="taskForProp" name="projectTaskForm" />
+		
 		<html:hidden property="allowAdd" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
-		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId" name="projectTaskForm" value=""/>
+		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId"
+			name="projectTaskForm" value="" />
 
 		<div class="container divContent">
 			<div class="form-group has-info" style="margin-top: 40px">
@@ -641,44 +684,7 @@
 						style="padding: 20px; display: none">
 						<h4>Propose Task Entry</h4>
 						<hr>
-						<table width="50%">
-							<colgroup>
-								<col width="30%" />
-								<col />
-							</colgroup>
-							<tr>
-								<td>Task Name</td>
-								<td><html:text styleClass="form-control"
-										styleId="txtTaskName" name="projectTaskForm"
-										property="bean.propTaskName"></html:text></td>
-							</tr>
-							<tr>
-								<td>Task Desc</td>
-								<td><html:textarea styleClass="form-control"
-										styleId="txtTaskDesc" name="projectTaskForm"
-										property="bean.propTaskDesc"></html:textarea></td>
-							</tr>
-							<tr>
-								<td>Estimate Start Date</td>
-								<td><html:text styleClass="form-control datepicker"
-										styleId="txtEstStartDate" name="projectTaskForm"
-										property="bean.estStartDateInString" style="width: 150px"></html:text>
-								</td>
-							</tr>
-							<tr>
-								<td>Estimate End Date</td>
-								<td><html:text styleClass="form-control datepicker"
-										styleId="txtEstEndDate" name="projectTaskForm"
-										property="bean.estEndDateInString" style="width: 150px"></html:text>
-								</td>
-							</tr>
-						</table>
-						<div align="right">
-							<button id="btnSaveProposeTask"
-								class="btn btn-sm btn-info">Save</button>
-							&nbsp;
-							<button id="btnCancelAdd" class="btn btn-sm">Cancel</button>
-						</div>
+
 					</div>
 					<%-- 			</logic:equal> --%>
 
@@ -694,16 +700,15 @@
 									</div></td>
 								<td>Search by</td>
 								<td style="padding-left: 15px;"><html:select
-										name="projectTaskForm" property="searchField"
-										styleId="selSearchField" styleClass="form-control">
+										name="projectTaskForm" property="searchField2"
+										styleId="selSearchField2" styleClass="form-control">
 										<option value="propTaskName">Task Name</option>
-										<option value="propToName">Propose To</option>
 									</html:select></td>
 								<td style="padding-left: 15px"><html:text
-										name="projectTaskForm" property="searchValue"
+										name="projectTaskForm" property="searchValue2"
 										styleClass="form-control" /></td>
 								<td style="padding-left: 15px"><button type="button"
-										onclick="search();" id="btnSearch"
+										onclick="search2();" id="btnSearch2"
 										class="btn btn-info btn-icon" title="Search">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									</button></td>
@@ -716,11 +721,11 @@
 							class="tableContent">
 							<thead>
 								<tr class="panel panel-info">
-									<td>Project Name</td>
-									<td>Task Name</td>
-									<td>Estimate</td>
+									<td width="200px">Task Name</td>
+									<td>Task Desc</td>
+									<td align="center" width="190px">Estimate</td>
 									<td>Proposed To</td>
-									<td>Status</td>
+									<td align="center">Status</td>
 									<td class="align-center">Action</td>
 								</tr>
 							</thead>
@@ -729,20 +734,25 @@
 									<logic:iterate id="reg" name="projectTaskForm"
 										property="arrListProp">
 										<tr>
-											<html:hidden styleClass="hdnListPropTaskId" name="reg" property="propTaskId"/>
-											<html:hidden styleClass="hdnListPropTaskDesc" name="reg" property="propTaskDesc"/>
-											<html:hidden styleClass="hdnListPropTaskName" name="reg" property="propTaskName"/>
-											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg" property="estStartDateInString"/>
-											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg" property="estStartDateInString"/>
+											<html:hidden styleClass="hdnListPropTaskId" name="reg"
+												property="propTaskId" />
+											<html:hidden styleClass="hdnListPropTaskDesc" name="reg"
+												property="propTaskDesc" />
+											<html:hidden styleClass="hdnListPropTaskName" name="reg"
+												property="propTaskName" />
+											<html:hidden styleClass="hdnListPropTaskStartDate" name="reg"
+												property="estStartDateInString" />
+											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg"
+												property="estStartDateInString" />
 
-											
-											<td><bean:write name="reg" property="projectName" />
+
 											<td><bean:write name="reg" property="propTaskName" />
-											<td><bean:write name="reg"
-													property="estStartDateInString" /> &nbsp;To&nbsp; <bean:write
+											<td><bean:write name="reg" property="propTaskDesc" />
+											<td align="center"><bean:write name="reg"
+													property="estStartDateInString" /> &nbsp;to&nbsp; <bean:write
 													name="reg" property="estEndDateInString" /></td>
 											<td><bean:write name="reg" property="propToName" /></td>
-											<td><bean:write name="reg" property="propStatusName" /></td>
+											<td align="center"><bean:write name="reg" property="propStatusName" /></td>
 											<td align="center"><logic:equal name="reg"
 													property="propStatus" value="TA_STAT_01">
 													<a class="text-success btnEditProposeTask" href="#"
@@ -764,19 +774,11 @@
 								</logic:empty>
 							</tbody>
 						</table>
-						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+						<jsp:include page="/WEB-INF/jsp/include/pagination2.jsp"></jsp:include>
 					</div>
 				</div>
-				<%-- 			</logic:equal> --%>
-
-				<%-- 			<logic:equal value="true" name="projectTaskForm" property="showDiv"> --%>
-				<%-- 			</logic:equal> --%>
-
-				<%-- 			<logic:equal value="false" name="projectTaskForm" property="showDiv"> --%>
-				<%-- 			</logic:equal> --%>
 			</div>
 		</div>
-
 		<!-- popup to give remarks  -->
 		<div class="modal fade" id="addRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -982,9 +984,9 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
-		<div class="modal fade" id="remarksProp" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+		<div class="modal fade" id="remarksProp" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -998,6 +1000,63 @@
 						<hr />
 						<br>
 						<p id="txtRemarksDec"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+
+		<div class="modal fade" id="modalPropTaskEntry" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Propose Task Entry</h4>
+						<hr />
+					</div>
+					<div class="modal-body">
+						<table width="80%" class="form-group has-info">
+							<colgroup>
+								<col width="30%" />
+								<col />
+							</colgroup>
+							<tr>
+								<td>Task Name</td>
+								<td><html:text styleClass="form-control"
+										styleId="txtTaskName" name="projectTaskForm"
+										property="bean.propTaskName"></html:text></td>
+							</tr>
+							<tr>
+								<td>Task Desc</td>
+								<td><html:textarea styleClass="form-control"
+										styleId="txtTaskDesc" name="projectTaskForm"
+										property="bean.propTaskDesc"></html:textarea></td>
+							</tr>
+							<tr>
+								<td>Estimate Start Date</td>
+								<td><html:text styleClass="form-control datepicker"
+										styleId="txtEstStartDate" name="projectTaskForm"
+										property="bean.estStartDateInString" style="width: 150px"></html:text>
+								</td>
+							</tr>
+							<tr>
+								<td>Estimate End Date</td>
+								<td><html:text styleClass="form-control datepicker"
+										styleId="txtEstEndDate" name="projectTaskForm"
+										property="bean.estEndDateInString" style="width: 150px"></html:text>
+								</td>
+							</tr>
+						</table>
+						<div align="right">
+							<button id="btnSaveProposeTask" class="btn btn-sm btn-info">Save</button>
+							&nbsp;
+							<button id="btnCancelAdd" class="btn btn-sm">Cancel</button>
+						</div>
 					</div>
 				</div>
 				<!-- /.modal-content -->

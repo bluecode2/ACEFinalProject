@@ -42,6 +42,31 @@ public class ProposeProjectTaskManager {
 		return list;
 	}
 	
+	public List<ProposeProjectTaskBean> getAllPropProjTask(String col,
+			String input, Integer pageNum, Integer pageSize, Integer projId,Integer proposedById){
+			List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
+			
+			int begin = (pageNum - 1) * pageSize;
+			int end = pageNum * pageSize;
+			
+			Map map = new HashMap();
+			map.put("searchField", col);
+			map.put("searchValue", input);
+			map.put("begin", begin);
+			map.put("end", end);
+			map.put("projId", projId);
+			map.put("proposedBy", proposedById);
+			
+			try {
+				list = this.ibatis.queryForList("projProposeTask.getAllTask", map);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return list;
+	}
+	
 	public Integer getNewTaskId() throws SQLException{
 		Integer newTaskId = (Integer) this.ibatis.queryForObject("projProposeTask.getnewTaskId", null);
 		
@@ -82,6 +107,18 @@ public class ProposeProjectTaskManager {
 		return result;
 	}
 	
+	public Integer getCountPropProjTask(String column, String value, Integer projId, Integer proposedBy) throws SQLException{
+		Map map = new HashMap();
+		map.put("searchField", column);
+		map.put("searchValue", value);
+		map.put("projId", projId);
+		map.put("proposedBy", proposedBy);
+
+		Integer result = (Integer) this.ibatis.queryForObject(
+				"projProposeTask.countGetAllTask", map);
+		return result;
+	}
+	
 	public ProposeProjectTaskBean getPropProjTaskByTaskId(Integer propTaskId){
 		ProposeProjectTaskBean pProjTask = new ProposeProjectTaskBean();
 
@@ -103,7 +140,7 @@ public class ProposeProjectTaskManager {
 			this.ibatis.commitTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("gagal");
+			e.printStackTrace();
 			try {
 				this.ibatis.endTransaction();
 			} catch (SQLException e1) {

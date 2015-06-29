@@ -36,6 +36,13 @@ public class ProjectTaskForm extends ActionForm
 	
 	//penambahan fitur pada form untuk propose project task
 	private Boolean allowAdd = false;
+	private String 			searchField2;
+	private String 			searchValue2;
+	private Integer 		currPage2 = 1;
+	private Integer 		pageCount2 = 0;
+	private Integer 		listCount2;
+	private String			currSearchField2;
+	private String			currSearchValue2;
 	private List<ProposeProjectTaskBean> arrListProp = new ArrayList<ProposeProjectTaskBean>();
 	private ProposeProjectTaskBean bean  = new ProposeProjectTaskBean();
 	private String rankIdDisplay;
@@ -242,6 +249,48 @@ public class ProjectTaskForm extends ActionForm
 	}
 	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
+	}
+	public String getSearchField2() {
+		return searchField2;
+	}
+	public void setSearchField2(String searchField2) {
+		this.searchField2 = searchField2;
+	}
+	public String getSearchValue2() {
+		return searchValue2;
+	}
+	public void setSearchValue2(String searchValue2) {
+		this.searchValue2 = searchValue2;
+	}
+	public Integer getCurrPage2() {
+		return currPage2;
+	}
+	public void setCurrPage2(Integer currPage2) {
+		this.currPage2 = currPage2;
+	}
+	public Integer getPageCount2() {
+		return pageCount2;
+	}
+	public void setPageCount2(Integer pageCount2) {
+		this.pageCount2 = pageCount2;
+	}
+	public Integer getListCount2() {
+		return listCount2;
+	}
+	public void setListCount2(Integer listCount2) {
+		this.listCount2 = listCount2;
+	}
+	public String getCurrSearchField2() {
+		return currSearchField2;
+	}
+	public void setCurrSearchField2(String currSearchField2) {
+		this.currSearchField2 = currSearchField2;
+	}
+	public String getCurrSearchValue2() {
+		return currSearchValue2;
+	}
+	public void setCurrSearchValue2(String currSearchValue2) {
+		this.currSearchValue2 = currSearchValue2;
 	}
 	
 }

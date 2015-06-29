@@ -42,7 +42,12 @@
 				LOWER(proposal_status_name) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		order by proposed_task_id
+		<dynamic prepend="AND">
+			<isNotEmpty property="proposedBy">
+				proposed_by = #proposedBy#
+			</isNotEmpty>
+		</dynamic>
+		order by est_end_date
 		) protask where ROWNUM &lt; = #end#) WHERE rnum &gt;
 		#begin#
 	</select>
@@ -61,6 +66,11 @@
 				LOWER(proposed_task_name)
 				LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isNotEmpty property="proposedBy">
+				proposed_by = #proposedBy#
+			</isNotEmpty>
 		</dynamic>
 	</select>
 	
