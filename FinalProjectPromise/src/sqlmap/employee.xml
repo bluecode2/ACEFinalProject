@@ -268,7 +268,8 @@
 		SUPERVISOR_ID 						AS supervisorId,
 		SUPERVISOR_CODE 					AS supervisorCode,
 		SUPERVISOR_NAME 					AS supervisorName,
-		EMPLOYEE_NAME 						AS employeeName
+		EMPLOYEE_NAME 						AS employeeName,
+		EMAIL								AS email
 		FROM vEMPLOYEE 
 		where SUPERVISOR_ID = #spvId# 
 		<dynamic prepend="AND">

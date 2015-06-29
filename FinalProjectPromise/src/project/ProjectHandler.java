@@ -223,11 +223,11 @@ public class ProjectHandler extends Action{
 		//untuk dept head atau PM
 		if (addBtn){
 			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
-			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
+			pForm.setListOfProject(pMan.getProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 		}
 		else {
 			rowCount = pMan.getCountProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
-			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize));
+			pForm.setListOfProject(pMan.getProjectListForRole("EMPLOYEE_ID", us.getEmployeeId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue(), pForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
 		}
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount

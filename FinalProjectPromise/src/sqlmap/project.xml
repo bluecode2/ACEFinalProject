@@ -318,6 +318,7 @@
 		STATUS_CAPTION AS statusCaption
 		FROM VPROJECT
 		where PROJECT_STATUS NOT IN ('PR_STAT_04','PR_STAT_98','PR_STAT_99')
+		AND EMPLOYEE_ID=#employeeId#
 		<dynamic prepend="AND">
 			<isEqual property="checkField" compareValue="DEPT_ID">
 				DEPT_ID = #searchValue2#

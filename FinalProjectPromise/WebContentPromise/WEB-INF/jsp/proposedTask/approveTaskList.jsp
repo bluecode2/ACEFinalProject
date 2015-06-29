@@ -183,10 +183,12 @@
 										<html:hidden property="propTaskId" name="reg" styleClass="hdnTaskId" /> 
 										<html:hidden property="propTaskName" name="reg" styleClass="hdnTaskName" />
 										<bean:write name="reg" property="propTaskId" /></td>
-									<td><a href="#" class="text-info"
+									<td>
+										<a href="#" class="text-info"
 										onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
 												property="propTaskName" /></a>
+									</td>
 									<td align="center"><bean:write name="reg"
 											property="estStartDateDisplay" /> to <bean:write name="reg"
 											property="estEndDateDisplay" /> 

@@ -57,7 +57,7 @@ public class ProjectManager {
 	}
 
 	public List<ProjectBean> getProjectListForRole(String checkField, Integer inputField, String col, String input,
-			Integer pageNum, Integer pageSize) {
+			Integer pageNum, Integer pageSize, Integer empId) {
 
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -70,6 +70,7 @@ public class ProjectManager {
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
+		map.put("employeeId", empId);
 
 		try {
 			listProject = this.ibatis.queryForList(

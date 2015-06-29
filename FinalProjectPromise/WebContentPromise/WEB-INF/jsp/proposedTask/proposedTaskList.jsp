@@ -11,6 +11,11 @@
 <title>Proposed Task List</title>
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
+	function getTaskDesc(taskDesc) {
+		$('#txtTaskDesc').html(taskDesc);
+		$('#taskDesc').modal();
+	}
+
 	$(document).ready(
 		function() {
 		$('.lnkRemarks').on(
@@ -113,10 +118,16 @@
 							<logic:iterate id="reg" name="proposedTaskForm"
 								property="arrList">
 								<tr>
-									<td>
+									<td style="display: none">
+										<html:hidden property="propTaskId" name="reg" styleClass="hdnTaskId" /> 
+										<html:hidden property="propTaskName" name="reg" styleClass="hdTaskName" />
 										<html:hidden property="remarks" name="reg" styleClass="hdRemarks"/>
-										<html:hidden property="propTaskName" name="reg" styleClass="hdTaskName"/>
-										<bean:write name="reg" property="propTaskName" />
+										<bean:write name="reg" property="propTaskId" /></td>
+									<td>
+										<a href="#" class="text-info"
+										onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
+										data-target="taskDesc"> <bean:write name="reg"
+												property="propTaskName" /></a>
 									</td>
 									<td align="center">
 							          <logic:notEmpty name="reg" property="estStartDateInString">
@@ -168,6 +179,29 @@
 		</div>
 		<html:hidden name="proposedTaskForm" property="currPage" />
 		
+		<!-- Pop Up buat Task Desc -->
+		<div class="modal fade" id="taskDesc" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Task Description</h4>
+					</div>
+					<div class="modal-body">
+						<hr />
+						<br>
+						<p id="txtTaskDesc"></p>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
 		<!-- popup to show Remarks -->
 		<div class="modal fade" id="showRemarks" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -178,13 +212,13 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Remarks Description</h4>
+						<h4 class="modal-title">Remarks</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<table width="100%">
 								<tr>
-									<td style="padding-left: 15px" valign="top">Remarks Name</td>
+									<td style="padding-left: 15px" valign="top">Task Name</td>
 									<td style="padding-left: 15px"><input type="text"
 										id="txtValueTaskNameRemarks" class="form-control"
 										disabled="disabled" /></td>
