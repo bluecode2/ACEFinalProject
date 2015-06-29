@@ -347,7 +347,7 @@ public class NotificationManager {
 	public boolean createNotificationProjectTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
 		
 		ProjectTaskManager ptMan = new ProjectTaskManager();
-		ProjectTaskBean ptBean = ptMan.getDataForEdit(taskId);
+		ProjectTaskBean ptBean = ptMan.getTaskById(taskId);
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);

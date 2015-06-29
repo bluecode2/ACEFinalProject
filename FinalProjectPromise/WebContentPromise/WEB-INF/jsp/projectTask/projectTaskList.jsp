@@ -485,9 +485,7 @@
 								<tr class="panel panel-info">
 									<td>Project Name</td>
 									<td>Task Name</td>
-									<td>Estimate Start Date</td>
-									<td>Estimate End Date</td>
-									<td>Estimate Main Days</td>
+									<td>Estimate Date</td>
 									<td>Proposed By</td>
 									<td>Assign To</td>
 									<td class="align-center">Action</td>
@@ -506,10 +504,11 @@
 												onclick="getTaskDesc('<bean:write name="reg" property="propTaskDesc" />');"
 												data-target="taskDesc"> <bean:write name="reg"
 														property="propTaskName" /></a>
-											<td><bean:write name="reg"
-													property="estStartDateInString" /> to</td>
-											<td><bean:write name="reg" property="estEndDateInString" /></td>
-											<td><bean:write name="reg" property="estMainDays" /></td>
+											<td align="center"><bean:write name="reg"
+													property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" />
+												<br/>
+												(<bean:write name="reg" property="estMainDays" /> main days)
+											</td>
 											<td><bean:write name="reg" property="propByName" /></td>
 											<td><input type="hidden" class="hdnAssignTo"
 												value="<bean:write name="reg" property="propBy" />" /> <a

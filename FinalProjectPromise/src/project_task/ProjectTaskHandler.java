@@ -4,6 +4,7 @@ import independent_task.IndependentTaskBean;
 import independent_task.IndependentTaskManager;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,7 @@ public class ProjectTaskHandler extends Action {
 		
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		ProjectTaskBean pTaskBean = new ProjectTaskBean();
 		EmployeeManager empMan = new EmployeeManager();
 		ProjectManager projManager = new ProjectManager();
 		ProjectMemberManager projMbrMgr = new ProjectMemberManager();
@@ -52,6 +54,8 @@ public class ProjectTaskHandler extends Action {
 		
 		Integer projId = (Integer) session.getAttribute("projectId");
 		NotificationManager noMan = new NotificationManager();
+		
+		Date now = new Date();
 		
 		if (tsForm.getPrjBean() == null) {
 			if (session.getAttribute("projectId") != null) {
@@ -97,7 +101,7 @@ public class ProjectTaskHandler extends Action {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsForm.getTkBean().setTaskId(tmpNewId);
 				tsMan.createNewOProjectTask(tsForm.getTkBean());
-				tsForm.setTkBean(tsMan.getDataForEdit(tmpNewId));				
+				tsForm.setTkBean(tsMan.getTaskById(tmpNewId));				
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			} else {
 
@@ -115,7 +119,7 @@ public class ProjectTaskHandler extends Action {
 				tsForm.setIsAdd(false);
 				CommonFunction.initializeHeader(
 						Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
-				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));
 				request.setAttribute("listProjMember", projMbrMgr
 						.getProjectMemberToEvaluate(tsForm.getPrjBean()
 								.getProjectId()));
@@ -123,12 +127,19 @@ public class ProjectTaskHandler extends Action {
 						empMan.getAllEmployee("", "", 1, Constant.pageSize));
 				return mapping.findForward("entry");
 			} else if (tsForm.getSelectedEdit() == 1) {
-				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
+				/*tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask());
 				
-				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
-				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
+				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());*/
+				
+				pTaskBean = tsMan.getTaskById(tsForm.getSelectedId());
+				pTaskBean.setActEndDate(now);
+				pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_COMPLETED);
+				pTaskBean.setUpdatedBy(us.getUserId());
+
+				tsMan.updateTaskStat(pTaskBean);
 			}
 		} 
 		else if ("listActivity".equals(tsForm.getTask())) {
@@ -163,7 +174,7 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
-				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
+				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));				
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 
 
@@ -172,7 +183,7 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
-				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));				
+				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));				
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 
