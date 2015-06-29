@@ -173,6 +173,7 @@
 							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Proposed By</td>
 							<td class="align-center">Assign To</td>
+							<td class="align-center">Task Status</td>
 							<td class="align-center">Action</td>
 						</tr>
 					</thead>
@@ -192,6 +193,7 @@
 											property="estStartDateInString" /> to <bean:write name="reg"
 											property="estEndDateInString" /> <br />(<bean:write
 											name="reg" property="estMainDays" /> main days)</td>
+<<<<<<< HEAD
 									<td><bean:write name="reg" property="propByName" /></td>				
 									<td>
 										<input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" />
@@ -210,12 +212,26 @@
 											</span>
 										</a>
 									</td>
+=======
+									<td><bean:write name="reg" property="propByName" /></td>
+									<td><input type="hidden" class="hdnAssignTo"
+										value="<bean:write name="reg" property="propBy" />" /><a
+										href="#" class="text-info lnkAssignTo"> <bean:write
+												name="reg" property="propByName" /></a></td>
+									<td><bean:write name="reg" property="taskStatusName" /></td>
+									<td align="center"><a class="text-success btnApprove"
+										href="#" title="Approve"><span
+											class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+										&nbsp; <a href="#" class="text-danger secondBtn" onclick=""
+										title="Decline"><span class="glyphicon glyphicon-remove"
+											aria-hidden="true"></span></a></td>
+>>>>>>> branch 'master' of https://github.com/bluecode2/ACEFinalProject.git
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="approveTaskForm" property="arrList">
 							<tr>
-								<td colspan="5" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

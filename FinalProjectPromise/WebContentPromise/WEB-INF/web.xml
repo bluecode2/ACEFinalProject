@@ -32,7 +32,7 @@
 	<error-page>
 		<!-- Not found -->
 		<error-code>404</error-code>
-		<location>/WEB-INF/jsp/error404.jsp</location>
+		<location>/WEB-INF/jsp/error-404.jsp</location>
 	</error-page>
 	<error-page>
 		<!-- Internal server error -->
