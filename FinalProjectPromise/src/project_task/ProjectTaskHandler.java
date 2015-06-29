@@ -225,8 +225,10 @@ public class ProjectTaskHandler extends Action {
 		
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount()
 				/ (double) Constant.pageSize));
-
-		tsForm.seteBean(aPropPMan.getEmployeeBySpvId(us.getEmployeeId()));
+		ProjectMemberManager pMemberMan = new ProjectMemberManager();
+		
+		
+		tsForm.seteBean(pMemberMan.getProjectMemberToEvaluate(projId));
 		
 		tsForm.setEmpId(us.getEmployeeId());
 		
