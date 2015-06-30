@@ -86,7 +86,7 @@
 								name="proposedTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="propTaskName">Task Name</option>
-								<option value="propStatus">Status</option>
+								<option value="propStatusName">Status</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="proposedTaskForm" property="searchValue"

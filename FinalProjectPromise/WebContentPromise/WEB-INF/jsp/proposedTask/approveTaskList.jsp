@@ -149,7 +149,7 @@
 								name="approveTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="propTaskName">Task Name</option>
-								<option value="propBy">Proposed By</option>
+								<option value="propByName">Proposed By</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="approveTaskForm" property="searchValue"
