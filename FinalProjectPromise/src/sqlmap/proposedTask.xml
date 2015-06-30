@@ -116,14 +116,14 @@
 		fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')))
 	</insert>
 	
-	<update id="updateProposedTask" parameterClass="java.util.Map">
+	<update id="updateProposedTask" parameterClass="proposed_task.ProposedTaskBean">
 		UPDATE PROPOSED_TASK
 		SET
 		proposed_task_name = #propTaskName#,
 		proposed_task_desc = #propTaskDesc#,
 		est_start_date = to_date(#estStartDateInString#,'yyyy-MM-dd'),
 		est_end_date = to_date(#estEndDateInString#,'yyyy-MM-dd'),
-		updated_by = #userId#,
+		updated_by = #updatedBy#,
 		update_date = SYSDATE,
 		est_main_days = fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd'))
 		WHERE

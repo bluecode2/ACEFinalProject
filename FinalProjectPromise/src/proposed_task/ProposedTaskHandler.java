@@ -71,7 +71,6 @@ public class ProposedTaskHandler extends Action {
 				int newId = dMan.newPropTaskId();
 				dForm.getBean().setPropTaskId(newId);
 				dMan.insertProposedTask(dForm.getBean());
-
 				
 				dForm.setBean(dMan.getPropTaskByPropTaskId(newId));
 				noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());

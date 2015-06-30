@@ -165,7 +165,6 @@
 			<div class="divContent form-group has-info">
 				<div class="text-danger" id="divError" style="display: none">
 					Save failed!
-					<ul id="errorContent"></ul>
 				</div>
 				<table width="50%">
 					<colgroup>

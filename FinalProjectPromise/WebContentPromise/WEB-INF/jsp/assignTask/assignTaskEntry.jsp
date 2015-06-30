@@ -77,7 +77,7 @@ function validateForm(){
 	var str = "";
 	var isValid = true;
 	
-	if(estEnd<estStart){
+	if(estEndDate<estStartDate){
 		str+= "<li>Estimate Start Date of Task must be smaller than Estimate Start Date Project!\n";
 		isValid = false;
 	}

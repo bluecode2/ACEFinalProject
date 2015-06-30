@@ -56,7 +56,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are you sure want to delete proposed Task " + nama)) {
+			if (confirm("Are you sure want to delete proposed Task " + nama + "?")) {
 				document.forms[0].submit();
 			}
 		} else {
