@@ -29,7 +29,7 @@ public class ManageReportHandler extends Action {
 		// TODO Auto-generated method stub
 		
 		ManageReportForm mrForm = (ManageReportForm) form;
-		
+		ReportManager rpMan = new ReportManager();
 		
 		if ("openReportAccess".equals(mrForm.getTask())) {
 			String listReportId = "";
@@ -81,7 +81,7 @@ public class ManageReportHandler extends Action {
 				rrMan.deleteUserRoleReport(reportRoleBean);
 			}
 		}
-		
+		request.setAttribute("lstReport", rpMan.getListReports() );
 		return null;
 	}
 }

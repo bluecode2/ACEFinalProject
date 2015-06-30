@@ -1,11 +1,24 @@
 package search_dialog;
 
+import java.util.List;
+
 import org.apache.struts.action.ActionForm;
+
+import reports.ReportBean;
 
 public class ManageReportForm extends ActionForm{
 	private Integer selectedId;
 	private String	task;
 	private String listReportId;
+	private List<ReportBean> arrList;
+
+	public List<ReportBean> getArrList() {
+		return arrList;
+	}
+
+	public void setArrList(List<ReportBean> arrList) {
+		this.arrList = arrList;
+	}
 
 	public String getListReportId() {
 		return listReportId;

@@ -38,6 +38,7 @@
 		<form-bean name="activityForm" type="activity.ActivityForm"></form-bean>
 		<form-bean name="notificationForm" type="notification.NotificationForm"></form-bean>
 		<form-bean name="reportForm" type="reports.ReportForm"></form-bean>
+		<form-bean name="userRoleReportForm" type="search_dialog.ManageReportForm"></form-bean>	
 	</form-beans>
 
 	<action-mappings>
@@ -181,6 +182,8 @@
 			scope="request">
 			<forward name="list" path="/WEB-INF/jsp/reports/reportList.jsp"></forward>
 		</action>
+		<action path="/userRoleReport" name="userRoleReportForm" type="search_dialog.ManageReportHandler" scope="request">
+		</action>	
 	</action-mappings>
 	
 	

@@ -473,11 +473,6 @@
 		$('#remarksProp').modal();
 	}
 	
-	function hideError(){
-		document.getElementById('errorContent').innerHTML = "";
-		document.getElementById("divError").style.display = "none";
-	}
-	
 	function validateForm(){
 		
 		var taskName	= document.getElementById("txtTaskName").value;
@@ -489,36 +484,35 @@
 		var isValid = true;
 		
 		if(taskName.trim() == '') {
-			str+= "<li>Task Name can not be empty!</li>";
+			str+= "Task Name can not be empty!\n";
 			isValid = false;
 		}
 		else if(taskName.length > 26) {
-			str+= "<li>Task Name can not be more than 25 characters!</li>";
+			str+= "Task Name can not be more than 25 characters!\n";
 			isValid = false;
 		}
 		
 		if(taskDesc.trim() == '') {
-			str+= "<li>Task Description can not be empty!</li>";
+			str+= "Task Description can not be empty!\n";
 			isValid = false;
 		}
 		else if(taskDesc.length > 201) {
-			str+= "<li>Task Description can not be more than 200 characters!</li>";
+			str+= "Task Description can not be more than 200 characters!\n";
 			isValid = false;
 		}
 		
 		if(startDate.trim() == '') {
-			str+= "<li>Estimate Start Date can not be empty!</li>";
+			str+= "Estimate Start Date can not be empty!\n";
 			isValid = false;
 		}
 		
 		if(endDate.trim() == '') {
-			str+= "<li>Estimate End Date can not be empty!</li>";
+			str+= "Estimate End Date can not be empty!\n";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			document.getElementById('errorContent').innerHTML = str;
-			document.getElementById("divError").style.display = "block";
+			alert(str);
 		}
 		
 		return isValid;
@@ -557,7 +551,7 @@
 		<html:hidden property="isAdd" name="projectTaskForm" />
 		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId"
 			name="projectTaskForm" value="" />
-		<html:hidden property="prjBean.projectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
+		<html:hidden property="tmpProjectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
 		<div class="container divContent">
 			<div class="form-group has-info">
@@ -776,11 +770,13 @@
 						<table width="100%">
 							<tr valign="middle">
 								<td width="60%"><div align="left">
+								<logic:notEqual value="PR_STAT_99" name="projectTaskForm" property="tmpProjectStatus">
 										<button type="button" href="#" id="btnAddPropTask"
 											class="btn btn-raised btn-info btn-icon"
 											title="Proposed Task">
 											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										</button>
+								</logic:notEqual>
 									</div></td>
 								<td>Search by</td>
 								<td style="padding-left: 15px;"><html:select
@@ -837,7 +833,9 @@
 													name="reg" property="estEndDateInString" /></td>
 											<td><bean:write name="reg" property="propToName" /></td>
 											<td align="center"><bean:write name="reg" property="propStatusName" /></td>
-											<td align="center"><logic:equal name="reg"
+											<td align="center">
+											<logic:notEqual value="PR_STAT_99" name="projectTaskForm" property="tmpProjectStatus">
+											<logic:equal name="reg"
 													property="propStatus" value="TA_STAT_01">
 													<a class="text-success btnEditProposeTask" href="#"
 														title="Edit"><span class="glyphicon glyphicon-pencil"
@@ -846,7 +844,9 @@
 														onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
 														title="Delete"><span class="glyphicon glyphicon-trash"
 														aria-hidden="true"></span></a>
-												</logic:equal></td>
+												</logic:equal>
+												</logic:notEqual>
+												</td>
 										</tr>
 									</logic:iterate>
 								</logic:notEmpty>
@@ -1104,10 +1104,6 @@
 						<hr />
 					</div>
 					<div class="modal-body">
-						<div class="text-danger" id="divError" style="display: none">
-							Save failed!
-							<ul id="errorContent"></ul>
-						</div>
 						<table width="80%" class="form-group has-info">
 							<colgroup>
 								<col width="30%" />
@@ -1143,7 +1139,7 @@
 						<div align="right">
 							<button type="button" id="btnSaveProposeTask" class="btn btn-sm btn-info">Save</button>
 							&nbsp;
-							<button type="button" id="btnCancelAdd" class="btn btn-sm" onclick="hideError()">Cancel</button>
+							<button type="button" id="btnCancelAdd" class="btn btn-sm">Cancel</button>
 						</div>
 					</div>
 				</div>
