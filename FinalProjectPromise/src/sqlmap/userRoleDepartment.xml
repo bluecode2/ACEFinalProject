@@ -1,0 +1,29 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userRoleDepartment">
+	<insert id="insertUserRoleDepartment" parameterClass="user.UserRoleDepartmentBean">
+		INSERT INTO USER_ROLE_DEPARTMENT (USER_ROLE_ID, dept_id) 
+			VALUES(#userRoleId#, #deptId#)
+	</insert>
+	<delete id="deleteUserRoleDepartment" parameterClass="user.UserRoleDepartmentBean">
+		DELETE FROM USER_ROLE_DEPARTMENT 
+			WHERE user_role_id = #userRoleId#
+			AND report_id = #deptId#
+	</delete>
+	<select id="getUserRoleDepartmentByUserRole" resultClass="user.UserRoleDepartmentBean" parameterClass="java.lang.Integer">
+		SELECT 
+		USER_ROLE_ID 	AS userRoleId,
+		DEPT_ID		AS deptId
+		from USER_ROLE_DEPARTMENT
+		where USER_ROLE_ID = #roleId#
+	</select>
+	<select id="getUserRoleDepartment" resultClass="user.UserRoleDepartmentBean" parameterClass="java.util.Map">
+		SELECT
+		USER_ROLE_ID 	AS userRoleId,
+		DEPT_ID		AS deptId
+		from USER_ROLE_DEPARTMENT
+		where USER_ROLE_ID = #roleId#
+		AND DEPT_ID = #deptId#
+	</select>
+</sqlMap>
