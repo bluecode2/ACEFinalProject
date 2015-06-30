@@ -62,6 +62,8 @@ public class ProjectTaskHandler extends Action {
 				Integer projectId = Integer.valueOf(session.getAttribute("projectId").toString());
 				tsForm.setPrjBean(projManager.getProjectByID(projectId));
 				tsForm.setProjectId(projectId);
+				tsForm.setTmpEstEndDateInString(tsForm.getPrjBean().getEstEndDateInString());
+				tsForm.setTmpEstStartDateInString(tsForm.getPrjBean().getEstStartDateInString());
 				session.setAttribute("projectId", projectId);
 			} else {
 				response.sendRedirect("project.do");
@@ -81,6 +83,7 @@ public class ProjectTaskHandler extends Action {
 					Constant.MenuCode.PROJECT_TASK_ENTRY, us, request);
 			tsForm.setIsAdd(true);
 			tsForm.getTkBean().setIsOutsource(0);
+			
 			request.setAttribute("listProjMember", projMbrMgr
 					.getProjectMemberToEvaluate(tsForm.getPrjBean()
 							.getProjectId()));

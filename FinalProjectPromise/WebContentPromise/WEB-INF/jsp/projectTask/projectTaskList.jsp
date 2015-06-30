@@ -173,6 +173,10 @@
 					$('#setRemarks').modal();
 				});
 				hideLoading();
+				
+				$('#projMemList').on('hidden.bs.modal', function() {
+					window.location.href = "approveTask.do";
+				});
 			});
 	
 	function assignTo(){
@@ -385,7 +389,6 @@
 									<td align="center">Task Name</td>
 									<td align="center">Assign To</td>
 									<td align="center" width="200px">Estimate Date</td>
-									<td align="center" width="200px">Estimate Main Days</td>
 									<td align="center" width="200px">Actual Date</td>
 									<td align="center">Status</td>
 									<td align="center" width="100px">Activity</td>
@@ -412,13 +415,15 @@
 											(Out)
 										</logic:equal></td>
 											<td align="center"><bean:write name="reg"
-													property="estStartDateInString" /> to <bean:write
-													name="reg" property="estEndDateInString" /></td>
-											<td align="center"><bean:write name="reg"
-													property="estMainDays" /></td>
+													property="estStartDateDisplay" /> to <bean:write
+													name="reg" property="estEndDateDisplay" />
+												<br/>(<bean:write name="reg" property="estMainDays" /> main days)
+											</td>
 											<td align="center"><bean:write name="reg"
 													property="actStartDateInString" /> to <bean:write
-													name="reg" property="actEndDateInString" /></td>
+													name="reg" property="actEndDateInString" />
+												<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+											</td>
 											<td align="center"><html:hidden name="reg"
 													property="taskStatus" styleClass="hdTaskStatus" /> <bean:write
 													name="reg" property="taskStatusName" /> : <bean:write
@@ -483,11 +488,11 @@
 							class="tableContent">
 							<thead>
 								<tr class="panel panel-info">
-									<td>Project Name</td>
-									<td>Task Name</td>
-									<td>Estimate Date</td>
-									<td>Proposed By</td>
-									<td>Assign To</td>
+									<td align="center">Project Name</td>
+									<td align="center">Task Name</td>
+									<td align="center">Estimate Date</td>
+									<td align="center">Proposed By</td>
+									<td align="center">Assign To</td>
 									<td class="align-center">Action</td>
 								</tr>
 							</thead>
@@ -505,7 +510,7 @@
 												data-target="taskDesc"> <bean:write name="reg"
 														property="propTaskName" /></a>
 											<td align="center"><bean:write name="reg"
-													property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" />
+													property="estStartDateDisplay" /> to <bean:write name="reg" property="estEndDateDisplay" />
 												<br/>
 												(<bean:write name="reg" property="estMainDays" /> main days)
 											</td>

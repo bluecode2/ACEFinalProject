@@ -34,6 +34,8 @@ public class ProjectTaskForm extends ActionForm
 	private Integer 		testingId =0;
 	private String showDiv = "true";
 	private String			tmpProjectStatus;
+	private String			tmpEstStartDateInString;
+	private String			tmpEstEndDateInString;
 	
 	//penambahan fitur pada form untuk propose project task
 	private Boolean allowAdd = false;
@@ -58,6 +60,18 @@ public class ProjectTaskForm extends ActionForm
 	private String remarksProp;
 	
 	
+	public String getTmpEstStartDateInString() {
+		return tmpEstStartDateInString;
+	}
+	public void setTmpEstStartDateInString(String tmpEstStartDateInString) {
+		this.tmpEstStartDateInString = tmpEstStartDateInString;
+	}
+	public String getTmpEstEndDateInString() {
+		return tmpEstEndDateInString;
+	}
+	public void setTmpEstEndDateInString(String tmpEstEndDateInString) {
+		this.tmpEstEndDateInString = tmpEstEndDateInString;
+	}
 	public String getTmpProjectStatus() {
 		return tmpProjectStatus;
 	}

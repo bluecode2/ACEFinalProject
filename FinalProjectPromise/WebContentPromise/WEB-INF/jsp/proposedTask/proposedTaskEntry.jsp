@@ -43,6 +43,11 @@
 		var str = "";
 		var isValid = true;
 		
+		if(estEnd<estStart){
+			str+= "<li>Estimate Start Date of Task must be smaller than Estimate Start Date Project!\n";
+			isValid = false;
+		}
+		
 		if(taskName.trim() == '') {
 			str+= "<li>Task Name can not be empty!</li>";
 			isValid = false;
