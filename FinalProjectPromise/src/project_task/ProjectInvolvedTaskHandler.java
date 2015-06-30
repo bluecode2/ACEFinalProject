@@ -39,7 +39,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		EmployeeManager empMan = new EmployeeManager();
 		ProjectManager projManager = new ProjectManager();
-
+		
 		request.setAttribute("user", us.getEmployeeId());
 		tsForm.setEmpId(us.getEmployeeId());
 		Date now = new Date();
@@ -59,6 +59,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 			if (session.getAttribute("projectId") != null) {
 				Integer projectId = (Integer) session.getAttribute("projectId");
 				tsForm.setPrjBean(projManager.getProjectByID(projectId));
+				tsForm.setTmpProjectStatus(tsForm.getPrjBean().getProjectStatus());
 				tsForm.setProjectId(projectId);
 				session.setAttribute("projectId", projectId);
 			} else {

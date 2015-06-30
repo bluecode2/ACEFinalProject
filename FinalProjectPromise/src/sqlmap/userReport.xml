@@ -2,18 +2,26 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="userReport">
-	<insert id="insertUserReport" parameterClass="java.util.Map">
-		INSERT INTO USER_ROLE_REPORT (user_role_id, report_id) 
-			VALUES(#userId#, #reportId#)
+	<insert id="insertUserReport" parameterClass="reports.ReportRoleBean">
+		INSERT INTO USER_ROLE_REPORT (USER_ROLE_ID, report_id) 
+			VALUES(#userRoleId#, #reportId#)
 	</insert>
-	<delete id="deleteUserReport" parameterClass="java.util.Map">
+	<delete id="deleteUserReport" parameterClass="reports.ReportRoleBean">
 		DELETE FROM USER_ROLE_REPORT 
-			WHERE user_role_id = #userId#
+			WHERE user_role_id = #userRoleId#
 			AND report_id = #reportId#
 	</delete>
-	<select id="getUserReportsByUserRole" resultClass="reports.ReportRoleBean">
+	<select id="getUserReportsByUserRole" resultClass="reports.ReportRoleBean" parameterClass="java.lang.Integer">
 		SELECT 
-		USER_ROLE_ID
+		USER_ROLE_ID 	AS userRoleId,
+		REPORT_ID		AS reportId
+		where USER_ROLE_ID = #roleId#
 	</select>
-
+	<select id="getUserReportBean" resultClass="reports.ReportRoleBean" parameterClass="java.util.Map">
+		SELECT
+		USER_ROLE_ID 	AS userRoleId,
+		REPORT_ID		AS reportId
+		where USER_ROLE_ID = #roleId#
+		AND REPORT_ID = #reportId#
+	</select>
 </sqlMap>

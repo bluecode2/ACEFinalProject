@@ -553,7 +553,7 @@
 		<html:hidden property="isAdd" name="projectTaskForm" />
 		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId"
 			name="projectTaskForm" value="" />
-		<html:hidden property="prjBean.projectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
+		<html:hidden property="tmpProjectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
 		<div class="container divContent">
 			<div class="form-group has-info">
@@ -772,11 +772,13 @@
 						<table width="100%">
 							<tr valign="middle">
 								<td width="60%"><div align="left">
+								<logic:notEqual value="PR_STAT_99" name="projectTaskForm" property="tmpProjectStatus">
 										<button type="button" href="#" id="btnAddPropTask"
 											class="btn btn-raised btn-info btn-icon"
 											title="Proposed Task">
 											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										</button>
+								</logic:notEqual>
 									</div></td>
 								<td>Search by</td>
 								<td style="padding-left: 15px;"><html:select
@@ -833,7 +835,9 @@
 													name="reg" property="estEndDateInString" /></td>
 											<td><bean:write name="reg" property="propToName" /></td>
 											<td align="center"><bean:write name="reg" property="propStatusName" /></td>
-											<td align="center"><logic:equal name="reg"
+											<td align="center">
+											<logic:notEqual value="PR_STAT_99" name="projectTaskForm" property="tmpProjectStatus">
+											<logic:equal name="reg"
 													property="propStatus" value="TA_STAT_01">
 													<a class="text-success btnEditProposeTask" href="#"
 														title="Edit"><span class="glyphicon glyphicon-pencil"
@@ -842,7 +846,9 @@
 														onclick="actionForm('delete','<bean:write name="reg" property="propTaskId" />','<bean:write name="reg" property="propTaskName" />');"
 														title="Delete"><span class="glyphicon glyphicon-trash"
 														aria-hidden="true"></span></a>
-												</logic:equal></td>
+												</logic:equal>
+												</logic:notEqual>
+												</td>
 										</tr>
 									</logic:iterate>
 								</logic:notEmpty>

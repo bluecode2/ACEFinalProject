@@ -33,6 +33,7 @@ public class ProjectTaskForm extends ActionForm
 	private List<ActivityBean> arrActivity;
 	private Integer 		testingId =0;
 	private String showDiv = "true";
+	private String			tmpProjectStatus;
 	
 	//penambahan fitur pada form untuk propose project task
 	private Boolean allowAdd = false;
@@ -56,6 +57,13 @@ public class ProjectTaskForm extends ActionForm
 	private String remarks;
 	private String remarksProp;
 	
+	
+	public String getTmpProjectStatus() {
+		return tmpProjectStatus;
+	}
+	public void setTmpProjectStatus(String tmpProjectStatus) {
+		this.tmpProjectStatus = tmpProjectStatus;
+	}
 	public String getRemarksProp() {
 		return remarksProp;
 	}
