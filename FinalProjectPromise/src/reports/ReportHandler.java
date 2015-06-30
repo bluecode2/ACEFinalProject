@@ -1,5 +1,7 @@
 package reports;
 
+import general.GeneralCodeManager;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -12,9 +14,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import project.ProjectManager;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
+import department.DepartmentManager;
+import employee.EmployeeManager;
 
 public class ReportHandler extends Action {
 	@Override
@@ -26,6 +31,17 @@ public class ReportHandler extends Action {
 		ReportManager rMan = new ReportManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		
+		//manager
+		DepartmentManager dMan = new DepartmentManager();
+		GeneralCodeManager genCodeMan = new GeneralCodeManager();
+		EmployeeManager eMan = new EmployeeManager();
+		ProjectManager pMan = new ProjectManager();
+		
+		rForm.setListOfDept(dMan.getListDepartmentForSearchDialog("", ""));
+		rForm.setListOfGenCode(genCodeMan.getGeneralCodeByParentId("PR_STAT"));
+		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstProject", pMan.getAllProjectForPopUp());
 		
 		if("selectReport".equals(rForm.getTask())){
 			ReportBean bean  = rMan.getReportById(rForm.getSelectedId());
@@ -52,6 +68,7 @@ public class ReportHandler extends Action {
 		
 		request.setAttribute("currentEmpId", us.getEmployeeId());
 		request.setAttribute("currentEmpName", us.getEmployeeName());
+		
 		
 		return mapping.findForward("list");
 	}

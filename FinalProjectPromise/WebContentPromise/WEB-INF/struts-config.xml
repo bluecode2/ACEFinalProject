@@ -20,6 +20,7 @@
 		<form-bean name="searchRankForm" type="search_dialog.SearchRankForm"></form-bean>	
 		<form-bean name="searchUserRoleForm" type="search_dialog.SearchUserRoleForm"></form-bean>
 		<form-bean name="searchEmpForm" type="search_dialog.SearchEmpForm"></form-bean>
+		<form-bean name="searchProjectForm" type="search_dialog.SearchProjectForm"></form-bean>
 		<form-bean name="searchEmpForPMForm" type="search_dialog.SearchEmpForPMForm"></form-bean>
 		<form-bean name="searchDeptForm" type="search_dialog.SearchDeptForm"></form-bean>	
 		<form-bean name="searchSpvForm" type="search_dialog.SearchSpvForm"></form-bean>
@@ -128,6 +129,8 @@
 		<action path="/searchSpv" name="searchSpvForm" type="search_dialog.SearchSpvHandler" scope="request">
 		</action>
 		<action path="/searchProjMember" name="searchProjMemberForm" type="search_dialog.SearchProjMemberHandler" scope="request">
+		</action>
+		<action path="/searchProj" name="searchProjectForm" type="search_dialog.SearchProjectHandler" scope="request">
 		</action>
 		<action path="/project" name="projectForm" type="project.ProjectHandler" scope="request">
 			<forward name="projectList" path="/WEB-INF/jsp/project/projectList.jsp"></forward>

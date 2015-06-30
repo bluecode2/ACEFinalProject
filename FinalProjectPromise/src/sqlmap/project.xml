@@ -45,6 +45,16 @@
 		WHERE ROWNUM &lt; = #end#)
 		WHERE rnum &gt; #begin#
 	</select>
+	
+	<select id="getAllProjectForPopUp" resultClass="project.ProjectBean">
+		SELECT
+		PROJECT_ID AS projectId,
+		PROJECT_CODE AS projectCode,
+		PROJECT_NAME AS projectName,
+		EMPLOYEE_NAME AS employeeName
+		FROM VPROJECT
+		where 1 = 1 order by project_id
+	</select>
 
 	<select id="getProjForHome" parameterClass="java.util.Map"
 		resultClass="project.ProjectBean">

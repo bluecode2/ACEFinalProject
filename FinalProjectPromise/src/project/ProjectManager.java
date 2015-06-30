@@ -55,6 +55,16 @@ public class ProjectManager {
 
 		return listProject;
 	}
+	
+	public List<ProjectBean> getAllProjectForPopUp() throws SQLException {
+		
+		
+		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		
+			listProject = this.ibatis.queryForList("project.getAllProjectForPopUp", null);
+		
+		return listProject;
+	}
 
 	public List<ProjectBean> getProjForHome(Integer empId,Integer pageNum, Integer pageSize) throws SQLException{
 
