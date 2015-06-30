@@ -85,10 +85,19 @@
 		var estStart 	= document.getElementById("txtEstStartDate").value;
 		var estEnd 		= document.getElementById("txtEstEndDate").value;
 		var assignedTo 	= document.getElementById("txtAssignedToName").value;
-		
+		var estStartProj = document.getElementById("hdnEstStartDateProj").value;
+		var estEndProj = document.getElementById("hdnEstEndDateProj").value;
 		var str = "";
 		var isValid = true;
 		
+		if (estStart < estStartProj){
+			str+= "Estimate Start Date of Task must be smaller than Estimate Start Date Project!\n";
+			isValid = false;
+		}		
+		if (estEnd > estEndProj){
+			str+= "Estimate End Date of Task must be bigger than Estimate End Date Project!\n";
+			isValid = false;
+		}		
 		if(taskName.trim() == '') {
 			str+= "Task Name can not be empty!\n";
 			isValid = false;
@@ -143,6 +152,8 @@
 		<html:hidden property="isAdd" name="projectTaskForm" />
 		<html:hidden styleId="hdnProjectId" property="projectId"
 			name="projectTaskForm" />
+		<html:hidden property="prjBean.estStartDateInString" name="projectTaskForm" styleId="hdnEstStartDateProj"/>
+		<html:hidden property="prjBean.estEndDateInString" name="projectTaskForm" styleId="hdnEstEndDateProj"/>
 		<div class="container">
 
 			<div class="divContent form-group has-info">
