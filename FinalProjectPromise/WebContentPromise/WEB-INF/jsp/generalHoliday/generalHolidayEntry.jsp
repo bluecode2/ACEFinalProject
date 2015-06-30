@@ -38,26 +38,27 @@
 		var isValid = true;
 		
 		if(genHolName.trim() == '') {
-			str+= "General Holiday Name can not be empty!\n";
+			str+= "<li>General Holiday Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(genHolName.length > 26) {
-			str+= "General Holiday Name can not be more than 25 characters!\n";
+			str+= "<li>General Holiday Name can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(genHolDate.trim() == '') {
-			str+= "General Holiday Date can not be empty!\n";
+			str+= "<li>General Holiday Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(genHolType == 0) {
-			str+= "General Holiday type must be chosen!\n";
+			str+= "<li>General Holiday type must be chosen!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -83,6 +84,10 @@
 
 		<div class="container">
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />

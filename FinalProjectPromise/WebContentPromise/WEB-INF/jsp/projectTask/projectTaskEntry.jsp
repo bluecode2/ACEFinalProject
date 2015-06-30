@@ -33,7 +33,7 @@
 	});
 
 	function searchEmployee() {
-		var searchField = $('#selSearchFieldEmpId').val(); //styleId
+		var searchField = $('#selSearchFieldEmpId').val();
 		var searchValue = $('#txtSearchValueEmpId').val();
 
 		$.ajax({
@@ -90,53 +90,50 @@
 		var str = "";
 		var isValid = true;
 		
-		if(estEnd < estStart){
-			str+= "Estimate End Date of Task must be equal or bigger than Estimate Start Date!\n";
-			isValid = false;
-		}
 		if (estStart < estStartProj){
-			str+= "Estimate Start Date of Task must be equal or bigger than Estimate Start Date Project!\n";
+			str+= "<li>Estimate Start Date of Task must be smaller than Estimate Start Date Project!\n";
 			isValid = false;
 		}		
 		if (estEnd > estEndProj){
-			str+= "Estimate End Date of Task must be equal or smaller than Estimate End Date Project!\n";
+			str+= "<li>Estimate End Date of Task must be bigger than Estimate End Date Project!</li>";
 			isValid = false;
 		}		
 		if(taskName.trim() == '') {
-			str+= "Task Name can not be empty!\n";
+			str+= "<li>Task Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(taskName.length > 26) {
-			str+= "Task Name can not be more than 25 characters!\n";
+			str+= "<li>Task Name can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(taskDesc.trim() == '') {
-			str+= "Task Description can not be empty!\n";
+			str+= "<li>Task Description can not be empty!</li>";
 			isValid = false;
 		}
 		else if(taskDesc.length > 201) {
-			str+= "Task Description can not be more than 200 characters!\n";
+			str+= "<li>Task Description can not be more than 200 characters!</li>";
 			isValid = false;
 		}
 		
 		if(estStart.trim() == '') {
-			str+= "Estimate Start Date can not be empty!\n";
+			str+= "<li>Estimate Start Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(estEnd.trim() == '') {
-			str+= "Estimate End Date can not be empty!\n";
+			str+= "<li>Estimate End Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(assignedTo.trim() == '') {
-			str+= "Assigned To can not be empty!\n";
+			str+= "<li>Assigned To can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -161,6 +158,10 @@
 		<div class="container">
 
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />

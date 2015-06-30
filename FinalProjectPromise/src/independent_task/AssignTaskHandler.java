@@ -130,7 +130,6 @@ public class AssignTaskHandler extends Action {
 				us, request);
 		
 		tsForm.setTask("");
-		System.out.println(tsForm.getCurrSearchField() + " " + tsForm.getCurrSearchValue());
 		
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());

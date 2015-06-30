@@ -67,25 +67,26 @@
 		var isValid = true;
 		
 		if(deptCode.trim() == '') {
-			str+= "Department Code can not be empty!\n";
+			str+= "<li>Department Code can not be empty!</li>";
 			isValid = false;
 		}
 		else if(deptCode.length > 11) {
-			str+= "Department Code can not be more than 10 characters!\n";
+			str+= "<li>Department Code can not be more than 10 characters!</li>";
 			isValid = false;
 		}
 		
 		if(deptName.trim() == '') {
-			str+= "Department Name can not be empty!\n";
+			str+= "<li>Department Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(deptName.length > 101) {
-			str+= "Department Name can not be more than 100 characters!\n";
+			str+= "<li>Department Name can not be more than 100 characters!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -105,8 +106,11 @@
 			property="selectedDept.deptId" />
 
 		<div class="container">
-
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />
