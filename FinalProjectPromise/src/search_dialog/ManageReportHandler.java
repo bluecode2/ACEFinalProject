@@ -29,13 +29,11 @@ public class ManageReportHandler extends Action {
 		// TODO Auto-generated method stub
 		
 		ManageReportForm mrForm = (ManageReportForm) form;
-		ReportManager rpMan = new ReportManager();
 		
 		if ("openReportAccess".equals(mrForm.getTask())) {
 			String listReportId = "";
 			Integer userRoleID = mrForm.getSelectedId();
-			
-
+	
 			ReportRoleManager rrMan = new ReportRoleManager();
 			
 			List<ReportRoleBean> arrList = rrMan.getReportRoleByRoleId(userRoleID);
@@ -81,7 +79,7 @@ public class ManageReportHandler extends Action {
 				rrMan.deleteUserRoleReport(reportRoleBean);
 			}
 		}
-		request.setAttribute("lstReport", rpMan.getListReports() );
+		
 		return null;
 	}
 }

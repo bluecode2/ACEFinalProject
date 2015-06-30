@@ -16,6 +16,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import reports.ReportManager;
+import reports.ReportRoleBean;
+import reports.ReportRoleManager;
 import user_access.UserRoleMenuBean;
 import user_access.UserRoleMenuManager;
 import common.CommonFunction;
@@ -30,7 +33,7 @@ public class UserRoleHandler extends Action {
 		UserRoleForm userRoleForm = (UserRoleForm) form;
 		UserRoleManager userRoleManager = new UserRoleManager();
 		MenuManager menuMan = new MenuManager();
-
+		ReportManager rpMan = new ReportManager();
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
@@ -170,6 +173,59 @@ public class UserRoleHandler extends Action {
 
 			return null;
 		}
+		
+		else if ("openReportAccess".equals(userRoleForm.getTask())) {
+			String listReportId = "";
+			Integer userRoleID = userRoleForm.getSelectedId();
+	
+			ReportRoleManager rrMan = new ReportRoleManager();
+			
+			List<ReportRoleBean> arrList = rrMan.getReportRoleByRoleId(userRoleID);
+			
+			for (ReportRoleBean rrBean : arrList) {
+				if (!listReportId.equals("")) {
+					listReportId += "#";
+				}
+				listReportId += rrBean.getReportId().toString();
+			}
+			PrintWriter out = response.getWriter();
+			String resp = listReportId;
+			out.println(resp);
+			
+			return null;
+		}
+		else if ("saveReportAccess".equals(userRoleForm.getTask())) {
+
+			String[] listReportId =  userRoleForm.getListReportId().split("#");
+			
+			ReportRoleManager rrMan = new ReportRoleManager();
+			Integer userRoleId = userRoleForm.getSelectedId();
+			List<ReportRoleBean> arrReportMenu = rrMan.getReportRoleByRoleId(userRoleId);
+			List<ReportRoleBean> arrDeletedRoleMenu = new ArrayList<ReportRoleBean>();
+			
+			for (ReportRoleBean rrBean : arrReportMenu) {
+				if (!Arrays.asList(listReportId).contains(rrBean.getReportId().toString())) {
+					arrDeletedRoleMenu.add(rrBean);
+				}
+			}
+	
+			for (int i = 0; i < listReportId.length; i++) {
+				Integer reportId = Integer.valueOf(listReportId[i]);
+				ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId, reportId);
+				
+				if (bean == null) {
+					bean = new ReportRoleBean();
+					bean.setReportId(reportId);
+					bean.setUserRoleId(userRoleId);
+					rrMan.insertUserRoleReport(bean);
+				}
+			}
+			for (ReportRoleBean reportRoleBean : arrDeletedRoleMenu) {
+				rrMan.deleteUserRoleReport(reportRoleBean);
+			}
+			return null;
+		}
+
 
 		request.setAttribute("pageTitle", "User Role");
 		userRoleForm.setTask("");
@@ -191,7 +247,7 @@ public class UserRoleHandler extends Action {
 
 		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE, us,
 				request);
-
+		request.setAttribute("lstReport", rpMan.getListReports() );
 		request.setAttribute("lstMenu", menuMan.getAllMenu());
 
 		request.setAttribute("pageNavigator", CommonFunction

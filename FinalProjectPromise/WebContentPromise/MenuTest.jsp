@@ -8,8 +8,7 @@
 <html>
 <head>
 <title>Index</title>
-<link rel="icon" href="/icon/favicon.png" type="image/png" />
-<link rel="shortcut icon" href="/favicon.ico" />
+
 <!-- CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/material.ripples.min.css" rel="stylesheet">
@@ -21,18 +20,18 @@
 <script type="text/javascript">
 $(document).ready(
 		function() {
-			$('.lnkMenuAccess').on('click',
+			$('.lnkReportAccess').on('click',
 				function() {
-		/* 			showLoading(); */
+		 			showLoading(); 
 						var userRoleId = $(this).closest(
 							'tr').find('td').eq(0).html();
 
 						var userRoleName = $(this).closest(
 							'tr').find('td').eq(2).html();
 
-								$('#hdnUserRoleCodeId').val(
+								$('#hdUserRoleIdReport').val(
 										userRoleId);
-								$('#lblUserRoleName').val(
+								$('#lblUserRoleNameReport').val(
 										userRoleName);
 
 								$.ajax({
@@ -49,7 +48,6 @@ $(document).ready(
 													var index = $.inArray(reportId,listReportId);
 														if (index > -1) {
 															$(this).prop('checked',true);
-
 														} 
 														else {
 															$(this).prop('checked',false);
@@ -57,20 +55,63 @@ $(document).ready(
 
 																});
 
-												$('#searchDeptHead')
+												$('#searchUserRoleReport')
 														.modal();
-										/* 		hideLoading(); */
+										 		hideLoading(); 
 											},
 											error : function(e) {
 												alert("Error: " + e);
-										/* 		hideLoading(); */
+										 		hideLoading(); 
 											}
 
 										});
 
-					/* 			hideLoading(); */
-			});
+					 			hideLoading(); 
 		});
+			
+			$("#btnSaveUserRoleReport").on('click',
+					function() {
+ 						showLoading(); 
+						var listReportId = "";
+
+						$('.chkSelectedMenu:checked').each(
+							function() {
+							var reportId = $(this).closest('tr')
+									.find('td').eq(0).html();
+							
+
+											if (listReportId != '') {
+												listReportId += '#';
+												
+											}
+											listReportId += reportId;
+											
+										});
+
+						$.ajax({
+									type : "POST",
+									url : "userRole.do",
+									data : "task=saveReportAccess&selectedId="
+											+ $("#hdUserRoleIdReport")
+													.val()
+											+ "&listReportId="
+											+ listReportId,
+									success : function(
+											response) {
+										$('#searchUserRoleReport')
+												.modal(
+														'hide');
+							 			hideLoading(); 
+									},
+									error : function(e) {
+										alert("Error: " + e);
+									 	hideLoading(); 
+									}
+								});
+						
+					});
+
+	});
 
 
 </script>
@@ -86,6 +127,7 @@ $(document).ready(
 							<td class="align-center">User Role Code</td>
 							<td class="align-center">User Role Name</td>
 							<td align="center">Menu Access</td>
+				
 
 						</tr>
 					</thead>
@@ -94,17 +136,16 @@ $(document).ready(
 							<td style="display: none">1</td>
 							<td>Code</td>
 							<td>Name</td>
-							<td align="center"><a href="#" class="text-info lnkMenuAccess">Menu Access</a></td>
+							<td align="center"><a href="#" class="text-info lnkReportAccess">Reports Access</a></td>
 						</tr>
 					</tbody>
 				</table>
 		
 			
 	
-				<div class="modal fade" id="searchDeptHead" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal fade" id="searchUserRoleReport" tabindex="-1" 
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
-							<html:form action="userRoleReport" method="post">
 					<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
@@ -117,8 +158,8 @@ $(document).ready(
 								<table width="70%" style="margin-top: 20px; margin-bottom: 20px">
 									<tr>
 										<td width="20%">User Role</td>
-										<td><input type="hidden" id="hdnUserRoleCodeId" /><input
-											type="text" disabled="disabled" id="lblUserRoleName"
+										<td><input type="hidden" id="hdUserRoleIdReport" /><input
+											type="text" disabled="disabled" id="lblUserRoleNameReport"
 											style="width: 300px"></input></td>
 									</tr>
 								</table>
@@ -161,12 +202,11 @@ $(document).ready(
 							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
-									id="btnSaveUserRoleMenu">Save changes</button>
+									id="btnSaveUserRoleReport">Save changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 
 							</div>
-						</html:form>
 					</div>
 				
 					<!-- /.modal-content -->

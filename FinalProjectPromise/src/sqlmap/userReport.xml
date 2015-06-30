@@ -15,12 +15,14 @@
 		SELECT 
 		USER_ROLE_ID 	AS userRoleId,
 		REPORT_ID		AS reportId
+		from USER_ROLE_REPORT
 		where USER_ROLE_ID = #roleId#
 	</select>
 	<select id="getUserReportBean" resultClass="reports.ReportRoleBean" parameterClass="java.util.Map">
 		SELECT
 		USER_ROLE_ID 	AS userRoleId,
 		REPORT_ID		AS reportId
+		from USER_ROLE_REPORT
 		where USER_ROLE_ID = #roleId#
 		AND REPORT_ID = #reportId#
 	</select>

@@ -22,6 +22,7 @@ public class UserRoleForm extends ActionForm{
 	private Integer 					currPage = 1;
 	private Integer 					pageCount = 1;
 	private Integer						selectedId;
+	private Integer						reportId;
 	
 	private String listMenuId;
 	private String listAllowAdd;
@@ -29,8 +30,21 @@ public class UserRoleForm extends ActionForm{
 	private String listAllowSave;
 	private String listAllowApprove;
 	private String listAllowDecline;
+	private String listReportId;
 	
 	
+	public Integer getReportId() {
+		return reportId;
+	}
+	public void setReportId(Integer reportId) {
+		this.reportId = reportId;
+	}
+	public String getListReportId() {
+		return listReportId;
+	}
+	public void setListReportId(String listReportId) {
+		this.listReportId = listReportId;
+	}
 	public List<UserRoleBean> getArrList() {
 		return arrList;
 	}
