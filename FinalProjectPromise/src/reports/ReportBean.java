@@ -8,6 +8,7 @@ public class ReportBean {
 	private Integer	parentId;
 	private String	filterField;
 	private String	filterPanel;
+	private String	reportFile;
 	
 	public Integer getReportId() {
 		return reportId;
@@ -44,5 +45,11 @@ public class ReportBean {
 	}
 	public void setFilterPanel(String filterPanel) {
 		this.filterPanel = filterPanel;
+	}
+	public String getReportFile() {
+		return reportFile;
+	}
+	public void setReportFile(String reportFile) {
+		this.reportFile = reportFile;
 	}
 }

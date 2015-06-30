@@ -8,8 +8,9 @@
 		REPORT_CODE		AS reportCode,
 		REPORT_CAPTION	AS reportCaption,
 		PARENT_ID		AS parentId,
-		FILTERFIELD		AS filterField,
-		FILTERPANEL		AS filterPanel
+		FILTER_FIELD		AS filterField,
+		FILTER_PANEL		AS filterPanel,
+		REPORT_FILE		AS reportFile
 		FROM REPORTS	
 		order by report_code 
 	</select>
@@ -20,8 +21,9 @@
 		REPORT_CODE		AS reportCode,
 		REPORT_CAPTION	AS reportCaption,
 		PARENT_ID		AS parentId,
-		FILTERFIELD		AS filterField,
-		FILTERPANEL		AS filterPanel
+		FILTER_FIELD		AS filterField,
+		FILTER_PANEL		AS filterPanel,
+		REPORT_FILE		AS reportFile
 		FROM REPORTS	
 		WHERE report_id IN (SELECT report_id FROM user_role_report WHERE user_role_id = #userRoleId#)
 			AND parent_id IS NULL
@@ -35,8 +37,9 @@
 		REPORT_CODE		AS reportCode,
 		REPORT_CAPTION	AS reportCaption,
 		PARENT_ID		AS parentId,
-		FILTERFIELD		AS filterField,
-		FILTERPANEL		AS filterPanel
+		FILTER_FIELD		AS filterField,
+		FILTER_PANEL		AS filterPanel,
+		REPORT_FILE		AS reportFile
 		FROM REPORTS	
 		WHERE report_id IN (SELECT report_id FROM user_role_report WHERE user_role_id = #userRoleId#)
 			AND parent_id = #parentId#
@@ -49,8 +52,9 @@
 		REPORT_CODE		AS reportCode,
 		REPORT_CAPTION	AS reportCaption,
 		PARENT_ID		AS parentId,
-		FILTERFIELD		AS filterField,
-		FILTERPANEL		AS filterPanel
+		FILTER_FIELD		AS filterField,
+		FILTER_PANEL		AS filterPanel,
+		REPORT_FILE		AS reportFile
 		FROM REPORTS	
 		WHERE report_id = #reportId#
 	</select>
