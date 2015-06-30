@@ -45,7 +45,6 @@
 	}
 
 	function getStyleBtn() {
-
 		$('.firstBtn').each(function() {
 			var assgTo = $(this).closest('tr').find('.assTo').val();
 			var currUser = $('#users_empId').val();
@@ -80,7 +79,6 @@
 	$(document)
 			.ready(
 					function() {
-						showLoading();
 						$('.statusCheck').each(
 								function() {
 									var statusRemark = $(this).closest('td')
@@ -222,7 +220,7 @@
 						$('.lnkMngActivity').on(
 								'click',
 								function() {
-
+									showLoading();
 									var taskId = $(this).closest('tr').find(
 											'.hdTaskId').val();
 
@@ -236,9 +234,11 @@
 													.remove();
 											$("#tblShow").append(response);
 											$('#showMember').modal();
+											hideLoading();
 										},
 										error : function(e) {
 											alert("Error: " + e);
+											hideLoading();
 										}
 
 									});
@@ -266,6 +266,7 @@
 						$('#btnSaveActivity').on(
 								'click',
 								function() {
+									showLoading();
 									var taskId = $('#hdnModalTaskId').val();
 									var activityDesc = $('#txtActivityDesc')
 											.val();
@@ -281,17 +282,19 @@
 											$("#tblShow").append(response);
 											$('#divActivityEntry').hide();
 											registerBtnActivityEvent();
+											hideLoading();	
 										},
 										error : function(e) {
 											alert("Error: " + e);
+											hideLoading();
 										}
-
 									});
 								});
 
 						$('#showActivity').on('shown.bs.modal', function() {
 							registerBtnActivityEvent();
 						});
+						
 						$('#showActivity').on('hidden.bs.modal', function() {
 							window.location.href = "projectInvolvedTask.do";
 						});
@@ -358,8 +361,6 @@
 									document.forms[0].submit();
 							}
 						});
-						
-						hideLoading();
 					});
 
 	function registerBtnActivityEvent() {
@@ -371,6 +372,7 @@
 				.on(
 						'click',
 						function() {
+							showLoading();
 							if (confirm('Are you sure you want to delete this activity?')) {
 								var activityId = $(this).closest('tr').find(
 										'.hdnActivityId').val();
@@ -383,17 +385,19 @@
 											+ activityId,
 									success : function(response) {
 										row.remove();
+										hideLoading();
 									},
 									error : function(e) {
 										alert("Error: " + e);
+										hideLoading();
 									}
-
 								});
 							}
 						});
 		$('.btnComplete').on(
 				'click',
 				function() {
+					showLoading();
 					var activityId = $(this).closest('tr').find(
 							'.hdnActivityId').val();
 					var row = $(this).closest('tr');
@@ -408,16 +412,18 @@
 							row.find('td').eq(1).remove();
 							row.append(response);
 							registerBtnActivityEvent();
+							hideLoading();
 						},
 						error : function(e) {
 							alert("Error: " + e);
+							hideLoading();
 						}
-
 					});
 				});
 		$('.btnUndoComplete').on(
 				'click',
 				function() {
+					showLoading();
 					var activityId = $(this).closest('tr').find(
 							'.hdnActivityId').val();
 					var row = $(this).closest('tr');
@@ -432,11 +438,12 @@
 							row.find('td').eq(1).remove();
 							row.append(response);
 							registerBtnActivityEvent();
+							hideLoading();
 						},
 						error : function(e) {
 							alert("Error: " + e);
+							hideLoading();
 						}
-
 					});
 				});
 	}

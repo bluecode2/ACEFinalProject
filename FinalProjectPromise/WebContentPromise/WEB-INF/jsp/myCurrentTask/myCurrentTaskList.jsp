@@ -19,7 +19,6 @@
 	}
 
 	function actionForm(task, id, nama) {
-
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
 		if (confirm("Are you sure want to " + task + " Task " + nama + "?")) {
@@ -49,11 +48,12 @@
 									$("#tblShow").find("tr:gt(0)").remove();
 									$("#tblShow").append(response);
 									$('#showMember').modal();
+									hideLoading();
 								},
 								error : function(e) {
 									alert("Error: " + e);
+									hideLoading();
 								}
-
 							});
 
 							var taskName = $(this).closest('tr').find(
@@ -65,7 +65,6 @@
 							$('#txtActivityTaskName').val(taskName);
 							$('#txtActivityAssignTo').val(assignedTo);
 							$('#manageActivity').modal();
-							hideLoading();
 						});
 				
 				$('.viewActivity').on('click',function(){
@@ -80,11 +79,12 @@
 							$("#tblShow2").find("tr:gt(0)").remove();
 							$("#tblShow2").append(response);
 							$('#showMember').modal();
+							hideLoading();
 						},
 						error : function(e) {
 							alert("Error: " + e);
+							hideLoading();
 						}
-
 					});
 
 					var taskName = $(this).closest('tr').find('.hdTaskName').val();
@@ -93,18 +93,15 @@
 					$('#txtActivityTaskName1').val(taskName);
 					$('#txtActivityAssignTo1').val(assignedTo);
 					$('#showActivity').modal();
-					hideLoading();
 				});
 
 				$('.viewRemarks').on('click',function(){
-					showLoading();
 					var remarks = $(this).closest('tr').find('.hdRemarks').val();
 					var taskName = $(this).closest('tr').find('.hdTaskName').val();
 					
 					$('#txtValueRemarksTaskRemarks').val(remarks);
 					$('#txtValueRemarksTaskName').val(taskName);
 					$('#showRemarks').modal();
-					hideLoading();
 				});
 				
 				$('#btnShowEntry').on('click', function() {
@@ -132,17 +129,14 @@
 									$("#tblShow").append(response);
 									$('#divActivityEntry').hide();
 									registerBtnActivityEvent();
+									hideLoading();
 								},
 								error : function(e) {
 									alert("Error: " + e);
+									hideLoading();
 								}
-
-							});
-							hideLoading();
-							
+							});	
 						});
-				
-				
 
 				$('#manageActivity').on('shown.bs.modal', function() {
 					registerBtnActivityEvent();
@@ -151,7 +145,7 @@
 				$('#manageActivity').on('hidden.bs.modal', function() {
 					window.location.href = "myCurrentTask.do";
 				});
-
+				hideLoading();
 			});
 
 	function registerBtnActivityEvent() {
@@ -176,13 +170,13 @@
 											+ activityId,
 									success : function(response) {
 										row.remove();
+										hideLoading();
 									},
 									error : function(e) {
 										alert("Error: " + e);
+										hideLoading();
 									}
-
 								});
-								hideLoading();
 							}
 						});
 		$('.btnComplete').on(
@@ -202,13 +196,13 @@
 							row.find('td').eq(1).remove();
 							row.append(response);
 							registerBtnActivityEvent();
+							hideLoading();
 						},
 						error : function(e) {
 							alert("Error: " + e);
+							hideLoading();
 						}
-
 					});
-					hideLoading();
 				});
 		$('.btnUndoComplete').on(
 				'click',
@@ -227,13 +221,13 @@
 							row.find('td').eq(1).remove();
 							row.append(response);
 							registerBtnActivityEvent();
+							hideLoading();
 						},
 						error : function(e) {
 							alert("Error: " + e);
+							hideLoading();
 						}
-
 					});
-					hideLoading();
 				});
 	}
 </script>

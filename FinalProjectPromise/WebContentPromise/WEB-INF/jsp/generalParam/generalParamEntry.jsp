@@ -24,7 +24,6 @@
 	}
 	
 	function validateForm(){
-		
 		var genParamDesc	= document.getElementById("txtGenParamDesc").value;
 		var genParamValue 	= document.getElementById("txtGenParamValue").value;
 		
@@ -56,7 +55,6 @@
 		
 		return isValid;
 	}
-	
 </script>
 </head>
 <body>

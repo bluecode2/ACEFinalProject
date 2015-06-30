@@ -12,7 +12,6 @@
 <script src="js/jquery.js"></script>
 
 <script type="text/javascript">
-
 	function onBtnBackClick() {
 		window.location.href = "project.do";
 	}
@@ -34,7 +33,6 @@
 	
 	$(document).ready(
 			function() {
-				showLoading();
 				assignTo();
 				$('.firstBtn').each(
 						function() {
@@ -133,6 +131,7 @@
 				$('.linkActivity').on(
 						'click',
 						function() {
+							showLoading();
 							var taskId = $(this).closest('tr')
 									.find('.hdTaskId').val();
 							$.ajax({
@@ -143,11 +142,12 @@
 									$("#tblShow").find("tr:gt(0)").remove();
 									$("#tblShow").append(response);
 									$('#showMember').modal();
+									hideLoading();
 								},
 								error : function(e) {
 									alert("Error: " + e);
+									hideLoading();
 								}
-
 							});
 
 							var projectName = $('#txtProjectName').val();
@@ -172,7 +172,6 @@
 					$('#hdnSelectedId').val(propTask);
 					$('#setRemarks').modal();
 				});
-				hideLoading();
 				
 				$('#projMemList').on('hidden.bs.modal', function() {
 					window.location.href = "approveTask.do";
@@ -208,7 +207,6 @@
 
 		} else if (taskStatus == 'TA_STAT_04') { //Function for approve task; change status 
 			document.forms[0].selectedEdit.value = "1";
-
 		}
 
 		document.forms[0].submit();

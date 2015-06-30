@@ -22,6 +22,7 @@
 		$(".datepicker").attr("data-provide", "datepicker");
 		
 		$('.linkMember').on('click',function(){
+			showLoading();
 			var selecId = $(this).closest('tr').find('.hdProjId').val();
 			$.ajax({
 				type : "POST",
@@ -32,11 +33,12 @@
 					$("#tblShow").find("tr:gt(0)").remove();
 					$("#tblShow").append(response);
 					$('#searchProjMember').modal();
+					hideLoading();
 				},
 				error : function(e) {
 					alert("Error: " + e);
+					hideLoading();
 				}
-
 			});
 		});
 

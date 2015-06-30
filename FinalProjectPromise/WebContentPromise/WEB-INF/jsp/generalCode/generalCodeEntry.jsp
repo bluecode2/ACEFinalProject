@@ -22,7 +22,6 @@
 	}
 	
 	function validateForm(){
-		
 		var genCodeIndex 	= document.getElementById("txtGenCodeIndex").value;
 		var genCodeCaption 	= document.getElementById("txtGenCodeCaption").value;
 		var str = "";

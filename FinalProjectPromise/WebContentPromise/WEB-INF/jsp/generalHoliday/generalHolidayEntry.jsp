@@ -29,7 +29,6 @@
 	}
 	
 	function validateForm(){
-		
 		var genHolName	= document.getElementById("txtGenHolName").value;
 		var genHolDate 	= document.getElementById("txtGenHolDate").value;
 		var genHolType 	= document.getElementById("genHolType").selectedIndex;
