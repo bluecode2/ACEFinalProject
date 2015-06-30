@@ -1,5 +1,8 @@
 package reports;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,9 +27,31 @@ public class ReportHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
+		if("selectReport".equals(rForm.getTask())){
+			ReportBean bean  = rMan.getReportById(rForm.getSelectedId());
+			PrintWriter out = response.getWriter();
+			out.println(bean.getFilterPanel().trim());
+			
+			return null;
+		}
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.REPORTS, us, request);
 		
+		List<ReportBean> listParentReport = rMan.getListParentReportsByUserRole(us.getUserRoleId());
+		List<ReportBean> listChildReport = rMan.getListParentReportsByUserRole(us.getUserRoleId());
+		
+		for (ReportBean rpt : listParentReport) {
+			List<ReportBean> tempList = rMan.getListChildReportsByUserRole(us.getUserRoleId(), rpt.getReportId());
+			for (ReportBean reportBean : tempList) {
+				listChildReport.add(reportBean);
+			}
+		}
+		
+		request.setAttribute("parentReport", listParentReport);
+		request.setAttribute("childReport", listChildReport);
+		
+		request.setAttribute("currentEmpId", us.getEmployeeId());
+		request.setAttribute("currentEmpName", us.getEmployeeName());
 		
 		return mapping.findForward("list");
 	}
