@@ -1,5 +1,8 @@
 package search_dialog;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,10 @@ import org.apache.struts.action.ActionMapping;
 
 import reports.ReportBean;
 import reports.ReportManager;
+import reports.ReportRoleBean;
+import reports.ReportRoleManager;
+import user_access.UserRoleMenuBean;
+import user_access.UserRoleMenuManager;
 
 public class ManageReportHandler extends Action {
 
@@ -23,14 +30,56 @@ public class ManageReportHandler extends Action {
 		
 		ManageReportForm mrForm = (ManageReportForm) form;
 		
-		String listReportId = "";
-		Integer userRoleID = mrForm.getSelectedId();
-		ReportManager rtMan = new ReportManager();
 		
-		List<ReportBean> arrList =rtMan.getListReports() ;
-		
-		for (ReportBean rpBean : arrList) {
+		if ("openReportAccess".equals(mrForm.getTask())) {
+			String listReportId = "";
+			Integer userRoleID = mrForm.getSelectedId();
 			
+
+			ReportRoleManager rrMan = new ReportRoleManager();
+			
+			List<ReportRoleBean> arrList = rrMan.getReportRoleByRoleId(userRoleID);
+			
+			for (ReportRoleBean rrBean : arrList) {
+				if (!listReportId.equals("")) {
+					listReportId += "#";
+				}
+				listReportId += rrBean.getReportId().toString();
+			}
+			PrintWriter out = response.getWriter();
+			String resp = listReportId;
+			out.println(resp);
+			
+	
+		}
+		else if ("saveReportAccess".equals(mrForm.getTask())) {
+			String[] listReportId =  mrForm.getListReportId().split("#");
+			
+			ReportRoleManager rrMan = new ReportRoleManager();
+			Integer userRoleId = mrForm.getSelectedId();
+			List<ReportRoleBean> arrReportMenu = rrMan.getReportRoleByRoleId(userRoleId);
+			List<ReportRoleBean> arrDeletedRoleMenu = new ArrayList<ReportRoleBean>();
+			
+			for (ReportRoleBean rrBean : arrReportMenu) {
+				if (!Arrays.asList(listReportId).contains(rrBean.getReportId().toString())) {
+					arrDeletedRoleMenu.add(rrBean);
+				}
+			}
+	
+			for (int i = 0; i < listReportId.length; i++) {
+				Integer reportId = Integer.valueOf(listReportId[i]);
+				ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId, reportId);
+				
+				if (bean == null) {
+					bean = new ReportRoleBean();
+					bean.setReportId(reportId);
+					bean.setUserRoleId(userRoleId);
+					rrMan.insertUserRoleReport(bean);
+				}
+			}
+			for (ReportRoleBean reportRoleBean : arrDeletedRoleMenu) {
+				rrMan.deleteUserRoleReport(reportRoleBean);
+			}
 		}
 		
 		return null;
