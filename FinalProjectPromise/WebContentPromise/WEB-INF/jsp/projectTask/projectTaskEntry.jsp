@@ -90,12 +90,16 @@
 		var str = "";
 		var isValid = true;
 		
+		if(estEnd < estStart){
+			str+= "Estimate End Date of Task must be equal or bigger than Estimate Start Date!\n";
+			isValid = false;
+		}
 		if (estStart < estStartProj){
-			str+= "Estimate Start Date of Task must be smaller than Estimate Start Date Project!\n";
+			str+= "Estimate Start Date of Task must be equal or bigger than Estimate Start Date Project!\n";
 			isValid = false;
 		}		
 		if (estEnd > estEndProj){
-			str+= "Estimate End Date of Task must be bigger than Estimate End Date Project!\n";
+			str+= "Estimate End Date of Task must be equal or smaller than Estimate End Date Project!\n";
 			isValid = false;
 		}		
 		if(taskName.trim() == '') {
