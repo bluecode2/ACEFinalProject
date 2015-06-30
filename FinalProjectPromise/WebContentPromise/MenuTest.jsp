@@ -1,145 +1,179 @@
+<%@ taglib uri="/WEB-INF/tld/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/tld/struts-logic.tld" prefix="logic"%>
+<%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-
-<link rel="stylesheet" href="css/jquery-ui.css">
+<title>Index</title>
+<link rel="icon" href="/icon/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<!-- CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/material.ripples.min.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<!-- JavaScript -->
 <script src="js/jquery.js"></script>
-<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/material.ripples.min.js"></script>
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			$('.lnkMenuAccess').on('click',
+				function() {
+		/* 			showLoading(); */
+						var userRoleId = $(this).closest(
+							'tr').find('td').eq(0).html();
 
-<style>
-body {
-	font-size: 62.5%;
-}
+						var userRoleName = $(this).closest(
+							'tr').find('td').eq(2).html();
 
-label,input {
-	display: block;
-}
+								$('#hdnUserRoleCodeId').val(
+										userRoleId);
+								$('#lblUserRoleName').val(
+										userRoleName);
 
-input.text {
-	margin-bottom: 12px;
-	width: 95%;
-	padding: .4em;
-}
+								$.ajax({
+									type : "POST",
+									url : "userRoleReport.do",
+									data : "task=openReportAccess&selectedId="+ userRoleId,
+									success : function(response) {
+										var strReportId = response.split("$")[0];
+										var listReportId = strReportId.split("#");
+											$('.chkSelectedMenu').each(
+												function() {
+													var reportId = $(this).closest('tr').find(
+																	'td').eq(0).html();
+													var index = $.inArray(reportId,listReportId);
+														if (index > -1) {
+															$(this).prop('checked',true);
 
-fieldset {
-	padding: 0;
-	border: 0;
-	margin-top: 25px;
-}
+														} 
+														else {
+															$(this).prop('checked',false);
+															}
 
-h1 {
-	font-size: 1.2em;
-	margin: .6em 0;
-}
+																});
 
-div#users-contain {
-	width: 350px;
-	margin: 20px 0;
-}
+												$('#searchDeptHead')
+														.modal();
+										/* 		hideLoading(); */
+											},
+											error : function(e) {
+												alert("Error: " + e);
+										/* 		hideLoading(); */
+											}
 
-div#users-contain table {
-	margin: 1em 0;
-	border-collapse: collapse;
-	width: 100%;
-}
+										});
 
-div#users-contain table td,div#users-contain table th {
-	border: 1px solid #eee;
-	padding: .6em 10px;
-	text-align: left;
-}
-
-.ui-dialog .ui-state-error {
-	padding: .3em;
-}
-
-.validateTips {
-	border: 1px solid transparent;
-	padding: 0.3em;
-}
-</style>
-
-<script>
-	$(function() {
-		var dialog, form,
-
-		// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-		coba = $("#coba"), allFields = $([]).add(coba);
-
-		function addUser() {
-			allFields.removeClass("ui-state-error");
-
-			var c = coba.val();
-			document.getElementById("hasilCoba").value = c;
-			dialog.dialog("close");
-
-		}
-
-		dialog = $("#dialog-form").dialog({
-			autoOpen : false,
-			height : 300,
-			width : 350,
-			modal : true,
-			buttons : {
-				"Get Input" : addUser,
-				Cancel : function() {
-					dialog.dialog("close");
-				}
-			},
-			close : function() {
-				form[0].reset();
-				allFields.removeClass("ui-state-error");
-			}
+					/* 			hideLoading(); */
+			});
 		});
 
-		form = dialog.find("form").on("submit", function(event) {
-			event.preventDefault();
-			addUser();
-		});
 
-		$("#create-user").button().on("click", function() {
-			dialog.dialog("open");
-		});
-	});
 </script>
+
 </head>
 <body>
 
-	<div id="dialog-form" title="Create new user">
-		<form>
-			<fieldset>
-				<label for="name">Coba : </label> <input type="text" name="coba"
-					id="coba" class="text ui-widget-content ui-corner-all">
+	<!-- userRoleReportForm -->
+		<table class="table table-bordered" cellspacing="0"
+					style="margin-top: 10px;" width="100%" class="tableContent">
+					<thead class="panel panel-info">
+						<tr>
+							<td class="align-center">User Role Code</td>
+							<td class="align-center">User Role Name</td>
+							<td align="center">Menu Access</td>
 
-				<!-- Allow form submission with keyboard without duplicating the dialog button -->
-				<input type="submit" tabindex="-1"
-					style="position: absolute; top: -1000px">
-			</fieldset>
-		</form>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="display: none">1</td>
+							<td>Code</td>
+							<td>Name</td>
+							<td align="center"><a href="#" class="text-info lnkMenuAccess">Menu Access</a></td>
+						</tr>
+					</tbody>
+				</table>
+		
+			
+	
+				<div class="modal fade" id="searchDeptHead" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+							<html:form action="userRoleReport" method="post">
+					<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">User Role Report Access</h4>
+							</div>
+							<div class="modal-body">
+								<table width="70%" style="margin-top: 20px; margin-bottom: 20px">
+									<tr>
+										<td width="20%">User Role</td>
+										<td><input type="hidden" id="hdnUserRoleCodeId" /><input
+											type="text" disabled="disabled" id="lblUserRoleName"
+											style="width: 300px"></input></td>
+									</tr>
+								</table>
+								<div style="overflow: auto; height: 350px">
+									<table width="100%" id="tblSearch"
+										class="table table-striped table-hover table-bordered table-clickable">
+										<thead>
+											<tr>
+												<th width="40px"></th>
+												<th width="200px">Report Code</th>
+												<th>Report Caption</th>
 
+											</tr>
+										</thead>
 
-	</div>
+										<tbody>
+											<logic:notEmpty name="lstReport">
+												<logic:iterate id="menu" name="lstReport">
+													<tr class="rowSearch">
+														<td style="display: none"><bean:write name="menu"
+																property="menuId" /></td>
+														<td align="center"><input type="checkbox"
+															class="chkSelectedMenu" /></td>
+														<td><bean:write name="menu" property="menuCode" /></td>
+														<td><bean:write name="menu" property="menuCaption" /></td>
+														
+													</tr>
+												</logic:iterate>
+											</logic:notEmpty>
+											<logic:empty name="lstReport">
+												<tr>
+													<td colspan="3" align="center">No Data Found</td>
+												</tr>
+											</logic:empty>
+										</tbody>
 
+									</table>
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-info getValue"
+									id="btnSaveUserRoleMenu">Save changes</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
 
-	<div id="users-contain" class="ui-widget">
+							</div>
+						</html:form>
+					</div>
+				
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
 
-		<h1>Existing Users:</h1>
-
-
-		<button id="create-user">Create new user</button>
-
-
-	</div>
-	<div>
-
-		<input type="text" name="hasilCoba" id="hasilCoba">
-
-
-	</div>
-</body>
 </body>
 </html>

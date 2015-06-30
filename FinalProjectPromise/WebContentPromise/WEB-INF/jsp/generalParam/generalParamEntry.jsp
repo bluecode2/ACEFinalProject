@@ -32,25 +32,26 @@
 		var isValid = true;
 		
 		if(genParamDesc.trim() == '') {
-			str+= "General Parameter Description can not be empty!\n";
+			str+= "<li>General Parameter Description can not be empty!</li>";
 			isValid = false;
 		}
 		else if(genParamDesc.length > 101) {
-			str+= "General Parameter Description can not be more than 100 characters!\n";
+			str+= "<li>General Parameter Description can not be more than 100 characters!</li>";
 			isValid = false;
 		}
 		
 		if(genParamValue.trim() == '') {
-			str+= "General Parameter Value can not be empty!\n";
+			str+= "<li>General Parameter Value can not be empty!</li>";
 			isValid = false;
 		}
 		else if(genParamValue.length > 51) {
-			str+= "General Parameter Value can not be more than 50 characters!\n";
+			str+= "<li>General Parameter Value can not be more than 50 characters!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -70,6 +71,10 @@
 
 		<div class="container" style="padding-top: 30px">
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />

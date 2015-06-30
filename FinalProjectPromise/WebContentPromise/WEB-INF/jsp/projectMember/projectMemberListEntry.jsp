@@ -107,17 +107,18 @@
 		var isValid = true;
 		
 		if(empId.trim() == '') {
-			str+= "Employee Name can not be empty!\n";
+			str+= "<li>Employee Name can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(role.trim() == '') {
-			str+= "Project Role can not be empty!\n";
+			str+= "<li>Project Role can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -169,6 +170,10 @@
 				<div class="panel form-group has-info" id="divEntryProjectMember" style="padding: 20px; display: none">
 					<h4>Project Member Entry</h4>
 					<hr>
+					<div class="text-danger" id="divError" style="display: none">
+						Save failed!
+						<ul id="errorContent"></ul>
+					</div>
 					<table cellspacing="0" style="margin-top: 10px;" width="100%"
 						class="tableContent">
 						<tr>

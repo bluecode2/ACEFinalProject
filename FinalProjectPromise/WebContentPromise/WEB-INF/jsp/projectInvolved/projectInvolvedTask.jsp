@@ -17,8 +17,6 @@
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
-
-
 	function showTask(task) {
 		document.forms[0].showDiv.value = task;
 	}

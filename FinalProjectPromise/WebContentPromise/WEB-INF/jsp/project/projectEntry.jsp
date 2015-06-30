@@ -105,49 +105,50 @@
 		isValid = false;
 	}
 	if(projectCode.trim() == '') {
-		str+= "Project Code can not be empty!\n";
+		str+= "<li>Project Code can not be empty!</li>";
 		isValid = false;
 	}
 	else if(projectCode.length > 26) {
-		str+= "Project Code can not be more than 25 characters!\n";
+		str+= "<li>Project Code can not be more than 25 characters!</li>";
 		isValid = false;
 	}
 	
 	if(projectName.trim() == '') {
-		str+= "Project name can not be empty!\n";
+		str+= "<li>Project name can not be empty!</li>";
 		isValid = false;
 	}
 	else if(projectName.length > 26) {
-		str+= "Project Name can not be more than 25 characters!\n";
+		str+= "<li>Project Name can not be more than 25 characters!</li>";
 		isValid = false;
 	}
 	
 	if(projectDesc.trim() == '') {
-		str+= "Project Description can not be empty!\n";
+		str+= "<li>Project Description can not be empty!</li>";
 		isValid = false;
 	}
 	else if(projectDesc.length > 101) {
-		str+= "Project Description can not be more than 100 characters!\n";
+		str+= "<li>Project Description can not be more than 100 characters!</li>";
 		isValid = false;
 	}
 	
 	if(projectMgr.trim() == '') {
-		str+= "Project Manager can not be empty!\n";
+		str+= "<li>Project Manager can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(startDate.trim() == '') {
-		str+= "Start Date Date can not be empty!\n";
+		str+= "<li>Start Date Date can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(endDate.trim() == '') {
-		str+= "End Date Date can not be empty!\n";
+		str+= "<li>End Date Date can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(!isValid){
-		alert(str);
+		document.getElementById('errorContent').innerHTML = str;
+		document.getElementById("divError").style.display = "block";
 	}
 	
 	return isValid;
@@ -172,7 +173,11 @@
 		<html:hidden property="dateInString" name="projectForm" styleId="hdnDatenow"/>
 				
 		<div class="container">
-			<div class="divSearch form-group has-info" style="float: left;">
+			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table>
 					<tr align="left">
 						<td>Project Code</td>

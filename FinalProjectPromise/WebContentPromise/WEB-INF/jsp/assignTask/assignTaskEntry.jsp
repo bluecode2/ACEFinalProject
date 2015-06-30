@@ -82,42 +82,43 @@ function validateForm(){
 		isValid = false;
 	}
 	if(taskName.trim() == '') {
-		str+= "Task Name can not be empty!\n";
+		str+= "<li>Task Name can not be empty!</li>";
 		isValid = false;
 	}
 	else if(taskName.length > 26) {
-		str+= "Task Name can not be more than 25 characters!\n";
+		str+= "<li>Task Name can not be more than 25 characters!</li>";
 		isValid = false;
 	}
 	
 	if(taskDesc.trim() == '') {
-		str+= "Task Description can not be empty!\n";
+		str+= "<li>Task Description can not be empty!</li>";
 		isValid = false;
 	}
 	else if(taskDesc.length > 201) {
-		str+= "Task Description can not be more than 200 characters!\n";
+		str+= "<li>Task Description can not be more than 200 characters!</li>";
 		isValid = false;
 	}
 	
 	if(estStartDate.trim() == '') {
-		str+= "Estimate Start Date can not be empty!\n";
+		str+= "<li>Estimate Start Date can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(estEndDate.trim() == '') {
-		str+= "Estimate End Date can not be empty!\n";
+		str+= "<li>Estimate End Date can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(assignedTo.trim() == '') {
-		str+= "Assigned To can not be empty!\n";
+		str+= "<li>Assigned To can not be empty!</li>";
 		isValid = false;
 	}
 	
 	if(!isValid){
-		alert(str);
+		document.getElementById('errorContent').innerHTML = str;
+		document.getElementById("divError").style.display = "block";
 	}
-	
+
 	return isValid;
 }
 </script>
@@ -135,8 +136,11 @@ function validateForm(){
 		<html:hidden property="dateInString" name="assignTaskForm" styleId="hdnDateInString"/>
 		
 		<div class="container">
-
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />
