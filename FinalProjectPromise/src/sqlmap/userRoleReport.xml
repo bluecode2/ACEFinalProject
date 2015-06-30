@@ -1,7 +1,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="userReport">
+<sqlMap namespace="userRoleReport">
 	<insert id="insertUserReport" parameterClass="reports.ReportRoleBean">
 		INSERT INTO USER_ROLE_REPORT (USER_ROLE_ID, report_id) 
 			VALUES(#userRoleId#, #reportId#)

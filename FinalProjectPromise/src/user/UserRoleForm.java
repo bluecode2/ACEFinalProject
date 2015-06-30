@@ -31,6 +31,7 @@ public class UserRoleForm extends ActionForm{
 	private String listAllowApprove;
 	private String listAllowDecline;
 	private String listReportId;
+	private String listDeptId;
 	
 	
 	public Integer getReportId() {
@@ -146,5 +147,11 @@ public class UserRoleForm extends ActionForm{
 	}
 	public void setListAllowDecline(String listAllowDecline) {
 		this.listAllowDecline = listAllowDecline;
+	}
+	public String getListDeptId() {
+		return listDeptId;
+	}
+	public void setListDeptId(String listDeptId) {
+		this.listDeptId = listDeptId;
 	}
 }

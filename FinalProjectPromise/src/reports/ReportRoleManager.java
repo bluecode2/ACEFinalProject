@@ -24,7 +24,7 @@ public class ReportRoleManager {
 		List<ReportRoleBean> arrList = new ArrayList<ReportRoleBean>();
 		
 		try {
-			arrList = this.ibatis.queryForList("userReport.getUserReportsByUserRole", roleId);
+			arrList = this.ibatis.queryForList("userRoleReport.getUserReportsByUserRole", roleId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class ReportRoleManager {
 		m.put("reportId", reportId);
 		
 		try {
-			rrBean = (ReportRoleBean) this.ibatis.queryForObject("userReport.getUserReportBean", m);
+			rrBean = (ReportRoleBean) this.ibatis.queryForObject("userRoleReport.getUserReportBean", m);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class ReportRoleManager {
 	public void insertUserRoleReport(ReportRoleBean rrBean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.insert("userReport.insertUserReport", rrBean);
+			this.ibatis.insert("userRoleReport.insertUserReport", rrBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();
@@ -62,7 +62,7 @@ public class ReportRoleManager {
 	public void deleteUserRoleReport(ReportRoleBean rrBean) throws SQLException {
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.delete("userReport.deleteUserReport", rrBean);
+			this.ibatis.delete("userRoleReport.deleteUserReport", rrBean);
 			this.ibatis.commitTransaction();
 		} finally {
 			this.ibatis.endTransaction();

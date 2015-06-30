@@ -367,53 +367,53 @@
 											
 										});
 						
-				$('.lnkReportAccess').on('click',
-						function() {
-							showLoading(); 
-							var userRoleId = $(this).closest(
-								'tr').find('td').eq(0).html();
-							var userRoleName = $(this).closest(
-								'tr').find('td').eq(2).html();
+						$('.lnkReportAccess').on('click',
+							function() {
+								showLoading(); 
+								var userRoleId = $(this).closest(
+									'tr').find('td').eq(0).html();
+								var userRoleName = $(this).closest(
+									'tr').find('td').eq(2).html();
 
-												$('#hdUserRoleIdReport').val(
-														userRoleId);
-												$('#lblUserRoleNameReport').val(
-														userRoleName);
+								$('#hdUserRoleIdReport').val(
+										userRoleId);
+								$('#lblUserRoleNameReport').val(
+										userRoleName);
 
-												$.ajax({
-													type : "POST",
-													url : "userRole.do",
-													data : "task=openReportAccess&selectedId="+ userRoleId,
-													success : function(response) {
-														var strReportId = response.split("$")[0];
-														var listReportId = strReportId.split("#");
-															$('.chkSelectedMenu').each(
-																function() {
-																	var reportId = $(this).closest('tr').find(
-																					'td').eq(0).html();
-																	var index = $.inArray(reportId,listReportId);
-																		if (index > -1) {
-																			$(this).prop('checked',true);
-																		} 
-																		else {
-																			$(this).prop('checked',false);
-																			}
-
-																				});
-
-																$('#searchUserRoleReport')
-																		.modal();
-														 		hideLoading(); 
-															},
-															error : function(e) {
-																alert("Error: " + e);
-														 		hideLoading(); 
+								$.ajax({
+									type : "POST",
+									url : "userRole.do",
+									data : "task=openReportAccess&selectedId="+ userRoleId,
+									success : function(response) {
+										
+										var listReportId = response.trim().split("#");
+											$('.chkSelectedReport').each(
+												function() {
+													var reportId = $(this).closest('tr').find(
+																	'td').eq(0).html();
+													var index = $.inArray(reportId,listReportId);
+														if (index > -1) {
+															$(this).prop('checked',true);
+														} 
+														else {
+															$(this).prop('checked',false);
 															}
 
-														});
+																});
 
-									 			hideLoading(); 
-						});
+												$('#searchUserRoleReport')
+														.modal();
+										 		hideLoading(); 
+											},
+											error : function(e) {
+												alert("Error: " + e);
+										 		hideLoading(); 
+											}
+
+										});
+
+					 			hideLoading(); 
+								});
 							
 							$("#btnSaveUserRoleReport").on('click',
 									function() {
@@ -456,6 +456,96 @@
 												});
 										
 									});
+							
+							$('.lnkDepartmentAccess').on('click',
+									function() {
+										showLoading(); 
+										var userRoleId = $(this).closest(
+											'tr').find('td').eq(0).html();
+										var userRoleName = $(this).closest(
+											'tr').find('td').eq(2).html();
+
+										$('#hdUserRoleIdDepartment').val(
+												userRoleId);
+										$('#lblUserRoleNameDepartment').val(
+												userRoleName);
+
+										$.ajax({
+											type : "POST",
+											url : "userRole.do",
+											data : "task=openDepartmentAccess&selectedId="+ userRoleId,
+											success : function(response) {
+												
+												var listDepartmentId = response.trim().split("#");
+													$('.chkSelectedDepartment').each(
+														function() {
+															var departmentId = $(this).closest('tr').find(
+																			'td').eq(0).html();
+															var index = $.inArray(departmentId,listDepartmentId);
+																if (index > -1) {
+																	$(this).prop('checked',true);
+																} 
+																else {
+																	$(this).prop('checked',false);
+																	}
+
+																		});
+
+														$('#searchUserRoleDepartment')
+																.modal();
+												 		hideLoading(); 
+													},
+													error : function(e) {
+														alert("Error: " + e);
+												 		hideLoading(); 
+													}
+
+												});
+
+							 			hideLoading(); 
+										});
+									
+									$("#btnSaveUserRoleDepartment").on('click',
+											function() {
+						 						showLoading(); 
+												var listDepartmentId = "";
+
+												$('.chkSelectedDepartment:checked').each(
+													function() {
+													var departmentId = $(this).closest('tr')
+															.find('td').eq(0).html();
+													
+
+																	if (listDepartmentId != '') {
+																		listDepartmentId += '#';
+																		
+																	}
+																	listDepartmentId += departmentId;
+																	
+																});
+
+												$.ajax({
+															type : "POST",
+															url : "userRole.do",
+															data : "task=saveDepartmentAccess&selectedId="
+																	+ $("#hdUserRoleIdDepartment")
+																			.val()
+																	+ "&listDeptId="
+																	+ listDepartmentId,
+															success : function(
+																	response) {
+																$('#searchUserRoleDepartment')
+																		.modal(
+																				'hide');
+													 			hideLoading(); 
+															},
+															error : function(e) {
+																alert("Error: " + e);
+															 	hideLoading(); 
+															}
+														});
+												
+											});
 					});
 </script>
 </head>
@@ -490,12 +580,6 @@
 							</html:text></td>
 
 						<td style="padding-left: 15px">
-
-
-
-
-
-
 							<button type="button" onclick="search();" id="btnSearch"
 								class="btn btn-info btn-icon" title="Search">
 
@@ -516,6 +600,7 @@
 							<td class="align-center">User Role Name</td>
 							<td align="center">Menu Access</td>
 							<td align="center">Report Access</td>
+							<td align="center">Department Access</td>
 							<td class="align-center"></td>
 						</tr>
 					</thead>
@@ -532,6 +617,8 @@
 										class="text-info lnkMenuAccess">Menu Access</a></td>
 									
 									<td align="center"><a href="#" class="text-info lnkReportAccess">Reports Access</a></td>									
+									
+									<td align="center"><a href="#" class="text-info lnkDepartmentAccess">Department Access</a></td>
 										
 									<td align="center"><a class="text-success" href="#"
 										onclick="actionForm('edit','<bean:write name="reg" property="userRoleId" />');"
@@ -570,12 +657,12 @@
 								<h4 class="modal-title">User Role Menu Access</h4>
 							</div>
 							<div class="modal-body">
-								<table width="70%" style="margin-top: 20px; margin-bottom: 20px">
+								<table width="70%" style="margin-top: 20px; margin-bottom: 20px" class="form-group has-info">
 									<tr>
 										<td width="20%">User Role</td>
 										<td><input type="hidden" id="hdnUserRoleCodeId" /><input
 											type="text" disabled="disabled" id="lblUserRoleName"
-											style="width: 300px"></input></td>
+											style="width: 300px" class="form-control"></input></td>
 									</tr>
 								</table>
 								<div style="overflow: auto; height: 350px">
@@ -665,12 +752,12 @@
 								<h4 class="modal-title">User Role Report Access</h4>
 							</div>
 							<div class="modal-body">
-								<table width="70%" style="margin-top: 20px; margin-bottom: 20px">
+								<table width="70%" style="margin-top: 20px; margin-bottom: 20px" class="form-group has-info">
 									<tr>
 										<td width="20%">User Role</td>
 										<td><input type="hidden" id="hdUserRoleIdReport" /><input
 											type="text" disabled="disabled" id="lblUserRoleNameReport"
-											style="width: 300px"></input></td>
+											style="width: 300px" class="form-control"></input></td>
 									</tr>
 								</table>
 								<div style="overflow: auto; height: 350px">
@@ -713,6 +800,78 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-info getValue"
 									id="btnSaveUserRoleReport">Save changes</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+
+							</div>
+					</div>
+				
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			
+			<!-- pop up to give department access -->
+				<div class="modal fade" id="searchUserRoleDepartment" tabindex="-1" 
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">User Role Department Access</h4>
+							</div>
+							<div class="modal-body">
+								<table width="70%" style="margin-top: 20px; margin-bottom: 20px" class="form-group has-info">
+									<tr>
+										<td width="20%">User Role</td>
+										<td><input type="hidden" id="hdUserRoleIdDepartment" /><input
+											type="text" disabled="disabled" id="lblUserRoleNameDepartment"
+											style="width: 300px" class="form-control"></input></td>
+									</tr>
+								</table>
+								<div style="overflow: auto; height: 350px">
+									<table width="100%" id="tblSearch"
+										class="table table-striped table-hover table-bordered table-clickable">
+										<thead>
+											<tr>
+												<th width="40px"></th>
+												<th width="200px">Department Code</th>
+												<th>Department Name</th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<logic:notEmpty name="lstDepartment">
+												<logic:iterate id="dept" name="lstDepartment">
+													<tr>
+														<td style="display: none"><bean:write name="dept"
+																property="deptId" /></td>
+														<td align="center"><input type="checkbox"
+															class="chkSelectedDepartment" /></td>
+														<td><bean:write name="dept" property="deptCode" /></td>
+														<td><bean:write name="dept" property="deptName" /></td>
+													</tr>
+												</logic:iterate>
+											</logic:notEmpty>
+											<logic:empty name="lstDepartment">
+												<tr>
+													<td colspan="3" align="center">No Data Found</td>
+												</tr>
+											</logic:empty>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+								<button type="button" class="btn btn-info getValue"
+									id="btnSaveUserRoleDepartment">Save changes</button>
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 
