@@ -71,6 +71,7 @@
 																+ userRoleId,
 														success : function(
 																response) {
+															response = response.trim();
 															var strMenuId = response
 																	.split("$")[0];
 															var strAllowAdd = response
