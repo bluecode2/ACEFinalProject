@@ -31,25 +31,26 @@
 		var isValid = true;
 		
 		if(projRoleCode.trim() == '') {
-			str+= "Project Role Code can not be empty!\n";
+			str+= "<li>Project Role Code can not be empty!</li>";
 			isValid = false;
 		}
 		else if(projRoleCode.length > 11) {
-			str+= "Project Role Code can not be more than 10 characters!\n";
+			str+= "<li>Project Role Code can not be more than 10 characters!</li>";
 			isValid = false;
 		}
 		
 		if(projRoleName.trim() == '') {
-			str+= "Project Role Name can not be empty!\n";
+			str+= "<li>Project Role Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(projRoleName.length > 26) {
-			str+= "Project Role Name can not be more than 25 characters!\n";
+			str+= "<li>Project Role Name can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -69,6 +70,10 @@
 
 		<div class="container">
 			<div class="divContent">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table>
 					<!-- <tr>
 						<td>General Holiday ID</td>

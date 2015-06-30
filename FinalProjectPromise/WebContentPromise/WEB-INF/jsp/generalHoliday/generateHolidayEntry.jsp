@@ -45,17 +45,18 @@
 		var isValid = true;
 		
 		if(genHolStartDate.trim() == '') {
-			str+= "Start Date can not be empty!\n";
+			str+= "<li>Start Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(genHolEndDate.trim() == '') {
-			str+= "End Date can not be empty!\n";
+			str+= "<li>End Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -78,6 +79,10 @@
 
 		<div class="container">
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />

@@ -143,62 +143,63 @@ function validateForm(){
 		var isValid = true;
 		
 		if(empCode.trim() == '') {
-			str+= "Employee Code can not be empty!\n";
+			str+= "<li>Employee Code can not be empty!</li>";
 			isValid = false;
 		}
 		else if(empCode.length > 21) {
-			str+= "Employee Code can not be more than 20 characters!\n";
+			str+= "<li>Employee Code can not be more than 20 characters!</li>";
 			isValid = false;
 		}
 		
 		if(empName.trim() == '') {
-			str+= "Employee Name can not be empty!\n";
+			str+= "<li>Employee Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(empName.length > 51) {
-			str+= "Employee Name can not be more than 50 characters!\n";
+			str+= "<li>Employee Name can not be more than 50 characters!</li>";
 			isValid = false;
 		}
 		
 		if(email.trim() == '') {
-			str+= "Email can not be empty!\n";
+			str+= "<li>Email can not be empty!</li>";
 			isValid = false;
 		}
 		else if(email.length > 51) {
-			str+= "Email can not be more than 50 characters!\n";
+			str+= "<li>Email can not be more than 50 characters!</li>";
 			isValid = false;
 		}
 		
 		if(address.trim() == '') {
-			str+= "Address can not be empty!\n";
+			str+= "<li>Address can not be empty!</li>";
 			isValid = false;
 		}
 		else if(address.length > 101) {
-			str+= "Address can not be more than 100 characters!\n";
+			str+= "<li>Address can not be more than 100 characters!</li>";
 			isValid = false;
 		}
 		
 		if(phone.trim() == '') {
-			str+= "Phone number can not be empty!\n";
+			str+= "<li>Phone number can not be empty!</li>";
 			isValid = false;
 		}
 		else if(phone.length > 26) {
-			str+= "Phone number can not be more than 25 characters!\n";
+			str+= "<li>Phone number can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(dept.trim() == '') {
-			str+= "Department can not be empty!\n";
+			str+= "<li>Department can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(rank.trim() == '') {
-			str+= "Rank can not be empty!\n";
+			str+= "<li>Rank can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -221,6 +222,10 @@ function validateForm(){
 		
 		<div class="container">
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />

@@ -76,31 +76,32 @@
 		var isValid = true;
 		
 		if(persHolDesc.trim() == '') {
-			str+= "Personal Holiday Name can not be empty!\n";
+			str+= "<li>Personal Holiday Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(persHolDesc.length > 26) {
-			str+= "Personal Holiday Name can not be more than 25 characters!\n";
+			str+= "<li>Personal Holiday Name can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(persHolDate.trim() == '') {
-			str+= "Personal Holiday Date can not be empty!\n";
+			str+= "<li>Personal Holiday Date can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(emp.trim() == '') {
-			str+= "Employee can not be empty!\n";
+			str+= "<li>Employee can not be empty!</li>";
 			isValid = false;
 		}
 		
 		if(persHolType == 0) {
-			str+= "General Holiday type must be chosen!\n";
+			str+= "<li>General Holiday type must be chosen!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -119,6 +120,10 @@
 
 		<div class="container">
 			<div class="divContent form-group has-info">
+				<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />

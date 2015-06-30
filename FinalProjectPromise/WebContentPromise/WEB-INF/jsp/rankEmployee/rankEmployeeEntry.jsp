@@ -31,34 +31,35 @@
 		var isValid = true;
 		
 		if(rankCode.trim() == '') {
-			str+= "Rank Code can not be empty!\n";
+			str+= "<li>Rank Code can not be empty!</li>";
 			isValid = false;
 		}
 		else if(rankCode.length > 11) {
-			str+= "Rank Code can not be more than 10 characters!\n";
+			str+= "<li>Rank Code can not be more than 10 characters!</li>";
 			isValid = false;
 		}
 		
 		if(rankName.trim() == '') {
-			str+= "Rank Name can not be empty!\n";
+			str+= "<li>Rank Name can not be empty!</li>";
 			isValid = false;
 		}
 		else if(rankName.length > 26) {
-			str+= "Rank Name can not be more than 25 characters!\n";
+			str+= "<li>Rank Name can not be more than 25 characters!</li>";
 			isValid = false;
 		}
 		
 		if(rankLevel.trim() == '') {
-			str+= "Rank Level can not be empty!\n";
+			str+= "<li>Rank Level can not be empty!</li>";
 			isValid = false;
 		}
 		else if(isNaN(rankLevel)) {
-			str+= "Rank Level must consist of number!\n";
+			str+= "<li>Rank Level must consist of number!</li>";
 			isValid = false;
 		}
 		
 		if(!isValid){
-			alert(str);
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
 		}
 		
 		return isValid;
@@ -78,6 +79,10 @@
 		<div class="container">
 			<div class="container">
 				<div class="divContent form-group has-info">
+					<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 					<table width="50%">
 						<colgroup>
 							<col width="30%" class="tdLabel" />
