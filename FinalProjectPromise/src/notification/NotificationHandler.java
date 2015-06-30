@@ -30,7 +30,7 @@ public class NotificationHandler extends Action {
 			nMan.updateNotificationAsRead(nForm.getSelectedId());
 			if(bean.getSessionParameter() != null && !bean.getSessionParameter().equals("")){
 				String[] sessionStr = bean.getSessionParameter().split("#");
-				session.setAttribute(sessionStr[0], sessionStr[1]);
+				session.setAttribute(sessionStr[0], Integer.valueOf(sessionStr[1]));
 			}
 			response.sendRedirect(bean.getNotificationUrl());
 			return null;

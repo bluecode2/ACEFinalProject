@@ -89,9 +89,10 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<logic:iterate id="menuLvl1" name="arrMenuLvl1">
-						<li class="dropdown"><a href="<bean:write name="menuLvl1" property="menuUrl" />" data-toggle="dropdown"
+						<logic:notEqual name="menuLvl1" property="menuCode" value="${reportMenuCode}">
+							<li class="dropdown"><a href="<bean:write name="menuLvl1" property="menuUrl" />" data-toggle="dropdown"
 							class="dropdown-toggle"><bean:write name="menuLvl1"
-									property="menuCaption" /> <logic:notEqual name="menuLvl1" property="menuCode" value="${reportMenuCode}"><b class="caret"></b></logic:notEqual> </a>
+									property="menuCaption" />&nbsp;<b class="caret"></b></a>
 							<ul class="dropdown-menu" id="menu1">
 								<logic:iterate id="menuLvl2" name="arrMenuLvl2">
 									<logic:equal name="menuLvl2" property="parentId"
@@ -110,6 +111,11 @@
 									</logic:equal>
 								</logic:iterate>
 							</ul></li>
+						</logic:notEqual>
+						<logic:equal name="menuLvl1" property="menuCode" value="${reportMenuCode}">
+							<li><a href="<bean:write name="menuLvl1" property="menuUrl" />" ><bean:write name="menuLvl1"
+									property="menuCaption" /></a></li>
+						</logic:equal>
 					</logic:iterate>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

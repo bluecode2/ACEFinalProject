@@ -16,8 +16,18 @@
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		
 		<div class="container">
-			
-		
+			<table width="100%">
+				<tr>
+					<td width="30%">
+						<div style="height: 400px; overflow: ">
+						</div>
+					</td>
+					<td>
+						<div style="height: 400px">
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 		
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
