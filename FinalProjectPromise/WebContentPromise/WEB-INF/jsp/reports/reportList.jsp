@@ -83,7 +83,7 @@
 									<tr>
 										<td width="150px">Department Name</td>
 										<td width="200px">
-										<html:select property="deptId" name="reportForm" styleClass="form-control">
+										<html:select property="deptId" name="reportForm" styleClass="form-control" styleId="txtDeptId"> 
 											<html:option value="">---Choose One---</html:option>
 											<logic:iterate id="listDept" name="reportForm" property="listOfDept" >
 												<html:option value="${listDept.deptId}">
@@ -100,7 +100,7 @@
 									<tr>
 										<td width="150px">Project Status</td>
 										<td width="200px">
-										<html:select property="genCodeId" name="reportForm" styleClass="form-control">
+										<html:select property="genCodeId" name="reportForm" styleClass="form-control" styleId="txtGenCodeId">
 											<html:option value="">---Choose One---</html:option>
 											<logic:iterate id="listProjStat" name="reportForm" property="listOfGenCode" >
 												<html:option value="${listProjStat.genCodeId}">
@@ -313,6 +313,28 @@
 	<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 	
 	<script type="text/javascript">
+	
+	function generateFilter(){
+		var filterValue = "";
+		if ($('#datePeriod').is(':visible')){
+			filterValue+="#"+$('#txtStartDate').val()+"#"+$('#txtEndDate').val();
+		}
+		if ($('#currentEmployee').is(':visible')){
+			filterValue+="#"+$('#hdnCurrentEmpId').val();
+		}
+		if ($('#department').is(':visible')){
+			filterValue+="#"+$('#txtDeptId').val();
+		}
+		if ($('#projectStatus').is(':visible')){
+			filterValue+="#"+$('#txtGenCodeId').val();
+		}
+		if ($('#employee').is(':visible')){
+			filterValue+="#"+$('#txtEmployeeId').val();
+		}
+		if ($('#project').is(':visible')){
+			filterValue+="#"+$('#txtProjId').val();
+		}
+	}
 	
 	function registerSearchProj() {
 		$('.rowSearchProj').on('click', function() {
