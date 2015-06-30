@@ -36,8 +36,6 @@
 		<form-bean name="projectInvolvedForm" type="project.ProjectInvolvedForm"></form-bean>
 		<form-bean name="myCurrentTaskForm" type="independent_task.MyCurrentTaskForm"></form-bean>
 		<form-bean name="activityForm" type="activity.ActivityForm"></form-bean>
-		<form-bean name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskForm"></form-bean>
-		<form-bean name="approvePropProjForm" type="propose_project_task.ApprovePropProjTaskForm"></form-bean>
 		<form-bean name="notificationForm" type="notification.NotificationForm"></form-bean>
 		<form-bean name="reportForm" type="reports.ReportForm"></form-bean>
 	</form-beans>
@@ -174,15 +172,6 @@
 			<forward name="myCurrentTaskList" path="/WEB-INF/jsp/myCurrentTask/myCurrentTaskList.jsp"></forward>
 		</action>
 		<action path="/activity" name="activityForm" type="activity.ActivityHandler" scope="request">
-		</action>
-		<action path="/propProjTask" name="proposeProjectTaskForm" type="propose_project_task.ProposeProjectTaskHandler"
-			scope="request">
-			<forward name="propProjTaskList" path="/WEB-INF/jsp/proposeProjectTask/proposeProjectTaskList.jsp"></forward>
-			<forward name="propProjTaskEntry" path="/WEB-INF/jsp/proposeProjectTask/proposeProjectTaskEntry.jsp"></forward>
-		</action>
-		<action path="/appPropProjTask" name="approvePropProjForm" type="propose_project_task.ApprovePropProjHandler"
-			scope="request">
-			<forward name="AppPropProjTaskList" path="/WEB-INF/jsp/proposeProjectTask/approvePropProjTask.jsp"></forward>
 		</action>
 		<action path="/notification" name="notificationForm" type="notification.NotificationHandler"
 			scope="request">
