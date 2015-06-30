@@ -20,7 +20,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<transactionManager type="JDBC">
 		<dataSource type="SIMPLE">
 			<property name="JDBC.Driver" value="oracle.jdbc.driver.OracleDriver" />
-			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@192.168.10.26:1521:orcl" />
+			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@192.168.10.24:1522:orcl1" />
 			<property name="JDBC.Username" value="promise" />
 			<property name="JDBC.Password" value="promise" />
 		</dataSource>

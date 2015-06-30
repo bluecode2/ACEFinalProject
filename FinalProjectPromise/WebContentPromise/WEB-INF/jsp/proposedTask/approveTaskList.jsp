@@ -44,8 +44,8 @@
 	$(document).ready(
 			function() {
 				$('.lnkAssignTo').on('click', function() {
-					/* currLink = $(this);
-					currHdnField = $(this).closest('td').find('.hdnAssignTo'); */
+					currLink = $(this);
+					currHdnField = $(this).closest('td').find('.hdnAssignTo');
 					search();
 					$("#empList").modal();
 				});
@@ -94,6 +94,7 @@
 		$('.rowSearch').on('click', function() {
 			var empId = $(this).closest('tr').find('td').eq(0).html();
 			var empName = $(this).closest('tr').find('td').eq(2).html();
+			
 			currHdnField.val(empId);
 			currLink.html(empName);
 		});
