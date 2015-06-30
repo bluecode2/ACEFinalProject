@@ -53,22 +53,28 @@
 			var currUser = $('#users_empId').val();
 			var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
 			var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
-			if (assgTo == currUser) {
-				if (taskStat == 'TA_STAT_02') {
-					$(this).addClass('glyphicon glyphicon-play');
-					$(this).attr("title", "Start");
-				} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {
-					$(this).addClass('glyphicon glyphicon-ok-circle');
-					$(this).attr("title", "Submit");
-				} else if (taskStat == 'TA_STAT_03') {
-					$(this).addClass('glyphicon glyphicon-pause');
-					$(this).attr("title", "Pause");
-				} else if (taskStat == 'TA_STAT_06') {
-					$(this).addClass('glyphicon glyphicon-chevron-right');
-					$(this).attr("title", "Resume");
-				} else {
-					$(this).hide();
+			var projStat = $('#hdnStatProj').val();
+			if (projStat != 'PR_STAT_01'){
+				if (assgTo == currUser) {
+					if (taskStat == 'TA_STAT_02') {
+						$(this).addClass('glyphicon glyphicon-play');
+						$(this).attr("title", "Start");
+					} else if (taskStat == 'TA_STAT_03' && taskProg == '100.0') {
+						$(this).addClass('glyphicon glyphicon-ok-circle');
+						$(this).attr("title", "Submit");
+					} else if (taskStat == 'TA_STAT_03') {
+						$(this).addClass('glyphicon glyphicon-pause');
+						$(this).attr("title", "Pause");
+					} else if (taskStat == 'TA_STAT_06') {
+						$(this).addClass('glyphicon glyphicon-chevron-right');
+						$(this).attr("title", "Resume");
+					} else {
+						$(this).hide();
+					}
 				}
+			}
+			else {
+				$(this).hide();
 			}
 		});
 	}
@@ -547,6 +553,7 @@
 		<html:hidden property="isAdd" name="projectTaskForm" />
 		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId"
 			name="projectTaskForm" value="" />
+		<html:hidden property="prjBean.projectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
 		<div class="container divContent">
 			<div class="form-group has-info">

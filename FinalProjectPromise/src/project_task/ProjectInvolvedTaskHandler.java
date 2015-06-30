@@ -202,7 +202,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 		request.setAttribute("pageCount2", tsForm.getPageCount2());
 		request.setAttribute("currPage2", tsForm.getCurrPage2());
 		request.setAttribute("rowCount2", tsForm.getListCount2());
-
 		return mapping.findForward("list");
 		
 

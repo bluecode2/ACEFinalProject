@@ -97,6 +97,23 @@ public class IndependentTaskManager {
 		}
 	}
 	
+	public void createNewAssignTaskProj(IndependentTaskBean tsBean) {
+		try {
+			this.ibatis.startTransaction();
+			tsBean.setTaskId(getNewTaskId());
+			this.ibatis.insert("independentTask.insertToAssignTaskProj", tsBean);
+			this.ibatis.commitTransaction();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
 	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
