@@ -158,7 +158,7 @@ function search() {
 								name="assignTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="taskName">Task Name</option>
-								<option value="assignedTo">Assign To</option>
+								<option value="assignedToName">Assign To</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="assignTaskForm" property="searchValue"

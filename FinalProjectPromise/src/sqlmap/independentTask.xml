@@ -35,19 +35,14 @@
 		          WHERE assigned_by = #empId#
 					<dynamic prepend="AND">
 						<isEqual property="searchField" compareValue="taskName">
-							LOWER(task_name) LIKE LOWER( '%' || #searchValue# || '%' )
+							LOWER(TASK_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>
 					<dynamic prepend="AND">
-						<isEqual property="searchField" compareValue="assignTo">
-							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
+						<isEqual property="searchField" compareValue="assignedToName">
+							LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
-					</dynamic>
-					<dynamic prepend="AND">
-						<isEqual property="searchField" compareValue="taskStatus">
-							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
-						</isEqual>
-					</dynamic>			          
+					</dynamic>		          
 		          order by task_id) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
@@ -63,10 +58,10 @@
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="assignedTo">
-				LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="assignedToName">
+				LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>		          
+		</dynamic>		            
 	</select>
 	
 	<insert id="insertToAssignTask" parameterClass="independent_task.IndependentTaskBean">
@@ -185,8 +180,8 @@
 						</isEqual>
 					</dynamic>
 					<dynamic prepend="AND">
-						<isEqual property="searchField" compareValue="assignTo">
-							LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
+						<isEqual property="searchField" compareValue="taskStatusName">
+							LOWER(TASK_STATUS_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
 		          order by task_id) vit
@@ -251,8 +246,8 @@
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="assignedTo">
-				LOWER(assigned_to) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="taskStatusName">
+				LOWER(TASK_STATUS_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>		          
 	</select>

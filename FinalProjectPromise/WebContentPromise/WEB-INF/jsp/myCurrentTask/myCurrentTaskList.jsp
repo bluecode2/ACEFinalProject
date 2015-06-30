@@ -257,7 +257,7 @@
 								name="myCurrentTaskForm" property="searchField"
 								styleId="selSearchField" styleClass="form-control">
 								<option value="taskName">Task Name</option>
-								<option value="taskStatus">Status</option>
+								<option value="taskStatusName">Status</option>
 							</html:select></td>
 						<td style="padding-left: 15px"><html:text
 								name="myCurrentTaskForm" property="searchValue"

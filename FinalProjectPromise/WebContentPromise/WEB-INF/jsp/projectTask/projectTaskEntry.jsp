@@ -33,7 +33,7 @@
 	});
 
 	function searchEmployee() {
-		var searchField = $('#selSearchFieldEmpId').val();
+		var searchField = $('#selSearchFieldEmpId').val(); //styleId
 		var searchValue = $('#txtSearchValueEmpId').val();
 
 		$.ajax({
