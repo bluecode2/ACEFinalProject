@@ -24,7 +24,8 @@
 		proposal_status_name as propStatusName,
 		project_id			as projectId,
 		project_name		as projectName,
-		REMARKS				as remakrs
+		REMARKS				as remakrs,
+		est_main_days		as estMainDays
 		FROM VPROPOSED_TASK
 		WHERE proposal_status != 'TA_STAT_99' and project_id = #projId#
 		<dynamic prepend="AND">
@@ -90,7 +91,8 @@
 			proposed_to, 
 			created_by, 
 			create_date, 
-			proposal_status, project_id)
+			proposal_status, project_id,
+			est_main_days)
 			
 			values (
 			#propTaskId#,
@@ -102,7 +104,8 @@
 			(select employee_id from project where project_id = #projectId# ), 
 			#createdBy#,
 			SYSDATE,
-			'TA_STAT_01', #projectId# )
+			'TA_STAT_01', #projectId#,
+			fGetEstimatedMainDays(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'),TO_DATE(#estEndDateInString#,'yyyy-MM-dd')))
 	</insert>
 	
 	<update id="updatePropProjTask" parameterClass="propose_project_task.ProposeProjectTaskBean">

@@ -11,8 +11,10 @@ public class ProposeProjectTaskBean {
 	private String propTaskDesc;
 	private Date estStartDate;
 	private String estStartDateInString;
+	private String estStartDateDisplay;
 	private Date estEndDate;
 	private String estEndDateInString;
+	private String estEndDateDisplay;
 	private Integer propBy;
 	private String propByName;
 	private Integer propTo;
@@ -31,7 +33,7 @@ public class ProposeProjectTaskBean {
 	private String remakrs;
 	private Integer estMainDays;
 	
-	
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public Integer getEstMainDays() {
 		return estMainDays;
@@ -292,5 +294,13 @@ public class ProposeProjectTaskBean {
 
 	public void setPropToName(String propToName) {
 		this.propToName = propToName;
+	}
+	
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
 	}	
 }

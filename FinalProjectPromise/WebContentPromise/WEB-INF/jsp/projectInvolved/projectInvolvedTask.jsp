@@ -815,10 +815,10 @@
 							class="tableContent">
 							<thead>
 								<tr class="panel panel-info">
-									<td width="200px">Task Name</td>
-									<td>Task Desc</td>
-									<td align="center" width="190px">Estimate</td>
-									<td>Proposed To</td>
+									<td align="center" width="200px">Task Name</td>
+									<td align="center">Task Desc</td>
+									<td align="center" width="250px">Estimate Date</td>
+									<td align="center">Proposed To</td>
 									<td align="center">Status</td>
 									<td class="align-center">Action</td>
 								</tr>
@@ -839,12 +839,13 @@
 											<html:hidden styleClass="hdnListPropTaskEndDate" name="reg"
 												property="estStartDateInString" />
 
-
 											<td><bean:write name="reg" property="propTaskName" />
 											<td><bean:write name="reg" property="propTaskDesc" />
 											<td align="center"><bean:write name="reg"
-													property="estStartDateInString" /> &nbsp;to&nbsp; <bean:write
-													name="reg" property="estEndDateInString" /></td>
+													property="estStartDateDisplay" /> to <bean:write
+													name="reg" property="estEndDateDisplay" />
+												<br/>(<bean:write name="reg" property="estMainDays"/>  main days)
+											</td>
 											<td><bean:write name="reg" property="propToName" /></td>
 											<td align="center"><bean:write name="reg" property="propStatusName" /></td>
 											<td align="center">
