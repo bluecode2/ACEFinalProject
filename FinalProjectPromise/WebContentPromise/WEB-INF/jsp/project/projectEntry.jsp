@@ -96,10 +96,14 @@
 	var projectMgr 	= document.getElementById("txtEmployeeId").value;
 	var startDate 	= document.getElementById("readAbleEstStart").value; 
 	var endDate 	= document.getElementById("readAbleEstEnd").value;
-	
+	var dateNow = document.getElementById("hdnDatenow").value;
 	var str = "";
 	var isValid = true;
 	
+	if (startDate < dateNow){
+		str+= "Estimate Start Date must be equal or bigger than to day!\n";
+		isValid = false;
+	}
 	if(projectCode.trim() == '') {
 		str+= "<li>Project Code can not be empty!</li>";
 		isValid = false;
@@ -166,6 +170,7 @@
 		<html:hidden property="pBean.actEndDateInString" name="projectForm"/>
 		<html:hidden property="pBean.estMainDays" name="projectForm"/>
 		<html:hidden property="pBean.actMainDays" name="projectForm"/>
+		<html:hidden property="dateInString" name="projectForm" styleId="hdnDatenow"/>
 				
 		<div class="container">
 			<div class="divContent form-group has-info">

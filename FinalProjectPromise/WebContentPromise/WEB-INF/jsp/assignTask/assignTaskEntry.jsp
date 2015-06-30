@@ -72,6 +72,8 @@ function validateForm(){
 	var estStartDate 	= document.getElementById("txtEstStartDate").value;
 	var estEndDate 		= document.getElementById("txtEstEndDate").value;
 	var assignedTo 		= document.getElementById("txtAssignedToName").value;
+	var dateNow 		= document.getElementById('hdnDateInString').value;
+	
 	var str = "";
 	var isValid = true;
 	
@@ -80,6 +82,10 @@ function validateForm(){
 		isValid = false;
 	}
 	
+	if (estStartDate < dateNow){
+		str+= "Estimate Start Date must be equal or bigger than today!\n";
+		isValid = false;
+	}
 	if(taskName.trim() == '') {
 		str+= "<li>Task Name can not be empty!</li>";
 		isValid = false;
@@ -132,6 +138,8 @@ function validateForm(){
 		<html:hidden property="tkBean.assignedBy" name="assignTaskForm" styleId="hdSpvId"/>
 		<html:hidden property="tkBean.createdBy" name="assignTaskForm"/>
 		<html:hidden property="isAdd" name="assignTaskForm"/>
+		<html:hidden property="dateInString" name="assignTaskForm" styleId="hdnDateInString"/>
+		
 		<div class="container">
 			<div class="divContent form-group has-info">
 				<div class="text-danger" id="divError" style="display: none">

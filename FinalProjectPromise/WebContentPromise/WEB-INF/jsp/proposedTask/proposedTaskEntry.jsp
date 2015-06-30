@@ -39,6 +39,7 @@
 		var taskDesc 	= document.getElementById("txtTaskDesc").value;
 		var estStart 	= document.getElementById("txtEstStartDate").value;
 		var estEnd 		= document.getElementById("txtEstEndDate").value;
+		var datenow 	= document.getElementById('hdnDateInString').value;
 		
 		var str = "";
 		var isValid = true;
@@ -48,6 +49,10 @@
 			isValid = false;
 		}
 		
+		if(estStart < datenow) {
+			str+= "Estimate Start Date must be equal or bigger than to day!\n";
+			isValid = false;
+		}
 		if(taskName.trim() == '') {
 			str+= "<li>Task Name can not be empty!</li>";
 			isValid = false;
@@ -90,6 +95,7 @@
 		<html:hidden name="proposedTaskForm" property="task" />
 		<html:hidden name="proposedTaskForm" property="isAdd" />
 		<html:hidden name="proposedTaskForm" property="bean.propTaskId" />
+		<html:hidden property="dateInString" name="proposedTaskForm" styleId="hdnDateInString"/>
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>

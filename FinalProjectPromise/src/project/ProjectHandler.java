@@ -40,6 +40,7 @@ public class ProjectHandler extends Action{
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		pForm.setDateInString(sdf.format(now));
 		EmployeeForm eForm = new EmployeeForm();
 		EmployeeManager eMan = new EmployeeManager();
 		EmployeeBean eBean = new EmployeeBean();

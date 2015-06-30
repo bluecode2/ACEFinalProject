@@ -1,5 +1,6 @@
 package project;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -26,7 +27,14 @@ public class ProjectForm extends ActionForm{
 	private String val;
 	private List<ProjectBean> listOfProject;
 	private ProjectBean pBean = new ProjectBean();
+	private String dateInString;
 
+	public String getDateInString() {
+		return dateInString;
+	}
+	public void setDateInString(String dateInString) {
+		this.dateInString = dateInString;
+	}
 	public ProjectBean getpBean() {
 		return pBean;
 	}

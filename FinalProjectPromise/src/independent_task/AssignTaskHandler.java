@@ -1,6 +1,8 @@
 package independent_task;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +40,12 @@ public class AssignTaskHandler extends Action {
 		NotificationManager noMan = new NotificationManager();
 		tsForm.getTkBean().setAssignedBy(us.getEmployeeId());
 		ActivityManager actMan = new ActivityManager();
+		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		tsForm.setDateInString(sdf.format(now));
+		
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);

@@ -479,10 +479,20 @@
 		var taskDesc 	= document.getElementById("txtTaskDesc").value;
 		var startDate 	= document.getElementById("txtEstStartDate").value;
 		var endDate 	= document.getElementById("txtEstEndDate").value;
+		var estStartproj = document.getElementById("hdnEstStartProj").value;
+		var estEndproj = document.getElementById("hdnEstEndProj").value;
 		
 		var str = "";
 		var isValid = true;
 		
+		if (startDate < estStartproj){
+			str+= "Estimate Start Date of Task must be equal or bigger than Estimate Start Date Project!\n";
+			isValid = false;
+		}
+		if (endDate > estEndproj){
+			str+= "Estimate End Date of Task must be equal or smaller than Estimate End Date Project!\n";
+			isValid = false;
+		}
 		if(taskName.trim() == '') {
 			str+= "Task Name can not be empty!\n";
 			isValid = false;
@@ -553,6 +563,10 @@
 			name="projectTaskForm" value="" />
 		<html:hidden property="tmpProjectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
+		<!-- untuk validasi date -->
+		<html:hidden property="estStartProj" name="projectTaskForm" styleId="hdnEstStartProj"/>
+		<html:hidden property="estEndProj" name="projectTaskForm" styleId="hdnEstEndProj"/>
+		
 		<div class="container divContent">
 			<div class="form-group has-info">
 				<table width="100%">

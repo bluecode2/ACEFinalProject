@@ -1,5 +1,8 @@
 package proposed_task;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +34,10 @@ public class ProposedTaskHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		NotificationManager noMan = new NotificationManager();
+		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		dForm.setDateInString(sdf.format(now));
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
