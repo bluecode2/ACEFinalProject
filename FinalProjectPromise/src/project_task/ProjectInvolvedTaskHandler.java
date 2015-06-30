@@ -110,6 +110,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 			pTaskBean.setUpdatedBy(us.getUserId());
 
 			tsMan.updateTaskStat(pTaskBean);
+			
+			noMan.createNotificationProjectTask(us.getEmployeeId(), pTaskBean.getAssignedBy(), pTaskBean.getTaskId());
 		} else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())) { // TASK TO
 																		// PAUSE
 																		// TASK
@@ -147,6 +149,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 				tsForm.getBean().setCreatedBy(us.getUserId());
 				tsForm.getBean().setPropBy(us.getEmployeeId());
 				pProjtaskMan.insertPropProjTask(tsForm.getBean());
+				
+				noMan.createNotificationProposeTaskProject(us.getEmployeeId(), tsForm.getBean().getPropTo(), tsForm.getBean().getPropTaskId());
 			} else {
 				tsForm.getBean().setProjectId(projId);
 				tsForm.getBean().setUpdatedBy(us.getUserId());

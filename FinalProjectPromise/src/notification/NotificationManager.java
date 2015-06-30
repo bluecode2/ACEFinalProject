@@ -259,8 +259,6 @@ public class NotificationManager {
 	}
 	
 	public boolean createNotificationProposeIndependentTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
-		IndependentTaskManager itMan = new IndependentTaskManager();
-		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
 		
 		ProposedTaskManager ptMan = new ProposedTaskManager();
 		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(taskId);
@@ -279,12 +277,12 @@ public class NotificationManager {
 		}
 		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
 		
-			desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getPropTaskName();
+			desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName();
 			bean.setNotificationUrl("proposedTask.do");
 		}
 		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
 			
-			desc = creatorEmp.getEmployeeName() + " approve your task : " + ptBean.getPropTaskName();
+			desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName();
 			bean.setNotificationUrl("proposedTask.do");
 		}
 
@@ -344,6 +342,7 @@ public class NotificationManager {
 		
 		return true;
 	}
+	
 	public boolean createNotificationProjectTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
 		
 		ProjectTaskManager ptMan = new ProjectTaskManager();
@@ -390,6 +389,41 @@ public class NotificationManager {
 		bean.setEmployeeId(assignedEmployeeId);
 		bean.setSessionParameter("projectId#"+ptBean.getProjectId());
 		bean.setNotificationDesc(desc);	
+		insertNotification(bean);
+		
+		return true;
+	}
+	
+	public boolean createNotificationProposeTaskProject(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer propTaskId) {
+		ProposedTaskManager ptMan = new ProposedTaskManager();
+		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(propTaskId);
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
+		
+		NotificationBean bean = new NotificationBean();
+		
+		//propose, approve, decline
+		String desc="";
+		if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
+
+			desc = creatorEmp.getEmployeeName() + " proposed you a task " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();			
+			bean.setNotificationUrl("projectTask.do");
+			bean.setSessionParameter("projectId#"+ptBean.getProjectId());
+		}
+		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
+		
+			desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();
+			bean.setNotificationUrl("proposedTask.do");
+		}
+		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+			
+			desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName()+ " in project " + ptBean.getProjectName();
+			bean.setNotificationUrl("proposedTask.do");
+		}
+
+		bean.setEmployeeId(assignedEmployeeId);
+		bean.setNotificationDesc(desc);
 		insertNotification(bean);
 		
 		return true;

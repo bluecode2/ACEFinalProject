@@ -29,9 +29,27 @@ public class ProposedTaskBean {
 	private String propStatusName;
 	private Integer estMainDays;
 	private String remarks;
+	private String projectName;
+	private String projectId;
 	
 	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
 	public String getRemarks() {
 		return remarks;
 	}

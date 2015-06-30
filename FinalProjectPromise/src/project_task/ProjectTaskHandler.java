@@ -203,11 +203,12 @@ public class ProjectTaskHandler extends Action {
 			iTaskBean.setProjectId(tsForm.getBean().getProjectId());
 			iTaskBean.setEstStartDateInString(tsForm.getBean().getEstStartDateInString());
 			iTaskBean.setEstEndDateInString(tsForm.getBean().getEstEndDateInString());
-			
+			iTaskBean.setTaskId(iTaskMan.getNewTaskId());
 			iTaskMan.createNewAssignTaskProj(iTaskBean);
+			noMan.createNotificationProjectTask(us.getEmployeeId(),iTaskBean.getAssignedTo(),iTaskBean.getTaskId());
 			
 			aPropPMan.approveTask(tsForm.getBean());
-			
+			noMan.createNotificationProposeTaskProject(us.getEmployeeId(), tsForm.getBean().getPropBy(), tsForm.getBean().getPropTaskId());
 			response.sendRedirect("projectTask.do");
 			return null;
 		}
@@ -216,6 +217,9 @@ public class ProjectTaskHandler extends Action {
 			tsForm.getBean().setPropTaskId(tsForm.getSelectTaskId());
 			tsForm.getBean().setRemakrs(tsForm.getRemarksProp());
 			aPropPMan.declineTask(tsForm.getBean());
+			
+			tsForm.setBean(aPropPMan.getApproveTaskById(tsForm.getSelectTaskId()));
+			noMan.createNotificationProposeTaskProject(us.getEmployeeId(), tsForm.getBean().getPropBy(), tsForm.getBean().getPropTaskId());
 			response.sendRedirect("projectTask.do");
 			return null;
 		}

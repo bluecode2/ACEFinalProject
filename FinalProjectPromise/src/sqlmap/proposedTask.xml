@@ -66,7 +66,9 @@
 		task_id		 		as taskId,
 		proposal_status		as propStatus,
 		proposal_status_name as propStatusName,
-		est_main_days		as estMainDays
+		est_main_days		as estMainDays,
+		project_name		as projectName,
+		project_id			as projectId
 		FROM VPROPOSED_TASK
 		WHERE proposed_task_id = #propTaskId#
 	</select>

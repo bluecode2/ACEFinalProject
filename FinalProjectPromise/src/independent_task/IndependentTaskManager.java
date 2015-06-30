@@ -100,7 +100,7 @@ public class IndependentTaskManager {
 	public void createNewAssignTaskProj(IndependentTaskBean tsBean) {
 		try {
 			this.ibatis.startTransaction();
-			tsBean.setTaskId(getNewTaskId());
+			
 			this.ibatis.insert("independentTask.insertToAssignTaskProj", tsBean);
 			this.ibatis.commitTransaction();	
 		} catch (SQLException e) {
