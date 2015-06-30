@@ -99,7 +99,7 @@
 			to_date(#estStartDateInString#,'yyyy-MM-dd'),
 			to_date(#estEndDateInString#,'yyyy-MM-dd'),
 			#propBy#, 
-			(select supervisor_id from employee where employee_id = #propBy# ), 
+			(select employee_id from project where project_id = #projectId# ), 
 			#createdBy#,
 			SYSDATE,
 			'TA_STAT_01', #projectId# )
