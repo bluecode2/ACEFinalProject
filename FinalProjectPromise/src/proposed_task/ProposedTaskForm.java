@@ -22,7 +22,16 @@ public class ProposedTaskForm extends ActionForm  {
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	private String rankIdDisplay;
+	private String dateInString;
 	
+	public String getDateInString() {
+		return dateInString;
+	}
+
+	public void setDateInString(String dateInString) {
+		this.dateInString = dateInString;
+	}
+
 	public String getTask() {
 		return task;
 	}

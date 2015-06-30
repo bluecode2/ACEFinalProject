@@ -25,7 +25,14 @@ public class AssignTaskForm extends ActionForm
 	private String			statusTask;
 	private String			remarksRecord;
 	private List<ActivityBean> arrActivity;
+	private String dateInString;
 
+	public String getDateInString() {
+		return dateInString;
+	}
+	public void setDateInString(String dateInString) {
+		this.dateInString = dateInString;
+	}
 	public List<ActivityBean> getArrActivity() {
 		return arrActivity;
 	}

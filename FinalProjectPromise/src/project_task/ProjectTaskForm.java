@@ -49,6 +49,8 @@ public class ProjectTaskForm extends ActionForm
 	private String rankIdDisplay;
 	private Integer selectTaskId;
 	private String taskForProp;
+	private String estStartProj;
+	private String estEndProj;
 	
 	//penambahan fitur pada form untuk approve propose project task
 	private Integer assignTo;
@@ -58,6 +60,18 @@ public class ProjectTaskForm extends ActionForm
 	private String remarksProp;
 	
 	
+	public String getEstStartProj() {
+		return estStartProj;
+	}
+	public void setEstStartProj(String estStartProj) {
+		this.estStartProj = estStartProj;
+	}
+	public String getEstEndProj() {
+		return estEndProj;
+	}
+	public void setEstEndProj(String estEndProj) {
+		this.estEndProj = estEndProj;
+	}
 	public String getTmpProjectStatus() {
 		return tmpProjectStatus;
 	}

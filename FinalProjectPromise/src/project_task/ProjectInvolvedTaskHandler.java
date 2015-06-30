@@ -15,11 +15,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import project.ProjectManager;
-import project_member.ProjectMemberManager;
 import propose_project_task.ProposeProjectTaskManager;
 import user.UserBean;
+
 import common.CommonFunction;
 import common.Constant;
+
 import employee.EmployeeBean;
 import employee.EmployeeManager;
 
@@ -42,9 +43,10 @@ public class ProjectInvolvedTaskHandler extends Action {
 		
 		request.setAttribute("user", us.getEmployeeId());
 		tsForm.setEmpId(us.getEmployeeId());
+		
 		Date now = new Date();
-
-
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		NotificationManager noMan = new NotificationManager();
 
 		ProjectTaskBean pTaskBean = new ProjectTaskBean();
@@ -60,6 +62,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 				Integer projectId = (Integer) session.getAttribute("projectId");
 				tsForm.setPrjBean(projManager.getProjectByID(projectId));
 				tsForm.setTmpProjectStatus(tsForm.getPrjBean().getProjectStatus());
+				tsForm.setEstStartProj(tsForm.getPrjBean().getEstStartDateInString());
+				tsForm.setEstEndProj(tsForm.getPrjBean().getEstEndDateInString());
 				tsForm.setProjectId(projectId);
 				session.setAttribute("projectId", projectId);
 			} else {
