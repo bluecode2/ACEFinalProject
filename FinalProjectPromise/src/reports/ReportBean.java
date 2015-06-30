@@ -46,4 +46,10 @@ public class ReportBean {
 	public void setFilterPanel(String filterPanel) {
 		this.filterPanel = filterPanel;
 	}
+	public String getReportFile() {
+		return reportFile;
+	}
+	public void setReportFile(String reportFile) {
+		this.reportFile = reportFile;
+	}
 }

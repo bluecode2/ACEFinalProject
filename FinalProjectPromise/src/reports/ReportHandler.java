@@ -50,6 +50,13 @@ public class ReportHandler extends Action {
 			
 			return null;
 		}
+		else if("printReport".equals(rForm.getTask())){
+			ReportBean rptBean = rMan.getReportById(rForm.getSelectedId());
+			
+			session.setAttribute("reportBean", rptBean);
+			session.setAttribute("filterValue", rForm.getFilterValue());
+			return mapping.findForward("print");
+		}
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.REPORTS, us, request);
 		

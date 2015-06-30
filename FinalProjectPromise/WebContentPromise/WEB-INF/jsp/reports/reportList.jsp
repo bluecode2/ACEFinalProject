@@ -17,6 +17,11 @@
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 
+		<html:hidden name="reportForm" property="task"/>
+		<html:hidden styleId="hdnSelectedId" name="reportForm" property="selectedId"/>
+		<html:hidden styleId="hdnFilterValue" name="reportForm" property="filterValue"/>
+
+
 		<div class="container bg-info"
 			style="border-radius: 3px; background-color: #E8F4FA">
 			<button id="btnPrint" type="button" onclick="onBtnPrintClick();"
@@ -314,26 +319,39 @@
 	
 	<script type="text/javascript">
 	
+	function onBtnPrintClick(){
+		document.forms[0].task.value = "printReport";
+		document.forms[0].filterValue.value = generateFilter();
+		document.forms[0].submit();
+	}
+	
 	function generateFilter(){
 		var filterValue = "";
 		if ($('#datePeriod').is(':visible')){
-			filterValue+="#"+$('#txtStartDate').val()+"#"+$('#txtEndDate').val();
+			filterValue+=$('#txtStartDate').val()+"#"+$('#txtEndDate').val();
 		}
 		if ($('#currentEmployee').is(':visible')){
-			filterValue+="#"+$('#hdnCurrentEmpId').val();
+			if(filterValue != "") filterValue += "#";
+			filterValue+=$('#hdnCurrentEmpId').val();
 		}
 		if ($('#department').is(':visible')){
-			filterValue+="#"+$('#txtDeptId').val();
+			if(filterValue != "") filterValue += "#";
+			filterValue+=$('#txtDeptId').val();
 		}
 		if ($('#projectStatus').is(':visible')){
-			filterValue+="#"+$('#txtGenCodeId').val();
+			if(filterValue != "") filterValue += "#";
+			filterValue+=$('#txtGenCodeId').val();
 		}
 		if ($('#employee').is(':visible')){
-			filterValue+="#"+$('#txtEmployeeId').val();
+			if(filterValue != "") filterValue += "#";
+			filterValue+=$('#txtEmployeeId').val();
 		}
 		if ($('#project').is(':visible')){
-			filterValue+="#"+$('#txtProjId').val();
+			if(filterValue != "") filterValue += "#";
+			filterValue+=$('#txtProjId').val();
 		}
+		
+		return filterValue;
 	}
 	
 	function registerSearchProj() {
@@ -415,6 +433,7 @@
 				
 				var reportId = $(this).closest('li').val();
 				$('#reportTitle').html($(this).html());
+				$('#hdnSelectedId').val(reportId);
 				
 				$.ajax({
 					type : "POST",

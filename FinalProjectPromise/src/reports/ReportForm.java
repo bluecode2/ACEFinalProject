@@ -13,6 +13,7 @@ import department.DepartmentBean;
 public class ReportForm extends ActionForm {
 	private String task;
 	private Integer selectedId;
+	private String filterValue;
 	
 	//untuk tampilan drop down
 	private List<DepartmentBean> listOfDept;
@@ -102,6 +103,14 @@ public class ReportForm extends ActionForm {
 
 	public void setTask(String task) {
 		this.task = task;
+	}
+
+	public String getFilterValue() {
+		return filterValue;
+	}
+
+	public void setFilterValue(String filterValue) {
+		this.filterValue = filterValue;
 	}
 	
 

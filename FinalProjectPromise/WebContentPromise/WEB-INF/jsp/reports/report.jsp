@@ -1,4 +1,8 @@
 <%@ page import="java.util.Map"%>
+<%@ page import="reports.ReportBean"%>
+<%@ page import="reports.ReportManager"%>
+
+
 <html>
 <head>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -10,14 +14,17 @@
 </head>
 <%@include file="../include/CrystalReportHelper.jsp"%>
 <body>
-
-	<%!private final String reportName = "report_exercise.rpt";%>
 	<%
 		try {
-			ReportClientDocument clientDoc = getClientDocument(reportName);
-			//Map map = (Map) session.getAttribute("param");
 
-			String empId = (String) session.getAttribute("param");
+			ReportBean rptBean = (ReportBean)session.getAttribute("reportBean");
+			String filter = (String)session.getAttribute("filterValue");
+			System.out.println(filter);
+			
+			ReportClientDocument clientDoc = null;//getClientDocument(rptBean.getReportFile());
+			System.out.println(rptBean.getReportFile());
+			
+			//Map map = (Map) session.getAttribute("param");
 
 			/*int i = 0;
 			String batchName = "'"+map.get("batchNamePrint")+"'";
@@ -25,8 +32,17 @@
 			try {
 				/*setDocParameter(0, batchName, clientDoc);
 				setDocParameter(1, topicName, clientDoc);*/
-				setDocParameter(0, empId, clientDoc);
-				viewReport(clientDoc, request, response, session);
+				String[] filterValue = filter.split("#"); 
+				int paramCount = filterValue.length;
+				System.out.println(paramCount);
+				
+				for(int i = 0;i < paramCount; i++){
+					//setDocParameter(i, filterValue[i], clientDoc);
+					System.out.println(filterValue[i]);
+				}
+				
+				
+				//viewReport(clientDoc, request, response, session);
 			} finally {
 				clientDoc.close();
 				clientDoc.dispose();
