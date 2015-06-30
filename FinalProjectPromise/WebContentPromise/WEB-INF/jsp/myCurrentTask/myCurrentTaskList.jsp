@@ -279,7 +279,6 @@
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
 							<td class="align-center">Estimate Date</td>
-							<td class="align-center">Progress</td>
 							<td class="align-center">Status</td>
 							<td class="align-center">Activity</td>
 							<td class="align-center">Action</td>
@@ -315,9 +314,8 @@
 							           -
 							          </logic:empty>
 							         </td>
-									<td align="center"><bean:write name="reg" property="taskProgress" />%</td>
 									<td align="center">
-										<bean:write name="reg" property="taskStatusName" /><br/>
+										<bean:write name="reg" property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%<br/>
 										<logic:notEmpty name="reg" property="remarks">
 											<a href="#" class="text-info viewRemarks">Remarks</a>
 										</logic:notEmpty>
