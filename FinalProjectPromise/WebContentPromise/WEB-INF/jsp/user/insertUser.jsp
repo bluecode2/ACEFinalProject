@@ -125,6 +125,7 @@
 	}
 	
 	function chkActiveDirectory(){
+		showLoading();
 		var username = $('#txtUserName').val();
 		
 		$.ajax({
@@ -142,9 +143,11 @@
 					$("#divInvalidAD").show();
 					$("#hdnIsActiveDirectory").val("0");
 				}
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
 		});
 	}

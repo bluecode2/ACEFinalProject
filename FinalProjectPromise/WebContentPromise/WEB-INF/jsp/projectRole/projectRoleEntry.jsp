@@ -23,7 +23,6 @@
 	}
 	
 	function validateForm(){
-		
 		var projRoleCode	= document.getElementById("txtProjectRoleCode").value;
 		var projRoleName 	= document.getElementById("txtProjectRoleName").value;
 		

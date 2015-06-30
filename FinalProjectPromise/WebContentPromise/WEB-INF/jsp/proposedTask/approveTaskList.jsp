@@ -101,6 +101,7 @@
 	}
 
 	function search() {
+		showLoading();
 		var spvId = $('#hdnEmpId').val();
 		var searchField = $('#selSearchFieldAssignTo').val();
 		var searchValue = $('#txtSearchValueAssignTo').val();
@@ -114,9 +115,11 @@
 				$("#tblSearch").find("tr:gt(0)").remove();
 				$("#tblSearch").append(response);
 				registerSearchAssignToEvent();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
 		});
 	}

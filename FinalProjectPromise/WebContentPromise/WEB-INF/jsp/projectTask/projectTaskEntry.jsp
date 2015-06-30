@@ -33,6 +33,7 @@
 	});
 
 	function searchEmployee() {
+		showLoading();
 		var searchField = $('#selSearchFieldEmpId').val();
 		var searchValue = $('#txtSearchValueEmpId').val();
 
@@ -45,9 +46,11 @@
 				$("#tblSearchEmp").find("tr:gt(0)").remove();
 				$("#tblSearchEmp").append(response);
 				registerSearchEmployee();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
 		});
 	}
@@ -79,7 +82,6 @@
 	}
 	
 	function validateForm(){
-		
 		var taskName	= document.getElementById("txtTaskName").value;
 		var taskDesc 	= document.getElementById("txtTaskDesc").value;
 		var estStart 	= document.getElementById("txtEstStartDate").value;

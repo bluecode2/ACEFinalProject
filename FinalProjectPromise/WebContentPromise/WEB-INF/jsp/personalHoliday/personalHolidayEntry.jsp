@@ -45,6 +45,7 @@
 	}
 	
 	function search() {
+		showLoading();
 		var empId = $('#hiddenEmpId').val();
 		var searchField = $('#selSearchFieldEmp').val();
 		var searchValue = $('#txtSearchValueEmp').val();
@@ -58,9 +59,11 @@
 				$("#tblSearch").find("tr:gt(0)").remove();
 				$("#tblSearch").append(response);
 				registerSearchEmpEvent();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
 		});
 	}

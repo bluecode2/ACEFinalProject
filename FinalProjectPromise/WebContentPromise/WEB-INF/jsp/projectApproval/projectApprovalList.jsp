@@ -26,6 +26,7 @@ $(document).ready(function() {
 	
 	
 	$('.linkMember').on('click',function(){
+		showLoading();
 		var selecId = $(this).closest('tr').find('.hdProjectId').val();
 
 		$.ajax({
@@ -37,15 +38,17 @@ $(document).ready(function() {
 				$("#tblShow").find("tr:gt(0)").remove();
 				$("#tblShow").append(response);
 				$('#showMember').modal();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading();
 			}
-
 		});
 	});
 	
 });
+
 function search() {
 	document.forms[0].currSearchField.value = document.forms[0].searchField.value;
 	document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
@@ -59,7 +62,6 @@ function goToEvaluate(id) {
 	document.forms[0].submit();
 }
 </script>
-
 
 <title>Project Approval List</title>
 </head>

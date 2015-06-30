@@ -18,7 +18,6 @@
 
 <script type="text/javascript">
 	function onBtnAddClick() {
-		//alert('add');
 		document.forms[0].task.value = 'add';
 		document.forms[0].submit();
 	}

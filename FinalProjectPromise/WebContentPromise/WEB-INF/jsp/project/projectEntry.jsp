@@ -89,70 +89,69 @@
 	}
 	
 	function validateForm(){
-	
-	var projectCode	= document.getElementById("readAbleCode").value;
-	var projectName = document.getElementById("readAbleName").value;
-	var projectDesc	= document.getElementById("readAbleDesc").value;
-	var projectMgr 	= document.getElementById("txtEmployeeId").value;
-	var startDate 	= document.getElementById("readAbleEstStart").value; 
-	var endDate 	= document.getElementById("readAbleEstEnd").value;
-	var dateNow = document.getElementById("hdnDatenow").value;
-	var str = "";
-	var isValid = true;
-	
-	if (startDate < dateNow){
-		str+= "Estimate Start Date must be equal or bigger than to day!\n";
-		isValid = false;
+		var projectCode	= document.getElementById("readAbleCode").value;
+		var projectName = document.getElementById("readAbleName").value;
+		var projectDesc	= document.getElementById("readAbleDesc").value;
+		var projectMgr 	= document.getElementById("txtEmployeeId").value;
+		var startDate 	= document.getElementById("readAbleEstStart").value; 
+		var endDate 	= document.getElementById("readAbleEstEnd").value;
+		var dateNow = document.getElementById("hdnDatenow").value;
+		var str = "";
+		var isValid = true;
+		
+		if (startDate < dateNow){
+			str+= "Estimate Start Date must be equal or bigger than to day!\n";
+			isValid = false;
+		}
+		if(projectCode.trim() == '') {
+			str+= "<li>Project Code can not be empty!</li>";
+			isValid = false;
+		}
+		else if(projectCode.length > 26) {
+			str+= "<li>Project Code can not be more than 25 characters!</li>";
+			isValid = false;
+		}
+		
+		if(projectName.trim() == '') {
+			str+= "<li>Project name can not be empty!</li>";
+			isValid = false;
+		}
+		else if(projectName.length > 26) {
+			str+= "<li>Project Name can not be more than 25 characters!</li>";
+			isValid = false;
+		}
+		
+		if(projectDesc.trim() == '') {
+			str+= "<li>Project Description can not be empty!</li>";
+			isValid = false;
+		}
+		else if(projectDesc.length > 101) {
+			str+= "<li>Project Description can not be more than 100 characters!</li>";
+			isValid = false;
+		}
+		
+		if(projectMgr.trim() == '') {
+			str+= "<li>Project Manager can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(startDate.trim() == '') {
+			str+= "<li>Start Date Date can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(endDate.trim() == '') {
+			str+= "<li>End Date Date can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
+		}
+		
+		return isValid;
 	}
-	if(projectCode.trim() == '') {
-		str+= "<li>Project Code can not be empty!</li>";
-		isValid = false;
-	}
-	else if(projectCode.length > 26) {
-		str+= "<li>Project Code can not be more than 25 characters!</li>";
-		isValid = false;
-	}
-	
-	if(projectName.trim() == '') {
-		str+= "<li>Project name can not be empty!</li>";
-		isValid = false;
-	}
-	else if(projectName.length > 26) {
-		str+= "<li>Project Name can not be more than 25 characters!</li>";
-		isValid = false;
-	}
-	
-	if(projectDesc.trim() == '') {
-		str+= "<li>Project Description can not be empty!</li>";
-		isValid = false;
-	}
-	else if(projectDesc.length > 101) {
-		str+= "<li>Project Description can not be more than 100 characters!</li>";
-		isValid = false;
-	}
-	
-	if(projectMgr.trim() == '') {
-		str+= "<li>Project Manager can not be empty!</li>";
-		isValid = false;
-	}
-	
-	if(startDate.trim() == '') {
-		str+= "<li>Start Date Date can not be empty!</li>";
-		isValid = false;
-	}
-	
-	if(endDate.trim() == '') {
-		str+= "<li>End Date Date can not be empty!</li>";
-		isValid = false;
-	}
-	
-	if(!isValid){
-		document.getElementById('errorContent').innerHTML = str;
-		document.getElementById("divError").style.display = "block";
-	}
-	
-	return isValid;
-}
 </script>                 
 </head>
 <body>

@@ -99,7 +99,6 @@
 	}
 	
 	function validateForm(){
-		
 		var empId	= document.getElementById("txtEmployeeId").value;
 		var role = document.getElementById("txtRoled").value;
 		
@@ -123,7 +122,6 @@
 		
 		return isValid;
 	}
-
 </script>
 </head>
 <body>

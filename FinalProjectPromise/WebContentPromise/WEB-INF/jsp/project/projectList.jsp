@@ -130,7 +130,6 @@
 		document.forms[0].selectedId.value = projectId;
 		document.forms[0].submit(); 
 	}
-	
 </script>
 </head>
 <body>

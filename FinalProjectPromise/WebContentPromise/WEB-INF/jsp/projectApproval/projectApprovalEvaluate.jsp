@@ -17,14 +17,17 @@
 
 		changePage(1);
 	}
+	
 	function onBtnBackClick() {
 		window.location.href = "projectApproval.do";
 	}
+	
 	function onBtnApproveClick() {
 		document.forms[0].task.value = "approve";
 		document.forms[0].selectedId.value = $('#hdProjectId').val();
 		document.forms[0].submit();
 	}
+	
 	function onBtnDeclineClick() {
 		var projectId = $('#hdProjectId').val();
 		var projectName = $('#txtProjectName').val();
@@ -33,9 +36,7 @@
 		$('#addRemarks').modal();
 	}
 
-
 	$(document).ready( function() {
-		
 		$('.insertRemarks').on('click', function() {
 			document.forms[0].selectedId.value = $('#hdProjectId').val();
 			document.forms[0].task.value = "decline";
@@ -44,7 +45,7 @@
 			});
 		
 		$('.linkActivity').on('click',function(){
-			
+			showLoading();
 			var taskId = $(this).closest('tr').find('.hdTaskId').val();
 
 			$.ajax({
@@ -56,9 +57,11 @@
 					$("#tblShow").find("tr:gt(0)").remove();
 					$("#tblShow").append(response);
 					$('#showMember').modal();
+					hideLoading();
 				},
 				error : function(e) {
 					alert("Error: " + e);
+					hideLoading();
 				}
 
 			});

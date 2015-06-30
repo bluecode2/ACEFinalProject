@@ -37,7 +37,6 @@
 	}
 	
 	function validateForm(){
-		
 		var genHolStartDate	= document.getElementById("txtGenStartDate").value;
 		var genHolEndDate 	= document.getElementById("txtGenEndDate").value;
 		
