@@ -27,6 +27,7 @@
 	});
 
 	function search() {
+		showLoading();
 		var deptId = $('#hdnDeptId').val();
 		var searchField = $('#selSearchFieldDeptHead').val();
 		var searchValue = $('#txtSearchValueDeptHead').val();
@@ -40,9 +41,11 @@
 				$("#tblSearch").find("tr:gt(0)").remove();
 				$("#tblSearch").append(response);
 				registerSearchHeadDeptEvent();
+				hideLoading();
 			},
 			error : function(e) {
 				alert("Error: " + e);
+				hideLoading(); 
 			}
 		});
 	}

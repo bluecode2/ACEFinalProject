@@ -24,7 +24,6 @@
 	}
 	
 	function actionForm(task, id, nama) {
-
 		document.forms[0].task.value = task;
 		document.forms[0].selectedId.value = id;
 
@@ -35,7 +34,6 @@
 		} else {
 			document.forms[0].submit();
 		}
-
 	}
 </script>
 <body>

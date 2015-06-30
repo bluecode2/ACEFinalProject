@@ -45,13 +45,14 @@ function search() {
 			$("#tblSearch").find("tr:gt(0)").remove();
 			$("#tblSearch").append(response);
 			registerSearchAssignToEvent();
+			hideLoading();
 		},
 		error : function(e) {
 			alert("Error: " + e);
+			hideLoading(); 
 		}
 		
 	});
-	hideLoading();	
 }
 
 function registerSearchAssignToEvent(){

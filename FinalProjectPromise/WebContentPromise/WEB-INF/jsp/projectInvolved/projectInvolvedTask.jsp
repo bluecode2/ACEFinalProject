@@ -784,12 +784,18 @@
 						<table width="100%">
 							<tr valign="middle">
 								<td width="60%"><div align="left">
+								<logic:notEqual value="PR_STAT_04" name="projectTaskForm" property="tmpProjectStatus">
+								<logic:notEqual value="PR_STAT_98" name="projectTaskForm" property="tmpProjectStatus">
+								<logic:notEqual value="PR_STAT_03" name="projectTaskForm" property="tmpProjectStatus">
 								<logic:notEqual value="PR_STAT_99" name="projectTaskForm" property="tmpProjectStatus">
 										<button type="button" href="#" id="btnAddPropTask"
 											class="btn btn-raised btn-info btn-icon"
 											title="Proposed Task">
 											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										</button>
+								</logic:notEqual>
+								</logic:notEqual>
+								</logic:notEqual>
 								</logic:notEqual>
 									</div></td>
 								<td>Search by</td>
