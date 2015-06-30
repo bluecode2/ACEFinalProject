@@ -191,8 +191,8 @@
 										data-target="taskDesc"> <bean:write name="reg"
 												property="propTaskName" /></a>
 									</td>
-									<td align="center"><bean:write name="reg"
-											property="estStartDateDisplay" /> to <bean:write name="reg"
+									<td align="center">
+										<bean:write name="reg" property="estStartDateDisplay" /> to <bean:write name="reg"
 											property="estEndDateDisplay" /> 
 											<br />(<bean:write
 											name="reg" property="estMainDays" /> main days)</td>

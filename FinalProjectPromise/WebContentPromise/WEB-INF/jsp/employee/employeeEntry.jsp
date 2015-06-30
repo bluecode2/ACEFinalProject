@@ -39,6 +39,7 @@
 	}
 
 	function searchSupervisor() {
+		showLoading();
 		var searchField = $('#selSearchFieldSpv').val();
 		var searchValue = $('#txtSearchValueSpv').val();
 		var deptId		= $('#hdDeptId').val();
@@ -52,9 +53,11 @@
 						$("#tblSearchSpv").find("tr:gt(0)").remove();
 						$("#tblSearchSpv").append(response);
 						registerSearchSpvEvent();
+						hideLoading();
 					},
 					error : function(e) {
 						alert("Error: " + e);
+						hideLoading();
 					}
 				});
 	}
@@ -74,6 +77,7 @@
 	}
 
 	function searchDepartment() {
+		showLoading();
 		var searchField = $('#selSearchFieldDept').val();
 		var searchValue = $('#txtSearchValueDept').val();
 
@@ -86,9 +90,11 @@
 						$("#tblSearchDept").find("tr:gt(0)").remove();
 						$("#tblSearchDept").append(response);
 						registerSearchDeptEvent();
+						hideLoading();
 					},
 					error : function(e) {
 						alert("Error: " + e);
+						hideLoading();
 					}
 				});
 	}
@@ -111,6 +117,7 @@
 	}
 	
 	function searchRank() {
+		showLoading();
 		var searchField = $('#selSearchFieldRank').val();
 		var searchValue = $('#txtSearchValueRank').val();
 		$
@@ -123,14 +130,16 @@
 						$("#tblSearchRank").find("tr:gt(0)").remove();
 						$("#tblSearchRank").append(response);
 						registerSearchRankEvent();
+						hideLoading();
 					},
 					error : function(e) {
 						alert("Error: " + e);
+						hideLoading();
 					}
 				});
 	}
+	
 function validateForm(){
-		
 		var empCode 	= document.getElementById("txtEmpCode").value;
 		var empName 	= document.getElementById("txtEmpName").value;
 		var email 		= document.getElementById("txtEmail").value;
@@ -204,7 +213,6 @@ function validateForm(){
 		
 		return isValid;
 	}
-
 </script>
 
 </head>

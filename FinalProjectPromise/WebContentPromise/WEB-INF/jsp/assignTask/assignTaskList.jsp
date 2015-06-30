@@ -91,6 +91,7 @@ function search() {
 			document.forms[0].submit();
 		});
 		$('.linkActivity').on('click',function(){
+			showLoading(); 
 			var taskId = $(this).closest('tr').find('.hdTaskId').val();
 			$.ajax({
 				type : "POST",
@@ -101,17 +102,17 @@ function search() {
 					$("#tblShow").find("tr:gt(0)").remove();
 					$("#tblShow").append(response);
 					$('#showMember').modal();
+					hideLoading(); 
 				},
 				error : function(e) {
 					alert("Error: " + e);
+					hideLoading(); 
 				}
-
 			});
 
 			var taskName = $(this).closest('tr').find('.hdTaskName').val();
 			var assignedTo = $(this).closest('tr').find('.hdAssignedToName').val();
 			
-
 			$('#txtActivityTaskName').val(taskName);
 			$('#txtActivityAssignTo').val(assignedTo);
 			$('#showActivity').modal();
