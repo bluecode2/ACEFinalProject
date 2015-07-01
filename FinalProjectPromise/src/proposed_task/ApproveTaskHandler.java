@@ -64,7 +64,7 @@ public class ApproveTaskHandler extends Action {
 
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
 			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
-			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
+			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropTo(), aForm.getBean().getPropTaskId());
 			response.sendRedirect("approveTask.do");
 			return null;
 		}
