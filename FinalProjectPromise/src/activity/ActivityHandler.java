@@ -1,5 +1,7 @@
 package activity;
 
+import independent_task.IndependentTaskManager;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import common.Constant;
 
 import user.UserBean;
 
@@ -52,6 +56,8 @@ public class ActivityHandler extends Action {
 		else if ("manageActivity".equals(aForm.getTask())) {
 			List<ActivityBean> arrList = aMan.getActivityByTaskId(aForm
 					.getTaskId());
+			
+			
 			if (arrList.size() > 0) {
 				for (ActivityBean actBean : arrList) {
 					out.println("<tr>");
@@ -60,10 +66,18 @@ public class ActivityHandler extends Action {
 					out.println("<td>" + actBean.getActivityDesc() + "</td>");
 					if (actBean.getIsCompleted() == 1) {
 						out.println("<td align=\"center\"> <input type=\"checkbox\" checked disabled> </td>");
-						out.println("<td align=\"center\"><a class=\"text-warning btnUndoComplete\" href=\"#\" title=\"Undo Complete\"><span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span></a></td>");
+						if(actBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING))
+							out.println("<td align=\"center\"><a class=\"text-warning btnUndoComplete\" href=\"#\" title=\"Undo Complete\"><span class=\"glyphicon glyphicon-repeat\" aria-hidden=\"true\"></span></a></td>");
+						else
+							out.println("<td align=\"center\"></td>");
 					} else {
 						out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
-						out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+						if(actBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING))
+							out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+						else if(actBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED))
+							out.println("<td align=\"center\"><a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+						else
+							out.println("<td align=\"center\"></td>");
 					}
 
 					out.println("</tr>");
@@ -88,9 +102,15 @@ public class ActivityHandler extends Action {
 			out.println("<input type=\"hidden\" class=\"hdnActivityId\" value=\""
 					+ actBean.getActivityId() + "\" />");
 			out.println("<td>" + actBean.getActivityDesc() + "</td>");
+			
 			out.println("<td align=\"center\"> <input type=\"checkbox\" disabled> </td>");
-			out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
-
+			if(actBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING))
+				out.println("<td align=\"center\"><a class=\"text-success btnComplete\" href=\"#\" title=\"Complete\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a> &nbsp; <a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+			else if(actBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED))
+				out.println("<td align=\"center\"><a class=\"text-danger btnActivityDelete\" href=\"#\" title=\"Delete\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td>");
+			else
+				out.println("<td align=\"center\"></td>");
+			
 			out.println("</tr>");
 
 		}
