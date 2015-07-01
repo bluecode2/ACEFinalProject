@@ -327,28 +327,66 @@
 	
 	function generateFilter(){
 		var filterValue = "";
+		var deptId = "";
+		var empId = "";
+		var endDate = "";
+		var projectId = "";
+		var projectStatus = "";
+		var startDate = "";
+		
 		if ($('#datePeriod').is(':visible')){
-			filterValue+=$('#txtStartDate').val()+"#"+$('#txtEndDate').val();
+			startDate = $('#txtStartDate').val();
+			endDate  = $('#txtEndDate').val();
+			//filterValue+=$('#txtStartDate').val()+"#"+$('#txtEndDate').val();
 		}
 		if ($('#currentEmployee').is(':visible')){
-			if(filterValue != "") filterValue += "#";
-			filterValue+=$('#hdnCurrentEmpId').val();
+			empId = $('#hdnCurrentEmpId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#hdnCurrentEmpId').val();
 		}
 		if ($('#department').is(':visible')){
-			if(filterValue != "") filterValue += "#";
-			filterValue+=$('#txtDeptId').val();
+			deptId = $('#txtDeptId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#txtDeptId').val();
 		}
 		if ($('#projectStatus').is(':visible')){
-			if(filterValue != "") filterValue += "#";
-			filterValue+=$('#txtGenCodeId').val();
+			projectStatus = $('#txtGenCodeId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#txtGenCodeId').val();
 		}
 		if ($('#employee').is(':visible')){
-			if(filterValue != "") filterValue += "#";
-			filterValue+=$('#txtEmployeeId').val();
+			empId = $('#txtEmployeeId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#txtEmployeeId').val();
 		}
 		if ($('#project').is(':visible')){
-			if(filterValue != "") filterValue += "#";
-			filterValue+=$('#txtProjId').val();
+			projectId = $('#txtProjId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#txtProjId').val();
+		}
+		
+		if(deptId.length > 0){
+			filterValue += deptId;
+		}
+		if(empId.length > 0){
+			if(filterValue.length > 0) filterValue += "#";
+			filterValue += empId;
+		}
+		if(endDate.length > 0){
+			if(filterValue.length > 0) filterValue += "#";
+			filterValue += endDate;
+		}
+		if(projectId.length > 0){
+			if(filterValue.length > 0) filterValue += "#";
+			filterValue += projectId;
+		}
+		if(projectStatus.length > 0){
+			if(filterValue.length > 0) filterValue += "#";
+			filterValue += projectStatus;
+		}
+		if(startDate.length > 0){
+			if(filterValue.length > 0) filterValue += "#";
+			filterValue += startDate;
 		}
 		
 		return filterValue;

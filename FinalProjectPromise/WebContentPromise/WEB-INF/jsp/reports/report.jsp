@@ -21,7 +21,7 @@
 			String filter = (String)session.getAttribute("filterValue");
 			System.out.println(filter);
 			
-			ReportClientDocument clientDoc = null;//getClientDocument(rptBean.getReportFile());
+			ReportClientDocument clientDoc = getClientDocument(rptBean.getReportFile());
 			System.out.println(rptBean.getReportFile());
 			
 			//Map map = (Map) session.getAttribute("param");
@@ -37,12 +37,12 @@
 				System.out.println(paramCount);
 				
 				for(int i = 0;i < paramCount; i++){
-					//setDocParameter(i, filterValue[i], clientDoc);
+					setDocParameter(i, filterValue[i], clientDoc);
 					System.out.println(filterValue[i]);
 				}
 				
 				
-				//viewReport(clientDoc, request, response, session);
+				viewReport(clientDoc, request, response, session);
 			} finally {
 				clientDoc.close();
 				clientDoc.dispose();

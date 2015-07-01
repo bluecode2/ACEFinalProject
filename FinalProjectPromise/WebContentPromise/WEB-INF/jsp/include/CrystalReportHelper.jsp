@@ -12,11 +12,11 @@
 <%!
 // Path directory for all reports.
 String disableCache = "rassdk://";
-String path = "E:\\Reports\\report exercise\\";
+String path = "E:\\Reports\\PromiseReports\\";
 
 /*********** TESTING *************/
 // Should be using XML config file: clientSDKOptions.xml.
-String rasHostName = "003ACE0315";
+String rasHostName = "TEACHERACE0315";
 String dbUser = "promise";
 String dbPassword = "promise";
 
