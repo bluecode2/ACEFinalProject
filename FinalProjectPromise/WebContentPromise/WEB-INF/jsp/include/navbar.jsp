@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!-- This is navbar -->
-<nav class="navbar navbar-material-blue navbar-static-top shadow-z-1">
+<nav class="navbar navbar-material-blue navbar-fixed-top shadow-z-1">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
