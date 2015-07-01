@@ -36,7 +36,6 @@ public class ApproveTaskHandler extends Action {
 
 		aForm.setEmpId(us.getEmployeeId());
 		if (aForm.getTask().equals("approve")) {
-
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			//Insert new Task
 			IndependentTaskBean taskBean = new IndependentTaskBean();
@@ -65,7 +64,7 @@ public class ApproveTaskHandler extends Action {
 
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
 			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
-			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropBy(), aForm.getBean().getPropTaskId());
+			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropTo(), aForm.getBean().getPropTaskId());
 			response.sendRedirect("approveTask.do");
 			return null;
 		}

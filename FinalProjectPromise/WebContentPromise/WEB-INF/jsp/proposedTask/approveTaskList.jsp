@@ -195,10 +195,20 @@
 												property="propTaskName" /></a>
 									</td>
 									<td align="center">
-										<bean:write name="reg" property="estStartDateDisplay" /> to <bean:write name="reg"
-											property="estEndDateDisplay" /> 
-											<br />(<bean:write
-											name="reg" property="estMainDays" /> main days)</td>
+										<logic:notEmpty name="reg" property="estStartDateInString">
+											<bean:write name="reg" property="estStartDateDisplay" /> to 
+												<logic:notEmpty name="reg" property="estEndDateInString">
+													<bean:write name="reg" property="estEndDateDisplay" />
+												</logic:notEmpty>
+												<logic:empty  name="reg" property="estEndDateInString">
+													-
+												</logic:empty>
+												<br/>(<bean:write name="reg" property="estMainDays" /> main days)
+										</logic:notEmpty>
+										<logic:empty name="reg" property="estStartDateInString">
+											-
+										</logic:empty>
+									</td>
 									<td><bean:write name="reg" property="propByName" /></td>				
 									<td>
 										<input type="hidden" class="hdnAssignTo" value="<bean:write name="reg" property="propBy" />" />

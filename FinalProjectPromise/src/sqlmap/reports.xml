@@ -15,6 +15,14 @@
 		order by report_code 
 	</select>
 	
+	<select id="getListDeptByUserRole" resultClass="department.DepartmentBean" parameterClass="java.lang.Integer">
+		SELECT
+		DEPT_ID AS deptId,
+		DEPT_NAME AS deptName
+		FROM VUSERROLEDEPT
+		WHERE USER_ROLE_ID = #userRoleId#
+	</select>
+	
 	<select id="getListParentReportsByUserRole" parameterClass="java.lang.Integer" resultClass="reports.ReportBean">
 		SELECT 
 		REPORT_ID		AS reportId,

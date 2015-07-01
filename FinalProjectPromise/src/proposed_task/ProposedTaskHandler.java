@@ -14,6 +14,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.crystaldecisions.a.d;
+
 import common.CommonFunction;
 import common.Constant;
 import employee.EmployeeBean;
@@ -59,6 +61,8 @@ public class ProposedTaskHandler extends Action {
 
 		else if (dForm.getTask().equals("delete")) {
 			dForm.getBean().setUpdatedBy(us.getUserId());
+			dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
+			noMan.createNotificationHapusProposeTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());
 			dMan.deleteProposedTask(dForm.getSelectedId(),us.getUserId());
 		}
 		else if (dForm.getTask().equals("save")) {

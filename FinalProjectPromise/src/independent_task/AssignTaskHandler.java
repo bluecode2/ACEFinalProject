@@ -76,6 +76,9 @@ public class AssignTaskHandler extends Action {
 		else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
 
+			System.out.println("disni ass task handler");
+			System.out.println("act main days : " + tsForm.getTkBean().getActmainDays());
+			
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				request.setAttribute("pageTitle", "Assign Independent Task");
@@ -89,7 +92,6 @@ public class AssignTaskHandler extends Action {
 				tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
-
 			}	
 		}
 		else if ("secondEdit".equals(tsForm.getTask())) {
@@ -116,7 +118,6 @@ public class AssignTaskHandler extends Action {
 			
 			List<ActivityBean> arrActivity = tsForm.getArrActivity();
 
-			System.out.println(arrActivity.size());
 			for (ActivityBean actBean : arrActivity) {
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearch\">");
 				out.println("<td>" + actBean.getActivityDesc() + "</td>");

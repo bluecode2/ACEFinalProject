@@ -330,11 +330,11 @@
 											</colgroup>
 											<tr>
 												<td><html:text name="projectTaskForm"
-														property="prjBean.estStartDateInString"
+														property="prjBean.estStartDateDisplay"
 														styleClass="form-control" disabled="true"></html:text></td>
 												<td align="center">to</td>
 												<td><html:text name="projectTaskForm"
-														property="prjBean.estEndDateInString"
+														property="prjBean.estEndDateDisplay"
 														styleClass="form-control" disabled="true"></html:text></td>
 											</tr>
 										</table>

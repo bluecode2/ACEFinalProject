@@ -41,7 +41,7 @@
 				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		order by PROJECT_ID) us
+		order by EST_END_DATE) us
 		WHERE ROWNUM &lt; = #end#)
 		WHERE rnum &gt; #begin#
 	</select>
@@ -233,7 +233,7 @@
 				LOWER(P.PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		order by P.PROJECT_ID) us
+		order by P.EST_END_DATE) us
 		WHERE ROWNUM &lt; = #end#)
 		WHERE rnum &gt; #begin#
 	</select>
@@ -390,7 +390,7 @@
 				LOWER(PROJECT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
-		order by PROJECT_ID) us
+		order by EST_END_DATE) us
 		WHERE ROWNUM &lt; = #end#)
 		WHERE rnum &gt; #begin#
 	</select>

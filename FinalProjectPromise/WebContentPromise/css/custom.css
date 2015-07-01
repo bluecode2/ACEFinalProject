@@ -1,6 +1,7 @@
 /*
 material-blue					#2196f3
 material-light-blue / -info		#03a9f4
+								#4FC3F7
 bg-info							#d9edf7
 */
 
@@ -75,7 +76,7 @@ label {
   margin-bottom: -1px;
 }
 .nav-tabs > li:first-child {
-  padding-left: 20px;
+  padding-left: 15px;
 }
 .nav-tabs > li > a {
   color: #03a9f4 !important;
@@ -91,22 +92,43 @@ label {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #2196f3 !important;
-  background: rgba(217, 237, 247, 0.3) !important;
+  background: #F4FAFD !important;
   cursor: default !important;
   border: 1px solid #81D4FA !important;
-  border-bottom-color: #fff !important;
+  border-bottom-color: #F4FAFD !important;
 }
 
 .nav-stacked > li.active > a {
 	border-radius: 2px;
 	background-color: #03a9f4 !important;
 }
+.tab-content {
+/* 	margin-top: -15px; */
+/* 	padding: 5px 25px; */
+/* 	background-color: #F4FAFD; */
+}
+.noshadow {
+	box-shadow: none !important;
+}
 
 .badge {
 	background-color: #ffeb3b;
 	color: #2196f3;
 }
-
+.home-proj-header,
+.home-task-header {
+  background-color: rgba(33,	169, 244, 0.2);
+  color: #03a9f4;
+  margin:2px;
+  padding: 12px 15px ;
+}
+.home-proj-body,
+.home-task-body {
+  cursor:pointer;
+  background-color: rgba(255,	169, 244, 0.2);
+  margin:2px;
+  padding: 12px 15px ;
+}
 .notif {
   cursor:pointer;
   background-color: rgba(3,	169, 244, 0.2);
@@ -393,7 +415,7 @@ thead > tr > td , th {
   position: relative;
 }
 .progress-pie-chart.gt-50 {
-  background-color: #81CE97;
+  background-color: #35BAF6;
 }
 
 .ppc-progress {
@@ -415,7 +437,7 @@ thead > tr > td , th {
   width: 200px;
   height: 200px;
   clip: rect(0, 100px, 200px, 0);
-  background: #81CE97;
+  background: #35BAF6;
   transform: rotate(60deg);
 }
 .gt-50 .ppc-progress {
@@ -442,7 +464,7 @@ thead > tr > td , th {
   display: block;
   font-size: 2.6em;
   font-weight: bold;
-  color: #81CE97;
+  color: #35BAF6;
 }
 
 .pcc-percents-wrapper {
