@@ -126,7 +126,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 																		// TASK
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
-			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus,"");
 
 		}
 

@@ -22,15 +22,22 @@
 	}
 
 	function onBtnSaveClick() {
-		if(validateForm()){
+		var newTask = document.forms[0].task.value;
+		if (newTask == 'add' || newTask == 'edit'){
+			if(validateForm()){
+				document.forms[0].task.value = "save";
+				document.forms[0].submit();
+			}
+		}else{
 			document.forms[0].task.value = "save";
 			document.forms[0].submit();
 		}
+			
 	}
 
 	$(document).ready(
 			function() {
-				$(".datepicker").attr("data-provide", "datepicker");
+				
 				registerSearchEmployee();
 				var newTask = document.forms[0].task.value;
 				if (newTask == 'add' || newTask == 'edit'){
@@ -45,9 +52,13 @@
 					$('#readAbleName').attr("readonly",true);
 					$('#readAbleDesc').attr("readonly",true);
 					$('#readAbleEstStart').attr("readonly",true);
+					$('#readAbleEstStart').removeClass("datepicker");
 					$('#readAbleEstEnd').attr("readonly",true);
+					$('#readAbleEstEnd').removeClass("datepicker");
 					document.getElementById('popView').style.display = 'none';
 				}
+				
+				$(".datepicker").attr("data-provide", "datepicker");
 			});
 	
 	function registerSearchEmployee(){
@@ -250,7 +261,7 @@
 					<logic:equal value="true" name="show">
 					<tr align="left">
 						<td>Progress</td>
-						<td style="padding-left: 15px;" colspan="3"><bean:write name="projectForm" property="pBean.projectStatus"/> : 
+						<td style="padding-left: 15px;" colspan="3"><bean:write name="projectForm" property="pBean.statusCaption"/> : 
 														<bean:write name="projectForm" property="pBean.projectProgress"/>%
 						</td>
 					</tr>

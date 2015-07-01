@@ -51,7 +51,7 @@
 			var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
 			var taskProg = $(this).closest('tr').find('.hdTaskProg').val();
 			var projStat = $('#hdnStatProj').val();
-			if (projStat != 'PR_STAT_01'){
+			if (projStat == 'PR_STAT_02'){
 				if (assgTo == currUser) {
 					if (taskStat == 'TA_STAT_02') {
 						$(this).addClass('glyphicon glyphicon-play');
