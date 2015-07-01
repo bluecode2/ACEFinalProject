@@ -18,11 +18,14 @@ public class ProjectMemberBean {
 	private String projRoleCode;
 	private Integer isDeleted;
 	private String estStartDateInString;
+	private String 	estStartDateDisplay;
 	private String estEndDateInString;
+	private String 	estEndDateDisplay;
 	private Date estStartDate;
 	private Date estEndDate;
 	
 	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public Integer getIsDeleted() {
 		return isDeleted;
@@ -148,10 +151,20 @@ public class ProjectMemberBean {
 			this.estEndDateInString = "";
 		}
 	}
+	
 	public String getEmpCode() {
 		return empCode;
 	}
+	
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
+	}
+	
+	public String getEstStartDateDisplay() {
+		return df2.format(estStartDate);
+	}
+
+	public String getEstEndDateDisplay() {
+		return df2.format(estEndDate);
 	}
 }

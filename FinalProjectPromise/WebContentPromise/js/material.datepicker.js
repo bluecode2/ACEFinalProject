@@ -21,10 +21,14 @@ $.fn.datepicker = function (options) {
 	    			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
 	    		'</div>',
 	    	'</section>',
+	    	'<section class="time">',
+	    		'<span id="clock" data-bind="text: time"></span>',
+    		'</section>',
 		'</div>'
    	].join('\n');
 
 	var field = this;
+	
 	var picker = $(pickerHtml);
 	// insert picker after the field in the DOM
 	$(field).after(picker);
@@ -60,7 +64,7 @@ $.fn.datepicker = function (options) {
 
 	// setup option values
 	var defaults = {
-		format: "DD/MM/YYYY",
+		format: "DD/MM/YYYY HH:mm",
 		colour: "#009688"
 	};
 	var options = $.extend(options, defaults);
@@ -74,6 +78,7 @@ $.fn.datepicker = function (options) {
 		self.datePickerValue = ko.observable( self.today() );
 		self.viewingMonth = ko.observable();
 		self.viewingYear = ko.observable();
+		self.time = moment().format("HH:mm") ;
 	    self.monthStruct = ko.observableArray();
 		self.viewingMonthName = ko.computed(function(){
 			var months = [
@@ -90,7 +95,7 @@ $.fn.datepicker = function (options) {
 
 		self.processDate = function(day) {
 			if (day) {
-				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear(), self.options.format );
+				var date = moment( day + '/' + self.viewingMonth() + '/' + self.viewingYear() + ' ' + moment().format("HH:mm"), self.options.format );
 				self.datePickerValue(date);
 				var year = self.viewingYear();
 				var month = self.viewingMonth();
@@ -206,6 +211,13 @@ $.fn.datepicker = function (options) {
 	    self.year = ko.computed(function(){
 	    	return self.datePickerValue().year();
 	    });
+	    
+	    self.time = ko.computed(function(){
+	    	return self.datePickerValue().format("HH:mm");
+	    });
+	    
+	    setInterval(function() {		
+		}, 1000);
 
        	// init function
 		self.init = function() {
@@ -214,7 +226,9 @@ $.fn.datepicker = function (options) {
 		};
 		self.init();
 	}
-	var viewModel = new AppViewModel(field, picker, options);
-	window.viewModel = viewModel;
-	ko.applyBindings(viewModel, picker[0]);
+//	setInterval(function() {
+		var viewModel = new AppViewModel(field, picker, options);
+		window.viewModel = viewModel;
+		ko.applyBindings(viewModel, picker[0]);
+//	}, 1000);
 }

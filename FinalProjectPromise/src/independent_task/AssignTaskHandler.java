@@ -75,9 +75,6 @@ public class AssignTaskHandler extends Action {
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
-
-			System.out.println("disni ass task handler");
-			System.out.println("act main days : " + tsForm.getTkBean().getActmainDays());
 			
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));

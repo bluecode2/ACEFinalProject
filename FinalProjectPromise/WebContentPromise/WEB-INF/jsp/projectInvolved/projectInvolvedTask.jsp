@@ -223,7 +223,7 @@
 									showLoading();
 									var taskId = $(this).closest('tr').find(
 											'.hdTaskId').val();
-
+									var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
 									$.ajax({
 										type : "POST",
 										url : "activity.do",
@@ -233,6 +233,11 @@
 											$("#tblShow").find("tr:gt(0)")
 													.remove();
 											$("#tblShow").append(response);
+											if (taskStat == 'TA_STAT_04' ||taskStat == 'TA_STAT_05' ||
+													taskStat == 'TA_STAT_07' ||taskStat == 'TA_STAT_98'
+													||taskStat == 'TA_STAT_99'){
+												$('#btnShowEntry').hide();
+											}
 											$('#showMember').modal();
 											hideLoading();
 										},
