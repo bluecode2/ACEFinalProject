@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import rank_employee.RankEmpManager;
 import user.UserBean;
+import user.UserManager;
 import common.CommonFunction;
 import common.Constant;
 import department.DepartmentManager;
@@ -27,6 +28,7 @@ public class EmployeeHandler extends Action{
 		RankEmpManager reMan = new RankEmpManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
+		UserManager usMan = new UserManager();
 
 		//CommonFunction.createAllowedMenu(us, request);
 		
@@ -60,7 +62,9 @@ public class EmployeeHandler extends Action{
 			return mapping.findForward("entry");
 		}
 		else if (eForm.getTask().equals("delete")) {
+			usMan.deleteUserByEmpId(eForm.getSelectedId(),us.getUserId());
 			eMan.deleteEmployee(eForm.getSelectedId(),us.getUserId());
+		
 		}
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();
@@ -97,7 +101,7 @@ public class EmployeeHandler extends Action{
 				eForm.getCurrPage(), Constant.pageSize));
 		rowCount = eMan.getCountEmployee(eForm.getCurrSearchField(),
 				eForm.getCurrSearchValue());
-		//
+		
 		eForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.pageSize));
 

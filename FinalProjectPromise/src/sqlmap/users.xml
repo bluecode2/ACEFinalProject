@@ -159,9 +159,18 @@
 		        from vusers
 		        where is_active = 1 AND USER_ID = #tempUserID#
 	</select>
-	<update id="delUsers" parameterClass="java.lang.Integer">
+	<update id="delUsers" parameterClass="java.util.Map">
 		update users set 
-		is_active = 0
+		is_active = 0,
+		UPDATED_BY = #updatedBy#,
+		UPDATE_DATE = SYSDATE
 		where user_id = #userId#
+	</update>
+	<update id="deleteEmployee" parameterClass="java.util.Map">
+		update users 
+		set is_active = 0,
+		UPDATED_BY = #updatedBy#,
+		UPDATE_DATE = SYSDATE
+		where employee_id = #empId#
 	</update>
 </sqlMap>
