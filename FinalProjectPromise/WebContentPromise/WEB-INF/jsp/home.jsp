@@ -46,15 +46,15 @@ $(function() {
    	if(mm<10) {mm = "0"+mm}
     var yyyy = date.getFullYear();
 	var dateString = yyyy+"-"+mm+"-"+dd;
-	var firstDate = new Date(dateString);
+	var today = new Date(dateString);
 //  mengambil tanggal hari ini  (end) //
 
 	var oneDay = 24*60*60*1000; //hours*minutes*seconds*milliseconds
 	var projDate = []; i = 0;
-	$('.home-proj-body .projDate').each(function() {
+	$('.projDate').each(function() {
 		projDate[i] = this.innerHTML;
-		var secondDate = new Date(projDate[i]);
-		var diffDays = Math.round((secondDate.getTime()-firstDate.getTime())/(oneDay));
+		var deadline = new Date(projDate[i]);
+		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 		if (diffDays<=1) {
 			$('.home-proj-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
 		} else if (diffDays<=3) {
@@ -65,10 +65,10 @@ $(function() {
 		i++;
 	});
 	var taskDate = []; i = 0;
-	$('.home-task-body .taskDate').each(function() {
+	$('.taskDate').each(function() {
 		taskDate[i] = this.innerHTML;
-		var secondDate = new Date(taskDate[i]);
-		var diffDays = Math.round((secondDate.getTime()-firstDate.getTime())/(oneDay));
+		var deadline = new Date(taskDate[i]);
+		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 		if (diffDays<=1) {
 			$('.home-task-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
 		} else if (diffDays<=3) {
@@ -89,7 +89,7 @@ $(function() {
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-9" style="margin-top: 25px;">
+		<div class="col-md-9" style="margin-top: 5px;">
 			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 			    <li class="active"><a href="#project" data-toggle="tab">Project</a></li>
 			    <li><a href="#independentTask" data-toggle="tab">Independent Task</a></li>
@@ -163,12 +163,18 @@ $(function() {
 				</div>
 			</div>	
 		</div>
-		<div class="col-md-3" style="margin-top: 35px;">
-			<p style="font-size: 16px;margin-bottom: -15px;text-align: center;" class="text-info"><b>Calendar</b></p>
+		<div class="col-md-3" style="margin-top: 14px;">
+			<p style="font-size: 15px;margin-bottom: -15px;text-align: center;" class="text-info"><b>Calendar</b></p>
        		<input id="field" style="visibility:hidden;">
 			<script>
+			$(function(){
 				var options = {};
-				$('#field').datepicker(options);
+					$('#field').datepicker(options); 				
+			});
+				setInterval(function(){ 
+					var time = new moment().format("HH:mm");
+					document.getElementById("clock").innerHTML = time;
+				}, 20000);
 			</script>
        	</div>
 	</div>
