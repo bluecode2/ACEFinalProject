@@ -11,158 +11,171 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home</title>
 <jsp:include page="/WEB-INF/jsp/include/head.jsp"></jsp:include>
+<script src="js/moment.min.js"></script>
+<script src="js/knockout-3.2.0.js"></script>
+<script src="js/material.datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="css/material.datepicker.css">
 
-<link rel="stylesheet" href="css/calendar.min.css">
-<!--
 <script type="text/javascript">
 $(function(){
-    var $ppc = $('.progress-pie-chart'),
-      percent = parseInt($ppc.data('percent')),
+	var $ppc = $('#projChart'),
+    percent = parseInt($ppc.data('percent')) || 0,
+    deg = 360*percent/100;
+  if (percent > 50) {
+    $ppc.addClass('gt-50');
+  }
+    $('#projChartFill').css('transform','rotate('+ deg +'deg)');
+    $('#projChartPercents span').html(percent+'%');
+  });
+$(function(){
+    var $ppc = $('#taskChart'),
+      percent = parseInt($ppc.data('percent')) || 0,
       deg = 360*percent/100;
     if (percent > 50) {
       $ppc.addClass('gt-50');
     }
-    $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
-    $('.ppc-percents span').html(percent+'%');
+    $('#taskChartFill').css('transform','rotate('+ deg +'deg)');
+    $('#taskChartPercents span').html(percent+'%');
   });
- 
-</script> -->
+$(function() {
+// 	mengambil tanggal hari ini  //
+	var date = new Date();
+    var dd = date.getDate();
+    var mm = date.getMonth()+1;
+   	if(dd<10) {dd = "0"+dd}
+   	if(mm<10) {mm = "0"+mm}
+    var yyyy = date.getFullYear();
+	var dateString = yyyy+"-"+mm+"-"+dd;
+	var firstDate = new Date(dateString);
+//  mengambil tanggal hari ini  (end) //
+
+	var oneDay = 24*60*60*1000; //hours*minutes*seconds*milliseconds
+	var projDate = []; i = 0;
+	$('.home-proj-body .projDate').each(function() {
+		projDate[i] = this.innerHTML;
+		var secondDate = new Date(projDate[i]);
+		var diffDays = Math.round((secondDate.getTime()-firstDate.getTime())/(oneDay));
+		if (diffDays<=1) {
+			$('.home-proj-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
+		} else if (diffDays<=3) {
+			$('.home-proj-body')[i].style.backgroundColor = "rgba(255,235,59,0.3)";
+		} else {
+			$('.home-proj-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)";
+		}
+		i++;
+	});
+	var taskDate = []; i = 0;
+	$('.home-task-body .taskDate').each(function() {
+		taskDate[i] = this.innerHTML;
+		var secondDate = new Date(taskDate[i]);
+		var diffDays = Math.round((secondDate.getTime()-firstDate.getTime())/(oneDay));
+		if (diffDays<=1) {
+			$('.home-task-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
+		} else if (diffDays<=3) {
+			$('.home-task-body')[i].style.backgroundColor = "rgba(255,235,59,0.3)";
+		} else {
+			$('.home-task-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)";
+		}
+		i++;
+	});
+});
+</script>
 
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/include/navbar.jsp"></jsp:include>
 
-	<html:form action="/home" method="post">
-	
+<html:form action="/home" method="post">
+
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-9" style="margin-top: 25px;">
 			<ul class="nav nav-tabs" style="margin-bottom: 15px;">
-			    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-			    <li><a href="#profile" data-toggle="tab">Profile</a></li>
+			    <li class="active"><a href="#project" data-toggle="tab">Project</a></li>
+			    <li><a href="#independentTask" data-toggle="tab">Independent Task</a></li>
 			</ul>
-			<div id="myTabContent" class="tab-content">
-			    <div class="tab-pane fade active in" id="home">
-			        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-			    </div>
-			    <div class="tab-pane fade" id="profile">
-			        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-			    </div>
+
+			<div id="myTabContent" class="tab-content">			    
+			    <div class="tab-pane fade active in" id="project">
+			        <div class="row">
+			        	<div class="col-md-7">
+							<div class="home-proj-header text-center"><h4>My Project</h4></div>
+							<logic:notEmpty name="homeForm" property="listProjBean">
+								<logic:iterate id="reg" name="homeForm" property="listProjBean">
+								<div class="home-proj-body">
+									<span style="font-size: 16px;"><bean:write name="reg" property="projectName" /></span>
+									<br />
+									Deadline: <span class="projDate"><bean:write name="reg" property="estEndDateInString" /></span>
+									<span style="float: right;"><bean:write name="reg" property="projectProgress" />%</span>
+								</div>
+								</logic:iterate>
+							</logic:notEmpty>
+						</div>
+			        	<div class="col-md-5 text-center">
+			        	<div class="home-proj-header"><h4><bean:write name="homeForm" property="username"/></h4></div>
+			                <div style="margin: 20px auto;" id="projChart" class="progress-pie-chart" data-percent="<bean:write name="homeForm" property="avgProjProg" />">
+			                    <div class="ppc-progress">
+			                        <div class="ppc-progress-fill" id="projChartFill"></div>
+			                    </div>
+			                    <div class="ppc-percents" id="projChartPercents">
+			                    <div class="pcc-percents-wrapper">
+			                        <span>%</span>
+			                    </div>
+			                    </div>
+			                </div>
+			            <div class="home-task-header">Average Project Progress</div>
+						</div>
+			        	
+			        </div>
+				</div>
+			    
+			    <div class="tab-pane fade" id="independentTask">
+			        <div class="row">
+			        	<div class="col-md-7">
+							<div class="home-task-header text-center"><h4>My Current Task</h4></div>
+							<logic:notEmpty name="homeForm" property="listTaskBean">
+								<logic:iterate id="reg" name="homeForm" property="listTaskBean">
+								<div class="home-task-body">
+									<span style="font-size: 16px;"><bean:write name="reg" property="taskName" /></span>
+									<br />
+									Deadline: <span class="taskDate"><bean:write name="reg" property="estEndDateInString" /></span>
+									<span style="float: right;"><bean:write name="reg" property="taskProgress" />%</span>
+								</div>
+								</logic:iterate>
+							</logic:notEmpty>
+						</div>
+			        	<div class="col-md-5 text-center">
+			        	<div class="home-task-header"><h4><bean:write name="homeForm" property="username"/></h4></div>
+			                <div style="margin: 20px auto;" id="taskChart" class="progress-pie-chart" data-percent="<bean:write name="homeForm" property="avgTaskProg" />">
+			                    <div class="ppc-progress">
+			                        <div class="ppc-progress-fill" id="taskChartFill"></div>
+			                    </div>
+			                    <div class="ppc-percents" id="taskChartPercents">
+			                    <div class="pcc-percents-wrapper">
+			                        <span>%</span>
+			                    </div>
+			                    </div>
+			                </div>
+			            <div class="home-task-header">Average Task Progress</div>
+						</div>
+
+			        </div>
+				</div>
 			</div>	
 		</div>
+		<div class="col-md-3" style="margin-top: 35px;">
+			<p style="font-size: 16px;margin-bottom: -15px;text-align: center;" class="text-info"><b>Calendar</b></p>
+       		<input id="field" style="visibility:hidden;">
+			<script>
+				var options = {};
+				$('#field').datepicker(options);
+			</script>
+       	</div>
 	</div>
 </div>
-
-		<div id="calendar"></div>
-    
-<!-- 		<div class="container-fluid" style="background-color: white; height: 80px; 
-		  margin-top: -20px !important; padding-top: 20px !important">
-			<div class="container">
-			<h1>Dashboard</h1>
-			<hr style="margin-top: 10px" />
-			</div>
-		</div>
-		<div class="container">
-		<h4 style="margin-bottom: 20px">My Current Task</h4>
-			<div class="row">
-				<div class="col-sm-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">hello</div>
-						<div class="panel-body">
-						
-							<div class="statChartHolder">
-				                <div class="progress-pie-chart" data-percent="67">
-				                    <div class="ppc-progress">
-				                        <div class="ppc-progress-fill"></div>
-				                    </div>
-				                    <div class="ppc-percents">
-				                    <div class="pcc-percents-wrapper">
-				                        <span>%</span>
-				                    </div>
-				                    </div>
-				                </div>
-				            </div>
-				            
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">hello</div>
-						<div class="panel-body">hello<br>hello<br>hello</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">hello</div>
-						<div class="panel-body">hello<br>hello<br>hello</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="panel panel-info">
-						<div class="panel-heading">hello</div>
-						<div class="panel-body">hello<br>hello<br>hello</div>
-					</div>
-				</div>
-			</div>
-				<hr><br>
-			
-			<div class="row">
-				<div class="col-sm-4">
-					<div style="background-color: #f4f4f4">
-						<ul class="nav nav-pills nav-stacked">
-							<li class="active" style="visibility: inherit;"><a href="#a" data-toggle="tab">General</a></li>
-		                    <li ><a href="#b" data-toggle="tab">Department</a></li>
-		                    <li><a href="#c" data-toggle="tab">Project</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-8">
-					<div style="background-color: #f4f4f4; min-height: 200px">
-						<div class="tab-content">
-		                    <div class="tab-pane active" id="a">Contains all departments</div>
-		                    <div class="tab-pane" id="b">Contains all projects in department</div>
-		                    <div class="tab-pane" id="c">Detail about a project</div>
-		                </div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		
-<!-- 		<div class="container" style="background-color: white; min-height: 100px; margin-top: 20px">
-
-		  <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-		    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-		  </ul>
-		
-		  Tab panes
-		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="home">...</div>
-		    <div role="tabpanel" class="tab-pane" id="profile">...</div>
-		    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-		    <div role="tabpanel" class="tab-pane" id="settings">...</div>
-		  </div>
-		</div> -->
 		
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
-		
-<!-- 		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/underscore-min.js"></script>
-	    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="js/calendar.min.js"></script>
-	    <script type="text/javascript">
-	    $(document).ready(function () {
-	    	var calendar = $("#calendar").calendar(
-		            {
-		                tmpl_path: "/tmpls/",
-		                events_source: function () { return []; }
-		            });  
-	    	});
-	               
-	    </script>  -->
+
  </html:form>
 </body>
 </html>
