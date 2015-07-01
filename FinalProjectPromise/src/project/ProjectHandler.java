@@ -94,7 +94,7 @@ public class ProjectHandler extends Action{
 			pMan.updateProject(pForm.getpBean());
 			
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getDept_id(), pForm.getpBean().getProjectId());
 		}
 		else if ("cancel".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("cancel");
