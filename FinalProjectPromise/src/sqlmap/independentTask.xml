@@ -269,4 +269,14 @@
 		update_date = SYSDATE
 		WHERE task_id = #taskId#
 	</update>
+	
+	<update id="updateStatusCurrentTaskToWaitingApproval" parameterClass="independent_task.IndependentTaskBean">
+		UPDATE TASK SET
+		TASK_STATUS = #taskStatus#,
+		updated_by = #updatedBy#,
+		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
+		update_date = SYSDATE,
+		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#,assigned_to)
+		WHERE task_id = #taskId#
+	</update>
 </sqlMap>
