@@ -43,7 +43,7 @@
 							LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
-		          order by task_id) vit
+		          order by EST_END_DATE) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>
@@ -106,7 +106,7 @@
 		task_status = #taskStatus#,
 		remarks = #remarks#,
 		update_date = SYSDATE,
-		act_main_days = FGETACTUALTASKMAINDAYS(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'), TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),#taskId#, (SELECT ASSIGNED_TO FROM TASK WHERE TASK_ID=#taskId#))
+		act_main_days = fGetActualTaskMainDays(act_start_date, TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd'),'yyyy-MM-dd'),#taskId#, ASSIGNED_TO)
 		where task_id =#taskId#      
 	</update>
 	
@@ -185,7 +185,7 @@
 							LOWER(TASK_STATUS_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
-		          order by task_id) vit
+		          order by EST_END_DATE) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>
@@ -267,6 +267,16 @@
 		TASK_STATUS = #taskStatus#,
 		updated_by = #updatedBy#,
 		update_date = SYSDATE
+		WHERE task_id = #taskId#
+	</update>
+	
+	<update id="updateStatusCurrentTaskToWaitingApproval" parameterClass="independent_task.IndependentTaskBean">
+		UPDATE TASK SET
+		TASK_STATUS = #taskStatus#,
+		updated_by = #updatedBy#,
+		ACT_END_DATE = TO_DATE(#actEndDateInString#,'yyyy-MM-dd'),
+		update_date = SYSDATE,
+		ACT_MAIN_DAYS = fGetActualTaskMainDays(TO_DATE(#actStartDateInString#,'yyyy-MM-dd'), TO_DATE(#actEndDateInString#,'yyyy-MM-dd'), #taskId#,assigned_to)
 		WHERE task_id = #taskId#
 	</update>
 </sqlMap>

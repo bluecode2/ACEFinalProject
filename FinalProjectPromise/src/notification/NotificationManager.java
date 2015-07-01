@@ -209,17 +209,16 @@ public class NotificationManager {
 	}
 	
 	public boolean createNotificationAssignIndependentTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
-		System.out.println(taskId);
+
 		IndependentTaskManager itMan = new IndependentTaskManager();
 		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
-		System.out.println(itBean);
+
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
 		NotificationBean bean = new NotificationBean();
 		//not started assign, waiting, completed, decline,cancel
 		String desc="";
-		
 		if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){	
 
 			desc = creatorEmp.getEmployeeName() + " assigned you a task : " + itBean.getTaskName();
@@ -333,8 +332,9 @@ public class NotificationManager {
 		
 		NotificationBean bean = new NotificationBean();
 		
-		String  desc = creatorEmp.getEmployeeName() + " was waiting for you to evaluate : " + pjBean.getProjectName();
+		String  desc = creatorEmp.getEmployeeName() + " was waiting you to evaluate : " + pjBean.getProjectName();
 		bean.setNotificationUrl("projectApproval.do");
+		bean.setSessionParameter("projectId#"+pjBean.getProjectId());
 	
 		bean.setEmployeeId(dpbean.getDeptHeadId());
 		bean.setNotificationDesc(desc);	
@@ -355,6 +355,26 @@ public class NotificationManager {
 		
 		String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
 		bean.setNotificationUrl("#");
+	
+		bean.setEmployeeId(empId);
+		bean.setNotificationDesc(desc);	
+		insertNotification(bean);
+		
+		return true;
+	}
+	
+	public boolean createNotificationPauseIndependentTask(Integer creatorEmployeeId, Integer empId,  Integer taskId) {
+		IndependentTaskManager itMan = new IndependentTaskManager();
+		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
+		
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
+		
+		NotificationBean bean = new NotificationBean();
+		
+		String  desc = creatorEmp.getEmployeeName() + " was pausing his task : " +itBean.getTaskName();
+		bean.setNotificationUrl("assignTask.do");
 	
 		bean.setEmployeeId(empId);
 		bean.setNotificationDesc(desc);	
@@ -439,7 +459,8 @@ public class NotificationManager {
 		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
 			
 			desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName()+ " in project " + ptBean.getProjectName();
-			bean.setNotificationUrl("proposedTask.do");
+			bean.setNotificationUrl("projectTask.do");
+			bean.setSessionParameter("projectId#"+ptBean.getProjectId());
 		}
 
 		bean.setEmployeeId(assignedEmployeeId);

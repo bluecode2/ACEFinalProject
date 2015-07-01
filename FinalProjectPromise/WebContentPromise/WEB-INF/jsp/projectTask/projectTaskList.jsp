@@ -174,7 +174,7 @@
 				});
 				
 				$('#projMemList').on('hidden.bs.modal', function() {
-					window.location.href = "approveTask.do";
+					//window.location.href = "projectTask.do";
 				});
 			});
 	
@@ -417,10 +417,16 @@
 													name="reg" property="estEndDateDisplay" />
 												<br/>(<bean:write name="reg" property="estMainDays" /> main days)
 											</td>
-											<td align="center"><bean:write name="reg"
-													property="actStartDateInString" /> to <bean:write
-													name="reg" property="actEndDateInString" />
-												<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+											<td align="center">
+												<logic:notEmpty name="reg" property="actStartDateInString">
+													<bean:write name="reg"
+														property="actStartDateInString" /> to <bean:write
+														name="reg" property="actEndDateInString" />
+													<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+												</logic:notEmpty>
+												<logic:empty name="reg" property="actStartDateInString">
+													-
+												</logic:empty>
 											</td>
 											<td align="center"><html:hidden name="reg"
 													property="taskStatus" styleClass="hdTaskStatus" /> <bean:write

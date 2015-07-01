@@ -49,7 +49,7 @@ public class AssignTaskHandler extends Action {
 		if ("add".equals(tsForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 			tsForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Assign Independent Task Entry");
+		
 			request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 			return mapping.findForward("assignTaskEntry");
 		}
@@ -75,9 +75,6 @@ public class AssignTaskHandler extends Action {
 		}
 		else if ("firstEdit".equals(tsForm.getTask())) {
 			tsForm.setIsAdd(false);
-
-			System.out.println("disni ass task handler");
-			System.out.println("act main days : " + tsForm.getTkBean().getActmainDays());
 			
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));

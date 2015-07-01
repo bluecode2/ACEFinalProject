@@ -120,12 +120,13 @@ public class ProjectInvolvedTaskHandler extends Action {
 			String remarks = tsForm.getRemarksRecord();
 			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(),
 					taskStatus, remarks);
+			
 		} else if ("resumeTask".equalsIgnoreCase(tsForm.getTask())) { // TASK TO
 																		// RESUME
 																		// TASK
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
-			tsMan.editStatusProjectTask(taskId, us.getUserId(), taskStatus);
+			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus,"");
 
 		}
 
@@ -150,6 +151,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 				tsForm.getBean().setPropBy(us.getEmployeeId());
 				pProjtaskMan.insertPropProjTask(tsForm.getBean());
 				
+				tsForm.setBean(pProjtaskMan.getPropProjTaskByTaskId(tsForm.getBean().getPropTaskId()));
 				noMan.createNotificationProposeTaskProject(us.getEmployeeId(), tsForm.getBean().getPropTo(), tsForm.getBean().getPropTaskId());
 			} else {
 				tsForm.getBean().setProjectId(projId);

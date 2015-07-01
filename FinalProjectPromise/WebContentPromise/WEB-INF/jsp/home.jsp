@@ -109,7 +109,10 @@ $(document).ready(function() {
 								<div class="home-proj-body">
 									<span style="font-size: 16px;"><bean:write name="reg" property="projectName" /></span>
 									<br />
-									Deadline: <span class="projDate"><bean:write name="reg" property="estEndDateInString" /></span>
+									Deadline: <span class="projDate">
+									<logic:notEmpty name="reg" property="estEndDateInString" >
+										<bean:write name="reg" property="estEndDateDisplay" /></span>
+									</logic:notEmpty>
 									<span style="float: right;"><bean:write name="reg" property="projectProgress" />%</span>
 								</div>
 								</logic:iterate>

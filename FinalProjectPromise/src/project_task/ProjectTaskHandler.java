@@ -134,8 +134,7 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask());
 				
-				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));				
-				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());*/
+				*/
 				
 				pTaskBean = tsMan.getTaskById(tsForm.getSelectedId());
 				pTaskBean.setActEndDate(now);
@@ -143,6 +142,9 @@ public class ProjectTaskHandler extends Action {
 				pTaskBean.setUpdatedBy(us.getUserId());
 
 				tsMan.updateTaskStat(pTaskBean);
+				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));				
+				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
+
 			}
 		} 
 		else if ("listActivity".equals(tsForm.getTask())) {

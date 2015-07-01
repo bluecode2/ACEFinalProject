@@ -18,13 +18,16 @@ import org.apache.struts.action.ActionMapping;
 import project_member.ProjectMemberBean;
 import project_member.ProjectMemberManager;
 import project_role.ProjectRoleManager;
+import project_task.ProjectTaskBean;
+import project_task.ProjectTaskManager;
 import user.UserBean;
+
 import common.CommonFunction;
 import common.Constant;
+
 import employee.EmployeeBean;
 import employee.EmployeeForm;
 import employee.EmployeeManager;
-import general.GeneralParamManager;
 
 public class ProjectHandler extends Action{
 
@@ -94,7 +97,7 @@ public class ProjectHandler extends Action{
 			pMan.updateProject(pForm.getpBean());
 			
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getEmployeeId(), pForm.getpBean().getProjectId());
+			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getDept_id(), pForm.getpBean().getProjectId());
 		}
 		else if ("cancel".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("cancel");
@@ -118,7 +121,9 @@ public class ProjectHandler extends Action{
 		}
 		else if ("resume".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("resume");
+			pForm.getpBean().setUpdatedBy(us.getUserId());
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
+			pForm.getpBean().setRemarks("");
 			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
 			pMan.updateProject(pForm.getpBean());
 		}
@@ -167,6 +172,7 @@ public class ProjectHandler extends Action{
 				ProjectBean oldBean = pMan.getProjectByID(pForm.getpBean().getProjectId());
 				
 				//Update Project
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pMan.updateProject(pForm.getpBean());
 				
 				//Condition if PM is changed
@@ -184,6 +190,7 @@ public class ProjectHandler extends Action{
 				}
 			}
 			else if (isProc.equalsIgnoreCase("cancel")){
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_CANCELLED);
 				pMan.updateProject(pForm.getpBean());
 			}
@@ -191,14 +198,42 @@ public class ProjectHandler extends Action{
 				System.out.println(pForm.getpBean());
 				System.out.println(pForm.getpBean().getProjectName() + " - " + pForm.getpBean().getProjectDesc());
 				
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
 				pMan.updateProject(pForm.getpBean());
+				
+				ProjectTaskManager taskMan = new ProjectTaskManager();
+				List<ProjectTaskBean> lstTask = taskMan.getListProjectTaskByProjectId("", "", 1, Integer.MAX_VALUE, pForm.getpBean().getProjectId());
+				
+				for (ProjectTaskBean projectTaskBean : lstTask) {
+					if(projectTaskBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)){
+						projectTaskBean.setUpdatedBy(us.getUserId());
+						projectTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_ON_HOLD);
+						projectTaskBean.setRemarks("Project paused");
+						taskMan.updateTaskStat(projectTaskBean);
+					}
+				}
+				
 			}
 			else if (isProc.equalsIgnoreCase("forceClose")){
 				pForm.getpBean().setActEndDate(now);
 				
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_FORCE_CLOSED);
 				pMan.updateProject(pForm.getpBean());
+				
+				ProjectTaskManager taskMan = new ProjectTaskManager();
+				List<ProjectTaskBean> lstTask = taskMan.getListProjectTaskByProjectId("", "", 1, Integer.MAX_VALUE, pForm.getpBean().getProjectId());
+				
+				for (ProjectTaskBean projectTaskBean : lstTask) {
+					if(!projectTaskBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)){
+						projectTaskBean.setUpdatedBy(us.getUserId());
+						projectTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_FORCE);
+						projectTaskBean.setActEndDate(now);
+						projectTaskBean.setRemarks("Project closed!");
+						taskMan.updateTaskStat(projectTaskBean);
+					}
+				}
 			}
 
 			response.sendRedirect("project.do");

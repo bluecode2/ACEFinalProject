@@ -42,7 +42,7 @@
 		PROJECT_ROLE_CODE	as projectRoleCode,
 		IS_DELETED			as isDeleted
 		FROM PROJECT_ROLE 
-		WHERE IS_DELETED = 0
+		WHERE IS_DELETED = 0 AND PROJECT_ROLE_CODE &lt;&gt; fGetGeneralParameterValue('ProjectManager')
 		ORDER BY PROJECT_ROLE_ID
 	</select>
 	

@@ -18,6 +18,10 @@
 	function onBtnAddClick() {
 // 		document.forms[0].task.value = "add";
 // 		document.forms[0].submit();
+		$('#txtEmployeeId').val();
+		$('#empIdDisplay').val();
+		$('#txtRoled').val();
+		$('#txtRoleIdDisplay').val();
 		$('#divEntryProjectMember').show();
 	}
 
@@ -155,11 +159,11 @@
 					<tr>
 						<td>Estimate Date</td>
 						<td style="padding-left: 15px;"><html:text
-								property="estStartDateInString" name="getProject"
+								property="estStartDateDisplay" name="getProject"
 								styleClass="form-control" readonly="true"></html:text></td>
 						<td style="padding-left: 15px;">To</td>
 						<td style="padding-left: 15px;"><html:text
-								property="estEndDateInString" name="getProject"
+								property="estEndDateDisplay" name="getProject"
 								styleClass="form-control" readonly="true"></html:text></td>
 					</tr>
 				</table>

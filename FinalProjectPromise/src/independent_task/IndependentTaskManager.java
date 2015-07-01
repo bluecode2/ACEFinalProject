@@ -294,4 +294,23 @@ public class IndependentTaskManager {
 			}
 		}
 	}
+	public void updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
+
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("independentTask.updateStatusCurrentTaskToWaitingApproval", itBean);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
+	}
 }
