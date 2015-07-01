@@ -47,13 +47,17 @@
 	</select>
 	
 	<select id="getAllProjectForPopUp" resultClass="project.ProjectBean">
+	SELECT * from (
+		SELECT us.*, ROWNUM rnum from(
 		SELECT
 		PROJECT_ID AS projectId,
 		PROJECT_CODE AS projectCode,
 		PROJECT_NAME AS projectName,
 		EMPLOYEE_NAME AS employeeName
 		FROM VPROJECT
-		where 1 = 1 order by project_id
+		where 1 = 1 order by project_id) us
+		WHERE ROWNUM &lt; = 10)
+		WHERE rnum &gt; 1
 	</select>
 
 	<select id="getProjForHome" parameterClass="java.util.Map"
