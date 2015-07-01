@@ -106,7 +106,7 @@
 										<td width="150px">Project Status</td>
 										<td width="200px">
 										<html:select property="genCodeId" name="reportForm" styleClass="form-control" styleId="txtGenCodeId">
-											<html:option value="">---Choose One---</html:option>
+											<html:option value="%">--- All ----</html:option>
 											<logic:iterate id="listProjStat" name="reportForm" property="listOfGenCode" >
 												<html:option value="${listProjStat.genCodeId}">
 													<bean:write name="listProjStat" property="genCodeCaption"/>
@@ -320,9 +320,11 @@
 	<script type="text/javascript">
 	
 	function onBtnPrintClick(){
+		document.forms[0].target = "_blank";
 		document.forms[0].task.value = "printReport";
 		document.forms[0].filterValue.value = generateFilter();
 		document.forms[0].submit();
+		document.forms[0].target = "_self";
 	}
 	
 	function generateFilter(){
