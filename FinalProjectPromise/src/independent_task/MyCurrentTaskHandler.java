@@ -36,6 +36,8 @@ public class MyCurrentTaskHandler extends Action {
 		}
 		else if ("pause".equals(tsForm.getTask())) {
 			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ON_HOLD);
+			tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
+			noMan.createNotificationPauseIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedBy(), tsForm.getSelectedId());
 		}
 		else if ("submit".equals(tsForm.getTask())) {
 			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL);

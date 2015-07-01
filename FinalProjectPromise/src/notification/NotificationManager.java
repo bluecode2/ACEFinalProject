@@ -363,9 +363,9 @@ public class NotificationManager {
 		return true;
 	}
 	
-	public boolean createNotificationPauseProposeTask(Integer creatorEmployeeId, Integer empId,  Integer proposeTaskId) {
-		ProposedTaskManager ptMan = new ProposedTaskManager();
-		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(proposeTaskId);
+	public boolean createNotificationPauseIndependentTask(Integer creatorEmployeeId, Integer empId,  Integer taskId) {
+		IndependentTaskManager itMan = new IndependentTaskManager();
+		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
 		
 		
 		EmployeeManager empMan = new EmployeeManager();
@@ -373,8 +373,8 @@ public class NotificationManager {
 		
 		NotificationBean bean = new NotificationBean();
 		
-		String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
-		bean.setNotificationUrl("#");
+		String  desc = creatorEmp.getEmployeeName() + " was pausing his task : " +itBean.getTaskName();
+		bean.setNotificationUrl("assignTask.do");
 	
 		bean.setEmployeeId(empId);
 		bean.setNotificationDesc(desc);	
