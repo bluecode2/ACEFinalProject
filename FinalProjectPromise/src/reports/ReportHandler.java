@@ -33,12 +33,10 @@ public class ReportHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
 		//manager
-		DepartmentManager dMan = new DepartmentManager();
 		GeneralCodeManager genCodeMan = new GeneralCodeManager();
 		EmployeeManager eMan = new EmployeeManager();
 		ProjectManager pMan = new ProjectManager();
-		
-		rForm.setListOfDept(dMan.getListDepartmentForSearchDialog("", ""));
+		rForm.setListOfDept(rMan.getListDeptFromUserRole(us.getUserRoleId()));
 		rForm.setListOfGenCode(genCodeMan.getGeneralCodeByParentId("PR_STAT"));
 		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
 		request.setAttribute("lstProject", pMan.getAllProjectForPopUp());

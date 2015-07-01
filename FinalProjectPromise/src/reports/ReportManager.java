@@ -10,6 +10,8 @@ import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import department.DepartmentBean;
+
 public class ReportManager {
 	
 	private SqlMapClient ibatis;
@@ -30,6 +32,12 @@ public class ReportManager {
 		}
 		
 		return arrList;
+	}
+	
+	public List<DepartmentBean> getListDeptFromUserRole(Integer userRoleId) throws SQLException{
+		List<DepartmentBean> list = new ArrayList<DepartmentBean>();
+		list = this.ibatis.queryForList("reports.getListDeptByUserRole", userRoleId);
+		return list;
 	}
 	
 	public List<ReportBean> getListParentReportsByUserRole(Integer userRoleId) {
