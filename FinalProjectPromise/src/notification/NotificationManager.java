@@ -363,6 +363,26 @@ public class NotificationManager {
 		return true;
 	}
 	
+	public boolean createNotificationPauseProposeTask(Integer creatorEmployeeId, Integer empId,  Integer proposeTaskId) {
+		ProposedTaskManager ptMan = new ProposedTaskManager();
+		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(proposeTaskId);
+		
+		
+		EmployeeManager empMan = new EmployeeManager();
+		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
+		
+		NotificationBean bean = new NotificationBean();
+		
+		String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
+		bean.setNotificationUrl("#");
+	
+		bean.setEmployeeId(empId);
+		bean.setNotificationDesc(desc);	
+		insertNotification(bean);
+		
+		return true;
+	}
+	
 	public boolean createNotificationProjectTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
 		
 		ProjectTaskManager ptMan = new ProjectTaskManager();

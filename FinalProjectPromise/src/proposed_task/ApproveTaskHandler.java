@@ -14,6 +14,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.crystaldecisions.a.a;
+
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -64,6 +66,7 @@ public class ApproveTaskHandler extends Action {
 
 			aForm.getBean().setPropTaskId(aForm.getSelectedId());
 			aManager.addRemarksProposedTask(us.getUserId(), aForm.getSelectedId(), aForm.getRemarksRecord());
+			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), aForm.getBean().getPropTo(), aForm.getBean().getPropTaskId());
 			response.sendRedirect("approveTask.do");
 			return null;
