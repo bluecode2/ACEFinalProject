@@ -332,8 +332,9 @@ public class NotificationManager {
 		
 		NotificationBean bean = new NotificationBean();
 		
-		String  desc = creatorEmp.getEmployeeName() + " was waiting for you to evaluate : " + pjBean.getProjectName();
+		String  desc = creatorEmp.getEmployeeName() + " was waiting you to evaluate : " + pjBean.getProjectName();
 		bean.setNotificationUrl("projectApproval.do");
+		bean.setSessionParameter("projectId#"+pjBean.getProjectId());
 	
 		bean.setEmployeeId(dpbean.getDeptHeadId());
 		bean.setNotificationDesc(desc);	
