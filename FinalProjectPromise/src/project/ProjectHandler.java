@@ -118,6 +118,7 @@ public class ProjectHandler extends Action{
 		}
 		else if ("resume".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("resume");
+			pForm.getpBean().setUpdatedBy(us.getUserId());
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
 			pMan.updateProject(pForm.getpBean());
@@ -167,6 +168,7 @@ public class ProjectHandler extends Action{
 				ProjectBean oldBean = pMan.getProjectByID(pForm.getpBean().getProjectId());
 				
 				//Update Project
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pMan.updateProject(pForm.getpBean());
 				
 				//Condition if PM is changed
@@ -184,6 +186,7 @@ public class ProjectHandler extends Action{
 				}
 			}
 			else if (isProc.equalsIgnoreCase("cancel")){
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_CANCELLED);
 				pMan.updateProject(pForm.getpBean());
 			}
@@ -191,12 +194,14 @@ public class ProjectHandler extends Action{
 				System.out.println(pForm.getpBean());
 				System.out.println(pForm.getpBean().getProjectName() + " - " + pForm.getpBean().getProjectDesc());
 				
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("forceClose")){
 				pForm.getpBean().setActEndDate(now);
 				
+				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_FORCE_CLOSED);
 				pMan.updateProject(pForm.getpBean());
 			}

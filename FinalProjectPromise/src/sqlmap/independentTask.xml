@@ -43,7 +43,7 @@
 							LOWER(ASSIGNED_TO_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
-		          order by task_id) vit
+		          order by EST_END_DATE) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>
@@ -106,7 +106,7 @@
 		task_status = #taskStatus#,
 		remarks = #remarks#,
 		update_date = SYSDATE,
-		act_main_days = FGETACTUALTASKMAINDAYS(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'), TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),#taskId#, (SELECT ASSIGNED_TO FROM TASK WHERE TASK_ID=#taskId#))
+		act_main_days = fGetActualTaskMainDays(act_start_date, TO_DATE(TO_CHAR(SYSDATE,'yyyy-MM-dd'),'yyyy-MM-dd'),#taskId#, ASSIGNED_TO)
 		where task_id =#taskId#      
 	</update>
 	
@@ -185,7 +185,7 @@
 							LOWER(TASK_STATUS_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 						</isEqual>
 					</dynamic>		          
-		          order by task_id) vit
+		          order by EST_END_DATE) vit
 		      where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>

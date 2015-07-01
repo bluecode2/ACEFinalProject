@@ -223,6 +223,7 @@
 		where PM.EMPLOYEE_ID = (SELECT E.EMPLOYEE_ID FROM EMPLOYEE E LEFT JOIN
 		USERS S ON E.EMPLOYEE_ID = S.EMPLOYEE_ID WHERE S.USER_ID=#employeeId#)
 		AND IS_ACTIVE=1
+		AND PROJECT_STATUS NOT IN ('PR_STAT_04', 'PR_STAT_99')
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectCode">
 				LOWER(P.PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -244,6 +245,7 @@
 		ON P.PROJECT_ID=PM.PROJECT_ID
 		where PM.EMPLOYEE_ID = #employeeId#
 		AND IS_ACTIVE=1
+		AND PROJECT_STATUS NOT IN ('PR_STAT_04', 'PR_STAT_99')
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectCode">
 				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
