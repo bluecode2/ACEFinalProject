@@ -36,7 +36,6 @@ public class ApproveTaskHandler extends Action {
 
 		aForm.setEmpId(us.getEmployeeId());
 		if (aForm.getTask().equals("approve")) {
-
 			aForm.setBean(aManager.getApproveTaskById(aForm.getSelectedId()));
 			//Insert new Task
 			IndependentTaskBean taskBean = new IndependentTaskBean();

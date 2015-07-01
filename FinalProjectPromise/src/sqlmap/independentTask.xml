@@ -105,7 +105,8 @@
 		updated_by = #updatedBy#,
 		task_status = #taskStatus#,
 		remarks = #remarks#,
-		update_date = SYSDATE
+		update_date = SYSDATE,
+		act_main_days = FGETACTUALTASKMAINDAYS(TO_DATE(#estStartDateInString#,'yyyy-MM-dd'), TO_DATE(#estEndDateInString#,'yyyy-MM-dd'),#taskId#, (SELECT ASSIGNED_TO FROM TASK WHERE TASK_ID=#taskId#))
 		where task_id =#taskId#      
 	</update>
 	

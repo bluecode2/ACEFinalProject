@@ -143,27 +143,6 @@
 									<col />
 								</colgroup>
 								<tr>
-									<td>Actual Date</td>
-									<td>
-										<table width="100%">
-											<colgroup>
-												<col width="40%" />
-												<col />
-												<col width="40%" />
-											</colgroup>
-											<tr>
-												<td><html:text name="projectApprovalForm"
-														property="pBean.actStartDateInString"
-														styleClass="form-control" disabled="true"></html:text></td>
-												<td align="center">to</td>
-												<td><html:text name="projectApprovalForm"
-														property="pBean.actEndDateInString"
-														styleClass="form-control" disabled="true"></html:text></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-								<tr>
 									<td>Estimated Date</td>
 									<td>
 										<table width="100%">
@@ -173,13 +152,62 @@
 												<col width="40%" />
 											</colgroup>
 											<tr>
-												<td><html:text name="projectApprovalForm"
-														property="pBean.estStartDateInString"
-														styleClass="form-control" disabled="true"></html:text></td>
+												<td>
+													<logic:notEmpty name="projectApprovalForm" property="pBean.estStartDateInString">
+														<html:text name="projectApprovalForm"
+														property="pBean.estStartDateDisplay"
+														styleClass="form-control" disabled="true"></html:text>
+													</logic:notEmpty>
+													<logic:empty name="projectApprovalForm" property="pBean.estStartDateInString">
+														-
+													</logic:empty>
+												</td>
 												<td align="center">to</td>
-												<td><html:text name="projectApprovalForm"
-														property="pBean.estEndDateInString"
-														styleClass="form-control" disabled="true"></html:text></td>
+												<td>
+													<logic:notEmpty name="projectApprovalForm" property="pBean.estEndDateInString">
+														<html:text name="projectApprovalForm"
+														property="pBean.estEndDateDisplay"
+														styleClass="form-control" disabled="true"></html:text>
+													</logic:notEmpty>
+													<logic:empty name="projectApprovalForm" property="pBean.estEndDateInString">
+														-
+													</logic:empty>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td>Actual Date</td>
+									<td>
+										<table width="100%">
+											<colgroup>
+												<col width="40%" />
+												<col />
+												<col width="40%" />
+											</colgroup>
+											<tr>
+												<td>
+													<logic:notEmpty name="projectApprovalForm" property="pBean.actStartDateInString">
+														<html:text name="projectApprovalForm"
+														property="pBean.actStartDateDisplay"
+														styleClass="form-control" disabled="true"></html:text>
+													</logic:notEmpty>
+													<logic:empty name="projectApprovalForm" property="pBean.actStartDateInString">
+														-
+													</logic:empty>
+												</td>
+												<td align="center">to</td>
+												<td>
+													<logic:notEmpty name="projectApprovalForm" property="pBean.actEndDateInString">
+														<html:text name="projectApprovalForm"
+														property="pBean.actEndDateDisplay"
+														styleClass="form-control" disabled="true"></html:text>
+													</logic:notEmpty>
+													<logic:empty name="projectApprovalForm" property="pBean.actEndDateInString">
+														-
+													</logic:empty>
+												</td>
 											</tr>
 										</table>
 									</td>
