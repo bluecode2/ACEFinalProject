@@ -67,6 +67,8 @@
 		#begin#
 	</select>
 	<select id="getAllEmployeeForPopUp" resultClass="employee.EmployeeBean">
+	SELECT * FROM(
+		SELECT emp.*, ROWNUM rnum from (
 		SELECT
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
@@ -92,7 +94,9 @@
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM vEMPLOYEE
 		where is_Active = 1
-		ORDER BY EMPLOYEE_ID ASC
+		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = 10)
+		WHERE rnum
+		&gt; 1
 	</select>
 	
 	<select id="getEmployeeByEmpId" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
