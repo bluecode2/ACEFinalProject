@@ -18,7 +18,7 @@ public class ProjectLogBean {
 	
 	private String updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat();
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	public Integer getProjectLogId() {
 		return projectLogId;
@@ -84,6 +84,14 @@ public class ProjectLogBean {
 	}
 	public void setUpdateDateInString(String updateDateInString) {
 		this.updateDateInString = updateDateInString;
+		Date date = new Date();
+		try {
+			date = df.parse(updateDateInString);
+		} catch (Exception pe){
+			this.updateDateInString = "";
+			date = null;
+		}
+		this.updateDate = date;
 	}
 	
 	

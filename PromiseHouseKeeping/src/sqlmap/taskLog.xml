@@ -1,0 +1,19 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="taskLog">
+	<select id="getTaskLogByProject" parameterClass="java.lang.Integer" resultClass="task_log.TaskLogBean">
+		SELECT 
+			task_log_id as taskLogId,
+			task_id as taskId,
+			update_by as updateBy,
+			task_field as taskField,
+			task_old_value as taskOldValue,
+			task_new_value as taskNewValue,
+			update_date as updateDate,
+			remarks as remarks,
+			change_type as changeType,
+			
+				
+	</select>
+</sqlMap>
