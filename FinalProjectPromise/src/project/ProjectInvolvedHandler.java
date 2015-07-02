@@ -33,8 +33,7 @@ public class ProjectInvolvedHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		
-		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED, us,
-				request);
+		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_INVOLVED, us,request);
 
 		if ("listMembers".equals(projectForm.getTask())) {
 			projectForm.setArrMember(projectMemberManager.getPopUpProjMember(projectForm.getSelectedId()));

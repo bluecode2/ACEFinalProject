@@ -56,12 +56,11 @@ $(function() {
 		var deadline = new Date(projDate[i]);
 		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 		if (diffDays<=1) {
-			$('.home-proj-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
+			$('.home-proj-body')[i].style.backgroundColor = "rgba(233,30,99,0.1)";
 		} else if (diffDays<=3) {
-			$('.home-proj-body')[i].style.backgroundColor = "rgba(255,235,59,0.3)";
-		} else {
-			$('.home-proj-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)";
-		}
+			$('.home-proj-body')[i].style.backgroundColor = "rgba(255,235,59,0.15)";
+		} 
+		// else { $('.home-proj-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)"; }
 		i++;
 	});
 	var taskDate = []; i = 0;
@@ -70,15 +69,20 @@ $(function() {
 		var deadline = new Date(taskDate[i]);
 		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 		if (diffDays<=1) {
-			$('.home-task-body')[i].style.backgroundColor = "rgba(233,30,99,0.3)";
+			$('.home-task-body')[i].style.backgroundColor = "rgba(233,30,99,0.1)";
 		} else if (diffDays<=3) {
-			$('.home-task-body')[i].style.backgroundColor = "rgba(255,235,59,0.3)";
-		} else {
-			$('.home-task-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)";
-		}
+			$('.home-task-body')[i].style.backgroundColor = "rgba(255,235,59,0.15)";
+		} 
 		i++;
 	});
 });
+
+$(document).ready(function() {
+	var x = document.getElementsByClassName("home-proj-body").length;
+	if (x<1) document.getElementById("project").style.visibility = "hidden";
+	var y = document.getElementsByClassName("home-task-body").length;
+	if (y<1) document.getElementById("task").style.visibility = "hidden";
+	});
 </script>
 
 </head>
@@ -114,7 +118,9 @@ $(function() {
 								</logic:iterate>
 							</logic:notEmpty>
 						</div>
+						
 			        	<div class="col-md-5 text-center">
+			        	<div id="divProj">
 			        	<div class="home-proj-header"><h4><bean:write name="homeForm" property="username"/></h4></div>
 			                <div style="margin: 20px auto;" id="projChart" class="progress-pie-chart" data-percent="<bean:write name="homeForm" property="avgProjProg" />">
 			                    <div class="ppc-progress">
@@ -127,6 +133,7 @@ $(function() {
 			                    </div>
 			                </div>
 			            <div class="home-task-header">Average Project Progress</div>
+						</div>
 						</div>
 			        	
 			        </div>
@@ -147,7 +154,9 @@ $(function() {
 								</logic:iterate>
 							</logic:notEmpty>
 						</div>
+						
 			        	<div class="col-md-5 text-center">
+			        	<div id="divTask">
 			        	<div class="home-task-header"><h4><bean:write name="homeForm" property="username"/></h4></div>
 			                <div style="margin: 20px auto;" id="taskChart" class="progress-pie-chart" data-percent="<bean:write name="homeForm" property="avgTaskProg" />">
 			                    <div class="ppc-progress">
@@ -160,6 +169,7 @@ $(function() {
 			                    </div>
 			                </div>
 			            <div class="home-task-header">Average Task Progress</div>
+						</div>
 						</div>
 
 			        </div>

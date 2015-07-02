@@ -64,13 +64,9 @@ public class UserHandler extends Action {
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
 			return mapping.findForward("userAdd");
 		} else if ("delete".equalsIgnoreCase(uForm.getTask())) {
-			uForm.getuBean().setUpdatedBy(us.getUserId());
-			uMan.delUsers(uForm.getSelectedId());
+			uMan.delUsers(uForm.getSelectedId(),us.getUserId());
 		}
-		else if ("delete".equalsIgnoreCase(uForm.getTask())) {
-			uForm.getuBean().setUpdatedBy(us.getUserId());
-			uMan.delUsers(uForm.getSelectedId());
-		}
+		
 		else if ("save".equalsIgnoreCase(uForm.getTask())) {
 			Boolean isAdd = uForm.getIsAdd();
 			if (isAdd) {

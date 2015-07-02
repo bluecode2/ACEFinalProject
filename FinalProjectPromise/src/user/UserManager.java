@@ -143,10 +143,13 @@ public class UserManager {
 		return uBean;
 	}
 
-	public void delUsers(Integer userId) throws SQLException {
+	public void delUsers(Integer userId, Integer updatedBy) throws SQLException {
+		Map m = new HashMap();
+		m.put("updatedBy", updatedBy);
+		m.put("userId", userId);
 		try {
 			this.ibatis.startTransaction();
-			this.ibatis.update("users.delUsers", userId);
+			this.ibatis.update("users.delUsers", m);
 			this.ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -157,5 +160,26 @@ public class UserManager {
 				e1.printStackTrace();
 			}
 		}
+	}
+	public void deleteUserByEmpId(Integer empId,Integer updatedBy) {
+		
+		Map m = new HashMap();
+		m.put("updatedBy", updatedBy);
+		m.put("empId", empId);
+		
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.update("users.deleteEmployee", m);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
 	}
 }
