@@ -12,7 +12,7 @@
 <meta http-equiv="Expires" content="0">
 <meta http-equiv="Pragma" content="no-cache">
 </head>
-<%@include file="../include/CrystalReportHelper.jsp"%>
+<%@include file="CrystalReportHelper.jsp"%>
 <body>
 	<%
 		try {
