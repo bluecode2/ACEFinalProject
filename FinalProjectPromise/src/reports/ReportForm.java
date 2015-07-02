@@ -2,15 +2,16 @@ package reports;
 
 import general.GeneralCodeBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
-
-import project.ProjectBean;
 import department.DepartmentBean;
 
 public class ReportForm extends ActionForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String task;
 	private Integer selectedId;
 	private String filterValue;
