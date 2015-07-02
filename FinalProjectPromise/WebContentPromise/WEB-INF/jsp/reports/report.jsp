@@ -19,10 +19,10 @@
 
 			ReportBean rptBean = (ReportBean)session.getAttribute("reportBean");
 			String filter = (String)session.getAttribute("filterValue");
-			System.out.println(filter);
+			//System.out.println(filter);
 			
 			ReportClientDocument clientDoc = getClientDocument(rptBean.getReportFile());
-			System.out.println(rptBean.getReportFile());
+			//System.out.println(rptBean.getReportFile());
 			
 			//Map map = (Map) session.getAttribute("param");
 
@@ -34,11 +34,11 @@
 				setDocParameter(1, topicName, clientDoc);*/
 				String[] filterValue = filter.split("#"); 
 				int paramCount = filterValue.length;
-				System.out.println(paramCount);
+				//System.out.println(paramCount);
 				
 				for(int i = 0;i < paramCount; i++){
 					setDocParameter(i, filterValue[i], clientDoc);
-					System.out.println(filterValue[i]);
+					//System.out.println(filterValue[i]);
 				}
 				
 				
@@ -53,4 +53,3 @@
 	%>
 </body>
 </html>
-

@@ -628,11 +628,11 @@
 											</colgroup>
 											<tr>
 												<td><html:text name="projectTaskForm"
-														property="prjBean.estStartDateInString"
+														property="prjBean.estStartDateDisplay"
 														styleClass="form-control" disabled="true"></html:text></td>
 												<td align="center">to</td>
 												<td><html:text name="projectTaskForm"
-														property="prjBean.estEndDateInString"
+														property="prjBean.estEndDateDisplay"
 														styleClass="form-control" disabled="true"></html:text></td>
 											</tr>
 										</table>
@@ -721,7 +721,7 @@
 													<br/>(<bean:write
 													name="reg" property="estMainDays" /> main days)
 											</td>
-											<%-- <td align="center">
+											<td align="center">
 												<logic:notEmpty name="reg" property="actStartDateInString">
 													<bean:write name="reg" property="actStartDateDisplay" /> to 
 														<logic:notEmpty name="reg" property="actEndDateInString">
@@ -730,23 +730,12 @@
 														<logic:empty  name="reg" property="actEndDateInString">
 															-
 														</logic:empty>
-														<br/>(
-															<logic:notEmpty name="reg" property="actMainDays">
-																<bean:write name="reg" property="actMainDays" />
-															</logic:notEmpty>
-															<logic:empty name="reg" property="actMainDays">
-																-
-															</logic:empty>
-														 main days)
+														<br/>(<bean:write name="reg" property="actmainDays" /> main days)
 												</logic:notEmpty>
 												<logic:empty name="reg" property="actStartDateInString">
 													-
 												</logic:empty>
-											</td> --%>
-											
-											<td align="center"><bean:write name="reg"
-													property="actStartDateInString" /> to <bean:write
-													name="reg" property="actEndDateInString" /></td>
+											</td>
 											<td align="center"><bean:write name="reg"
 													property="taskStatusName" /> : <bean:write name="reg"
 													property="taskProgress" />%<logic:notEqual name="reg"

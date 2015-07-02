@@ -420,8 +420,8 @@
 											<td align="center">
 												<logic:notEmpty name="reg" property="actStartDateInString">
 													<bean:write name="reg"
-														property="actStartDateInString" /> to <bean:write
-														name="reg" property="actEndDateInString" />
+														property="actStartDateDisplay" /> to <bean:write
+														name="reg" property="actEndDateDisplay" />
 													<br/>(<bean:write name="reg" property="actmainDays" /> main days)
 												</logic:notEmpty>
 												<logic:empty name="reg" property="actStartDateInString">

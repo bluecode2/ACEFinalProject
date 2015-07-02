@@ -17,7 +17,7 @@ public class AuditTrailHandler {
 		AuditTrailManager aTrailMan = new AuditTrailManager();
 		GeneralParamManager gParamMan = new GeneralParamManager();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		
 		List<AuditTrailBean> listOfAuditTrail = aTrailMan.getAuditTrail();
