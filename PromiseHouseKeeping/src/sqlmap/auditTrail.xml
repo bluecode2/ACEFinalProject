@@ -14,11 +14,11 @@
         FGETGENERALCODECAPTION(CHANGE_TYPE)              AS changeType,
         DATA_ID                                          AS dataId
         FROM AUDIT_TRAIL
-        WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') <= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
+        WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
 	</select>
 	
 	<delete id="delAuditTrail">
 		DELETE FROM AUDIT_TRAIL
-		WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') <= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
+		WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
 	</delete>
 </sqlMap>

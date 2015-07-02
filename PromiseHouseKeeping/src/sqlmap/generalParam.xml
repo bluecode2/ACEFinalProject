@@ -1,0 +1,11 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="genParam">
+	<select id="getGenParamByParamId" resultClass="java.lang.String" parameterClass="java.lang.String">
+	select
+		GEN_PARAM_VALUE
+		FROM GENERAL_PARAMETER
+		WHERE GEN_PARAM_ID = #genParamId# AND IS_ACTIVE = 1
+	</select>
+</sqlMap>

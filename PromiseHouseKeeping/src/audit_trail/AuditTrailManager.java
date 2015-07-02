@@ -20,12 +20,32 @@ public class AuditTrailManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<AuditTrailBean> getAuditTrailByDate() throws SQLException{
+	public List<AuditTrailBean> getAuditTrail(){
 		List<AuditTrailBean> listAudit = new ArrayList<AuditTrailBean>();
-		listAudit = this.ibatis.queryForList("auditTrail.getAllAuditTrail", null);
-		
+		try {
+			listAudit = this.ibatis.queryForList("auditTrail.getAllAuditTrail", null);
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		return listAudit;
 	}
 	
+	public void delAuditTrail(){
+		try {
+			this.ibatis.startTransaction();
+			this.ibatis.delete("auditTrail.delAuditTrail", null);
+			this.ibatis.commitTransaction();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				ibatis.endTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 	
 }
