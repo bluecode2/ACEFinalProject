@@ -1,27 +1,27 @@
-package project_log;
+package task_log;
 
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import task_log.TaskLogBean;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
-public class ProjectLogManager {
+public class TaskLogManager {
 	private SqlMapClient ibatis;
 
-	public ProjectLogManager() {
+	public TaskLogManager() {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public List<ProjectLogBean> getListProjectLogBeanForBackup(){
-		List<ProjectLogBean> lstBean = new ArrayList<ProjectLogBean>();
+	public List<TaskLogBean> getListTaskLogByProject(Integer projectId){
+		List<TaskLogBean> lstBean = new ArrayList<TaskLogBean>();
 		
 		try {
-			lstBean = this.ibatis.queryForList("projectLog.getProjectLogForBackup", null);
+			lstBean = this.ibatis.queryForList("taskLog.getListTaskLogByProject", projectId);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -30,10 +30,10 @@ public class ProjectLogManager {
 		return lstBean;
 	}
 	
-	public void deleteProjectLog(){
+	public void deleteTaskLogByProject(Integer projectId){
 		try {
 			ibatis.startTransaction();
-			ibatis.delete("projectLog.deleteProjectLog", null);
+			ibatis.delete("taskLog.deleteTaskLogByProject", projectId);
 			ibatis.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -45,5 +45,4 @@ public class ProjectLogManager {
 			}
 		}
 	}
-
 }

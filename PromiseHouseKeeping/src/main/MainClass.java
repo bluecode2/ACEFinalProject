@@ -9,15 +9,12 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		NotificationHandler	noHan = new NotificationHandler();
-
+		AuditTrailHandler auditTrailHan = new AuditTrailHandler();
 		ProjectLogHandler prLogHandler = new ProjectLogHandler();
 		
-
 		noHan.writeNotificationToSweep();
-		
-		prLogHandler.backupProjectLog();
-		
-		AuditTrailHandler auditTrailHan = new AuditTrailHandler();
 		auditTrailHan.backUpAuditTrail();
+		prLogHandler.backupProjectLog();
+
 	}
 }
