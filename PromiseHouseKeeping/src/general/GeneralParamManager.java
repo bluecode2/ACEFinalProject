@@ -20,7 +20,7 @@ public class GeneralParamManager {
 		String genParamId = Constant.GeneralParameter.BACK_UP_LOG_PATH;
 		String paramValue = "";
 		try {
-			paramValue = (String) this.ibatis.queryForObject("", genParamId);
+			paramValue = (String) this.ibatis.queryForObject("genParam.getGenParamByParamId", genParamId);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();

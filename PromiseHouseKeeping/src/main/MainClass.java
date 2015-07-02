@@ -1,5 +1,6 @@
 package main;
 
+import audit_trail.AuditTrailHandler;
 import project_log.ProjectLogHandler;
 import project_log.ProjectLogManager;
 import notification.NotificationHandler;
@@ -14,5 +15,8 @@ public class MainClass {
 		noHan.writeNotificationToSweep();
 		
 		prLogHandler.backupProjectLog();
+		
+		AuditTrailHandler auditTrailHan = new AuditTrailHandler();
+		auditTrailHan.backUpAuditTrail();
 	}
 }

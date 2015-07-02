@@ -11,10 +11,12 @@
         OLD_VALUE                                        AS oldValue,
         NEW_VALUE                                        AS newValue,
         TO_CHAR(UPDATE_DATE,'yyyy-MM-dd HH24:mi:ss')     AS updateDateInString,
-        FGETGENERALCODECAPTION(CHANGE_TYPE)              AS changeType,
-        DATA_ID                                          AS dataId
-        FROM AUDIT_TRAIL
+        CHANGE_TYPE							             AS changeType,
+        DATA_ID                                          AS dataId,
+        USERNAME										 AS userName
+        FROM VAUDITTRAIL
         WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
+		ORDER BY AUDIT_TRAIL_ID DESC
 	</select>
 	
 	<delete id="delAuditTrail">
