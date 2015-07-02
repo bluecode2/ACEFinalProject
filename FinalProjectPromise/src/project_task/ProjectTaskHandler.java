@@ -285,7 +285,7 @@ public class ProjectTaskHandler extends Action {
 				tsForm.getPrjBean().getProjectId()));
 		tsForm.setListCount2(aPropPMan.getCountAllPropTask(
 				tsForm.getCurrSearchField2(), tsForm.getCurrSearchValue2(),
-				us.getEmployeeId()));
+				us.getEmployeeId(),tsForm.getPrjBean().getProjectId()));
 
 		tsForm.setPageCount2((int) Math.ceil((double) tsForm.getListCount2()
 				/ (double) Constant.pageSize));
