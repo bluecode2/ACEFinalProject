@@ -36,7 +36,7 @@ public class SearchEmpForPMHandler extends Action{
 		String searchField = sEmpForm.getSearchField();
 		String searchValue = sEmpForm.getSearchValue();
 		
-		List<EmployeeBean> arrEmp = eMan.getAllEmployeeForPM(deptId);
+		List<EmployeeBean> arrEmp = eMan.getAllEmployeeForPM(searchField,searchValue,deptId);
 		
 		for (EmployeeBean empBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");

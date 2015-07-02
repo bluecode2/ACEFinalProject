@@ -62,7 +62,7 @@ public class ProjectHandler extends Action{
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
 			session.setAttribute("deptId", eBean.getDeptId());
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM(eBean.getDeptId()));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM("","",eBean.getDeptId()));
 					/*getAllEmployeeForDeptHead(eBean.getDeptId(), 
 					"", ""));*/
 			request.setAttribute("pageTitle", "Project Entry");
@@ -72,7 +72,7 @@ public class ProjectHandler extends Action{
 		else if ("edit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("edit");
 			request.setAttribute("pageTitle", "Project Edit");
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM(eBean.getDeptId()));
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM("","",eBean.getDeptId()));
 			request.setAttribute("show", true);
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,

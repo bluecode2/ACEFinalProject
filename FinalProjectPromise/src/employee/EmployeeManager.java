@@ -54,11 +54,16 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getAllEmployeeForPM(Integer deptId) {
+	public List<EmployeeBean> getAllEmployeeForPM(String searchField,String searchValue,Integer deptId) {
 		
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		Map map = new HashMap();
+		map.put("searchField", searchField);
+		map.put("searchValue", searchValue);
+		map.put("deptId", deptId);
+		
 		try {
-			arr = this.ibatis.queryForList("employee.getAllEmployeeForPM", deptId);
+			arr = this.ibatis.queryForList("employee.getAllEmployeeForPM", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
