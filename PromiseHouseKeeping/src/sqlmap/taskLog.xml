@@ -13,7 +13,16 @@
 			update_date as updateDate,
 			remarks as remarks,
 			change_type as changeType,
-			
-				
+			fGetGeneralCodeCaption(change_type) as changeTypeCaption
+		FROM task_log
+		WHERE task_id IN (
+			SELECT task_id FROM task WHERE project_id = #projectId#
+			)
 	</select>
+	
+	<delete id="deleteTaskLogByProject" parameterClass="java.lang.Integer">
+		DELETE FROM task_log
+		WHERE task_id IN (
+			SELECT task_id FROM task WHERE project_id = #projectId#)
+	</delete>
 </sqlMap>

@@ -1,0 +1,48 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="projectLog">
+	<select id="getprojectLogToBackup" parameterClass="java.lang.Integer"
+		resultClass="project_log.projectLogBean">
+	SELECT
+		project_log_id as projectLogId,
+		project_id as projectId,
+		update_by as updateBy,
+		project_field as projectField,
+		project_old_value as projectOldValue,
+		project_new_value as projectNewValue,
+		update_date as updateDate,
+		remarks as remarks,
+		change_type as changeType,
+		fGetGeneralCodeCaption(change_type) as changeTypeCaption
+	FROM project_log
+	WHERE project_id IN (
+		SELECT project_id
+		FROM project
+		WHERE project_status IN ('PR_STAT_04', 'PR_STAT_98', 'PR_STAT_99')
+			AND (
+				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+			)
+	)
+	</select>
+
+	<delete id="deleteprojectLog">
+		DELETE FROM project_log
+		WHERE project_id IN (
+		SELECT project_id
+		FROM project
+		WHERE project_status IN ('PR_STAT_04', 'PR_STAT_98', 'PR_STAT_99')
+			AND (
+				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+			)
+	)
+	</delete>
+</sqlMap>
