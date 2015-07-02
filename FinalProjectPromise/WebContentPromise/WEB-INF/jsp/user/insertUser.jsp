@@ -211,7 +211,7 @@
 
 
 		<div class="container">
-			<div class="divSearch form-group has-info">
+			<div class="form-group has-info">
 				<div class="divContent form-group has-info">
 					<div class="text-danger" id="divError" style="display: none">
 					Save failed!
