@@ -207,12 +207,24 @@
 						<td>
 							<table width="100%">
 								<tr>
-									<td width="50%"><html:radio name="projectTaskForm"
+									<td width="50%">
+									 <div class="radio radio-info">
+									    <label>
+									      <html:radio name="projectTaskForm"
 											property="tkBean.isOutsource" value="0"
-											styleClass="rboIsOutsource">Project Member</html:radio></td>
-									<td><html:radio name="projectTaskForm"
+											styleClass="rboIsOutsource">Project Member</html:radio>
+									    </label>
+									  </div>
+									</td>
+									<td>
+									<div class="radio radio-info">
+									    <label>
+									      <html:radio name="projectTaskForm"
 											property="tkBean.isOutsource" value="1"
-											styleClass="rboIsOutsource">Outsource</html:radio></td>
+											styleClass="rboIsOutsource">Outsource</html:radio>
+									    </label>
+									  </div>
+									</td>
 								</tr>
 							</table> <html:hidden styleId="hdEmpId" name="projectTaskForm"
 								property="tkBean.assignedTo" />
@@ -300,7 +312,7 @@
 						<h4 class="modal-title">Employee</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -314,7 +326,7 @@
 										id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="searchEmployee();"
-											class="btn btn-sm btn-info btn-icon" title="Search">
+											class="btn btn-raised btn-info btn-icon" title="Search">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>
 									</td>

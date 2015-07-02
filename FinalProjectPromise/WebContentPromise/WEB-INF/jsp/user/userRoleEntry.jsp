@@ -12,12 +12,48 @@
 
 <script type="text/javascript">
 	function onBtnSaveClick() {
-		document.forms[0].task.value = 'save';
-		document.forms[0].submit();
+		if(validateForm()){
+			document.forms[0].task.value = "save";
+			document.forms[0].submit();
+		}
 	}
 
 	function onBtnBackClick() {
 		location.href = "userRole.do";
+	}
+	
+	function validateForm(){
+		
+		var roleCode	= document.getElementById("txtUserRoleCode").value;
+		var roleName 	= document.getElementById("txtUserRoleName").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(roleCode.trim() == '') {
+			str+= "<li>User Role Code can not be empty!</li>";
+			isValid = false;
+		}
+		else if(roleCode.length > 11) {
+			str+= "<li>User Role Code can not be more than 10 characters!</li>";
+			isValid = false;
+		}
+		
+		if(roleName.trim() == '') {
+			str+= "<li>User Role Name can not be empty!</li>";
+			isValid = false;
+		}
+		else if(roleName.length > 26) {
+			str+= "<li>User Role Name can not be more than 25 characters!</li>";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
+		}
+		
+		return isValid;
 	}
 </script>
 </head>
@@ -33,6 +69,11 @@
 
 		<div class="container">
 			<div class="divContent form-group has-info">
+				<div class="divContent form-group has-info">
+					<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" class="tdLabel" />
@@ -59,4 +100,3 @@
 	</html:form>
 </body>
 </html>
->

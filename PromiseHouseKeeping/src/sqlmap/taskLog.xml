@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="taskLog">
-	<select id="getTaskLogByProject" parameterClass="java.lang.Integer" resultClass="task_log.TaskLogBean">
+	<select id="getListTaskLogByProject" parameterClass="java.lang.Integer" resultClass="task_log.TaskLogBean">
 		SELECT 
 			task_log_id as taskLogId,
 			task_id as taskId,

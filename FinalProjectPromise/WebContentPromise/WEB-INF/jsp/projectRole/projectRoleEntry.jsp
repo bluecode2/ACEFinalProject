@@ -73,7 +73,7 @@
 					Save failed!
 					<ul id="errorContent"></ul>
 				</div>
-				<table>
+				<table class="form-group has-info">
 					<!-- <tr>
 						<td>General Holiday ID</td>
 						<td><input type="text" id="txtGoToPage" class="form-control"/></td>

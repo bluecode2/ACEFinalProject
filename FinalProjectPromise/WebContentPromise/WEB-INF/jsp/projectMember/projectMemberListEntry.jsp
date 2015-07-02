@@ -207,10 +207,10 @@
 							<td></td>
 							<td style="padding-left: 15px;" width="50%" align="right">
 								<button id="btnSave" type="button" onclick="addProjMember();"
-									class="btn btn-info btn-sm" title="Add Member">
+									class="btn btn-raised btn-info btn-sm btn-80" title="Add Member">
 									Save</button>
 								<button type="button" onclick="hideEntryPanel();"
-									class="btn btn-sm" title="Add Member">
+									class="btn btn-raised btn-sm btn-80" title="Add Member">
 									Cancel</button>
 							</td>
 							<td width="10%">&nbsp;</td>
@@ -292,7 +292,7 @@
 										id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="search();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="BackEmp"
+											class="btn btn-raised btn-info btn-icon" title="BackEmp"
 											value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>

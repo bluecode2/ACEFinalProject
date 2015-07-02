@@ -17,11 +17,15 @@
 
 	function onBtnSaveClick() {
 		if (document.forms[0].task.value == "add") {
-			document.forms[0].task.value = "save";
-			document.forms[0].submit();
+			if(validateForm()){
+				document.forms[0].task.value = "save";
+				document.forms[0].submit();
+			}
 		} else if (document.forms[0].task.value == "edit") {
-			document.forms[0].task.value = "save";
-			document.forms[0].submit();
+			if(validateForm()){
+				document.forms[0].task.value = "save";
+				document.forms[0].submit();
+			}
 
 		} else if (document.forms[0].task.value == "changePassword") {
 			var nPass = document.getElementById('newPass').value;
@@ -151,6 +155,42 @@
 			}
 		});
 	}
+	
+	function validateForm(){
+		
+		var username	= document.getElementById("txtUserName").value;
+		var roleId 	= document.getElementById("txtUserRoleId").value;
+		var empId 	= document.getElementById("txtEmployeeId").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(username.trim() == '') {
+			str+= "<li>User Name can not be empty!</li>";
+			isValid = false;
+		}
+		else if(username.length > 26) {
+			str+= "<li>User Name can not be more than 25 characters!</li>";
+			isValid = false;
+		}
+		
+		if(roleId.trim() == '') {
+			str+= "<li>User Role ID can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(empId.trim() == '') {
+			str+= "<li>Employee ID can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
+		}
+		
+		return isValid;
+	}
 </script>
 </head>
 <body>
@@ -171,7 +211,12 @@
 
 
 		<div class="container">
-			<div class="divSearch form-group has-info">
+			<div class="form-group has-info">
+				<div class="divContent form-group has-info">
+					<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />
@@ -186,8 +231,8 @@
 										<td><html:text name="userForm" property="uBean.username"
 												styleId="txtUserName" styleClass="form-control">
 											</html:text></td>
-										<td><button type="button" id="btnCheckActiveDirectory"
-												class="btn btn-xs btn-info" onclick="chkActiveDirectory();">
+										<td style="padding-left: 10px;"><button type="button" id="btnCheckActiveDirectory"
+												class="btn btn-raised btn-xs btn-info" onclick="chkActiveDirectory();">
 												Check<br />Act. Dir.
 											</button></td>
 										<td width="20%">
@@ -248,7 +293,7 @@
 								<tr align="left" id="resetBtn">
 									<td>&nbsp;</td>
 									<td style="padding-left: 15px;"><input type="button"
-										onclick="resetPass()" class="btn btn-info"
+										onclick="resetPass()" class="btn btn-raised btn-info"
 										value="Reset Password" /></td>
 								</tr>
 							</logic:notEqual>
@@ -319,7 +364,7 @@
 						<h4 class="modal-title">User Role</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -333,7 +378,7 @@
 										id="txtSearchValueRoleId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="search();"
-											id="btnSearchUserRole" class="btn btn-sm btn-info btn-icon"
+											id="btnSearchUserRole" class="btn btn-raised btn-info btn-icon"
 											title="BackRole" value="btnRole">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>
@@ -389,7 +434,7 @@
 						<h4 class="modal-title">Employee</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -403,7 +448,7 @@
 										id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="search();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="BackEmp"
+											class="btn btn-raised btn-info btn-icon" title="BackEmp"
 											value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>

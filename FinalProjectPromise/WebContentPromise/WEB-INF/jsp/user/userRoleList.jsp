@@ -582,7 +582,7 @@
 
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
+								class="btn btn-raised btn-info btn-icon" title="Search">
 
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
@@ -725,10 +725,10 @@
 									</table>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-info getValue"
+							<div class="modal-footer user-role">
+								<button type="button" class="btn btn-raised btn-sm btn-info getValue"
 									id="btnSaveUserRoleMenu">Save changes</button>
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-raised btn-sm btn-default"
 									data-dismiss="modal">Close</button>
 
 							</div>
@@ -798,10 +798,10 @@
 								</div>
 							</div>
 							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-info getValue"
+							<div class="modal-footer user-role">
+								<button type="button" class="btn btn-raised btn-sm btn-info getValue"
 									id="btnSaveUserRoleReport">Save changes</button>
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-raised btn-sm btn-default"
 									data-dismiss="modal">Close</button>
 
 							</div>
@@ -870,10 +870,10 @@
 								</div>
 							</div>
 							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-info getValue"
+							<div class="modal-footer user-role">
+								<button type="button" class="btn btn-raised btn-sm btn-info getValue"
 									id="btnSaveUserRoleDepartment">Save changes</button>
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-raised btn-sm btn-default"
 									data-dismiss="modal">Close</button>
 
 							</div>

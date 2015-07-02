@@ -160,7 +160,7 @@
 								name="projectForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								onclick="search();" id="btnSearch" class="btn btn-raised btn-info btn-icon"
 								title="Back">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
