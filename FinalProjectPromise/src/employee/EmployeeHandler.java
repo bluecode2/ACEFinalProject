@@ -64,7 +64,6 @@ public class EmployeeHandler extends Action{
 		else if (eForm.getTask().equals("delete")) {
 			usMan.deleteUserByEmpId(eForm.getSelectedId(),us.getUserId());
 			eMan.deleteEmployee(eForm.getSelectedId(),us.getUserId());
-		
 		}
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();

@@ -47,7 +47,6 @@ public class GeneralCodeHandler extends Action {
 			return mapping.findForward("entry");
 		}
 		else if ("save".equals(gcForm.getTask())) {
-			System.out.println("save");
 			if (gcForm.getGenCodeBean().getGenCodeId() == "")
 				gcForm.getGenCodeBean().setGenCodeId(null);
 			
