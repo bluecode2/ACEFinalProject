@@ -678,7 +678,7 @@
 						</table>
 					</div>
 					<div id="projTask">
-						<table class="table table-bordered" cellspacing="0" width="100%"
+						<table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%"
 							class="">
 							<thead class="panel panel-info">
 								<tr>
@@ -1073,7 +1073,7 @@
 									</tr>
 								</table>
 							</div>
-							<table class="table table-bordered" cellspacing="0" id="tblShow"
+							<table class="table table-striped table-bordered table-hover" cellspacing="0" id="tblShow"
 								style="margin-top: 10px;" width="100%" class="tableContent">
 								<tr>
 									<th style="padding-left: 15px">Activity Description</th>

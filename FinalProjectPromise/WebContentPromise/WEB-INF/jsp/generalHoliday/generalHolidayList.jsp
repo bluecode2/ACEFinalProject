@@ -103,7 +103,7 @@
 				</table>
 			</div>
 			<div class="divContent">
-				<table class="table table-bordered" cellspacing="0"
+				<table class="table table-striped table-bordered table-hover" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>

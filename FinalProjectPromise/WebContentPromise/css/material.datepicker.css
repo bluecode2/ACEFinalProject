@@ -38,6 +38,16 @@ section.top-day {
 	color: #fff;
 }
 
+section.today {
+	text-align: center;
+	font-weight: 300;
+	font-size: 12px;
+	background-color: rgba(33, 169, 244, 0.3);
+	height: 25px;
+	line-height: 25px;
+	cursor: pointer;
+}
+
 section.middle-date {
 	background-color: #35BAF6;
 	height: 135px;
