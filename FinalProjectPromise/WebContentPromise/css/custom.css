@@ -16,7 +16,7 @@ html {
 body {
   padding-top:80px;
   background-color: #fff;
-  margin-bottom: 60px;		/* space for footer */
+  margin-bottom: 88px;		/* space for footer */
 }
 
 h1 {
@@ -176,7 +176,7 @@ label {
 
 @media (min-width: 481px) and (max-width: 767px) {
     .text404 > h1 {
-    	font-size: 212px;
+    	font-size: 184px;
     }
     .textNotFound > p {
     	font-size: 51px;
@@ -217,13 +217,13 @@ label {
 		padding-right: 40px;
 	}
 	.text404 > h1 {
-   		font-size: 404px;
+   		font-size: 388px;
     }
     .textNotFound > p {
     	font-size: 111px;
     }
     .wrong {
-    	font-size: 112px;
+    	font-size: 114px;
     	padding-top: 10px;
     }
 }
@@ -280,16 +280,19 @@ label {
   position: absolute;
   bottom: 0;
   width: 100%;
-  min-height: 60px;
+  min-height: 70px;
+  background-color: rgba(33,150,243,0);
 }
 
 .footer > .container {
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #ddd;
+	padding-top: 8px;
 }
 
 .footer-text {
 	margin: 10px;
-	color: #777;
+	color: #888;
+	font-weight: 400;
 }
 
 /* ----------------------------------------------- */
@@ -506,4 +509,19 @@ thead > tr > td , th {
     box-shadow: 0 -2em #ffffff;
     height: 5em;
   }
+}
+
+.checkbox-info {
+	margin: 4px;;
+}
+.radio label {
+  padding-left: 35px;
+}
+.btn-80 {
+	width: 80px;
+}
+.user-role {
+	height: 60px;
+	padding-top: 10px !important;
+	padding-right: 30px !important;
 }

@@ -17,72 +17,44 @@
 <link rel="stylesheet" type="text/css" href="css/material.datepicker.css">
 
 <script type="text/javascript">
-$(function(){
-	var $ppc = $('#projChart'),
+
+function generateChart(chart,fill,percents){
+	var $ppc = $(chart),
     percent = parseInt($ppc.data('percent')) || 0,
     deg = 360*percent/100;
   if (percent > 50) {
     $ppc.addClass('gt-50');
   }
-    $('#projChartFill').css('transform','rotate('+ deg +'deg)');
-    $('#projChartPercents span').html(percent+'%');
-  });
-$(function(){
-    var $ppc = $('#taskChart'),
-      percent = parseInt($ppc.data('percent')) || 0,
-      deg = 360*percent/100;
-    if (percent > 50) {
-      $ppc.addClass('gt-50');
-    }
-    $('#taskChartFill').css('transform','rotate('+ deg +'deg)');
-    $('#taskChartPercents span').html(percent+'%');
-  });
-$(function() {
-// 	mengambil tanggal hari ini  //
-	var date = new Date();
-    var dd = date.getDate();
-    var mm = date.getMonth()+1;
-   	if(dd<10) {dd = "0"+dd}
-   	if(mm<10) {mm = "0"+mm}
-    var yyyy = date.getFullYear();
+    $(fill).css('transform','rotate('+ deg +'deg)');
+    $(percents).html(percent+'%');
+  };
+
+function generateColor(className1,className2){
+	  var arr = []; i = 0;
+		$(className1).each(function() {
+			arr[i] = this.innerHTML;
+			var deadline = new Date(arr[i]);
+			var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
+			if (diffDays<=1) {
+				$(className2)[i].style.backgroundColor = "rgba(233,30,99,0.1)";
+			} else if (diffDays<=3) {
+				$(className2)[i].style.backgroundColor = "rgba(255,235,59,0.15)";
+			} 
+			i++;
+		});
+  }
+  
+  var date = new Date();
+  var dd = date.getDate();
+  var mm = date.getMonth()+1;
+ 	if(dd<10) {dd = "0"+dd}
+ 	if(mm<10) {mm = "0"+mm}
+  var yyyy = date.getFullYear();
+  
 	var dateString = yyyy+"-"+mm+"-"+dd;
 	var today = new Date(dateString);
-//  mengambil tanggal hari ini  (end) //
-
 	var oneDay = 24*60*60*1000; //hours*minutes*seconds*milliseconds
-	var projDate = []; i = 0;
-	$('.projDate').each(function() {
-		projDate[i] = this.innerHTML;
-		var deadline = new Date(projDate[i]);
-		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
-		if (diffDays<=1) {
-			$('.home-proj-body')[i].style.backgroundColor = "rgba(233,30,99,0.1)";
-		} else if (diffDays<=3) {
-			$('.home-proj-body')[i].style.backgroundColor = "rgba(255,235,59,0.15)";
-		} 
-		// else { $('.home-proj-body')[i].style.backgroundColor = "rgba(76,175,80,0.3)"; }
-		i++;
-	});
-	var taskDate = []; i = 0;
-	$('.taskDate').each(function() {
-		taskDate[i] = this.innerHTML;
-		var deadline = new Date(taskDate[i]);
-		var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
-		if (diffDays<=1) {
-			$('.home-task-body')[i].style.backgroundColor = "rgba(233,30,99,0.1)";
-		} else if (diffDays<=3) {
-			$('.home-task-body')[i].style.backgroundColor = "rgba(255,235,59,0.15)";
-		} 
-		i++;
-	});
-});
 
-$(document).ready(function() {
-	var x = document.getElementsByClassName("home-proj-body").length;
-	if (x<1) document.getElementById("project").style.visibility = "hidden";
-	var y = document.getElementsByClassName("home-task-body").length;
-	if (y<1) document.getElementById("task").style.visibility = "hidden";
-	});
 </script>
 
 </head>
@@ -184,10 +156,20 @@ $(document).ready(function() {
 				var options = {};
 					$('#field').datepicker(options); 				
 			});
-				setInterval(function(){ 
-					var time = new moment().format("HH:mm");
-					document.getElementById("clock").innerHTML = time;
-				}, 20000);
+			$(document).ready(function() {
+				var x = document.getElementsByClassName("home-proj-body").length;
+				if (x<1) document.getElementById("project").style.visibility = "hidden";
+				var y = document.getElementsByClassName("home-task-body").length;
+				if (y<1) document.getElementById("independentTask").style.visibility = "hidden";
+				generateChart('#projChart','#projChartFill','#projChartPercents span');
+				generateChart('#taskChart','#taskChartFill','#taskChartPercents span');
+				generateColor('.projDate', '.home-proj-body');
+				generateColor('.taskDate', '.home-task-body');
+			});
+			setInterval(function(){ 
+				var time = new moment().format("HH:mm");
+				document.getElementById("clock").innerHTML = time;
+			}, 20000);
 			</script>
        	</div>
 	</div>

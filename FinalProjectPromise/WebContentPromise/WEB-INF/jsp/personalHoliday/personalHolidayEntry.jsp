@@ -185,7 +185,11 @@
 					<tr>
 						<td>Is Exchange Day</td>
 						<td>
-							<html:checkbox name="personalHolidayForm" property="persHolidayBean.isExchangeDay" />
+							<div class="checkbox checkbox-info">
+							    <label>
+							    	<html:checkbox name="personalHolidayForm" property="persHolidayBean.isExchangeDay" />
+							    </label>
+							  </div>
 						</td>
 					</tr>
 				</table>

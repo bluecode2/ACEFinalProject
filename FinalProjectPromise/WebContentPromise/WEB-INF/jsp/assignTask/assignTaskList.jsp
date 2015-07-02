@@ -166,7 +166,7 @@ function search() {
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
+								class="btn btn-raised btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
@@ -272,7 +272,7 @@ function search() {
 							<h4 class="modal-title">Task Issue</h4>
 						</div>
 						<div class="modal-body">
-							<div class="form-group">
+							<div class="form-group has-info">
 								<table width="100%">
 									<tr>
 										<td style="padding-left: 15px">Task</td>
@@ -298,10 +298,10 @@ function search() {
 								<table align="right">
 								<tr>
 								<td>
-	      							<input type="button" class="btn btn-sm btn-info insertRemarks" value="Save"> 
+	      							<input type="button" class="btn btn-raised btn-sm btn-info btn-80 insertRemarks" value="Save"> 
 	      						</td>
 	      						<td>
-	      							<input type="button" class="btn btn-sm" value="Cancel" data-dismiss="modal">
+	      							<input type="button" class="btn btn-raised btn-sm btn-80" value="Cancel" data-dismiss="modal">
 								</td>
 								</tr>
 								</table>

@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!-- 	This is toolbar -->
-	<div class="container bg-info" style="border-radius: 3px;background-color: #E8F4FA">
+	<div class="container bg-info" style="border-radius: 3px;">
 		<logic:notEmpty name="btnBackVisible">
 			<logic:equal name="btnBackVisible" value="true">
 				<button id="btnBack" type="button" onclick="onBtnBackClick();"

@@ -304,7 +304,7 @@
 									<input type="text" id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 									<button type="button" onclick="search();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="BackEmp" value="btnEmp">
+											class="btn btn-raised btn-info btn-icon" title="BackEmp" value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button></td>
 								</tr>

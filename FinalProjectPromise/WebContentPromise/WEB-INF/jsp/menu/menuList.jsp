@@ -48,7 +48,7 @@
 								property="searchValue" styleClass="form-control" /></td>
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
+								class="btn btn-raised btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
