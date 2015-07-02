@@ -257,7 +257,7 @@
 								name="myCurrentTaskForm" property="searchValue"
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px"><button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-info btn-icon"
+								onclick="search();" id="btnSearch" class="btn btn-raised btn-info btn-icon"
 								title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button></td>
@@ -483,8 +483,8 @@
 									<tr>
 										<td colspan="2" align="right">
 											<button type="button" id="btnSaveActivity"
-												class="btn btn-sm btn-info">Save</button>
-											<button type="button" id="btnCancel" class="btn btn-sm">Cancel</button>
+												class="btn btn-raised btn-sm btn-info btn-80">Save</button>
+											<button type="button" id="btnCancel" class="btn btn-raised btn-sm btn-80">Cancel</button>
 										</td>
 									</tr>
 								</table>

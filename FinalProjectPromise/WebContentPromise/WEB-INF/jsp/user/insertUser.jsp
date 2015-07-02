@@ -186,8 +186,8 @@
 										<td><html:text name="userForm" property="uBean.username"
 												styleId="txtUserName" styleClass="form-control">
 											</html:text></td>
-										<td><button type="button" id="btnCheckActiveDirectory"
-												class="btn btn-xs btn-info" onclick="chkActiveDirectory();">
+										<td style="padding-left: 10px;"><button type="button" id="btnCheckActiveDirectory"
+												class="btn btn-raised btn-xs btn-info" onclick="chkActiveDirectory();">
 												Check<br />Act. Dir.
 											</button></td>
 										<td width="20%">
@@ -248,7 +248,7 @@
 								<tr align="left" id="resetBtn">
 									<td>&nbsp;</td>
 									<td style="padding-left: 15px;"><input type="button"
-										onclick="resetPass()" class="btn btn-info"
+										onclick="resetPass()" class="btn btn-raised btn-info"
 										value="Reset Password" /></td>
 								</tr>
 							</logic:notEqual>
@@ -319,7 +319,7 @@
 						<h4 class="modal-title">User Role</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -333,7 +333,7 @@
 										id="txtSearchValueRoleId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="search();"
-											id="btnSearchUserRole" class="btn btn-sm btn-info btn-icon"
+											id="btnSearchUserRole" class="btn btn-raised btn-info btn-icon"
 											title="BackRole" value="btnRole">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>
@@ -389,7 +389,7 @@
 						<h4 class="modal-title">Employee</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -403,7 +403,7 @@
 										id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="search();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="BackEmp"
+											class="btn btn-raised btn-info btn-icon" title="BackEmp"
 											value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>

@@ -257,10 +257,22 @@ function validateForm(){
 
 							<table width="50%">
 								<tr align="left">
-									<td><html:radio name="employeeForm"
-											property="selectedEmp.gender" value="M">Male</html:radio></td>
-									<td><html:radio name="employeeForm"
-											property="selectedEmp.gender" value="F">Female</html:radio></td>
+									<td>
+									<div class="radio radio-info">
+									    <label>
+									      <html:radio name="employeeForm"
+											property="selectedEmp.gender" value="M">Male</html:radio>
+									    </label>
+									  </div>
+									</td>
+									<td>
+									<div class="radio radio-info">
+									    <label>
+									      <html:radio name="employeeForm"
+											property="selectedEmp.gender" value="F">Female</html:radio>
+									    </label>
+									  </div>
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -356,7 +368,7 @@ function validateForm(){
 							<h4 class="modal-title">Rank Option</h4>
 						</div>
 						<div class="modal-body">
-							<div class="container form-group">
+							<div class="container form-group has-info">
 								<table>
 									<tr>
 										<td>Search</td>
@@ -373,7 +385,7 @@ function validateForm(){
 										<td style="padding-left: 15px">
 										<button type="button"
 												onclick="searchDepartment();" id="btnSearch"
-												class="btn btn-sm btn-info btn-icon" title="Back">
+												class="btn btn-raised btn-info btn-icon" title="Back">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button></td>
 									</tr>
@@ -438,7 +450,7 @@ function validateForm(){
 							<h4 class="modal-title">Rank Option</h4>
 						</div>
 						<div class="modal-body">
-							<div class="container form-group">
+							<div class="container form-group has-info">
 								<table>
 									<tr>
 										<td>Search</td>
@@ -452,7 +464,7 @@ function validateForm(){
 											id="txtSearchValueRank" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="searchRank();" id="btnSearch"
-												class="btn btn-sm btn-info btn-icon" title="Back">
+												class="btn btn-raised btn-info btn-icon" title="Back">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button></td>
 									</tr>
@@ -510,7 +522,7 @@ function validateForm(){
 							<h4 class="modal-title">Supervisor Option</h4>
 						</div>
 						<div class="modal-body">
-							<div class="container form-group">
+							<div class="container form-group has-info">
 								<table>
 									<tr>
 										<td>Search</td>
@@ -528,7 +540,7 @@ function validateForm(){
 										<td style="padding-left: 15px">
 											<button type="button"
 												onclick="searchSupervisor();" id="btnSearch"
-												class="btn btn-sm btn-info btn-icon" title="Back">
+												class="btn btn-raised btn-info btn-icon" title="Back">
 												<span class="glyphicon glyphicon-search" aria-hidden="true">
 												</span>
 											</button>

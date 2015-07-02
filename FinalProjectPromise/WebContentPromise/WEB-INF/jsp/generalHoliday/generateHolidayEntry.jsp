@@ -18,49 +18,50 @@
 <script src="js/datepicker/bootstrap-datepicker.min.js"></script>
 
 <script type="text/javascript">
-	function onBtnSaveClick(){
-		if(validateForm()){
+	function onBtnSaveClick() {
+		if (validateForm()) {
 			var str = "";
-			$(".checkDays:checked").each(function(){
-				if(str != "") str += ",";
+			$(".checkDays:checked").each(function() {
+				if (str != "")
+					str += ",";
 				str += $(this).val();
 			});
-			
+
 			document.forms[0].checkDays.value = str;
 			document.forms[0].task.value = 'generate';
 			document.forms[0].submit();
 		}
 	}
-	
-	function onBtnBackClick(){
+
+	function onBtnBackClick() {
 		location.href = "generalHoliday.do";
 	}
-	
-	function validateForm(){
-		var genHolStartDate	= document.getElementById("txtGenStartDate").value;
-		var genHolEndDate 	= document.getElementById("txtGenEndDate").value;
-		
+
+	function validateForm() {
+		var genHolStartDate = document.getElementById("txtGenStartDate").value;
+		var genHolEndDate = document.getElementById("txtGenEndDate").value;
+
 		var str = "";
 		var isValid = true;
-		
-		if(genHolStartDate.trim() == '') {
-			str+= "<li>Start Date can not be empty!</li>";
+
+		if (genHolStartDate.trim() == '') {
+			str += "<li>Start Date can not be empty!</li>";
 			isValid = false;
 		}
-		
-		if(genHolEndDate.trim() == '') {
-			str+= "<li>End Date can not be empty!</li>";
+
+		if (genHolEndDate.trim() == '') {
+			str += "<li>End Date can not be empty!</li>";
 			isValid = false;
 		}
-		
-		if(!isValid){
+
+		if (!isValid) {
 			document.getElementById('errorContent').innerHTML = str;
 			document.getElementById("divError").style.display = "block";
 		}
-		
+
 		return isValid;
 	}
-	
+
 	$(document).ready(function() {
 		$(".datepicker").attr("data-provide", "datepicker");
 	});
@@ -70,8 +71,9 @@
 	<html:form action="/generalHoliday" method="post">
 		<html:hidden name="generalHolidayForm" property="task" />
 		<html:hidden name="generalHolidayForm" property="isAdd" />
-		<html:hidden name="generalHolidayForm" property="genHolidayBean.genHolidayId" />
-		<html:hidden property="checkDays" name="generalHolidayForm"/>
+		<html:hidden name="generalHolidayForm"
+			property="genHolidayBean.genHolidayId" />
+		<html:hidden property="checkDays" name="generalHolidayForm" />
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/title.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/jsp/include/toolbar.jsp"></jsp:include>
@@ -100,36 +102,71 @@
 								property="endDateInString"></html:text></td>
 					</tr>
 					<tr>
-						<td valign="top">Weekend</td>
+						<td valign="top"><br>Weekend</td>
 						<td>
 							<table>
 								<tr>
-									<td><input type="checkbox" name="checkDays1" value="1"
-										class="checkDays">Monday</td>
+									<td><br>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays1"
+												value="1" class="checkDays"> Monday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays2" value="2"
-										class="checkDays">Tuesday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays2"
+												value="2" class="checkDays"> Tuesday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays3" value="3"
-										class="checkDays">Wednesday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays3"
+												value="3" class="checkDays"> Wednesday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays4" value="4"
-										class="checkDays">Thursday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays4"
+												value="4" class="checkDays"> Thursday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays5" value="5"
-										class="checkDays">Friday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays5"
+												value="5" class="checkDays"> Friday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays6" value="6"
-										class="checkDays">Saturday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays6"
+												value="6" class="checkDays"> Saturday
+											</label>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" name="checkDays7" value="7"
-										class="checkDays">Sunday</td>
+									<td>
+										<div class="checkbox checkbox-info">
+											<label> <input type="checkbox" name="checkDays7"
+												value="7" class="checkDays"> Sunday
+											</label>
+										</div>
+									</td>
 								</tr>
 							</table>
 						</td>

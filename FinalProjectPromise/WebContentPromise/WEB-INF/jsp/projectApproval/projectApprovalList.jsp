@@ -93,7 +93,7 @@ function goToEvaluate(id) {
 								styleClass="form-control" /></td>
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
-								class="btn btn-info btn-icon" title="Search">
+								class="btn btn-raised btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>
@@ -171,7 +171,9 @@ function goToEvaluate(id) {
 										</a>
 									</td>
 									<td align="center">
-										<button type="button" property="" onclick="goToEvaluate('<bean:write name="reg" property="projectId" />');"  style="margin: 0px" class="btn btn-xs btn-info goEvaluate">Evaluate</button>
+										<button type="button" property="" 
+										onclick="goToEvaluate('<bean:write name="reg" property="projectId" />');" 
+										style="margin: 0px" class="btn btn-raised btn-xs btn-info goEvaluate">Evaluate</button>
 									</td>
 								</tr>
 							</logic:iterate>

@@ -23,10 +23,10 @@
 
 
 		<div class="container bg-info"
-			style="border-radius: 3px; background-color: #E8F4FA">
+			style="border-radius: 3px; margin-top:-8px;margin-bottom:15px; display: none;">
 			<button id="btnPrint" type="button" onclick="onBtnPrintClick();"
-				class="btn btn-raised btn-info btn-icon" title="Print">
-				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+				class="btn btn-raised btn-info" title="Print">
+				<span class="glyphicon glyphicon-print" aria-hidden="true" style="padding-right: 10px;"></span>Print
 			</button>
 		</div>
 
@@ -152,8 +152,13 @@
 										</td>
 									</tr>
 								</table>
-							</div>			
-							
+							</div>	
+							<div><br>
+							<button id="btnPrint" type="button" onclick="onBtnPrintClick();"
+								class="btn btn-raised btn-info" title="Print" style="float: right;">
+								<span class="glyphicon glyphicon-print" aria-hidden="true" style="padding-right: 10px;"></span>Print
+							</button>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -189,7 +194,7 @@
 										id="txtSearchValueEmpId" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="searchEmp();" id="btnSearchEmp"
-											class="btn btn-sm btn-info btn-icon" title="Search"
+											class="btn btn-raised btn-info btn-icon" title="Search"
 											value="btnEmp">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>
@@ -265,7 +270,7 @@
 										id="txtSearchValueProj" class="form-control" /></td>
 									<td style="padding-left: 15px">
 										<button type="button" onclick="searchProj();" id="btnSearchProj"
-											class="btn btn-sm btn-info btn-icon" title="Search"
+											class="btn btn-raised btn-info btn-icon" title="Search"
 											value="btnProj">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										</button>

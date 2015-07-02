@@ -388,7 +388,7 @@
 										styleClass="form-control" /></td>
 								<td style="padding-left: 15px">
 									<button type="button" onclick="search();" id="btnSearch"
-										class="btn btn-info btn-icon" title="Search">
+										class="btn btn-raised btn-info btn-icon" title="Search">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									</button>
 								</td>
@@ -495,7 +495,7 @@
 										styleClass="form-control" /></td>
 								<td style="padding-left: 15px"><button type="button"
 										onclick="search();" id="btnSearch"
-										class="btn btn-info btn-icon" title="Search">
+										class="btn btn-raised btn-info btn-icon" title="Search">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									</button></td>
 							</tr>
@@ -808,7 +808,7 @@
 											id="txtSearchValueAssignTo" class="form-control" /></td>
 										<td style="padding-left: 15px"><button type="button"
 												onclick="searchProjMem();" id="btnSearch"
-												class="btn btn-sm btn-info btn-icon" title="Back">
+												class="btn btn-raised btn-info btn-icon" title="Back">
 												<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 											</button></td>
 									</tr>
@@ -882,9 +882,9 @@
 							</tr>
 							<tr align="right">
 								<td>
-									<button type="button" class="btn btn-sm btn-info" id="btnDeclinePropTask"
+									<button type="button" class="btn btn-raised btn-sm btn-info btn-80" id="btnDeclinePropTask"
 										value="Submit">Submit</button> &nbsp;
-									<button type="button" class="btn btn-sm" data-dismiss="modal" aria-label="Close">Cancel</button>
+									<button type="button" class="btn btn-raised btn-sm btn-80" data-dismiss="modal" aria-label="Close">Cancel</button>
 								</td>
 							</tr>
 						</table>
