@@ -2,8 +2,8 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="projectLog">
-	<select id="getprojectLogToBackup" parameterClass="java.lang.Integer"
-		resultClass="project_log.projectLogBean">
+	<select id="getprojectLogForBackup" parameterClass="java.lang.Integer"
+		resultClass="project_log.ProjectLogBean">
 	SELECT
 		project_log_id as projectLogId,
 		project_id as projectId,
@@ -11,7 +11,7 @@
 		project_field as projectField,
 		project_old_value as projectOldValue,
 		project_new_value as projectNewValue,
-		update_date as updateDate,
+		TO_CHAR(update_date,'yyyy-MM-dd HH24:mi:ss') as updateDate,
 		remarks as remarks,
 		change_type as changeType,
 		fGetGeneralCodeCaption(change_type) as changeTypeCaption
@@ -28,6 +28,7 @@
 				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 			)
 	)
+	ORDER BY project_log_id DESC
 	</select>
 
 	<delete id="deleteprojectLog">

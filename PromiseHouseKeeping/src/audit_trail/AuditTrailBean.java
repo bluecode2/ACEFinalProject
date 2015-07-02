@@ -17,7 +17,15 @@ public class AuditTrailBean {
 	private String dataId;
 	private Date updateDate;
 	private String updateDateInString;
+	private String userName;
 	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	SimpleDateFormat sdf = new SimpleDateFormat(Constant.StringFormat.dateFormat);
 	
 	public Integer getAuditTrailId() {

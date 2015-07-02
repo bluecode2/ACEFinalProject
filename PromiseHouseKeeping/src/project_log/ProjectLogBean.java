@@ -15,6 +15,7 @@ public class ProjectLogBean {
 	private Date updateDate;
 	private String remarks;
 	private String changeType;
+	private String changeTypeInString;
 	
 	private String updateDateInString;
 	
@@ -92,6 +93,12 @@ public class ProjectLogBean {
 			date = null;
 		}
 		this.updateDate = date;
+	}
+	public String getChangeTypeInString() {
+		return changeTypeInString;
+	}
+	public void setChangeTypeInString(String changeTypeInString) {
+		this.changeTypeInString = changeTypeInString;
 	}
 	
 	
