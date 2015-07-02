@@ -49,12 +49,17 @@ public class NotificationHandler {
 
 				wt.close();
 				fo.close();
-				System.out.println("Write to the file success");
+/*				sweepNotification();*/
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				// TODO: handle exception
 			}
 		}
+	}
+	
+	public void sweepNotification() {
+		noMan.deleteNotificationToSweep();
 	}
 
 }
