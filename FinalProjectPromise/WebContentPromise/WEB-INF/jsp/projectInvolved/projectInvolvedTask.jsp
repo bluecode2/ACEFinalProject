@@ -41,7 +41,7 @@
 		document.forms[0].currSearchField2.value = document.forms[0].searchField2.value;
 		document.forms[0].currSearchValue2.value = document.forms[0].searchValue2.value;
 
-		changePage(1);
+		changePage2(1);
 	}
 
 	function getStyleBtn() {

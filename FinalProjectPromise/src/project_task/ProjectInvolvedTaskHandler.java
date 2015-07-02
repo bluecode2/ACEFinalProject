@@ -168,10 +168,12 @@ public class ProjectInvolvedTaskHandler extends Action {
 
 		tsForm.setTask("");
 		tsForm.setTaskForProp("");
-		tsForm.setSearchField(tsForm.getCurrSearchField());
-		tsForm.setSearchValue(tsForm.getCurrSearchValue());
+		
+		
 
 		//paging Project Task
+		tsForm.setSearchField(tsForm.getCurrSearchField());
+		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		tsForm.setListCount(tsMan.getCountAssignTaskByProjectId(
 				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),
 				projId));
@@ -195,6 +197,8 @@ public class ProjectInvolvedTaskHandler extends Action {
 		
 		
 		//paging Propose Task
+		tsForm.setSearchField2(tsForm.getCurrSearchField2());
+		tsForm.setSearchValue2(tsForm.getCurrSearchValue2());
 		tsForm.setListCount2(pProjtaskMan.getCountPropProjTask(
 				tsForm.getCurrSearchField2(), tsForm.getCurrSearchValue2(),
 				projId,us.getEmployeeId()));
