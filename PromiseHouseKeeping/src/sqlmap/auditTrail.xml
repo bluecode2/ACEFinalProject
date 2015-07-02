@@ -1,0 +1,19 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="auditTrail">
+	<select id="getAllAuditTrail" resultClass="audit_trail.AuditTrailBean">
+		SELECT 
+        AUDIT_TRAIL_ID                                   AS auditTrailId,
+        UPDATED_BY                                       AS updatedBy,
+        TABLE_NAME                                       AS tableName,
+        FIELD_NAME                                       AS fieldName,
+        OLD_VALUE                                        AS oldValue,
+        NEW_VALUE                                        AS newValue,
+        TO_CHAR(UPDATE_DATE,'yyyy-MM-dd HH24:mi:ss')     AS updateDateInString,
+        FGETGENERALCODECAPTION(CHANGE_TYPE)              AS changeType,
+        DATA_ID                                          AS dataId
+        FROM AUDIT_TRAIL
+        WHERE TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') <= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd');
+	</select>
+</sqlMap>
