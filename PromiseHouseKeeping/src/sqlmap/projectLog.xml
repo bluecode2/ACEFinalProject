@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="projectLog">
-	<select id="getprojectLogForBackup" parameterClass="java.lang.Integer"
+	<select id="getProjectLogForBackup" parameterClass="java.lang.Integer"
 		resultClass="project_log.ProjectLogBean">
 	SELECT
 		project_log_id as projectLogId,
@@ -31,7 +31,7 @@
 	ORDER BY project_log_id DESC
 	</select>
 
-	<delete id="deleteprojectLog">
+	<delete id="deleteProjectLog">
 		DELETE FROM project_log
 		WHERE project_id IN (
 		SELECT project_id

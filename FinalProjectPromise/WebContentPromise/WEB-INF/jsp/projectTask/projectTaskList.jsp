@@ -28,6 +28,13 @@
 		changePage(1);
 	}
 	
+	function search2() {
+		document.forms[0].currSearchField2.value = document.forms[0].searchField2.value;
+		document.forms[0].currSearchValue2.value = document.forms[0].searchValue2.value;
+
+		changePage2(1);
+	}
+	
 	var currLink;
 	var currHdnField;
 	
@@ -284,9 +291,15 @@
 
 		<html:hidden property="task" name="projectTaskForm" />
 		<html:hidden property="selectedEdit" name="projectTaskForm" />
+		
 		<html:hidden property="currSearchField" name="projectTaskForm" />
 		<html:hidden property="currSearchValue" name="projectTaskForm" />
 		<html:hidden property="currPage" name="projectTaskForm" />
+		
+		<html:hidden property="currSearchField2" name="projectTaskForm" />
+		<html:hidden property="currSearchValue2" name="projectTaskForm" />
+		<html:hidden property="currPage2" name="projectTaskForm" />
+		
 		<html:hidden styleId="hdnSelectedId" property="selectedId" name="projectTaskForm" />
 		<html:hidden property="remarksRecord" name="projectTaskForm" />
 		<html:hidden property="showDiv" name="projectTaskForm" />
@@ -485,16 +498,16 @@
 							<tr>
 								<td>Search by</td>
 								<td style="padding-left: 15px;"><html:select
-										name="projectTaskForm" property="searchField"
-										styleId="selSearchField" styleClass="form-control">
+										name="projectTaskForm" property="searchField2"
+										styleId="selSearchField2" styleClass="form-control">
 										<option value="propTaskName">Task Name</option>
 										<option value="propBy">Proposed By</option>
 									</html:select></td>
 								<td style="padding-left: 15px"><html:text
-										name="projectTaskForm" property="searchValue"
+										name="projectTaskForm" property="searchValue2"
 										styleClass="form-control" /></td>
 								<td style="padding-left: 15px"><button type="button"
-										onclick="search();" id="btnSearch"
+										onclick="search2();" id="btnSearch2"
 										class="btn btn-raised btn-info btn-icon" title="Search">
 										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									</button></td>
@@ -559,7 +572,7 @@
 								</logic:empty>
 							</tbody>
 						</table>
-						<jsp:include page="/WEB-INF/jsp/include/pagination.jsp"></jsp:include>
+						<jsp:include page="/WEB-INF/jsp/include/pagination2.jsp"></jsp:include>
 					</div>
 				</div>
 			</div>

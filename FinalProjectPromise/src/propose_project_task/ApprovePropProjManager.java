@@ -46,11 +46,12 @@ public class ApprovePropProjManager {
 		return list;
 	}
 	
-	public Integer getCountAllPropTask(String column, String value, Integer empId) throws SQLException{
+	public Integer getCountAllPropTask(String column, String value, Integer empId,Integer projectId) throws SQLException{
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
 		map.put("empId", empId);
+		map.put("projId", projectId);
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"appPropProjTask.countListToApp", map);
 		return result;

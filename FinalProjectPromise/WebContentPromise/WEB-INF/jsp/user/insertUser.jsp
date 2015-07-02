@@ -17,11 +17,15 @@
 
 	function onBtnSaveClick() {
 		if (document.forms[0].task.value == "add") {
-			document.forms[0].task.value = "save";
-			document.forms[0].submit();
+			if(validateForm()){
+				document.forms[0].task.value = "save";
+				document.forms[0].submit();
+			}
 		} else if (document.forms[0].task.value == "edit") {
-			document.forms[0].task.value = "save";
-			document.forms[0].submit();
+			if(validateForm()){
+				document.forms[0].task.value = "save";
+				document.forms[0].submit();
+			}
 
 		} else if (document.forms[0].task.value == "changePassword") {
 			var nPass = document.getElementById('newPass').value;
@@ -151,6 +155,42 @@
 			}
 		});
 	}
+	
+	function validateForm(){
+		
+		var username	= document.getElementById("txtUserName").value;
+		var roleId 	= document.getElementById("txtUserRoleId").value;
+		var empId 	= document.getElementById("txtEmployeeId").value;
+		
+		var str = "";
+		var isValid = true;
+		
+		if(username.trim() == '') {
+			str+= "<li>User Name can not be empty!</li>";
+			isValid = false;
+		}
+		else if(username.length > 26) {
+			str+= "<li>User Name can not be more than 25 characters!</li>";
+			isValid = false;
+		}
+		
+		if(roleId.trim() == '') {
+			str+= "<li>User Role ID can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(empId.trim() == '') {
+			str+= "<li>Employee ID can not be empty!</li>";
+			isValid = false;
+		}
+		
+		if(!isValid){
+			document.getElementById('errorContent').innerHTML = str;
+			document.getElementById("divError").style.display = "block";
+		}
+		
+		return isValid;
+	}
 </script>
 </head>
 <body>
@@ -171,7 +211,12 @@
 
 
 		<div class="container">
-			<div class="divSearch form-group has-info">
+			<div class="form-group has-info">
+				<div class="divContent form-group has-info">
+					<div class="text-danger" id="divError" style="display: none">
+					Save failed!
+					<ul id="errorContent"></ul>
+				</div>
 				<table width="50%">
 					<colgroup>
 						<col width="30%" />

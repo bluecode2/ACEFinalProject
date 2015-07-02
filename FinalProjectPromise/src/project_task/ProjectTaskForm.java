@@ -313,7 +313,10 @@ public class ProjectTaskForm extends ActionForm
 		this.currPage2 = currPage2;
 	}
 	public Integer getPageCount2() {
-		return pageCount2;
+		if(this.pageCount2.intValue()==0)
+			return 1;
+		else
+			return pageCount2;
 	}
 	public void setPageCount2(Integer pageCount2) {
 		this.pageCount2 = pageCount2;
