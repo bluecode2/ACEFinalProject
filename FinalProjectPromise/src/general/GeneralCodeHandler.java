@@ -36,7 +36,6 @@ public class GeneralCodeHandler extends Action {
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_CODE_ENTRY,us, request);
 			/*request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
-			request.setAttribute("pageTitle", "General Code Edit");
 
 			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
 /*			if(gcForm.getGenCodeBean().getDeptHeadCode() != null)

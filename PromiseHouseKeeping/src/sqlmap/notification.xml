@@ -11,9 +11,11 @@
 		IS_READ												AS isRead,
 		TO_CHAR(READ_DATE,'yyyy-MM-dd HH24:mi:ss') 			AS readDateInString,
 		NOTIFICATION_URL									AS notificationUrl,
-		SESSION_PARAMETER									AS sessionParameter
-        FROM NOTIFICATIONS
+		SESSION_PARAMETER									AS sessionParameter,
+		EMPLOYEE_NAME										AS employeeName
+        FROM vnotifications	
         WHERE TO_CHAR(NOTIFICATION_DATE,'yyyy-MM-dd') &lt;= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
+		ORDER BY NOTIFICATION_ID DESC
 	</select>
 	<delete id="deleteNotification">
 		DELETE FROM NOTIFICATIONS

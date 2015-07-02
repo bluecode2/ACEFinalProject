@@ -6,20 +6,29 @@ import java.util.Date;
 public class NotificationBean {
 	private Integer notificationId;
 	private Integer employeeId;
-	private String notificationDesc;
-	private Date notificationDate;
+	private String 	notificationDesc;
+	private Date 	notificationDate;
 	private Integer isRead;
-	private Date readDate;
-	private String notificationUrl;
-	private String sessionParameter;
-	private String notificationDateInString;
-	private String notificationDateDisplay;
-	private String readDateInString;
-	private String readDateDisplay;
-
+	private Date 	readDate;
+	private String 	notificationUrl;
+	private String 	sessionParameter;
+	private String 	notificationDateInString;
+	private String 	notificationDateDisplay;
+	private String 	readDateInString;
+	private String 	readDateDisplay;
+	private String 	employeeName;
+	
 	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	SimpleDateFormat dfTime = new SimpleDateFormat("dd MMM yyyy HH:mm");
 	
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
 	public Integer getNotificationId() {
 		return notificationId;
 	}
