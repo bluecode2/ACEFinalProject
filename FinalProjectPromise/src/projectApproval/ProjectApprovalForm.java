@@ -11,6 +11,10 @@ import project_task.ProjectTaskBean;
 
 public class ProjectApprovalForm extends ActionForm{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String 				task;
 	private String 				currSearchField;
 	private String 				currSearchValue;
@@ -112,7 +116,10 @@ public class ProjectApprovalForm extends ActionForm{
 		this.currPage = currPage;
 	}
 	public int getPageCount() {
-		return pageCount;
+		if(this.pageCount==0)
+			return 1;
+		else
+			return pageCount;
 	}
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;

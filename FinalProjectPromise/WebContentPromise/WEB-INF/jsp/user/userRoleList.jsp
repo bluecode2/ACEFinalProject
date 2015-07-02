@@ -602,7 +602,7 @@
 							<td align="center">Menu Access</td>
 							<td align="center">Report Access</td>
 							<td align="center">Department Access</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -635,7 +635,7 @@
 						</logic:notEmpty>
 						<logic:empty name="userRoleForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
+								<td colspan="6" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

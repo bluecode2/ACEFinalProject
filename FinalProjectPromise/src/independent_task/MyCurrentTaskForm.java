@@ -83,10 +83,10 @@ public class MyCurrentTaskForm extends ActionForm
 		this.currPage = currPage;
 	}
 	public Integer getPageCount() {
-		if(pageCount==0)
-			pageCount = 1;
-		
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;

@@ -79,7 +79,7 @@
 							<td class="align-center">General Code Index</td>
 							<td class="align-center">General Code Caption</td>
 							<td class="align-center">Parent ID</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,7 +106,7 @@
 						</logic:notEmpty>
 						<logic:empty name="generalCodeForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No
+								<td colspan="5" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

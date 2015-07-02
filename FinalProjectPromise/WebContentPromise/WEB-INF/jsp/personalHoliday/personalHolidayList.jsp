@@ -86,7 +86,7 @@
 							<td class="align-center">Personal Holiday Date</td>
 							<td class="align-center">Employee Name</td>
 							<td class="align-center">Holiday Type</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -113,7 +113,7 @@
 						</logic:notEmpty>
 						<logic:empty name="personalHolidayForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
+								<td colspan="5" align="center" style="padding: 10px">No Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>

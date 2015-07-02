@@ -106,17 +106,17 @@
 										onclick="actionForm('edit','<bean:write name="reg" property="genParamId" />');"
 										title="Edit">
 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp; 
-										<a href="#" class="text-danger" 
+										<%-- <a href="#" class="text-danger" 
 										onclick="actionForm('delete','<bean:write name="reg" property="genParamId" />','<bean:write name="reg" property="genParamDesc" />');"
 										title="Delete">
-										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> --%>
 									</td>
 								</tr>
 							</logic:iterate>
 						</logic:notEmpty>
 						<logic:empty name="generalParamForm" property="arrList">
 							<tr>
-								<td colspan="4" align="center" style="padding: 10px">No Data Found</td>
+								<td colspan="5" align="center" style="padding: 10px">No Data Found</td>
 							</tr>
 						</logic:empty>
 					</tbody>

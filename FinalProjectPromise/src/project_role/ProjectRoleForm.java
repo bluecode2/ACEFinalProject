@@ -82,7 +82,10 @@ public class ProjectRoleForm extends ActionForm{
 		this.currPage = currPage;
 	}
 	public Integer getPageCount() {
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;

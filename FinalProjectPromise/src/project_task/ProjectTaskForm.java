@@ -12,6 +12,10 @@ import activity.ActivityBean;
 
 public class ProjectTaskForm extends ActionForm
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String 			task = "";
 	private String 			searchField;
 	private String 			searchValue;
@@ -240,7 +244,10 @@ public class ProjectTaskForm extends ActionForm
 		this.currPage = currPage;
 	}
 	public Integer getPageCount() {
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;

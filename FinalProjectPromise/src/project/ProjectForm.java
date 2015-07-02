@@ -1,11 +1,7 @@
 package project;
 
-import java.util.Date;
 import java.util.List;
-
 import org.apache.struts.action.ActionForm;
-
-import user.UserBean;
 
 public class ProjectForm extends ActionForm{
 	
@@ -97,7 +93,10 @@ public class ProjectForm extends ActionForm{
 		this.currPage = currPage;
 	}
 	public Integer getPageCount() {
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;

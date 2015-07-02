@@ -105,7 +105,10 @@ public class GeneralCodeForm extends ActionForm {
 	}
 
 	public Integer getPageCount() {
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 
 	public void setPageCount(Integer pageCount) {

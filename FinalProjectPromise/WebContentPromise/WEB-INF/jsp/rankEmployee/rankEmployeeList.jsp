@@ -82,7 +82,7 @@
 							<td class="align-center">Rank Code</td>
 							<td class="align-center">Rank Name</td>
 							<td class="align-center">Rank Level</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>

@@ -87,7 +87,7 @@
 					data : "searchField=" + searchField + "&searchValue="
 							+ searchValue,
 					success : function(response) {
-						$("#tblSearchDept").find("tr:gt(0)").remove();
+						$("#").find("tr:gt(0)").remove();
 						$("#tblSearchDept").append(response);
 						registerSearchDeptEvent();
 						hideLoading();

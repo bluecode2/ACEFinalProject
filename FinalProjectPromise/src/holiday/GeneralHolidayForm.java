@@ -28,8 +28,8 @@ public class GeneralHolidayForm extends ActionForm{
 	private String 						currSearchValue ;
 	private String 						currSearchValue2 = Constant.DefaultValue.maxDate;
 	private String 						currSearchField = "byDate";
-	private int							currPage = 1;
-	private int 						pageCount = 1;
+	private Integer							currPage = 1;
+	private Integer 						pageCount = 1;
 	private Integer						selectedId;
 	
 	private Date						startDate;
@@ -134,7 +134,10 @@ public class GeneralHolidayForm extends ActionForm{
 	}
 
 	public Integer getPageCount() {
-		return pageCount;
+		if(this.pageCount.intValue()==0)
+			return 1;
+		else
+			return pageCount;
 	}
 
 	public void setPageCount(Integer pageCount) {

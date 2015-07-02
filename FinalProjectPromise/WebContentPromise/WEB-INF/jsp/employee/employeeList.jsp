@@ -84,7 +84,7 @@
 							<td class="align-center">Department</td>
 							<td class="align-center">Supervisor</td>
 							<td class="align-center">Rank</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -110,7 +110,7 @@
 						</logic:notEmpty>
 						<logic:empty name="employeeForm" property="listOfEmployee">
 							<tr>
-								<td colspan="6" align="center" style="padding: 10px">No
+								<td colspan="7" align="center" style="padding: 10px">No
 									Data Found</td>
 							</tr>
 						</logic:empty>

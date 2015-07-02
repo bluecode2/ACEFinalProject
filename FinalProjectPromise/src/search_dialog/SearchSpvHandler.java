@@ -39,8 +39,7 @@ public class SearchSpvHandler extends Action {
 		Integer deptId = ssForm.getDeptId();
 		String searchField = ssForm.getSearchField();
 		String searchValue = ssForm.getSearchValue();
-		System.out.println(rankId + "-" + deptId + "-" + searchField + "-"
-				+ searchValue);
+		
 		List<EmployeeBean> arrEmp = eman.getListEmployeeForSupervisor(deptId,
 				rankBean.getRankLevel(), searchField, searchValue);
 
