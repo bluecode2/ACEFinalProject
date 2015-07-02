@@ -50,7 +50,7 @@ public class GeneralCodeManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(genCodeBean);
+		
 		return genCodeBean;
 	}
 	
@@ -86,7 +86,6 @@ public class GeneralCodeManager {
 
 	public void updateGeneralCode(GeneralCodeBean genCodeBean)
 			throws SQLException {
-		
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genCode.updateGeneralCode", genCodeBean);
