@@ -78,9 +78,9 @@
 	
 	function search() {
 			showLoading();
-			var searchField = $('#selSearchFieldEmpId').val();
+			var searchValue = $('#selSearchFieldEmpId').val();
 			var searchValue = $('#txtSearchValueEmpId').val();
-	
+			
 			$.ajax({
 				type : "POST",
 				url : "searchEmpForPM.do",
