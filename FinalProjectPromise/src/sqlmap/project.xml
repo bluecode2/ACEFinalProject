@@ -249,7 +249,7 @@
 		ON P.PROJECT_ID=PM.PROJECT_ID
 		where PM.EMPLOYEE_ID = #employeeId#
 		AND IS_ACTIVE=1
-		AND PROJECT_STATUS NOT IN ('PR_STAT_04', 'PR_STAT_99')
+		AND PROJECT_STATUS NOT IN ('PR_STAT_04','PR_STAT_98', 'PR_STAT_99')
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="projectCode">
 				LOWER(PROJECT_CODE) LIKE LOWER( '%' || #searchValue# || '%' )
