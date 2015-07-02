@@ -204,12 +204,14 @@
 
 		if (taskStatus == 'TA_STAT_02') { //Function for edit task; change name and desc
 			document.forms[0].selectedEdit.value = "0";
-
+			document.forms[0].submit();
 		} else if (taskStatus == 'TA_STAT_04') { //Function for approve task; change status 
+			if (confirm("Are you sure want to Approve This Task ?")){
 			document.forms[0].selectedEdit.value = "1";
+			document.forms[0].submit();
+			}
 		}
 
-		document.forms[0].submit();
 	}
 	
 	//untuk mendapatkan desc dari propose project task
@@ -250,6 +252,9 @@
 	} */
 	
 	function actionForm(task, id) {
+		alert(task);
+		if (task == "approve"){
+		if (confirm("Are you sure want to Approve This Propose Task ?")){
 		var remark = $('#remarksToProp').val();
 		var testing = $('.hdnAssignTo').val();
 		document.forms[0].taskForProp.value = task;
@@ -257,6 +262,17 @@
 		document.forms[0].assignTo.value = testing;
 		document.forms[0].remarksProp.value = remark;
  		document.forms[0].submit();
+		}
+		}
+		else {
+		var remark = $('#remarksToProp').val();
+		var testing = $('.hdnAssignTo').val();
+		document.forms[0].taskForProp.value = task;
+		document.forms[0].selectTaskId.value = id;
+		document.forms[0].assignTo.value = testing;
+		document.forms[0].remarksProp.value = remark;
+ 		document.forms[0].submit();
+		}
 	}
 </script>
 </head>
