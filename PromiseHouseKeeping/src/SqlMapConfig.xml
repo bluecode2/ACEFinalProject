@@ -32,8 +32,10 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<!-- Identify all SQL Map XML files to be loaded by this SQL map. Notice 
 		the paths are relative to the classpath. For now, we only have one� -->
 	<sqlMap resource="sqlmap/auditTrail.xml" />
-	<sqlMap resource="sqlmap/notification.xml" />
 	<sqlMap resource="sqlmap/generalParam.xml" />
+	<sqlMap resource="sqlmap/notification.xml" />
+	<sqlMap resource="sqlmap/projectLog.xml" />
+	<sqlMap resource="sqlmap/taskLog.xml" />
 </sqlMapConfig>
 
 

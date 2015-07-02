@@ -19,7 +19,7 @@ public class ProjectLogHandler {
 			for (ProjectLogBean projectLogBean : listProjectLog) {
 				System.out
 						.println(String
-								.format("| %-5s | %-5s | %-5s | %-150s | %-100s | %-100s | %-20s | %-50s | %-10s |",
+								.format("| %-5s | %-5s | %-5s | %-150s | %-100s | %-100s | %-20s | %-50s | %-10s | %-10s |",
 										projectLogBean.getProjectLogId(),
 										projectLogBean.getProjectId(),
 										projectLogBean.getUpdateBy(),
