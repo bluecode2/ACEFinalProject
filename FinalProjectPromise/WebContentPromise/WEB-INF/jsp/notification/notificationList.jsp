@@ -71,7 +71,7 @@
 									property="notificationId" />
 								<bean:write name="notif" property="notificationDesc" />
 								<br /> <span style="font-size: xx-small;"><bean:write
-										name="notif" property="notificationDateInString" /></span>
+										name="notif" property="notificationDateDisplay" /></span>
 							</div>
 						</logic:equal>
 						<logic:equal name="notif" property="isRead" value="1">
@@ -80,9 +80,9 @@
 									property="notificationId" />
 								<bean:write name="notif" property="notificationDesc" />
 								<br /> <span style="font-size: xx-small;"><bean:write
-										name="notif" property="notificationDateInString" /></span> <span
-									style="font-size: xx-small; padding-left: 30px">Read <bean:write
-										name="notif" property="readDateInString" /></span>
+										name="notif" property="notificationDateDisplay" /></span> <span
+									style="font-size: xx-small; padding-left: 30px">Read : <bean:write
+										name="notif" property="readDateDisplay" /></span>
 							</div>
 						</logic:equal>
 					</logic:iterate>
@@ -90,6 +90,7 @@
 			</div>
 			<div>
 				<hr>
+				<bean:write name="currPage"/>
 				<logic:notEqual name="currPage" value="1">
 					<a href='#' class="text-info btnPrevNotif"
 						style="padding-right: 20px">prev</a>

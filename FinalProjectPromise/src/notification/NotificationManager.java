@@ -116,6 +116,22 @@ public class NotificationManager {
 		return result;
 	}
 	
+	public Integer getCountNotificationByEmployee(Integer employeeId,Boolean isRead) {
+		Map map = new HashMap();
+		map.put("employeeId", employeeId);
+		map.put("isRead", isRead?1:0);
+		
+		Integer result = 0;
+		try {
+			result = (Integer) this.ibatis.queryForObject(
+					"notification.countNotificationByEmployee", map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public boolean insertNotification(NotificationBean bean){
 		boolean flag = true;
 		

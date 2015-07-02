@@ -9,9 +9,9 @@
 			notification_id as notificationId,
 			employee_id as employeeId,
 			notification_desc as notificationDesc,
-			TO_CHAR(notification_date,'yyyy-MM-dd') as notificationDateInString,
+			TO_CHAR(notification_date,'yyyy-MM-dd HH24:mi') as notificationDateInString,
 			is_read as isRead,
-			TO_CHAR(read_date,'yyyy-MM-dd') as readDateInString,
+			TO_CHAR(read_date,'yyyy-MM-dd HH24:mi') as readDateInString,
 			notification_url as notificationUrl,
 			session_parameter as sessionParameter
 		FROM notifications
@@ -21,8 +21,8 @@
 				is_read = #isRead#
 			</isNotEmpty>
 		</dynamic>
-		ORDER BY notification_date DESC
-		) n where ROWNUM &lt; = #end#) WHERE rnum &gt;
+		ORDER BY notification_id DESC
+		) n where ROWNUM &lt;= #end#) WHERE rnum &gt;
 		#begin#
 		
 	</select>
@@ -43,9 +43,9 @@
 			notification_id as notificationId,
 			employee_id as employeeId,
 			notification_desc as notificationDesc,
-			TO_CHAR(notification_date,'yyyy-MM-dd') as notificationDateInString,
+			TO_CHAR(notification_date,'yyyy-MM-dd HH24:mi') as notificationDateInString,
 			is_read as isRead,
-			TO_CHAR(read_date,'yyyy-MM-dd') as readDateInString,
+			TO_CHAR(read_date,'yyyy-MM-dd HH24:mi') as readDateInString,
 			notification_url as notificationUrl,
 			session_parameter as sessionParameter
 		FROM notifications

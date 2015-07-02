@@ -16,9 +16,12 @@ public class NotificationBean {
 	private String sessionParameter;
 	
 	private String notificationDateInString;
+	private String notificationDateDisplay;
 	private String readDateInString;
+	private String readDateDisplay;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	SimpleDateFormat dfTime = new SimpleDateFormat("dd MMM yyyy HH:mm");
 	
 	public Integer getNotificationId() {
 		return notificationId;
@@ -127,4 +130,13 @@ public class NotificationBean {
 		}
 		this.notificationDate = date;
 	}
+	
+	public String getNotificationDateDisplay() {
+		return dfTime.format(notificationDate.getTime());
+	}
+	
+	public String getReadDateDisplay() {
+		return dfTime.format(readDate.getTime());
+	}
+
 }

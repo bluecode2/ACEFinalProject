@@ -110,7 +110,7 @@ public class CommonFunction {
 				}
 			}
 		}
-		
+
 		request.setAttribute("reportMenuCode", Constant.MenuCode.REPORTS);
 
 		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
@@ -123,9 +123,12 @@ public class CommonFunction {
 
 		// Generate Unread Notification
 		NotificationManager nMan = new NotificationManager();
-		List<NotificationBean> lstUnreadNotification = nMan.getListUnreadNotificationByEmployee(user.getEmployeeId());
-		request.setAttribute("unreadNotification",lstUnreadNotification);
-		request.setAttribute("unreadCount", lstUnreadNotification.size());
+		List<NotificationBean> lstUnreadNotification = nMan
+				.getListUnreadNotificationByEmployee(user.getEmployeeId());
+		int unreadCount = nMan.getCountNotificationByEmployee(user
+				.getEmployeeId(),false);
+		request.setAttribute("unreadNotification", lstUnreadNotification);
+		request.setAttribute("unreadCount", unreadCount);
 	}
 
 	public static void initializeHeader(String menuCode, UserBean user,
@@ -158,7 +161,7 @@ public class CommonFunction {
 		}
 
 		request.setAttribute("reportMenuCode", Constant.MenuCode.REPORTS);
-		
+
 		request.setAttribute("arrMenuLvl1", arrMenuLvl1);
 		request.setAttribute("arrMenuLvl2", arrMenuLvl2);
 		request.setAttribute("arrMenuLvl3", arrMenuLvl3);
@@ -182,10 +185,13 @@ public class CommonFunction {
 
 		// Generate Unread Notification
 		NotificationManager nMan = new NotificationManager();
-		List<NotificationBean> lstUnreadNotification = nMan.getListUnreadNotificationByEmployee(user.getEmployeeId());
-		request.setAttribute("unreadNotification",lstUnreadNotification);
-		request.setAttribute("unreadCount", lstUnreadNotification.size());
-		
+		List<NotificationBean> lstUnreadNotification = nMan
+				.getListUnreadNotificationByEmployee(user.getEmployeeId());
+		int unreadCount = nMan.getCountNotificationByEmployee(user
+				.getEmployeeId(),false);
+		request.setAttribute("unreadNotification", lstUnreadNotification);
+		request.setAttribute("unreadCount", unreadCount);
+
 		// Generate BreadCrumb
 		ArrayList<MenuBean> arrBreadCrumb = new ArrayList<MenuBean>();
 		arrBreadCrumb.add(menu);
@@ -207,11 +213,11 @@ public class CommonFunction {
 		} else
 			return;
 	}
-	
-	public static String getGeneralParameterValue(String genParamId){
+
+	public static String getGeneralParameterValue(String genParamId) {
 		GeneralParamManager manager = new GeneralParamManager();
 		GeneralParamBean bean = manager.getGenParamByParamId(genParamId);
-		
+
 		return bean.getGenParamValue();
 	}
 }
