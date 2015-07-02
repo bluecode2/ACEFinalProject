@@ -2,7 +2,7 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="projectLog">
-	<select id="getprojectLogToBackup" parameterClass="java.lang.Integer"
+	<select id="getprojectLogForBackup" parameterClass="java.lang.Integer"
 		resultClass="project_log.projectLogBean">
 	SELECT
 		project_log_id as projectLogId,
