@@ -21,11 +21,11 @@
 		FROM project
 		WHERE project_status IN ('PR_STAT_04', 'PR_STAT_98', 'PR_STAT_99')
 			AND (
-				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 				OR
-				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 				OR
-				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 			)
 	)
 	</select>
@@ -37,11 +37,11 @@
 		FROM project
 		WHERE project_status IN ('PR_STAT_04', 'PR_STAT_98', 'PR_STAT_99')
 			AND (
-				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_04' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 				OR
-				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_98' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 				OR
-				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') < TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				(project_status LIKE 'PR_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
 			)
 	)
 	</delete>

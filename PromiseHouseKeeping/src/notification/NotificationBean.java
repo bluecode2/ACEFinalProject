@@ -12,7 +12,6 @@ public class NotificationBean {
 	private Date readDate;
 	private String notificationUrl;
 	private String sessionParameter;
-	
 	private String notificationDateInString;
 	private String notificationDateDisplay;
 	private String readDateInString;

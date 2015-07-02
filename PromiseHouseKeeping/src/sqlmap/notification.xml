@@ -2,7 +2,21 @@
 "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="notification">
-	<select id="getAllAuditNotification">
-	
+	<select id="getAllNotification" resultClass="notification.NotificationBean">
+		SELECT 
+		NOTIFICATION_ID 									AS notificationId,
+		EMPLOYEE_ID											AS employeeId,
+		NOTIFICATION_DESC									AS notificationDesc,
+		TO_CHAR(NOTIFICATION_DATE,'yyyy-MM-dd HH24:mi:ss')	AS notificationDateInString, 
+		IS_READ												AS isRead,
+		TO_CHAR(READ_DATE,'yyyy-MM-dd HH24:mi:ss') 			AS readDateInString,
+		NOTIFICATION_URL									AS notificationUrl,
+		SESSION_PARAMETER									AS sessionParameter
+        FROM NOTIFICATIONS
+        WHERE TO_CHAR(NOTIFICATION_DATE,'yyyy-MM-dd') &lt;= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
 	</select>
+	<delete id="deleteNotification">
+		DELETE FROM NOTIFICATIONS
+		WHERE TO_CHAR(NOTIFICATION_DATE,'yyyy-MM-dd') &lt;= TO_CHAR((SYSDATE - TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')
+	</delete>
 </sqlMap>
