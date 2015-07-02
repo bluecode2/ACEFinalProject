@@ -84,6 +84,7 @@ public class ProjectHandler extends Action{
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
 			pForm.getpBean().setActStartDate(now);
+			pForm.getpBean().setUpdatedBy(us.getUserId());
 			
 			pMan.updateProject(pForm.getpBean());
 			
@@ -93,6 +94,7 @@ public class ProjectHandler extends Action{
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_WAITING_FOR_APPROVAL);
 			pForm.getpBean().setActEndDate(now);
+			pForm.getpBean().setUpdatedBy(us.getUserId());
 			
 			pMan.updateProject(pForm.getpBean());
 			

@@ -34,7 +34,7 @@
 	});
 	
 	function registerSearchEmpEvent(){
-		$('.rowSearch').on(
+		$('.rowSearchEmployee').on(
 				'click',
 				function() {
 					var value = $(this).find('td').eq(0).html();
@@ -238,7 +238,7 @@
 								<tbody>
 									<logic:notEmpty name="listEmployeeSearch">
 										<logic:iterate id="emp" name="listEmployeeSearch">
-											<tr data-dismiss="modal" class="rowSearch">
+											<tr data-dismiss="modal" class="rowSearchEmployee">
 												<td style="display: none"><bean:write name="emp"
 														property="employeeId" /></td>
 												<td width="150px"><bean:write name="emp"
