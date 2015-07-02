@@ -17,12 +17,12 @@ public class AuditTrailHandler {
 		AuditTrailManager aTrailMan = new AuditTrailManager();
 		GeneralParamManager gParamMan = new GeneralParamManager();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
 		Date date = new Date();
 		
 		List<AuditTrailBean> listOfAuditTrail = aTrailMan.getAuditTrail();
 		String fileName = gParamMan.getGeneralParamValue()
-				+ "Audit_Trail_Log"+sdf.format(date)+".txt";
+				+ "Audit_Trail_Log_"+sdf.format(date)+".txt";
 
 		FileOutputStream fileOut = null;
 		PrintStream write = null;
