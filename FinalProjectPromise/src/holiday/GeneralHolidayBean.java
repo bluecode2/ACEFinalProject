@@ -27,7 +27,12 @@ public class GeneralHolidayBean {
 	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getGenHolidayDateDisplay() {
-		return df2.format(genHolidayDate);
+		try {
+			return df2.format(genHolidayDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 	
 	public Integer getGenHolidayId() {

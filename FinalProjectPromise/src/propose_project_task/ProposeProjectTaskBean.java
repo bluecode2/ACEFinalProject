@@ -297,10 +297,20 @@ public class ProposeProjectTaskBean {
 	}
 	
 	public String getEstStartDateDisplay() {
-		return df2.format(estStartDate);
+		try {
+			return df2.format(estStartDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}		
 	}
 
 	public String getEstEndDateDisplay() {
-		return df2.format(estEndDate);
+		try {
+			return df2.format(estEndDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}	
 }
