@@ -290,7 +290,7 @@
 						<h4 class="modal-title">Employee</h4>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container from-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>

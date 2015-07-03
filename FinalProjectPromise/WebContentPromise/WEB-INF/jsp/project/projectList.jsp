@@ -245,13 +245,13 @@
 											Task</a></td>
 									<td align="center">
 									
-									<a href="#" onclick="actionForm('firstBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />','<bean:write name="proj" property="projectProgress" />');"
+									<a class="text-success" href="#" onclick="actionForm('firstBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />','<bean:write name="proj" property="projectProgress" />');"
 										><span class="firstBtn"
 											aria-hidden="true" id="firstBtn" ></span></a> &nbsp; 
-									<a href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
+									<a class="text-success" href="#"	onclick="actionForm('edit','<bean:write name="proj" property="projectId" />');"
 										title="Edit"><span class="secondBtn"
 											aria-hidden="true"></span></a> &nbsp; 
-									<a href="#" onclick="actionForm('thirdBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />');"
+									<a class="text-danger" href="#" onclick="actionForm('thirdBtn','<bean:write name="proj" property="projectId" />','<bean:write name="proj" property="projectName" />','<bean:write name="proj" property="projectStatus" />');"
 										><span class="thirdBtn"
 											aria-hidden="true" id="thirdBtn"></span></a>
 									</td>

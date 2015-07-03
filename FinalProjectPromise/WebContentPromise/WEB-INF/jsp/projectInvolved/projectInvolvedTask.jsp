@@ -750,7 +750,7 @@
 											<td align="center"><a href="#"
 												class="text-info lnkMngActivity" id="mngAct">Manage
 													Activity</a></td>
-											<td align="center"><a href="#" onclick=""> <span
+											<td align="center"><a class="text-success" href="#" onclick=""> <span
 													class="firstBtn" aria-hidden="true"></span>
 											</a> &nbsp; <!-- 	<a href="#" onclick="">
 											<span class="secondBtn" aria-hidden="true" ></span>
@@ -951,7 +951,7 @@
 						<h4 class="modal-title">Task Description</h4>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
+						<div class="from-group has-info">
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
@@ -990,7 +990,7 @@
 						<h4 class="modal-title">Task Remarks</h4>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
+						<div class="from-group has-info">
 							<table width="100%">
 								<tr>
 									<td style="padding-left: 15px">Task</td>
@@ -1031,7 +1031,7 @@
 						<br />
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container from-group has-info">
 							<input type="hidden" id="hdnModalTaskId" />
 							<table>
 								<tr>
@@ -1049,7 +1049,7 @@
 							</table>
 						</div>
 
-						<div class="form-group" style="overflow-y: auto; height: 350px">
+						<div class="from-group has-info" style="overflow-y: auto; height: 350px">
 							<a class="text-info" id="btnShowEntry" href="#"
 								title="Add Activity"><span class="glyphicon glyphicon-plus"
 								aria-hidden="true"></span></a>

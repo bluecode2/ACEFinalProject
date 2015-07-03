@@ -272,6 +272,7 @@
 					<thead>
 						<tr class="panel panel-info">
 							<td class="align-center">Task Name</td>
+							<td class="align-center">Assigned By</td>
 							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Status</td>
 							<td class="align-center">Activity</td>
@@ -293,6 +294,8 @@
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
 												property="taskName" /></a></td>
+									<td><bean:write name="reg"
+												property="assignedByName" /></td>
 									<td align="center">
 							          <logic:notEmpty name="reg" property="estStartDateInString">
 							           <bean:write name="reg" property="estStartDateDisplay" /> to 

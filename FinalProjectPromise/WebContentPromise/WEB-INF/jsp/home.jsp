@@ -18,6 +18,17 @@
 
 <script type="text/javascript">
 
+	var date = new Date();
+	var dd = date.getDate();
+	var mm = date.getMonth()+1;
+		if(dd<10) {dd = "0"+dd}
+		if(mm<10) {mm = "0"+mm}
+	var yyyy = date.getFullYear();
+
+	var dateString = yyyy+"-"+mm+"-"+dd;
+	var today = new Date(dateString);
+	var oneDay = 24*60*60*1000; //hours*minutes*seconds*milliseconds
+	
 function generateChart(chart,fill,percents){
 	var $ppc = $(chart),
     percent = parseInt($ppc.data('percent')) || 0,
@@ -33,30 +44,19 @@ function generateColor(className1,className2){
 	  var arr = []; i = 0;
 		$(className1).each(function() {
 			arr[i] = this.innerHTML;
+			alert(arr[i]);
 			var deadline = new Date(arr[i]);
 			var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 			if (diffDays<=1) {
 				$(className2)[i].style.backgroundColor = "rgba(233,30,99,0.1)";
 			} else if (diffDays<=3) {
 				$(className2)[i].style.backgroundColor = "rgba(255,235,59,0.2)";
-			} 
-			else {
+			} else if (diffDays>3) {
 				$(className2)[i].style.backgroundColor = "rgba(139,195,74,0.2)";
 			} 
 			i++;
 		});
   }
-  
-  var date = new Date();
-  var dd = date.getDate();
-  var mm = date.getMonth()+1;
- 	if(dd<10) {dd = "0"+dd}
- 	if(mm<10) {mm = "0"+mm}
-  var yyyy = date.getFullYear();
-  
-	var dateString = yyyy+"-"+mm+"-"+dd;
-	var today = new Date(dateString);
-	var oneDay = 24*60*60*1000; //hours*minutes*seconds*milliseconds
 
 </script>
 
@@ -84,9 +84,10 @@ function generateColor(className1,className2){
 								<div class="home-proj-body">
 									<span style="font-size: 16px;"><bean:write name="reg" property="projectName" /></span>
 									<br />
-									Deadline: <span class="projDate">
+									<span class="projDate" style="display: none;"><bean:write name="reg" property="estEndDateInString" /></span>
+									<span style="padding-right: 5px;">Deadline:</span>
 									<logic:notEmpty name="reg" property="estEndDateInString" >
-										<bean:write name="reg" property="estEndDateDisplay" /></span>
+										<bean:write name="reg" property="estEndDateDisplay" />
 									</logic:notEmpty>
 									<span style="float: right;"><bean:write name="reg" property="projectProgress" />%</span>
 								</div>
@@ -123,7 +124,11 @@ function generateColor(className1,className2){
 								<div class="home-task-body">
 									<span style="font-size: 16px;"><bean:write name="reg" property="taskName" /></span>
 									<br />
-									Deadline: <span class="taskDate"><bean:write name="reg" property="estEndDateInString" /></span>
+									<span class="taskDate" style="display: none;"><bean:write name="reg" property="estEndDateInString" /></span>
+									<span style="padding-right: 5px;">Deadline:</span>
+									<logic:notEmpty name="reg" property="estEndDateInString" >
+										<bean:write name="reg" property="estEndDateDisplay" />
+									</logic:notEmpty>
 									<span style="float: right;"><bean:write name="reg" property="taskProgress" />%</span>
 								</div>
 								</logic:iterate>

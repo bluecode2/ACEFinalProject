@@ -229,7 +229,7 @@
 							<td>Project Name</td>
 							<td>Employee Name</td>
 							<td>Project Role Name</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -244,7 +244,7 @@
 									<td><bean:write name="member" property="projName" /></td>
 									<td><bean:write name="member" property="empName" /></td>
 									<td><bean:write name="member" property="projRoleName" /></td>
-									<td align="center"><a href="#"
+									<td align="center"><a class="text-danger" href="#" title="delete"
 										onclick="actionForm('<bean:write name="member" property="memberId" />','<bean:write name="member" property="empName" />');"
 										id="delBtn"><span
 											class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
@@ -278,7 +278,7 @@
 						<hr>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
