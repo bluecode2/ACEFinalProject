@@ -111,7 +111,7 @@ function goToEvaluate(id) {
 							<td class="align-center">Estimate Date</td>
 							<td class="align-center">Actual Date</td>
 							<td class="align-center">Project Member</td>
-							<td class="align-center"></td>
+							<td class="align-center">Action</td>
 						</tr>
 					</thead>
 					<tbody>

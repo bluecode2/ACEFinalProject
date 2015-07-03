@@ -32,14 +32,14 @@ public class HomeHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		hmForm.setUsername(us.getEmployeeName());
+
+		ProjectManager pMan = new ProjectManager();		
+		hmForm.setListProjBean(pMan.getProjForHome(us.getEmployeeId(), 1, 5));
+		hmForm.setAvgProjProg(pMan.avgProjProg(us.getEmployeeId()));
 		
 		IndependentTaskManager iTaskMan = new IndependentTaskManager();
 		hmForm.setListTaskBean(iTaskMan.getListForIndividualTask(1, 5, us.getEmployeeId()));
 		hmForm.setAvgTaskProg(iTaskMan.getAvgTaskProg(us.getEmployeeId()));
-		
-		ProjectManager pMan = new ProjectManager();		
-		hmForm.setListProjBean(pMan.getProjForHome(us.getEmployeeId(), 1, 5));
-		hmForm.setAvgProjProg(pMan.avgProjProg(us.getEmployeeId()));
 		
 		CommonFunction.createAllowedMenu(us, request);
 		
