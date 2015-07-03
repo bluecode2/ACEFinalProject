@@ -259,7 +259,6 @@
 	} */
 	
 	function actionForm(task, id) {
-		alert(task);
 		if (task == "approve"){
 		if (confirm("Are you sure want to Approve This Propose Task ?")){
 		var remark = $('#remarksToProp').val();
@@ -431,7 +430,7 @@
 													styleClass="hdTaskDesc" /> <html:hidden property="taskId"
 													name="reg" styleClass="hdTaskId" /> <html:hidden
 													property="taskName" name="reg" styleClass="hdTaskName" />
-												<html:hidden property="assignedTo" name="reg"
+												<html:hidden property="assignedToName" name="reg"
 													styleClass="hdAssignedToName" /> <html:hidden
 													property="remarks" name="reg" styleClass="hdRemarks" /> <a
 												href="#" class="text-info linkDesc"> <bean:write
@@ -714,7 +713,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Project Member</h4>
+						<h4 class="modal-title">Activity</h4>
 						<br />
 					</div>
 					<div class="modal-body">
