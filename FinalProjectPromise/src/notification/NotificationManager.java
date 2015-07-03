@@ -186,19 +186,19 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		String desc = creatorEmp.getEmployeeName() + " just assigned you as a " + projRoleBean.getProjectRoleName() +" in a new project : " + projBean.getProjectName();
-		
-		NotificationBean bean = new NotificationBean();
-		
-		bean.setEmployeeId(assignedEmployeeId);
-		
-		if(projectRoleId.intValue() == projRoleMan.getProjectManagerRoleId().intValue())
-			bean.setNotificationUrl("project.do");
-		else
-			bean.setNotificationUrl("projectInvolved.do");
-		bean.setNotificationDesc(desc);
-		
-		insertNotification(bean);
+		if (creatorEmployeeId != assignedEmployeeId) {
+			String desc = creatorEmp.getEmployeeName() + " just assigned you as a " + projRoleBean.getProjectRoleName() +" in a new project : " + projBean.getProjectName();
+			NotificationBean bean = new NotificationBean();
+			bean.setEmployeeId(assignedEmployeeId);
+			
+			if(projectRoleId.intValue() == projRoleMan.getProjectManagerRoleId().intValue())
+				bean.setNotificationUrl("project.do");
+			else
+				bean.setNotificationUrl("projectInvolved.do");
+			
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
+		}
 		return true;
 	}
 	
@@ -212,99 +212,98 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		String desc = creatorEmp.getEmployeeName() + " just remove your position as a " + projRoleBean.getProjectRoleName() +" from project : " + projBean.getProjectName();
-		
-		NotificationBean bean = new NotificationBean();
-		
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationUrl("project.do");
-		bean.setNotificationDesc(desc);
-		
-		insertNotification(bean);
+		if (creatorEmployeeId != assignedEmployeeId) {
+			String desc = creatorEmp.getEmployeeName() + " just remove your position as a " + projRoleBean.getProjectRoleName() +" from project : " + projBean.getProjectName();
+			
+			NotificationBean bean = new NotificationBean();
+			
+			bean.setEmployeeId(assignedEmployeeId);
+			bean.setNotificationUrl("project.do");
+			bean.setNotificationDesc(desc);
+			
+			insertNotification(bean);
+		}
 		return true;
 	}
 	
 	public boolean createNotificationAssignIndependentTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
-
 		IndependentTaskManager itMan = new IndependentTaskManager();
 		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
 
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
-		//not started assign, waiting, completed, decline,cancel
-		String desc="";
-		if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){	
-
-			desc = creatorEmp.getEmployeeName() + " assigned you a task : " + itBean.getTaskName();
-			bean.setNotificationUrl("myCurrentTask.do");
-		
-		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
+		if (creatorEmployeeId != assignedEmployeeId) {
+			NotificationBean bean = new NotificationBean();
+			String desc="";
+			if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){	
+	
+				desc = creatorEmp.getEmployeeName() + " assigned you a task : " + itBean.getTaskName();
+				bean.setNotificationUrl("myCurrentTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + itBean.getTaskName();
-			bean.setNotificationUrl("assignTask.do");
-			//assign task
-		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
+			}
+			else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
+				
+				desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + itBean.getTaskName();
+				bean.setNotificationUrl("assignTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " canceled your task : " + itBean.getTaskName();
-			bean.setNotificationUrl("assignTask.do");
-			//assign task
-		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
+			}
+			else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
+				
+				desc = creatorEmp.getEmployeeName() + " canceled your task : " + itBean.getTaskName();
+				bean.setNotificationUrl("assignTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " declined your task : " + itBean.getTaskName();
-			bean.setNotificationUrl("myCurrentTask.do");
-		
-		}
-		else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
+			}
+			else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
+				
+				desc = creatorEmp.getEmployeeName() + " declined your task : " + itBean.getTaskName();
+				bean.setNotificationUrl("myCurrentTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " approved your task : " + itBean.getTaskName();
-			bean.setNotificationUrl("myCurrentTask.do");
-		
+			}
+			else if (itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
+				
+				desc = creatorEmp.getEmployeeName() + " approved your task : " + itBean.getTaskName();
+				bean.setNotificationUrl("myCurrentTask.do");
+			
+			}
+			
+			bean.setEmployeeId(assignedEmployeeId);
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
 		}
-		
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
-		
 		return true;
 	}
 	
 	public boolean createNotificationProposeIndependentTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
-		
 		ProposedTaskManager ptMan = new ProposedTaskManager();
 		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(taskId);
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
-		
-		//propose, approve, decline
-		String desc="";
-		if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
-
-			desc = creatorEmp.getEmployeeName() + " proposed you a task : " + ptBean.getPropTaskName();			
-			bean.setNotificationUrl("approveTask.do");
-		}
-		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
-		
-			desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName();
-			bean.setNotificationUrl("proposedTask.do");
-		}
-		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+		if (creatorEmployeeId != assignedEmployeeId) {
+			NotificationBean bean = new NotificationBean();
+			String desc="";
+			if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
+	
+				desc = creatorEmp.getEmployeeName() + " proposed you a task : " + ptBean.getPropTaskName();			
+				bean.setNotificationUrl("approveTask.do");
+			}
+			else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
 			
-			desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName();
-			bean.setNotificationUrl("proposedTask.do");
+				desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName();
+				bean.setNotificationUrl("proposedTask.do");
+			}
+			else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+				
+				desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName();
+				bean.setNotificationUrl("proposedTask.do");
+			}
+	
+			bean.setEmployeeId(assignedEmployeeId);
+			bean.setNotificationDesc(desc);
+			insertNotification(bean);
 		}
-
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationDesc(desc);
-		insertNotification(bean);
-		
 		return true;
 	}
 	
@@ -314,25 +313,24 @@ public class NotificationManager {
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
-		
-		NotificationBean bean = new NotificationBean();
-		
-		//decline - on going ,submit - waiting for approval,approve 
-		String desc="";
-		
-		if (pjBean.getProjectStatus().equals(Constant.GeneralCode.PROJECT_STATUS_ONGOING)) {
-			desc = creatorEmp.getEmployeeName() + " declined your project : " + pjBean.getProjectName();
-			bean.setNotificationUrl("project.do");
+			
+		if (creatorEmployeeId != assignedEmployeeId) {
+			NotificationBean bean = new NotificationBean();
+			String desc="";
+			if (creatorEmployeeId != assignedEmployeeId) {	
+				if (pjBean.getProjectStatus().equals(Constant.GeneralCode.PROJECT_STATUS_ONGOING)) {
+					desc = creatorEmp.getEmployeeName() + " declined your project : " + pjBean.getProjectName();
+					bean.setNotificationUrl("project.do");
+				}
+				else if (pjBean.getProjectStatus().equals(Constant.GeneralCode.PROJECT_STATUS_COMPLETED)) {
+					desc = creatorEmp.getEmployeeName() + " accepted  your project : " + pjBean.getProjectName();
+					bean.setNotificationUrl("project.do");
+				}
+				bean.setEmployeeId(assignedEmployeeId);
+				bean.setNotificationDesc(desc);	
+				insertNotification(bean);
+			}
 		}
-		else if (pjBean.getProjectStatus().equals(Constant.GeneralCode.PROJECT_STATUS_COMPLETED)) {
-			desc = creatorEmp.getEmployeeName() + " accepted  your project : " + pjBean.getProjectName();
-			bean.setNotificationUrl("project.do");
-		}
-		
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
-		
 		return true;
 	}
 
@@ -346,16 +344,17 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
-		
-		String  desc = creatorEmp.getEmployeeName() + " was waiting you to evaluate : " + pjBean.getProjectName();
-		bean.setNotificationUrl("projectApproval.do");
-		bean.setSessionParameter("projectId#"+pjBean.getProjectId());
 	
-		bean.setEmployeeId(dpbean.getDeptHeadId());
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
+		if (creatorEmployeeId != dpbean.getDeptHeadId()) {
+			NotificationBean bean = new NotificationBean();
+			String  desc = creatorEmp.getEmployeeName() + " was waiting you to evaluate : " + pjBean.getProjectName();
+			bean.setNotificationUrl("projectApproval.do");
+			bean.setSessionParameter("projectId#"+pjBean.getProjectId());
 		
+			bean.setEmployeeId(dpbean.getDeptHeadId());
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
+		}
 		return true;
 	}
 	
@@ -363,19 +362,18 @@ public class NotificationManager {
 		ProposedTaskManager ptMan = new ProposedTaskManager();
 		ProposedTaskBean ptBean = ptMan.getPropTaskByPropTaskId(proposeTaskId);
 		
-		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
+		if (creatorEmployeeId != empId) {	
+			NotificationBean bean = new NotificationBean();	
+			String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
+			bean.setNotificationUrl("#");
 		
-		String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
-		bean.setNotificationUrl("#");
-	
-		bean.setEmployeeId(empId);
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
-		
+			bean.setEmployeeId(empId);
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
+		}
 		return true;
 	}
 	
@@ -383,70 +381,68 @@ public class NotificationManager {
 		IndependentTaskManager itMan = new IndependentTaskManager();
 		IndependentTaskBean itBean = itMan.getDataForEdit(taskId);
 		
-		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
+		if (creatorEmployeeId != empId) {	
+			NotificationBean bean = new NotificationBean();
+			
+			String  desc = creatorEmp.getEmployeeName() + " was pausing his task : " +itBean.getTaskName();
+			bean.setNotificationUrl("assignTask.do");
 		
-		String  desc = creatorEmp.getEmployeeName() + " was pausing his task : " +itBean.getTaskName();
-		bean.setNotificationUrl("assignTask.do");
-	
-		bean.setEmployeeId(empId);
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
-		
+			bean.setEmployeeId(empId);
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
+		}
 		return true;
 	}
 	
 	public boolean createNotificationProjectTask(Integer creatorEmployeeId, Integer assignedEmployeeId,  Integer taskId) {
-		
 		ProjectTaskManager ptMan = new ProjectTaskManager();
 		ProjectTaskBean ptBean = ptMan.getTaskById(taskId);
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
-		
-		//not started assign, waiting, completed, decline,cancel
-		String desc="";
-		if(ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){
-
-			desc = creatorEmp.getEmployeeName() + " assigned you a task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
-			bean.setNotificationUrl("projectInvolvedTask.do");
-		
-		}
-		else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
+		if (creatorEmployeeId != assignedEmployeeId) {
+			NotificationBean bean = new NotificationBean();
+			String desc="";
+			if(ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){
+	
+				desc = creatorEmp.getEmployeeName() + " assigned you a task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
+				bean.setNotificationUrl("projectInvolvedTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + ptBean.getTaskName()+" in project "+ptBean.getProjectName();
-			bean.setNotificationUrl("projectTask.do");
-			//assign task
-		}
-		else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
+			}
+			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
+				
+				desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + ptBean.getTaskName()+" in project "+ptBean.getProjectName();
+				bean.setNotificationUrl("projectTask.do");
+				//assign task
+			}
+			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
+				
+				desc = creatorEmp.getEmployeeName() + " canceled your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
+				bean.setNotificationUrl("projectInvolvedTask.do");
+				//assign task
+			}
+			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
+				
+				desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
+				bean.setNotificationUrl("projectInvolvedTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " canceled your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
-			bean.setNotificationUrl("projectInvolvedTask.do");
-			//assign task
-		}
-		else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
+			}
+			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
+				
+				desc = creatorEmp.getEmployeeName() + " approved your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
+				bean.setNotificationUrl("projectInvolvedTask.do");
 			
-			desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
-			bean.setNotificationUrl("projectInvolvedTask.do");
-		
-		}
-		else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
+			}
 			
-			desc = creatorEmp.getEmployeeName() + " approved your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
-			bean.setNotificationUrl("projectInvolvedTask.do");
-		
+			bean.setEmployeeId(assignedEmployeeId);
+			bean.setSessionParameter("projectId#"+ptBean.getProjectId());
+			bean.setNotificationDesc(desc);	
+			insertNotification(bean);
 		}
-		
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setSessionParameter("projectId#"+ptBean.getProjectId());
-		bean.setNotificationDesc(desc);	
-		insertNotification(bean);
-		
 		return true;
 	}
 	
@@ -457,32 +453,30 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		NotificationBean bean = new NotificationBean();
-		
-		//propose, approve, decline
-		String desc="";
-		if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
-
-			desc = creatorEmp.getEmployeeName() + " proposed you a task " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();			
-			bean.setNotificationUrl("projectTask.do");
-			bean.setSessionParameter("projectId#"+ptBean.getProjectId());
-		}
-		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
-		
-			desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();
-			bean.setNotificationUrl("proposedTask.do");
-		}
-		else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+		if (creatorEmployeeId != assignedEmployeeId) {
+			NotificationBean bean = new NotificationBean();
+			String desc="";
+			if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
+	
+				desc = creatorEmp.getEmployeeName() + " proposed you a task " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();			
+				bean.setNotificationUrl("projectTask.do");
+				bean.setSessionParameter("projectId#"+ptBean.getProjectId());
+			}
+			else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_DECLINE)) {
 			
-			desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName()+ " in project " + ptBean.getProjectName();
-			bean.setNotificationUrl("projectTask.do");
-			bean.setSessionParameter("projectId#"+ptBean.getProjectId());
+				desc = creatorEmp.getEmployeeName() + " declined your propose task : " + ptBean.getPropTaskName() + " in project " + ptBean.getProjectName();
+				bean.setNotificationUrl("proposedTask.do");
+			}
+			else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
+				
+				desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName()+ " in project " + ptBean.getProjectName();
+				bean.setNotificationUrl("projectTask.do");
+				bean.setSessionParameter("projectId#"+ptBean.getProjectId());
+			}
+			bean.setEmployeeId(assignedEmployeeId);
+			bean.setNotificationDesc(desc);
+			insertNotification(bean);
 		}
-
-		bean.setEmployeeId(assignedEmployeeId);
-		bean.setNotificationDesc(desc);
-		insertNotification(bean);
-		
 		return true;
 	}
 }
