@@ -52,17 +52,24 @@
 
 		<div class="container divContent divNotif">
 			<div>
-				<logic:notEqual name="currPage" value="1">
-					<a href='#' class="text-info btnPrevNotif"
-						style="padding-right: 20px">prev</a>
-				</logic:notEqual>
-				<logic:notEqual name="currPage" value="${pageCount}">
-					<a href="#" class="text-info btnNextNotif">next</a>
-				</logic:notEqual>
-				<hr>
+				<div class="col-md-8">
+					<nav>
+					<ul class="pager">
+						<logic:notEqual name="currPage" value="1">
+							<li class="previous"><a href='#'
+								class="text-info btnPrevNotif" style="padding-right: 20px"><span aria-hidden="true">&larr;</span> Newer</a></li>
+						</logic:notEqual>
+						<logic:notEqual name="currPage" value="${pageCount}">
+							<li class="next"><a href="#" class="text-info btnNextNotif">Older <span aria-hidden="true">&rarr;</span></a></li>
+						</logic:notEqual>
+					</ul>
+					</nav>
+				</div>
 			</div>
+			
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-md-8">
+					<hr>
 					<logic:iterate id="notif" name="notificationForm"
 						property="lstBean">
 						<logic:equal name="notif" property="isRead" value="0">
@@ -86,19 +93,23 @@
 							</div>
 						</logic:equal>
 					</logic:iterate>
+					<hr>
 				</div>
 			</div>
 			<div>
-				<hr>
-				<bean:write name="currPage"/>
-				<logic:notEqual name="currPage" value="1">
-					<a href='#' class="text-info btnPrevNotif"
-						style="padding-right: 20px">prev</a>
-				</logic:notEqual>
-				<logic:notEqual name="currPage" value="${pageCount}">
-					<a href="#" class="text-info btnNextNotif">next</a>
-				</logic:notEqual>
-				
+				<div class="col-md-8">
+					<nav>
+					<ul class="pager">
+						<logic:notEqual name="currPage" value="1">
+							<li class="previous"><a href='#'
+								class="text-info btnPrevNotif" style="padding-right: 20px"><span aria-hidden="true">&larr;</span> Newer</a></li>
+						</logic:notEqual>
+						<logic:notEqual name="currPage" value="${pageCount}">
+							<li class="next"><a href="#" class="text-info btnNextNotif">Older <span aria-hidden="true">&rarr;</span></a></li>
+						</logic:notEqual>
+					</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
 
