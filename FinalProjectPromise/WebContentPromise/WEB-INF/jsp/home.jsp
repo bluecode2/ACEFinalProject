@@ -44,7 +44,6 @@ function generateColor(className1,className2){
 	  var arr = []; i = 0;
 		$(className1).each(function() {
 			arr[i] = this.innerHTML;
-			alert(arr[i]);
 			var deadline = new Date(arr[i]);
 			var diffDays = Math.round((deadline.getTime()-today.getTime())/(oneDay));
 			if (diffDays<=1) {
