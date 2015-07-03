@@ -571,12 +571,13 @@
 			styleId="users_empId" />
 		<html:hidden property="testingId" name="projectTaskForm" />
 		<html:hidden property="showDiv" name="projectTaskForm" />
-		<html:hidden property="selectTaskId" name="projectTaskForm" />
+		<html:hidden styleId="hdnPropTaskId" property="selectTaskId" name="projectTaskForm" />
 		
 		<html:hidden property="allowAdd" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
-		<html:hidden styleId="hdnPropTaskId" property="bean.propTaskId"
-			name="projectTaskForm" value="" />
+		
+<%-- 		<html:hidden property="bean.propTaskId" --%>
+<%-- 			name="projectTaskForm" value="" /> --%>
 		<html:hidden property="tmpProjectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
 		<!-- untuk validasi date -->
@@ -597,13 +598,13 @@
 									<td>Project Code</td>
 									<td><html:text name="projectTaskForm"
 											property="prjBean.projectCode" styleClass="form-control"
-											readonly="true"></html:text></td>
+											disabled="true"></html:text></td>
 								</tr>
 								<tr>
 									<td>Project Name</td>
 									<td><html:text name="projectTaskForm"
 											property="prjBean.projectName" styleClass="form-control"
-											readonly="true"></html:text></td>
+											disabled="true"></html:text></td>
 								</tr>
 
 							</table>
@@ -617,10 +618,10 @@
 								</colgroup>
 								<tr>
 									<td>Project Manager</td>
-									<td><html:hidden styleId="hdnProjectManagerId" name="projectTaskForm" property="prjBean.employeeId"/>
+									<td><html:hidden styleId="hdnProjectManagerId" name="projectTaskForm" property="projectManagerId"/>
 										<html:text name="projectTaskForm"
 											property="prjBean.employeeName" styleClass="form-control"
-											readonly="true"></html:text></td>
+											disabled="true"></html:text></td>
 								</tr>
 								<tr>
 									<td>Estimated Date</td>
@@ -634,11 +635,11 @@
 											<tr>
 												<td><html:text name="projectTaskForm"
 														property="prjBean.estStartDateDisplay"
-														styleClass="form-control" readonly="true"></html:text></td>
+														styleClass="form-control" disabled="true"></html:text></td>
 												<td align="center">to</td>
 												<td><html:text name="projectTaskForm"
 														property="prjBean.estEndDateDisplay"
-														styleClass="form-control" readonly="true"></html:text></td>
+														styleClass="form-control" disabled="true"></html:text></td>
 											</tr>
 										</table>
 									</td>
@@ -702,9 +703,9 @@
 									<logic:iterate id="reg" name="projectTaskForm"
 										property="arrList">
 										<tr>
-											<td style="display: none"><html:hidden
-													property="assignedTo" name="reg" styleClass="assTo" /> <html:hidden
-													property="taskDesc" name="reg" styleClass="hdTaskDesc" />
+											<td style="display: none">
+											<html:hidden property="assignedTo" name="reg" styleClass="assTo" /> 
+											<html:hidden property="taskDesc" name="reg" styleClass="hdTaskDesc" />
 												<html:hidden property="taskId" name="reg"
 													styleClass="hdTaskId" /> <html:hidden property="taskName"
 													name="reg" styleClass="hdTaskName" /> <html:hidden

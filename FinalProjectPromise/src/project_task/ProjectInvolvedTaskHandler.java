@@ -65,6 +65,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 				tsForm.setEstStartProj(tsForm.getPrjBean().getEstStartDateInString());
 				tsForm.setEstEndProj(tsForm.getPrjBean().getEstEndDateInString());
 				tsForm.setProjectId(projectId);
+				tsForm.setProjectManagerId(tsForm.getPrjBean().getEmployeeId());
 				session.setAttribute("projectId", projectId);
 			} else {
 				response.sendRedirect("project.do");
@@ -108,6 +109,7 @@ public class ProjectInvolvedTaskHandler extends Action {
 			pTaskBean.setActEndDate(now);
 			pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL);
 			pTaskBean.setUpdatedBy(us.getUserId());
+			
 
 			tsMan.updateTaskStat(pTaskBean);
 			

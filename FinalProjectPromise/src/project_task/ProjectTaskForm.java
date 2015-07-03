@@ -40,6 +40,7 @@ public class ProjectTaskForm extends ActionForm
 	private String			tmpProjectStatus;
 	private String			tmpEstStartDateInString;
 	private String			tmpEstEndDateInString;
+	private Integer			projectManagerId;
 	
 	//penambahan fitur pada form untuk propose project task
 	private Boolean allowAdd = false;
@@ -338,6 +339,12 @@ public class ProjectTaskForm extends ActionForm
 	}
 	public void setCurrSearchValue2(String currSearchValue2) {
 		this.currSearchValue2 = currSearchValue2;
+	}
+	public Integer getProjectManagerId() {
+		return projectManagerId;
+	}
+	public void setProjectManagerId(Integer projectManagerId) {
+		this.projectManagerId = projectManagerId;
 	}
 	
 }
