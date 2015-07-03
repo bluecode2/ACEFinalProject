@@ -36,6 +36,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
 	<sqlMap resource="sqlmap/notification.xml" />
 	<sqlMap resource="sqlmap/projectLog.xml" />
 	<sqlMap resource="sqlmap/taskLog.xml" />
+	<sqlMap resource="sqlmap/independentTaskLog.xml" />
 </sqlMapConfig>
 
 

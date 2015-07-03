@@ -1,14 +1,10 @@
 package audit_trail;
 
-import general.GeneralParamManager;
-
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import common.CommonFunction;
 import common.Constant;
@@ -18,7 +14,6 @@ public class AuditTrailHandler {
 	public void backUpAuditTrail() {
 
 		AuditTrailManager aTrailMan = new AuditTrailManager();
-		GeneralParamManager gParamMan = new GeneralParamManager();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
