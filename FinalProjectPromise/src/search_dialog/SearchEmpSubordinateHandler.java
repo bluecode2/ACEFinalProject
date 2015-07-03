@@ -39,6 +39,8 @@ public class SearchEmpSubordinateHandler extends Action {
 		List<EmployeeBean> arrEmp = new ArrayList<EmployeeBean>();
 		generateSubordinateList(arrEmp,spvId,searchField,searchValue);
 		
+		
+		
 		//System.out.println(arrEmp.size());
 		if (arrEmp.size() == 0) {
 			out.println("<tr>");
@@ -62,13 +64,25 @@ public class SearchEmpSubordinateHandler extends Action {
 		return null;
 	}
 	
-	private void generateSubordinateList(List<EmployeeBean> arrEmp, Integer spvId, String searchField, String searchValue){
+	public void generateSubordinateList(List<EmployeeBean> arrEmp, Integer spvId, String searchField, String searchValue){
 		if(spvId == null) return;
 		
 		EmployeeManager eman = new EmployeeManager();
-		List<EmployeeBean> arrTemp = eman.getEmpForAssignTask(spvId, searchField, searchValue);
+		List<EmployeeBean> arrTemp = eman.getEmpForAssignTask(spvId, "", "");
 		for (EmployeeBean employeeBean : arrTemp) {
-			arrEmp.add(employeeBean);
+			if(searchField.equals("employeeCode")){
+				if(employeeBean.getEmployeeCode().toLowerCase().contains(searchValue.toLowerCase())){
+					arrEmp.add(employeeBean);
+				}
+			}
+			else if(searchField.equals("employeeName")){
+				if(employeeBean.getEmployeeName().toLowerCase().contains(searchValue.toLowerCase())){
+					arrEmp.add(employeeBean);
+				}
+			}
+			else
+				arrEmp.add(employeeBean);
+			
 			generateSubordinateList(arrEmp,employeeBean.getEmployeeId(),searchField,searchValue);
 		}
 	}

@@ -134,6 +134,21 @@
 									</tr>
 								</table>
 							</div>			
+							<div id="subordinateEmployee" style="display: none;">
+								<table>
+									<tr>
+										<td width="150px">Employee Name</td>
+										<td width="200px">
+										<input type="hidden" id="hdnSubordinateId" />
+										<input type="text" class="form-control" id="txtSubordinateName" width="100%" readonly="true"/> 
+										</td>
+										<td width="50px" align="center">
+										<a href="#" class="text-info" > <span
+										class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#searchSubordinateEmp"/></a>
+										</td>
+									</tr>
+								</table>
+							</div>			
 							<div id="project" style="display: none;">
 								<table>
 									<tr>
@@ -151,11 +166,12 @@
 									</tr>
 								</table>
 							</div>	
-							<div><br>
-							<button id="btnPrint" type="button" onclick="onBtnPrintClick();"
-								class="btn btn-raised btn-info" title="Print" style="float: right;">
-								<span class="glyphicon glyphicon-print" aria-hidden="true" style="padding-right: 10px;"></span>Print
-							</button>
+							<div id="divBtnPrint" style="display: none">
+								<br>
+								<button id="btnPrint" type="button" onclick="onBtnPrintClick();"
+									class="btn btn-raised btn-info" title="Print" style="float: right;">
+									<span class="glyphicon glyphicon-print" aria-hidden="true" style="padding-right: 10px;"></span>Print
+								</button>
 							</div>
 						</div>
 					</td>
@@ -249,7 +265,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Employee</h4>
+						<h4 class="modal-title">Subordinate Employee</h4>
 						<hr>
 					</div>
 					<div class="modal-body">
@@ -276,7 +292,7 @@
 							</table>
 						</div>
 
-						<table width="100%" id="tblSearchEmp"
+						<table width="100%" id="tblSearchSubEmp"
 							class="table table-striped table-hover table-bordered table-clickable">
 							<thead>
 								<tr>
@@ -444,6 +460,11 @@
 			//if(filterValue != "") filterValue += "#";
 			//filterValue+=$('#txtProjId').val();
 		}
+		if ($('#subordinateEmployee').is(':visible')){
+			empId = $('#hdnSubordinateId').val();
+			//if(filterValue != "") filterValue += "#";
+			//filterValue+=$('#txtProjId').val();
+		}
 		
 		if(deptId.length > 0){
 			filterValue += deptId;
@@ -490,16 +511,24 @@
 		});
 	}
 	
+	function registerSearchSubEmployee() {
+		$('.rowSearchSubordinate').on('click', function() {
+			var valueEmp = $(this).find('td').eq(0).html().trim();
+			var text = $(this).find('td').eq(2).html().trim();
+			$('#hdnSubordinateId').val(valueEmp);
+			$('#txtSubordinateName').val(text);
+		});
+	}
+	
 	function searchEmp() {	
-		$('.linkProject').on('click', function() {
-			showLoading();
+		showLoading();
 		var searchField = $('#selSearchFieldEmpId').val();
 		var searchValue = $('#txtSearchValueEmpId').val();
 
 			$.ajax({
 				type : "POST",
 				url : "searchEmp.do",
-				data : "&searchField=" + searchField + "&searchValue="
+				data : "searchField=" + searchField + "&searchValue="
 						+ searchValue,
 				success : function(response) {
 					$("#tblSearchEmp").find("tr:gt(0)").remove();
@@ -512,23 +541,22 @@
 					hideLoading();
 				}
 			});
-		});
 	}
 	
-/* 	function searchProj() {
+	function searchSubEmp() {	
 		showLoading();
-		var searchField = $('#selSearchFieldProj').val();
-		var searchValue = $('#txtSearchValueProj').val();
-		var deptId		= $('#txtDeptId').val();
+		var searchField = $('#selSearchFieldSubEmpId').val();
+		var searchValue = $('#txtSearchValueSubEmpId').val();
+
 		$.ajax({
 			type : "POST",
-			url : "searchProj.do",
-			data : "task=showProjectName&searchField=" + searchField + "&searchValue="
-			+ searchValue+"&selectedId="+deptId,
+			url : "searchSubordinate.do",
+			data : "searchField=" + searchField + "&searchValue="
+					+ searchValue + "&spvId=" + $('#hdnCurrentEmpId').val(),
 			success : function(response) {
-				$("#tblSearchProj").find("tr:gt(0)").remove();
-				$("#tblSearchProj").append(response);
-				registerSearchProj();
+				$("#tblSearchSubEmp").find("tr:gt(0)").remove();
+				$("#tblSearchSubEmp").append(response);
+				registerSearchSubEmployee();
 				hideLoading();
 			},
 			error : function(e) {
@@ -536,7 +564,8 @@
 				hideLoading();
 			}
 		});
-	} */
+	}
+
 	function setProjectNull() {
 		$('.txtClassDeptId').on('change',
 				function() {
@@ -548,32 +577,33 @@
 	
 	function registerSearchProject() {
 		$('.linkProject').on('click', function() {
-		showLoading();
-		var searchField = $('#selSearchFieldProj').val();
-		var searchValue = $('#txtSearchValueProj').val();
-		var deptId		= $('#txtDeptId').val();
-			$.ajax({
-				type : "POST",
-				url : "searchProj.do",
-				data : "task=showProjectName&searchField=" + searchField + "&searchValue="
-						+ searchValue+"&selectedId="+deptId,
-				success : function(response) {
-					$("#tblSearchProj").find("tr:gt(0)").remove();
-					$("#tblSearchProj").append(response);
-					registerSearchProj();
-					hideLoading();
-				},
-				error : function(e) {
-					alert("Error: " + e);
-					hideLoading();
-				}
-			});
-		$('#searchProject').modal();
+			showLoading();
+			var searchField = $('#selSearchFieldProj').val();
+			var searchValue = $('#txtSearchValueProj').val();
+			var deptId		= $('#txtDeptId').val();
+				$.ajax({
+					type : "POST",
+					url : "searchProj.do",
+					data : "task=showProjectName&searchField=" + searchField + "&searchValue="
+							+ searchValue+"&selectedId="+deptId,
+					success : function(response) {
+						$("#tblSearchProj").find("tr:gt(0)").remove();
+						$("#tblSearchProj").append(response);
+						registerSearchProj();
+						hideLoading();
+					},
+					error : function(e) {
+						alert("Error: " + e);
+						hideLoading();
+					}
+				});
+			$('#searchProject').modal();
 		});
 	}
 	
 		$(document).ready(function() {
 			registerSearchEmployee();
+			registerSearchSubEmployee();
 			registerSearchProj();
 			registerSearchProject();
 			setProjectNull();
@@ -586,6 +616,7 @@
 			
 			$('.reportNode').on('click',function(){
 				showLoading();
+				
 				hideAllFilter();
 				
 				var reportId = $(this).closest('li').val();
@@ -605,9 +636,10 @@
 						alert("Error: " + e);
 						hideLoading();
 					}
-
 				});
 				
+				if(!$('#divBtnPrint').is(':visible'))
+					$('#divBtnPrint').show();
 			});
 			
 			$(".datepicker").attr("data-provide", "datepicker");
@@ -651,6 +683,11 @@
 			if($.inArray("project",arrFilter) > -1){
 				$("#project").show();
 			}
+			
+			//Filter Subordinate Employee
+			if($.inArray("subordinateEmployee",arrFilter) > -1){
+				$("#subordinateEmployee").show();
+			}
 		}
 		
 		function hideAllFilter(){
@@ -660,6 +697,7 @@
 			$("#projectStatus").hide();
 			$("#employee").hide();
 			$("#project").hide();
+			$("#subordinateEmployee").hide();
 		}
 	</script>
 </body>

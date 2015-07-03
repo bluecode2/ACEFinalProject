@@ -1,8 +1,11 @@
 package reports;
 
+import employee.EmployeeBean;
+import employee.EmployeeManager;
 import general.GeneralCodeManager;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +18,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import project.ProjectManager;
+import search_dialog.SearchEmpSubordinateHandler;
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
-import department.DepartmentManager;
-import employee.EmployeeManager;
 
 public class ReportHandler extends Action {
 	@Override
@@ -36,10 +38,21 @@ public class ReportHandler extends Action {
 		GeneralCodeManager genCodeMan = new GeneralCodeManager();
 		EmployeeManager eMan = new EmployeeManager();
 		ProjectManager pMan = new ProjectManager();
+		
+		//for subordinate employee
+		List<EmployeeBean> arrEmp = new ArrayList<EmployeeBean>();
+		SearchEmpSubordinateHandler subordinateHandler = new SearchEmpSubordinateHandler();
+		subordinateHandler.generateSubordinateList(arrEmp, us.getEmployeeId(), "", "");
+		int maxIdx = arrEmp.size() < Constant.pageSize ? arrEmp.size() : Constant.pageSize;
+		
 		rForm.setListOfDept(rMan.getListDeptFromUserRole(us.getUserRoleId()));
 		rForm.setListOfGenCode(genCodeMan.getGeneralCodeByParentId("PR_STAT"));
 		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstSubEmployeeId", arrEmp.subList(0,maxIdx));
 		request.setAttribute("lstProject", pMan.getAllProjectForPopUp());
+		
+		
+		
 		
 		if("selectReport".equals(rForm.getTask())){
 			ReportBean bean  = rMan.getReportById(rForm.getSelectedId());

@@ -275,7 +275,7 @@
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL								AS email
 		FROM vEMPLOYEE 
-		where SUPERVISOR_ID = #spvId# 
+		where SUPERVISOR_ID = #spvId# AND is_active = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )

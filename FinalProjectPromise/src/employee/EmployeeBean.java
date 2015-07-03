@@ -203,6 +203,4 @@ public class EmployeeBean {
 	public void setRankLevel(Integer rankLevel) {
 		this.rankLevel = rankLevel;
 	}
-	
-	
 }
