@@ -16,8 +16,7 @@ public class GeneralParamManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 	
-	public String getGeneralParamValue(){
-		String genParamId = Constant.GeneralParameter.BACK_UP_LOG_PATH;
+	public String getGeneralParamValue(String genParamId){
 		String paramValue = "";
 		try {
 			paramValue = (String) this.ibatis.queryForObject("genParam.getGenParamByParamId", genParamId);

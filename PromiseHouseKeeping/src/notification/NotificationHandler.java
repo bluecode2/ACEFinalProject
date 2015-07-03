@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import common.CommonFunction;
+import common.Constant;
+
 public class NotificationHandler {
 
 	private List<NotificationBean> arrTemp;
@@ -19,7 +22,7 @@ public class NotificationHandler {
 		SimpleDateFormat sdFormat = new SimpleDateFormat("ddMMyyyy");
 		if (arrTemp.size() > 0) {
 
-			String f = "E:\\Notification_BackUp_" + sdFormat.format(now)
+			String f = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH) + "Notification_Backup_" + sdFormat.format(now)
 					+ ".txt";
 			FileOutputStream fo = null;
 			PrintStream wt = null;

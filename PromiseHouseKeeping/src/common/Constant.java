@@ -6,6 +6,6 @@ public class Constant {
 	}
 	
 	public static class GeneralParameter{
-		public static final String BACK_UP_LOG_PATH = "backupLogPath";
+		public static final String BACKUP_LOG_PATH = "backupLogPath";
 	}
 }
