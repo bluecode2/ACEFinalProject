@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
 
+import common.CommonFunction;
+import common.Constant;
 import task_log.TaskLogHandler;
 
 public class ProjectLogHandler {
@@ -65,7 +67,7 @@ public class ProjectLogHandler {
 	private void printProjectLogToFile() throws FileNotFoundException {
 		Date now = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		String f = "E:\\Project_BackUp_" + sdFormat.format(now) + ".txt";
+		String f = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH) + "Project_Backup_" + sdFormat.format(now) + ".txt";
 		FileOutputStream fos = null;
 		PrintStream ps = null;
 

@@ -12,7 +12,7 @@
 		project_old_value as projectOldValue,
 		project_new_value as projectNewValue,
 		TO_CHAR(update_date,'yyyy-MM-dd HH24:mi:ss') as updateDate,
-		remarks as remarks,
+		REPLACE(REPLACE(remarks, chr(10), ''), chr(13), '') as remarks,
 		change_type as changeType,
 		fGetGeneralCodeCaption(change_type) as changeTypeCaption
 	FROM project_log
