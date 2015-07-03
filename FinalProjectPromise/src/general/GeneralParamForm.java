@@ -11,7 +11,7 @@ public class GeneralParamForm extends ActionForm {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<GeneralParamBean> arrList;
+	private List<GeneralParamBean> arrList = new ArrayList<GeneralParamBean>();
 	private String task = "";
 	private String selectedId = "";
 	private String searchValue;

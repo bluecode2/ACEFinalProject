@@ -1,5 +1,6 @@
 package user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -22,7 +23,7 @@ public class UserForm extends ActionForm{
 	private String task ="";
 	private Integer selectedId = 0;
 	private Boolean isAdd = false;
-	private List<UserBean> listOfUser;
+	private List<UserBean> listOfUser = new ArrayList<UserBean>();
 	private UserBean uBean = new UserBean();
 	private String searchValue;
 	private String searchField;

@@ -26,7 +26,7 @@ public class ProjectTaskForm extends ActionForm
 	private String			currSearchValue;
 	private Integer			selectedId;
 	private Integer 		projectId;
-	private ProjectBean prjBean = null;
+	private ProjectBean prjBean = new ProjectBean();
 	private ProjectTaskBean		tkBean = new ProjectTaskBean();
 	private List<ProjectTaskBean>	arrList = new ArrayList<ProjectTaskBean>();
 	private Boolean 		isAdd = false;

@@ -28,7 +28,7 @@ public class AssignTaskForm extends ActionForm
 	private int				selectedEdit;
 	private String			statusTask;
 	private String			remarksRecord;
-	private List<ActivityBean> arrActivity;
+	private List<ActivityBean> arrActivity = new ArrayList<ActivityBean>();
 	private String dateInString;
 
 	public String getDateInString() {

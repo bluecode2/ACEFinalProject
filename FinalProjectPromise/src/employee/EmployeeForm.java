@@ -1,5 +1,6 @@
 package employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -16,7 +17,7 @@ public class EmployeeForm extends ActionForm{
 	private Integer selectedId = 0;
 	private Integer selectedRankId = 0;
 	private Boolean isAdd = false;
-	private List<EmployeeBean> listOfEmployee;
+	private List<EmployeeBean> listOfEmployee = new ArrayList<EmployeeBean>();
 	private EmployeeBean selectedEmp  = new EmployeeBean();
 	private String searchValue;
 	private String searchField;

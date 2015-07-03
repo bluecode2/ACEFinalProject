@@ -1,5 +1,6 @@
 package search_dialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -10,7 +11,7 @@ public class ManageReportForm extends ActionForm{
 	private Integer selectedId;
 	private String	task;
 	private String listReportId;
-	private List<ReportBean> arrList;
+	private List<ReportBean> arrList = new ArrayList<ReportBean>();
 
 	public List<ReportBean> getArrList() {
 		return arrList;

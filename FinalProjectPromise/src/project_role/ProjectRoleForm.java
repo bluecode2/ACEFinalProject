@@ -1,5 +1,6 @@
 package project_role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -10,7 +11,7 @@ public class ProjectRoleForm extends ActionForm{
 	private String task = "";
 	private Integer selectedId = 0;
 	private Boolean isAdd = false;
-	private List<ProjectRoleBean> arrList;
+	private List<ProjectRoleBean> arrList = new ArrayList<ProjectRoleBean>();
 	private ProjectRoleBean projectRoleBean  = new ProjectRoleBean();
 	
 	private String searchValue;

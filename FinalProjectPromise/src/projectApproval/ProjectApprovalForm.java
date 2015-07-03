@@ -1,5 +1,6 @@
 package projectApproval;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -22,14 +23,14 @@ public class ProjectApprovalForm extends ActionForm{
 	private String 				searchField;
 	private int					currPage=1;
 	private int					pageCount=1;
-	private List<ProjectBean> 	arrList;
-	private ProjectBean 		pBean;
-	private List<ProjectMemberBean> arrMember;
+	private List<ProjectBean> 	arrList = new ArrayList<ProjectBean>();
+	private ProjectBean 		pBean = new ProjectBean();
+	private List<ProjectMemberBean> arrMember = new ArrayList<ProjectMemberBean>();
 	private int					selectedId;
 	private int					selectedProjectId;
-	private List<ProjectTaskBean> arrTask;
+	private List<ProjectTaskBean> arrTask = new ArrayList<ProjectTaskBean>();
 	private String 				remarksRecord;
-	private List<ActivityBean>	arrActivity;
+	private List<ActivityBean>	arrActivity = new ArrayList<ActivityBean>();
 	
 	public List<ActivityBean> getArrActivity() {
 		return arrActivity;

@@ -1,5 +1,6 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -23,9 +24,9 @@ public class ProjectInvolvedForm extends ActionForm{
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	private String val;
-	private List<ProjectBean> listOfProjectInvolved;
+	private List<ProjectBean> listOfProjectInvolved = new ArrayList<ProjectBean>();
 	private ProjectBean projectBean = new ProjectBean();
-	private List<ProjectMemberBean> arrMember;
+	private List<ProjectMemberBean> arrMember = new ArrayList<ProjectMemberBean>();
 	
 	public List<ProjectMemberBean> getArrMember() {
 		return arrMember;

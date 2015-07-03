@@ -2,9 +2,11 @@ package reports;
 
 import general.GeneralCodeBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
+
 import department.DepartmentBean;
 
 public class ReportForm extends ActionForm {
@@ -17,9 +19,9 @@ public class ReportForm extends ActionForm {
 	private String filterValue;
 	
 	//untuk tampilan drop down
-	private List<DepartmentBean> listOfDept;
+	private List<DepartmentBean> listOfDept = new ArrayList<DepartmentBean>();
 	private Integer deptId;
-	private List<GeneralCodeBean> listOfGenCode;
+	private List<GeneralCodeBean> listOfGenCode = new ArrayList<GeneralCodeBean>();
 	private Integer genCodeId;
 	private Integer empId;
 	private String empName;

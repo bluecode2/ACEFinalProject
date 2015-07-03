@@ -1,5 +1,6 @@
 package general;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.action.ActionForm;
@@ -15,8 +16,8 @@ public class MenuForm extends ActionForm{
 	private String 			searchValue;
 	private String 			currSearchValue;
 	private String 			currSearchField;
-	private MenuBean 		mnBean;
-	private List<MenuBean> 	arrList;
+	private MenuBean 		mnBean = new MenuBean();
+	private List<MenuBean> 	arrList = new ArrayList<MenuBean>();
 	private Integer 		currPage=1;
 	private Integer 		pageCount;
 	private Integer 		listCount;
