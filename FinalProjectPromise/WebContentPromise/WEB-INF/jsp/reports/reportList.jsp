@@ -241,6 +241,81 @@
 			<!-- /.modal-dialog -->
 		</div>
 
+		<!-- untuk pop up employee subordinate -->
+		<div class="modal fade" id="searchSubordinateEmp" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Employee</h4>
+						<hr>
+					</div>
+					<div class="modal-body">
+						<div class="container form-group has-info">
+							<table>
+								<tr>
+									<td>Search</td>
+									<td style="padding-left: 15px"><select
+										class="form-control" id="selSearchFieldSubEmpId"
+										style="width: 150px">
+											<option value="employeeCode">Employee Code</option>
+											<option value="employeeName">Employee Name</option>
+									</select></td>
+									<td style="padding-left: 15px"><input type="text"
+										id="txtSearchValueSubEmpId" class="form-control" /></td>
+									<td style="padding-left: 15px">
+										<button type="button" onclick="searchSubEmp();" id="btnSearchSubEmp"
+											class="btn btn-raised btn-info btn-icon" title="Search"
+											value="btnEmp">
+											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<table width="100%" id="tblSearchEmp"
+							class="table table-striped table-hover table-bordered table-clickable">
+							<thead>
+								<tr>
+									<th>Employee Code</th>
+									<th>Employee Name</th>
+									<th>Department Name</th>
+								</tr>
+							</thead>
+							<logic:notEmpty name="lstSubEmployeeId">
+								<logic:iterate id="emp" name="lstSubEmployeeId">
+									<tr data-dismiss="modal" class="rowSearchSubordinate">
+										<td style="display: none"><bean:write name="emp"
+												property="employeeId" /></td>
+										<td width="150px"><bean:write name="emp"
+												property="employeeCode" /></td>
+										<td width="150px"><bean:write name="emp"
+												property="employeeName" /></td>
+										<td width="150px"><bean:write name="emp"
+												property="deptName" /></td>
+										<td style="display: none"><bean:write name="emp"
+												property="deptId" /></td>
+									</tr>
+								</logic:iterate>
+							</logic:notEmpty>
+							<logic:empty name="lstSubEmployeeId">
+								<tr>
+									<td colspan="4" align="center">No Data Found</td>
+								</tr>
+							</logic:empty>
+						</table>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+
 
 		<!-- untuk pop up Project -->
 		<div class="modal fade" id="searchProject" tabindex="-1"
