@@ -180,7 +180,7 @@
 						<hr>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>
@@ -256,7 +256,7 @@
 						<hr>
 					</div>
 					<div class="modal-body">
-						<div class="container form-group">
+						<div class="container form-group has-info">
 							<table>
 								<tr>
 									<td>Search</td>

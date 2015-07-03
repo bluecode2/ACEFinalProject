@@ -405,7 +405,7 @@
 							<h4 class="modal-title">Task Remarks</h4>
 						</div>
 						<div class="modal-body">
-							<div class="form-group">
+							<div class="form-group has-info">
 								<table width="100%">
 									<tr>
 										<td style="padding-left: 15px">Task Name</td>
@@ -489,7 +489,7 @@
 									</tr>
 								</table>
 							</div>
-							<table class="table table-bordered" cellspacing="0" id="tblShow"
+							<table class="table table-striped table-bordered table-hover" cellspacing="0" id="tblShow"
 								style="margin-top: 10px;" width="100%" class="tableContent">
 								<tr>
 									<th style="padding-left: 15px">Activity Description</th>
@@ -539,7 +539,7 @@
 							</div>
 						
 							<div class="form-group">
-								<table class="table table-bordered" cellspacing="0" id="tblShow2" style="margin-top: 10px;" width="100%" class="tableContent">
+								<table class="table table-striped table-bordered table-hover" cellspacing="0" id="tblShow2" style="margin-top: 10px;" width="100%" class="tableContent">
 									<tr>
 										<th style="padding-left: 15px">Activity Description</th>
 										<th style="padding-left: 15px">Completed</th>

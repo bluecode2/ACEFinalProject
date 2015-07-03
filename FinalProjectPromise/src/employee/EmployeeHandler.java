@@ -35,6 +35,7 @@ public class EmployeeHandler extends Action{
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);
 			eForm.setSelectedId(0);
+			eForm.getSelectedEmp().setGender("M");
 			request.setAttribute("pageTitle", "Employee Entry");
 			request.setAttribute("listRank",  reMan.getListRankForSearch("", ""));
 			request.setAttribute("listOfDepartment",dMan.getListDepartmentForSearchDialog("",""));

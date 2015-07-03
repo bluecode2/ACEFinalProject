@@ -38,7 +38,10 @@ function generateColor(className1,className2){
 			if (diffDays<=1) {
 				$(className2)[i].style.backgroundColor = "rgba(233,30,99,0.1)";
 			} else if (diffDays<=3) {
-				$(className2)[i].style.backgroundColor = "rgba(255,235,59,0.15)";
+				$(className2)[i].style.backgroundColor = "rgba(255,235,59,0.2)";
+			} 
+			else {
+				$(className2)[i].style.backgroundColor = "rgba(139,195,74,0.2)";
 			} 
 			i++;
 		});

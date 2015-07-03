@@ -242,7 +242,7 @@
 			</div>
 
 			<div class="divContent">
-				<table class="table table-bordered" cellspacing="0"
+				<table class="table table-striped table-bordered table-hover" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
@@ -437,7 +437,7 @@
 							</div>
 						
 							<div class="form-group">
-								<table class="table table-bordered" cellspacing="0" id="tblShow" style="margin-top: 10px;" width="100%" class="tableContent">
+								<table class="table table-striped table-bordered table-hover" cellspacing="0" id="tblShow" style="margin-top: 10px;" width="100%" class="tableContent">
 									<tr>
 										<th style="padding-left: 15px">Activity Description</th>
 										<th style="padding-left: 15px">Completed</th>
