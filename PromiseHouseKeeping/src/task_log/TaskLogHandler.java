@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import common.CommonFunction;
+import common.Constant;
+
 public class TaskLogHandler {
 	private TaskLogManager taskLogManager;
 	private List<TaskLogBean> lstBean;
@@ -49,7 +52,7 @@ public class TaskLogHandler {
 	public void printAllBackupTask(){
 	Date now = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		String f = "E:\\Task_BackUp_" + sdFormat.format(now) + ".txt";
+		String f = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH) + "Task_Log_Backup_" + sdFormat.format(now) + ".txt";
 		FileOutputStream fos = null;
 		PrintStream ps = null;
 		try {
@@ -78,9 +81,9 @@ public class TaskLogHandler {
 	}
 	
 	public void deleteAllBackupTask(){
-		for (Integer projectId : lstProjectId) {
+		//for (Integer projectId : lstProjectId) {
 			//taskLogManager.deleteTaskLogByProject(projectId);
-		}
+		//}
 		
 	}
 	

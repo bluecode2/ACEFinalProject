@@ -10,6 +10,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import common.CommonFunction;
+import common.Constant;
+
 public class AuditTrailHandler {
 
 	public void backUpAuditTrail() {
@@ -21,8 +24,8 @@ public class AuditTrailHandler {
 		Date date = new Date();
 		
 		List<AuditTrailBean> listOfAuditTrail = aTrailMan.getAuditTrail();
-		String fileName = gParamMan.getGeneralParamValue()
-				+ "Audit_Trail_Log_"+sdf.format(date)+".txt";
+		String fileName = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH)
+				+ "Audit_Trail_Log_Backup_"+sdf.format(date)+".txt";
 
 		FileOutputStream fileOut = null;
 		PrintStream write = null;
