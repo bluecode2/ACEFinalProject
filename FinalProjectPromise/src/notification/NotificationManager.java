@@ -186,7 +186,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			String desc = creatorEmp.getEmployeeName() + " just assigned you as a " + projRoleBean.getProjectRoleName() +" in a new project : " + projBean.getProjectName();
 			NotificationBean bean = new NotificationBean();
 			bean.setEmployeeId(assignedEmployeeId);
@@ -212,7 +212,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			String desc = creatorEmp.getEmployeeName() + " just remove your position as a " + projRoleBean.getProjectRoleName() +" from project : " + projBean.getProjectName();
 			
 			NotificationBean bean = new NotificationBean();
@@ -233,7 +233,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String desc="";
 			if(itBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){	
@@ -281,7 +281,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String desc="";
 			if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){
@@ -314,7 +314,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 			
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String desc="";
 			if (creatorEmployeeId != assignedEmployeeId) {	
@@ -345,7 +345,7 @@ public class NotificationManager {
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
 	
-		if (creatorEmployeeId != dpbean.getDeptHeadId()) {
+		if (creatorEmployeeId.intValue() != dpbean.getDeptHeadId().intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String  desc = creatorEmp.getEmployeeName() + " was waiting you to evaluate : " + pjBean.getProjectName();
 			bean.setNotificationUrl("projectApproval.do");
@@ -365,7 +365,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != empId) {	
+		if (creatorEmployeeId.intValue() != empId.intValue()) {	
 			NotificationBean bean = new NotificationBean();	
 			String  desc = creatorEmp.getEmployeeName() + " was deleting his approve task to you : " +ptBean.getPropTaskName() ;
 			bean.setNotificationUrl("#");
@@ -384,7 +384,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != empId) {	
+		if (creatorEmployeeId.intValue() != empId.intValue()) {	
 			NotificationBean bean = new NotificationBean();
 			
 			String  desc = creatorEmp.getEmployeeName() + " was pausing his task : " +itBean.getTaskName();
@@ -404,7 +404,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String desc="";
 			if(ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_NOT_STARTED)){
@@ -453,7 +453,7 @@ public class NotificationManager {
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean creatorEmp = empMan.getEmployeeByEmpId(creatorEmployeeId);
 		
-		if (creatorEmployeeId != assignedEmployeeId) {
+		if (creatorEmployeeId.intValue() != assignedEmployeeId.intValue()) {
 			NotificationBean bean = new NotificationBean();
 			String desc="";
 			if(ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_PROPOSED)){

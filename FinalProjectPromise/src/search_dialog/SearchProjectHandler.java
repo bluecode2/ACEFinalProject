@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.crystaldecisions.b.i;
+
 import common.Constant;
 import employee.EmployeeBean;
 import project.ProjectBean;
@@ -30,6 +32,33 @@ public class SearchProjectHandler extends Action{
 		
 		SearchProjectForm sProjForm = (SearchProjectForm) form;
 		ProjectManager pMan = new ProjectManager();
+		
+		if ("showProjectName".equals(sProjForm.getTask())) {
+			String searchField = sProjForm.getSearchField();
+			String searchValue = sProjForm.getSearchValue();
+			Integer deptId	   = sProjForm.getSelectedId();
+			System.out.println(deptId + "-" + searchValue + " "+searchField);
+			List<ProjectBean> list = pMan.getProjectByDeptId(searchField, searchValue, 1, Constant.pageSize,deptId);
+
+			if (list.size()>0) {
+				for (ProjectBean projBean : list) {
+					out.println("<tr data-dismiss=\"modal\" class=\"rowSearchProj\">");
+					out.println("<td style=\"display: none\">" + projBean.getProjectId() + "</td>");
+					out.println("<td>" + projBean.getProjectCode() + "</td>");
+					out.println("<td>" + projBean.getProjectName() + "</td>");
+					out.println("<td>" + projBean.getEmployeeName() + "</td>");
+					out.println("</tr>");
+				}	
+			}
+			else {
+				out.println("<tr>");
+				out.println("<td align=\"center\" colspan=\"3\"> NO DATA FOUND</td>");	
+				out.println("</tr>");
+			}
+			
+			out.flush();
+			return null;
+		}
 		
 		String searchField = sProjForm.getSearchField();
 		String searchValue = sProjForm.getSearchValue();

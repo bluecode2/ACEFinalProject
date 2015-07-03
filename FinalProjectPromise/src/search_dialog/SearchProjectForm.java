@@ -3,10 +3,23 @@ package search_dialog;
 import org.apache.struts.action.ActionForm;
 
 public class SearchProjectForm extends ActionForm{
-
+	private String task;
 	private String searchField;
 	private String searchValue;
+	private Integer selectedId;
 	
+	public Integer getSelectedId() {
+		return selectedId;
+	}
+	public void setSelectedId(Integer selectedId) {
+		this.selectedId = selectedId;
+	}
+	public String getTask() {
+		return task;
+	}
+	public void setTask(String task) {
+		this.task = task;
+	}
 	public String getSearchField() {
 		return searchField;
 	}
