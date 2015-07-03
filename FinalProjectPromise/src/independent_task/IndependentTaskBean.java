@@ -385,18 +385,38 @@ public class IndependentTaskBean {
 	}
 	
 	public String getEstStartDateDisplay() {
-		return df2.format(estStartDate);
+		try {
+			return df2.format(estStartDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 
 	public String getEstEndDateDisplay() {
-		return df2.format(estEndDate);
+		try {
+			return df2.format(estEndDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 
 	public String getActStartDateDisplay() {
-		return df2.format(actStartDate);
+		try {
+			return df2.format(actStartDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 
 	public String getActEndDateDisplay() {
-		return df2.format(actEndDate);
+		try {
+			return df2.format(actEndDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 }

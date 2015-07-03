@@ -300,10 +300,20 @@ public class ProposedTaskBean {
 	}
 
 	public String getEstStartDateDisplay() {
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return df2.format(estStartDate);
 	}
 
 	public String getEstEndDateDisplay() {
-		return df2.format(estEndDate);
+		try {
+			return df2.format(estEndDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}	
 }

@@ -31,7 +31,12 @@ public class PersonalHolidayBean {
 	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
 	
 	public String getHolidayDateDisplay() {
-		return df2.format(holidayDate);
+		try {
+			return df2.format(holidayDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "-";
+		}
 	}
 	
 	public Integer getHolidayId() {
