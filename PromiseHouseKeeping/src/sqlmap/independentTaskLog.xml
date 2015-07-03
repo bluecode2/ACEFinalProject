@@ -1,0 +1,47 @@
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL MAP 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="independentTaskLog">
+	<select id="getListIndependentTaskLog" resultClass="task_log.TaskLogBean">
+		SELECT 
+			task_log_id as taskLogId,
+			task_id as taskId,
+			update_by as updateBy,
+			task_field as taskField,
+			task_old_value as taskOldValue,
+			task_new_value as taskNewValue,
+			update_date as updateDate,
+			REPLACE(REPLACE(remarks, chr(10), ''), chr(13), '') as remarks,
+			change_type as changeType,
+			fGetGeneralCodeCaption(change_type) as changeTypeCaption
+		FROM task_log
+		WHERE  task_id IN (
+			SELECT task_id FROM task WHERE 
+			task_status IN ('TA_STAT_05', 'TA_STAT_97', 'TA_STAT_99')
+			AND (
+				(TASK_status LIKE 'TA_STAT_05' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(TASK_STATUS LIKE 'TA_STAT_97' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(TASK_STATUS LIKE 'TA_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+			)
+			AND PROJECT_ID IS NULL
+			)
+	</select>
+	
+	<delete id="deleteIndependentTaskLog" parameterClass="java.lang.Integer">
+		DELETE FROM task_log
+		WHERE  task_id IN (
+			SELECT task_id FROM task WHERE 
+			task_status IN ('TA_STAT_05', 'TA_STAT_97', 'TA_STAT_99')
+			AND (
+				(TASK_status LIKE 'TA_STAT_05' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(TASK_STATUS LIKE 'TA_STAT_97' AND (TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+				OR
+				(TASK_STATUS LIKE 'TA_STAT_99' AND (TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') &lt; TO_CHAR((SYSDATE-TO_NUMBER(FGETGENERALPARAMETERVALUE('logKeepingDays'))),'yyyy-MM-dd')))
+			)
+			AND PROJECT_ID IS NULL
+			)
+	</delete>
+</sqlMap>
