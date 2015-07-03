@@ -21,7 +21,7 @@ public class ApproveTaskManager {
 	}
 
 	public List<ProposedTaskBean> getListApproveTask(String col, String input,
-			Integer pageNum, Integer pageSize, int userId)  {
+			Integer pageNum, Integer pageSize, int employeeId)  {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
@@ -32,7 +32,7 @@ public class ApproveTaskManager {
 		map.put("searchValue", input);
 		map.put("begin", begin);
 		map.put("end", end);
-		map.put("userId", userId);
+		map.put("employeeId", employeeId);
 
 		try {
 			arr = this.ibatis.queryForList(
@@ -98,11 +98,11 @@ public class ApproveTaskManager {
 		}
 	}
 
-	public Integer getCountApproveTask(String column, String value, int userId) throws SQLException{
+	public Integer getCountApproveTask(String column, String value, int employeeId) throws SQLException{
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
-		map.put("userId", userId);
+		map.put("employeeId", employeeId);
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"approveTask.countApproveTask", map);
 		return result;

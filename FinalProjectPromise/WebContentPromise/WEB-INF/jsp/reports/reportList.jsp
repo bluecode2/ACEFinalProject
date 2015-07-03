@@ -88,7 +88,7 @@
 									<tr>
 										<td width="150px">Department Name</td>
 										<td width="200px">
-										<html:select property="deptId" name="reportForm" styleClass="form-control" styleId="txtDeptId"> 
+										<html:select property="deptId" name="reportForm" styleClass="form-control txtClassDeptId" styleId="txtDeptId"> 
 											<html:option value="">---Choose One---</html:option>
 											<logic:iterate id="listDept" name="reportForm" property="listOfDept" >
 												<html:option value="${listDept.deptId}">
@@ -128,9 +128,8 @@
 										styleId="empIdDisplay" styleClass="form-control" readonly="true"/> 
 										</td>
 										<td width="50px" align="center">
-										<a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchEmployeeId"> <span
-										class="glyphicon glyphicon-edit" aria-hidden="true" /></a>
+										<a href="#" class="text-info" > <span
+										class="glyphicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#searchEmployeeId"/></a>
 										</td>
 									</tr>
 								</table>
@@ -140,15 +139,14 @@
 									<tr>
 										<td width="150px">Project name</td>
 										<td width="200px">
-										<html:hidden property="projId" name="reportForm"
-										styleId="txtProjId" /> 
-										<html:text property="projName" name="reportForm"
-										styleId="projIdDisplay" styleClass="form-control" readonly="true"/> 
+										<html:hidden property="projId" name="reportForm" styleId="txtProjId" /> 
+										<html:text property="projName" name="reportForm" styleId="projIdDisplay" styleClass="form-control" readonly="true"/> 
 										</td>
 										<td width="50px" align="center">
-										<a href="#" class="text-info"
-										data-toggle="modal" data-target="#searchProject"> <span
-										class="glyphicon glyphicon-edit" aria-hidden="true" /></a>
+										<!-- data-toggle="modal" data-target="#searchProject" -->
+										<a href="#" class="text-info linkProject" > 
+											<span class="glyphicon glyphicon-edit" aria-hidden="true" />
+										</a>
 										</td>
 									</tr>
 								</table>
@@ -269,7 +267,7 @@
 									<td style="padding-left: 15px"><input type="text"
 										id="txtSearchValueProj" class="form-control" /></td>
 									<td style="padding-left: 15px">
-										<button type="button" onclick="searchProj();" id="btnSearchProj"
+										<button type="button" onclick="registerSearchProject();" id="btnSearchProj"
 											class="btn btn-raised btn-info btn-icon" title="Search"
 											value="btnProj">
 											<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -417,39 +415,41 @@
 		});
 	}
 	
-	function searchEmp() {
-		showLoading();
+	function searchEmp() {	
+		$('.linkProject').on('click', function() {
+			showLoading();
 		var searchField = $('#selSearchFieldEmpId').val();
 		var searchValue = $('#txtSearchValueEmpId').val();
 
-		$.ajax({
-			type : "POST",
-			url : "searchEmp.do",
-			data : "&searchField=" + searchField + "&searchValue="
-					+ searchValue,
-			success : function(response) {
-				$("#tblSearchEmp").find("tr:gt(0)").remove();
-				$("#tblSearchEmp").append(response);
-				registerSearchEmployee();
-				hideLoading();
-			},
-			error : function(e) {
-				alert("Error: " + e);
-				hideLoading();
-			}
+			$.ajax({
+				type : "POST",
+				url : "searchEmp.do",
+				data : "&searchField=" + searchField + "&searchValue="
+						+ searchValue,
+				success : function(response) {
+					$("#tblSearchEmp").find("tr:gt(0)").remove();
+					$("#tblSearchEmp").append(response);
+					registerSearchEmployee();
+					hideLoading();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+					hideLoading();
+				}
+			});
 		});
 	}
 	
-	function searchProj() {
+/* 	function searchProj() {
 		showLoading();
 		var searchField = $('#selSearchFieldProj').val();
 		var searchValue = $('#txtSearchValueProj').val();
-
+		var deptId		= $('#txtDeptId').val();
 		$.ajax({
 			type : "POST",
 			url : "searchProj.do",
-			data : "&searchField=" + searchField + "&searchValue="
-					+ searchValue,
+			data : "task=showProjectName&searchField=" + searchField + "&searchValue="
+			+ searchValue+"&selectedId="+deptId,
 			success : function(response) {
 				$("#tblSearchProj").find("tr:gt(0)").remove();
 				$("#tblSearchProj").append(response);
@@ -461,11 +461,48 @@
 				hideLoading();
 			}
 		});
+	} */
+	function setProjectNull() {
+		$('.txtClassDeptId').on('change',
+				function() {
+					$('#txtProjId').val('');
+					$('#projIdDisplay').val('');	
+			
+		});
+	}
+	
+	function registerSearchProject() {
+		$('.linkProject').on('click', function() {
+		showLoading();
+		var searchField = $('#selSearchFieldProj').val();
+		var searchValue = $('#txtSearchValueProj').val();
+		var deptId		= $('#txtDeptId').val();
+			$.ajax({
+				type : "POST",
+				url : "searchProj.do",
+				data : "task=showProjectName&searchField=" + searchField + "&searchValue="
+						+ searchValue+"&selectedId="+deptId,
+				success : function(response) {
+					$("#tblSearchProj").find("tr:gt(0)").remove();
+					$("#tblSearchProj").append(response);
+					registerSearchProj();
+					hideLoading();
+				},
+				error : function(e) {
+					alert("Error: " + e);
+					hideLoading();
+				}
+			});
+		$('#searchProject').modal();
+		});
 	}
 	
 		$(document).ready(function() {
 			registerSearchEmployee();
 			registerSearchProj();
+			registerSearchProject();
+			setProjectNull();
+			
 			showLoading();
 			$.jstree.defaults.core.animation = 100;
 			$.jstree.defaults.core.themes.icons = false;

@@ -326,4 +326,27 @@ public class ProjectManager {
 				"project.countProjectInvolved", map);
 		return result;
 	}
+	public List<ProjectBean> getProjectByDeptId(String col, String input,
+			Integer pageNum, Integer pageSize, Integer deptId) {
+		
+		int begin = (pageNum - 1) * pageSize;
+		int end = pageNum * pageSize;
+
+		List<ProjectBean> arr  = new ArrayList<ProjectBean>();
+		
+		Map map = new HashMap();
+		map.put("searchField", col);
+		map.put("searchValue", input);
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("deptId", deptId);
+		try {
+			arr = this.ibatis.queryForList(
+					"project.getProjectByDeptId", map);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return arr;
+	}
 }

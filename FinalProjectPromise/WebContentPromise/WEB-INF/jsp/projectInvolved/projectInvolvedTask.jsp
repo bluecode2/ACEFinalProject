@@ -366,6 +366,10 @@
 									document.forms[0].submit();
 							}
 						});
+						
+						if($('#users_empId').val() == $('#hdnProjectManagerId').val()) 
+							$('#btnAddPropTask').hide();
+						
 					});
 
 	function registerBtnActivityEvent() {
@@ -593,13 +597,13 @@
 									<td>Project Code</td>
 									<td><html:text name="projectTaskForm"
 											property="prjBean.projectCode" styleClass="form-control"
-											disabled="true"></html:text></td>
+											readonly="true"></html:text></td>
 								</tr>
 								<tr>
 									<td>Project Name</td>
 									<td><html:text name="projectTaskForm"
 											property="prjBean.projectName" styleClass="form-control"
-											disabled="true"></html:text></td>
+											readonly="true"></html:text></td>
 								</tr>
 
 							</table>
@@ -613,9 +617,10 @@
 								</colgroup>
 								<tr>
 									<td>Project Manager</td>
-									<td><html:text name="projectTaskForm"
+									<td><html:hidden styleId="hdnProjectManagerId" name="projectTaskForm" property="prjBean.employeeId"/>
+										<html:text name="projectTaskForm"
 											property="prjBean.employeeName" styleClass="form-control"
-											disabled="true"></html:text></td>
+											readonly="true"></html:text></td>
 								</tr>
 								<tr>
 									<td>Estimated Date</td>
@@ -629,11 +634,11 @@
 											<tr>
 												<td><html:text name="projectTaskForm"
 														property="prjBean.estStartDateDisplay"
-														styleClass="form-control" disabled="true"></html:text></td>
+														styleClass="form-control" readonly="true"></html:text></td>
 												<td align="center">to</td>
 												<td><html:text name="projectTaskForm"
 														property="prjBean.estEndDateDisplay"
-														styleClass="form-control" disabled="true"></html:text></td>
+														styleClass="form-control" readonly="true"></html:text></td>
 											</tr>
 										</table>
 									</td>

@@ -55,7 +55,7 @@ public class ReportHandler extends Action {
 			session.setAttribute("filterValue", rForm.getFilterValue());
 			return mapping.findForward("print");
 		}
-		
+
 		CommonFunction.initializeHeader(Constant.MenuCode.REPORTS, us, request);
 		
 		List<ReportBean> listParentReport = rMan.getListParentReportsByUserRole(us.getUserRoleId());
