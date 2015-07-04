@@ -109,7 +109,7 @@
 									<td><br>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays1"
-												value="1" class="checkDays"> Monday
+												value="2" class="checkDays"> Monday
 											</label>
 										</div>
 									</td>
@@ -118,7 +118,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays2"
-												value="2" class="checkDays"> Tuesday
+												value="3" class="checkDays"> Tuesday
 											</label>
 										</div>
 									</td>
@@ -127,7 +127,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays3"
-												value="3" class="checkDays"> Wednesday
+												value="4" class="checkDays"> Wednesday
 											</label>
 										</div>
 									</td>
@@ -136,7 +136,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays4"
-												value="4" class="checkDays"> Thursday
+												value="5" class="checkDays"> Thursday
 											</label>
 										</div>
 									</td>
@@ -145,7 +145,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays5"
-												value="5" class="checkDays"> Friday
+												value="6" class="checkDays"> Friday
 											</label>
 										</div>
 									</td>
@@ -154,7 +154,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays6"
-												value="6" class="checkDays"> Saturday
+												value="7" class="checkDays"> Saturday
 											</label>
 										</div>
 									</td>
@@ -163,7 +163,7 @@
 									<td>
 										<div class="checkbox checkbox-info">
 											<label> <input type="checkbox" name="checkDays7"
-												value="7" class="checkDays"> Sunday
+												value="1" class="checkDays"> Sunday
 											</label>
 										</div>
 									</td>
