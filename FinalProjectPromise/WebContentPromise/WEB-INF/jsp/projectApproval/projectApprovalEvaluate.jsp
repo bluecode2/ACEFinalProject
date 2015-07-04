@@ -246,13 +246,12 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td>Task Name</td>
-							<td>Assign To</td>
-							<td>Estimate Date</td>
-							<td>Actual Date</td>
-							<td>Task Progress</td>
-							<td>Task Status</td>
-							<td>Activity</td>
+							<td class="align-center">Task Name</td>
+							<td class="align-center">Assign To</td>
+							<td class="align-center">Estimate Date</td>
+							<td class="align-center">Actual Date</td>
+							<td class="align-center">Status</td>
+							<td class="align-center">Activity</td>
 					<!-- 		<td class="align-center">Action</td> -->
 						</tr>
 					</thead>
@@ -271,12 +270,15 @@
 										</a>
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
-									<td><bean:write name="reg" property="estStartDateInString" /> to <bean:write name="reg" property="estEndDateInString" /></td>
-									<td><bean:write name="reg" property="actStartDateInString" /> to <bean:write name="reg" property="actEndDateInString" /></td>
-									<td><bean:write name="reg" property="taskProgress" /></td>
+									<td  align="center"><bean:write name="reg" property="estStartDateDisplay" /> to <bean:write name="reg" property="estEndDateDisplay" />
+										<br/>(<bean:write name="reg" property="estMainDays" /> main days)
+									</td>
+									<td  align="center"><bean:write name="reg" property="actStartDateDisplay" /> to <bean:write name="reg" property="actEndDateDisplay" />
+										<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+									</td>
 									<td><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" /> <bean:write name="reg"
-											property="taskStatusName" /></td>
+											property="taskStatusName" /> : <bean:write name="reg" property="taskProgress" />%</td>
 									<td align="center">
 										<a class="text-info linkActivity" href="#">Activity List</a> </td>
 									<%-- <td align="center">
