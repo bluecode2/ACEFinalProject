@@ -52,7 +52,7 @@ public class ProjectTaskForm extends ActionForm
 	private String			currSearchField2;
 	private String			currSearchValue2;
 	private List<ProposeProjectTaskBean> arrListProp = new ArrayList<ProposeProjectTaskBean>();
-	private ProposeProjectTaskBean bean  = new ProposeProjectTaskBean();
+	private ProposeProjectTaskBean bean  = null;
 	private String rankIdDisplay;
 	private Integer selectTaskId;
 	private String taskForProp;
