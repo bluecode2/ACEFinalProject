@@ -74,23 +74,23 @@ public class UserRoleHandler extends Action {
 		} else if ("delete".equals(userRoleForm.getTask())) {
 			userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
-		} 
-		else if("openMenuAccess".equals(userRoleForm.getTask())){
-			
+		} else if ("openMenuAccess".equals(userRoleForm.getTask())) {
+
 			String listMenuId = "";
 			String listAllowAdd = "";
 			String listAllowBack = "";
 			String listAllowSave = "";
 			String listAllowApprove = "";
 			String listAllowDecline = "";
-			
+
 			Integer userRoleID = userRoleForm.getSelectedId();
-			
+
 			UserRoleMenuManager manager = new UserRoleMenuManager();
-			List<UserRoleMenuBean> arrRoleMenu = manager.getUserRoleMenuByUserRole(userRoleID);
-			
+			List<UserRoleMenuBean> arrRoleMenu = manager
+					.getUserRoleMenuByUserRole(userRoleID);
+
 			for (UserRoleMenuBean bean : arrRoleMenu) {
-				if(!listMenuId.equals("")){
+				if (!listMenuId.equals("")) {
 					listMenuId += "#";
 					listAllowAdd += "#";
 					listAllowBack += "#";
@@ -98,7 +98,7 @@ public class UserRoleHandler extends Action {
 					listAllowApprove += "#";
 					listAllowDecline += "#";
 				}
-				
+
 				listMenuId += bean.getMenuId().toString();
 				listAllowAdd += bean.getMenuCrud().contains("C");
 				listAllowBack += bean.getMenuCrud().contains("B");
@@ -106,14 +106,15 @@ public class UserRoleHandler extends Action {
 				listAllowApprove += bean.getMenuCrud().contains("A");
 				listAllowDecline += bean.getMenuCrud().contains("D");
 			}
-			
-			String resp = listMenuId + "$" + listAllowAdd + "$" + listAllowBack + "$" + listAllowSave + "$" + listAllowApprove + "$" + listAllowDecline;
+
+			String resp = listMenuId + "$" + listAllowAdd + "$" + listAllowBack
+					+ "$" + listAllowSave + "$" + listAllowApprove + "$"
+					+ listAllowDecline;
 			PrintWriter out = response.getWriter();
 			out.println(resp);
-			
+
 			return null;
-		}
-		else if ("saveMenuAccess".equals(userRoleForm.getTask())) {
+		} else if ("saveMenuAccess".equals(userRoleForm.getTask())) {
 			String[] listMenuId = userRoleForm.getListMenuId().split("#");
 			String[] listAllowAdd = userRoleForm.getListAllowAdd().split("#");
 			String[] listAllowBack = userRoleForm.getListAllowBack().split("#");
@@ -125,65 +126,67 @@ public class UserRoleHandler extends Action {
 
 			UserRoleMenuManager manager = new UserRoleMenuManager();
 			Integer userRoleId = userRoleForm.getSelectedId();
-			List<UserRoleMenuBean> arrRoleMenu = manager.getUserRoleMenuByUserRole(userRoleId);
+			List<UserRoleMenuBean> arrRoleMenu = manager
+					.getUserRoleMenuByUserRole(userRoleId);
 			List<UserRoleMenuBean> arrDeletedRoleMenu = new ArrayList<UserRoleMenuBean>();
-			
+
 			for (UserRoleMenuBean bean : arrRoleMenu) {
-				if(!Arrays.asList(listMenuId).contains(bean.getMenuId().toString())){
+				if (!Arrays.asList(listMenuId).contains(
+						bean.getMenuId().toString())) {
 					arrDeletedRoleMenu.add(bean);
 				}
 			}
-			
-			
+
 			for (int i = 0; i < listMenuId.length; i++) {
-				String menuCrud = "";
-				if (listAllowAdd[i].equals("true"))
-					menuCrud += "C";
-				if (listAllowBack[i].equals("true"))
-					menuCrud += "B";
-				if (listAllowSave[i].equals("true"))
-					menuCrud += "U";
-				if (listAllowApprove[i].equals("true"))
-					menuCrud += "A";
-				if (listAllowDecline[i].equals("true"))
-					menuCrud += "D";
+				if (!listMenuId[i].equals("")) {
+					String menuCrud = "";
+					if (listAllowAdd[i].equals("true"))
+						menuCrud += "C";
+					if (listAllowBack[i].equals("true"))
+						menuCrud += "B";
+					if (listAllowSave[i].equals("true"))
+						menuCrud += "U";
+					if (listAllowApprove[i].equals("true"))
+						menuCrud += "A";
+					if (listAllowDecline[i].equals("true"))
+						menuCrud += "D";
 
-				Integer menuId = Integer.valueOf(listMenuId[i]);
-				
+					Integer menuId = Integer.valueOf(listMenuId[i]);
 
-				UserRoleMenuBean bean = manager.getUserRoleMenu(userRoleId,
-						menuId);
-				
-				
-				if (bean == null) {
-					bean = new UserRoleMenuBean();
-					bean.setMenuId(menuId);
-					bean.setUserRoleId(userRoleId);
-					bean.setMenuCrud(menuCrud);
-					
-					manager.insertUserRoleMenu(bean);
-				}
-				else{
-					bean.setMenuCrud(menuCrud);
-					manager.editUserRoleMenu(bean);
+					UserRoleMenuBean bean = manager.getUserRoleMenu(userRoleId,
+							menuId);
+
+					if (bean == null) {
+						bean = new UserRoleMenuBean();
+						bean.setMenuId(menuId);
+						bean.setUserRoleId(userRoleId);
+						bean.setMenuCrud(menuCrud);
+
+						manager.insertUserRoleMenu(bean);
+					} else {
+						bean.setMenuCrud(menuCrud);
+						manager.editUserRoleMenu(bean);
+					}
 				}
 			}
-			
+
 			for (UserRoleMenuBean bean : arrDeletedRoleMenu) {
-				manager.deleteUserRoleMenu(bean.getUserRoleId(), bean.getMenuId());
+				manager.deleteUserRoleMenu(bean.getUserRoleId(),
+						bean.getMenuId());
 			}
 
 			return null;
 		}
-		
+
 		else if ("openReportAccess".equals(userRoleForm.getTask())) {
 			String listReportId = "";
 			Integer userRoleID = userRoleForm.getSelectedId();
-	
+
 			ReportRoleManager rrMan = new ReportRoleManager();
-			
-			List<ReportRoleBean> arrList = rrMan.getReportRoleByRoleId(userRoleID);
-			
+
+			List<ReportRoleBean> arrList = rrMan
+					.getReportRoleByRoleId(userRoleID);
+
 			for (ReportRoleBean rrBean : arrList) {
 				if (!listReportId.equals("")) {
 					listReportId += "#";
@@ -193,33 +196,37 @@ public class UserRoleHandler extends Action {
 			PrintWriter out = response.getWriter();
 			String resp = listReportId;
 			out.println(resp);
-			
-			return null;
-		}
-		else if ("saveReportAccess".equals(userRoleForm.getTask())) {
 
-			String[] listReportId =  userRoleForm.getListReportId().split("#");
-			
+			return null;
+		} else if ("saveReportAccess".equals(userRoleForm.getTask())) {
+
+			String[] listReportId = userRoleForm.getListReportId().split("#");
+
 			ReportRoleManager rrMan = new ReportRoleManager();
 			Integer userRoleId = userRoleForm.getSelectedId();
-			List<ReportRoleBean> arrReportMenu = rrMan.getReportRoleByRoleId(userRoleId);
+			List<ReportRoleBean> arrReportMenu = rrMan
+					.getReportRoleByRoleId(userRoleId);
 			List<ReportRoleBean> arrDeletedRoleMenu = new ArrayList<ReportRoleBean>();
-			
+
 			for (ReportRoleBean rrBean : arrReportMenu) {
-				if (!Arrays.asList(listReportId).contains(rrBean.getReportId().toString())) {
+				if (!Arrays.asList(listReportId).contains(
+						rrBean.getReportId().toString())) {
 					arrDeletedRoleMenu.add(rrBean);
 				}
 			}
-	
+
 			for (int i = 0; i < listReportId.length; i++) {
-				Integer reportId = Integer.valueOf(listReportId[i]);
-				ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId, reportId);
-				
-				if (bean == null) {
-					bean = new ReportRoleBean();
-					bean.setReportId(reportId);
-					bean.setUserRoleId(userRoleId);
-					rrMan.insertUserRoleReport(bean);
+				if (!listReportId[i].equals("")) {
+					Integer reportId = Integer.valueOf(listReportId[i]);
+					ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId,
+							reportId);
+
+					if (bean == null) {
+						bean = new ReportRoleBean();
+						bean.setReportId(reportId);
+						bean.setUserRoleId(userRoleId);
+						rrMan.insertUserRoleReport(bean);
+					}
 				}
 			}
 			for (ReportRoleBean reportRoleBean : arrDeletedRoleMenu) {
@@ -231,11 +238,12 @@ public class UserRoleHandler extends Action {
 		else if ("openReportAccess".equals(userRoleForm.getTask())) {
 			String listReportId = "";
 			Integer userRoleID = userRoleForm.getSelectedId();
-	
+
 			ReportRoleManager rrMan = new ReportRoleManager();
-			
-			List<ReportRoleBean> arrList = rrMan.getReportRoleByRoleId(userRoleID);
-			
+
+			List<ReportRoleBean> arrList = rrMan
+					.getReportRoleByRoleId(userRoleID);
+
 			for (ReportRoleBean rrBean : arrList) {
 				if (!listReportId.equals("")) {
 					listReportId += "#";
@@ -245,48 +253,52 @@ public class UserRoleHandler extends Action {
 			PrintWriter out = response.getWriter();
 			String resp = listReportId;
 			out.println(resp);
-			
-			return null;
-		}
-		else if ("saveReportAccess".equals(userRoleForm.getTask())) {
 
-			String[] listReportId =  userRoleForm.getListReportId().split("#");
-			
+			return null;
+		} else if ("saveReportAccess".equals(userRoleForm.getTask())) {
+
+			String[] listReportId = userRoleForm.getListReportId().split("#");
+
 			ReportRoleManager rrMan = new ReportRoleManager();
 			Integer userRoleId = userRoleForm.getSelectedId();
-			List<ReportRoleBean> arrReportMenu = rrMan.getReportRoleByRoleId(userRoleId);
+			List<ReportRoleBean> arrReportMenu = rrMan
+					.getReportRoleByRoleId(userRoleId);
 			List<ReportRoleBean> arrDeletedRoleMenu = new ArrayList<ReportRoleBean>();
-			
+
 			for (ReportRoleBean rrBean : arrReportMenu) {
-				if (!Arrays.asList(listReportId).contains(rrBean.getReportId().toString())) {
+				if (!Arrays.asList(listReportId).contains(
+						rrBean.getReportId().toString())) {
 					arrDeletedRoleMenu.add(rrBean);
 				}
 			}
-	
+
 			for (int i = 0; i < listReportId.length; i++) {
-				Integer reportId = Integer.valueOf(listReportId[i]);
-				ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId, reportId);
-				
-				if (bean == null) {
-					bean = new ReportRoleBean();
-					bean.setReportId(reportId);
-					bean.setUserRoleId(userRoleId);
-					rrMan.insertUserRoleReport(bean);
+				if (!listReportId[i].equals("")) {
+					Integer reportId = Integer.valueOf(listReportId[i]);
+					ReportRoleBean bean = rrMan.getReportRoleBean(userRoleId,
+							reportId);
+
+					if (bean == null) {
+						bean = new ReportRoleBean();
+						bean.setReportId(reportId);
+						bean.setUserRoleId(userRoleId);
+						rrMan.insertUserRoleReport(bean);
+					}
 				}
 			}
 			for (ReportRoleBean reportRoleBean : arrDeletedRoleMenu) {
 				rrMan.deleteUserRoleReport(reportRoleBean);
 			}
 			return null;
-		}
-		else if ("openDepartmentAccess".equals(userRoleForm.getTask())) {
+		} else if ("openDepartmentAccess".equals(userRoleForm.getTask())) {
 			String listDeptId = "";
 			Integer userRoleID = userRoleForm.getSelectedId();
-	
+
 			UserRoleDepartmentManager rrMan = new UserRoleDepartmentManager();
-			
-			List<UserRoleDepartmentBean> arrList = rrMan.getUserRoleDepartmentByUserRole(userRoleID);
-			
+
+			List<UserRoleDepartmentBean> arrList = rrMan
+					.getUserRoleDepartmentByUserRole(userRoleID);
+
 			for (UserRoleDepartmentBean rrBean : arrList) {
 				if (!listDeptId.equals("")) {
 					listDeptId += "#";
@@ -296,28 +308,30 @@ public class UserRoleHandler extends Action {
 			PrintWriter out = response.getWriter();
 			String resp = listDeptId;
 			out.println(resp);
-			
-			return null;
-		}
-		else if ("saveDepartmentAccess".equals(userRoleForm.getTask())) {
 
-			String[] listDeptId =  userRoleForm.getListDeptId().split("#");
-			
+			return null;
+		} else if ("saveDepartmentAccess".equals(userRoleForm.getTask())) {
+
+			String[] listDeptId = userRoleForm.getListDeptId().split("#");
+
 			UserRoleDepartmentManager rrMan = new UserRoleDepartmentManager();
 			Integer userRoleId = userRoleForm.getSelectedId();
-			List<UserRoleDepartmentBean> arrDeptAccess = rrMan.getUserRoleDepartmentByUserRole(userRoleId);
+			List<UserRoleDepartmentBean> arrDeptAccess = rrMan
+					.getUserRoleDepartmentByUserRole(userRoleId);
 			List<UserRoleDepartmentBean> arrDeletedDeptAccess = new ArrayList<UserRoleDepartmentBean>();
-			
+
 			for (UserRoleDepartmentBean rrBean : arrDeptAccess) {
-				if (!Arrays.asList(listDeptId).contains(rrBean.getDeptId().toString())) {
+				if (!Arrays.asList(listDeptId).contains(
+						rrBean.getDeptId().toString())) {
 					arrDeletedDeptAccess.add(rrBean);
 				}
 			}
-	
+
 			for (int i = 0; i < listDeptId.length; i++) {
 				Integer deptId = Integer.valueOf(listDeptId[i]);
-				UserRoleDepartmentBean bean = rrMan.getUserRoleDepartment(userRoleId, deptId);
-				
+				UserRoleDepartmentBean bean = rrMan.getUserRoleDepartment(
+						userRoleId, deptId);
+
 				if (bean == null) {
 					bean = new UserRoleDepartmentBean();
 					bean.setDeptId(deptId);
@@ -330,7 +344,6 @@ public class UserRoleHandler extends Action {
 			}
 			return null;
 		}
-		
 
 		request.setAttribute("pageTitle", "User Role");
 		userRoleForm.setTask("");
@@ -352,9 +365,10 @@ public class UserRoleHandler extends Action {
 
 		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE, us,
 				request);
-		request.setAttribute("lstReport", rpMan.getListReports() );
+		request.setAttribute("lstReport", rpMan.getListReports());
 		request.setAttribute("lstMenu", menuMan.getAllMenu());
-		request.setAttribute("lstDepartment", deptMan.getListDepartmentForSearchDialog("",""));
+		request.setAttribute("lstDepartment",
+				deptMan.getListDepartmentForSearchDialog("", ""));
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(userRoleForm.getPageCount(),
