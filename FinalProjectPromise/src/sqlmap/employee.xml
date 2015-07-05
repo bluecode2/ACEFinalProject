@@ -137,7 +137,7 @@
 		EMPLOYEE_NAME 						AS employeeName,
 		EMAIL 								AS email
 		FROM vEMPLOYEE e
-		WHERE dept_id = #deptId# and IS_ACTIVE = 1 AND e.rank_id = fGetGeneralParameterValue('deptHeadLevel')
+		WHERE dept_id = #deptId# and IS_ACTIVE = 1 AND e.rank_level = fGetGeneralParameterValue('deptHeadLevel')
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeCode">
 				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )
