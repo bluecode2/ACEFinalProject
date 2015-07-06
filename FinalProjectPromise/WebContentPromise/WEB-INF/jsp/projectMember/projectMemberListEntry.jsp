@@ -18,10 +18,10 @@
 	function onBtnAddClick() {
 // 		document.forms[0].task.value = "add";
 // 		document.forms[0].submit();
-		$('#txtEmployeeId').val();
-		$('#empIdDisplay').val();
-		$('#txtRoled').val();
-		$('#txtRoleIdDisplay').val();
+		$('#txtEmployeeId').val('');
+		$('#empIdDisplay').val('');
+		$('#txtRoled').val('');
+		$('#txtRoleIdDisplay').val('');
 		$('#divEntryProjectMember').show();
 	}
 
