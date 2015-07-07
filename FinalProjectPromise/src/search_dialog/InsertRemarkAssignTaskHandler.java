@@ -20,10 +20,6 @@ public ActionForward execute(ActionMapping mapping, ActionForm form,
 	// TODO Auto-generated method stub
 	response.setContentType("text/text;charset=utf-8");
 	response.setHeader("cache-control", "no-cache");
-	
-
-	
-	/*atMan.editStatusAssignTask(taskId, updatedBy, status, remarks);*/
 
 	return null;
 }
