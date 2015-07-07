@@ -42,30 +42,60 @@
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptId">
-				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(DEPT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>		
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="rankId">
-				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="rankName">
+				LOWER(RANK_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="supervisorId">
-				LOWER(SUPERVISOR_ID) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="supervisorName">
+				LOWER(SUPERVISOR_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>									
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
-		</dynamic>								
-		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = #end#)
-		WHERE rnum
-		&gt;
-		#begin#
+		</dynamic>			
+		ORDER BY EMPLOYEE_CODE ASC ) emp where ROWNUM &lt; = #end#)
+		WHERE rnum &gt; #begin#
 	</select>
+	
+	<select id="countEmployee" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(1) FROM vEMPLOYEE
+		where is_active = 1
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeCode">
+				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="deptName">
+				LOWER(DEPT_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>		
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="rankName">
+				LOWER(RANK_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="supervisorName">
+				LOWER(SUPERVISOR_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>									
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+	</select>
+	
 	<select id="getAllEmployeeForPopUp" resultClass="employee.EmployeeBean">
 	SELECT * FROM(
 		SELECT emp.*, ROWNUM rnum from (
@@ -95,8 +125,6 @@
 		FROM vEMPLOYEE
 		where is_Active = 1
 		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = 10)
-		WHERE rnum
-		&gt; 1
 	</select>
 	
 	<select id="getEmployeeByEmpId" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
@@ -224,41 +252,6 @@
 		where EMPLOYEE_ID = #employeeId#
 	</delete>
 
-	<select id="countEmployee" resultClass="java.lang.Integer"
-		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM EMPLOYEE
-		where is_active = 1
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="employeeId">
-				LOWER(employee_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="deptId">
-				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="rankId">
-				LOWER(rank_id) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="supervisorId">
-				LOWER(SUPERVISOR_ID) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>				
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="projectId">
-				LOWER(PROJECT_ID) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>						
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="employeeName">
-				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>								
-	</select>
 	<select id="getEmployeeForAssignTask" resultClass="employee.EmployeeBean" parameterClass="java.util.Map">
 	SELECT
 		EMPLOYEE_ID 						AS employeeId,
