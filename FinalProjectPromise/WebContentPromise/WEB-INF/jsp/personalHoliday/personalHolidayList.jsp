@@ -76,11 +76,11 @@
 <!-- 						</td> -->
 						<td style="padding-left: 15px"><html:text
 								styleClass="form-control datepicker" styleId="txtGenHolDate"
-								name="generalHolidayForm" property="searchValue"></html:text></td>
+								name="personalHolidayForm" property="searchValue"></html:text></td>
 						<td style="padding-left: 15px">-</td>
 						<td style="padding-left: 15px"><html:text
 								styleClass="form-control datepicker" styleId="txtGenHolDate"
-								name="generalHolidayForm" property="searchValue2"></html:text></td>
+								name="personalHolidayForm" property="searchValue2"></html:text></td>
 								
 						<td style="padding-left: 15px">
 							<button type="button" onclick="search();" id="btnSearch"
@@ -97,9 +97,9 @@
 					style="margin-top: 10px;" width="100%" class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-							<td class="align-center">Personal Holiday Name</td>
 							<td class="align-center">Personal Holiday Date</td>
 							<td class="align-center">Employee Name</td>
+							<td class="align-center">Personal Holiday Name</td>
 							<td class="align-center">Holiday Type</td>
 							<td class="align-center">Action</td>
 						</tr>
@@ -108,9 +108,9 @@
 						<logic:notEmpty name="personalHolidayForm" property="arrList">
 							<logic:iterate id="reg" name="personalHolidayForm" property="arrList">
 								<tr>
-									<td><bean:write name="reg" property="holidayDesc" /></td>
 									<td><bean:write name="reg" property="holidayDateDisplay" /></td>
 									<td><bean:write name="reg" property="employeeName" /></td>
+									<td><bean:write name="reg" property="holidayDesc" /></td>
 									<td><bean:write name="reg" property="holidayTypeName" /></td>
 									<td align="center">
 										<a class="text-success" href="#"

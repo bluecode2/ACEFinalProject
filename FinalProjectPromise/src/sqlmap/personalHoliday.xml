@@ -15,8 +15,8 @@
 		P.IS_EXCHANGE_DAY		as isExchangeDay,
 		P.CREATE_DATE			as createDateInString,
 		P.UPDATE_DATE			as updateDateInString,
-		E.EMPLOYEE_CODE			as employeeCode,
-		E.EMPLOYEE_NAME			as employeeName,
+		(SELECT employee_code FROM employee WHERE employee_id = p.employee_id) 		as employeeCode,
+		(SELECT employee_name FROM employee WHERE employee_id = p.employee_id)		as employeeName,
 		IS_DELETED 				as isDeleted,
 		P.HOLIDAY_TYPE			as holidayType,
 		fGetGeneralCodeCaption(P.HOLIDAY_TYPE) as holidayTypeName
@@ -31,7 +31,7 @@
 				</isNotEmpty>
 			</isEqual>
 		</dynamic>		
-		ORDER BY HOLIDAY_ID) hol
+		ORDER BY P.HOLIDAY_DATE) hol
 		where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
 	</select>
@@ -124,9 +124,9 @@
 		where IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="byDate">
-				TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &gt;= #searchValue#
+				TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd') &gt;= #searchValue#
 				<isNotEmpty property="searchValue2">
-				AND TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &lt;= #searchValue2#
+				AND TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd') &lt;= #searchValue2#
 				</isNotEmpty>
 			</isEqual>
 		</dynamic>		
