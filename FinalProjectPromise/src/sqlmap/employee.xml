@@ -50,7 +50,7 @@
 			emp.updatedBy 							AS updatedBy,
 			emp.employeeName 						AS employeeName,
 			emp.gender 								AS gender,
-			emp.gender 								AS email,
+			emp.email 								AS email,
 			emp.address 							AS address,
 			emp.phoneNumber 						AS phoneNumber,
 			emp.isActive							AS isActive,
