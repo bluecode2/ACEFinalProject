@@ -2,6 +2,7 @@ package propose_project_task;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class ApprovePropProjManager {
 		map.put("empId", empId);
 		map.put("projId", projId);
 		
-		List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
+		List<ProposeProjectTaskBean> list = Collections.EMPTY_LIST;
 		
 		try {
 			list = this.ibatis.queryForList("appPropProjTask.getListToApp", map);

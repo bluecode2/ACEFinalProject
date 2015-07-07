@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ReportManager {
 	}
 	
 	public List<ReportBean> getListReports() {
-		List<ReportBean> arrList = new ArrayList<ReportBean>();
+		List<ReportBean> arrList = Collections.EMPTY_LIST;
 		
 		try {
 			arrList = this.ibatis.queryForList("reports.getListReports", null);
@@ -35,13 +36,13 @@ public class ReportManager {
 	}
 	
 	public List<DepartmentBean> getListDeptFromUserRole(Integer userRoleId) throws SQLException{
-		List<DepartmentBean> list = new ArrayList<DepartmentBean>();
+		List<DepartmentBean> list = Collections.EMPTY_LIST;
 		list = this.ibatis.queryForList("reports.getListDeptByUserRole", userRoleId);
 		return list;
 	}
 	
 	public List<ReportBean> getListParentReportsByUserRole(Integer userRoleId) {
-		List<ReportBean> arrList = new ArrayList<ReportBean>();
+		List<ReportBean> arrList = Collections.EMPTY_LIST;
 		
 		try {
 			arrList = this.ibatis.queryForList("reports.getListParentReportsByUserRole", userRoleId);
@@ -54,7 +55,7 @@ public class ReportManager {
 	}
 	
 	public List<ReportBean> getListChildReportsByUserRole(Integer userRoleId, Integer parentId) {
-		List<ReportBean> arrList = new ArrayList<ReportBean>();
+		List<ReportBean> arrList = Collections.EMPTY_LIST;
 		
 		Map m = new HashMap();
 		m.put("userRoleId", userRoleId);

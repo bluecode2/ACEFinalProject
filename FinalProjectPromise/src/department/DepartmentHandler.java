@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.crystaldecisions.a.d;
+
 import user.UserBean;
 import common.CommonFunction;
 import common.Constant;
@@ -28,15 +30,13 @@ public class DepartmentHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		request.setAttribute("username", us.getUsername());
 
-		//CommonFunction.createAllowedMenu(us, request);
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
 			request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
-			request.setAttribute("pageTitle", "Department Entry");
-			
+				
 			CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT_ENTRY,
 					us, request);
 			
@@ -47,8 +47,7 @@ public class DepartmentHandler extends Action {
 			dForm.setIsAdd(false);
 			request.setAttribute("lstDeptHead",
 					eMan.getAllEmployeeForDeptHead(dForm.getSelectedId(),"",""));
-			request.setAttribute("pageTitle", "Department Edit");
-
+		
 			dForm.setSelectedDept(dMan.getDepartmentByDeptId(dForm
 					.getSelectedId()));
 			
@@ -59,22 +58,52 @@ public class DepartmentHandler extends Action {
 		}
 
 		else if (dForm.getTask().equals("delete")) {
-			dMan.deleteDepartment(dForm.getSelectedId(), us.getUserId());
+			
+			if(!dMan.deleteDepartment(dForm.getSelectedId(), us.getUserId())){
+				session.setAttribute("validationMessage",
+						"Failed To Delete Department!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Delete Department!");
+				session.setAttribute("validationType", "success");
+			}
+
 		}
 
 		else if (dForm.getTask().equals("save")) {
 			Boolean isAdd = dForm.getIsAdd();
 			
 			if (isAdd) {
-				System.out.println("MASUK ADD");
 				dForm.getSelectedDept().setCreatedBy(us.getUserId());
-				dMan.insertDepartment(dForm.getSelectedDept());
+				if(!dMan.insertDepartment(dForm.getSelectedDept())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New Department!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New Department!");
+					session.setAttribute("validationType", "success");
+				}
 			} else {
 				if (dForm.getSelectedDept().getDeptHeadId() == 0)
 					dForm.getSelectedDept().setDeptHeadId(null);
 				
 				dForm.getSelectedDept().setUpdatedBy(us.getUserId());
 				dMan.updateDepartment(dForm.getSelectedDept());
+				
+				if(!dMan.updateDepartment(dForm.getSelectedDept())){
+					session.setAttribute("validationMessage",
+							"Failed To Edit Department!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Department!");
+					session.setAttribute("validationType", "success");
+				}
 			}
 
 			response.sendRedirect("department.do");
@@ -98,10 +127,15 @@ public class DepartmentHandler extends Action {
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.PAGE_SIZE));
 
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
+		
 		CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
 				us, request);
-		
-		request.setAttribute("pageTitle", "Department");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),
