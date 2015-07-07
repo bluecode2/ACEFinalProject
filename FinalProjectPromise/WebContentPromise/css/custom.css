@@ -1,38 +1,81 @@
-/*
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Light/RobotoDraft-Light.woff2?v=1.0.0") format("woff2"), url("./fonts/Light/RobotoDraft-Light.woff?v=1.0.0") format("woff"), url("./fonts/Light/RobotoDraft-Light.ttf?v=1.0.0") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Regular/RobotoDraft-Regular.woff2?v=1.0.0") format("woff2"), url("./fonts/Regular/RobotoDraft-Regular.woff?v=1.0.0") format("woff"), url("./fonts/Regular/RobotoDraft-Regular.ttf?v=1.0.0") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Regular/RobotoDraft-Regular.woff2?v=1.0.0") format("woff2"), url("./fonts/Regular/RobotoDraft-Regular.woff?v=1.0.0") format("woff"), url("./fonts/Regular/RobotoDraft-Regular.ttf?v=1.0.0") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Italic/RobotoDraft-Italic.woff2?v=1.0.0") format("woff2"), url("./fonts/Italic/RobotoDraft-Italic.woff?v=1.0.0") format("woff"), url("./fonts/Italic/RobotoDraft-Italic.ttf?v=1.0.0") format("truetype");
+  font-weight: 400;
+  font-style: italic; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Italic/RobotoDraft-Italic.woff2?v=1.0.0") format("woff2"), url("./fonts/Italic/RobotoDraft-Italic.woff?v=1.0.0") format("woff"), url("./fonts/Italic/RobotoDraft-Italic.ttf?v=1.0.0") format("truetype");
+  font-weight: normal;
+  font-style: italic; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Medium/RobotoDraft-Medium.woff2?v=1.0.0") format("woff2"), url("./fonts/Medium/RobotoDraft-Medium.woff?v=1.0.0") format("woff"), url("./fonts/Medium/RobotoDraft-Medium.ttf?v=1.0.0") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Bold/RobotoDraft-Bold.woff2?v=1.0.0") format("woff2"), url("./fonts/Bold/RobotoDraft-Bold.woff?v=1.0.0") format("woff"), url("./fonts/Bold/RobotoDraft-Bold.ttf?v=1.0.0") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/Bold/RobotoDraft-Bold.woff2?v=1.0.0") format("woff2"), url("./fonts/Bold/RobotoDraft-Bold.woff?v=1.0.0") format("woff"), url("./fonts/Bold/RobotoDraft-Bold.ttf?v=1.0.0") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/BoldItalic/RobotoDraft-BoldItalic.woff2?v=1.0.0") format("woff2"), url("./fonts/BoldItalic/RobotoDraft-BoldItalic.woff?v=1.0.0") format("woff"), url("./fonts/BoldItalic/RobotoDraft-BoldItalic.ttf?v=1.0.0") format("truetype");
+  font-weight: 700;
+  font-style: italic; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("./fonts/BoldItalic/RobotoDraft-BoldItalic.woff2?v=1.0.0") format("woff2"), url("./fonts/BoldItalic/RobotoDraft-BoldItalic.woff?v=1.0.0") format("woff"), url("./fonts/BoldItalic/RobotoDraft-BoldItalic.ttf?v=1.0.0") format("truetype");
+  font-weight: bold;
+  font-style: italic; }
+
+/* COLORs CODE
 material-blue					#2196f3
 material-light-blue / -info		#03a9f4
-								#4FC3F7
+lighter-blue					#4FC3F7
 bg-info							#d9edf7
 */
-
-@import url(http://fonts.googleapis.com/css?family=Roboto);
-@import url(https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,900,400italic);
 
 html {
   position: relative;
   min-height: 100%;
 }
-
 body {
   padding-top:80px;
   background-color: #fff;
   margin-bottom: 88px;		/* space for footer */
 }
-
 h1 {
   font-size: 24.5px;
   margin: 0;
   padding: 0;
 }
-
 hr {
   margin: 5px 0 3px;
 }
-
 label {
 	font-weight: normal;
 }
-
 .logo {
 	width: 23px;
 	height: 30px;
@@ -40,34 +83,27 @@ label {
 	top:-3px; 
 	padding-right: 7px;
 }
-
 .btn-icon {
 	padding: 10px 13px 13px 13px;
 }
-
 .btn-xs {
 	margin-top: -2px;
 	margin-bottom: -2px;
 }
-
 .breadcrumb {
 	padding: 0 12px 0;
 	margin-left: -10px;
 	background-color: transparent;
 }
-
 .breadcrumb > li > a {
 	color: #03a9f4;
 }
-
 .datepicker{ 
 	z-index: 9999 !important;
 }
-
 .center-block {
 	float: none !important;
 }
-
 .nav-tabs {
   background: #fff;
   border-bottom: 1px solid #81D4FA;
@@ -98,20 +134,13 @@ label {
   border: 1px solid #81D4FA !important;
   border-bottom-color: #F4FAFD !important;
 }
-
 .nav-stacked > li.active > a {
 	border-radius: 2px;
 	background-color: #03a9f4 !important;
 }
-.tab-content {
-/* 	margin-top: -15px; */
-/* 	padding: 5px 25px; */
-/* 	background-color: #F4FAFD; */
-}
 .noshadow {
 	box-shadow: none !important;
 }
-
 .badge {
 	background-color: #ffeb3b;
 	color: #2196f3;
@@ -160,7 +189,6 @@ label {
 .dropdown-menu-notif > li > a {
   white-space: normal;
 }
-
 @media (max-width: 480px) {
     .text404 > h1 {
     	font-size: 114px;
@@ -173,7 +201,6 @@ label {
     	padding-top: 10px;
     }
 }
-
 @media (min-width: 481px) and (max-width: 767px) {
     .text404 > h1 {
     	font-size: 184px;
@@ -186,7 +213,6 @@ label {
     	padding-top: 10px;
     }
 }
-
 @media (min-width: 768px) and (max-width: 979px) {
 	.text404 > h1 {
    		font-size: 254px;
@@ -199,7 +225,6 @@ label {
     	padding-top: 10px;
     }
 }
-
 @media (min-width: 980px) and (max-width: 1199px) {
 	.text404 > h1 {
    		font-size: 345px;
@@ -230,7 +255,6 @@ label {
 
 /* Submenu
 -------------------------------------------------- */
-
 .sub-menu {
     left: 100%;
     position: absolute;
@@ -238,23 +262,18 @@ label {
     visibility: hidden;
     margin-top: -1px;
 }
-
 .dropdown-menu li {
   overflow: visible;
  }
-
 .dropdown-menu li:hover .sub-menu:not(:empty) {
     visibility: visible;
 }
-
 .dropdown:hover .dropdown-menu {
     display: block;
 }
-
 .dropdown-menu {
     margin-top: 0;
 }
-
 .sub-menu:before {
     border-bottom: 7px solid transparent;
     border-left: none;
@@ -275,7 +294,6 @@ label {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -283,54 +301,44 @@ label {
   min-height: 70px;
   background-color: rgba(33,150,243,0);
 }
-
 .footer > .container {
 	border-top: 1px solid #ddd;
 	padding-top: 8px;
 }
-
 .footer-text {
 	margin: 10px;
 	color: #888;
 	font-weight: 400;
 }
-
 /* ----------------------------------------------- */
 
 .align-center{
 	text-align: center;
-}
-	
+}	
 .divSearch{
 	text-align: right;
 	margin-top: 10px;
 }
-
 .divContent{
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
-
 .divNotif {
 	margin-top: 0px; 
 	padding-bottom: 20px;
 }
-
 thead > tr > td , th {
 	background-color: #d9edf7 !important;
 	font-weight: 500;
 }
-
 .divPaging{
 	margin-top: -30px;
 }
-
 .tdLabel {
 	padding-right: 20px;
 	margin-right: 20px;
 	text-align: right;
 }
-
 .table-clickable td {
 	cursor: pointer;
 }
@@ -358,13 +366,11 @@ thead > tr > td , th {
 	color: white;
 	font-weight: bold;
 }
-
 .dropdown-menu .divider {
   background-color: rgba(229, 229, 229, 0.8);
   margin-left: 8px;
   margin-right: 8px;
 }
-
 .dropdown-menu > li > span {
 	display: block;
 	padding: 3px 20px;
@@ -375,7 +381,6 @@ thead > tr > td , th {
 	white-space: nowrap;
     cursor: default;
 }
-
 .dropdown-menu-right > li > span,
 .dropdown-menu-right > li > a {
 	text-align: right;
@@ -392,7 +397,6 @@ thead > tr > td , th {
 .progress-pie-chart.gt-50 {
   background-color: #35BAF6;
 }
-
 .ppc-progress {
   content: "";
   position: absolute;
@@ -422,7 +426,6 @@ thead > tr > td , th {
   clip: rect(0, 200px, 200px, 100px);
   background: #E5E5E5;
 }
-
 .ppc-percents {
   content: "";
   position: absolute;
@@ -441,15 +444,14 @@ thead > tr > td , th {
   font-weight: bold;
   color: #35BAF6;
 }
-
 .pcc-percents-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
-
 .progress-pie-chart {
   margin: 50px auto 0;
 }
+
 /* Loader
 -------------------------------------------------- */
 .loader,

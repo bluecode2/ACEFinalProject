@@ -86,20 +86,17 @@ public class RankEmpManager {
 	public boolean insertEmployeeRank(RankEmpBean eb) {
 		boolean flag = true;
 		try {
-			this.ibatis.startTransaction();
-			eb.setRankId(getNewRankId());
-
-			this.ibatis.insert("rank.insertEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			flag = false;
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				eb.setRankId(getNewRankId());
+				this.ibatis.insert("rank.insertEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
 		}
 		return flag;
 	}
@@ -107,38 +104,33 @@ public class RankEmpManager {
 	public boolean updateEmployeeRank(RankEmpBean eb) {
 		boolean flag = true;
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("rank.updateEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			flag = false;
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("rank.updateEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag = false;
 		}
 		return true;
 	}
 
 	public boolean deleteEmployeeRank(RankEmpBean eb) {
 		boolean flag = true;
-		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("rank.deleteEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			flag = false;
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("rank.deleteEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
 		}
 		return flag;
 	}

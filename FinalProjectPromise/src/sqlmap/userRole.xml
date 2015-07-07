@@ -3,8 +3,24 @@
 
 <sqlMap namespace="userRole">
 	<select id="getUserRole" resultClass="user.UserRoleBean" parameterClass="java.util.Map">
-	select * from(
-		select ur.*, ROWNUM rnum from (
+	select 
+	userRoleId,
+	updatedBy, 
+	createdBy,
+	userRoleName,
+	createDateInString,
+	updateDateInString,
+	userRoleCode
+	from(
+		select
+		ur.userRoleId 	as userRoleId,
+	    ur.updatedBy 		as updatedBy, 
+	    ur.createdBy 		as createdBy,
+	    ur.userRoleName 	as userRoleName,
+	    ur.createDateInString 	as createDateInString,
+	    ur.updateDateInString 	as updateDateInString,
+	    ur.userRoleCode 	as userRoleCode,
+		ROWNUM rnum from (
 			SELECT 
 			USER_ROLE_ID 	as userRoleId,
 	        UPDATED_BY 		as updatedBy, 
@@ -26,8 +42,8 @@
 				</isEqual>
 			</dynamic>
 	        ORDER BY USER_ROLE_ID) ur 
-		where ROWNUM &lt;= #end#)
-	where rnum &gt; #begin#
+		where ROWNUM <![CDATA[<=]]> #end#)
+	where rnum <![CDATA[>=]]> #begin#
 	</select>
 	<select id="getUserRoleForPopUp" resultClass="user.UserRoleBean">
 			SELECT 

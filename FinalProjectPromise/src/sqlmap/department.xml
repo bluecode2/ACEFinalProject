@@ -4,20 +4,42 @@
 <sqlMap namespace="department">
 	<select id="getListDepartments" parameterClass="java.util.Map" 
 		resultClass="department.DepartmentBean">
-		SELECT * FROM (
-		SELECT dept.*, ROWNUM rnum from ( SELECT 
-		dept_id 			as deptId ,
-		dept_head_id 		as deptHeadId ,
-		dept_head_code 		as deptHeadCode ,
-		dept_head_name		as deptHeadName ,
-		created_by 			as createdBy ,
-		updated_by 			as updatedBy , 
-		dept_code 			as deptCode , 
-		dept_name 			as deptName , 
-		create_date			as createDate , 
-		update_date 		as updateDate 
-		from vDepartment
-		WHERE is_deleted = 0
+		SELECT 
+		deptId ,
+		deptHeadId ,
+		deptHeadCode ,
+		deptHeadName ,
+		createdBy ,
+		updatedBy , 
+		deptCode , 
+		deptName , 
+		createDate , 
+		updateDate
+		FROM (
+			SELECT 
+			dept.deptId 			as deptId ,
+			dept.deptHeadId 		as deptHeadId ,
+			dept.deptHeadCode 		as deptHeadCode ,
+			dept.deptHeadName		as deptHeadName ,
+			dept.createdBy 			as createdBy ,
+			dept.updatedBy 			as updatedBy , 
+			dept.deptCode 			as deptCode , 
+			dept.deptName 			as deptName , 
+			dept.createDate			as createDate , 
+			dept.updateDate 		as updateDate,
+				ROWNUM rnum from ( SELECT 
+				dept_id 			as deptId ,
+				dept_head_id 		as deptHeadId ,
+				dept_head_code 		as deptHeadCode ,
+				dept_head_name		as deptHeadName ,
+				created_by 			as createdBy ,
+				updated_by 			as updatedBy , 
+				dept_code 			as deptCode , 
+				dept_name 			as deptName , 
+				create_date			as createDate , 
+				update_date 		as updateDate 
+				from vDepartment
+				WHERE is_deleted = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="deptId">
 				LOWER(dept_id) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -39,8 +61,7 @@
 			</isEqual>
 		</dynamic>
 		order by dept_id
-		) dept where ROWNUM &lt; = #end#) WHERE rnum &gt;
-		#begin#
+		) dept where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 	
 	<select id="getDepartmentbyDeptId" parameterClass="java.lang.Integer" resultClass="department.DepartmentBean">

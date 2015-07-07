@@ -3,18 +3,40 @@
 
 <sqlMap namespace="rank">
 	<select id="getAllEmployeeRank" resultClass="rank_employee.RankEmpBean" parameterClass="java.util.Map">
-		select * from (select r.* , ROWNUM rnum from (
-		SELECT rank_id as rankId,
-		UPDATED_BY as updatedBy,
-		CREATED_BY as createdBy,
-		rank_name as rankName,
-		rank_level as rankLevel,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
-		rank_code as rankCode,
-		IS_DELETED as isDeleted
-		FROM rank_emp
-		where IS_DELETED=0
+		select 
+		rankId,
+		updatedBy,
+		createdBy,
+		rankName,
+		rankLevel,
+		createDateInString,
+		updateDateInString,
+		rankCode,
+		isDeleted
+		from (
+			select r. 
+			r.rankId as rankId,
+			r.updatedBy as updatedBy,
+			r.createdBy as createdBy,
+			r.rankName as rankName,
+			r.rankLevel as rankLevel,
+			r.createDateInString 	AS createDateInString,
+			r.updateDateInString 	AS updateDateInString,
+			r.rankCode as rankCode,
+			r.isDeleted as isDeleted,
+			ROWNUM rnum from (
+				SELECT 
+				rank_id as rankId,
+				UPDATED_BY as updatedBy,
+				CREATED_BY as createdBy,
+				rank_name as rankName,
+				rank_level as rankLevel,
+				TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+				TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString,
+				rank_code as rankCode,
+				IS_DELETED as isDeleted
+				FROM rank_emp
+				where IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="rankCode">
 				LOWER(rank_code) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -26,8 +48,8 @@
 			</isEqual>
 		</dynamic>			
 		ORDER BY rank_level asc ) r
-		where ROWNUM &lt;= #end#)
-		where rnum &gt; #begin#
+		where ROWNUM <![CDATA[<=]]> #end#)
+		where rnum <![CDATA[>=]]> #begin#
 	</select>
 
 	<select id="getRankByRankId" parameterClass="java.lang.Integer" resultClass="rank_employee.RankEmpBean">

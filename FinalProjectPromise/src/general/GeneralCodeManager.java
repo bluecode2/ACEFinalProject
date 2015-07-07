@@ -68,55 +68,45 @@ public class GeneralCodeManager {
 
 	public void insertGeneralCode(GeneralCodeBean genCodebean)
 			throws SQLException {
-
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("genCode.insertGeneralCode", genCodebean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("genCode.insertGeneralCode", genCodebean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateGeneralCode(GeneralCodeBean genCodeBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("genCode.updateGeneralCode", genCodeBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("genCode.updateGeneralCode", genCodeBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteGeneralCodeByCodeId(String genCodeId) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("genCode.deleteGeneralCode", genCodeId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("genCode.deleteGeneralCode", genCodeId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

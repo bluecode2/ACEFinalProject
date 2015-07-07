@@ -9,31 +9,77 @@
 
 	<select id="getAllEmployee" resultClass="employee.EmployeeBean"
 		parameterClass="java.util.Map">
-		SELECT * FROM(
-		SELECT emp.*, ROWNUM rnum from (
-		SELECT
-		EMPLOYEE_ID 						AS employeeId,
-		EMPLOYEE_code 						AS employeeCode,
-		DEPT_ID 							AS deptId,
-		DEPT_CODE 							AS deptCode,
-		DEPT_NAME							AS deptName,
-		RANK_ID 							AS rankId,
-		RANK_CODE 							AS rankCode,
-		RANK_NAME 							AS rankName,
-		RANK_LEVEL 							AS rankLevel,
-		SUPERVISOR_ID 						AS supervisorID,
-		SUPERVISOR_CODE 					AS supervisorCode,
-		SUPERVISOR_NAME 					AS supervisorName,
-		CREATED_BY 							AS createdBy,
-		UPDATED_BY 							AS updatedBy,
-		EMPLOYEE_NAME 						AS employeeName,
-		GENDER 								AS gender,
-		EMAIL 								AS email,
-		ADDRESS 							AS address,
-		PHONE_NUMBER 						AS phoneNumber,
-		is_active							AS isActive,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
+		SELECT  
+		employeeId,
+		employeeCode,
+		deptId,
+		deptCode,
+		deptName,
+		rankId,
+		rankCode,
+		rankName,
+		rankLevel,
+		supervisorID,
+		supervisorCode,
+		supervisorName,
+		createdBy,
+		updatedBy,
+		employeeName,
+		gender,
+		email,
+		address,
+		phoneNumber,
+		isActive,
+		createDateInString,
+		updateDateInString
+		FROM(
+			SELECT 
+			emp.employeeId 							AS employeeId,
+			emp.employeeCode 						AS employeeCode,
+			emp.deptId 								AS deptId,
+			emp.deptCode 							AS deptCode,
+			emp.deptName							AS deptName,
+			emp.rankId 								AS rankId,
+			emp.rankCode 							AS rankCode,
+			emp.rankName 							AS rankName,
+			emp.rankLevel 							AS rankLevel,
+			emp.supervisorID 						AS supervisorID,
+			emp.supervisorCode 						AS supervisorCode,
+			emp.supervisorName 						AS supervisorName,
+			emp.createdBy 							AS createdBy,
+			emp.updatedBy 							AS updatedBy,
+			emp.employeeName 						AS employeeName,
+			emp.gender 								AS gender,
+			emp.gender 								AS email,
+			emp.address 							AS address,
+			emp.phoneNumber 						AS phoneNumber,
+			emp.isActive							AS isActive,
+			emp.createDateInString 					AS createDateInString,
+			emp.updateDateInString 					AS updateDateInString
+			ROWNUM rnum from (
+				SELECT
+				EMPLOYEE_ID 						AS employeeId,
+				EMPLOYEE_code 						AS employeeCode,
+				DEPT_ID 							AS deptId,
+				DEPT_CODE 							AS deptCode,
+				DEPT_NAME							AS deptName,
+				RANK_ID 							AS rankId,
+				RANK_CODE 							AS rankCode,
+				RANK_NAME 							AS rankName,
+				RANK_LEVEL 							AS rankLevel,
+				SUPERVISOR_ID 						AS supervisorID,
+				SUPERVISOR_CODE 					AS supervisorCode,
+				SUPERVISOR_NAME 					AS supervisorName,
+				CREATED_BY 							AS createdBy,
+				UPDATED_BY 							AS updatedBy,
+				EMPLOYEE_NAME 						AS employeeName,
+				GENDER 								AS gender,
+				EMAIL 								AS email,
+				ADDRESS 							AS address,
+				PHONE_NUMBER 						AS phoneNumber,
+				is_active							AS isActive,
+				TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
+				TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM vEMPLOYEE
 		where is_Active = 1
 		<dynamic prepend="AND">
@@ -61,8 +107,8 @@
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
 			</isEqual>
 		</dynamic>			
-		ORDER BY EMPLOYEE_CODE ASC ) emp where ROWNUM &lt; = #end#)
-		WHERE rnum &gt; #begin#
+		ORDER BY EMPLOYEE_CODE ASC ) emp where ROWNUM <![CDATA[<=]]> #end#)
+		WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 	
 	<select id="countEmployee" resultClass="java.lang.Integer"
@@ -95,7 +141,7 @@
 			</isEqual>
 		</dynamic>			
 	</select>
-	
+
 	<select id="getAllEmployeeForPopUp" resultClass="employee.EmployeeBean" parameterClass="java.util.Map">
 		SELECT
 		EMPLOYEE_ID 						AS employeeId,
@@ -121,7 +167,7 @@
 		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM vEMPLOYEE
-		where is_Active = 1
+		where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeCode">
 				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )

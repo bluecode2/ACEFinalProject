@@ -3,18 +3,31 @@
 
 <sqlMap namespace="genParam">
 	<select id="selectGenParam" resultClass="general.GeneralParamBean" parameterClass="java.util.Map">
-		SELECT * FROM ( 
 		SELECT 
-		genParam.*, ROWNUM rnum FROM (
-		SELECT
-		GEN_PARAM_ID 			as genParamId,
-		GEN_PARAM_DESC 			as genParamDesc,
-		GEN_PARAM_VALUE 		as genParamValue,
-		IS_ACTIVE 				as isActive,
-		UPDATED_BY				as updatedBy,
-		UPDATE_DATE				as updateDateInString
-		FROM GENERAL_PARAMETER
-		where IS_ACTIVE = 1
+		genParamId,
+		genParamDesc,
+		genParamValue,
+		isActive,
+		updatedBy,
+		updateDateInString
+		FROM ( 
+			SELECT 
+			genParam.genParamId 			as genParamId,
+			genParam.genParamDesc 			as genParamDesc,
+			genParam.genParamValue 			as genParamValue,
+			genParam.isActive 				as isActive,
+			genParam.updatedBy				as updatedBy,
+			genParam.updateDateInString		as updateDateInString,
+			ROWNUM rnum FROM (
+				SELECT
+				GEN_PARAM_ID 			as genParamId,
+				GEN_PARAM_DESC 			as genParamDesc,
+				GEN_PARAM_VALUE 		as genParamValue,
+				IS_ACTIVE 				as isActive,
+				UPDATED_BY				as updatedBy,
+				UPDATE_DATE				as updateDateInString
+				FROM GENERAL_PARAMETER
+				where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genParamDesc">
 				LOWER(Gen_param_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -26,8 +39,8 @@
 			</isEqual>
 		</dynamic>
 		) genParam
-		WHERE ROWNUM &lt;= #end#)
-		WHERE rnum &gt; #begin#
+		WHERE ROWNUM <![CDATA[<=]]> #end#)
+		WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 
 	<select id="countGenParam" resultClass="java.lang.Integer" parameterClass="java.util.Map">

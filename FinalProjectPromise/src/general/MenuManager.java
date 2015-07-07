@@ -136,52 +136,43 @@ public class MenuManager {
 
 	public void insertMenu(MenuBean bean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("menu.insertMenu", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("menu.insertMenu", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateMenu(MenuBean bean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("menu.updateMenu", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("menu.updateMenu", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteMenu(Integer menuId) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("menu.updateMenu", menuId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.delete("menu.updateMenu", menuId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

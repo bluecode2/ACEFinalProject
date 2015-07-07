@@ -5,19 +5,34 @@
 
 	<select id="selectGeneralCode" resultClass="general.GeneralCodeBean"
 		parameterClass="java.util.Map">
-		SELECT *
-		FROM (SELECT genCode.*, ROWNUM rnum
-		FROM (
 		SELECT 
-		gen_code_id 			AS genCodeId,
-		Gen_code_caption 		AS genCodeCaption,
-		Parent_Id 				AS parentId,
-		IS_ACTIVE				AS isActive,
-		GEN_CODE_INDEX 			AS genCodeIndex,
-		updated_by				as updateBy,
-		TO_CHAR(UPDATE_DATE,'yyyy-mm-dd')	as updateDateInString
-		FROM 					general_code
-		where IS_ACTIVE = 1
+		genCodeId,
+		genCodeCaption,
+		parentId,
+		isActive,
+		genCodeIndex,
+		updateBy,
+		updateDateInString
+		FROM (SELECT
+			genCode.genCodeId 			AS genCodeId,
+			genCode.genCodeCaption 		AS genCodeCaption,
+			genCode.parentId 				AS parentId,
+			genCode.isActive				AS isActive,
+			genCode.genCodeIndex 			AS genCodeIndex,
+			genCode.updateBy				as updateBy,
+			genCode.updateDateInString	as updateDateInString,
+			ROWNUM rnum
+			FROM (
+				SELECT 
+				gen_code_id 			AS genCodeId,
+				Gen_code_caption 		AS genCodeCaption,
+				Parent_Id 				AS parentId,
+				IS_ACTIVE				AS isActive,
+				GEN_CODE_INDEX 			AS genCodeIndex,
+				updated_by				as updateBy,
+				TO_CHAR(UPDATE_DATE,'yyyy-mm-dd')	as updateDateInString
+				FROM 					general_code
+				where IS_ACTIVE = 1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="genCodeCaption">
 				LOWER(gen_code_caption) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -29,9 +44,9 @@
 			</isEqual>
 		</dynamic>
 		order by gen_code_id,gen_code_index) genCode
-		WHERE ROWNUM &lt;= #end#)
+		WHERE ROWNUM <![CDATA[<=]]> #end#)
 		WHERE rnum
-		&gt; #begin#
+		<![CDATA[>=]]> #begin#
 	</select>
 
 	<select id="countGeneralCode" resultClass="java.lang.Integer" parameterClass="java.util.Map">

@@ -76,4 +76,9 @@
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
+	
+	<context-param>
+		<param-name>crystal_image_uri</param-name>
+		<param-value>/FinalProjectPromise/crystalreportviewers</param-value>
+	</context-param>
 </web-app>

@@ -56,55 +56,44 @@ public class ProjectTaskManager {
 	public void createNewOProjectTask(ProjectTaskBean tsBean)
 			 {
 		try {
-			this.ibatis.startTransaction();
-			
-			this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void editProjectTask(ProjectTaskBean bean)  {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.updateProjectTask", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.updateProjectTask", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void updateTaskStat(ProjectTaskBean bean) {
 	
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.updateProjectStat", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.updateProjectStat", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -117,18 +106,15 @@ public class ProjectTaskManager {
 		m.put("remarks", remarks);
 
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.updateStatusRemarksProjectTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.updateStatusRemarksProjectTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -140,18 +126,15 @@ public class ProjectTaskManager {
 		m.put("taskStatus", taskStatus);
 
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.startProjectTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.startProjectTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -163,18 +146,15 @@ public class ProjectTaskManager {
 		m.put("taskStatus", taskStatus);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.submitProjectTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.submitProjectTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -186,18 +166,15 @@ public class ProjectTaskManager {
 		m.put("taskStatus", taskStatus);
 
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectTask.updateStatusProjectTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectTask.updateStatusProjectTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -80,35 +80,30 @@ public class IndependentTaskManager {
 	
 	public void createNewAssignTask(IndependentTaskBean tsBean) {
 		try {
-			this.ibatis.startTransaction();
-			tsBean.setTaskId(getNewTaskId());
-			this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
-			this.ibatis.commitTransaction();	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				this.ibatis.startTransaction();
+				tsBean.setTaskId(getNewTaskId());
+				this.ibatis.insert("independentTask.insertToAssignTask", tsBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void createNewAssignTaskProj(IndependentTaskBean tsBean) {
 		try {
-			this.ibatis.startTransaction();
-			
-			this.ibatis.insert("independentTask.insertToAssignTaskProj", tsBean);
-			this.ibatis.commitTransaction();	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				this.ibatis.startTransaction();
+				this.ibatis.insert("independentTask.insertToAssignTaskProj", tsBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -119,18 +114,15 @@ public class IndependentTaskManager {
 		m.put("taskDesc", taskDesc);
 		m.put("updatedBy", updatedBy);
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.updateCommentAssignTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.updateCommentAssignTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -142,18 +134,15 @@ public class IndependentTaskManager {
 		m.put("remarks", remarks);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.updateStatusAssignTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.updateStatusAssignTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -165,18 +154,15 @@ public class IndependentTaskManager {
 		m.put("remarks", remarks);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.updateStatusAssignTaskApprove", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.updateStatusAssignTaskApprove", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -235,18 +221,15 @@ public class IndependentTaskManager {
 		m.put("taskStatus", taskStatus);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.startMyCurrentTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.startMyCurrentTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -257,35 +240,29 @@ public class IndependentTaskManager {
 		m.put("taskStatus", taskStatus);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.updateStatusMyCurrentTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.updateStatusMyCurrentTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("independentTask.updateStatusCurrentTaskToWaitingApproval", itBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("independentTask.updateStatusCurrentTaskToWaitingApproval", itBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }
