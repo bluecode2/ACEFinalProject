@@ -69,7 +69,13 @@
 					</tr>
 				</table>
 			</div>
-
+			<logic:notEmpty name="validationMessage">
+				<br/>
+				<div class="col-md-6 alert alert-dismissable alert-<bean:write name="validationType" />" role="alert">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong><bean:write name="validationMessage" /></strong>
+				</div>
+			</logic:notEmpty>
 			<div class="divContent">
 				<table class="table table-striped table-bordered table-hover" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">

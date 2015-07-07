@@ -81,8 +81,8 @@ public class GeneralCodeManager {
 		}
 	}
 
-	public void updateGeneralCode(GeneralCodeBean genCodeBean)
-			throws SQLException {
+	public boolean updateGeneralCode(GeneralCodeBean genCodeBean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -93,10 +93,13 @@ public class GeneralCodeManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void deleteGeneralCodeByCodeId(String genCodeId) throws SQLException {
+	public boolean deleteGeneralCodeByCodeId(String genCodeId) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -107,7 +110,9 @@ public class GeneralCodeManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public List<GeneralCodeBean> getGeneralCodeByParentId(String parentId) {
