@@ -66,55 +66,45 @@ public class GeneralParamManager {
 
 	public void insertGeneralParam(GeneralParamBean genParamBean)
 			throws SQLException {
-
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("genParam.insertGenParam", genParamBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("genParam.insertGenParam", genParamBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void updateGeneralParam(GeneralParamBean genParamBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("genParam.updateGenParam", genParamBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("genParam.updateGenParam", genParamBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteGeneralParam(GeneralParamBean genParamBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("genParam.deleteGenParam", genParamBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("genParam.deleteGenParam", genParamBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

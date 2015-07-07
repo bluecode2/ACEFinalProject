@@ -60,19 +60,16 @@ public class PersonalHolidayManager {
 	public void insertPersonalHoliday(PersonalHolidayBean persHolidayBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("personalHoliday.insertPersonalHoliday",
-					persHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("personalHoliday.insertPersonalHoliday",
+						persHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -92,36 +89,30 @@ public class PersonalHolidayManager {
 	public void editPersonalHoliday(PersonalHolidayBean persHolidayBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("personalHoliday.editPersonalHoliday",
-					persHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("personalHoliday.editPersonalHoliday",
+						persHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deletePersonalHoliday(PersonalHolidayBean persHolidayBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("personalHoliday.deletePersonalHoliday", persHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("personalHoliday.deletePersonalHoliday", persHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

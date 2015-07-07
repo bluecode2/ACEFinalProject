@@ -83,52 +83,43 @@ public class ApprovePropProjManager {
 	
 	public void createNewAssignTaskMap(ProposeProjectTaskBean bean)  {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("appPropProjTask.insertToAssignTaskMap", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.insert("appPropProjTask.insertToAssignTaskMap", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				try {
-					ibatis.endTransaction();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			e.printStackTrace();
 		}
 	}
 	
 	public void approveTask(ProposeProjectTaskBean pPropProjTask) {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("appPropProjTask.approveTask", pPropProjTask);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
 			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("appPropProjTask.approveTask", pPropProjTask);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void declineTask(ProposeProjectTaskBean bean)  {
 		try {
-			ibatis.startTransaction();
-			ibatis.update("appPropProjTask.declineTask", bean);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("appPropProjTask.declineTask", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				try {
-					ibatis.endTransaction();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			e.printStackTrace();
 		}
 	}
 }

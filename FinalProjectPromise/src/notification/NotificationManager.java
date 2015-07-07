@@ -136,21 +136,17 @@ public class NotificationManager {
 		boolean flag = true;
 		
 		try {
-			this.ibatis.startTransaction();
-			bean.setNotificationId(getNotificationNewId());
-			this.ibatis.insert("notification.insertNotification", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				bean.setNotificationId(getNotificationNewId());
+				this.ibatis.insert("notification.insertNotification", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 		return flag;
 	}
@@ -159,20 +155,16 @@ public class NotificationManager {
 		boolean flag = true;
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("notification.updateReadNotification", notificationId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("notification.updateReadNotification", notificationId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 		
 		return flag;

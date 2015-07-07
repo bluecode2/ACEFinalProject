@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.jsp.tagext.TryCatchFinally;
+
 import ibatis.IbatisHelper;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -49,58 +51,46 @@ public class ActivityManager {
 	public Integer insertActivity(ActivityBean bean){
 		Integer maxId = null;
 		try {
-			this.ibatis.startTransaction();
-			bean.setActivityId(getNewActivityId());
-			this.ibatis.insert("activity.insertActivity", bean);
-			maxId =  (Integer) this.ibatis.queryForObject("activity.getActivityMaxId", null);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 			try {
+				this.ibatis.startTransaction();
+				bean.setActivityId(getNewActivityId());
+				this.ibatis.insert("activity.insertActivity", bean);
+				maxId = (Integer) this.ibatis.queryForObject("activity.getActivityMaxId", null);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return maxId;
 	}
 	
 	public void updateActivity(ActivityBean bean){
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("activity.updateActivity", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("activity.updateActivity", bean);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public void deleteActivity(Integer activityId){
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("activity.deleteActivity", activityId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 			try {
+				this.ibatis.startTransaction();
+				this.ibatis.delete("activity.deleteActivity", activityId);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

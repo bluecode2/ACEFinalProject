@@ -164,43 +164,35 @@ public class ProjectManager {
 	public void insertProject(ProjectBean pBean) throws SQLException,
 			ParseException {
 		try {
-			this.ibatis.startTransaction();
-			Integer newProjId = getNewProjectId();
-			if (newProjId == null) {
-				newProjId = 1;
-			}
-
-			pBean.setProjectId(newProjId);
-			this.ibatis.insert("project.insertProject", pBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				Integer newProjId = getNewProjectId();
+				if (newProjId == null) {
+					newProjId = 1;
+				}
+				pBean.setProjectId(newProjId);
+				this.ibatis.insert("project.insertProject", pBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateProject(ProjectBean pBean) throws ParseException,
 			SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("project.updateProject", pBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("project.updateProject", pBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -280,18 +272,15 @@ public class ProjectManager {
 		m.put("projectStatus", projectStatus);
 
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("project.setToApproveProject", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("project.setToApproveProject", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -306,18 +295,15 @@ public class ProjectManager {
 		m.put("projectStatus", projectStatus);
 
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("project.setToDeclineProject", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("project.setToDeclineProject", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

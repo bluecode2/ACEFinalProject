@@ -65,21 +65,17 @@ public class GeneralHolidayManager {
 	public void insertGeneralHoliday(GeneralHolidayBean genHolidayBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			int newId = getNewGenHolidayId();
-			genHolidayBean.setGenHolidayId(newId);
-			this.ibatis.insert("generalHoliday.insertGeneralHoliday",
-					genHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				int newId = getNewGenHolidayId();
+				genHolidayBean.setGenHolidayId(newId);
+				this.ibatis.insert("generalHoliday.insertGeneralHoliday",genHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -98,39 +94,31 @@ public class GeneralHolidayManager {
 	public void editGeneralHoliday(GeneralHolidayBean genHolidayBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("generalHoliday.editGeneralHoliday",
-					genHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("generalHoliday.editGeneralHoliday",
+						genHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("generalHoliday.deleteGeneralHoliday",
-					genHolidayBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("generalHoliday.deleteGeneralHoliday",
+						genHolidayBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -149,25 +137,21 @@ public class GeneralHolidayManager {
 			String checkDays, Integer createdBy) throws SQLException,
 			ClassNotFoundException {
 		try {
-			Map map = new HashMap();
-			map.put("startDate", startDate);
-			map.put("endDate", endDate);
-			map.put("checkDays", checkDays);
-			map.put("createdBy", createdBy);
-
-			ibatis.startTransaction();
-			this.ibatis.insert("generalHoliday.generateWeekend", map);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				Map map = new HashMap();
+				map.put("startDate", startDate);
+				map.put("endDate", endDate);
+				map.put("checkDays", checkDays);
+				map.put("createdBy", createdBy);
+
+				ibatis.startTransaction();
+				this.ibatis.insert("generalHoliday.generateWeekend", map);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

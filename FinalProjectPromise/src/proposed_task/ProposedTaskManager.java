@@ -80,17 +80,15 @@ public class ProposedTaskManager {
 
 	public void updateProposedTask(ProposedTaskBean bean) {
 		try {
-			ibatis.startTransaction();
-			ibatis.update("proposedTask.updateProposedTask", bean);
-			ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ibatis.startTransaction();
+				ibatis.update("proposedTask.updateProposedTask", bean);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -101,34 +99,29 @@ public class ProposedTaskManager {
 		m.put("userId", userId);
 
 		try {
-			ibatis.startTransaction();
-			ibatis.delete("proposedTask.deleteProposedTask", m);
-			ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
+				ibatis.startTransaction();
+				ibatis.delete("proposedTask.deleteProposedTask", m);
+				ibatis.commitTransaction();
+			} finally {
 				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void insertProposedTask(ProposedTaskBean bean) {
 		try {
-			this.ibatis.startTransaction();
-
-			this.ibatis.insert("proposedTask.insertProposedTask", bean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("proposedTask.insertProposedTask", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

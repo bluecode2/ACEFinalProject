@@ -75,59 +75,48 @@ public class DepartmentManager {
 
 	public void updateDepartment(DepartmentBean dept) {
 		try {
-			ibatis.startTransaction();
-			ibatis.update("department.updateDepartment", dept);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ibatis.startTransaction();
+				ibatis.update("department.updateDepartment", dept);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteDepartment(int deptid,int userId) {
 		try {
-			Map map = new HashMap();
-			map.put("deptId", deptid);
-			map.put("updatedBy", userId);
-			
-			ibatis.startTransaction();
-			ibatis.update("department.deleteDepartment", map);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				Map map = new HashMap();
+				map.put("deptId", deptid);
+				map.put("updatedBy", userId);
+				
+				ibatis.startTransaction();
+				ibatis.update("department.deleteDepartment", map);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void insertDepartment(DepartmentBean dept) {
 		try {
-			ibatis.startTransaction();
-			dept.setDeptId(getNewDeptId());
-			ibatis.insert("department.insertDepartment", dept);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ibatis.startTransaction();
+				dept.setDeptId(getNewDeptId());
+				ibatis.insert("department.insertDepartment", dept);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

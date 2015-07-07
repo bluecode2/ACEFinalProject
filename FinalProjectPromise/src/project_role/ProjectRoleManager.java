@@ -84,57 +84,47 @@ public class ProjectRoleManager {
 			throws SQLException {
 
 		try {
-			this.ibatis.startTransaction();
-			projectRoleBean.setProjectRoleId(getNewProjectRoleId());
-			this.ibatis
-					.insert("projectRole.insertProjectRole", projectRoleBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				projectRoleBean.setProjectRoleId(getNewProjectRoleId());
+				this.ibatis
+						.insert("projectRole.insertProjectRole", projectRoleBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateProjectRole(ProjectRoleBean projectRoleBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectRole.editProjectRole", projectRoleBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectRole.editProjectRole", projectRoleBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteProjectRole(ProjectRoleBean projectRoleBean)
 			throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis
-					.update("projectRole.deleteProjectRole", projectRoleBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectRole.deleteProjectRole", projectRoleBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

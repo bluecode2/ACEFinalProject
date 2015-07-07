@@ -85,53 +85,46 @@ public class UserManager {
 	public void insertUser(UserBean uBean) throws SQLException,
 			ClassNotFoundException {
 		try {
-			this.ibatis.startTransaction();
-
-			uBean.setUserId(getNewUserID());
-			this.ibatis.insert("users.insertNewUser", uBean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				uBean.setUserId(getNewUserID());
+				this.ibatis.insert("users.insertNewUser", uBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateUser(UserBean uBean) throws SQLException,
 			ClassNotFoundException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("users.updateUser", uBean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("users.updateUser", uBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void changePassword(UserBean uBean) throws SQLException,
 			ClassNotFoundException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("users.changePassword", uBean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("users.changePassword", uBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -148,17 +141,15 @@ public class UserManager {
 		m.put("updatedBy", updatedBy);
 		m.put("userId", userId);
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("users.delUsers", m);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("users.delUsers", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	public void deleteUserByEmpId(Integer empId,Integer updatedBy) {
@@ -168,17 +159,15 @@ public class UserManager {
 		m.put("empId", empId);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("users.deleteEmployee", m);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("users.deleteEmployee", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 	}
