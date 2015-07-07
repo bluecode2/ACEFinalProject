@@ -24,8 +24,6 @@ public class MenuHandler extends Action {
 		MenuManager mnMan = new MenuManager();
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-
-		//CommonFunction.createAllowedMenu(us, request);
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.MENU_MANAGEMENT,us, request);
 		mnForm.setListCount(mnMan.getCountMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue()));

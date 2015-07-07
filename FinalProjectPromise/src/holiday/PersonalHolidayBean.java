@@ -92,7 +92,6 @@ public class PersonalHolidayBean {
 			date = df.parse(holidayDateInString);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			this.holidayDateInString = "";
 			date = null;
 		}
@@ -137,7 +136,6 @@ public class PersonalHolidayBean {
 		try {
 			date = df.parse(createDateInString);
 		} catch (Exception pe){
-			//pe.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -163,7 +161,6 @@ public class PersonalHolidayBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception pe){
-			//pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

@@ -33,12 +33,10 @@ public class PersonalHolidayHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		//CommonFunction.createAllowedMenu(us, request);
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
 			request.setAttribute("pageTitle", "Personal Holiday Entry");
-			
 			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,

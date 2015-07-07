@@ -168,7 +168,6 @@ public class ProjectTaskBean {
 			date = df.parse(estStartDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.estStartDateInString = "";
 			date = null;
 		}
@@ -201,7 +200,6 @@ public class ProjectTaskBean {
 			date = df.parse(estEndDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.estEndDateInString = "";
 			date = null;
 		}
@@ -234,7 +232,6 @@ public class ProjectTaskBean {
 			date = df.parse(actStartDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.actStartDateInString = "";
 			date = null;
 		}
@@ -267,7 +264,6 @@ public class ProjectTaskBean {
 			date = df.parse(actEndDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.actEndDateInString = "";
 			date = null;
 		}
@@ -340,7 +336,6 @@ public class ProjectTaskBean {
 			date = df.parse(createDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.createDateInString = "";
 			date = null;
 		}
@@ -373,7 +368,6 @@ public class ProjectTaskBean {
 			date = df.parse(updateDateInString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

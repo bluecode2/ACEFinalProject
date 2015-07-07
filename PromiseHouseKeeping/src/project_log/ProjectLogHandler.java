@@ -2,6 +2,7 @@ package project_log;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class ProjectLogHandler {
 		row = "===========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================";
 	}
 
-	public void backupProjectLog() {
+	public void backupProjectLog(){
 		try {
 			TaskLogHandler taskLogHandler = new TaskLogHandler();
 
@@ -64,7 +65,7 @@ public class ProjectLogHandler {
 		}
 	}
 
-	private void printProjectLogToFile() throws FileNotFoundException {
+	private void printProjectLogToFile() throws FileNotFoundException, IOException {
 		Date now = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		String f = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH) + "Project_Backup_" + sdFormat.format(now) + ".txt";
@@ -83,5 +84,8 @@ public class ProjectLogHandler {
 		ps.println(row);
 		ps.println(strToPrint);
 		ps.print(row);
+		
+		ps.close();
+		fos.close();
 	}
 }

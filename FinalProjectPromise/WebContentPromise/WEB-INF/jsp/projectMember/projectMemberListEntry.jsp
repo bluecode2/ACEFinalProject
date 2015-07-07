@@ -18,10 +18,10 @@
 	function onBtnAddClick() {
 // 		document.forms[0].task.value = "add";
 // 		document.forms[0].submit();
-		$('#txtEmployeeId').val('');
-		$('#empIdDisplay').val('');
-		$('#txtRoled').val('');
-		$('#txtRoleIdDisplay').val('');
+		$('#txtEmployeeId').val();
+		$('#empIdDisplay').val();
+		$('#txtRoled').val();
+		$('#txtRoleIdDisplay').val();
 		$('#divEntryProjectMember').show();
 	}
 
@@ -224,9 +224,6 @@
 					class="tableContent">
 					<thead class="panel panel-info">
 						<tr>
-
-							<td>Project Code</td>
-							<td>Project Name</td>
 							<td>Employee Name</td>
 							<td>Project Role Name</td>
 							<td class="align-center">Action</td>
@@ -239,10 +236,7 @@
 								property="listOfProjMember">
 								<tr>
 									<td><html:hidden property="employeeId" name="member"
-											styleId="txtEmpId" /> <bean:write name="member"
-											property="projCode" /></td>
-									<td><bean:write name="member" property="projName" /></td>
-									<td><bean:write name="member" property="empName" /></td>
+											styleId="txtEmpId" /><bean:write name="member" property="empName" /></td>
 									<td><bean:write name="member" property="projRoleName" /></td>
 									<td align="center"><a class="text-danger" href="#" title="delete"
 										onclick="actionForm('<bean:write name="member" property="memberId" />','<bean:write name="member" property="empName" />');"

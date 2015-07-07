@@ -34,20 +34,6 @@ public class SearchProjMemberHandler extends Action{
 		String searchField = sEmpForm.getSearchField();
 		String searchValue = sEmpForm.getSearchValue();
 		
-		
-		
-//		List<ProjectMemberBean> arrEmp = pMan.getAllEmployee(searchField, searchValue, 1, Constant.pageSize);
-//		
-//		for (EmployeeBean empBean : arrEmp) {
-//			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");
-//			out.println("<td style=\"display: none\">" + empBean.getEmployeeId() + "</td>");
-//			out.println("<td>" + empBean.getEmployeeCode() + "</td>");
-//			out.println("<td>" + empBean.getEmployeeName() + "</td>");
-//			out.println("<td>" + empBean.getDeptName() + "</td>");
-//			out.println("<td style=\"display: none\">" + empBean.getDeptId() + "</td>");
-//			out.println("</tr>");
-//		}	
-
 		out.flush();
 		return null;
 	}
