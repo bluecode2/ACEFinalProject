@@ -47,7 +47,7 @@
 					</logic:iterate>
 				</ul>
 				<div class="form-group has-info" style="display: inline-block;margin: 15px;">
-					<label for="txtGoToPage2" class="col-md-6" style="margin-top: 12px;text-align: right;color: #777;width: 100px !important;">
+					<label for="txtGoToPage2" class="col-md-6" style="margin-top: 12px;text-align: right;color: #777;width: 150px !important;">
 						Go to Page</label>
 					<div class="col-md-4" style="margin-top: 2px;padding-left: 0;">
 						<input type="text" class="form-control" id="txtGoToPage2"/>
