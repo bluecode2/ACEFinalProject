@@ -84,53 +84,46 @@ public class RankEmpManager {
 	public void insertEmployeeRank(RankEmpBean eb)
 			  {
 		try {
-			this.ibatis.startTransaction();
-			eb.setRankId(getNewRankId());
-			
-			this.ibatis.insert("rank.insertEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				eb.setRankId(getNewRankId());
+				this.ibatis.insert("rank.insertEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void updateEmployeeRank(RankEmpBean eb)
 			  {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("rank.updateEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("rank.updateEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteEmployeeRank(RankEmpBean eb)
 			  {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("rank.deleteEmployeeRank", eb);
-			this.ibatis.commitTransaction();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("rank.deleteEmployeeRank", eb);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

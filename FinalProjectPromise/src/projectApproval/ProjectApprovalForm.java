@@ -125,5 +125,4 @@ public class ProjectApprovalForm extends ActionForm{
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	
 }

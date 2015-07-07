@@ -20,15 +20,6 @@ import proposed_task.ProposedTaskBean;
 import proposed_task.ProposedTaskManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-
-
-
-
-
-
-
-
-import common.CommonFunction;
 import common.Constant;
 import department.DepartmentBean;
 import department.DepartmentManager;
@@ -136,21 +127,17 @@ public class NotificationManager {
 		boolean flag = true;
 		
 		try {
-			this.ibatis.startTransaction();
-			bean.setNotificationId(getNotificationNewId());
-			this.ibatis.insert("notification.insertNotification", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				bean.setNotificationId(getNotificationNewId());
+				this.ibatis.insert("notification.insertNotification", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 		return flag;
 	}
@@ -159,20 +146,16 @@ public class NotificationManager {
 		boolean flag = true;
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("notification.updateReadNotification", notificationId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("notification.updateReadNotification", notificationId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 		
 		return flag;
@@ -416,28 +399,20 @@ public class NotificationManager {
 			
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
-				
 				desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + ptBean.getTaskName()+" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectTask.do");
-				//assign task
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
-				
 				desc = creatorEmp.getEmployeeName() + " canceled your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-				//assign task
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
-				
 				desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-			
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
-				
 				desc = creatorEmp.getEmployeeName() + " approved your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-			
 			}
 			
 			bean.setEmployeeId(assignedEmployeeId);

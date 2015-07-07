@@ -63,18 +63,15 @@ public class ApproveTaskManager {
 		map.put("selectedId", task.getPropTaskId());
 
 		try {
-			ibatis.startTransaction();
-			ibatis.update("approveTask.declineTask", map);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ibatis.startTransaction();
+				ibatis.update("approveTask.declineTask", map);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -85,18 +82,15 @@ public class ApproveTaskManager {
 		map.put("selectedId", task.getPropTaskId());
 
 		try {
-			ibatis.startTransaction();
-			ibatis.update("approveTask.approveTask", map);
-			ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ibatis.startTransaction();
+				ibatis.update("approveTask.approveTask", map);
+				ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -131,18 +125,15 @@ public class ApproveTaskManager {
 		m.put("propTaskId", propId);
 		m.put("remarks", remarks);
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("proposedTask.addRemarksProposedTask", m);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("proposedTask.addRemarksProposedTask", m);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

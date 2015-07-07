@@ -118,6 +118,4 @@ public class GeneralParamForm extends ActionForm {
 	public void setIsAdd(Boolean isAdd) {
 		this.isAdd = isAdd;
 	}
-	
-	
 }

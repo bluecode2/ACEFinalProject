@@ -3,8 +3,6 @@ package notification;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import common.Constant;
-
 public class NotificationBean {
 	private Integer notificationId;
 	private Integer employeeId;

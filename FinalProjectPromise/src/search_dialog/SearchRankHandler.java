@@ -40,7 +40,6 @@ public ActionForward execute(ActionMapping mapping, ActionForm form,
 		out.println("<td>" + reBean.getRankLevel() + "</td>");
 		out.println("</tr>");
 	}
-//	
 	out.flush();
 
 	return null;

@@ -82,7 +82,6 @@ public class ProjectLogBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

@@ -44,17 +44,15 @@ public class UserRoleManager {
 
 	public void insertUserRole(UserRoleBean userRoleBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("userRole.insertUserRole", userRoleBean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.insert("userRole.insertUserRole", userRoleBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -66,33 +64,29 @@ public class UserRoleManager {
 
 	public void editUserRole(UserRoleBean userRoleBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("userRole.editUserRole", userRoleBean);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("userRole.editUserRole", userRoleBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void deleteUserRole(Integer roleId) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("userRole.deleteUserRole", roleId);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.delete("userRole.deleteUserRole", roleId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

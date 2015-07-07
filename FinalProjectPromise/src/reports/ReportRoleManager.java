@@ -52,20 +52,28 @@ public class ReportRoleManager {
 	
 	public void insertUserRoleReport(ReportRoleBean rrBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("userRoleReport.insertUserReport", rrBean);
-			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.insert("userRoleReport.insertUserReport", rrBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	public void deleteUserRoleReport(ReportRoleBean rrBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("userRoleReport.deleteUserReport", rrBean);
-			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.delete("userRoleReport.deleteUserReport", rrBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import project.ProjectBean;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class ProjectMemberManager {
@@ -58,20 +56,16 @@ public class ProjectMemberManager {
 	public void insertProjectMember(ProjectMemberBean bean){
 
 		try {
-			this.ibatis.startTransaction();
-			bean.setMemberId(getNewMemberId());   
-			this.ibatis.insert("projectMember.insertProjectMember", bean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				bean.setMemberId(getNewMemberId());   
+				this.ibatis.insert("projectMember.insertProjectMember", bean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -89,18 +83,15 @@ public class ProjectMemberManager {
 	
 	public void delProjMember(Integer memberId) throws SQLException{
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projectMember.delProjMember", memberId);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.ibatis.startTransaction();
+				this.ibatis.update("projectMember.delProjMember", memberId);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

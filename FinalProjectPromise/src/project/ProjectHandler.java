@@ -39,7 +39,6 @@ public class ProjectHandler extends Action{
 		
 		ProjectForm pForm = (ProjectForm) form;
 		ProjectManager pMan = new ProjectManager();
-//		CommonFunction.createAllowedMenu(null, request);
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -63,8 +62,6 @@ public class ProjectHandler extends Action{
 					us, request);
 			session.setAttribute("deptId", eBean.getDeptId());
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM("","",eBean.getDeptId()));
-					/*getAllEmployeeForDeptHead(eBean.getDeptId(), 
-					"", ""));*/
 			request.setAttribute("pageTitle", "Project Entry");
 			request.setAttribute("show", false);
 			return mapping.findForward("projectEntry");
@@ -87,7 +84,6 @@ public class ProjectHandler extends Action{
 			pForm.getpBean().setUpdatedBy(us.getUserId());
 			
 			pMan.updateProject(pForm.getpBean());
-			
 		}
 		else if ("submit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("submit");
@@ -197,9 +193,6 @@ public class ProjectHandler extends Action{
 				pMan.updateProject(pForm.getpBean());
 			}
 			else if (isProc.equalsIgnoreCase("pause")){
-				System.out.println(pForm.getpBean());
-				System.out.println(pForm.getpBean().getProjectName() + " - " + pForm.getpBean().getProjectDesc());
-				
 				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
 				pMan.updateProject(pForm.getpBean());
@@ -253,8 +246,6 @@ public class ProjectHandler extends Action{
 		pForm.setSearchValue(pForm.getCurrSearchValue());
 
 		int rowCount;
-		/*rowCount = pMan.getCountProject(pForm.getCurrSearchField(),
-				pForm.getCurrSearchValue());*/
 		
 		//untuk dept head atau PM
 		if (addBtn){
@@ -268,11 +259,6 @@ public class ProjectHandler extends Action{
 		
 		pForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.PAGE_SIZE));
-		
-		//untuk all project
-				/*pForm.setListOfProject(pMan.getAllProject(
-						pForm.getCurrSearchField(), pForm.getCurrSearchValue(),
-						pForm.getCurrPage(), Constant.pageSize));*/
 		
 		request.setAttribute("pageTitle", "Project");
 		request.setAttribute("pageNavigator", CommonFunction

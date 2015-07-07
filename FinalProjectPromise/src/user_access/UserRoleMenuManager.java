@@ -34,11 +34,15 @@ public class UserRoleMenuManager {
 
 	public void insertUserRoleMenu(UserRoleMenuBean userRoleMenuBean) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("userRoleMenu.insertUserRoleMenu", userRoleMenuBean);
-			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.insert("userRoleMenu.insertUserRoleMenu", userRoleMenuBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -60,11 +64,15 @@ public class UserRoleMenuManager {
 
 	public void editUserRoleMenu(UserRoleMenuBean userRoleBeanMenu) throws SQLException {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("userRoleMenu.editUserRoleMenu", userRoleBeanMenu);
-			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("userRoleMenu.editUserRoleMenu", userRoleBeanMenu);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -74,11 +82,15 @@ public class UserRoleMenuManager {
 		map.put("menuId", menuId);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("userRoleMenu.deleteUserRoleMenu", map);
-			this.ibatis.commitTransaction();
-		} finally {
-			this.ibatis.endTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.delete("userRoleMenu.deleteUserRoleMenu", map);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

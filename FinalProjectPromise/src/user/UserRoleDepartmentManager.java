@@ -53,32 +53,28 @@ private SqlMapClient ibatis;
 	
 	public void insertUserRoleDepartment(UserRoleDepartmentBean rrBean){
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("userRoleDepartment.insertUserRoleDepartment", rrBean);
-			this.ibatis.commitTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.insert("userRoleDepartment.insertUserRoleDepartment", rrBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 	}
 	public void deleteUserRoleDepartment(UserRoleDepartmentBean rrBean) {
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.delete("userRoleDepartment.deleteUserRoleDepartment", rrBean);
-			this.ibatis.commitTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.delete("userRoleDepartment.deleteUserRoleDepartment", rrBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			try {
-				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 	}
 }

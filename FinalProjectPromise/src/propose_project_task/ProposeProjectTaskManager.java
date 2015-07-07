@@ -82,17 +82,15 @@ public class ProposeProjectTaskManager {
 		}
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("projProposeTask.insertPropProjTask", pProjTBean);
-			this.ibatis.commitTransaction();
+			try {
+				this.ibatis.startTransaction();
+				this.ibatis.insert("projProposeTask.insertPropProjTask", pProjTBean);
+				this.ibatis.commitTransaction();
+			} finally {
+				this.ibatis.endTransaction();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				try {
-					ibatis.endTransaction();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			e.printStackTrace();
 		}
 	}
 	
@@ -135,19 +133,15 @@ public class ProposeProjectTaskManager {
 	
 	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -157,18 +151,15 @@ public class ProposeProjectTaskManager {
 		map.put("propTaskId", propTaskId);
 		
 		try {
-			this.ibatis.startTransaction();
-			this.ibatis.update("projProposeTask.delPropProjTask", map);
-			this.ibatis.commitTransaction();
-			this.ibatis.endTransaction();
-		} catch (Exception e) {
-			// TODO: handle exception
 			try {
+				this.ibatis.startTransaction();
+				this.ibatis.update("projProposeTask.delPropProjTask", map);
+				this.ibatis.commitTransaction();
+			} finally {
 				this.ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

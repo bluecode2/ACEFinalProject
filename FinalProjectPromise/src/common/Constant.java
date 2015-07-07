@@ -108,5 +108,6 @@ public class Constant {
 		public static final String AD_ADMIN_USERNAME = "ADAdminUser";
 		public static final String AD_ADMIN_PASSWORD = "ADAdminPass";
 		public static final String PROJECT_MANAGER_ROLE_ID = "ProjectManager";
+		public static final String APPLICATION_PROPERTIES_PATH = "appPropPath";
 	}
 }

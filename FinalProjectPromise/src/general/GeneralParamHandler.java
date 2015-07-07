@@ -25,7 +25,6 @@ public class GeneralParamHandler extends Action{
 		
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
-//		CommonFunction.createAllowedMenu(us, request);
 
 		if("add".equals(gpf.getTask())){
 			gpf.setIsAdd(true);

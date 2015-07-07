@@ -3,6 +3,10 @@ package activity;
 import org.apache.struts.action.ActionForm;
 
 public class ActivityForm extends ActionForm{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String task;
 	private Integer taskId;
 	private Integer selectedId;
@@ -39,5 +43,4 @@ public class ActivityForm extends ActionForm{
 	public void setIsCompleted(Integer isCompleted) {
 		this.isCompleted = isCompleted;
 	}
-	
 }
