@@ -54,6 +54,7 @@ public class ActivityManager {
 			this.ibatis.insert("activity.insertActivity", bean);
 			maxId =  (Integer) this.ibatis.queryForObject("activity.getActivityMaxId", null);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -72,6 +73,7 @@ public class ActivityManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("activity.updateActivity", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -89,6 +91,7 @@ public class ActivityManager {
 			this.ibatis.startTransaction();
 			this.ibatis.delete("activity.deleteActivity", activityId);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

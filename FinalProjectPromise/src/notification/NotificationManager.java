@@ -70,7 +70,7 @@ public class NotificationManager {
 		map.put("employeeId", employeeId);
 		map.put("isRead", 0);
 		map.put("begin", 0);
-		map.put("end", Constant.notificationSize);
+		map.put("end", Constant.NOTIFICATION_SIZE);
 	
 		try {
 			list =  this.ibatis.queryForList("notification.getAllNotificationByEmployee", map);
@@ -140,6 +140,7 @@ public class NotificationManager {
 			bean.setNotificationId(getNotificationNewId());
 			this.ibatis.insert("notification.insertNotification", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -161,6 +162,7 @@ public class NotificationManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("notification.updateReadNotification", notificationId);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -470,7 +472,7 @@ public class NotificationManager {
 			else if (ptBean.getPropStatus().equals(Constant.GeneralCode.TASK_STATUS_APPROVE)) {
 				
 				desc = creatorEmp.getEmployeeName() + " approve your propose task : " + ptBean.getPropTaskName()+ " in project " + ptBean.getProjectName();
-				bean.setNotificationUrl("projectTask.do");
+				bean.setNotificationUrl("projectInvolvedTask.do");
 				bean.setSessionParameter("projectId#"+ptBean.getProjectId());
 			}
 			bean.setEmployeeId(assignedEmployeeId);

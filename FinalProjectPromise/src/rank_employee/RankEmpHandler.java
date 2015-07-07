@@ -76,12 +76,12 @@ public class RankEmpHandler extends Action {
 
 		dForm.setArrList(dMan.getAllEmployeeRank(
 				dForm.getCurrSearchField(), dForm.getCurrSearchValue(),
-				dForm.getCurrPage(), Constant.pageSize));
+				dForm.getCurrPage(), Constant.PAGE_SIZE));
 		rowCount = dMan.getCountRankEmp(dForm.getCurrSearchField(),
 				dForm.getCurrSearchValue());
 		
 		dForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK,
 				us, request);

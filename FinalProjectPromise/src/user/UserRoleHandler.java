@@ -354,14 +354,14 @@ public class UserRoleHandler extends Action {
 		userRoleForm.setArrList(userRoleManager.getUserRole(
 				userRoleForm.getCurrSearchField(),
 				userRoleForm.getCurrSearchValue(), userRoleForm.getCurrPage(),
-				Constant.pageSize));
+				Constant.PAGE_SIZE));
 
 		rowCount = userRoleManager.getCountUserRole(
 				userRoleForm.getCurrSearchField(),
 				userRoleForm.getCurrSearchValue());
 
 		userRoleForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		CommonFunction.initializeHeader(Constant.MenuCode.USER_ROLE, us,
 				request);

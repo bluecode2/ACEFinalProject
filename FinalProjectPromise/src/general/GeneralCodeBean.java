@@ -17,7 +17,7 @@ public class GeneralCodeBean {
 	private String	updateDateInString;
 	
 	
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getUpdatedBy() {
 		return updatedBy;

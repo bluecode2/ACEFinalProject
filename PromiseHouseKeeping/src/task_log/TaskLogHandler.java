@@ -1,6 +1,7 @@
 package task_log;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class TaskLogHandler {
 		lstProjectId.add(projectId);
 	}
 	
-	public void printAllBackupTask(){
+	public void printAllBackupTask() throws IOException{
 	Date now = new Date();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		String f = CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.BACKUP_LOG_PATH) + "Task_Log_Backup_" + sdFormat.format(now) + ".txt";
@@ -77,6 +78,10 @@ public class TaskLogHandler {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		finally{
+			ps.close();
+			fos.close();
 		}
 	}
 	

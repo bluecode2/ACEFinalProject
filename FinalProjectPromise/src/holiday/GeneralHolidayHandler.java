@@ -79,12 +79,12 @@ public class GeneralHolidayHandler extends Action{
 				int rowCount;
 				genForm.setArrList(genManager.getGeneralHoliday(
 						genForm.getCurrSearchField(), genForm.getCurrSearchValue(), genForm.getCurrSearchValue2(),
-						genForm.getCurrPage(), Constant.pageSize));
+						genForm.getCurrPage(), Constant.PAGE_SIZE));
 				
 				rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
 						genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
-				genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+				genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));
 				request.setAttribute("pageTitle", "General Holiday");
 				
 				request.setAttribute("pageNavigator", CommonFunction
@@ -120,12 +120,12 @@ public class GeneralHolidayHandler extends Action{
 		int rowCount;
 		genForm.setArrList(genManager.getGeneralHoliday(
 				genForm.getCurrSearchField(), genForm.getCurrSearchValue(), genForm.getCurrSearchValue2(),
-				genForm.getCurrPage(), Constant.pageSize));
+				genForm.getCurrPage(), Constant.PAGE_SIZE));
 		
 		rowCount = genManager.getCountGeneralHoliday(genForm.getCurrSearchField(),
 				genForm.getCurrSearchValue(), genForm.getCurrSearchValue2());
 
-		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));		
+		genForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));		
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_HOLIDAY, us,
 				request);

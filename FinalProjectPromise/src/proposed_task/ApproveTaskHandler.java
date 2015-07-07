@@ -79,7 +79,7 @@ public class ApproveTaskHandler extends Action {
 		
 		aForm.setArrList(aManager.getListApproveTask(
 				aForm.getCurrSearchField(), aForm.getCurrSearchValue(),
-				aForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+				aForm.getCurrPage(), Constant.PAGE_SIZE, us.getEmployeeId()));
 		
 		rowCount = aManager.getCountApproveTask(aForm.getCurrSearchField(),
 				aForm.getCurrSearchValue(), us.getEmployeeId());
@@ -87,7 +87,7 @@ public class ApproveTaskHandler extends Action {
 		aForm.seteBean(aManager.getEmployeeBySpvId(us.getEmployeeId()));
 		
 		aForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(aForm.getPageCount(),

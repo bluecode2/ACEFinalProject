@@ -83,10 +83,10 @@ public class PersonalHolidayHandler extends Action{
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
 				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),
-				persForm.getCurrPage(), Constant.pageSize));
+				persForm.getCurrPage(), Constant.PAGE_SIZE));
 		
 		rowCount = persManager.getCountPersonalHoliday(persForm.getCurrSearchField(), persForm.getCurrSearchValue());
-		persForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		persForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY, us,
 				request);

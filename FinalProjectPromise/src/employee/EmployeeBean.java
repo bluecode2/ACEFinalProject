@@ -31,7 +31,7 @@ public class EmployeeBean {
 	private Integer 	isActive;
 	private String 		employeeCode;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public Integer getEmployeeId() {
 		return employeeId;

@@ -17,7 +17,7 @@ public class GeneralHolidayForm extends ActionForm{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	private List<GeneralHolidayBean> 	arrList = new ArrayList<GeneralHolidayBean>();
 	private GeneralHolidayBean 			genHolidayBean  = new GeneralHolidayBean();
 	private String 						task="";
@@ -26,7 +26,7 @@ public class GeneralHolidayForm extends ActionForm{
 	private String 						searchValue2 = "";
 	private String 						searchField = "";
 	private String 						currSearchValue ;
-	private String 						currSearchValue2 = Constant.DefaultValue.maxDate;
+	private String 						currSearchValue2 = Constant.DefaultValue.MAX_DATE;
 	private String 						currSearchField = "byDate";
 	private Integer							currPage = 1;
 	private Integer 						pageCount = 1;

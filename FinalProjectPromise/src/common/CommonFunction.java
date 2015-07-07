@@ -35,10 +35,10 @@ public class CommonFunction {
 			arr.add(page);
 		}
 
-		int maxShownPageCount = Constant.pageNavigatorSize;
+		int maxShownPageCount = Constant.PAGE_NAVIGATION_SIZE;
 
-		int frontCount = (Constant.pageNavigatorSize / 2);
-		if (pageCount - currPage < Constant.pageNavigatorSize / 2) {
+		int frontCount = (Constant.PAGE_NAVIGATION_SIZE / 2);
+		if (pageCount - currPage < Constant.PAGE_NAVIGATION_SIZE / 2) {
 			frontCount += (currPage - pageCount + frontCount);
 		}
 

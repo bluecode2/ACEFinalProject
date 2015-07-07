@@ -100,12 +100,12 @@ public class ProposedTaskHandler extends Action {
 
 		dForm.setArrList(dMan.getAllPropTaskFiltered(
 				dForm.getCurrSearchField(), dForm.getCurrSearchValue(),
-				dForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+				dForm.getCurrPage(), Constant.PAGE_SIZE, us.getEmployeeId()));
 		rowCount = dMan.getCountProposedTask(dForm.getCurrSearchField(),
 				dForm.getCurrSearchValue(), us.getEmployeeId());
 		
 		dForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),

@@ -71,6 +71,7 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("genParam.insertGenParam", genParamBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -88,6 +89,7 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genParam.updateGenParam", genParamBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -104,6 +106,7 @@ public class GeneralParamManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genParam.deleteGenParam", genParamBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

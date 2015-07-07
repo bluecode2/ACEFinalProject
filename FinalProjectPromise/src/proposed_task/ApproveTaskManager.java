@@ -66,6 +66,7 @@ public class ApproveTaskManager {
 			ibatis.startTransaction();
 			ibatis.update("approveTask.declineTask", map);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -87,6 +88,7 @@ public class ApproveTaskManager {
 			ibatis.startTransaction();
 			ibatis.update("approveTask.approveTask", map);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -132,6 +134,7 @@ public class ApproveTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("proposedTask.addRemarksProposedTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

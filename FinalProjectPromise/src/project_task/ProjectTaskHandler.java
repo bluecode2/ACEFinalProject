@@ -91,7 +91,7 @@ public class ProjectTaskHandler extends Action {
 					.getProjectMemberToEvaluate(tsForm.getPrjBean()
 							.getProjectId()));
 			request.setAttribute("lstEmployeeId",
-					empMan.getAllEmployee("", "", 1, Constant.pageSize));
+					empMan.getAllEmployee("", "", 1, Constant.PAGE_SIZE));
 
 			return mapping.findForward("entry");
 		} else if ("save".equals(tsForm.getTask())) {
@@ -131,7 +131,7 @@ public class ProjectTaskHandler extends Action {
 						.getProjectMemberToEvaluate(tsForm.getPrjBean()
 								.getProjectId()));
 				request.setAttribute("lstEmployeeId",
-						empMan.getAllEmployee("", "", 1, Constant.pageSize));
+						empMan.getAllEmployee("", "", 1, Constant.PAGE_SIZE));
 				return mapping.findForward("entry");
 			} else if (tsForm.getSelectedEdit() == 1) {
 				/*
@@ -258,14 +258,14 @@ public class ProjectTaskHandler extends Action {
 
 		tsForm.setArrList(tsMan.getListProjectTaskByProjectId(tsForm
 				.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm
-				.getCurrPage(), Constant.pageSize, tsForm.getPrjBean()
+				.getCurrPage(), Constant.PAGE_SIZE, tsForm.getPrjBean()
 				.getProjectId()));
 		tsForm.setListCount(tsMan.getCountAssignTaskByProjectId(
 				tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),
 				tsForm.getPrjBean().getProjectId()));
 
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount()
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(tsForm.getPageCount(),
@@ -281,14 +281,14 @@ public class ProjectTaskHandler extends Action {
 		
 		tsForm.setArrListProp(aPropPMan.getAllPropTask(
 				tsForm.getCurrSearchField2(), tsForm.getCurrSearchValue2(),
-				tsForm.getCurrPage2(), Constant.pageSize, us.getEmployeeId(),
+				tsForm.getCurrPage2(), Constant.PAGE_SIZE, us.getEmployeeId(),
 				tsForm.getPrjBean().getProjectId()));
 		tsForm.setListCount2(aPropPMan.getCountAllPropTask(
 				tsForm.getCurrSearchField2(), tsForm.getCurrSearchValue2(),
 				us.getEmployeeId(),tsForm.getPrjBean().getProjectId()));
 
 		tsForm.setPageCount2((int) Math.ceil((double) tsForm.getListCount2()
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		
 		request.setAttribute("pageNavigator2", CommonFunction

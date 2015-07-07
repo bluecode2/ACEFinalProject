@@ -33,7 +33,7 @@ public class ProposeProjectTaskBean {
 	private String remakrs;
 	private Integer estMainDays;
 	
-	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.DATE_FORMAT);
 	
 	public Integer getEstMainDays() {
 		return estMainDays;
@@ -81,7 +81,7 @@ public class ProposeProjectTaskBean {
 		this.propStatusName = propStatusName;
 	}
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getPropTaskId() {
 		return propTaskId;

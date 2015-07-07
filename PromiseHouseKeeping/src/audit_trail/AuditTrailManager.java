@@ -14,7 +14,7 @@ import common.Constant;
 public class AuditTrailManager {
 
 	private SqlMapClient ibatis;
-	SimpleDateFormat sdf = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat sdf = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public AuditTrailManager(){
 		this.ibatis = IbatisHelper.getSqlMapInstance();

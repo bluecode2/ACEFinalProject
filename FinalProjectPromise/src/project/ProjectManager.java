@@ -173,6 +173,7 @@ public class ProjectManager {
 			pBean.setProjectId(newProjId);
 			this.ibatis.insert("project.insertProject", pBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -190,6 +191,7 @@ public class ProjectManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("project.updateProject", pBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -281,6 +283,7 @@ public class ProjectManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("project.setToApproveProject", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -306,6 +309,7 @@ public class ProjectManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("project.setToDeclineProject", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

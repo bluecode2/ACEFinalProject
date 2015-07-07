@@ -18,7 +18,7 @@ public class ProjectLogBean {
 	private String remarks;
 	private Integer updateBy;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getProjectLogId() {
 		return projectLogId;

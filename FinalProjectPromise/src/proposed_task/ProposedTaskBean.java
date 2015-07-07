@@ -32,7 +32,7 @@ public class ProposedTaskBean {
 	private String projectName;
 	private String projectId;
 	
-	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.DATE_FORMAT);
 	
 	public String getProjectName() {
 		return projectName;
@@ -72,7 +72,7 @@ public class ProposedTaskBean {
 		this.propStatusName = propStatusName;
 	}
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getPropTaskId() {
 		return propTaskId;

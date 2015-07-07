@@ -19,7 +19,7 @@ public class RankEmpBean {
 	private String  rankCode;
 	private Integer isDeleted;
 	
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	
 	public Integer getRankId() {

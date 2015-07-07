@@ -62,7 +62,6 @@
 		        user_role_name  AS      userRoleName
 		        from vusers
 		        where is_active = 1
-
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="employeeName">
 				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )

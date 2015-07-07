@@ -1,6 +1,8 @@
 package audit_trail;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +13,7 @@ import common.Constant;
 
 public class AuditTrailHandler {
 
-	public void backUpAuditTrail() {
+	public void backUpAuditTrail() throws IOException {
 
 		AuditTrailManager aTrailMan = new AuditTrailManager();
 		
@@ -28,7 +30,7 @@ public class AuditTrailHandler {
 		StringBuffer sb = new StringBuffer();
 
 		int i = 0;
-
+		
 		if (listOfAuditTrail.size() > 0) {
 			try {
 				fileOut = new FileOutputStream(fileName);
@@ -73,14 +75,15 @@ public class AuditTrailHandler {
 
 				write.println(sb);
 				//aTrailMan.delAuditTrail();
-				
-				write.close();
-				fileOut.close();
 
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 				System.out.println("Failed To Export");
+			}
+			finally{
+				write.close();
+				fileOut.close();
 			}
 		}
 	}

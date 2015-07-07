@@ -23,7 +23,7 @@ public class ActivityBean {
 	private String	taskStatus;
 	private String 	employeeCode;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public String getEmployeeName() {
 		return employeeName;

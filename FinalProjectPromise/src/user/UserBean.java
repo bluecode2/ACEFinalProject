@@ -22,7 +22,7 @@ public class UserBean {
 	private String 	userRoleName;
 	private Integer	deptId;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getDeptId() {
 		return deptId;

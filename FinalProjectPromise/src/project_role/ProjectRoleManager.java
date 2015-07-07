@@ -89,6 +89,7 @@ public class ProjectRoleManager {
 			this.ibatis
 					.insert("projectRole.insertProjectRole", projectRoleBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -106,6 +107,7 @@ public class ProjectRoleManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectRole.editProjectRole", projectRoleBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -124,6 +126,7 @@ public class ProjectRoleManager {
 			this.ibatis
 					.update("projectRole.deleteProjectRole", projectRoleBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

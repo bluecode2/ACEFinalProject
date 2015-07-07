@@ -70,11 +70,11 @@ public class ProjectInvolvedHandler extends Action{
 				projectForm.getCurrSearchValue());
 		
 		projectForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 		
 		projectForm.setListOfProjectInvolved(projectManager.getProjectInvolved(
 				projectForm.getCurrSearchField(), projectForm.getCurrSearchValue(),
-				projectForm.getCurrPage(), Constant.pageSize,  us.getUserId()));
+				projectForm.getCurrPage(), Constant.PAGE_SIZE,  us.getUserId()));
 		
 		request.setAttribute("pageTitle", "Project Involved");
 

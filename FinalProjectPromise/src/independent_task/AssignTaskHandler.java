@@ -141,9 +141,9 @@ public class AssignTaskHandler extends Action {
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		
 		tsForm.setListCount(tsMan.getCountAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(),us.getEmployeeId()));
-		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.pageSize));
+		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount() / (double) Constant.PAGE_SIZE));
 		
-		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.pageSize, us.getEmployeeId()));
+		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.PAGE_SIZE, us.getEmployeeId()));
 
 		request.setAttribute("pageTitle", "Assign Independent Task");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));

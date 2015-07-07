@@ -112,11 +112,11 @@ public class ProjectApprovalHandler extends Action{
 			rowCount = tsMan.getCountAssignTaskByProjectId(paForm.getCurrSearchField(),
 					paForm.getCurrSearchValue(),paForm.getpBean().getProjectId());
 
-			paForm.setPageCount((int) Math.ceil((double) rowCount / (double) Constant.pageSize));
+			paForm.setPageCount((int) Math.ceil((double) rowCount / (double) Constant.PAGE_SIZE));
 			
 			paForm.setArrTask(tsMan.getListProjectTaskByProjectId(paForm.getCurrSearchField(),
 					paForm.getCurrSearchValue(), paForm.getCurrPage(),
-					Constant.pageSize, paForm.getpBean().getProjectId()));
+					Constant.PAGE_SIZE, paForm.getpBean().getProjectId()));
 
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_APPROVAL_EVALUATE,
 					us, request);
@@ -138,12 +138,12 @@ public class ProjectApprovalHandler extends Action{
 		
 		paForm.setArrList(paMan.getListProjectToEvaluate(
 				paForm.getCurrSearchField(), paForm.getCurrSearchValue(),
-				paForm.getCurrPage(), Constant.pageSize,us.getDeptId()));
+				paForm.getCurrPage(), Constant.PAGE_SIZE,us.getDeptId()));
 		rowCount = paMan.getCountProjectToEvaluate(paForm.getCurrSearchField(),
 				paForm.getCurrSearchValue(),us.getDeptId());
 		
 		paForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_APPROVAL,
 				us, request);

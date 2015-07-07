@@ -17,7 +17,7 @@ public class ProjectRoleBean {
 	private String projectRoleCode;
 	private Integer isDeleted;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public Integer getProjectRoleId() {
 		return projectRoleId;

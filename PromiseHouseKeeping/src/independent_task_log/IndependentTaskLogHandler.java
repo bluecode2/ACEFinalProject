@@ -1,19 +1,19 @@
 package independent_task_log;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import task_log.TaskLogBean;
-
 import common.CommonFunction;
 import common.Constant;
 
 public class IndependentTaskLogHandler {
 
-	public void backupIndependentTaskLog(){
+	public void backupIndependentTaskLog() throws IOException{
 		IndependentTaskLogManager iTMan = new IndependentTaskLogManager();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -74,14 +74,15 @@ public class IndependentTaskLogHandler {
 
 				write.println(sb);
 //				iTMan.delIndependentTaskLog();
-				
-				write.close();
-				fileOut.close();
 
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 				System.out.println("Failed To Export");
+			}
+			finally{
+				write.close();
+				fileOut.close();
 			}
 		}
 	}

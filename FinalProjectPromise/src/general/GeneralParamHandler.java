@@ -62,13 +62,13 @@ public class GeneralParamHandler extends Action{
 		int rowCount;
 		gpf.setArrList(gpm.getAllGeneralParam(
 				gpf.getCurrSearchField(), gpf.getCurrSearchValue(),
-				gpf.getCurrPage(), Constant.pageSize));
+				gpf.getCurrPage(), Constant.PAGE_SIZE));
 		
 		
 		rowCount = gpm.getCountGeneralParam(gpf.getCurrSearchField(),
 				gpf.getCurrSearchValue());
 		
-		gpf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		gpf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_PARAMETER,
 				us, request);

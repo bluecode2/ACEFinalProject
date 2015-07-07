@@ -138,6 +138,7 @@ public class ProposeProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projProposeTask.updatePropProjTask", pProjTaskBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -159,6 +160,7 @@ public class ProposeProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projProposeTask.delPropProjTask", map);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			try {

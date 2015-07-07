@@ -41,8 +41,8 @@ public class IndependentTaskBean {
 	private Integer isOutsource;
 	private String 	taskDesc;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
-	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
+	SimpleDateFormat df2 = new SimpleDateFormat(Constant.StringFormat2.DATE_FORMAT);
 	
 	public String getTaskDesc() {
 		return taskDesc;

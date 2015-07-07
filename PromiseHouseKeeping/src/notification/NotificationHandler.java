@@ -15,7 +15,7 @@ public class NotificationHandler {
 	private List<NotificationBean> arrTemp;
 	NotificationManager noMan = new NotificationManager();
 
-	public void writeNotificationToSweep() {
+	public void writeNotificationToSweep() throws IOException {
 		arrTemp = noMan.getListNotificationToSweep();
 		String row = "==========================================================================================================================================================================================";
 		Date now = new Date();
@@ -50,13 +50,15 @@ public class NotificationHandler {
 					));
 				}
 
-				wt.close();
-				fo.close();
 /*				sweepNotification();*/
 				
 			} catch (IOException e) {
 				e.printStackTrace();
 				// TODO: handle exception
+			}
+			finally{
+				wt.close();
+				fo.close();
 			}
 		}
 	}

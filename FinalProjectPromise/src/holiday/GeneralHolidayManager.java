@@ -71,6 +71,7 @@ public class GeneralHolidayManager {
 			this.ibatis.insert("generalHoliday.insertGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -101,6 +102,7 @@ public class GeneralHolidayManager {
 			this.ibatis.update("generalHoliday.editGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,6 +121,7 @@ public class GeneralHolidayManager {
 			this.ibatis.update("generalHoliday.deleteGeneralHoliday",
 					genHolidayBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,6 +158,7 @@ public class GeneralHolidayManager {
 			ibatis.startTransaction();
 			this.ibatis.insert("generalHoliday.generateWeekend", map);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
