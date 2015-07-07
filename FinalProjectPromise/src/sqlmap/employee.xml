@@ -55,7 +55,7 @@
 			emp.phoneNumber 						AS phoneNumber,
 			emp.isActive							AS isActive,
 			emp.createDateInString 					AS createDateInString,
-			emp.updateDateInString 					AS updateDateInString
+			emp.updateDateInString 					AS updateDateInString,
 			ROWNUM rnum from (
 				SELECT
 				EMPLOYEE_ID 						AS employeeId,
