@@ -27,17 +27,9 @@ public class ProjectRoleHandler extends Action {
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE, us, request);
 
-		if("add".equals(prf.getTask())){
-			/*empForm.getEmpBean().setEmpId(empManager.generateIdEmp());
-			empForm.setListOfJobs(empManager.getJobId());
-			empForm.setListOfEmp(empManager.getEmployees());
-			empForm.setListOfDept(empManager.getDeptId());
-			
-			request.setAttribute("ljob", empManager.getJobId());*/
-			
+		if("add".equals(prf.getTask())){		
 			prf.setIsAdd(true);
 			request.setAttribute("pageTitle", "Project Role Entry");
-
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE_ENTRY, us, request);
 			
 			return mapping.findForward("projectRoleEntry");
@@ -56,32 +48,20 @@ public class ProjectRoleHandler extends Action {
 				prm.updateProjectRole(prf.getProjectRoleBean());
 			}
 			
-			System.out.println(prf.getProjectRoleBean().getProjectRoleId());
-			System.out.println(prf.getProjectRoleBean().getProjectRoleCode());
-			System.out.println(prf.getProjectRoleBean().getProjectRoleName());
-			System.out.println(prf.getProjectRoleBean().getUpdateDate());
-			System.out.println(prf.getProjectRoleBean().getUpdatedBy());
-			
 			response.sendRedirect("projectRole.do");
 			return null;
 		}
 		else if ("edit".equals(prf.getTask())) {
 			request.setAttribute("pageTitle", "Project Role Edit");
-			
 			prf.setProjectRoleBean(prm.getProjectRoleById(prf.getSelectedId()));
-			
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ROLE_ENTRY, us, request);
 
 			return mapping.findForward("projectRoleEntry");
 		}
 		else if ("delete".equals(prf.getTask())) {
-			
 			prf.getProjectRoleBean().setProjectRoleId(prf.getSelectedId());
 			prf.getProjectRoleBean().setUpdatedBy(us.getUserId());
-			System.out.println(prf.getSelectedId());
 			prm.deleteProjectRole(prf.getProjectRoleBean());
-			
-			System.out.println("selesai");
 		}
 		
 		prf.setTask("");

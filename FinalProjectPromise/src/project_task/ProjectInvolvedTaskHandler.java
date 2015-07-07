@@ -83,8 +83,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 		if ("startTask".equalsIgnoreCase(tsForm.getTask())) {// TASK TO START
 							// TASK
 			int taskId = tsForm.getTestingId();
-			//String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
-			//tsMan.startProjectTask(taskId, us.getUserId(), taskStatus);
 			pTaskBean = tsMan.getTaskById(taskId);
 			pTaskBean.setActStartDate(now);
 			pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_ONGOING);
@@ -95,15 +93,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 		} else if ("submitTask".equalsIgnoreCase(tsForm.getTask())) {// TASK TO
 																		// SUBMIT
 																		// TASK
-			/*int taskId = tsForm.getTestingId();
-			String taskStatus = Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL;
-			tsMan.submitProjectTask(taskId, us.getUserId(), taskStatus);
-
-			tsForm.setTkBean(tsMan.getTaskById(taskId));
-			noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
-					.getTkBean().getAssignedBy(), tsForm.getTkBean()
-					.getTaskId());*/
-			
 			int taskId = tsForm.getTestingId();
 			pTaskBean = tsMan.getTaskById(taskId);
 			pTaskBean.setActEndDate(now);
@@ -171,8 +160,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 		tsForm.setTask("");
 		tsForm.setTaskForProp("");
 		
-		
-
 		//paging Project Task
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
@@ -195,8 +182,6 @@ public class ProjectInvolvedTaskHandler extends Action {
 		request.setAttribute("pageCount", tsForm.getPageCount());
 		request.setAttribute("currPage", tsForm.getCurrPage());
 		request.setAttribute("rowCount", tsForm.getListCount());
-		
-		
 		
 		//paging Propose Task
 		tsForm.setSearchField2(tsForm.getCurrSearchField2());

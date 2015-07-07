@@ -25,8 +25,6 @@ public class RankEmpHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-		//CommonFunction.createAllowedMenu(us, request);
-
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
