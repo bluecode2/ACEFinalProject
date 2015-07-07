@@ -73,6 +73,7 @@ public class GeneralCodeManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("genCode.insertGeneralCode", genCodebean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -90,6 +91,7 @@ public class GeneralCodeManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genCode.updateGeneralCode", genCodeBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -106,6 +108,7 @@ public class GeneralCodeManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("genCode.deleteGeneralCode", genCodeId);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

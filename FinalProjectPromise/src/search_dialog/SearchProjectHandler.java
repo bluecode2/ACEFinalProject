@@ -38,7 +38,7 @@ public class SearchProjectHandler extends Action{
 			String searchValue = sProjForm.getSearchValue();
 			Integer deptId	   = sProjForm.getSelectedId();
 			System.out.println(deptId + "-" + searchValue + " "+searchField);
-			List<ProjectBean> list = pMan.getProjectByDeptId(searchField, searchValue, 1, Constant.pageSize,deptId);
+			List<ProjectBean> list = pMan.getProjectByDeptId(searchField, searchValue, 1, Constant.PAGE_SIZE,deptId);
 
 			if (list.size()>0) {
 				for (ProjectBean projBean : list) {
@@ -63,7 +63,7 @@ public class SearchProjectHandler extends Action{
 		String searchField = sProjForm.getSearchField();
 		String searchValue = sProjForm.getSearchValue();
 		
-		List<ProjectBean> list = pMan.getAllProject(searchField, searchValue, 1, Constant.pageSize);
+		List<ProjectBean> list = pMan.getAllProject(searchField, searchValue, 1, Constant.PAGE_SIZE);
 		
 		for (ProjectBean projBean : list) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchProj\">");

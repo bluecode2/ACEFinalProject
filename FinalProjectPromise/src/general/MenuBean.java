@@ -29,7 +29,7 @@ public class MenuBean {
 	private Boolean isAllowDecline;
 
 	SimpleDateFormat df = new SimpleDateFormat(
-			common.Constant.StringFormat.dateFormat);
+			common.Constant.StringFormat.DATE_FORMAT);
 
 	public String getUpdatedByName() {
 		return updatedByName;

@@ -19,7 +19,7 @@ public class HolidayBean {
 	private Date updateDate;
 	private String updateDateInString;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getHolidayId() {
 		return holidayId;

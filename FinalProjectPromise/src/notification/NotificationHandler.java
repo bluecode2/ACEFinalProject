@@ -38,10 +38,10 @@ public class NotificationHandler extends Action {
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.NOTIFICATIONS, us, request);
 		
-		nForm.setLstBean(nMan.getListAllNotificationByEmployee(us.getEmployeeId(),nForm.getCurrPage(),Constant.pageSize));
+		nForm.setLstBean(nMan.getListAllNotificationByEmployee(us.getEmployeeId(),nForm.getCurrPage(),Constant.PAGE_SIZE));
 		int rowCount = nMan.getCountNotificationByEmployee(us.getEmployeeId());
 		nForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 		
 		request.setAttribute("pageCount", nForm.getPageCount());
 		request.setAttribute("currPage", nForm.getCurrPage());

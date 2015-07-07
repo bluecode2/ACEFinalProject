@@ -91,12 +91,12 @@ public class DepartmentHandler extends Action {
 
 		dForm.setArrList(dMan.getAllDepartmentsFiltered(
 				dForm.getCurrSearchField(), dForm.getCurrSearchValue(),
-				dForm.getCurrPage(), Constant.pageSize));
+				dForm.getCurrPage(), Constant.PAGE_SIZE));
 		rowCount = dMan.getCountDepartment(dForm.getCurrSearchField(),
 				dForm.getCurrSearchValue());
 		//
 		dForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		CommonFunction.initializeHeader(Constant.MenuCode.DEPARTMENT,
 				us, request);

@@ -60,6 +60,7 @@ public class ProjectTaskManager {
 			
 			this.ibatis.insert("projectTask.insertToProjectTask", tsBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -76,6 +77,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateProjectTask", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -93,6 +95,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateProjectStat", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +120,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateStatusRemarksProjectTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -139,6 +143,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.startProjectTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -161,6 +166,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.submitProjectTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -183,6 +189,7 @@ public class ProjectTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectTask.updateStatusProjectTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

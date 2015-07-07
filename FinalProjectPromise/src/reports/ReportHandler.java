@@ -43,7 +43,7 @@ public class ReportHandler extends Action {
 		List<EmployeeBean> arrEmp = new ArrayList<EmployeeBean>();
 		SearchEmpSubordinateHandler subordinateHandler = new SearchEmpSubordinateHandler();
 		subordinateHandler.generateSubordinateList(arrEmp, us.getEmployeeId(), "", "");
-		int maxIdx = arrEmp.size() < Constant.pageSize ? arrEmp.size() : Constant.pageSize;
+		int maxIdx = arrEmp.size() < Constant.PAGE_SIZE ? arrEmp.size() : Constant.PAGE_SIZE;
 		
 		rForm.setListOfDept(rMan.getListDeptFromUserRole(us.getUserRoleId()));
 		rForm.setListOfGenCode(genCodeMan.getGeneralCodeByParentId("PR_STAT"));

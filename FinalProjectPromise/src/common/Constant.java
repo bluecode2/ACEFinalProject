@@ -2,21 +2,21 @@ package common;
 
 public class Constant {
 	public static class StringFormat{
-		public static final String dateFormat = "yyyy-MM-dd";
+		public static final String DATE_FORMAT = "yyyy-MM-dd";
 	}
 	
 	public static class StringFormat2{
-		public static final String dateFormat = "dd MMMM yyyy";
+		public static final String DATE_FORMAT = "dd MMMM yyyy";
 	}
 	
 	public static class DefaultValue{
-		public static final String minDate = "1900-01-01";
-		public static final String maxDate = "2100-12-31";
+		public static final String MIN_DATE = "1900-01-01";
+		public static final String MAX_DATE = "2100-12-31";
 	}
 	
-	public static final Integer pageSize = 10;
-	public static final Integer notificationSize = 5;
-	public static final Integer pageNavigatorSize = 5;
+	public static final Integer PAGE_SIZE = 10;
+	public static final Integer NOTIFICATION_SIZE = 5;
+	public static final Integer PAGE_NAVIGATION_SIZE = 5;
 	
 	public static class MenuCode{
 		public static final String DEPARTMENT = "MS0101";

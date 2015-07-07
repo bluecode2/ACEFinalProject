@@ -29,8 +29,8 @@ public class MenuHandler extends Action {
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.MENU_MANAGEMENT,us, request);
 		mnForm.setListCount(mnMan.getCountMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue()));
-		mnForm.setPageCount((int) Math.ceil((double) mnForm.getListCount() / (double) Constant.pageSize));
-		mnForm.setArrList(mnMan.selectListMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue(), mnForm.getCurrPage(), Constant.pageSize));
+		mnForm.setPageCount((int) Math.ceil((double) mnForm.getListCount() / (double) Constant.PAGE_SIZE));
+		mnForm.setArrList(mnMan.selectListMenu(mnForm.getCurrSearchField(), mnForm.getCurrSearchValue(), mnForm.getCurrPage(), Constant.PAGE_SIZE));
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(mnForm.getPageCount(), mnForm.getCurrPage()));
 
 		request.setAttribute("pageCount", mnForm.getPageCount());

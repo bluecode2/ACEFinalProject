@@ -14,7 +14,7 @@ public class GeneralParamBean {
 	private Date 	updateDate;
 	private String 	updateDateInString;
 	
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public String getGenParamId() {
 		return genParamId;

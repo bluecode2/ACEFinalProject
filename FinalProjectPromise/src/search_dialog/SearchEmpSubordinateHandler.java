@@ -50,7 +50,7 @@ public class SearchEmpSubordinateHandler extends Action {
 		}
 		else {
 			for (EmployeeBean employeeBean : arrEmp) {
-				if(arrEmp.indexOf(employeeBean) == Constant.pageSize) break;
+				if(arrEmp.indexOf(employeeBean) == Constant.PAGE_SIZE) break;
 				out.println("<tr data-dismiss=\"modal\" class=\"rowSearchSubordinate\">");
 				out.println("<td style=\"display: none\">" + employeeBean.getEmployeeId() + "</td>");
 				out.println("<td>" + employeeBean.getEmployeeCode() + "</td>");

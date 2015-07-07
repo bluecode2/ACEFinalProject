@@ -124,6 +124,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateCommentAssignTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -146,6 +147,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusAssignTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -168,6 +170,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusAssignTaskApprove", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -263,6 +266,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.startMyCurrentTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -284,6 +288,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusMyCurrentTask", m);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {
@@ -301,6 +306,7 @@ public class IndependentTaskManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusCurrentTaskToWaitingApproval", itBean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

@@ -17,7 +17,7 @@ public class UserRoleBean {
 	private String 		userRoleCode;
 	private Integer		isDeleted;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getUserRoleId() {
 		return userRoleId;

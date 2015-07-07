@@ -98,12 +98,12 @@ public class EmployeeHandler extends Action{
 
 		eForm.setListOfEmployee(eMan.getAllEmployee(
 				eForm.getCurrSearchField(), eForm.getCurrSearchValue(),
-				eForm.getCurrPage(), Constant.pageSize));
+				eForm.getCurrPage(), Constant.PAGE_SIZE));
 		rowCount = eMan.getCountEmployee(eForm.getCurrSearchField(),
 				eForm.getCurrSearchValue());
 		
 		eForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE,
 				us, request);

@@ -181,11 +181,11 @@ public class ProjectInvolvedTaskHandler extends Action {
 				projId));
 
 		tsForm.setPageCount((int) Math.ceil((double) tsForm.getListCount()
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 		
 		tsForm.setArrList(tsMan.getListProjectTaskByProjectId(tsForm
 				.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm
-				.getCurrPage(), Constant.pageSize, tsForm.getPrjBean()
+				.getCurrPage(), Constant.PAGE_SIZE, tsForm.getPrjBean()
 				.getProjectId()));
 		
 		request.setAttribute("pageNavigator", CommonFunction
@@ -206,11 +206,11 @@ public class ProjectInvolvedTaskHandler extends Action {
 				projId,us.getEmployeeId()));
 
 		tsForm.setPageCount2((int) Math.ceil((double) tsForm.getListCount2()
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		tsForm.setArrListProp(pProjtaskMan.getAllPropProjTask(
 				tsForm.getCurrSearchField2(), tsForm.getCurrSearchValue2(),
-				tsForm.getCurrPage2(), Constant.pageSize, projId,us.getEmployeeId()));
+				tsForm.getCurrPage2(), Constant.PAGE_SIZE, projId,us.getEmployeeId()));
 
 		request.setAttribute("pageNavigator2", CommonFunction
 				.createPagingNavigatorList(tsForm.getPageCount2(),

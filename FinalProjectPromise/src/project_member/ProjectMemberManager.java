@@ -62,6 +62,7 @@ public class ProjectMemberManager {
 			bean.setMemberId(getNewMemberId());   
 			this.ibatis.insert("projectMember.insertProjectMember", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,6 +92,7 @@ public class ProjectMemberManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("projectMember.delProjMember", memberId);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

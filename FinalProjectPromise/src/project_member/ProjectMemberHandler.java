@@ -82,10 +82,10 @@ public class ProjectMemberHandler extends Action {
 		rowCount = pMemberMan.getCountProjectMember(projId);
 		
 		pMemberForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
-				pMemberForm.getCurrPage(), Constant.pageSize));
+				pMemberForm.getCurrPage(), Constant.PAGE_SIZE));
 		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
 		request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
 

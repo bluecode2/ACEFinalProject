@@ -153,12 +153,13 @@ public class UserHandler extends Action {
 
 		rowCount = uMan.getCountUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue());
+		
 		uForm.setPageCount((int) Math.ceil((double) rowCount
-				/ (double) Constant.pageSize));
+				/ (double) Constant.PAGE_SIZE));
 
 		uForm.setListOfUser(uMan.getAllUser(uForm.getCurrSearchField(),
 				uForm.getCurrSearchValue(), uForm.getCurrPage(),
-				Constant.pageSize));
+				Constant.PAGE_SIZE));
 	
 
 		request.setAttribute("pageNavigator", CommonFunction

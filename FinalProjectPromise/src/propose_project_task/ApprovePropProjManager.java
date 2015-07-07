@@ -86,6 +86,7 @@ public class ApprovePropProjManager {
 			this.ibatis.startTransaction();
 			this.ibatis.insert("appPropProjTask.insertToAssignTaskMap", bean);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				try {
@@ -102,6 +103,7 @@ public class ApprovePropProjManager {
 			this.ibatis.startTransaction();
 			this.ibatis.update("appPropProjTask.approveTask", pPropProjTask);
 			this.ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (Exception e) {
 			// TODO: handle exception
 			try {
@@ -118,6 +120,7 @@ public class ApprovePropProjManager {
 			ibatis.startTransaction();
 			ibatis.update("appPropProjTask.declineTask", bean);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 				try {

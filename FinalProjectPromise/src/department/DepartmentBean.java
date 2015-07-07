@@ -22,7 +22,7 @@ public class DepartmentBean {
 	private String deptHeadName;
 	private String deptHeadDisplay;
 
-	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 
 	public Integer getDeptId() {
 		return deptId;

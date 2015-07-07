@@ -69,9 +69,9 @@ public class GeneralCodeHandler extends Action {
 		gcForm.setSearchValue(gcForm.getCurrSearchValue());
 		
 		gcForm.setListCount(gcMan.getCountGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue()));
-		gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount() / (double) Constant.pageSize));
+		gcForm.setPageCount((int) Math.ceil((double) gcForm.getListCount() / (double) Constant.PAGE_SIZE));
 		
-		gcForm.setArrList(gcMan.getAllGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue(), gcForm.getCurrPage(), Constant.pageSize));
+		gcForm.setArrList(gcMan.getAllGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue(), gcForm.getCurrPage(), Constant.PAGE_SIZE));
 
 		request.setAttribute("pageTitle", "General Code");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getCurrPage()));

@@ -78,6 +78,7 @@ public class DepartmentManager {
 			ibatis.startTransaction();
 			ibatis.update("department.updateDepartment", dept);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,6 +100,7 @@ public class DepartmentManager {
 			ibatis.startTransaction();
 			ibatis.update("department.deleteDepartment", map);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +119,7 @@ public class DepartmentManager {
 			dept.setDeptId(getNewDeptId());
 			ibatis.insert("department.insertDepartment", dept);
 			ibatis.commitTransaction();
+			this.ibatis.endTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			try {

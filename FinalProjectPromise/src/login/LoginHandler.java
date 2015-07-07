@@ -44,8 +44,7 @@ public class LoginHandler extends Action {
 						}
 							
 					} else {
-						if (lMan.getLoginValidasi(lForm.getUsername(),
-								lForm.getPassword()) != null) {
+						if (lMan.getLoginValidasi(lForm.getUsername(), lForm.getPassword()) != null) {
 							lForm.setUserBean(lMan.getLoginValidasi(
 									lForm.getUsername(), lForm.getPassword()));
 							if (lForm.getUserBean().getIsActive() == 1) {

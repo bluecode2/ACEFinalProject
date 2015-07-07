@@ -91,13 +91,13 @@ public class ProjectRoleHandler extends Action {
 		int rowCount;
 		prf.setArrList(prm.getAllProjectRole(
 				prf.getCurrSearchField(), prf.getCurrSearchValue(),
-				prf.getCurrPage(), Constant.pageSize));
+				prf.getCurrPage(), Constant.PAGE_SIZE));
 		
 		
 		rowCount = prm.getCountGeneralHoliday(prf.getCurrSearchField(),
 				prf.getCurrSearchValue());
 		
-		prf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.pageSize));
+		prf.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));
 		
 		request.setAttribute("pageTitle", "Project Role List");
 		
