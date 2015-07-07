@@ -26,7 +26,7 @@ public class AuditTrailBean {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	SimpleDateFormat sdf = new SimpleDateFormat(Constant.StringFormat.dateFormat);
+	SimpleDateFormat sdf = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
 	
 	public Integer getAuditTrailId() {
 		return auditTrailId;
