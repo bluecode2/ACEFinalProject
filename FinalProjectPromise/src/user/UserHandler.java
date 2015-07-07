@@ -25,7 +25,6 @@ public class UserHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		// return super.execute(mapping, form, request, response);
 		UserForm uForm = (UserForm) form;
 		UserManager uMan = new UserManager();
 
@@ -37,7 +36,6 @@ public class UserHandler extends Action {
 
 		HttpSession session = request.getSession();
 		UserBean us = (UserBean) session.getAttribute("currUser");
-		// CommonFunction.createAllowedMenu(us, request);
 
 		if ("add".equalsIgnoreCase(uForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.USER_ENTRY, us,

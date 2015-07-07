@@ -25,8 +25,6 @@ public class HomeHandler extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
-		//MenuManager menuMan = new MenuManager();
 		HomeForm hmForm = (HomeForm) form;
 		
 		HttpSession session = request.getSession();	

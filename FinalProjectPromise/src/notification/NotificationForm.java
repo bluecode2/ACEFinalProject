@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.struts.action.ActionForm;
 
 public class NotificationForm extends ActionForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String task;
 	private Integer selectedId;
 	private NotificationBean bean;

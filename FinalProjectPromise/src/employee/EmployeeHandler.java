@@ -29,8 +29,6 @@ public class EmployeeHandler extends Action{
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 		UserManager usMan = new UserManager();
-
-		//CommonFunction.createAllowedMenu(us, request);
 		
 		if (eForm.getTask().equals("add")) {
 			eForm.setIsAdd(true);

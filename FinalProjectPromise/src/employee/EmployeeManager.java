@@ -1,6 +1,5 @@
 package employee;
 
-import general.GeneralCodeBean;
 import ibatis.IbatisHelper;
 
 import java.sql.SQLException;

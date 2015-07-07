@@ -4,7 +4,6 @@ public class UserRoleDepartmentBean {
 	private Integer userRoleId;
 	private Integer deptId;
 	
-	
 	public Integer getUserRoleId() {
 		return userRoleId;
 	}
@@ -17,6 +16,4 @@ public class UserRoleDepartmentBean {
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
 	}
-	
-	
 }

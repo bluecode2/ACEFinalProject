@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-import department.DepartmentBean;
-
 public class EmployeeForm extends ActionForm{
 
 	/**

@@ -74,7 +74,6 @@ public class NotificationBean {
 		try {
 			date = df.parse(notificationDateInString);
 		} catch (ParseException e) {
-			e.printStackTrace();
 			this.notificationDateInString = "";
 			date = null;
 		}
@@ -90,7 +89,6 @@ public class NotificationBean {
 		try {
 			date = df.parse(readDateInString);
 		} catch (ParseException e) {
-			e.printStackTrace();
 			this.readDateInString = "";
 			date = null;
 		}

@@ -1,7 +1,5 @@
 package independent_task;
 
-
-
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,7 +71,5 @@ public class MyCurrentTaskHandler extends Action {
 		request.setAttribute("rowCount", tsForm.getListCount());
 
 		return mapping.findForward("myCurrentTaskList");
-		
-		
 	}
 }

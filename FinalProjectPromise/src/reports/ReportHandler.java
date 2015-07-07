@@ -50,10 +50,7 @@ public class ReportHandler extends Action {
 		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp("", ""));
 		request.setAttribute("lstSubEmployeeId", arrEmp.subList(0,maxIdx));
 		request.setAttribute("lstProject", pMan.getAllProjectForPopUp());
-		
-		
-		
-		
+
 		if("selectReport".equals(rForm.getTask())){
 			ReportBean bean  = rMan.getReportById(rForm.getSelectedId());
 			PrintWriter out = response.getWriter();
@@ -86,7 +83,6 @@ public class ReportHandler extends Action {
 		
 		request.setAttribute("currentEmpId", us.getEmployeeId());
 		request.setAttribute("currentEmpName", us.getEmployeeName());
-		
 		
 		return mapping.findForward("list");
 	}

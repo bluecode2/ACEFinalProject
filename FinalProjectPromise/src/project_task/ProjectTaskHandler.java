@@ -134,12 +134,6 @@ public class ProjectTaskHandler extends Action {
 						empMan.getAllEmployee("", "", 1, Constant.PAGE_SIZE));
 				return mapping.findForward("entry");
 			} else if (tsForm.getSelectedEdit() == 1) {
-				/*
-				 * tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE)
-				 * ; tsMan.editStatusProjectTask(tsForm.getSelectedId(),
-				 * us.getUserId(), tsForm.getStatusTask());
-				 */
-
 				pTaskBean = tsMan.getTaskById(tsForm.getSelectedId());
 				pTaskBean.setActEndDate(now);
 				pTaskBean
@@ -151,7 +145,6 @@ public class ProjectTaskHandler extends Action {
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 						.getTkBean().getAssignedTo(), tsForm.getTkBean()
 						.getTaskId());
-
 			}
 		} else if ("listActivity".equals(tsForm.getTask())) {
 			int selId = tsForm.getSelectedId();

@@ -29,24 +29,17 @@ public class SearchEmpSubordinateHandler extends Action {
 		
 		SearchEmpAssignedToForm seatForm = (SearchEmpAssignedToForm) form;
 		
-		
 		Integer spvId = seatForm.getSpvId();
 		String searchField = seatForm.getSearchField();
 		String searchValue = seatForm.getSearchValue();
 		
-		//List<EmployeeBean> arrEmp = eman.getEmpForAssignTask(spvId, searchField, searchValue);
-		
 		List<EmployeeBean> arrEmp = new ArrayList<EmployeeBean>();
 		generateSubordinateList(arrEmp,spvId,searchField,searchValue);
 		
-		
-		
-		//System.out.println(arrEmp.size());
 		if (arrEmp.size() == 0) {
 			out.println("<tr>");
 			out.println("<td colspan=\"3\" align=\"center\">No Data Found</td>");	
 			out.println("</tr>");
-			
 		}
 		else {
 			for (EmployeeBean employeeBean : arrEmp) {

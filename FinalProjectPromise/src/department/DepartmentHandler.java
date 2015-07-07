@@ -94,7 +94,7 @@ public class DepartmentHandler extends Action {
 				dForm.getCurrPage(), Constant.PAGE_SIZE));
 		rowCount = dMan.getCountDepartment(dForm.getCurrSearchField(),
 				dForm.getCurrSearchValue());
-		//
+		
 		dForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.PAGE_SIZE));
 

@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import proposed_task.ProposedTaskBean;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class IndependentTaskManager {
@@ -198,32 +196,6 @@ public class IndependentTaskManager {
 		int tmpNewId = (Integer) this.ibatis.queryForObject("independentTask.getNewTaskId", null);
 		return tmpNewId;
 	}
-	
-/*	public void createNewAssignTaskMap(ProposedTaskBean bean) {
-		Map map = new HashMap();
-		map.put("taskId", bean.getTaskId());
-		map.put("taskName", bean.getPropTaskName());
-		map.put("taskDesc", bean.getPropTaskDesc());
-		map.put("assignedBy", bean.getPropTo());
-		map.put("assignedTo", bean.getPropBy());
-		map.put("estStartDateInString", bean.getEstStartDateInString());
-		map.put("estEndDateInString", bean.getEstEndDateInString());
-		map.put("createdBy", bean.getCreatedBy());
-		
-		try {
-			this.ibatis.startTransaction();
-			this.ibatis.insert("independentTask.insertToAssignTaskMap", map);
-			this.ibatis.commitTransaction();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			try {
-				ibatis.endTransaction();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-	}*/
 
 	public List<IndependentTaskBean> getListMyCurrentTask(String col, String input, int pageNum, int pageSize, int empId) {
 		int begin = (pageNum - 1) * pageSize;
@@ -299,9 +271,8 @@ public class IndependentTaskManager {
 			}
 		}
 	}
+	
 	public void updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
-
-		
 		try {
 			this.ibatis.startTransaction();
 			this.ibatis.update("independentTask.updateStatusCurrentTaskToWaitingApproval", itBean);
@@ -316,7 +287,5 @@ public class IndependentTaskManager {
 				e1.printStackTrace();
 			}
 		}
-		
-		
 	}
 }
