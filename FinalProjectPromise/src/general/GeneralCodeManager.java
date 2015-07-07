@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class GeneralCodeManager {
 			Integer pageNum, Integer pageSize){
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		List<GeneralCodeBean> arr = new ArrayList<GeneralCodeBean>();
+		List<GeneralCodeBean> arr = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -111,7 +112,7 @@ public class GeneralCodeManager {
 	}
 	
 	public List<GeneralCodeBean> getGeneralCodeByParentId(String parentId) {
-		List<GeneralCodeBean> arrList = new ArrayList<GeneralCodeBean>();
+		List<GeneralCodeBean> arrList = Collections.EMPTY_LIST;
 		
 		try {
 			arrList = this.ibatis.queryForList("genCode.selectGeneralCodeByParentId", parentId);

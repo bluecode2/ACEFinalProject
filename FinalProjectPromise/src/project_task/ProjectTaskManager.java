@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class ProjectTaskManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectTaskBean> arr = new ArrayList<ProjectTaskBean>();
+		List<ProjectTaskBean> arr = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("searchField", col);

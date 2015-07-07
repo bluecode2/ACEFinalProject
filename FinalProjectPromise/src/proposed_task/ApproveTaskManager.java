@@ -2,6 +2,7 @@ package proposed_task;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class ApproveTaskManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProposedTaskBean> arr = new ArrayList<ProposedTaskBean>();
+		List<ProposedTaskBean> arr = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -105,7 +106,7 @@ public class ApproveTaskManager {
 	}
 
 	public List<EmployeeBean> getEmployeeBySpvId(Integer empId){
-		List<EmployeeBean> empBean = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> empBean = Collections.EMPTY_LIST;
 		
 		try {
 			empBean = this.ibatis.queryForList(

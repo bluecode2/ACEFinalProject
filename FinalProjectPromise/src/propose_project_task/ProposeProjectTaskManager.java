@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class ProposeProjectTaskManager {
 	
 	public List<ProposeProjectTaskBean> getAllPropProjTask(String col,
 			String input, Integer pageNum, Integer pageSize, Integer projId){
-			List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
+			List<ProposeProjectTaskBean> list = Collections.EMPTY_LIST;
 			
 			int begin = (pageNum - 1) * pageSize;
 			int end = pageNum * pageSize;
@@ -44,7 +45,7 @@ public class ProposeProjectTaskManager {
 	
 	public List<ProposeProjectTaskBean> getAllPropProjTask(String col,
 			String input, Integer pageNum, Integer pageSize, Integer projId,Integer proposedById){
-			List<ProposeProjectTaskBean> list = new ArrayList<ProposeProjectTaskBean>();
+			List<ProposeProjectTaskBean> list = Collections.EMPTY_LIST;
 			
 			int begin = (pageNum - 1) * pageSize;
 			int end = pageNum * pageSize;
@@ -127,7 +128,6 @@ public class ProposeProjectTaskManager {
 			e.printStackTrace();
 		}
 
-		
 		return pProjTask;
 	}
 	

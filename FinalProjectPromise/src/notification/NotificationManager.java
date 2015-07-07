@@ -6,6 +6,7 @@ import independent_task.IndependentTaskManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import proposed_task.ProposedTaskBean;
 import proposed_task.ProposedTaskManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+
 import common.Constant;
 import department.DepartmentBean;
 import department.DepartmentManager;
@@ -34,7 +36,7 @@ public class NotificationManager {
 	}
 	
 	public List<NotificationBean> getListAllNotificationByEmployee(Integer employeeId,Integer pageNum, Integer pageSize){
-		List<NotificationBean> list = new ArrayList<NotificationBean>();
+		List<NotificationBean> list = Collections.EMPTY_LIST;
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 		
@@ -55,7 +57,7 @@ public class NotificationManager {
 	}
 	
 	public List<NotificationBean> getListUnreadNotificationByEmployee(Integer employeeId){
-		List<NotificationBean> list = new ArrayList<NotificationBean>();
+		List<NotificationBean> list = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("employeeId", employeeId);

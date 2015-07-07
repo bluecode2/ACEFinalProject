@@ -4,6 +4,8 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +26,12 @@ public class ProjectMemberManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
+		List<ProjectMemberBean> pmbList = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("projId", projId);
 		map.put("begin", begin);
 		map.put("end", end);
-		
 		
 		try {
 			pmbList = this.ibatis.queryForList("projectMember.getAllProjMember", map);
@@ -70,7 +71,7 @@ public class ProjectMemberManager {
 	}
 	
 	public List<ProjectMemberBean> getProjectMemberToEvaluate(Integer projId) {
-		List<ProjectMemberBean> arrMember = new ArrayList<ProjectMemberBean>();
+		List<ProjectMemberBean> arrMember = Collections.EMPTY_LIST;
 		
 		try {
 			arrMember = this.ibatis.queryForList("projectMember.getAllMemberFromProject", projId);
@@ -99,7 +100,7 @@ public class ProjectMemberManager {
 		Map map = new HashMap();
 		map.put("projId", projId);
 		
-		List<ProjectMemberBean> pmbList = new ArrayList<ProjectMemberBean>();
+		List<ProjectMemberBean> pmbList = Collections.EMPTY_LIST;
 		try {
 			pmbList = this.ibatis.queryForList("projectMember.getPopUpProjMember", map);
 		} catch (SQLException e) {

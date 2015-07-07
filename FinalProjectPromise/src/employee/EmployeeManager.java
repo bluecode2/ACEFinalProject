@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class EmployeeManager {
 			SQLException {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -36,7 +37,7 @@ public class EmployeeManager {
 	}
 	
 	public List<EmployeeBean> getAllEmployeeForPopUp()  {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>() ;
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		try {
 			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", null);
 		} catch (SQLException e) {
@@ -47,7 +48,7 @@ public class EmployeeManager {
 	}
 	
 	public List<EmployeeBean> getAllEmployeeForPM(String searchField,String searchValue,Integer deptId) {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("searchField", searchField);
 		map.put("searchValue", searchValue);
@@ -63,7 +64,7 @@ public class EmployeeManager {
 	
 	public List<EmployeeBean> getAllEmployeeForDeptHead(Integer deptId,String searchField, String searchValue)
 			throws ClassNotFoundException, SQLException {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("deptId", deptId);
 		map.put("searchField",searchField);
@@ -80,7 +81,7 @@ public class EmployeeManager {
 
 	public List<EmployeeBean> getListEmployeeForSupervisor(Integer deptId, Integer rankLevel, String col, String input)
 			throws ClassNotFoundException, SQLException {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("deptId", deptId);
 		map.put("rankLevel", rankLevel);
@@ -173,7 +174,7 @@ public class EmployeeManager {
 	}
 	
 	public List<EmployeeBean> getListEmployeeForPersonalHoliday() {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();		
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;	
 		try {
 			arr = this.ibatis.queryForList("employee.getEmployeeForPersonalHoliday", null);
 		} catch (SQLException e) {
@@ -184,7 +185,7 @@ public class EmployeeManager {
 	}
 	
 	public List<EmployeeBean> getEmpForAssignTask(int spvId, String searchField,String searchValue) {
-		List<EmployeeBean> arr = new ArrayList<EmployeeBean>();
+		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		Map m = new HashMap();
 		m.put("spvId",spvId);
 		m.put("searchValue", searchValue);

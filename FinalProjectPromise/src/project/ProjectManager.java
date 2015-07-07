@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		List<ProjectBean> listProject = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -58,8 +59,7 @@ public class ProjectManager {
 	
 	public List<ProjectBean> getAllProjectForPopUp() throws SQLException {
 		
-		
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		List<ProjectBean> listProject = Collections.EMPTY_LIST;
 		
 			listProject = this.ibatis.queryForList("project.getAllProjectForPopUp", null);
 		
@@ -71,7 +71,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		List<ProjectBean> listProject = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("begin", begin);
 		map.put("end", end);
@@ -95,7 +95,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		List<ProjectBean> listProject = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("checkField", checkField);
 		map.put("searchValue2", inputField);
@@ -202,7 +202,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> listProject = new ArrayList<ProjectBean>();
+		List<ProjectBean> listProject = Collections.EMPTY_LIST;
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
@@ -234,7 +234,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> arr  = new ArrayList<ProjectBean>();
+		List<ProjectBean> arr  = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("searchField", col);
@@ -322,7 +322,7 @@ public class ProjectManager {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
 
-		List<ProjectBean> arr  = new ArrayList<ProjectBean>();
+		List<ProjectBean> arr  = Collections.EMPTY_LIST;
 		
 		Map map = new HashMap();
 		map.put("searchField", col);

@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class DepartmentManager {
 		m.put("searchValue", input);
 		m.put("searchField", col);
 		
-		List<DepartmentBean> arr = new ArrayList<DepartmentBean>();
+		List<DepartmentBean> arr = Collections.EMPTY_LIST;
 
 		try {
 			arr = this.ibatis.queryForList("department.getDepartmentForSearchDialog", m);

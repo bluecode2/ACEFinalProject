@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ private SqlMapClient ibatis;
 	
 	public List<UserRoleDepartmentBean> getUserRoleDepartmentByUserRole(Integer roleId) {
 		
-		List<UserRoleDepartmentBean> arrList = new ArrayList<UserRoleDepartmentBean>();
+		List<UserRoleDepartmentBean> arrList = Collections.EMPTY_LIST;
 		
 		try {
 			arrList = this.ibatis.queryForList("userRoleDepartment.getUserRoleDepartmentByUserRole", roleId);

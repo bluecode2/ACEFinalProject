@@ -2,6 +2,8 @@ package activity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.jsp.tagext.TryCatchFinally;
@@ -21,7 +23,7 @@ public class ActivityManager {
 
 	public List<ActivityBean> getActivityByTaskId(int id) {
 		
-		List<ActivityBean> arr = new ArrayList<ActivityBean>();
+		List<ActivityBean> arr = Collections.EMPTY_LIST;
 		try {
 			arr = this.ibatis.queryForList("activity.getActivityByTaskId", id);
 		} catch (SQLException e) {
