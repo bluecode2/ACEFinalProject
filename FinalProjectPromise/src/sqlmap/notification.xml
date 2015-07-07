@@ -3,26 +3,44 @@
 
 <sqlMap namespace="notification">
 	<select id="getAllNotificationByEmployee" resultClass="notification.NotificationBean" parameterClass="java.util.Map">
-		SELECT * FROM (
-		SELECT n.*, ROWNUM rnum from (
 		SELECT
-			notification_id as notificationId,
-			employee_id as employeeId,
-			notification_desc as notificationDesc,
-			TO_CHAR(notification_date,'yyyy-MM-dd HH24:mi') as notificationDateInString,
-			is_read as isRead,
-			TO_CHAR(read_date,'yyyy-MM-dd HH24:mi') as readDateInString,
-			notification_url as notificationUrl,
-			session_parameter as sessionParameter
-		FROM notifications
-		WHERE employee_id = #employeeId#
+		notificationId,
+		employeeId,
+		notificationDesc,
+		notificationDateInString,
+		isRead,
+		readDateInString,
+		notificationUrl,
+		sessionParameter
+		FROM (
+			SELECT  
+			n.notificationId as notificationId,
+			n.employeeId as employeeId,
+			n.notificationDesc as notificationDesc,
+			n.notificationDateInString as notificationDateInString,
+			n.isRead as isRead,
+			n.readDateInString as readDateInString,
+			n.notificationUrl as notificationUrl,
+			n.sessionParameter as sessionParameter,
+			ROWNUM rnum from (
+				SELECT
+					notification_id as notificationId,
+					employee_id as employeeId,
+					notification_desc as notificationDesc,
+					TO_CHAR(notification_date,'yyyy-MM-dd HH24:mi') as notificationDateInString,
+					is_read as isRead,
+					TO_CHAR(read_date,'yyyy-MM-dd HH24:mi') as readDateInString,
+					notification_url as notificationUrl,
+					session_parameter as sessionParameter
+				FROM notifications
+				WHERE employee_id = #employeeId#
 		<dynamic prepend="AND">
 			<isNotEmpty property="isRead">
 				is_read = #isRead#
 			</isNotEmpty>
 		</dynamic>
 		ORDER BY notification_id DESC
-		) n where ROWNUM &lt;= #end#) WHERE rnum &gt;
+		) n where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]>
 		#begin#
 		
 	</select>

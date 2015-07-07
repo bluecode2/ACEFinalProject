@@ -4,22 +4,46 @@
 <sqlMap namespace="generalHoliday">
 	<select id="getGeneralHoliday" resultClass="holiday.GeneralHolidayBean"
 		parameterClass="java.util.Map">
-		select * from(
-		select hol.* , ROWNUM rnum from(
-		SELECT
-		GEN_HOLIDAY_ID as genHolidayId,
-		GEN_HOLIDAY_NAME as genHolidayName,
-		TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
-		IS_GENERATED as isGenerated,
-		created_by as createdBy,
-		updated_by as updatedBy,
-		TO_CHAR(create_date,'yyyy-MM-dd') as createDateInString,
-		TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString,
-		IS_DELETED as isDeleted,
-		HOLIDAY_TYPE			as holidayType,
-		fGetGeneralCodeCaption(HOLIDAY_TYPE) as holidayTypeName
-		FROM GENERAL_HOLIDAY
-		where IS_DELETED=0
+		select 
+		genHolidayId,
+		genHolidayName,
+		genHolidayDateInString,
+		isGenerated,
+		createdBy,
+		updatedBy,
+		createDateInString,
+		updateDateInString,
+		isDeleted,
+		holidayType,
+		holidayTypeName
+		from(
+				select
+				hol.genHolidayId as genHolidayId,
+				hol.genHolidayName as genHolidayName,
+				hol.genHolidayDateInString as genHolidayDateInString,
+				hol.isGenerated as isGenerated,
+				hol.createdBy as createdBy,
+				hol.updatedBy as updatedBy,
+				hol.createDateInString as createDateInString,
+				hol.updateDateInString as updateDateInString,
+				hol.isDeleted as isDeleted,
+				hol.holidayType			as holidayType,
+				hol.holidayTypeName as holidayTypeName,
+				ROWNUM rnum from(
+					SELECT
+					GEN_HOLIDAY_ID as genHolidayId,
+					GEN_HOLIDAY_NAME as genHolidayName,
+					TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
+					IS_GENERATED as isGenerated,
+					created_by as createdBy,
+					updated_by as updatedBy,
+					TO_CHAR(create_date,'yyyy-MM-dd') as createDateInString,
+					TO_CHAR(update_date,'yyyy-MM-dd') as updateDateInString,
+					IS_DELETED as isDeleted,
+					HOLIDAY_TYPE			as holidayType,
+					fGetGeneralCodeCaption(HOLIDAY_TYPE) as holidayTypeName
+					FROM GENERAL_HOLIDAY
+					where IS_DELETED=0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="byDate">
 				<isNotEqual property="searchValue" compareValue="">
@@ -29,8 +53,8 @@
 			</isEqual>
 		</dynamic>
 		ORDER BY GEN_HOLIDAY_DATE ) hol
-		where ROWNUM &lt;= #end#)
-		where rnum &gt;
+		where ROWNUM <![CDATA[<=]]> #end#)
+		where rnum <![CDATA[>=]]>
 		#begin#
 	</select>
 

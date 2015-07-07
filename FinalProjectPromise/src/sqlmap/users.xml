@@ -44,8 +44,36 @@
 
 	<select id="getAllUser" parameterClass="java.util.Map"
 		resultClass="user.UserBean">
-		SELECT * from (
-		    SELECT us.*, ROWNUM rnum from(
+		SELECT 
+		userId,
+		userRoleId,
+		employeeId,
+		createdBy,
+		updatedBy,
+		username,
+		passwordUser,
+		isActive,
+		isActiveDirectory,
+		createDateInString,
+		updateDateInString,
+		employeeName,
+		userRoleName
+		from (
+		    SELECT 
+			us.userId         AS      userId,
+		    us.userRoleId    AS      userRoleId,
+		    us.employeeId     AS      employeeId,
+		    us.createdBy      AS      createdBy,
+		    us.updatedBy      AS      updatedBy,
+		    us.username        AS      username,
+		    us.passwordUser   AS      passwordUser,
+		    us.isActive       AS      isActive,
+		    us.isActiveDirectory       AS      isActiveDirectory,
+		    us.createDateInString AS createDateInString,
+		    us.updateDateInString AS updateDateInString,
+		    us.employeeName   AS      employeeName,
+		    us.userRoleName  AS      userRoleName,
+			ROWNUM rnum from(
 		        SELECT
 		        USER_ID         AS      userId,
 		        USER_ROLE_ID    AS      userRoleId,
@@ -73,8 +101,8 @@
 			</isEqual>
 		</dynamic>
       	 		order by username) us 
-	       WHERE ROWNUM &lt; = #end#)
-        WHERE rnum &gt; #begin#
+	       WHERE ROWNUM <![CDATA[<=]]> #end#)
+        WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 	
 	<select id="checkLogin" resultClass="user.UserBean" parameterClass="java.util.Map">

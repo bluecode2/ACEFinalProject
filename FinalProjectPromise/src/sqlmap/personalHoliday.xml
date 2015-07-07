@@ -3,27 +3,57 @@
 
 <sqlMap namespace="personalHoliday">
 	<select id="getPersonalHoliday" resultClass="holiday.PersonalHolidayBean" parameterClass="java.util.Map">
-		select * from(
-		select hol.* , ROWNUM rnum from(
-		SELECT 
-		P.HOLIDAY_ID			as holidayId,
-		P.EMPLOYEE_ID			as employeeId,
-		P.CREATED_BY			as createdBy,
-		P.UPDATED_BY			as updatedBy,
-		P.HOLIDAY_DESC			as holidayDesc,
-		TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd')	as holidayDateInString,
-		P.IS_EXCHANGE_DAY		as isExchangeDay,
-		P.CREATE_DATE			as createDateInString,
-		P.UPDATE_DATE			as updateDateInString,
-		E.EMPLOYEE_CODE			as employeeCode,
-		E.EMPLOYEE_NAME			as employeeName,
-		IS_DELETED 				as isDeleted,
-		P.HOLIDAY_TYPE			as holidayType,
-		fGetGeneralCodeCaption(P.HOLIDAY_TYPE) as holidayTypeName
-		FROM PERSONAL_HOLIDAY  P
-		JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
-		where HOLIDAY_DATE >= SYSDATE
-		AND IS_DELETED = 0
+		select 
+		holidayId,
+		employeeId,
+		createdBy,
+		updatedBy,
+		holidayDesc,
+		holidayDateInString,
+		isExchangeDay,
+		createDateInString,
+		updateDateInString,
+		employeeCode,
+		employeeName,
+		isDeleted,
+		holidayType,
+		holidayTypeName
+		from(
+				select
+				hol.holidayId			as holidayId,
+				hol.employeeId			as employeeId,
+				hol.createdBy			as createdBy,
+				hol.updatedBy			as updatedBy,
+				hol.holidayDesc			as holidayDesc,
+				hol.holidayDateInString	as holidayDateInString,
+				hol.isExchangeDay		as isExchangeDay,
+				hol.createDateInString	as createDateInString,
+				hol.updateDateInString	as updateDateInString,
+				hol.employeeCode		as employeeCode,
+				hol.employeeName		as employeeName,
+				hol.isDeleted 			as isDeleted,
+				hol.holidayType			as holidayType,
+				hol.holidayTypeName as holidayTypeName,
+				ROWNUM rnum from(
+					SELECT 
+					P.HOLIDAY_ID			as holidayId,
+					P.EMPLOYEE_ID			as employeeId,
+					P.CREATED_BY			as createdBy,
+					P.UPDATED_BY			as updatedBy,
+					P.HOLIDAY_DESC			as holidayDesc,
+					TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd')	as holidayDateInString,
+					P.IS_EXCHANGE_DAY		as isExchangeDay,
+					P.CREATE_DATE			as createDateInString,
+					P.UPDATE_DATE			as updateDateInString,
+					E.EMPLOYEE_CODE			as employeeCode,
+					E.EMPLOYEE_NAME			as employeeName,
+					IS_DELETED 				as isDeleted,
+					P.HOLIDAY_TYPE			as holidayType,
+					fGetGeneralCodeCaption(P.HOLIDAY_TYPE) as holidayTypeName
+					FROM PERSONAL_HOLIDAY  P
+					JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
+					where HOLIDAY_DATE >= SYSDATE
+					AND IS_DELETED = 0
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="holidayDesc">
 				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -35,8 +65,8 @@
 			</isEqual>
 		</dynamic>	
 		ORDER BY HOLIDAY_ID) hol
-		where ROWNUM &lt;= #end#)
-		where rnum &gt; #begin#
+		where ROWNUM <![CDATA[<=]]> #end#)
+		where rnum <![CDATA[>=]]> #begin#
 	</select>
 	
 	<select id="getPersonalHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.PersonalHolidayBean">

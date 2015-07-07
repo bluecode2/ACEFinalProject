@@ -164,25 +164,57 @@
 
 	<select id="selectListMenu" resultClass="general.MenuBean"
 		parameterClass="java.util.Map">
-		select * from(
-		select m.* , ROWNUM rnum from (SELECT
-		MENU_ID 			as menuId,
-		UPDATED_BY 			as updatedBy,
-		CREATED_BY 			as createdBy,
-		MENU_CODE 			as menuCode,
-		MENU_CAPTION 		as menuCaption,
-		PARENT_ID 			as parentId,
-		MENU_CRUD 			as menuCrud,
-		MENU_INDEX 			as menuIndex,
-		MENU_URL 			as menuUrl,
-		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
-		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
-		IS_PARENT 			as isParent,
-		PARENT_NAME			as parentName,
-		created_by_name 	as createdByName,
-		updated_by_name		as updatedByName
-		FROM vmenu
-		where 1=1
+		select
+		menuId,
+		updatedBy,
+		createdBy,
+		menuCode,
+		menuCaption,
+		parentId,
+		menuCrud,
+		menuIndex,
+		menuUrl,
+		createDateInString ,
+		updateDateInString,
+		isParent,
+		parentName,
+		createdByName,
+		updatedByName
+		from(
+				select  
+				m.menuId 			as menuId,
+				m.updatedBy 			as updatedBy,
+				m.createdBy 			as createdBy,
+				m.menuCode 			as menuCode,
+				m.menuCaption 		as menuCaption,
+				m.parentId 			as parentId,
+				m.menuCrud 			as menuCrud,
+				m.menuIndex 			as menuIndex,
+				m.menuUrl 			as menuUrl,
+				m.createDateInString as createDateInString ,
+				m.updateDateInString as updateDateInString,
+				m.isParent 			as isParent,
+				m.parentName			as parentName,
+				m.createdByName 	as createdByName,
+				m.updatedByName		as updatedByName,
+				ROWNUM rnum from (SELECT
+					MENU_ID 			as menuId,
+					UPDATED_BY 			as updatedBy,
+					CREATED_BY 			as createdBy,
+					MENU_CODE 			as menuCode,
+					MENU_CAPTION 		as menuCaption,
+					PARENT_ID 			as parentId,
+					MENU_CRUD 			as menuCrud,
+					MENU_INDEX 			as menuIndex,
+					MENU_URL 			as menuUrl,
+					TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString ,
+					TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
+					IS_PARENT 			as isParent,
+					PARENT_NAME			as parentName,
+					created_by_name 	as createdByName,
+					updated_by_name		as updatedByName
+					FROM vmenu
+					where 1=1
 		<dynamic prepend="AND">
 			<isEqual property="searchField" compareValue="menuCode">
 				LOWER(menu_code) LIKE LOWER( '%' || #searchValue# || '%' )
@@ -209,8 +241,8 @@
 			</isEqual>
 		</dynamic>										
 		order by menu_index) m
-		where ROWNUM &lt;= #end#)
-		where rnum &gt;
+		where ROWNUM <![CDATA[<=]]> #end#)
+		where rnum <![CDATA[>=]]>
 		#begin#
 	</select>
 

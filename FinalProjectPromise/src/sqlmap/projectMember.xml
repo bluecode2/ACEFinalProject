@@ -3,26 +3,52 @@
 
 <sqlMap namespace="projectMember">
 	<select id="getAllProjMember" resultClass="project_member.ProjectMemberBean" parameterClass="java.util.Map">
-		SELECT * from (
-			SELECT us.*, ROWNUM rnum from(
-		    	SELECT 
-		    	MEMBER_ID AS memberId,
-		    	PROJECT_ROLE_ID AS projectRoleId,
-		    	EMPLOYEE_ID AS employeeId,
-		    	PROJECT_ID AS projectId,
-		    	PROJECT_CODE AS projCode,
-		    	PROJECT_NAME AS projName,
-		    	EMPLOYEE_CODE AS empCode,
-		    	EMPLOYEE_NAME AS empName,
-		    	PROJECT_ROLE_NAME AS projRoleName,
-		    	PROJECT_ROLE_CODE AS projRoleCode,
-		    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
-		    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
-		    	FROM VPROJECTMEMBER
-				where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
-      	 		order by MEMBER_ID) us 
-	       WHERE ROWNUM &lt; = #end#)
-        WHERE rnum &gt; #begin#
+		SELECT 
+		memberId,
+		projectRoleId,
+		employeeId,
+		projectId,
+		projCode,
+		projName,
+		empCode,
+		empName,
+		projRoleName,
+		projRoleCode,
+		estStartDateInString,
+		estEndDateInString
+		from (
+				SELECT  
+				us.memberId AS memberId,
+			    us.projectRoleId AS projectRoleId,
+			    us.employeeId AS employeeId,
+			    us.projectId AS projectId,
+			    us.projCode AS projCode,
+			    us.projName AS projName,
+			    us.empCode AS empCode,
+			    us.empName AS empName,
+			    us.projRoleName AS projRoleName,
+			    us.projRoleCode AS projRoleCode,
+			    us.estStartDateInString AS estStartDateInString,
+			    us.estEndDateInString AS estEndDateInString,
+				ROWNUM rnum from(
+			    	SELECT 
+			    	MEMBER_ID AS memberId,
+			    	PROJECT_ROLE_ID AS projectRoleId,
+			    	EMPLOYEE_ID AS employeeId,
+			    	PROJECT_ID AS projectId,
+			    	PROJECT_CODE AS projCode,
+			    	PROJECT_NAME AS projName,
+			    	EMPLOYEE_CODE AS empCode,
+			    	EMPLOYEE_NAME AS empName,
+			    	PROJECT_ROLE_NAME AS projRoleName,
+			    	PROJECT_ROLE_CODE AS projRoleCode,
+			    	TO_CHAR(EST_START_DATE,'yyyy-MM-dd') AS estStartDateInString,
+			    	TO_CHAR(EST_END_DATE,'yyyy-MM-dd') AS estEndDateInString
+			    	FROM VPROJECTMEMBER
+					where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
+	      	 		order by MEMBER_ID) us 
+		       WHERE ROWNUM <![CDATA[<=]]> #end#)
+	        WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 	
 	<select id="getProjectMemberById" resultClass="project_member.ProjectMemberBean" parameterClass="java.lang.Integer">
