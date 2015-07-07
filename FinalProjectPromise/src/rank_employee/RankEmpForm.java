@@ -13,7 +13,6 @@ public class RankEmpForm extends ActionForm  {
 	private Boolean isAdd = false;
 	private List<RankEmpBean> arrList = new ArrayList<RankEmpBean>();
 	private RankEmpBean bean  = new RankEmpBean();
-	
 	private String searchValue;
 	private String searchField;
 	private String currSearchValue = "";
@@ -21,7 +20,16 @@ public class RankEmpForm extends ActionForm  {
 	private Integer currPage = 1;
 	private Integer pageCount = 1;
 	private String rankIdDisplay;
+	private Integer isComplete = 0;
 	
+	public Integer getIsComplete() {
+		return isComplete;
+	}
+
+	public void setIsComplete(Integer isComplete) {
+		this.isComplete = isComplete;
+	}
+
 	public String getTask() {
 		return task;
 	}

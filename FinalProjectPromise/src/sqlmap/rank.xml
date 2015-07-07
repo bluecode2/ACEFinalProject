@@ -14,7 +14,7 @@
 		rankCode,
 		isDeleted
 		from (
-			select r. 
+			select
 			r.rankId as rankId,
 			r.updatedBy as updatedBy,
 			r.createdBy as createdBy,
@@ -97,12 +97,6 @@
 		WHERE RANK_ID=#rankId#
 		AND IS_DELETED=0
 	</update>
-
-	<!-- <delete id="deleteEmployeeRank" parameterClass="java.lang.Integer">
-		DELETE
-		rank_emp
-		WHERE rank_id=#id#
-	</delete> -->
 
 	<select id="countEmployeeRank" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">

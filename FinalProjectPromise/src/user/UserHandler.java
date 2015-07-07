@@ -46,7 +46,7 @@ public class UserHandler extends Action {
 			uForm.setSelectedId(0);
 			uForm.setVal("0");
 			request.setAttribute("lstUserRole", uRoleMan.getUserRoleForPopUp());
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp("",""));
 			return mapping.findForward("userAdd");
 		} else if ("Edit".equalsIgnoreCase(uForm.getTask())) {
 
@@ -59,7 +59,7 @@ public class UserHandler extends Action {
 			uForm.setPasswordUser(uForm.getuBean().getPasswordUser());
 			uForm.setVal("0");
 			request.setAttribute("lstUserRole", uRoleMan.getUserRoleForPopUp());
-			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp("",""));
 			return mapping.findForward("userAdd");
 		} else if ("delete".equalsIgnoreCase(uForm.getTask())) {
 			uMan.delUsers(uForm.getSelectedId(),us.getUserId());
@@ -108,7 +108,7 @@ public class UserHandler extends Action {
 			return mapping.findForward("userAdd");
 		}
 		else if("saveChangePassword".equalsIgnoreCase(uForm.getTask())) {
-			if (uMan.getLoginValidasi(us.getUsername(), uForm.getOldPassword()) != null){
+			if (uMan.validasiLogin(us.getUsername(), uForm.getOldPassword()) == 1){
 				us.setPasswordUser(uForm.getPasswordUser());
 				uForm.getuBean().setUpdatedBy(us.getUserId());
 				uMan.changePassword(us);

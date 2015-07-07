@@ -9,6 +9,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.crystaldecisions.a.d;
+
 import common.CommonFunction;
 import common.Constant;
 import rank_employee.RankEmpManager;
@@ -22,14 +24,13 @@ public class RankEmpHandler extends Action {
 
 		RankEmpForm dForm = (RankEmpForm) form;
 		RankEmpManager dMan = new RankEmpManager();
-		HttpSession session = request.getSession();	
+		HttpSession session = request.getSession(true);	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
 
-			request.setAttribute("pageTitle", "Employee Rank Entry");
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK_ENTRY,
 					us, request);
@@ -39,7 +40,6 @@ public class RankEmpHandler extends Action {
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Employee Rank Edit");
 
 			dForm.setBean(dMan.getRankByRankId(dForm.getSelectedId()));
 			CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK_ENTRY,
@@ -49,27 +49,55 @@ public class RankEmpHandler extends Action {
 		else if (dForm.getTask().equals("delete")) {
 			dForm.getBean().setUpdatedBy(us.getUserId());
 			dForm.getBean().setRankId(dForm.getSelectedId());
-			dMan.deleteEmployeeRank(dForm.getBean());
+			
+			if(!dMan.deleteEmployeeRank(dForm.getBean())){
+				session.setAttribute("validationMessage", "Failed To Delete Employee Rank " + dForm.getBean().getRankName() + "!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Delete Employee Rank !");
+				session.setAttribute("validationType", "success");
+			}
 		}
 		else if (dForm.getTask().equals("save")) {
 			Boolean isAdd = dForm.getIsAdd();
 
 			if (isAdd) {
 				dForm.getBean().setCreatedBy(us.getUserId());
-				dMan.insertEmployeeRank(dForm.getBean());
+				if(!dMan.insertEmployeeRank(dForm.getBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New Employee Rank!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New Employee Rank!");
+					session.setAttribute("validationType", "success");
+				}
+
 			} else {
 				dForm.getBean().setUpdatedBy(us.getUserId());
-				dMan.updateEmployeeRank(dForm.getBean());
+				if(!dMan.updateEmployeeRank(dForm.getBean())){
+					session.setAttribute("validationMessage", "Failed To Edit Employee Rank " + dForm.getBean().getRankName() + "!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Employee Rank "+dForm.getBean().getRankName() +"!");
+					session.setAttribute("validationType", "success");
+				}
+				
 			}
 
 			response.sendRedirect("rankEmployee.do");
 			return null;
 		}
-
+		
 		dForm.setTask("");
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
-
+		dForm.setIsComplete(0);
 		int rowCount;
 
 		dForm.setArrList(dMan.getAllEmployeeRank(
@@ -84,7 +112,13 @@ public class RankEmpHandler extends Action {
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE_RANK,
 				us, request);
 		
-		request.setAttribute("pageTitle", "Employee Rank");
+		if(session.getAttribute("validationMessage") != null){
+				request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+				request.setAttribute("validationType", session.getAttribute("validationType").toString());
+				session.removeAttribute("validationMessage");
+				session.removeAttribute("validationType");
+		}
+		
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(dForm.getPageCount(),

@@ -36,10 +36,15 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getAllEmployeeForPopUp()  {
+	public List<EmployeeBean> getAllEmployeeForPopUp(String searchValue, String searchField)  {
+		
+		Map map = new HashMap();
+		map.put("searchField", searchField);
+		map.put("searchValue", searchValue);
+
 		List<EmployeeBean> arr = Collections.EMPTY_LIST;
 		try {
-			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", null);
+			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,8 +105,10 @@ public class EmployeeManager {
 	public EmployeeBean getEmployeeByEmpId(Integer empId) {
 		EmployeeBean empBean= null;
 		try {
+
 			empBean = (EmployeeBean) this.ibatis.queryForObject(
 					"employee.getEmployeeByEmpId", empId);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,8 +121,8 @@ public class EmployeeManager {
 		return tempNewEmp;
 	}
 
-	public void insertEmployee(EmployeeBean eb) throws ClassNotFoundException,
-			SQLException {
+	public boolean insertEmployee(EmployeeBean eb) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -125,13 +132,15 @@ public class EmployeeManager {
 			} finally {
 				this.ibatis.endTransaction();
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void updateEmployee(EmployeeBean eb) throws ClassNotFoundException,
-			SQLException {
+	public boolean updateEmployee(EmployeeBean eb) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -142,11 +151,14 @@ public class EmployeeManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void deleteEmployee(Integer empId, Integer updatedBy)
+	public boolean deleteEmployee(Integer empId, Integer updatedBy)
 			throws ClassNotFoundException {
+		boolean flag= true;
 		try {
 			try {
 				Map map = new HashMap();
@@ -161,7 +173,9 @@ public class EmployeeManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public Integer getCountEmployee(String column, String value)

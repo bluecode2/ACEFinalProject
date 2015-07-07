@@ -47,7 +47,7 @@ public class ReportHandler extends Action {
 		
 		rForm.setListOfDept(rMan.getListDeptFromUserRole(us.getUserRoleId()));
 		rForm.setListOfGenCode(genCodeMan.getGeneralCodeByParentId("PR_STAT"));
-		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp("", ""));
 		request.setAttribute("lstSubEmployeeId", arrEmp.subList(0,maxIdx));
 		request.setAttribute("lstProject", pMan.getAllProjectForPopUp());
 

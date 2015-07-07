@@ -47,8 +47,6 @@ public class EmployeeHandler extends Action{
 		else if (eForm.getTask().equals("edit")) {
 			eForm.setIsAdd(false);
 			
-			request.setAttribute("pageTitle", "Employee Edit");
-			
 			eForm.setSelectedEmp(eMan.getEmployeeByEmpId(eForm
 					.getSelectedId()));
 			
@@ -62,7 +60,15 @@ public class EmployeeHandler extends Action{
 		}
 		else if (eForm.getTask().equals("delete")) {
 			usMan.deleteUserByEmpId(eForm.getSelectedId(),us.getUserId());
-			eMan.deleteEmployee(eForm.getSelectedId(),us.getUserId());
+			if(eMan.deleteEmployee(eForm.getSelectedId(),us.getUserId())){
+				session.setAttribute("validationMessage",
+						"Succeed to Delete Employee!");
+				session.setAttribute("validationType", "success");
+			}
+			else{
+				session.setAttribute("validationMessage", "Failed to Delete Employee " + eForm.getSelectedEmp().getEmployeeName() + "!");
+				session.setAttribute("validationType", "danger");
+			}
 		}
 		else if (eForm.getTask().equals("save")) {
 			Boolean isAdd = eForm.getIsAdd();
@@ -76,12 +82,28 @@ public class EmployeeHandler extends Action{
 			if (isAdd) 
 			{
 				eForm.getSelectedEmp().setCreatedBy(us.getUserId());
-				eMan.insertEmployee(eForm.getSelectedEmp());
+				if(eMan.insertEmployee(eForm.getSelectedEmp())){
+					session.setAttribute("validationMessage",
+							"Succeed to Add New Employee!");
+					session.setAttribute("validationType", "success");
+				}
+				else{
+					session.setAttribute("validationMessage", "Failed to Add New Employee!");
+					session.setAttribute("validationType", "danger");
+				}
 			} 
 			else 
 			{
 				eForm.getSelectedEmp().setUpdatedBy(us.getUserId());
-				eMan.updateEmployee(eForm.getSelectedEmp());
+				if(eMan.updateEmployee(eForm.getSelectedEmp())){
+					session.setAttribute("validationMessage",
+							"Succeed to Add Edit Employee " + eForm.getSelectedEmp().getEmployeeName() + "!");
+					session.setAttribute("validationType", "success");
+				}
+				else{
+					session.setAttribute("validationMessage", "Failed to Edit Employee " + eForm.getSelectedEmp().getEmployeeName() + "!");
+					session.setAttribute("validationType", "danger");
+				}
 			}
 			
 			response.sendRedirect("employee.do");
@@ -105,8 +127,6 @@ public class EmployeeHandler extends Action{
 
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE,
 				us, request);
-		
-		request.setAttribute("pageTitle", "Employee");
 
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(eForm.getPageCount(),
