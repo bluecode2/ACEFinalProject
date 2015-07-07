@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.crystaldecisions.b.f;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class DepartmentManager {
@@ -74,7 +75,8 @@ public class DepartmentManager {
 		return tempDeptId;
 	}
 
-	public void updateDepartment(DepartmentBean dept) {
+	public boolean updateDepartment(DepartmentBean dept) {
+		boolean flag = true;
 		try {
 			try {
 				ibatis.startTransaction();
@@ -84,11 +86,14 @@ public class DepartmentManager {
 				this.ibatis.endTransaction();
 			}
 		} catch (Exception e) {
+			flag = false;
 			e.printStackTrace();
 		}
+		return flag;
 	}
 
-	public void deleteDepartment(int deptid,int userId) {
+	public boolean deleteDepartment(int deptid,int userId) {
+		boolean flag = true;
 		try {
 			try {
 				Map map = new HashMap();
@@ -103,10 +108,13 @@ public class DepartmentManager {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void insertDepartment(DepartmentBean dept) {
+	public boolean insertDepartment(DepartmentBean dept) {
+		boolean flag = true;
 		try {
 			try {
 				ibatis.startTransaction();
@@ -117,8 +125,10 @@ public class DepartmentManager {
 				this.ibatis.endTransaction();
 			}
 		} catch (Exception e) {
+			flag = false;
 			e.printStackTrace();
 		}
+		return flag;
 	}
 
 	public Integer getCountDepartment(String column, String value)
