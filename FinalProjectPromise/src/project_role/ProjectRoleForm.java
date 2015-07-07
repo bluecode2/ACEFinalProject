@@ -94,6 +94,4 @@ public class ProjectRoleForm extends ActionForm{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 }

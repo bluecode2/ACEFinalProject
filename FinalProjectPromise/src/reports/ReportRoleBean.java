@@ -16,6 +16,4 @@ public class ReportRoleBean {
 	public void setReportId(Integer reportId) {
 		this.reportId = reportId;
 	}
-	
-	
 }

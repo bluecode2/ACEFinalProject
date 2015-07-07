@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import proposed_task.ProposedTaskBean;
-
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class IndependentTaskManager {
@@ -253,6 +251,7 @@ public class IndependentTaskManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public void updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
 		try {
 			try {
@@ -265,7 +264,5 @@ public class IndependentTaskManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 }

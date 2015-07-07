@@ -1,7 +1,5 @@
 package activity;
 
-import independent_task.IndependentTaskManager;
-
 import java.io.PrintWriter;
 import java.util.List;
 

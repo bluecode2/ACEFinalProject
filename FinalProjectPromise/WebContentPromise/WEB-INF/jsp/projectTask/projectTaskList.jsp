@@ -443,14 +443,14 @@
 											<td align="center"><bean:write name="reg"
 													property="estStartDateDisplay" /> to <bean:write
 													name="reg" property="estEndDateDisplay" />
-												<br/>(<bean:write name="reg" property="estMainDays" /> main days)
+												<br/>(<bean:write name="reg" property="estMainDays" /> man days)
 											</td>
 											<td align="center">
 												<logic:notEmpty name="reg" property="actStartDateInString">
 													<bean:write name="reg"
 														property="actStartDateDisplay" /> to <bean:write
 														name="reg" property="actEndDateDisplay" />
-													<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+													<br/>(<bean:write name="reg" property="actmainDays" /> man days)
 												</logic:notEmpty>
 												<logic:empty name="reg" property="actStartDateInString">
 													-
@@ -544,7 +544,7 @@
 											<td align="center"><bean:write name="reg"
 													property="estStartDateDisplay" /> to <bean:write name="reg" property="estEndDateDisplay" />
 												<br/>
-												(<bean:write name="reg" property="estMainDays" /> main days)
+												(<bean:write name="reg" property="estMainDays" /> man days)
 											</td>
 											<td><bean:write name="reg" property="propByName" /></td>
 											<td><input type="hidden" class="hdnAssignTo"

@@ -271,10 +271,10 @@
 									</td>
 									<td><bean:write name="reg" property="assignedToName" /></td>
 									<td  align="center"><bean:write name="reg" property="estStartDateDisplay" /> to <bean:write name="reg" property="estEndDateDisplay" />
-										<br/>(<bean:write name="reg" property="estMainDays" /> main days)
+										<br/>(<bean:write name="reg" property="estMainDays" /> man days)
 									</td>
 									<td  align="center"><bean:write name="reg" property="actStartDateDisplay" /> to <bean:write name="reg" property="actEndDateDisplay" />
-										<br/>(<bean:write name="reg" property="actmainDays" /> main days)
+										<br/>(<bean:write name="reg" property="actmainDays" /> man days)
 									</td>
 									<td><html:hidden name="reg" property="taskStatus"
 											styleClass="hdTaskStatus" /> <bean:write name="reg"

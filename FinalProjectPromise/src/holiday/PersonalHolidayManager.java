@@ -17,7 +17,7 @@ public class PersonalHolidayManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public List<PersonalHolidayBean> getPersonalHoliday(String col, String input,
+	public List<PersonalHolidayBean> getPersonalHoliday(String col, String input, String input2,
 			Integer pageNum, Integer pageSize) {
 		int begin = (pageNum - 1) * pageSize;
 		int end = pageNum * pageSize;
@@ -27,6 +27,7 @@ public class PersonalHolidayManager {
 		Map map = new HashMap();
 		map.put("searchField", col);
 		map.put("searchValue", input);
+		map.put("searchValue2", input2);
 		map.put("begin", begin);
 		map.put("end", end);
 		
@@ -116,11 +117,12 @@ public class PersonalHolidayManager {
 		}
 	}
 	
-	public Integer getCountPersonalHoliday(String column, String value)
+	public Integer getCountPersonalHoliday(String column, String value, String value2)
 			throws SQLException, ClassNotFoundException {
 		Map map = new HashMap();
 		map.put("searchField", column);
 		map.put("searchValue", value);
+		map.put("searchValue2", value2);
 		Integer result = (Integer) this.ibatis.queryForObject(
 				"personalHoliday.countPersonalHoliday", map);
 		return result;

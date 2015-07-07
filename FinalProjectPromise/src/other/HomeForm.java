@@ -50,6 +50,4 @@ public class HomeForm extends ActionForm {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-
 }

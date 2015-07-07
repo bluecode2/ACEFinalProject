@@ -138,7 +138,7 @@ function goToEvaluate(id) {
 							            <logic:empty  name="reg" property="estEndDateInString">
 							             -
 							            </logic:empty>
-							            <br/>(<bean:write name="reg" property="estMainDays" /> main days)
+							            <br/>(<bean:write name="reg" property="estMainDays" /> man days)
 							          </logic:notEmpty>
 							          <logic:empty name="reg" property="estStartDateInString">
 							           -
@@ -160,7 +160,7 @@ function goToEvaluate(id) {
 									             <logic:empty name="reg" property="actMainDays">
 									              -
 									             </logic:empty>
-									             main days)
+									             man days)
 										</logic:notEmpty>
 										<logic:empty name="reg" property="actStartDateInString">
 											-

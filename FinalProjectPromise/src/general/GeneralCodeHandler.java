@@ -25,24 +25,10 @@ public class GeneralCodeHandler extends Action {
 		HttpSession session = request.getSession();	
 		UserBean us = (UserBean) session.getAttribute("currUser");
 
-	
-		/*if ("add".equals(gcForm.getTask())) {
-			request.setAttribute("pageTitle", "Add General Code");
-			//gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
-			return mapping.findForward("entry");
-		} */
-
 		if ("edit".equals(gcForm.getTask())) {
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_CODE_ENTRY,us, request);
-			/*request.setAttribute("lstDeptHead",
-					eMan.getAllEmployeeForDeptHead(gcForm.getSelectedId()));*/
 
 			gcForm.setGenCodeBean(gcMan.getGeneralCodeByGenId(gcForm.getSelectedId()));
-/*			if(gcForm.getGenCodeBean().getDeptHeadCode() != null)
-				gcForm.setDeptHeadDisplay(gcForm.getSelectedDept().getDeptHeadCode() + " - "
-						+ gcForm.getSelectedDept().getDeptHeadName());
-			else
-				gcForm.setDeptHeadDisplay("");*/
 			return mapping.findForward("entry");
 		}
 		else if ("save".equals(gcForm.getTask())) {

@@ -50,8 +50,6 @@ public class SearchEmpAssignedToHandler extends Action {
 			}				
 		}
 		
-
-
 		out.flush();
 		return null;
 	}

@@ -42,7 +42,6 @@ public class SearchDeptHandler extends Action {
 			out.println("<td>" + deptBean.getDeptHeadName() + "</td>");
 			out.println("</tr>");
 		}
-	//	
 		out.flush();
 
 		return null;

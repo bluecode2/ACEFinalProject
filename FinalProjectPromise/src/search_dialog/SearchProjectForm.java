@@ -3,6 +3,10 @@ package search_dialog;
 import org.apache.struts.action.ActionForm;
 
 public class SearchProjectForm extends ActionForm{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String task;
 	private String searchField;
 	private String searchValue;

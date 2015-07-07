@@ -1,5 +1,6 @@
 package active_directory;
 import javax.naming.Context;
+
 import java.util.*;
 
 import javax.naming.AuthenticationException;
@@ -13,6 +14,11 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
+
+
+
+import common.CommonFunction;
+import common.Constant;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,24 +35,24 @@ public final class ActiveDirectoryManager {
 
 	public ActiveDirectoryManager() {
 
-//		Properties properties = new Properties();
-//		try {
-//			properties.load(new FileInputStream("C://application.properties"));
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		this.provideURL = properties.getProperty("ad.provideURL");
-//		this.domain = properties.getProperty("ad.domain");
-//		this.schema = properties.getProperty("ad.schema");
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream(CommonFunction.getGeneralParameterValue(Constant.GeneralParameter.APPLICATION_PROPERTIES_PATH) + "application.properties"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.provideURL = properties.getProperty("ad.provideURL");
+		this.domain = properties.getProperty("ad.domain");
+		this.schema = properties.getProperty("ad.schema");
 
-		this.provideURL = "ldap://ace-router";
-		this.domain = "nu-ace.ad-ins.com";
-		this.schema = "DC=nu-ace,DC=ad-ins,DC=com";
+//		this.provideURL = "ldap://ace-router";
+//		this.domain = "nu-ace.ad-ins.com";
+//		this.schema = "DC=nu-ace,DC=ad-ins,DC=com";
 
 	}
 

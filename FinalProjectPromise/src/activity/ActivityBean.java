@@ -1,6 +1,5 @@
 package activity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -143,5 +142,4 @@ public class ActivityBean {
 	public void setTaskStatus(String taskStatus) {
 		this.taskStatus = taskStatus;
 	}
-
 }

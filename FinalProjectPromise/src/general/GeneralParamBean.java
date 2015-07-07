@@ -60,7 +60,6 @@ public class GeneralParamBean {
 		try {
 			date = df.parse(updateDateInString);
 		} catch (Exception pe){
-			//pe.printStackTrace();
 			this.updateDateInString = "";
 			date = null;
 		}

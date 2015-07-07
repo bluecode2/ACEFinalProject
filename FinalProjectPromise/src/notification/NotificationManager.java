@@ -20,15 +20,6 @@ import proposed_task.ProposedTaskBean;
 import proposed_task.ProposedTaskManager;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-
-
-
-
-
-
-
-
-import common.CommonFunction;
 import common.Constant;
 import department.DepartmentBean;
 import department.DepartmentManager;
@@ -408,28 +399,20 @@ public class NotificationManager {
 			
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL)) {
-				
 				desc = creatorEmp.getEmployeeName() + " submitted a task to you : " + ptBean.getTaskName()+" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectTask.do");
-				//assign task
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_CANCELLED)) {
-				
 				desc = creatorEmp.getEmployeeName() + " canceled your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-				//assign task
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_ONGOING)) {
-				
 				desc = creatorEmp.getEmployeeName() + " declined your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-			
 			}
 			else if (ptBean.getTaskStatus().equals(Constant.GeneralCode.TASK_STATUS_COMPLETED)) {
-				
 				desc = creatorEmp.getEmployeeName() + " approved your task : " + ptBean.getTaskName() +" in project "+ptBean.getProjectName();
 				bean.setNotificationUrl("projectInvolvedTask.do");
-			
 			}
 			
 			bean.setEmployeeId(assignedEmployeeId);
