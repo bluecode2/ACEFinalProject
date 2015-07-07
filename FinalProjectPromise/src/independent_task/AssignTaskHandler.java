@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import notification.NotificationManager;
-import oracle.jdbc.Const;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
