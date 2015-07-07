@@ -96,9 +96,7 @@
 		</dynamic>			
 	</select>
 	
-	<select id="getAllEmployeeForPopUp" resultClass="employee.EmployeeBean">
-	SELECT * FROM(
-		SELECT emp.*, ROWNUM rnum from (
+	<select id="getAllEmployeeForPopUp" resultClass="employee.EmployeeBean" parameterClass="java.util.Map">
 		SELECT
 		EMPLOYEE_ID 						AS employeeId,
 		EMPLOYEE_code 						AS employeeCode,
@@ -124,35 +122,46 @@
 		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
 		FROM vEMPLOYEE
 		where is_Active = 1
-		ORDER BY EMPLOYEE_ID ASC ) emp where ROWNUM &lt; = 10)
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeCode">
+				LOWER(EMPLOYEE_code) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>							
+		<dynamic prepend="AND">
+			<isEqual property="searchField" compareValue="employeeName">
+				LOWER(EMPLOYEE_NAME) LIKE LOWER( '%' || #searchValue# || '%' )
+			</isEqual>
+		</dynamic>			
+		ORDER BY EMPLOYEE_ID ASC
 	</select>
 	
 	<select id="getEmployeeByEmpId" parameterClass="java.lang.Integer" resultClass="employee.EmployeeBean">
-	SELECT
-		EMPLOYEE_ID 						AS employeeId,
-		EMPLOYEE_code 						AS employeeCode,
-		DEPT_ID 							AS deptId,
-		DEPT_CODE 							AS deptCode,
-		DEPT_NAME							AS deptName,
-		RANK_ID 							AS rankId,
-		RANK_CODE 							AS rankCode,
-		RANK_NAME 							AS rankName,
-		RANK_LEVEL							AS rankLevel,
-		SUPERVISOR_ID 						AS supervisorId,
-		SUPERVISOR_CODE 					AS supervisorCode,
-		SUPERVISOR_NAME 					AS supervisorName,
-		CREATED_BY 							AS createdBy,
-		UPDATED_BY 							AS updatedBy,
-		EMPLOYEE_NAME 						AS employeeName,
-		GENDER 								AS gender,
-		EMAIL 								AS email,
-		ADDRESS 							AS address,
-		PHONE_NUMBER 						AS phoneNumber,
-		is_active							AS isActive,
-		TO_CHAR(CREATE_DATE,'YYYY-MM-DD') 	AS createDateInString,
-		TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') 	AS updateDateInString
-		FROM vEMPLOYEE 
-		where employee_id = #value# and IS_ACTIVE = 1
+		SELECT
+	        EMPLOYEE_ID                      AS employeeId,
+	        EMPLOYEE_code                    AS employeeCode,
+	        DEPT_ID                          AS deptId,
+	        DEPT_CODE                        AS deptCode,
+	        DEPT_NAME                        AS deptName,
+	        RANK_ID                          AS rankId,
+	        RANK_CODE                        AS rankCode,
+	        RANK_NAME                        AS rankName,
+	        RANK_LEVEL                       AS rankLevel,
+	        SUPERVISOR_ID                    AS supervisorID,
+	        SUPERVISOR_CODE                  AS supervisorCode,
+	        SUPERVISOR_NAME                  AS supervisorName,
+	        CREATED_BY                       AS createdBy,
+	        UPDATED_BY                       AS updatedBy,
+	        EMPLOYEE_NAME                    AS employeeName,
+	        GENDER                           AS gender,
+	        EMAIL                            AS email,
+	        ADDRESS                          AS address,
+	        PHONE_NUMBER                     AS phoneNumber,
+	        is_active                        AS isActive,
+	        TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS createDateInString,
+	        TO_CHAR(UPDATE_DATE,'YYYY-MM-DD') AS updateDateInString
+	        FROM vEMPLOYEE
+	    where is_Active = 1 AND EMPLOYEE_ID = #empId#
+		ORDER BY EMPLOYEE_ID ASC
 	</select>
 	
 	<select id="getEmployeeForDeptHead" parameterClass="java.util.Map" resultClass="employee.EmployeeBean">

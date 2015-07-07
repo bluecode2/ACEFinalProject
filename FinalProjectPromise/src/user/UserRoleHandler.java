@@ -75,13 +75,13 @@ public class UserRoleHandler extends Action {
 			userRoleForm.getUserRoleBean().setUpdatedBy(us.getUserId());
 			userRoleManager.deleteUserRole(userRoleForm.getSelectedId());
 		} else if ("openMenuAccess".equals(userRoleForm.getTask())) {
-
-			String listMenuId = "";
-			String listAllowAdd = "";
-			String listAllowBack = "";
-			String listAllowSave = "";
-			String listAllowApprove = "";
-			String listAllowDecline = "";
+			
+			StringBuilder sbListMenuId = new StringBuilder();
+			StringBuilder sbListAllowAdd = new StringBuilder();
+			StringBuilder sbListAllowBack = new StringBuilder();
+			StringBuilder sbListAllowSave = new StringBuilder();
+			StringBuilder sbListAllowApprove = new StringBuilder();
+			StringBuilder sbListAllowDecline = new StringBuilder();			
 
 			Integer userRoleID = userRoleForm.getSelectedId();
 
@@ -90,26 +90,26 @@ public class UserRoleHandler extends Action {
 					.getUserRoleMenuByUserRole(userRoleID);
 
 			for (UserRoleMenuBean bean : arrRoleMenu) {
-				if (!listMenuId.equals("")) {
-					listMenuId += "#";
-					listAllowAdd += "#";
-					listAllowBack += "#";
-					listAllowSave += "#";
-					listAllowApprove += "#";
-					listAllowDecline += "#";
+				if (!sbListMenuId.toString().equals("")) {
+					sbListMenuId.append("#");
+					sbListAllowAdd.append("#");
+					sbListAllowBack.append("#");
+					sbListAllowSave.append("#");
+					sbListAllowApprove.append("#");
+					sbListAllowDecline.append("#");
 				}
-
-				listMenuId += bean.getMenuId().toString();
-				listAllowAdd += bean.getMenuCrud().contains("C");
-				listAllowBack += bean.getMenuCrud().contains("B");
-				listAllowSave += bean.getMenuCrud().contains("U");
-				listAllowApprove += bean.getMenuCrud().contains("A");
-				listAllowDecline += bean.getMenuCrud().contains("D");
+				
+				sbListMenuId.append(bean.getMenuId().toString());
+				sbListAllowAdd.append(bean.getMenuCrud().contains("C"));
+				sbListAllowBack.append(bean.getMenuCrud().contains("B"));
+				sbListAllowSave.append(bean.getMenuCrud().contains("U"));
+				sbListAllowApprove.append(bean.getMenuCrud().contains("A"));
+				sbListAllowDecline.append(bean.getMenuCrud().contains("D"));
 			}
 
-			String resp = listMenuId + "$" + listAllowAdd + "$" + listAllowBack
-					+ "$" + listAllowSave + "$" + listAllowApprove + "$"
-					+ listAllowDecline;
+			String resp = sbListMenuId.toString() + "$" + sbListAllowAdd.toString() + "$" + sbListAllowBack.toString()
+					+ "$" + sbListAllowSave.toString() + "$" + sbListAllowApprove.toString() + "$"
+					+ sbListAllowDecline.toString();
 			PrintWriter out = response.getWriter();
 			out.println(resp);
 
@@ -139,17 +139,17 @@ public class UserRoleHandler extends Action {
 
 			for (int i = 0; i < listMenuId.length; i++) {
 				if (!listMenuId[i].equals("")) {
-					String menuCrud = "";
+					StringBuilder sbMenuCrud = new StringBuilder();
 					if (listAllowAdd[i].equals("true"))
-						menuCrud += "C";
+						sbMenuCrud.append("C");
 					if (listAllowBack[i].equals("true"))
-						menuCrud += "B";
+						sbMenuCrud.append("B");
 					if (listAllowSave[i].equals("true"))
-						menuCrud += "U";
+						sbMenuCrud.append("U");
 					if (listAllowApprove[i].equals("true"))
-						menuCrud += "A";
+						sbMenuCrud.append("A");
 					if (listAllowDecline[i].equals("true"))
-						menuCrud += "D";
+						sbMenuCrud.append("D");
 
 					Integer menuId = Integer.valueOf(listMenuId[i]);
 
@@ -160,11 +160,11 @@ public class UserRoleHandler extends Action {
 						bean = new UserRoleMenuBean();
 						bean.setMenuId(menuId);
 						bean.setUserRoleId(userRoleId);
-						bean.setMenuCrud(menuCrud);
+						bean.setMenuCrud(sbMenuCrud.toString());
 
 						manager.insertUserRoleMenu(bean);
 					} else {
-						bean.setMenuCrud(menuCrud);
+						bean.setMenuCrud(sbMenuCrud.toString());
 						manager.editUserRoleMenu(bean);
 					}
 				}
@@ -179,7 +179,7 @@ public class UserRoleHandler extends Action {
 		}
 
 		else if ("openReportAccess".equals(userRoleForm.getTask())) {
-			String listReportId = "";
+			StringBuilder sbListReportId = new StringBuilder();
 			Integer userRoleID = userRoleForm.getSelectedId();
 
 			ReportRoleManager rrMan = new ReportRoleManager();
@@ -188,13 +188,14 @@ public class UserRoleHandler extends Action {
 					.getReportRoleByRoleId(userRoleID);
 
 			for (ReportRoleBean rrBean : arrList) {
-				if (!listReportId.equals("")) {
-					listReportId += "#";
+				if (!sbListReportId.toString().equals("")) {
+					sbListReportId.append("#");
 				}
-				listReportId += rrBean.getReportId().toString();
+				sbListReportId.append(rrBean.getReportId().toString());
+
 			}
 			PrintWriter out = response.getWriter();
-			String resp = listReportId;
+			String resp = sbListReportId.toString();
 			out.println(resp);
 
 			return null;
@@ -234,8 +235,7 @@ public class UserRoleHandler extends Action {
 			}
 			return null;
 		}
-
-		else if ("openReportAccess".equals(userRoleForm.getTask())) {
+/*		else if ("openReportAccess".equals(userRoleForm.getTask())) {
 			String listReportId = "";
 			Integer userRoleID = userRoleForm.getSelectedId();
 
@@ -290,8 +290,10 @@ public class UserRoleHandler extends Action {
 				rrMan.deleteUserRoleReport(reportRoleBean);
 			}
 			return null;
-		} else if ("openDepartmentAccess".equals(userRoleForm.getTask())) {
-			String listDeptId = "";
+		} */
+		else if ("openDepartmentAccess".equals(userRoleForm.getTask())) {
+			StringBuilder sbListDeptId = new StringBuilder();
+
 			Integer userRoleID = userRoleForm.getSelectedId();
 
 			UserRoleDepartmentManager rrMan = new UserRoleDepartmentManager();
@@ -300,13 +302,14 @@ public class UserRoleHandler extends Action {
 					.getUserRoleDepartmentByUserRole(userRoleID);
 
 			for (UserRoleDepartmentBean rrBean : arrList) {
-				if (!listDeptId.equals("")) {
-					listDeptId += "#";
+				if (!sbListDeptId.toString().equals("")) {
+					sbListDeptId.append("#");
+
 				}
-				listDeptId += rrBean.getDeptId().toString();
+				sbListDeptId.append(rrBean.getDeptId().toString());
 			}
 			PrintWriter out = response.getWriter();
-			String resp = listDeptId;
+			String resp = sbListDeptId.toString();
 			out.println(resp);
 
 			return null;

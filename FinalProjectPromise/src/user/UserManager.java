@@ -19,7 +19,7 @@ public class UserManager {
 		this.ibatis = IbatisHelper.getSqlMapInstance();
 	}
 
-	public UserBean getLoginValidasi(String username, String password)
+	public UserBean getUserLogin(String username, String password)
 			throws SQLException {
 		UserBean uBean = null;
 
@@ -27,10 +27,27 @@ public class UserManager {
 		m.put("username", username);
 		m.put("password", password);
 
-		uBean = (UserBean) this.ibatis.queryForObject("users.checkLogin", m);
+		uBean = (UserBean) this.ibatis.queryForObject("users.getBeanLogin", m);
 
 		return uBean;
 	}
+	public int validasiLogin(String username, String password){
+		Map m = new HashMap();
+		m.put("username", username);
+		m.put("password", password);
+		
+		int valLogin = 0;
+		
+		try {
+			valLogin = (Integer) this.ibatis.queryForObject("users.validasiLogin", m);			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return valLogin;
+		
+	}
+	
 
 	public UserBean getUserByUsername(String username) throws SQLException {
 		UserBean uBean = null;

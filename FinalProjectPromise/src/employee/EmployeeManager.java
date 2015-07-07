@@ -42,11 +42,15 @@ public class EmployeeManager {
 		return arr;
 	}
 	
-	public List<EmployeeBean> getAllEmployeeForPopUp()  {
+	public List<EmployeeBean> getAllEmployeeForPopUp(String searchValue, String searchField)  {
+		
+		Map map = new HashMap();
+		map.put("searchField", searchField);
+		map.put("searchValue", searchValue);
 		
 		List<EmployeeBean> arr = new ArrayList<EmployeeBean>() ;
 		try {
-			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", null);
+			arr = this.ibatis.queryForList("employee.getAllEmployeeForPopUp", map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,8 +119,7 @@ public class EmployeeManager {
 	public EmployeeBean getEmployeeByEmpId(Integer empId) {
 		EmployeeBean empBean= null;
 		try {
-			empBean = (EmployeeBean) this.ibatis.queryForObject(
-					"employee.getEmployeeByEmpId", empId);
+			empBean = (EmployeeBean) this.ibatis.queryForObject("employee.getEmployeeByEmpId", empId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

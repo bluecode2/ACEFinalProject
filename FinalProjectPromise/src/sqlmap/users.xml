@@ -77,7 +77,7 @@
         WHERE rnum &gt; #begin#
 	</select>
 	
-	<select id="checkLogin" resultClass="user.UserBean" parameterClass="java.util.Map">
+	<select id="getBeanLogin" resultClass="user.UserBean" parameterClass="java.util.Map">
 		SELECT
 		USER_ID         AS      userId,
 		USER_ROLE_ID    AS      userRoleId,
@@ -94,6 +94,13 @@
 		user_role_name  AS      userRoleName,
 		dept_id			AS		deptId
 		from vusers
+		where password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #password#) 
+		AND username = #username# 
+	</select>
+	
+	<select id="validasiLogin" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(1)
+		FROM VUSERS
 		where password_user = dbms_obfuscation_toolkit.md5(input_string=&gt; #password#) 
 		AND username = #username# 
 	</select>

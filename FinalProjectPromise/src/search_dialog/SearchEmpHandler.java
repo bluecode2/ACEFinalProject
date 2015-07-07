@@ -38,9 +38,9 @@ public class SearchEmpHandler extends Action {
 		for (EmployeeBean empBean : arrEmp) {
 			out.println("<tr data-dismiss=\"modal\" class=\"rowSearchEmployee\">");
 			out.println("<td style=\"display: none\">" + empBean.getEmployeeId() + "</td>");
-			out.println("<td>" + empBean.getEmployeeCode() + "</td>");
-			out.println("<td>" + empBean.getEmployeeName() + "</td>");
-			out.println("<td>" + empBean.getDeptName() + "</td>");
+			out.println("<td width=\"150px\">" + empBean.getEmployeeCode() + "</td>");
+			out.println("<td width=\"150px\">" + empBean.getEmployeeName() + "</td>");
+			out.println("<td width=\"150px\">" + empBean.getDeptName() + "</td>");
 			out.println("<td style=\"display: none\">" + empBean.getDeptId() + "</td>");
 			out.println("</tr>");
 		}	

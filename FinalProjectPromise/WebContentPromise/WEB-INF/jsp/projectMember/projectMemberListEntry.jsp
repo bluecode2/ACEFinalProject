@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Project List</title>
 <script type="text/javascript" src="js/jquery.js"></script>
+
 <script type="text/javascript">
 	function onBtnBackClick() {
 		window.location.href = "project.do";
@@ -28,7 +29,27 @@
 	$(document).ready(function() {
 		registerSearchEmployee();
 		registerSearchProjRole();
-		empManager()
+		empManager();
+		
+		
+		 $('#tblSearchEmp').floatThead({
+			    useAbsolutePositioning: true,
+			    scrollContainer: function($table){
+			        return $table.closest(".wrapper");
+			    }
+			});
+       //  alignmentDebugger($('table'))
+         var useAbs = true;
+         $("#makeFixed").on("click", function(e){
+             e.preventDefault();
+             useAbs = !useAbs;
+             $('table').floatThead('destroy').floatThead({
+                 scrollingTop: pageTop,
+                 useAbsolutePositioning: useAbs
+             });
+             $(this).text("Re-initialize plugin with "+(useAbs ? "fixed" : "absolute") +" positioning");
+             $("#posType").text("position: "+(useAbs ? "absolute" : "fixed"));
+     });
 	});
 
 	function actionForm(memberId, nama) {
@@ -127,6 +148,7 @@
 		return isValid;
 	}
 </script>
+
 </head>
 <body>
 	<html:form action="/projectMember" method="post">
@@ -300,16 +322,22 @@
 								</tr>
 							</table>
 						</div>
-
+						<div style="overflow: auto; height: 350px" class="wrapper">
 						<table width="100%" id="tblSearchEmp"
 							class="table table-striped table-hover table-bordered table-clickable">
-							<thead>
+							<colgroup>
+								<col width="150px" />
+								<col width="150px" />
+								<col width="150px" />
+							</colgroup>
+							<thead >
 								<tr>
-									<th>Employee Code</th>
-									<th>Employee Name</th>
-									<th>Department Name</th>
+									<th width="150px">Employee Code</th>
+									<th width="150px">Employee Name</th>
+									<th width="150px">Department Name</th>
 								</tr>
 							</thead>
+						
 							<logic:notEmpty name="lstEmployeeId">
 								<logic:iterate id="emp" name="lstEmployeeId">
 									<tr data-dismiss="modal" class="rowSearchEmployee">
@@ -332,6 +360,7 @@
 								</tr>
 							</logic:empty>
 						</table>
+						</div>
 					</div>
 				</div>
 				<!-- /.modal-content -->
@@ -389,5 +418,17 @@
 		<jsp:include page="/WEB-INF/jsp/include/footer.jsp"></jsp:include>
 
 	</html:form>
+	
+	<script type="text/javascript" src="js/jquery.floatThead.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		 $('#tblSearchEmp').floatThead({
+			 scrollContainer: function($table){
+					return $table.closest('.wrapper');
+				}
+		 });
+	});
+	</script>
+	
 </body>
 </html>

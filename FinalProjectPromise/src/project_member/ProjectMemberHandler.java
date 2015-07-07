@@ -86,7 +86,7 @@ public class ProjectMemberHandler extends Action {
 		
 		pMemberForm.setListOfProjMember(pMemberMan.getAllProjectMember(projId,				
 				pMemberForm.getCurrPage(), Constant.PAGE_SIZE));
-		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp());
+		request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPopUp("",""));
 		request.setAttribute("lstProjectRole", pRoleMan.getAllProjectRoleForPopUp());
 
 		request.setAttribute("pageNavigator", CommonFunction
