@@ -16,18 +16,16 @@ public class FilterLogin implements Filter {
 	
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
 	}
+	
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 			// TODO Auto-generated method stub
-		
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
 		
 		if(request.getServletPath().equals("/login.do")){
 			   chain.doFilter(request, response);
-			   
 		}
 
 		else{  
@@ -49,22 +47,9 @@ public class FilterLogin implements Filter {
 				chain.doFilter(request, response);
 			}
 		}
-		
-		/*if(session.getAttribute("currUser") == null)
-		{
-			System.out.println("session null");
-			response.sendRedirect("login.do");
-		}
-		else {
-			chain.doFilter(req, res);
-			//System.out.println(session.getAttribute("currUser"));	
-		}*/
-			
 	}
-	
-	
+
 	public void init(FilterConfig arg0) throws ServletException {
 			// TODO Auto-generated method stub
-		//System.out.println("check login");
 	}
 }
