@@ -22,18 +22,15 @@
 		fGetGeneralCodeCaption(P.HOLIDAY_TYPE) as holidayTypeName
 		FROM PERSONAL_HOLIDAY  P
 		JOIN EMPLOYEE E ON P.EMPLOYEE_ID = E.EMPLOYEE_ID
-		where HOLIDAY_DATE >= SYSDATE
-		AND IS_DELETED = 0
+		where IS_DELETED = 0
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="holidayDesc">
-				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="byDate">
+				TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &gt;= #searchValue#
+				<isNotEmpty property="searchValue2">
+				AND TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &lt;= #searchValue2#
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="holidayDateInString">
-					to_char(HOLIDAY_DATE,'yyyy-MM-dd') LIKE ( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>	
 		ORDER BY HOLIDAY_ID) hol
 		where ROWNUM &lt;= #end#)
 		where rnum &gt; #begin#
@@ -123,22 +120,15 @@
 
 	<select id="countPersonalHoliday" resultClass="java.lang.Integer"
 		parameterClass="java.util.Map">
-		SELECT COUNT(1) FROM PERSONAL_HOLIDAY WHERE IS_DELETED=0
-		AND HOLIDAY_DATE >= SYSDATE
+		SELECT COUNT(1) FROM PERSONAL_HOLIDAY 
+		where IS_DELETED = 0
 		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="holidayId">
-				LOWER(HOLIDAY_ID) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="holidayDesc">
-				LOWER(HOLIDAY_DESC) LIKE LOWER( '%' || #searchValue# || '%' )
+			<isEqual property="searchField" compareValue="byDate">
+				TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &gt;= #searchValue#
+				<isNotEmpty property="searchValue2">
+				AND TO_CHAR(P.HOLIDAY_DATE,'yyyy-MM-dd') &lt;= #searchValue2#
+				</isNotEmpty>
 			</isEqual>
 		</dynamic>		
-		<dynamic prepend="AND">
-			<isEqual property="searchField" compareValue="holidayDateInString">
-				LOWER(HOLIDAY_DATE) LIKE LOWER( '%' || #searchValue# || '%' )
-			</isEqual>
-		</dynamic>	
 	</select>
 </sqlMap>

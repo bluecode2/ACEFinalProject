@@ -10,6 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Personal Holiday</title>
 
+<link href="css/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
+<script src="js/jquery.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
+
 <script type="text/javascript">
 	function onBtnAddClick(){
 		//alert('add');
@@ -18,9 +24,10 @@
 	}
 	
 	function search() {
-		document.forms[0].currSearchField.value = document.forms[0].searchField.value;
+		document.forms[0].task.value = 'search';
+		document.forms[0].currSearchField.value = 'byDate';
 		document.forms[0].currSearchValue.value = document.forms[0].searchValue.value;
-
+		document.forms[0].currSearchValue2.value = document.forms[0].searchValue2.value;
 		changePage(1);
 	}
 	
@@ -37,6 +44,10 @@
 			document.forms[0].submit();
 		}
 	}
+	
+	$(document).ready(function() {
+		$(".datepicker").attr("data-provide", "datepicker");
+	});
 </script>
 </head>
 <body>
@@ -45,6 +56,7 @@
 		<html:hidden name="personalHolidayForm" property="selectedId"/>
 		
 		<html:hidden property="currSearchValue" name="personalHolidayForm"/>
+		<html:hidden property="currSearchValue2" name="personalHolidayForm"/>
 		<html:hidden property="currSearchField" name="personalHolidayForm"/>
 		
 		<jsp:include page="/WEB-INF/jsp/include/header.jsp"></jsp:include>
@@ -55,21 +67,24 @@
 			<div class="divSearch form-group has-info" style="float: right;">
 				<table>
 					<tr>
-						<td>Search by</td>
-						<td style="padding-left: 15px;">
-							<html:select name="personalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control">
-								<option value="holidayDesc">Personal Holiday Name</option>
-								<option value="holidayDateInString">Personal Holiday Date</option>
-							</html:select>
-						</td>
+						<td>Search by Date</td>
+<!-- 						<td style="padding-left: 15px;"> -->
+<%-- 							<html:select name="personalHolidayForm" property="searchField" styleId="selSearchField" styleClass="form-control"> --%>
+<!-- 								<option value="holidayDesc">Personal Holiday Name</option> -->
+<!-- 								<option value="holidayDateInString">Personal Holiday Date</option> -->
+<%-- 							</html:select> --%>
+<!-- 						</td> -->
+						<td style="padding-left: 15px"><html:text
+								styleClass="form-control datepicker" styleId="txtGenHolDate"
+								name="generalHolidayForm" property="searchValue"></html:text></td>
+						<td style="padding-left: 15px">-</td>
+						<td style="padding-left: 15px"><html:text
+								styleClass="form-control datepicker" styleId="txtGenHolDate"
+								name="generalHolidayForm" property="searchValue2"></html:text></td>
+								
 						<td style="padding-left: 15px">
-							<html:text
-								name="personalHolidayForm" property="searchValue" styleClass="form-control">
-							</html:text>
-						</td>
-						<td style="padding-left: 15px">
-							<button type="button"
-								onclick="search();" id="btnSearch" class="btn btn-raised btn-info btn-icon" title="Search">
+							<button type="button" onclick="search();" id="btnSearch"
+								class="btn btn-raised btn-info btn-icon" title="Search">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</td>

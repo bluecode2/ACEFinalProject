@@ -18,8 +18,10 @@ public class PersonalHolidayForm extends ActionForm{
 	private String 						task="";
 	private Boolean 					isAdd = false;
 	private String 						searchValue;
+	private String 						searchValue2;
 	private String 						searchField;
 	private String 						currSearchValue = "";
+	private String 						currSearchValue2 = "";
 	private String 						currSearchField = "";
 	private Integer 					currPage = 1;
 	private Integer 					pageCount = 1;
@@ -100,5 +102,17 @@ public class PersonalHolidayForm extends ActionForm{
 	}
 	public void setListOfGenCode(List<GeneralCodeBean> listOfGenCode) {
 		this.listOfGenCode = listOfGenCode;
+	}
+	public String getSearchValue2() {
+		return searchValue2;
+	}
+	public void setSearchValue2(String searchValue2) {
+		this.searchValue2 = searchValue2;
+	}
+	public String getCurrSearchValue2() {
+		return currSearchValue2;
+	}
+	public void setCurrSearchValue2(String currSearchValue2) {
+		this.currSearchValue2 = currSearchValue2;
 	}
 }

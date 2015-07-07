@@ -1,5 +1,8 @@
 package holiday;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,8 +13,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import user.UserBean;
+
 import common.CommonFunction;
 import common.Constant;
+
 import employee.EmployeeManager;
 import general.GeneralCodeManager;
 
@@ -77,21 +82,27 @@ public class PersonalHolidayHandler extends Action{
 		}
 		
 		persForm.setTask("");
+		if(persForm.getCurrSearchField().equals("")){
+			SimpleDateFormat df = new SimpleDateFormat(Constant.StringFormat.DATE_FORMAT);
+			persForm.setCurrSearchField("byDate");
+			persForm.setCurrSearchValue(df.format(new Date()));
+		}
+		
 		persForm.setSearchField(persForm.getCurrSearchField());
 		persForm.setSearchValue(persForm.getCurrSearchValue());
+		persForm.setSearchValue2(persForm.getCurrSearchValue2());
 		
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
-				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),
+				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),persForm.getCurrSearchValue2(),
 				persForm.getCurrPage(), Constant.PAGE_SIZE));
 		
-		rowCount = persManager.getCountPersonalHoliday(persForm.getCurrSearchField(), persForm.getCurrSearchValue());
+		rowCount = persManager.getCountPersonalHoliday(persForm.getCurrSearchField(), persForm.getCurrSearchValue(),persForm.getCurrSearchValue2());
 		persForm.setPageCount((int) Math.ceil((double) rowCount/(double) Constant.PAGE_SIZE));
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY, us,
 				request);
 		
-		request.setAttribute("pageTitle", "Personal Holiday");
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(persForm.getPageCount(),persForm.getCurrPage()));
 		request.setAttribute("pageCount", persForm.getPageCount());
