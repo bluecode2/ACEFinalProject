@@ -39,6 +39,7 @@
 							showLoading();
 							var taskId = $(this).closest('tr')
 									.find('.hdTaskId').val();
+							var taskStat = $(this).closest('tr').find('.hdTaskStatus').val();
 
 							$.ajax({
 								type : "POST",
@@ -47,6 +48,11 @@
 								success : function(response) {
 									$("#tblShow").find("tr:gt(0)").remove();
 									$("#tblShow").append(response);
+									if (taskStat == 'TA_STAT_04' ||taskStat == 'TA_STAT_05' ||
+											taskStat == 'TA_STAT_07' ||taskStat == 'TA_STAT_98'
+											||taskStat == 'TA_STAT_99'){
+										$('#btnShowEntry').hide();
+									}
 									$('#showMember').modal();
 									hideLoading();
 								},
@@ -290,6 +296,7 @@
 									<html:hidden styleClass="hdAssignedToName" name="reg"
 										property="assignedToName" />
 										<html:hidden property="remarks" name="reg" styleClass="hdRemarks"/>
+									<html:hidden name="reg" property="taskStatus" styleClass="hdTaskStatus" />
 									<td><a href="#" class="text-info"
 										onclick="getTaskDesc('<bean:write name="reg" property="taskDesc" />');"
 										data-target="taskDesc"> <bean:write name="reg"
