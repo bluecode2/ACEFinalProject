@@ -1,6 +1,7 @@
 package search_dialog;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +40,12 @@ public class SearchSpvHandler extends Action {
 		Integer deptId = ssForm.getDeptId();
 		String searchField = ssForm.getSearchField();
 		String searchValue = ssForm.getSearchValue();
-		
-		List<EmployeeBean> arrEmp = eman.getListEmployeeForSupervisor(deptId,
-				rankBean.getRankLevel(), searchField, searchValue);
+
+		List<EmployeeBean> arrEmp = new ArrayList<EmployeeBean>();
+
+		if (rankBean != null)
+			arrEmp = eman.getListEmployeeForSupervisor(deptId,
+					rankBean.getRankLevel(), searchField, searchValue);
 
 		if (arrEmp.size() > 0) {
 

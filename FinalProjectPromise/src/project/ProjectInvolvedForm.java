@@ -25,7 +25,7 @@ public class ProjectInvolvedForm extends ActionForm{
 	private Integer pageCount = 1;
 	private String val;
 	private List<ProjectBean> listOfProjectInvolved = new ArrayList<ProjectBean>();
-	private ProjectBean projectBean = new ProjectBean();
+	private ProjectBean projectBean = null;
 	private List<ProjectMemberBean> arrMember = new ArrayList<ProjectMemberBean>();
 	
 	public List<ProjectMemberBean> getArrMember() {
