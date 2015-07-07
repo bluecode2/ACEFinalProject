@@ -136,7 +136,7 @@
 							            <logic:empty  name="proj" property="estEndDateInString">
 							             -
 							            </logic:empty>
-							            <br/>(<bean:write name="proj" property="estMainDays" /> main days)
+							            <br/>(<bean:write name="proj" property="estMainDays" /> man days)
 							          </logic:notEmpty>
 							          <logic:empty name="proj" property="estStartDateInString">
 							           -
@@ -158,7 +158,7 @@
 							             <logic:empty name="proj" property="actMainDays">
 							              -
 							             </logic:empty>
-							             main days)
+							             man days)
 							          </logic:notEmpty>
 							          <logic:empty name="proj" property="actStartDateInString">
 							           -
