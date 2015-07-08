@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.crystaldecisions.b.f;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class GeneralHolidayManager {
@@ -62,8 +63,9 @@ public class GeneralHolidayManager {
 		return tmpNewHolId;
 	}
 
-	public void insertGeneralHoliday(GeneralHolidayBean genHolidayBean)
+	public boolean insertGeneralHoliday(GeneralHolidayBean genHolidayBean)
 			throws SQLException {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -76,7 +78,9 @@ public class GeneralHolidayManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public GeneralHolidayBean getGeneralHolidayEdit(int genId){
@@ -107,7 +111,8 @@ public class GeneralHolidayManager {
 		}
 	}
 
-	public void deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) {
+	public boolean deleteGeneralHoliday(GeneralHolidayBean genHolidayBean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -118,8 +123,10 @@ public class GeneralHolidayManager {
 				this.ibatis.endTransaction();
 			}
 		} catch (SQLException e) {
+			flag = false;
 			e.printStackTrace();
 		}
+		return flag;
 	}
 
 	public Integer getCountGeneralHoliday(String column, String value,
@@ -133,9 +140,10 @@ public class GeneralHolidayManager {
 		return result;
 	}
 
-	public void generateWeekend(String startDate, String endDate,
+	public boolean generateWeekend(String startDate, String endDate,
 			String checkDays, Integer createdBy) throws SQLException,
 			ClassNotFoundException {
+		boolean flag = true;
 		try {
 			try {
 				Map map = new HashMap();
@@ -152,6 +160,8 @@ public class GeneralHolidayManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 }
