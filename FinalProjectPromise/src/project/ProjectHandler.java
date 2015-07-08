@@ -265,7 +265,12 @@ public class ProjectHandler extends Action{
 		pForm.setSearchValue(pForm.getCurrSearchValue());
 
 		int rowCount;
-		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
 		//untuk dept head atau PM
 		if (addBtn){
 			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
