@@ -44,7 +44,6 @@ public class ProposedTaskHandler extends Action {
 		if (dForm.getTask().equals("add")) {
 			dForm.setIsAdd(true);
 			dForm.setSelectedId(0);
-			request.setAttribute("pageTitle", "Proposed Task Entry");
 			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
 
 			return mapping.findForward("proposedTaskEntry");
@@ -53,7 +52,6 @@ public class ProposedTaskHandler extends Action {
 		else if (dForm.getTask().equals("edit")) {
 			dForm.setIsAdd(false);
 			CommonFunction.initializeHeader(Constant.MenuCode.PROPOSE_INDEPENDENT_TASK_ENTRY, us, request);
-			request.setAttribute("pageTitle", "Proposed Task Edit");
 			dForm.setBean(dMan.getPropTaskByPropTaskId(dForm.getSelectedId()));
 			
 			return mapping.findForward("proposedTaskEntry");
@@ -74,13 +72,30 @@ public class ProposedTaskHandler extends Action {
 				dForm.getBean().setPropBy(us.getEmployeeId());
 				int newId = dMan.newPropTaskId();
 				dForm.getBean().setPropTaskId(newId);
-				dMan.insertProposedTask(dForm.getBean());
 				
-				dForm.setBean(dMan.getPropTaskByPropTaskId(newId));
-				noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());
+				if (dMan.insertProposedTask(dForm.getBean())){
+					dForm.setBean(dMan.getPropTaskByPropTaskId(newId));
+					noMan.createNotificationProposeIndependentTask(us.getEmployeeId(), dForm.getBean().getPropTo(), dForm.getBean().getPropTaskId());
+					session.setAttribute("validationMessage",
+							"Succeed to Propose Task!");
+					session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Propose Task!");
+					session.setAttribute("validationType", "danger");
+				}
 			} else {
 				dForm.getBean().setUpdatedBy(us.getUserId());
-				dMan.updateProposedTask(dForm.getBean());
+				if (dMan.updateProposedTask(dForm.getBean())){
+					session.setAttribute("validationMessage",
+							"Succeed to Edit Propose Task : " + dForm.getBean().getPropTaskName() + "!");
+					session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Edit Propose Task " + dForm.getBean().getPropTaskName() + "!");
+					session.setAttribute("validationType", "danger");
+				}
+			
 			}
 
 			response.sendRedirect("proposedTask.do");
@@ -90,7 +105,6 @@ public class ProposedTaskHandler extends Action {
 		dForm.setTask("");
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
-		request.setAttribute("pageTitle", "Proposed Task");
 		
 		EmployeeManager empMan = new EmployeeManager();
 		EmployeeBean empBean = empMan.getEmployeeByEmpId(us.getEmployeeId());

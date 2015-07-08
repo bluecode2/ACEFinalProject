@@ -61,12 +61,27 @@ public class AssignTaskHandler extends Action {
 
 			if (isAdd) {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
-				tsMan.createNewAssignTask(tsForm.getTkBean());
+				if (tsMan.createNewAssignTask(tsForm.getTkBean())){
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
-				
+				session.setAttribute("validationMessage",
+						"Succeed to Add New Assign Task!");
+				session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Add New Assign Task!");
+					session.setAttribute("validationType", "danger");
+				}
 			} else {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
+				if (tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy())){
+					session.setAttribute("validationMessage",
+							"Succeed to Edit Task : " + tsForm.getTkBean().getTaskName() + "!");
+					session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Edit Task : " + tsForm.getTkBean().getTaskName() + "!");
+					session.setAttribute("validationType", "danger");
+				}
 				
 			}
 			response.sendRedirect("assignTask.do");
@@ -77,7 +92,6 @@ public class AssignTaskHandler extends Action {
 			
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
-				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
@@ -144,7 +158,6 @@ public class AssignTaskHandler extends Action {
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.PAGE_SIZE, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "Assign Independent Task");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());

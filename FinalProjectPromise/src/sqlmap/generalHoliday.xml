@@ -128,8 +128,6 @@
 		AND IS_DELETED=0
 	</update>
 	
-
-
 	<select id="countGeneralHoliday" resultClass="java.lang.Integer" parameterClass="java.util.Map">
 		SELECT COUNT(1) FROM GENERAL_HOLIDAY
 		WHERE IS_DELETED=0
