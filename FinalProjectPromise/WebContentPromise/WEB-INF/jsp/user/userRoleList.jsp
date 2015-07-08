@@ -668,7 +668,7 @@
 								</table>
 								<div style="overflow: auto; height: 350px">
 									<table width="100%" id="tblSearch"
-										class="table table-striped table-hover table-bordered table-clickable">
+										class="table table-striped table-hover table-bordered">
 										<thead>
 											<tr>
 												<th width="40px"></th>
@@ -763,7 +763,7 @@
 								</table>
 								<div style="overflow: auto; height: 350px">
 									<table width="100%" id="tblSearch"
-										class="table table-striped table-hover table-bordered table-clickable">
+										class="table table-striped table-hover table-bordered">
 										<thead>
 											<tr>
 												<th width="40px"></th>
@@ -836,7 +836,7 @@
 								</table>
 								<div style="overflow: auto; height: 350px">
 									<table width="100%" id="tblSearch"
-										class="table table-striped table-hover table-bordered table-clickable">
+										class="table table-striped table-hover table-bordered">
 										<thead>
 											<tr>
 												<th width="40px"></th>
