@@ -46,7 +46,7 @@
 		</dynamic>				
 		ORDER BY PROJECT_ROLE_ID ) hol
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]>
+		WHERE rnum <![CDATA[>]]>
 		#begin#
 	</select>
 	<select id="getProjectRoleForPopUp" resultClass="project_role.ProjectRoleBean">

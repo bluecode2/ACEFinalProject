@@ -102,7 +102,7 @@
 		</dynamic>
 		order by task_id) vit
 		where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="getCountProjectTaskByProject" resultClass="java.lang.Integer"

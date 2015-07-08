@@ -91,7 +91,7 @@
 			</isNotEmpty>
 		</dynamic>
 		order by est_end_date
-		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]>
+		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>]]>
 		#begin#
 	</select>
 	

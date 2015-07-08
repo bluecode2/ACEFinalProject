@@ -49,7 +49,7 @@
 		</dynamic>			
 		ORDER BY rank_level asc ) r
 		where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="getRankByRankId" parameterClass="java.lang.Integer" resultClass="rank_employee.RankEmpBean">

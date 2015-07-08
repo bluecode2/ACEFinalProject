@@ -81,7 +81,7 @@
 			</isEqual>
 		</dynamic>
 		order by proposed_task_id
-		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]>
+		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>]]>
 		#begin#
 	</select>
 	

@@ -102,7 +102,7 @@
 		</dynamic>
       	 		order by username) us 
 	       WHERE ROWNUM <![CDATA[<=]]> #end#)
-        WHERE rnum <![CDATA[>=]]> #begin#
+        WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getBeanLogin" resultClass="user.UserBean" parameterClass="java.util.Map">
