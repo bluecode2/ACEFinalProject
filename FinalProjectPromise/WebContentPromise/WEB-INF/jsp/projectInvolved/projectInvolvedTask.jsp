@@ -491,12 +491,12 @@
 	
 	function validateForm(){
 		
-		var taskName	= document.getElementById("txtTaskName").value;
-		var taskDesc 	= document.getElementById("txtTaskDesc").value;
-		var startDate 	= document.getElementById("txtEstStartDate").value;
-		var endDate 	= document.getElementById("txtEstEndDate").value;
-		var estStartproj = document.getElementById("hdnEstStartProj").value;
-		var estEndproj = document.getElementById("hdnEstEndProj").value;
+		var taskName		= document.getElementById("txtTaskName").value;
+		var taskDesc 		= document.getElementById("txtTaskDesc").value;
+		var startDate 		= document.getElementById("txtEstStartDate").value;
+		var endDate 		= document.getElementById("txtEstEndDate").value;
+		var estStartproj	= document.getElementById("hdnEstStartProj").value;
+		var estEndproj 		= document.getElementById("hdnEstEndProj").value;
 		
 		var str = "";
 		var isValid = true;

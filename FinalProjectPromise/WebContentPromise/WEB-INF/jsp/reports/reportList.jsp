@@ -62,14 +62,18 @@
 							style="height: 500px; padding: 20px">
 							<h4 id="reportTitle"></h4>
 							<hr>
-							<br>
+							<div class="divContent form-group has-info">
+								<div class="text-danger" id="divError" style="display: none">
+									Save failed!
+								<ul id="errorContent"></ul>
+							</div>
 							<div id="datePeriod" style="display: none;">
 								<table>
 									<tr>
 										<td width="150px">Date period</td>
-										<td width="200px"><input type="text" id="txtStartDate" class="datepicker form-control" /></td>
+										<td width="200px"><input type="text" styleId="txtStartDate" id="txtStartDate" class="datepicker form-control" /></td>
 										<td width="50px" align="center">to</td>
-										<td width="200px"><input type="text" id="txtEndDate" class="datepicker form-control" /></td>
+										<td width="200px"><input type="text" styleId="txtEndDate" id="txtEndDate" class="datepicker form-control" /></td>
 									</tr>
 								</table>
 							</div>
@@ -414,11 +418,13 @@
 	<script type="text/javascript">
 	
 	function onBtnPrintClick(){
-		document.forms[0].target = "_blank";
-		document.forms[0].task.value = "printReport";
-		document.forms[0].filterValue.value = generateFilter();
-		document.forms[0].submit();
-		document.forms[0].target = "_self";
+		if(validateForm()){
+			document.forms[0].target = "_blank";
+			document.forms[0].task.value = "printReport";
+			document.forms[0].filterValue.value = generateFilter();
+			document.forms[0].submit();
+			document.forms[0].target = "_self";
+		}
 	}
 	
 	function generateFilter(){
@@ -698,6 +704,86 @@
 			$("#employee").hide();
 			$("#project").hide();
 			$("#subordinateEmployee").hide();
+		}
+		
+		function validateForm(){
+			
+			var empName		= document.getElementById("empIdDisplay").value;
+			var empSub 		= document.getElementById("txtSubordinateName").value;
+			var startDate 	= document.getElementById("txtStartDate").value;
+			var endDate 	= document.getElementById("txtEndDate").value;
+			var projName 	= document.getElementById("projIdDisplay").value;
+			var projStatus 	= document.getElementById("txtGenCodeId").value;
+			var deptName 	= document.getElementById("txtDeptId").value;
+			
+			
+			
+			var str = "";
+			var isValid = true;
+			
+			if ($('#subordinateEmployee').is(':visible')){
+				if(empSub.trim() == '') {
+					str+= "<li>Employee Name can not be empty!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#employee').is(':visible')){
+				if(empName.trim() == '') {
+					str+= "<li>Employee Name can not be empty!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#project').is(':visible')){
+				if(projName.trim() == '') {
+					str+= "<li>Project Name can not be empty!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#projectStatus').is(':visible')){
+				if(projStatus.trim() == '%') {
+					str+= "<li>Project Status must be Chosen!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#department').is(':visible')){
+				if(deptName.trim() == '') {
+					str+= "<li>Department Name must be Chosen!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#datePeriod').is(':visible')){
+				if(startDate.trim() == '') {
+					str+= "<li>Start Date can not be empty!</li>";
+					isValid = false;
+				}
+				else if(startDate > endDate) {
+					str+= "<li>Start Date can not be greater than End Date!</li>";
+					isValid = false;
+				}
+			}
+			
+			if ($('#datePeriod').is(':visible')){
+				if(endDate.trim() == '') {
+					str+= "<li>End Date can not be empty!</li>";
+					isValid = false;
+				}
+				else if(endDate < startDate) {
+					str+= "<li>End Date can not be smaller than Start Date!</li>";
+					isValid = false;
+				}
+			}
+			
+			if(!isValid){
+				document.getElementById('errorContent').innerHTML = str;
+				document.getElementById("divError").style.display = "block";
+			}
+			
+			return isValid;
 		}
 	</script>
 </body>
