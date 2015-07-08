@@ -150,4 +150,16 @@
    <procedure id="generateWeekend" parameterClass="java.util.Map"> 
    		{ call generateWeekend(to_date(#startDate#,&apos;yyyy-MM-dd&apos;),to_date(#endDate#,&apos;yyyy-MM-dd&apos;), #checkDays#, #createdBy#) } 
 	</procedure>
+	
+	<select id="getGeneralHolidayForCalendar" parameterClass="java.util.Map" resultClass="holiday.GeneralHolidayBean">
+		SELECT 
+			TO_CHAR(GEN_HOLIDAY_DATE,'yyyy-MM-dd') as genHolidayDateInString,
+			GEN_HOLIDAY_NAME as genHolidayName,
+			IS_GENERATED as isGenerated
+		FROM general_holiday 
+		WHERE TO_CHAR(GEN_HOLIDAY_DATE,'fmMM') = #month# 
+			AND TO_CHAR(GEN_HOLIDAY_DATE,'yyyy') = #year#
+			AND is_deleted = 0
+		ORDER BY GEN_HOLIDAY_DATE
+	</select>
 </sqlMap>

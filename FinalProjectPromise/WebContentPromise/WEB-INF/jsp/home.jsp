@@ -158,6 +158,10 @@ function generateColor(className1,className2){
 		<div class="col-md-3" style="margin-top: 14px;">
 			<p style="font-size: 15px;margin-bottom: -15px;text-align: center;" class="text-info"><b>Calendar</b></p>
        		<input id="field" style="visibility:hidden;">
+       		<div>
+      			<ul id="calendarLegend">
+      			</ul>
+       		</div>
 			<script>
 			$(function(){
 				var options = {};
@@ -173,10 +177,10 @@ function generateColor(className1,className2){
 				generateColor('.projDate', '.home-proj-body');
 				generateColor('.taskDate', '.home-task-body');
 			});
-			setInterval(function(){ 
-				var time = new moment().format("HH:mm");
-				document.getElementById("clock").innerHTML = time;
-			}, 20000);
+// 			setInterval(function(){ 
+// 				var time = new moment().format("HH:mm");
+// 				document.getElementById("clock").innerHTML = time;
+// 			}, 20000);
 			</script>
        	</div>
 	</div>

@@ -128,4 +128,24 @@ public class PersonalHolidayManager {
 				"personalHoliday.countPersonalHoliday", map);
 		return result;
 	}
+	
+	public List<PersonalHolidayBean> getPersonalHolidayForCalendar(Integer month, Integer year, Integer employeeId) {
+
+		Map map = new HashMap();
+		map.put("month", month);
+		map.put("year", year);
+		map.put("employeeId", employeeId);
+		
+		List<PersonalHolidayBean> listResult = Collections.EMPTY_LIST;
+
+		try {
+			listResult = this.ibatis.queryForList(
+					"personalHoliday.getPersonalHolidayForCalendar", map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return listResult;
+	}
 }

@@ -15,6 +15,9 @@ public class HomeForm extends ActionForm {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String username;
+	private String task = "";
+	private Integer currentMonth;
+	private Integer currentYear;
 	private List<IndependentTaskBean> listTaskBean;
 	private Float avgTaskProg;
 	private List<ProjectBean> listProjBean;
@@ -49,5 +52,29 @@ public class HomeForm extends ActionForm {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getTask() {
+		return task;
+	}
+	public void setTask(String task) {
+		this.task = task;
+	}
+	public Integer getCurrentMonth() {
+		return currentMonth;
+	}
+	public void setCurrentMonth(Integer currentMonth) {
+		this.currentMonth = currentMonth;
+	}
+	/**
+	 * @return the currentYear
+	 */
+	public Integer getCurrentYear() {
+		return currentYear;
+	}
+	/**
+	 * @param currentYear the currentYear to set
+	 */
+	public void setCurrentYear(Integer currentYear) {
+		this.currentYear = currentYear;
 	}
 }

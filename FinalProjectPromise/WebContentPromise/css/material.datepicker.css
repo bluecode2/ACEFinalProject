@@ -139,6 +139,15 @@ section.calendar a.day {
 
 section.calendar a.day.today {
 	color: #35BAF6;
+	font-weight: bold;
+}
+
+section.calendar a.day.holiday {
+	color: red;
+}
+
+section.calendar a.day.personalHoliday {
+	color: #01DF01;
 }
 
 section.calendar a.day {
@@ -151,8 +160,31 @@ section.calendar a.day.selected {
 	color: #fff;
 }
 
+section.calendar a.day.holiday.selected {
+	background-color: #35BAF6;
+	color: red;
+}
+
+section.calendar a.day.personalHoliday.selected {
+	background-color: #35BAF6;
+	color: #00FF00;
+}
+
 section.calendar a.day:hover {
 	background-color: #EDEDED;
 	color: #35BAF6;
+	text-decoration: none;
+}
+
+section.calendar a.day.holiday:hover {
+	background-color: #EDEDED;
+	color: red;
+	text-decoration: none;
+}
+
+
+section.calendar a.day.personalHoliday:hover {
+	background-color: #EDEDED;
+	color: #01DF01;
 	text-decoration: none;
 }

@@ -1,4 +1,6 @@
 $.fn.datepicker = function (options) {
+	var arrHoliday;
+	var arrPersonalHoliday;
 	var pickerHtml =
    	[
 	   	'<div class="material-datepicker" tabindex="0">',
@@ -18,12 +20,12 @@ $.fn.datepicker = function (options) {
 		    		'<span data-bind="text: $data" class="day heading"></span>',
 		    	'</div>',
 	    		'<div class="days" data-bind="foreach : monthStruct()">',
-	    			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
+	    			'<a data-bind="css:{ selected: $parent.isSelected($data), today: $parent.isToday($data), holiday: $parent.isHoliday($data), personalHoliday: $parent.isPersonalHoliday($data) },text: $data, click: function(data,event){ $parent.chooseDate(data) }" class="day" data-bind="text: $data"></a>',
 	    		'</div>',
 	    	'</section>',
-	    	'<section class="time">',
-	    		'<span id="clock" data-bind="text: time"></span>',
-    		'</section>',
+//	    	'<section class="time">',
+//	    		'<span id="clock" data-bind="text: time"></span>',
+//    		'</section>',
 		'</div>'
    	].join('\n');
 
@@ -71,7 +73,7 @@ $.fn.datepicker = function (options) {
 
 	function AppViewModel(field, picker, options) {
 		var self = this;
-		self.daysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+		self.daysShort = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 		self.field = field;
 		self.options = options;
 		self.today = ko.observable( moment() );
@@ -90,7 +92,7 @@ $.fn.datepicker = function (options) {
 	    });
 
 	    self.closePicker = function(){
-//			picker.addClass('hide');
+			picker.addClass('hide');
 		};
 
 		self.processDate = function(day) {
@@ -106,7 +108,9 @@ $.fn.datepicker = function (options) {
 
 		self.chooseDate = function(day) {
 			self.processDate(day);
-			self.closePicker();
+			//Edited by Haidar
+	    	//Make calendar always shown
+//			self.closePicker();
 		};
 
 		self.setupViewingDates = function() {
@@ -114,26 +118,50 @@ $.fn.datepicker = function (options) {
 			self.viewingMonth(self.datePickerValue().month() + 1);
 		}
 
+		//var notReady;
+		
 		self.buildMonthStruct = function(){
-	    	self.monthStruct.removeAll();
+			notReady = true;
+			self.monthStruct.removeAll();
 	    	var month = self.viewingMonth();
 	    	var year = self.viewingYear();
 	    	var startOfMonth = moment( "1/" + month + "/" + year, self.options.format).startOf('month');
 	    	var startDay = startOfMonth.format('dddd');
-	    	var startingPoint = startOfMonth.day();
+	    	var startingPoint = startOfMonth.day()-1;
+	    	if(startingPoint < 0)startingPoint = 6;
 	    	var daysInMonth = startOfMonth.endOf('month').date();
 	    	var day = 1;
-	    	for (var i = 0 ; i < 50 ; i++){
-	    		if (i < startingPoint) {
-	    			self.monthStruct.push("");
-	    		}
-	    		else {
-	    			if(day <= daysInMonth){
-		    			self.monthStruct.push(day);
-	    			}
-	    			day++;
-	    		}
-	    	}
+	    	
+	    	//Fetch holiday -- By Bona
+	    	$.ajax({
+				type : "POST",
+				url : "home.do",
+				async: false,
+				data : "task=fetchHoliday&currentMonth=" + self.viewingMonth() + "&currentYear=" + self.viewingYear(),
+				success : function(response) {
+					arrHoliday = response.trim().split('|')[0].split('#');
+					arrPersonalHoliday = response.trim().split('|')[1].split('#');
+					var legend = response.trim().split('|')[2];
+					
+					$("#calendarLegend").empty();
+					$("#calendarLegend").append(legend);
+					
+					for (var i = 0 ; i < 50 ; i++){
+			    		if (i < startingPoint) {
+			    			self.monthStruct.push("");
+			    		}
+			    		else {
+			    			if(day <= daysInMonth){
+				    			self.monthStruct.push(day);
+			    			}
+			    			day++;
+			    		}
+			    	}
+				},
+				error : function(e) {
+					alert("Error: " + e);
+				}
+			});
 	    };
 
 		self.fetchDateFromField = function(){
@@ -186,6 +214,19 @@ $.fn.datepicker = function (options) {
 	    	return thisDay && thisMonth && thisYear;
 	    };
 
+	    self.isHoliday = function(day) {
+	    	var dateInString = self.viewingYear() + "-" + self.viewingMonth() + "-" + day ;
+	    	//alert(arrHoliday + " " + dateInString + " " + $.inArray(dateInString,arrHoliday));
+	    	return ($.inArray(dateInString,arrHoliday) > -1);
+	    };
+	    
+	    self.isPersonalHoliday = function(day) {
+	    	var dateInString = self.viewingYear() + "-" + self.viewingMonth() + "-" + day ;
+	    	//alert(arrHoliday + " " + dateInString + " " + $.inArray(dateInString,arrHoliday));
+	    	return ($.inArray(dateInString,arrPersonalHoliday) > -1);
+	    };
+	    
+	    
 	    self.isSelected = function(day) {
 	    	var rightMonth = self.viewingMonth() == (self.datePickerValue().month() + 1);
 	    	var rightYear = self.viewingYear() == self.datePickerValue().year();

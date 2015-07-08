@@ -155,4 +155,23 @@ public class GeneralHolidayManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<GeneralHolidayBean> getGeneralHolidayForCalendar(Integer month, Integer year) {
+
+		Map map = new HashMap();
+		map.put("month", month);
+		map.put("year", year);
+		
+		List<GeneralHolidayBean> listResult = Collections.EMPTY_LIST;
+
+		try {
+			listResult = this.ibatis.queryForList(
+					"generalHoliday.getGeneralHolidayForCalendar", map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return listResult;
+	}
 }

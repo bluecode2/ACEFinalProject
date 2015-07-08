@@ -161,4 +161,17 @@
 			</isEqual>
 		</dynamic>		
 	</select>
+	
+	<select id="getPersonalHolidayForCalendar" parameterClass="java.util.Map" resultClass="holiday.PersonalHolidayBean">
+		SELECT 
+			TO_CHAR(HOLIDAY_DATE,'yyyy-MM-dd')		as holidayDateInString,
+			HOLIDAY_DESC		as holidayDesc
+		FROM personal_holiday 
+		WHERE TO_CHAR(HOLIDAY_DATE,'fmMM') = #month# 
+			AND TO_CHAR(HOLIDAY_DATE,'yyyy') = #year#
+			AND employee_id = #employeeId#
+			AND is_deleted = 0
+			AND is_exchange_day = 0
+		ORDER BY HOLIDAY_DATE
+	</select>
 </sqlMap>

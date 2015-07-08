@@ -110,4 +110,8 @@ public class Constant {
 		public static final String PROJECT_MANAGER_ROLE_ID = "ProjectManager";
 		public static final String APPLICATION_PROPERTIES_PATH = "appPropPath";
 	}
+	
+	public static class GeneralHolidayType{
+		public static final String WEEKEND = "GH_TYPE_01";
+	}
 }
