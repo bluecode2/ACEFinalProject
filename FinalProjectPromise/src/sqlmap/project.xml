@@ -596,7 +596,7 @@
 			</isEqual>
 		</dynamic>
 		order by ACT_END_DATE) us
-		WHERE ROWNUM <![CDATA[<=]]> = #end#)
+		WHERE ROWNUM <![CDATA[<=]]> #end#)
 		WHERE rnum <![CDATA[>=]]> #begin#
 	</select>
 

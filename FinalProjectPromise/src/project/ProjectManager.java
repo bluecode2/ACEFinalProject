@@ -161,8 +161,8 @@ public class ProjectManager {
 		return newProjectId;
 	}
 
-	public void insertProject(ProjectBean pBean) throws SQLException,
-			ParseException {
+	public boolean insertProject(ProjectBean pBean) throws ParseException {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -178,11 +178,13 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void updateProject(ProjectBean pBean) throws ParseException,
-			SQLException {
+	public boolean updateProject(ProjectBean pBean) throws ParseException{
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -193,7 +195,9 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public List<ProjectBean> getProjectInvolved(String col, String input,
