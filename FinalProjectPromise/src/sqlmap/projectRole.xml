@@ -24,14 +24,14 @@
 			hol.IS_DELETED			as isDeleted,
 			ROWNUM rnum FROM(
 				SELECT 
-				PROJECT_ROLE_ID 	as projectRoleId,
-				UPDATED_BY 			as updatedBy,
-				CREATED_BY 			as createdBy,
-				PROJECT_ROLE_NAME	as projectRoleName,
-				CREATE_DATE			as createDate, 
-				UPDATE_DATE 		as updateDate,
-				PROJECT_ROLE_CODE	as projectRoleCode,
-				IS_DELETED			as isDeleted
+				PROJECT_ROLE_ID 	as hol.PROJECT_ROLE_ID ,
+				UPDATED_BY 			as hol.UPDATED_BY ,
+				CREATED_BY 			as hol.CREATED_BY,
+				PROJECT_ROLE_NAME	as hol.PROJECT_ROLE_NAME,
+				CREATE_DATE			as hol.CREATE_DATE, 
+				UPDATE_DATE 		as hol.UPDATE_DATE,
+				PROJECT_ROLE_CODE	as hol.PROJECT_ROLE_CODE,
+				IS_DELETED			as hol.IS_DELETED
 				FROM PROJECT_ROLE 
 				WHERE IS_DELETED = 0
 		<dynamic prepend="AND">

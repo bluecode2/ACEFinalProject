@@ -42,7 +42,18 @@ public class GeneralHolidayHandler extends Action{
 			Boolean isAdd = genForm.getIsAdd();
 			if (isAdd) {
 				genForm.getGenHolidayBean().setCreatedBy(us.getUserId());
-				genManager.insertGeneralHoliday(genForm.getGenHolidayBean());
+				
+				
+				if(!genManager.insertGeneralHoliday(genForm.getGenHolidayBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New General Holiday!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New General Holiday!");
+					session.setAttribute("validationType", "success");
+				}
 			} 
 			else {
 				genForm.getGenHolidayBean().setUpdatedBy(us.getUserId());
@@ -53,8 +64,19 @@ public class GeneralHolidayHandler extends Action{
 			return null;
 		}
 		else if ("generate".equals(genForm.getTask())){
-			genManager.generateWeekend(genForm.getStartDateInString(), genForm.getEndDateInString(), genForm.getCheckDays(), us.getUserId());
 			
+			
+			
+			if(!genManager.generateWeekend(genForm.getStartDateInString(), genForm.getEndDateInString(), genForm.getCheckDays(), us.getUserId())){
+				session.setAttribute("validationMessage",
+						"Failed To Generate Weekend!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To General Weekend!");
+				session.setAttribute("validationType", "success");
+			}
 			response.sendRedirect("generalHoliday.do");
 			return null;
 		}
@@ -71,7 +93,17 @@ public class GeneralHolidayHandler extends Action{
 		else if ("delete".equals(genForm.getTask())) {
 			genForm.getGenHolidayBean().setUpdatedBy(us.getUserId());
 			genForm.getGenHolidayBean().setGenHolidayId(genForm.getSelectedId());
-			genManager.deleteGeneralHoliday(genForm.getGenHolidayBean());
+				
+			if(!genManager.deleteGeneralHoliday(genForm.getGenHolidayBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Delete General Holiday!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Delete General Holiday!");
+				session.setAttribute("validationType", "success");
+			}
 		}
 		else if ("search".equals(genForm.getTask())) {
 			if (genForm.getCurrSearchValue()!= "" && genForm.getCurrSearchValue2() != "") {	
@@ -103,7 +135,6 @@ public class GeneralHolidayHandler extends Action{
 			}
 		}
 		else if("generateWeekend".equals(genForm.getTask())){
-			request.setAttribute("pageTitle", "Generate Holiday Entry");
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.GENERATE_HOLIDAY_ENTRY,
 					us, request);
@@ -113,6 +144,12 @@ public class GeneralHolidayHandler extends Action{
 		genForm.setTask("");
 		
 		genForm.setSearchField(genForm.getCurrSearchField());
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
 		
 		int rowCount;
 		genForm.setArrList(genManager.getGeneralHoliday(

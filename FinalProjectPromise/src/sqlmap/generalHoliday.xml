@@ -18,17 +18,17 @@
 		holidayTypeName
 		from(
 				select
-				hol.genHolidayId as genHolidayId,
-				hol.genHolidayName as genHolidayName,
+				hol.genHolidayId 		as genHolidayId,
+				hol.genHolidayName 		as genHolidayName,
 				hol.genHolidayDateInString as genHolidayDateInString,
-				hol.isGenerated as isGenerated,
-				hol.createdBy as createdBy,
-				hol.updatedBy as updatedBy,
-				hol.createDateInString as createDateInString,
-				hol.updateDateInString as updateDateInString,
-				hol.isDeleted as isDeleted,
+				hol.isGenerated 		as isGenerated,
+				hol.createdBy 			as createdBy,
+				hol.updatedBy 			as updatedBy,
+				hol.createDateInString 	as createDateInString,
+				hol.updateDateInString 	as updateDateInString,
+				hol.isDeleted 			as isDeleted,
 				hol.holidayType			as holidayType,
-				hol.holidayTypeName as holidayTypeName,
+				hol.holidayTypeName 	as holidayTypeName,
 				ROWNUM rnum from(
 					SELECT
 					GEN_HOLIDAY_ID as genHolidayId,
