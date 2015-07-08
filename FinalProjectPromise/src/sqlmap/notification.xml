@@ -40,7 +40,7 @@
 			</isNotEmpty>
 		</dynamic>
 		ORDER BY notification_id DESC
-		) n where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]>
+		) n where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>]]>
 		#begin#
 		
 	</select>

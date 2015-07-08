@@ -89,7 +89,7 @@
 					</dynamic>		          
 		          order by EST_END_DATE) vit
 		      where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getCountAssignTask" resultClass="java.lang.Integer" parameterClass="java.util.Map">
@@ -275,7 +275,7 @@
 					</dynamic>		          
 		           order by EST_END_DATE) vit
 		      where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getListForIndividualTask" resultClass="independent_task.IndependentTaskBean" parameterClass="java.util.Map">
@@ -354,7 +354,7 @@
 				          OR TASK_STATUS='TA_STAT_06')  
 		           order by EST_END_DATE) vit
 		      where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>	
 	
 	<select id="getAvgProgress" resultClass="java.lang.Float" parameterClass="java.lang.Integer">

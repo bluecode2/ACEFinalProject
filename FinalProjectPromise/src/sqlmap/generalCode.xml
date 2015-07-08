@@ -46,7 +46,7 @@
 		order by gen_code_id,gen_code_index) genCode
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
 		WHERE rnum
-		<![CDATA[>=]]> #begin#
+		<![CDATA[>]]> #begin#
 	</select>
 
 	<select id="countGeneralCode" resultClass="java.lang.Integer" parameterClass="java.util.Map">

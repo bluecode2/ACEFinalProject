@@ -85,7 +85,7 @@
 		
 		order by proposed_task_id
 		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE
-		rnum <![CDATA[>=]]>
+		rnum <![CDATA[>]]>
 		#begin#
 		
 	</select>
