@@ -713,7 +713,7 @@
 			var startDate 	= document.getElementById("txtStartDate").value;
 			var endDate 	= document.getElementById("txtEndDate").value;
 			var projName 	= document.getElementById("projIdDisplay").value;
-			var projStatus 	= document.getElementById("txtGenCodeId").value;
+			/* var projStatus 	= document.getElementById("txtGenCodeId").value; */
 			var deptName 	= document.getElementById("txtDeptId").value;
 			
 			
@@ -742,12 +742,12 @@
 				}
 			}
 			
-			if ($('#projectStatus').is(':visible')){
+			/* if ($('#projectStatus').is(':visible')){
 				if(projStatus.trim() == '%') {
 					str+= "<li>Project Status must be Chosen!</li>";
 					isValid = false;
 				}
-			}
+			} */
 			
 			if ($('#department').is(':visible')){
 				if(deptName.trim() == '') {
