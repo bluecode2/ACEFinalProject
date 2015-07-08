@@ -266,8 +266,8 @@ public class ProjectManager {
 		return tmpCount;
 	}
 
-	public void setApproveProject(int projectId, int updatedBy)
-			throws SQLException {
+	public boolean setApproveProject(int projectId, int updatedBy){
+		boolean flag = true;
 		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_COMPLETED;
 
 		Map m = new HashMap();
@@ -285,11 +285,13 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void setDeclineProject(int projectId, int updatedBy, String remarks)
-			throws SQLException {
+	public boolean  setDeclineProject(int projectId, int updatedBy, String remarks){
+		boolean flag = true;
 		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_ONGOING;
 
 		Map m = new HashMap();
@@ -308,7 +310,9 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public Integer getCountProjectInvolved(Integer empId, String value)

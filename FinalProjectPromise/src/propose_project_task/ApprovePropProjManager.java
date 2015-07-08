@@ -96,7 +96,8 @@ public class ApprovePropProjManager {
 		}
 	}
 	
-	public void approveTask(ProposeProjectTaskBean pPropProjTask) {
+	public boolean approveTask(ProposeProjectTaskBean pPropProjTask) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -107,10 +108,13 @@ public class ApprovePropProjManager {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void declineTask(ProposeProjectTaskBean bean)  {
+	public boolean declineTask(ProposeProjectTaskBean bean)  {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -121,6 +125,8 @@ public class ApprovePropProjManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 }

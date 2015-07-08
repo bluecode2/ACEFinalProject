@@ -106,7 +106,16 @@ public class ProjectTaskHandler extends Action {
 						tsForm.getPrjBean().getProjectId());
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
 				tsForm.getTkBean().setTaskId(tmpNewId);
-				tsMan.createNewOProjectTask(tsForm.getTkBean());
+				
+				if(!tsMan.createNewOProjectTask(tsForm.getTkBean())){
+					session.setAttribute("validationMessage", "Failed To Create Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Create Task!");
+					session.setAttribute("validationType", "success");
+				}
 				tsForm.setTkBean(tsMan.getTaskById(tmpNewId));
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 						.getTkBean().getAssignedTo(), tsForm.getTkBean()
@@ -114,7 +123,17 @@ public class ProjectTaskHandler extends Action {
 			} else {
 
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editProjectTask(tsForm.getTkBean());
+				
+				
+				if(!tsMan.editProjectTask(tsForm.getTkBean())){
+					session.setAttribute("validationMessage", "Failed To Edit Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Task!");
+					session.setAttribute("validationType", "success");
+				}
 			}
 
 			response.sendRedirect("projectTask.do");
@@ -140,7 +159,16 @@ public class ProjectTaskHandler extends Action {
 						.setTaskStatus(Constant.GeneralCode.TASK_STATUS_COMPLETED);
 				pTaskBean.setUpdatedBy(us.getUserId());
 
-				tsMan.updateTaskStat(pTaskBean);
+				
+				if(!tsMan.updateTaskStat(pTaskBean)){
+					session.setAttribute("validationMessage", "Failed To Complete Task " +pTaskBean.getTaskName()+"!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To To Complete Task " +pTaskBean.getTaskName()+"!");
+					session.setAttribute("validationType", "success");
+				}
 				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 						.getTkBean().getAssignedTo(), tsForm.getTkBean()
@@ -172,9 +200,19 @@ public class ProjectTaskHandler extends Action {
 		} else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_CANCELLED);
-				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
+				if(!tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
-						tsForm.getRemarksRecord());
+						tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Cancel Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Cancel Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
+				
 				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 						.getTkBean().getAssignedTo(), tsForm.getTkBean()
@@ -185,6 +223,17 @@ public class ProjectTaskHandler extends Action {
 				tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
 						us.getUserId(), tsForm.getStatusTask(),
 						tsForm.getRemarksRecord());
+				if(!tsMan.editStatusRemarksProjectTask(tsForm.getSelectedId(),
+						us.getUserId(), tsForm.getStatusTask(),
+						tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Start Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Start Task!");
+				}
+				
 				tsForm.setTkBean(tsMan.getTaskById(tsForm.getSelectedId()));
 				noMan.createNotificationProjectTask(us.getEmployeeId(), tsForm
 						.getTkBean().getAssignedTo(), tsForm.getTkBean()
@@ -213,7 +262,15 @@ public class ProjectTaskHandler extends Action {
 			noMan.createNotificationProjectTask(us.getEmployeeId(),
 					iTaskBean.getAssignedTo(), iTaskBean.getTaskId());
 
-			aPropPMan.approveTask(tsForm.getBean());
+			
+			if(!aPropPMan.approveTask(tsForm.getBean())){
+				session.setAttribute("validationMessage", "Failed Approve Propose Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Approve Propose Task!");
+			}
 			noMan.createNotificationProposeTaskProject(us.getEmployeeId(),
 					tsForm.getBean().getPropBy(), tsForm.getBean()
 							.getPropTaskId());
@@ -223,8 +280,17 @@ public class ProjectTaskHandler extends Action {
 			tsForm.getBean().setUpdatedBy(us.getUserId());
 			tsForm.getBean().setPropTaskId(tsForm.getSelectTaskId());
 			tsForm.getBean().setRemakrs(tsForm.getRemarksProp());
-			aPropPMan.declineTask(tsForm.getBean());
-
+			
+			
+			if(!aPropPMan.declineTask(tsForm.getBean())){
+				session.setAttribute("validationMessage", "Failed Decline Propose Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Decline Propose Task!");
+			}
+			
 			tsForm.setBean(aPropPMan.getApproveTaskById(tsForm
 					.getSelectTaskId()));
 			noMan.createNotificationProposeTaskProject(us.getEmployeeId(),
@@ -245,6 +311,13 @@ public class ProjectTaskHandler extends Action {
 
 		tsForm.setEmpId(us.getEmployeeId());
 
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
+		
 		//Paging Project Task
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
@@ -293,6 +366,6 @@ public class ProjectTaskHandler extends Action {
 		request.setAttribute("rowCount2", tsForm.getListCount2());
 		
 		return mapping.findForward("list");
-
+		
 	}
 }

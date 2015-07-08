@@ -54,8 +54,9 @@ public class ProjectTaskManager {
 		return tmpCount;
 	}
 
-	public void createNewOProjectTask(ProjectTaskBean tsBean)
+	public boolean createNewOProjectTask(ProjectTaskBean tsBean)
 			 {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -66,10 +67,13 @@ public class ProjectTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void editProjectTask(ProjectTaskBean bean)  {
+	public boolean editProjectTask(ProjectTaskBean bean)  {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -80,11 +84,13 @@ public class ProjectTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
-	public void updateTaskStat(ProjectTaskBean bean) {
-	
+	public boolean updateTaskStat(ProjectTaskBean bean) {
+	boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -95,11 +101,15 @@ public class ProjectTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void editStatusRemarksProjectTask(int taskId, int updatedBy,
+	public boolean editStatusRemarksProjectTask(int taskId, int updatedBy,
 			String taskStatus, String remarks) {
+		boolean flag = true;
+		
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -116,7 +126,9 @@ public class ProjectTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public void startProjectTask(int taskId, int updatedBy,

@@ -81,7 +81,18 @@ public class ProjectHandler extends Action{
 			pForm.getpBean().setActStartDate(now);
 			pForm.getpBean().setUpdatedBy(us.getUserId());
 			
-			pMan.updateProject(pForm.getpBean());
+			
+			if(!pMan.updateProject(pForm.getpBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Start Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Start Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "success");
+			}
+
 		}
 		else if ("submit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("submit");
@@ -92,6 +103,17 @@ public class ProjectHandler extends Action{
 			
 			pMan.updateProject(pForm.getpBean());
 			
+			if(!pMan.updateProject(pForm.getpBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Approve Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Approve Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "success");
+			}
+			
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			nMan.createNotificationSubmitedProject(us.getEmployeeId(), pForm.getpBean().getDept_id(), pForm.getpBean().getProjectId());
 		}
@@ -100,7 +122,17 @@ public class ProjectHandler extends Action{
 			CommonFunction.initializeHeader(Constant.MenuCode.PROJECT_ENTRY,
 					us, request);
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			request.setAttribute("pageTitle", "Project Cancel");
+			
+			if(!pMan.updateProject(pForm.getpBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Cancel Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Cancel Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "success");
+			}
 			request.setAttribute("show", true);
 			return mapping.findForward("projectEntry");
 			
@@ -111,7 +143,6 @@ public class ProjectHandler extends Action{
 					us, request);
 			pForm.setIsProc("pause");
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
-			request.setAttribute("pageTitle", "Project Pause");
 			request.setAttribute("show", true);
 			return mapping.findForward("projectEntry");
 		}
@@ -121,7 +152,17 @@ public class ProjectHandler extends Action{
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
 			pForm.getpBean().setRemarks("");
 			pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ONGOING);
-			pMan.updateProject(pForm.getpBean());
+			if(!pMan.updateProject(pForm.getpBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Resume Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Resume Project "+pForm.getpBean().getProjectName()+ " !");
+				session.setAttribute("validationType", "success");
+			}
+			
 		}
 		else if ("forceClose".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("forceClose");
@@ -214,7 +255,17 @@ public class ProjectHandler extends Action{
 			else if (isProc.equalsIgnoreCase("pause")){
 				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_ON_HOLD);
-				pMan.updateProject(pForm.getpBean());
+					
+				if(!pMan.updateProject(pForm.getpBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Pause Project "+pForm.getpBean().getProjectName()+ " !");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Pause Project "+pForm.getpBean().getProjectName()+ " !");
+					session.setAttribute("validationType", "success");
+				}
 				
 				ProjectTaskManager taskMan = new ProjectTaskManager();
 				List<ProjectTaskBean> lstTask = taskMan.getListProjectTaskByProjectId("", "", 1, Integer.MAX_VALUE, pForm.getpBean().getProjectId());
@@ -234,7 +285,17 @@ public class ProjectHandler extends Action{
 				
 				pForm.getpBean().setUpdatedBy(us.getUserId());
 				pForm.getpBean().setProjectStatus(Constant.GeneralCode.PROJECT_STATUS_FORCE_CLOSED);
-				pMan.updateProject(pForm.getpBean());
+					
+				if(!pMan.updateProject(pForm.getpBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Force Close Project "+pForm.getpBean().getProjectName()+ " !");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Force Close Project "+pForm.getpBean().getProjectName()+ " !");
+					session.setAttribute("validationType", "success");
+				}
 				
 				ProjectTaskManager taskMan = new ProjectTaskManager();
 				List<ProjectTaskBean> lstTask = taskMan.getListProjectTaskByProjectId("", "", 1, Integer.MAX_VALUE, pForm.getpBean().getProjectId());
@@ -270,7 +331,8 @@ public class ProjectHandler extends Action{
 			request.setAttribute("validationType", session.getAttribute("validationType").toString());
 			session.removeAttribute("validationMessage");
 			session.removeAttribute("validationType");
-	}
+		}
+		
 		//untuk dept head atau PM
 		if (addBtn){
 			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
@@ -284,7 +346,6 @@ public class ProjectHandler extends Action{
 		pForm.setPageCount((int) Math.ceil((double) rowCount
 				/ (double) Constant.PAGE_SIZE));
 		
-		request.setAttribute("pageTitle", "Project");
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(pForm.getPageCount(),pForm.getCurrPage()));
 
