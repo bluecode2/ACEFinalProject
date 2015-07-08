@@ -242,7 +242,7 @@
 		</dynamic>										
 		order by menu_index) m
 		where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]>
+		where rnum <![CDATA[>]]>
 		#begin#
 	</select>
 

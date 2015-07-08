@@ -75,7 +75,7 @@
 			</isEqual>
 		</dynamic>
 		order by proposed_task_id
-		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]> #begin#
+		) protask where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getPropTaskByPropTaskId" parameterClass="java.lang.Integer"

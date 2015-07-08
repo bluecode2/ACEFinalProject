@@ -74,7 +74,8 @@ public class ProposeProjectTaskManager {
 		return newTaskId;
 	}
 	
-	public void insertPropProjTask(ProposeProjectTaskBean pProjTBean){
+	public boolean insertPropProjTask(ProposeProjectTaskBean pProjTBean){
+		boolean flag = true;
 		try {
 			pProjTBean.setPropTaskId(getNewTaskId());
 		} catch (SQLException e2) {
@@ -92,7 +93,9 @@ public class ProposeProjectTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public Integer getCountPropProjTask(String column, String value, Integer projId) throws SQLException{
@@ -131,7 +134,8 @@ public class ProposeProjectTaskManager {
 		return pProjTask;
 	}
 	
-	public void editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
+	public boolean editPropProjTask(ProposeProjectTaskBean pProjTaskBean){
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -142,10 +146,13 @@ public class ProposeProjectTaskManager {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
-	public void delPropProjTask(Integer userId, Integer propTaskId){
+	public boolean delPropProjTask(Integer userId, Integer propTaskId){
+		boolean flag = true;
 		Map map = new HashMap();
 		map.put("userId", userId);
 		map.put("propTaskId", propTaskId);
@@ -160,7 +167,9 @@ public class ProposeProjectTaskManager {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 }

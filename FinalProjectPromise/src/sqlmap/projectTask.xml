@@ -35,29 +35,29 @@
 		taskStatusName
 		from (
 			select
-			vit.taskId AS taskId,
-			vit.PROJECT_ID as projectId,
-			vit.PROJECT_Code as projectCode,
-			vit.PROJECT_name as projectName,
-			vit.ASSIGNED_TO as assignedTo,
-			vit.ASSIGNED_TO_NAME as assignedToName,
-			vit.ASSIGNED_BY as assignedBy,
-			vit.ASSIGNED_BY_NAME as assignedByName,
-			vit.TASK_STATUS as taskStatus,
-			vit.TASK_NAME as taskName,
-			vit.TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as estStartDateInString,
-			vit.TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as estEndDateInString,
-			vit.TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as actStartDateInString,
-			vit.TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as actEndDateInString,
-			vit.EST_MAIN_DAYS as estMainDays,
-			vit.ACT_MAIN_DAYS as actmainDays,
-			vit.TASK_PROGRESS as taskProgress,
-			vit.REMARKS as remarks,
-			vit.TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString,
-			vit.TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
-			vit.TASK_DESC as taskDesc,
-			vit.IS_OUTSOURCE as isOutsource,
-			vit.TASK_STATUS_NAME as taskStatusName,
+			vit.taskId as taskId,
+            vit.projectId as projectId,
+            vit.projectCode as projectCode,
+            vit.projectName as projectName,
+            vit.assignedTo as assignedTo,
+            vit.assignedToName as assignedToName,
+            vit.assignedBy as assignedBy,
+            vit.assignedByName as assignedByName,
+            vit.taskStatus as taskStatus,
+            vit.taskName as taskName,
+            vit.estStartDateInString as estStartDateInString,
+            vit.estEndDateInString as estEndDateInString,
+            vit.actStartDateInString as actStartDateInString,
+            vit.actEndDateInString as actEndDateInString,
+            vit.estMainDays as estMainDays,
+            vit.actmainDays as actmainDays,
+            vit.taskProgress as taskProgress,
+            vit.remarks as remarks,
+            vit.createDateInString as createDateInString,
+            vit.updateDateInString as updateDateInString,
+            vit.taskDesc as taskDesc,
+            vit.isOutsource as isOutsource,
+            vit.taskStatusName as taskStatusName,
 			ROWNUM rnum from(
 				SELECT
 				TASK_ID AS taskId,
@@ -102,7 +102,7 @@
 		</dynamic>
 		order by task_id) vit
 		where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="getCountProjectTaskByProject" resultClass="java.lang.Integer"
@@ -219,23 +219,17 @@
 		ASSIGNED_BY_NAME as assignedByName,
 		TASK_STATUS as taskStatus,
 		TASK_NAME as taskName,
-		TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as
-		estStartDateInString,
-		TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as
-		estEndDateInString,
-		TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as
-		actStartDateInString,
-		TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as
-		actEndDateInString,
+		TO_CHAR(EST_START_DATE,'yyyy-MM-dd') as estStartDateInString,
+		TO_CHAR(EST_END_DATE,'yyyy-MM-dd') as estEndDateInString,
+		TO_CHAR(ACT_START_DATE,'yyyy-MM-dd') as actStartDateInString,
+		TO_CHAR(ACT_END_DATE,'yyyy-MM-dd') as actEndDateInString,
 		EST_MAIN_DAYS as estMainDays,
-		ACT_MAIN_DAYS as
-		actmainDays,
+		ACT_MAIN_DAYS as actmainDays,
 		TASK_PROGRESS as taskProgress,
 		REMARKS as remarks,
 		TO_CHAR(CREATE_DATE,'yyyy-MM-dd') as createDateInString,
 		TO_CHAR(UPDATE_DATE,'yyyy-MM-dd') as updateDateInString,
-		TASK_DESC as
-		taskDesc,
+		TASK_DESC as taskDesc,
 		IS_OUTSOURCE as isOutsource,
 		TASK_STATUS_NAME as
 		taskStatusName

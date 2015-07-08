@@ -91,14 +91,34 @@ public class ProjectApprovalHandler extends Action{
 		}
 		
 		else if ("approve".equals(paForm.getTask())) {
-			paMan.setApproveProject(paForm.getSelectedId(), us.getUserId());
+			
+			if(!paMan.setApproveProject(paForm.getSelectedId(), us.getUserId())){
+				session.setAttribute("validationMessage", "Failed To Approve Project!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Approve Project!");
+				session.setAttribute("validationType", "success");
+			}
+			
 			paForm.setpBean(paMan.getProjectByID(paForm.getSelectedId()));
 			noMan.createNotificationProject(us.getEmployeeId(), paForm.getpBean().getEmployeeId(), paForm.getpBean().getProjectId());
 			
 		}
 		
 		else if ("decline".equals(paForm.getTask())) {
-			paMan.setDeclineProject(paForm.getSelectedId(), us.getUserId(), paForm.getRemarksRecord());
+
+			if(!paMan.setDeclineProject(paForm.getSelectedId(), us.getUserId(), paForm.getRemarksRecord())){
+				session.setAttribute("validationMessage", "Failed To Decline Project!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Decline Project!");
+				session.setAttribute("validationType", "success");
+			}
+			
 			paForm.setpBean(paMan.getProjectByID(paForm.getSelectedId()));
 			noMan.createNotificationProject(us.getEmployeeId(), paForm.getpBean().getEmployeeId(), paForm.getpBean().getProjectId());
 
@@ -131,11 +151,15 @@ public class ProjectApprovalHandler extends Action{
 			return mapping.findForward("evaluate");
 		}
 		
-		request.setAttribute("pageTitle", "Project Approval");
 		paForm.setTask("");
 		paForm.setSearchField(paForm.getCurrSearchField());
 		paForm.setSearchValue(paForm.getCurrSearchValue());
-		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
 		paForm.setArrList(paMan.getListProjectToEvaluate(
 				paForm.getCurrSearchField(), paForm.getCurrSearchValue(),
 				paForm.getCurrPage(), Constant.PAGE_SIZE,us.getDeptId()));

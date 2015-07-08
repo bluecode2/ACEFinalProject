@@ -88,7 +88,16 @@ public class ProjectInvolvedTaskHandler extends Action {
 			pTaskBean.setTaskStatus(Constant.GeneralCode.TASK_STATUS_ONGOING);
 			pTaskBean.setUpdatedBy(us.getUserId());
 
-			tsMan.updateTaskStat(pTaskBean);
+
+			if(!tsMan.updateTaskStat(pTaskBean)){
+				session.setAttribute("validationMessage", "Failed To Start task " + pTaskBean.getTaskName() + "!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Start task " + pTaskBean.getTaskName() + "!");
+				session.setAttribute("validationType", "success");
+			}
 
 		} else if ("submitTask".equalsIgnoreCase(tsForm.getTask())) {// TASK TO
 																		// SUBMIT
@@ -100,7 +109,16 @@ public class ProjectInvolvedTaskHandler extends Action {
 			pTaskBean.setUpdatedBy(us.getUserId());
 			
 
-			tsMan.updateTaskStat(pTaskBean);
+			if(!tsMan.updateTaskStat(pTaskBean)){
+				session.setAttribute("validationMessage", "Failed To Submitted task " + pTaskBean.getTaskName() + "!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Submitted task " + pTaskBean.getTaskName() + "!");
+				session.setAttribute("validationType", "success");
+			}
+			
 			
 			noMan.createNotificationProjectTask(us.getEmployeeId(), pTaskBean.getAssignedBy(), pTaskBean.getTaskId());
 		} else if ("pauseTask".equalsIgnoreCase(tsForm.getTask())) { // TASK TO
@@ -109,16 +127,35 @@ public class ProjectInvolvedTaskHandler extends Action {
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ON_HOLD;
 			String remarks = tsForm.getRemarksRecord();
-			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(),
-					taskStatus, remarks);
+			
+			
+			if(!tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(),
+					taskStatus, remarks)){
+				session.setAttribute("validationMessage", "Failed To Pause Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Pause Task!");
+				session.setAttribute("validationType", "success");
+			}
 			
 		} else if ("resumeTask".equalsIgnoreCase(tsForm.getTask())) { // TASK TO
 																		// RESUME
 																		// TASK
 			int taskId = tsForm.getTestingId();
 			String taskStatus = Constant.GeneralCode.TASK_STATUS_ONGOING;
-			tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(), taskStatus,"");
-
+			
+			if(!tsMan.editStatusRemarksProjectTask(taskId, us.getUserId(),
+					taskStatus, "")){
+				session.setAttribute("validationMessage", "Failed To Resume Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Resume Task!");
+				session.setAttribute("validationType", "success");
+			}
 		}
 
 		// Handling Task Propose Task
@@ -128,10 +165,18 @@ public class ProjectInvolvedTaskHandler extends Action {
 					.getSelectTaskId()));
 			request.setAttribute("viewAddEdit", "show");
 		} else if ("delete".equalsIgnoreCase(tsForm.getTaskForProp())) {
-			pProjtaskMan.delPropProjTask(us.getEmployeeId(),
-					tsForm.getSelectTaskId());
+			if(!pProjtaskMan.delPropProjTask(us.getEmployeeId(),
+					tsForm.getSelectTaskId())){
+				session.setAttribute("validationMessage", "Failed To Delete Propose Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Delete Employee Rank !");
+				session.setAttribute("validationType", "success");
+			}
+			
 		} else if ("cancel".equalsIgnoreCase(tsForm.getTaskForProp())) {
-
 			tsForm.setShowDiv("false");
 			request.setAttribute("viewAddEdit", "hide");
 		} else if ("save".equalsIgnoreCase(tsForm.getTaskForProp())) {
@@ -140,14 +185,35 @@ public class ProjectInvolvedTaskHandler extends Action {
 				tsForm.getBean().setProjectId(projId);
 				tsForm.getBean().setCreatedBy(us.getUserId());
 				tsForm.getBean().setPropBy(us.getEmployeeId());
-				pProjtaskMan.insertPropProjTask(tsForm.getBean());
+				
+
+				if(!pProjtaskMan.insertPropProjTask(tsForm.getBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New Propose Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New Propose Task!");
+					session.setAttribute("validationType", "success");
+				}
 				
 				tsForm.setBean(pProjtaskMan.getPropProjTaskByTaskId(tsForm.getBean().getPropTaskId()));
 				noMan.createNotificationProposeTaskProject(us.getEmployeeId(), tsForm.getBean().getPropTo(), tsForm.getBean().getPropTaskId());
 			} else {
 				tsForm.getBean().setProjectId(projId);
 				tsForm.getBean().setUpdatedBy(us.getUserId());
-				pProjtaskMan.editPropProjTask(tsForm.getBean());
+			System.out.println(tsForm.getBean().getPropTaskId());
+				if(!pProjtaskMan.editPropProjTask(tsForm.getBean())){
+					session.setAttribute("validationMessage", "Failed To Edit Propose Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Propose Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
 			}
 			response.sendRedirect("projectInvolvedTask.do");
 			return null;
@@ -179,6 +245,12 @@ public class ProjectInvolvedTaskHandler extends Action {
 				.createPagingNavigatorList(tsForm.getPageCount(),
 						tsForm.getCurrPage()));
 
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
 		request.setAttribute("pageCount", tsForm.getPageCount());
 		request.setAttribute("currPage", tsForm.getCurrPage());
 		request.setAttribute("rowCount", tsForm.getListCount());

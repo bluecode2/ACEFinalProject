@@ -491,12 +491,12 @@
 	
 	function validateForm(){
 		
-		var taskName	= document.getElementById("txtTaskName").value;
-		var taskDesc 	= document.getElementById("txtTaskDesc").value;
-		var startDate 	= document.getElementById("txtEstStartDate").value;
-		var endDate 	= document.getElementById("txtEstEndDate").value;
-		var estStartproj = document.getElementById("hdnEstStartProj").value;
-		var estEndproj = document.getElementById("hdnEstEndProj").value;
+		var taskName		= document.getElementById("txtTaskName").value;
+		var taskDesc 		= document.getElementById("txtTaskDesc").value;
+		var startDate 		= document.getElementById("txtEstStartDate").value;
+		var endDate 		= document.getElementById("txtEstEndDate").value;
+		var estStartproj	= document.getElementById("hdnEstStartProj").value;
+		var estEndproj 		= document.getElementById("hdnEstEndProj").value;
 		
 		var str = "";
 		var isValid = true;
@@ -543,6 +543,7 @@
 		
 		return isValid;
 	}
+	
 </script>
 </head>
 <body>
@@ -571,21 +572,28 @@
 			styleId="users_empId" />
 		<html:hidden property="testingId" name="projectTaskForm" />
 		<html:hidden property="showDiv" name="projectTaskForm" />
-		<html:hidden styleId="hdnPropTaskId" property="selectTaskId" name="projectTaskForm" />
+		<html:hidden property="selectTaskId" name="projectTaskForm" />
 		
 		<html:hidden property="allowAdd" name="projectTaskForm" />
 		<html:hidden property="isAdd" name="projectTaskForm" />
 		
-<%-- 		<html:hidden property="bean.propTaskId" --%>
-<%-- 			name="projectTaskForm" value="" /> --%>
+		<html:hidden property="bean.propTaskId" styleId="hdnPropTaskId" 
+			name="projectTaskForm"/>
 		<html:hidden property="tmpProjectStatus" name="projectTaskForm" styleId="hdnStatProj"/>
 
 		<!-- untuk validasi date -->
 		<html:hidden property="estStartProj" name="projectTaskForm" styleId="hdnEstStartProj"/>
 		<html:hidden property="estEndProj" name="projectTaskForm" styleId="hdnEstEndProj"/>
-		
+
 		<div class="container divContent">
 			<div class="form-group has-info">
+					<logic:notEmpty name="validationMessage">
+						<br/>
+							<div class="col-md-6 alert alert-dismissable alert-<bean:write name="validationType" />" role="alert">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong><bean:write name="validationMessage" /></strong>
+							</div>
+		</logic:notEmpty>
 				<table width="100%">
 					<tr>
 						<td width="45%">

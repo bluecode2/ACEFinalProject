@@ -24,14 +24,14 @@
 			hol.IS_DELETED			as isDeleted,
 			ROWNUM rnum FROM(
 				SELECT 
-				PROJECT_ROLE_ID 	as projectRoleId,
-				UPDATED_BY 			as updatedBy,
-				CREATED_BY 			as createdBy,
-				PROJECT_ROLE_NAME	as projectRoleName,
-				CREATE_DATE			as createDate, 
-				UPDATE_DATE 		as updateDate,
-				PROJECT_ROLE_CODE	as projectRoleCode,
-				IS_DELETED			as isDeleted
+				PROJECT_ROLE_ID 	as PROJECT_ROLE_ID ,
+				UPDATED_BY 			as UPDATED_BY ,
+				CREATED_BY 			as CREATED_BY,
+				PROJECT_ROLE_NAME	as PROJECT_ROLE_NAME,
+				CREATE_DATE			as CREATE_DATE, 
+				UPDATE_DATE 		as UPDATE_DATE,
+				PROJECT_ROLE_CODE	as PROJECT_ROLE_CODE,
+				IS_DELETED			as IS_DELETED
 				FROM PROJECT_ROLE 
 				WHERE IS_DELETED = 0
 		<dynamic prepend="AND">
@@ -46,7 +46,7 @@
 		</dynamic>				
 		ORDER BY PROJECT_ROLE_ID ) hol
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]>
+		WHERE rnum <![CDATA[>]]>
 		#begin#
 	</select>
 	<select id="getProjectRoleForPopUp" resultClass="project_role.ProjectRoleBean">

@@ -226,7 +226,7 @@
 					</div>
 					<div class="modal-body">
 						<table width="100%" id="tblShow"
-							class="table table-striped table-hover table-bordered table-clickable">
+							class="table table-striped table-hover table-bordered">
 
 								<tr>
 									<th class="align-center">Employee Name</th>

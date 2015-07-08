@@ -48,7 +48,7 @@
 					where IS_ACTIVE = 1 AND PROJECT_ID = #projId#
 	      	 		order by MEMBER_ID) us 
 		       WHERE ROWNUM <![CDATA[<=]]> #end#)
-	        WHERE rnum <![CDATA[>=]]> #begin#
+	        WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getProjectMemberById" resultClass="project_member.ProjectMemberBean" parameterClass="java.lang.Integer">

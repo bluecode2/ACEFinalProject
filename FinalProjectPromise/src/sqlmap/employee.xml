@@ -108,7 +108,7 @@
 			</isEqual>
 		</dynamic>			
 		ORDER BY EMPLOYEE_CODE ASC ) emp where ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="countEmployee" resultClass="java.lang.Integer"

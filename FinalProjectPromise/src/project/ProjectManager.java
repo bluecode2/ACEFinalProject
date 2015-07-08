@@ -161,8 +161,8 @@ public class ProjectManager {
 		return newProjectId;
 	}
 
-	public void insertProject(ProjectBean pBean) throws SQLException,
-			ParseException {
+	public boolean insertProject(ProjectBean pBean) throws ParseException {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -178,11 +178,13 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void updateProject(ProjectBean pBean) throws ParseException,
-			SQLException {
+	public boolean updateProject(ProjectBean pBean) throws ParseException{
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -193,7 +195,9 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public List<ProjectBean> getProjectInvolved(String col, String input,
@@ -262,8 +266,8 @@ public class ProjectManager {
 		return tmpCount;
 	}
 
-	public void setApproveProject(int projectId, int updatedBy)
-			throws SQLException {
+	public boolean setApproveProject(int projectId, int updatedBy){
+		boolean flag = true;
 		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_COMPLETED;
 
 		Map m = new HashMap();
@@ -281,11 +285,13 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void setDeclineProject(int projectId, int updatedBy, String remarks)
-			throws SQLException {
+	public boolean  setDeclineProject(int projectId, int updatedBy, String remarks){
+		boolean flag = true;
 		String projectStatus = Constant.GeneralCode.PROJECT_STATUS_ONGOING;
 
 		Map m = new HashMap();
@@ -304,7 +310,9 @@ public class ProjectManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public Integer getCountProjectInvolved(Integer empId, String value)

@@ -43,7 +43,7 @@
 			</dynamic>
 	        ORDER BY USER_ROLE_ID) ur 
 		where ROWNUM <![CDATA[<=]]> #end#)
-	where rnum <![CDATA[>=]]> #begin#
+	where rnum <![CDATA[>]]> #begin#
 	</select>
 	<select id="getUserRoleForPopUp" resultClass="user.UserRoleBean">
 			SELECT 

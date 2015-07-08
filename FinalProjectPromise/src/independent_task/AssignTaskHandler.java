@@ -61,12 +61,27 @@ public class AssignTaskHandler extends Action {
 
 			if (isAdd) {
 				tsForm.getTkBean().setCreatedBy(us.getUserId());
-				tsMan.createNewAssignTask(tsForm.getTkBean());
+				if (tsMan.createNewAssignTask(tsForm.getTkBean())){
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
-				
+				session.setAttribute("validationMessage",
+						"Succeed to Add New Assign Task!");
+				session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Add New Assign Task!");
+					session.setAttribute("validationType", "danger");
+				}
 			} else {
 				tsForm.getTkBean().setUpdatedBy(us.getUserId());
-				tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy());			
+				if (tsMan.editAssignTask(tsForm.getTkBean().getTaskId(), tsForm.getTkBean().getTaskName(), tsForm.getTkBean().getTaskDesc(), tsForm.getTkBean().getUpdatedBy())){
+					session.setAttribute("validationMessage",
+							"Succeed to Edit Task : " + tsForm.getTkBean().getTaskName() + "!");
+					session.setAttribute("validationType", "success");
+				}
+				else {
+					session.setAttribute("validationMessage", "Failed to Edit Task : " + tsForm.getTkBean().getTaskName() + "!");
+					session.setAttribute("validationType", "danger");
+				}
 				
 			}
 			response.sendRedirect("assignTask.do");
@@ -77,7 +92,6 @@ public class AssignTaskHandler extends Action {
 			
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
-				request.setAttribute("pageTitle", "Assign Independent Task");
 				CommonFunction.initializeHeader(Constant.MenuCode.ASSIGN_TASK_ENTRY,us, request);
 				request.setAttribute("listAssignTo", empMan.getEmpForAssignTask(us.getEmployeeId(),"",""));
 				return mapping.findForward("assignTaskEntry");
@@ -85,7 +99,16 @@ public class AssignTaskHandler extends Action {
 			
 			else if (tsForm.getSelectedEdit() == 1) { //APPROVED
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
-				tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+				if(tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"")){
+					session.setAttribute("validationMessage", "Failed To Approve Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Approve Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}	
@@ -93,13 +116,32 @@ public class AssignTaskHandler extends Action {
 		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_CANCELLED);
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				
+				if(tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Cancel Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Cancel Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 			else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_ONGOING);
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				
+				if(tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Start Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Start Task!");
+					session.setAttribute("validationType", "success");
+				}
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
@@ -136,6 +178,13 @@ public class AssignTaskHandler extends Action {
 		
 		tsForm.setTask("");
 		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
+		
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());
 		
@@ -144,7 +193,6 @@ public class AssignTaskHandler extends Action {
 		
 		tsForm.setArrList(tsMan.getListAssignTask(tsForm.getCurrSearchField(), tsForm.getCurrSearchValue(), tsForm.getCurrPage(), Constant.PAGE_SIZE, us.getEmployeeId()));
 
-		request.setAttribute("pageTitle", "Assign Independent Task");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(tsForm.getPageCount(), tsForm.getCurrPage()));
 
 		request.setAttribute("pageCount", tsForm.getPageCount());

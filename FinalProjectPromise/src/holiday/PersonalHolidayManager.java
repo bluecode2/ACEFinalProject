@@ -59,8 +59,8 @@ public class PersonalHolidayManager {
 		return tmpNewHolId;
 	}
 	
-	public void insertPersonalHoliday(PersonalHolidayBean persHolidayBean)
-			throws SQLException {
+	public boolean insertPersonalHoliday(PersonalHolidayBean persHolidayBean){
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -71,8 +71,10 @@ public class PersonalHolidayManager {
 				this.ibatis.endTransaction();
 			}
 		} catch (SQLException e) {
+			flag = false;
 			e.printStackTrace();
 		}
+		return flag;
 	}
 
 	public PersonalHolidayBean getPersonalHolidayEdit(int genId){
@@ -88,8 +90,8 @@ public class PersonalHolidayManager {
 		return persHolidayBean;
 	}
 
-	public void editPersonalHoliday(PersonalHolidayBean persHolidayBean)
-			throws SQLException {
+	public boolean editPersonalHoliday(PersonalHolidayBean persHolidayBean){
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -101,10 +103,13 @@ public class PersonalHolidayManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void deletePersonalHoliday(PersonalHolidayBean persHolidayBean) throws SQLException {
+	public boolean deletePersonalHoliday(PersonalHolidayBean persHolidayBean) throws SQLException {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -115,7 +120,9 @@ public class PersonalHolidayManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public Integer getCountPersonalHoliday(String column, String value, String value2)

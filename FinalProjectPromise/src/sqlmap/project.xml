@@ -91,7 +91,7 @@
 		</dynamic>
 		order by EST_END_DATE) us
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getAllProjectForPopUp" resultClass="project.ProjectBean">
@@ -206,7 +206,7 @@
 			</dynamic>
 			order by EST_END_DATE) us
 			WHERE ROWNUM <![CDATA[<=]]> #end#)
-			WHERE rnum <![CDATA[>=]]> #begin#
+			WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="getProjForHome" parameterClass="java.util.Map"
@@ -290,7 +290,7 @@
 					(PROJECT_STATUS = 'PR_STAT_02' OR PROJECT_STATUS = 'PR_STAT_03' OR PROJECT_STATUS = 'PR_STAT_05')
 					order by EST_END_DATE) us
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="avgProjProg" resultClass="java.lang.Float" parameterClass="java.lang.Integer">
@@ -485,7 +485,7 @@
 		</dynamic>
 		order by P.EST_END_DATE) us
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="countProjectInvolved" resultClass="java.lang.Integer"
@@ -596,8 +596,8 @@
 			</isEqual>
 		</dynamic>
 		order by ACT_END_DATE) us
-		WHERE ROWNUM <![CDATA[<=]]> = #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE ROWNUM <![CDATA[<=]]> #end#)
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="countProjectToEvaluate" resultClass="java.lang.Integer"
@@ -739,7 +739,7 @@
 		</dynamic>
 		order by EST_END_DATE) us
 		WHERE ROWNUM <![CDATA[<=]]> #end#)
-		WHERE rnum <![CDATA[>=]]> #begin#
+		WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 
 	<select id="countProjectListForRole" resultClass="java.lang.Integer"

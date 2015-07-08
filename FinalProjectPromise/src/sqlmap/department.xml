@@ -61,7 +61,7 @@
 			</isEqual>
 		</dynamic>
 		order by dept_id
-		) dept where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>=]]> #begin#
+		) dept where ROWNUM <![CDATA[<=]]> #end#) WHERE rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getDepartmentbyDeptId" parameterClass="java.lang.Integer" resultClass="department.DepartmentBean">
@@ -131,8 +131,7 @@
 		dept_head_id = #deptHeadId#,
 		updated_by = #updatedBy#,
 		dept_code = #deptCode#,
-		dept_name
-		= #deptName#,
+		dept_name = #deptName#,
 		update_date = SYSDATE
 		WHERE dept_id = #deptId#
 	</update>

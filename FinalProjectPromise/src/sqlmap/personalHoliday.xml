@@ -63,7 +63,7 @@
 		</dynamic>		
 		ORDER BY P.HOLIDAY_DATE) hol
 		where ROWNUM <![CDATA[<=]]> #end#)
-		where rnum <![CDATA[>=]]> #begin#
+		where rnum <![CDATA[>]]> #begin#
 	</select>
 	
 	<select id="getPersonalHolidayByHolId" parameterClass="java.lang.Integer" resultClass="holiday.PersonalHolidayBean">

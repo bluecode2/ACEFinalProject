@@ -1,7 +1,16 @@
 @font-face {
 	font-family: FontAwesome;
-	src: url('../fonts/FontAwesome.otf');
-}
+	src: url('../fonts/FontAwesome.otf'); }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../fonts/Light/RobotoDraft-Light.woff2?v=1.0.0") format("woff2"), url("./fonts/Light/RobotoDraft-Light.woff?v=1.0.0") format("woff"), url("./fonts/Light/RobotoDraft-Light.ttf?v=1.0.0") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+@font-face {
+  font-family: RobotoDraft;
+  src: url("../fonts/Regular/RobotoDraft-Regular.woff2?v=1.0.0") format("woff2"), url("./fonts/Regular/RobotoDraft-Regular.woff?v=1.0.0") format("woff"), url("./fonts/Regular/RobotoDraft-Regular.ttf?v=1.0.0") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
 
 .no-select {
     -webkit-touch-callout: none;
@@ -13,7 +22,8 @@
 }
 
 .material-datepicker {
-	font-family: Roboto;
+	font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
 	margin-top: 0;
 	margin-left: 5px;
 	width: 260px;
