@@ -36,7 +36,6 @@ public class PersonalHolidayHandler extends Action{
 		
 		if("add".equals(persForm.getTask())){
 			persForm.setIsAdd(true);
-			request.setAttribute("pageTitle", "Personal Holiday Entry");
 			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
 			
 			CommonFunction.initializeHeader(Constant.MenuCode.PERSONAL_HOLIDAY_ENTRY,
@@ -51,18 +50,37 @@ public class PersonalHolidayHandler extends Action{
 				persForm.getPersHolidayBean().setHolidayId(persManager.getNewGenHolidayId());
 				persForm.getPersHolidayBean().setCreatedBy(us.getUserId());
 				
-				persManager.insertPersonalHoliday(persForm.getPersHolidayBean());
+				
+				if(!persManager.insertPersonalHoliday(persForm.getPersHolidayBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New Personal Holiday!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New Personal Holiday!");
+					session.setAttribute("validationType", "success");
+				}
 			} 
 			else {
 				persForm.getPersHolidayBean().setUpdatedBy(us.getUserId());
-				persManager.editPersonalHoliday(persForm.getPersHolidayBean());
+				
+				if(!persManager.editPersonalHoliday(persForm.getPersHolidayBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Edit Personal Holiday!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Personal Holiday!");
+					session.setAttribute("validationType", "success");
+				}
 			}
 
 			response.sendRedirect("personalHoliday.do");
 			return null;
 		}
 		else if ("edit".equals(persForm.getTask())) {
-			request.setAttribute("pageTitle", "Personal Holiday Edit");
 			persForm.setPersHolidayBean(persManager.getPersonalHolidayEdit(persForm.getSelectedId()));
 			
 			request.setAttribute("listEmployeeSearch", empManager.getListEmployeeForPersonalHoliday());
@@ -76,7 +94,18 @@ public class PersonalHolidayHandler extends Action{
 		else if ("delete".equals(persForm.getTask())) {
 			persForm.getPersHolidayBean().setUpdatedBy(us.getUserId());
 			persForm.getPersHolidayBean().setHolidayId(persForm.getSelectedId());
-			persManager.deletePersonalHoliday(persForm.getPersHolidayBean());
+			
+			
+			if(!persManager.deletePersonalHoliday(persForm.getPersHolidayBean())){
+				session.setAttribute("validationMessage",
+						"Failed To Delete Personal Holiday!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Delete Personal Holiday!");
+				session.setAttribute("validationType", "success");
+			}
 		}
 		
 		persForm.setTask("");
@@ -90,6 +119,12 @@ public class PersonalHolidayHandler extends Action{
 		persForm.setSearchValue(persForm.getCurrSearchValue());
 		persForm.setSearchValue2(persForm.getCurrSearchValue2());
 		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
 		int rowCount;
 		persForm.setArrList(persManager.getPersonalHoliday(
 				persForm.getCurrSearchField(), persForm.getCurrSearchValue(),persForm.getCurrSearchValue2(),

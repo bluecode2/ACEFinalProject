@@ -79,12 +79,12 @@ public class RankEmpHandler extends Action {
 			} else {
 				dForm.getBean().setUpdatedBy(us.getUserId());
 				if(!dMan.updateEmployeeRank(dForm.getBean())){
-					session.setAttribute("validationMessage", "Failed To Edit Employee Rank " + dForm.getBean().getRankName() + "!");
+					session.setAttribute("validationMessage", "Failed To Edit Employee Rank!");
 					session.setAttribute("validationType", "danger");
 				}
 				else {
 					session.setAttribute("validationMessage",
-							"Succeed To Edit Employee Rank "+dForm.getBean().getRankName() +"!");
+							"Succeed To Edit Employee Rank!");
 					session.setAttribute("validationType", "success");
 				}
 				

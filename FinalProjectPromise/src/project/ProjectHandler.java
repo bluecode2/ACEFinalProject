@@ -62,13 +62,11 @@ public class ProjectHandler extends Action{
 					us, request);
 			session.setAttribute("deptId", eBean.getDeptId());
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM("","",eBean.getDeptId()));
-			request.setAttribute("pageTitle", "Project Entry");
 			request.setAttribute("show", false);
 			return mapping.findForward("projectEntry");
 		}
 		else if ("edit".equalsIgnoreCase(pForm.getTask())){
 			pForm.setIsProc("edit");
-			request.setAttribute("pageTitle", "Project Edit");
 			request.setAttribute("lstEmployeeId", eMan.getAllEmployeeForPM("","",eBean.getDeptId()));
 			request.setAttribute("show", true);
 			pForm.setpBean(pMan.getProjectByID(pForm.getSelectedId()));
@@ -154,7 +152,18 @@ public class ProjectHandler extends Action{
 				pForm.getpBean().setCreatedBy(us.getUserId());
 				
 				//Insert new project
-				pMan.insertProject(pForm.getpBean());
+				
+				if(!pMan.insertProject(pForm.getpBean())){
+					session.setAttribute("validationMessage",
+							"Failed To Add New Project!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Add New Project!");
+					session.setAttribute("validationType", "success");
+				}
+				
 				
 				//Insert PM into Projet Member
 				ProjectMemberBean memberBean = new ProjectMemberBean();
@@ -171,7 +180,17 @@ public class ProjectHandler extends Action{
 				
 				//Update Project
 				pForm.getpBean().setUpdatedBy(us.getUserId());
-				pMan.updateProject(pForm.getpBean());
+				
+				
+				if(!pMan.updateProject(pForm.getpBean())){
+					session.setAttribute("validationMessage", "Failed To Edit project!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Edit Employee Rank!");
+					session.setAttribute("validationType", "success");
+				}
 				
 				//Condition if PM is changed
 				if(pForm.getpBean().getEmployeeId() != oldBean.getEmployeeId()){
@@ -246,7 +265,12 @@ public class ProjectHandler extends Action{
 		pForm.setSearchValue(pForm.getCurrSearchValue());
 
 		int rowCount;
-		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
 		//untuk dept head atau PM
 		if (addBtn){
 			rowCount = pMan.getCountProjectListForRole("DEPT_ID", us.getDeptId(), pForm.getCurrSearchField(), pForm.getCurrSearchValue());
