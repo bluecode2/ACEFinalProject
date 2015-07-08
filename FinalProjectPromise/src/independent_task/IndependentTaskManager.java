@@ -79,7 +79,8 @@ public class IndependentTaskManager {
 		return tmpCount;
 	}
 	
-	public void createNewAssignTask(IndependentTaskBean tsBean) {
+	public boolean createNewAssignTask(IndependentTaskBean tsBean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -91,7 +92,9 @@ public class IndependentTaskManager {
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public void createNewAssignTaskProj(IndependentTaskBean tsBean) {
@@ -108,12 +111,13 @@ public class IndependentTaskManager {
 		}
 	}
 	
-	public void editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) {
+	public boolean editAssignTask(int taskId, String taskName, String taskDesc, int updatedBy) {
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("taskName", taskName);
 		m.put("taskDesc", taskDesc);
 		m.put("updatedBy", updatedBy);
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -124,7 +128,9 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) {

@@ -79,7 +79,8 @@ public class ProposedTaskManager {
 		return propTaskId;
 	}
 
-	public void updateProposedTask(ProposedTaskBean bean) {
+	public boolean updateProposedTask(ProposedTaskBean bean) {
+		boolean flag = true;
 		try {
 			try {
 				ibatis.startTransaction();
@@ -90,7 +91,9 @@ public class ProposedTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public void deleteProposedTask(int propTaskId, int userId)
@@ -112,7 +115,8 @@ public class ProposedTaskManager {
 		}
 	}
 
-	public void insertProposedTask(ProposedTaskBean bean) {
+	public boolean insertProposedTask(ProposedTaskBean bean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -123,7 +127,9 @@ public class ProposedTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
 	public Integer getCountProposedTask(String column, String value, int empId)
