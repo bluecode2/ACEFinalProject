@@ -35,11 +35,28 @@ public class MyCurrentTaskHandler extends Action {
 		
 		if ("start".equals(tsForm.getTask())) {
 
-			tsMan.startMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ONGOING);
-
+			
+			if(!tsMan.startMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ONGOING)){
+				session.setAttribute("validationMessage", "Failed To Start Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Start Task!");
+				session.setAttribute("validationType", "success");
+			}
 		}
 		else if ("pause".equals(tsForm.getTask())) {
-			tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ON_HOLD);
+			
+			if(!tsMan.updateStatusMyCurrentTask(tsForm.getSelectedId(), us.getUserId(), Constant.GeneralCode.TASK_STATUS_ON_HOLD)){
+				session.setAttribute("validationMessage", "Failed To Pause Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Pause Task!");
+				session.setAttribute("validationType", "success");
+			}
 			tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 			noMan.createNotificationPauseIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedBy(), tsForm.getSelectedId());
 		}
@@ -48,13 +65,27 @@ public class MyCurrentTaskHandler extends Action {
 			tsForm.getTkBean().setTaskStatus(Constant.GeneralCode.TASK_STATUS_WAITING_FOR_APPROVAL);
 			tsForm.getTkBean().setUpdatedBy(us.getUserId());
 			tsForm.getTkBean().setActEndDate(now);
-			tsMan.updateStatusMyCurrentTaskToWaitingApproval(tsForm.getTkBean());
+			
+			if(!tsMan.updateStatusMyCurrentTaskToWaitingApproval(tsForm.getTkBean())){
+				session.setAttribute("validationMessage", "Failed To Submit Task!");
+				session.setAttribute("validationType", "danger");
+			}
+			else {
+				session.setAttribute("validationMessage",
+						"Succeed To Submit Task!");
+				session.setAttribute("validationType", "success");
+			}
 			tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 			noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedBy(), tsForm.getTkBean().getTaskId());
 		}
 	
 		CommonFunction.initializeHeader(Constant.MenuCode.CURRENT_TASK_LIST, us, request);
-		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
 		tsForm.setTask("");
 		tsForm.setSearchField(tsForm.getCurrSearchField());
 		tsForm.setSearchValue(tsForm.getCurrSearchValue());

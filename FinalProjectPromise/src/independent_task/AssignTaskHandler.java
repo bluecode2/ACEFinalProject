@@ -99,7 +99,16 @@ public class AssignTaskHandler extends Action {
 			
 			else if (tsForm.getSelectedEdit() == 1) { //APPROVED
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_APPROVE);
-				tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"");
+				if(tsMan.editStatusAssignTaskApprove(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),"")){
+					session.setAttribute("validationMessage", "Failed To Approve Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Approve Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}	
@@ -107,13 +116,32 @@ public class AssignTaskHandler extends Action {
 		else if ("secondEdit".equals(tsForm.getTask())) {
 			if (tsForm.getSelectedEdit() == 0) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_CANCELLED);
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				
+				if(tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Cancel Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Cancel Task!");
+					session.setAttribute("validationType", "success");
+				}
+				
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}
 			else if (tsForm.getSelectedEdit() == 1) {
 				tsForm.setStatusTask(Constant.GeneralCode.TASK_STATUS_ONGOING);
-				tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord());
+				
+				if(tsMan.editStatusAssignTask(tsForm.getSelectedId(), us.getUserId(), tsForm.getStatusTask(),tsForm.getRemarksRecord())){
+					session.setAttribute("validationMessage", "Failed To Start Task!");
+					session.setAttribute("validationType", "danger");
+				}
+				else {
+					session.setAttribute("validationMessage",
+							"Succeed To Start Task!");
+					session.setAttribute("validationType", "success");
+				}
 				tsForm.setTkBean(tsMan.getDataForEdit(tsForm.getSelectedId()));
 				noMan.createNotificationAssignIndependentTask(us.getEmployeeId(), tsForm.getTkBean().getAssignedTo(), tsForm.getTkBean().getTaskId());
 			}

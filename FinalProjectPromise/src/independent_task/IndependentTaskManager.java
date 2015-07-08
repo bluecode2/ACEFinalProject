@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.crystaldecisions.b.f;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class IndependentTaskManager {
@@ -133,7 +134,8 @@ public class IndependentTaskManager {
 		return flag;
 	}
 	
-	public void editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) {
+	public boolean editStatusAssignTask(int taskId, int updatedBy, String taskStatus, String remarks) {
+		boolean flag = true;
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -150,10 +152,13 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
-	public void editStatusAssignTaskApprove(int taskId, int updatedBy, String taskStatus, String remarks) {
+	public boolean editStatusAssignTaskApprove(int taskId, int updatedBy, String taskStatus, String remarks) {
+		boolean flag = true;
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -170,7 +175,9 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public IndependentTaskBean getDataForEdit(int taskId) {
@@ -221,7 +228,8 @@ public class IndependentTaskManager {
 		return tmpCount;
 	}
 	
-	public void startMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
+	public boolean startMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
+		boolean flag = true;
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -237,10 +245,13 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
-	public void updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
+	public boolean updateStatusMyCurrentTask(int taskId, int updatedBy, String taskStatus) {
+		boolean flag = true;
 		Map m = new HashMap();
 		m.put("taskId", taskId);
 		m.put("updatedBy", updatedBy);
@@ -256,10 +267,13 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
-	public void updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
+	public boolean updateStatusMyCurrentTaskToWaitingApproval(IndependentTaskBean itBean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -270,6 +284,8 @@ public class IndependentTaskManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 }
