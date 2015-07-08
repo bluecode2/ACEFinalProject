@@ -35,7 +35,7 @@
 		document.forms[0].selectedId.value = id;
 
 		if (task == "delete") {
-			if (confirm("Are u sure want to delete General Holiday " + nama
+			if (confirm("Are you sure want to delete General Holiday " + nama
 					+ " ?")) {
 				document.forms[0].submit();
 			}
