@@ -5,6 +5,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class ProjectRoleManager {
 		map.put("begin", begin);
 		map.put("end", end);
 
-		List<ProjectRoleBean> arr = new ArrayList<ProjectRoleBean>();
+		List<ProjectRoleBean> arr = Collections.EMPTY_LIST;
 
 		try {
 			arr = this.ibatis.queryForList("projectRole.getProjectRole", map);
@@ -42,7 +43,7 @@ public class ProjectRoleManager {
 	}
 
 	public List<ProjectRoleBean> getAllProjectRoleForPopUp() {
-		List<ProjectRoleBean> arr = new ArrayList<ProjectRoleBean>();
+		List<ProjectRoleBean> arr = Collections.EMPTY_LIST;
 
 		try {
 			arr = this.ibatis.queryForList(

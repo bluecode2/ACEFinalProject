@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class GeneralHolidayManager {
 		map.put("searchValue2", input2);
 		map.put("begin", begin);
 		map.put("end", end);
-		List<GeneralHolidayBean> listResult = new ArrayList<GeneralHolidayBean>();
+		List<GeneralHolidayBean> listResult = Collections.EMPTY_LIST;
 
 		try {
 			listResult = this.ibatis.queryForList(

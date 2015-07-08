@@ -4,6 +4,7 @@ import ibatis.IbatisHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class UserRoleMenuManager {
 	public List<UserRoleMenuBean> getUserRoleMenuByUserRole(Integer userRoleId)
 			throws SQLException {
 
-		List<UserRoleMenuBean> arr = new ArrayList<UserRoleMenuBean>();
+		List<UserRoleMenuBean> arr = Collections.EMPTY_LIST;
 		
 		try {
 			arr = (List<UserRoleMenuBean>) this.ibatis.queryForList(

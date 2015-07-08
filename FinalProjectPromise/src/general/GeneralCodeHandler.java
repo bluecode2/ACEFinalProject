@@ -36,19 +36,42 @@ public class GeneralCodeHandler extends Action {
 				gcForm.getGenCodeBean().setGenCodeId(null);
 			
 			gcForm.getGenCodeBean().setUpdatedBy(us.getUserId()); 
-			gcMan.updateGeneralCode(gcForm.getGenCodeBean());
+			if(gcMan.updateGeneralCode(gcForm.getGenCodeBean())){
+				session.setAttribute("validationMessage",
+						"Succeed to Edit General Code " + gcForm.getGenCodeBean().getGenCodeCaption() + "!");
+				session.setAttribute("validationType", "success");
+			}
+			else{
+				session.setAttribute("validationMessage", "Failed to Edit General Code " + gcForm.getGenCodeBean().getGenCodeCaption() + "!");
+				session.setAttribute("validationType", "danger");
+			}
 				
 			response.sendRedirect("generalCode.do");
 			return null;
 		}
 		else if ("delete".equals(gcForm.getTask())) {
 			gcForm.getGenCodeBean().setUpdatedBy(us.getUserId());
-			gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId());
+			if(gcMan.deleteGeneralCodeByCodeId(gcForm.getSelectedId())){
+				session.setAttribute("validationMessage",
+						"Succeed to Delete General Code!");
+				session.setAttribute("validationType", "success");
+			}
+			else{
+				session.setAttribute("validationMessage", "Failed to Delete General Code " + gcForm.getGenCodeBean().getGenCodeCaption() + "!");
+				session.setAttribute("validationType", "danger");
+			}
 		}
 		
 		CommonFunction.initializeHeader(Constant.MenuCode.GENERAL_CODE,
 				us, request);
 		CommonFunction.createAllowedMenu(us, request);
+		
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+		}
 		
 		gcForm.setTask("");
 		gcForm.setSearchField(gcForm.getCurrSearchField());
@@ -59,7 +82,6 @@ public class GeneralCodeHandler extends Action {
 		
 		gcForm.setArrList(gcMan.getAllGeneralCode(gcForm.getCurrSearchField(), gcForm.getCurrSearchValue(), gcForm.getCurrPage(), Constant.PAGE_SIZE));
 
-		request.setAttribute("pageTitle", "General Code");
 		request.setAttribute("pageNavigator", CommonFunction.createPagingNavigatorList(gcForm.getPageCount(), gcForm.getCurrPage()));
 
 		request.setAttribute("pageCount", gcForm.getPageCount());

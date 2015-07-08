@@ -97,7 +97,7 @@ public class EmployeeHandler extends Action{
 				eForm.getSelectedEmp().setUpdatedBy(us.getUserId());
 				if(eMan.updateEmployee(eForm.getSelectedEmp())){
 					session.setAttribute("validationMessage",
-							"Succeed to Add Edit Employee " + eForm.getSelectedEmp().getEmployeeName() + "!");
+							"Succeed to Edit Employee " + eForm.getSelectedEmp().getEmployeeName() + "!");
 					session.setAttribute("validationType", "success");
 				}
 				else{
@@ -128,6 +128,13 @@ public class EmployeeHandler extends Action{
 		CommonFunction.initializeHeader(Constant.MenuCode.EMPLOYEE,
 				us, request);
 
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
+		
 		request.setAttribute("pageNavigator", CommonFunction
 				.createPagingNavigatorList(eForm.getPageCount(),
 						eForm.getCurrPage()));

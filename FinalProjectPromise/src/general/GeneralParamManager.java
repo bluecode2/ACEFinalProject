@@ -79,8 +79,8 @@ public class GeneralParamManager {
 		}
 	}
 	
-	public void updateGeneralParam(GeneralParamBean genParamBean)
-			throws SQLException {
+	public boolean updateGeneralParam(GeneralParamBean genParamBean){
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -91,10 +91,13 @@ public class GeneralParamManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 
-	public void deleteGeneralParam(GeneralParamBean genParamBean) throws SQLException {
+	public boolean deleteGeneralParam(GeneralParamBean genParamBean) {
+		boolean flag = true;
 		try {
 			try {
 				this.ibatis.startTransaction();
@@ -105,7 +108,9 @@ public class GeneralParamManager {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = false;
 		}
+		return flag;
 	}
 	
 	public String getNewParamId() throws SQLException{
