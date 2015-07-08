@@ -76,15 +76,6 @@
 							<button type="button" property="" onclick="flyToPage('generateWeekend');"  style="margin: 0px" class="btn btn-raised btn-sm btn-info">Generate Weekend</button>
 						</td>
 						<td>Search by Date</td>
-						<%-- <td style="padding-left: 15px;">
-							<html:select
-								name="generalHolidayForm" property="searchField"
-								styleId="selSearchField" styleClass="form-control">
-								<option value="genHolidayName">General Holiday Name</option>
-								<option value="genHolidayDateInString">General Holiday
-									Date</option>
-							</html:select>
-						</td> --%>
 						<td style="padding-left: 15px"><html:text
 								styleClass="form-control datepicker" styleId="txtGenHolDate"
 								name="generalHolidayForm" property="searchValue"></html:text></td>
@@ -102,6 +93,13 @@
 					</tr>
 				</table>
 			</div>
+			<logic:notEmpty name="validationMessage">
+						<br/>
+							<div class="col-md-6 alert alert-dismissable alert-<bean:write name="validationType" />" role="alert">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong><bean:write name="validationMessage" /></strong>
+							</div>
+					</logic:notEmpty>
 			<div class="divContent">
 				<table class="table table-striped table-bordered table-hover" cellspacing="0"
 					style="margin-top: 10px;" width="100%" class="tableContent">
