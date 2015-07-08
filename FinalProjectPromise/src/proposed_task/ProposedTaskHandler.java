@@ -102,6 +102,13 @@ public class ProposedTaskHandler extends Action {
 			return null;
 		}
 
+		if(session.getAttribute("validationMessage") != null){
+			request.setAttribute("validationMessage", session.getAttribute("validationMessage").toString());
+			request.setAttribute("validationType", session.getAttribute("validationType").toString());
+			session.removeAttribute("validationMessage");
+			session.removeAttribute("validationType");
+	}
+		
 		dForm.setTask("");
 		dForm.setSearchField(dForm.getCurrSearchField());
 		dForm.setSearchValue(dForm.getCurrSearchValue());
