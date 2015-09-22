@@ -41,6 +41,21 @@ footer {
   }
 }
 
+/*
+ * Navbar
+ */
+
+/*
+.navbar{
+	background-color: #F2C81F;
+	background-image:none;
+}
+*/
+
+.navbar-brand { 
+	max-width: 30%; 
+	padding: 0; 
+}
 
 /* Sidebar navigation */
 .nav-sidebar {
@@ -75,3 +90,5 @@ footer {
 .main .page-header {
   margin-top: 0;
 }
+
+
