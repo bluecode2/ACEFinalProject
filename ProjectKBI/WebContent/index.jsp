@@ -9,25 +9,6 @@
 <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"><img style="margin-left: 50px"
-				src="images/logoKBI.png" width="59px" height="53px" /></a>
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><strong>[Logout]</strong></a></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
 	<br>
 	<br>
 	<div class="container-fluid">
@@ -39,13 +20,14 @@
 
 				<table border="0" width="100%" bgcolor="#6686df">
 					<tr height="320">
-						<td style="padding: 5px" width="100%" bgcolor="#6686df" height="320"><font
-							face="Verdana" size="1" color="white"><b> USER ID dan
-									PIN Internet Banking dapat diperoleh pada saat Anda melakukan
-									Registrasi Internet melalui ATM BCA. Untuk informasi lebih
-									lanjut hubungi Halo BCA 500888 atau (021) 500888 via ponsel. </b></font> <font
-							face="Verdana" size="2" color="white"><br> <br>
-						</font> <font face="Verdana" size="1" color="yellow"> <b> <!--In order to get BCA Internet Banking User ID and PIN, You should register through
+						<td style="padding: 5px" width="100%" bgcolor="#6686df"
+							height="320"><font face="Verdana" size="1" color="white"><b>
+									USER ID dan PIN Internet Banking dapat diperoleh pada saat Anda
+									melakukan Registrasi Internet melalui ATM BCA. Untuk informasi
+									lebih lanjut hubungi Halo BCA 500888 atau (021) 500888 via
+									ponsel. </b></font> <font face="Verdana" size="2" color="white"><br>
+								<br> </font> <font face="Verdana" size="1" color="yellow">
+								<b> <!--In order to get BCA Internet Banking User ID and PIN, You should register through
                             BCA ATM. For further information, please contact Halo BCA (021) 5208888.-->
 									HOW TO GET STARTED: To start using BCA Internet Banking, You
 									must first register through any BCA ATM. For further
@@ -54,86 +36,18 @@
 									<center>
 										<br> <br> [ PRIVACY POLICY ]
 									</center> <br>
-							</b></font></td>
+							</b>
+						</font></td>
 					</tr>
 				</table>
-
-				<!-- <ul class="nav nav-sidebar">
-					<li class="active"><a href="#">Overview</a></li>
-					<li><a href="#">Reports</a></li>
-					<li><a href="#">Analytics</a></li>
-					<li><a href="#">Export</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="">Nav item</a></li>
-					<li><a href="">Nav item again</a></li>
-					<li><a href="">One more nav</a></li>
-					<li><a href="">Another nav item</a></li>
-					<li><a href="">More navigation</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="">Nav item again</a></li>
-					<li><a href="">One more nav</a></li>
-					<li><a href="">Another nav item</a></li>
-				</ul> -->
 
 			</div>
 			<!--/span-->
 
 			<div class="col-sm-9 col-md-6 main">
 
-				<!--toggle sidebar button-->
-				<p class="visible-xs">
-					<button type="button" class="btn btn-primary btn-xs"
-						data-toggle="offcanvas">
-						<i class="glyphicon glyphicon-chevron-left"></i>
-					</button>
-				</p>
-
-				<!-- <h1 class="page-header">
-					Dashboard
-					<p class="lead">
-						(<a href="http://www.bootply.com/128936">with off-canvas
-							sidebar</a>)
-					</p>
-				</h1> 
-
-				 <div class="row placeholders">
-					<div class="col-xs-6 col-sm-3 placeholder text-center">
-						<img src="//placehold.it/200/6666ff/fff"
-							class="center-block img-responsive img-circle"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder text-center">
-						<img src="//placehold.it/200/66ff66/fff"
-							class="center-block img-responsive img-circle"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder text-center">
-						<img src="//placehold.it/200/6666ff/fff"
-							class="center-block img-responsive img-circle"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-xs-6 col-sm-3 placeholder text-center">
-						<img src="//placehold.it/200/66ff66/fff"
-							class="center-block img-responsive img-circle"
-							alt="Generic placeholder thumbnail">
-						<h4>Label</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-				</div> 
-
-				<hr>-->
-
-				<!-- <h2 class="sub-header">Section title</h2> -->
 				<div class="table-responsive page-header">
-					<table border="0" cellpadding="0" cellspacing="0" width="500">
+					<table border="0" cellpadding="0" cellspacing="0" width="330">
 						<tr>
 							<td width="500"><font face="Verdana" size="2"
 								color="#000090"> <b>Silakan memasukkan USER ID Anda</b></font></td>
@@ -200,153 +114,23 @@
 								name="submit" onclick="" onmouseover="this.style.cursor='hand'" /></td>
 						</tr>
 					</table>
-					<br><br>
-					<table border="0" cellpadding="5" cellspacing="0" width="520">
+					<br>
+					<table border="0" cellpadding="5" cellspacing="0" width="100%"
+						align="center">
 						<tr>
-							<td>
-								<table border=0 width="100%" cellpadding="0" cellspacing="0">
-									<tr>
-										<td colspan="2"><img src="pictures\\WaspadaVirus.gif">
-										</td>
-									</tr>
-
-									<tr>
-										<td width="55"></td>
-									</tr>
-								</table>
-
-							</td>
-
+							<td width="50%" align="right"><img
+								src="pictures\\TipsKeamanan.gif"></td>
+							<td width="50%" align="Left"><img
+								src="pictures\\CyberTrust.gif"></td>
 						</tr>
-					</table>
-					<!-- <table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1,001</td>
-								<td>Lorem</td>
-								<td>ipsum</td>
-								<td>dolor</td>
-								<td>sit</td>
-							</tr>
-							<tr>
-								<td>1,002</td>
-								<td>amet</td>
-								<td>consectetur</td>
-								<td>adipiscing</td>
-								<td>elit</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>Integer</td>
-								<td>nec</td>
-								<td>odio</td>
-								<td>Praesent</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>libero</td>
-								<td>Sed</td>
-								<td>cursus</td>
-								<td>ante</td>
-							</tr>
-							<tr>
-								<td>1,004</td>
-								<td>dapibus</td>
-								<td>diam</td>
-								<td>Sed</td>
-								<td>nisi</td>
-							</tr>
-							<tr>
-								<td>1,005</td>
-								<td>Nulla</td>
-								<td>quis</td>
-								<td>sem</td>
-								<td>at</td>
-							</tr>
-							<tr>
-								<td>1,006</td>
-								<td>nibh</td>
-								<td>elementum</td>
-								<td>imperdiet</td>
-								<td>Duis</td>
-							</tr>
-							<tr>
-								<td>1,007</td>
-								<td>sagittis</td>
-								<td>ipsum</td>
-								<td>Praesent</td>
-								<td>mauris</td>
-							</tr>
-							<tr>
-								<td>1,008</td>
-								<td>Fusce</td>
-								<td>nec</td>
-								<td>tellus</td>
-								<td>sed</td>
-							</tr>
-							<tr>
-								<td>1,009</td>
-								<td>augue</td>
-								<td>semper</td>
-								<td>porta</td>
-								<td>Mauris</td>
-							</tr>
-							<tr>
-								<td>1,010</td>
-								<td>massa</td>
-								<td>Vestibulum</td>
-								<td>lacinia</td>
-								<td>arcu</td>
-							</tr>
-							<tr>
-								<td>1,011</td>
-								<td>eget</td>
-								<td>nulla</td>
-								<td>Class</td>
-								<td>aptent</td>
-							</tr>
-							<tr>
-								<td>1,012</td>
-								<td>taciti</td>
-								<td>sociosqu</td>
-								<td>ad</td>
-								<td>litora</td>
-							</tr>
-							<tr>
-								<td>1,013</td>
-								<td>torquent</td>
-								<td>per</td>
-								<td>conubia</td>
-								<td>nostra</td>
-							</tr>
-							<tr>
-								<td>1,014</td>
-								<td>per</td>
-								<td>inceptos</td>
-								<td>himenaeos</td>
-								<td>Curabitur</td>
-							</tr>
-							<tr>
-								<td>1,015</td>
-								<td>sodales</td>
-								<td>ligula</td>
-								<td>in</td>
-								<td>libero</td>
-							</tr>
-						</tbody>
-					</table> -->
-				</div>
+						<tr align="center">
+							<td width="100%" colspan="2"><img
+								src="pictures\\WaspadaVirus.gif"></td>
+						</tr>
 
-				<a href="http://www.bootply.com/128936">Get the Source Code</a>
+					</table>
+
+				</div>
 
 			</div>
 			<!--/row-->
