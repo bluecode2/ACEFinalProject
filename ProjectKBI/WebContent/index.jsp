@@ -14,12 +14,12 @@
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img style="margin-left: 50px" src="images/logoKBI.png" width="59px" height="53px" /></a>
+			<a class="navbar-brand" href="#"><img style="margin-left: 50px"
+				src="images/logoKBI.png" width="59px" height="53px" /></a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -28,15 +28,37 @@
 		</div>
 	</div>
 	</nav>
-
+	<br>
+	<br>
 	<div class="container-fluid">
 
 		<div class="row row-offcanvas row-offcanvas-left">
 
-			<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar"
+			<div class="col-sm-3 col-md-6 sidebar-offcanvas" id="sidebar"
 				role="navigation">
 
-				<ul class="nav nav-sidebar">
+				<table border="0" width="100%" bgcolor="#6686df">
+					<tr height="320">
+						<td style="padding: 5px" width="100%" bgcolor="#6686df" height="320"><font
+							face="Verdana" size="1" color="white"><b> USER ID dan
+									PIN Internet Banking dapat diperoleh pada saat Anda melakukan
+									Registrasi Internet melalui ATM BCA. Untuk informasi lebih
+									lanjut hubungi Halo BCA 500888 atau (021) 500888 via ponsel. </b></font> <font
+							face="Verdana" size="2" color="white"><br> <br>
+						</font> <font face="Verdana" size="1" color="yellow"> <b> <!--In order to get BCA Internet Banking User ID and PIN, You should register through
+                            BCA ATM. For further information, please contact Halo BCA (021) 5208888.-->
+									HOW TO GET STARTED: To start using BCA Internet Banking, You
+									must first register through any BCA ATM. For further
+									information, please contact Halo BCA 500888 or (021) 500888 via
+									mobile phone.
+									<center>
+										<br> <br> [ PRIVACY POLICY ]
+									</center> <br>
+							</b></font></td>
+					</tr>
+				</table>
+
+				<!-- <ul class="nav nav-sidebar">
 					<li class="active"><a href="#">Overview</a></li>
 					<li><a href="#">Reports</a></li>
 					<li><a href="#">Analytics</a></li>
@@ -53,12 +75,12 @@
 					<li><a href="">Nav item again</a></li>
 					<li><a href="">One more nav</a></li>
 					<li><a href="">Another nav item</a></li>
-				</ul>
+				</ul> -->
 
 			</div>
 			<!--/span-->
 
-			<div class="col-sm-9 col-md-10 main">
+			<div class="col-sm-9 col-md-6 main">
 
 				<!--toggle sidebar button-->
 				<p class="visible-xs">
@@ -68,15 +90,15 @@
 					</button>
 				</p>
 
-				<h1 class="page-header">
+				<!-- <h1 class="page-header">
 					Dashboard
 					<p class="lead">
 						(<a href="http://www.bootply.com/128936">with off-canvas
 							sidebar</a>)
 					</p>
-				</h1>
+				</h1> 
 
-				<div class="row placeholders">
+				 <div class="row placeholders">
 					<div class="col-xs-6 col-sm-3 placeholder text-center">
 						<img src="//placehold.it/200/6666ff/fff"
 							class="center-block img-responsive img-circle"
@@ -105,13 +127,99 @@
 						<h4>Label</h4>
 						<span class="text-muted">Something else</span>
 					</div>
-				</div>
+				</div> 
 
-				<hr>
+				<hr>-->
 
-				<h2 class="sub-header">Section title</h2>
-				<div class="table-responsive">
-					<table class="table table-striped">
+				<!-- <h2 class="sub-header">Section title</h2> -->
+				<div class="table-responsive page-header">
+					<table border="0" cellpadding="0" cellspacing="0" width="500">
+						<tr>
+							<td width="500"><font face="Verdana" size="2"
+								color="#000090"> <b>Silakan memasukkan USER ID Anda</b></font></td>
+						</tr>
+						<tr>
+							<td width="500">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr height="2">
+										<td width="255" bgcolor="#000090" height="2"><IMG
+											height=1 src="pictures\\spacer.gif" width=1></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td width="500"><font face="Verdana" size="2"
+								color="#ff9c00"> <b>Please enter Your USER ID</b></font></td>
+						</tr>
+						<tr>
+							<td width="500"><input type="text" name="userId"
+								maxlength="12" size="24" /></td>
+						</tr>
+						<tr height="15">
+							<td height="15" width="500">&nbsp;<!--<IMG height=1
+					src="pictures\\spacer.gif"
+					width=1></td>-->
+						</tr>
+						<tr>
+							<td width="500"><font face="Verdana" size="2"
+								color="#000090"> <b>Silakan memasukkan PIN Internet
+										Banking Anda</b></font></td>
+						</tr>
+						<tr>
+							<td width="500">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr height="2">
+										<td width="350" bgcolor="#000090" height="2"><IMG
+											height=1 src="pictures\\spacer.gif" width=1></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td width="500"><font face="Verdana" size="2"
+								color="#ff9c00"> <b>Please enter Your Internet
+										Banking PIN</b></font></td>
+						</tr>
+						<tr>
+							<td width="500"><input type="password" name="pass" size="24"
+								maxlength="6"></td>
+						</tr>
+						<tr height="20">
+							<td height="20" width="500">&nbsp;<!--<IMG height=1
+					src="pictures\\spacer.gif"
+					width=1></td>-->
+						</tr>
+						<tr height="20">
+							<td height="20" width="500"><IMG height=1
+								src="https://ibank.klikbca.com/images/spacer.gif;bcaa6898ca9eb84de3e"
+								width=1></td>
+						</tr>
+						<tr>
+							<td width="500"><input type="Submit" value="LOGIN"
+								name="submit" onclick="" onmouseover="this.style.cursor='hand'" /></td>
+						</tr>
+					</table>
+					<br><br>
+					<table border="0" cellpadding="5" cellspacing="0" width="520">
+						<tr>
+							<td>
+								<table border=0 width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td colspan="2"><img src="pictures\\WaspadaVirus.gif">
+										</td>
+									</tr>
+
+									<tr>
+										<td width="55"></td>
+									</tr>
+								</table>
+
+							</td>
+
+						</tr>
+					</table>
+					<!-- <table class="table table-striped">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -235,7 +343,7 @@
 								<td>libero</td>
 							</tr>
 						</tbody>
-					</table>
+					</table> -->
 				</div>
 
 				<a href="http://www.bootply.com/128936">Get the Source Code</a>
