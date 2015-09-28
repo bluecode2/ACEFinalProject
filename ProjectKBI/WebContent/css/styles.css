@@ -45,16 +45,17 @@ footer {
  * Navbar
  */
 
-/*
-.navbar{
-	background-color: #F2C81F;
-	background-image:none;
+
+.navbar a{
+	font-weight: bold;
 }
-*/
+
 
 .navbar-brand { 
-	max-width: 30%; 
+	width: 30%; 
 	padding: 0; 
+	margin-right: 85px;
+	padding-left: 85px;
 }
 
 /* Sidebar navigation */
@@ -71,6 +72,10 @@ footer {
 .nav-sidebar > .active > a {
   color: #fff;
   background-color: #428bca;
+}
+
+.nav-sidebar > .disabled{
+  cursor: default;
 }
 
 /*
