@@ -8,132 +8,92 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body>
-	<br>
-	<br>
+<body style="background-color: #f5f5f5">
 	<div class="container-fluid">
 
 		<div class="row row-offcanvas row-offcanvas-left">
 
-			<div class="col-sm-3 col-md-6 sidebar-offcanvas" id="sidebar"
+			<div class="col-sm-3 col-md-8 sidebar-offcanvas" id="sidebar"
 				role="navigation">
 
-				<table border="0" width="100%" bgcolor="#6686df">
+				<table border="0" width="100%">
 					<tr height="320">
-						<td style="padding: 5px" width="100%" bgcolor="#6686df"
-							height="320"><font face="Verdana" size="1" color="white"><b>
-									USER ID dan PIN Internet Banking dapat diperoleh pada saat Anda
-									melakukan Registrasi Internet melalui ATM BCA. Untuk informasi
-									lebih lanjut hubungi Halo BCA 500888 atau (021) 500888 via
-									ponsel. </b></font> <font face="Verdana" size="2" color="white"><br>
-								<br> </font> <font face="Verdana" size="1" color="yellow">
-								<b> <!--In order to get BCA Internet Banking User ID and PIN, You should register through
-                            BCA ATM. For further information, please contact Halo BCA (021) 5208888.-->
-									HOW TO GET STARTED: To start using BCA Internet Banking, You
-									must first register through any BCA ATM. For further
-									information, please contact Halo BCA 500888 or (021) 500888 via
-									mobile phone.
-									<center>
-										<br> <br> [ PRIVACY POLICY ]
-									</center> <br>
-							</b>
-						</font></td>
+						<td style="padding: 5px" width="100%"
+							height="320">
+						<img width="100%" src="pictures\\haloBCA.jpg">
+						</td>
 					</tr>
 				</table>
 
 			</div>
 			<!--/span-->
 
-			<div class="col-sm-9 col-md-6 main">
+			<div class="col-sm-9 col-md-4 main form-group" style="background-color: #f5f5f5">
 
-				<div class="table-responsive page-header">
-					<table border="0" cellpadding="0" cellspacing="0" width="330">
-						<tr>
-							<td width="500"><font face="Verdana" size="2"
-								color="#000090"> <b>Silakan memasukkan USER ID Anda</b></font></td>
+				<div class="table-responsive page-header" style="border: 0px">
+					<table border="0" cellpadding="15" cellspacing="15" width="100%">
+					    <tr align="center">
+					    	<td>
+								<table border="0" width="100%">
+					    			<tr>
+					    				<td  width="40%"><img src="images\\logoKBI.png" width="90%"></td>
+					    				<td width="60%"><font face="Verdana" size="3"
+								color="#000090">I N D I V I D U A L</font></td>
+					    			</tr>
+					    		</table>
+					    		
+					    	</td>
+					    </tr>
+					    <tr height="5">
+					    	<td>&nbsp;</td>
+					    </tr>
+						<tr align="center" style="padding-top: 5">
+							<td><input type="text" name="userId"
+								maxlength="12" size="24" placeholder="User ID" class="form-control" /></td>
 						</tr>
 						<tr>
-							<td width="500">
-								<table border="0" cellpadding="0" cellspacing="0">
-									<tr height="2">
-										<td width="255" bgcolor="#000090" height="2"><IMG
-											height=1 src="pictures\\spacer.gif" width=1></td>
-									</tr>
-								</table>
-							</td>
+					    	<td>&nbsp;</td>
+					    </tr>
+						<tr>
+						<tr align="center">
+							<td><input type="password" name="pass" size="24"
+								maxlength="6" placeholder="PIN" class="form-control"></td>
 						</tr>
 						<tr>
-							<td width="500"><font face="Verdana" size="2"
-								color="#ff9c00"> <b>Please enter Your USER ID</b></font></td>
-						</tr>
-						<tr>
-							<td width="500"><input type="text" name="userId"
-								maxlength="12" size="24" /></td>
-						</tr>
-						<tr height="15">
-							<td height="15" width="500">&nbsp;<!--<IMG height=1
-					src="pictures\\spacer.gif"
-					width=1></td>-->
-						</tr>
-						<tr>
-							<td width="500"><font face="Verdana" size="2"
-								color="#000090"> <b>Silakan memasukkan PIN Internet
-										Banking Anda</b></font></td>
-						</tr>
-						<tr>
-							<td width="500">
-								<table border="0" cellpadding="0" cellspacing="0">
-									<tr height="2">
-										<td width="350" bgcolor="#000090" height="2"><IMG
-											height=1 src="pictures\\spacer.gif" width=1></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr>
-							<td width="500"><font face="Verdana" size="2"
-								color="#ff9c00"> <b>Please enter Your Internet
-										Banking PIN</b></font></td>
-						</tr>
-						<tr>
-							<td width="500"><input type="password" name="pass" size="24"
-								maxlength="6"></td>
-						</tr>
-						<tr height="20">
-							<td height="20" width="500">&nbsp;<!--<IMG height=1
-					src="pictures\\spacer.gif"
-					width=1></td>-->
-						</tr>
-						<tr height="20">
-							<td height="20" width="500"><IMG height=1
-								src="https://ibank.klikbca.com/images/spacer.gif;bcaa6898ca9eb84de3e"
-								width=1></td>
-						</tr>
-						<tr>
-							<td width="500"><input type="Submit" value="LOGIN"
-								name="submit" onclick="" onmouseover="this.style.cursor='hand'" /></td>
+					    	<td>&nbsp;</td>
+					    </tr>
+						<tr align="center">
+							<td><input type="Submit" value="LOGIN"
+								name="submit" class="btn btn-primary btn-block"/></td>
 						</tr>
 					</table>
 					<br>
 					<table border="0" cellpadding="5" cellspacing="0" width="100%"
 						align="center">
 						<tr>
-							<td width="50%" align="right"><img
+							<td width="50%" align="right"><img width="80%"
 								src="pictures\\TipsKeamanan.gif"></td>
-							<td width="50%" align="Left"><img
+							<td width="50%" align="Left"><img width="80%"
 								src="pictures\\CyberTrust.gif"></td>
 						</tr>
-						<tr align="center">
-							<td width="100%" colspan="2"><img
-								src="pictures\\WaspadaVirus.gif"></td>
-						</tr>
-
 					</table>
 
 				</div>
 
 			</div>
 			<!--/row-->
+		</div>
+		<div class="col-sm-3 col-md-3 sidebar-offcanvas" id="sidebar"
+				role="navigation">
+		&nbsp;
+		</div>
+		<div class="col-sm-9 col-md-6" main>
+			<table border="0" cellpadding="5" cellspacing="0" width="100%">
+				<tr align="center">
+				 	<td><img width="100%"
+								src="pictures\\WaspadaVirus.gif"></td>
+				</tr>			
+			</table>
 		</div>
 	</div>
 	<!--/.container-->
